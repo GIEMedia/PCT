@@ -1,0 +1,14 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/PST.API/bin/Debug
+/PST.API/obj/Debug
+/PST.Api.Core/obj/Debug
+/PST.Api.Models/obj/Debug
+/PST.Data/obj/Debug
+/PST.Declarations/obj/Debug
+/PST.Migrations/obj/Debug
+/PST.Services/obj/Debug
+/packages
+*.suo

@@ -4,17 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{994F126E-1871-41AE-8C29-4F9498C0C563}</ProjectGuid>
+    <ProjectGuid>{7E6C338D-5EEB-4825-A2F5-3990DEFF4085}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PST.Api</RootNamespace>
-    <AssemblyName>PST.Api</AssemblyName>
+    <RootNamespace>PST.Services</RootNamespace>
+    <AssemblyName>PST.Services</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -105,6 +102,7 @@
     </Reference>
     <Reference Include="Prototype1.FluentNHibernate">
       <HintPath>..\packages\Prototype1.FluentNHibernate.1.0.0.3\lib\net40\Prototype1.FluentNHibernate.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Prototype1.Foundation">
       <HintPath>..\packages\Prototype1.Foundation.1.0.0.5\lib\net451\Prototype1.Foundation.dll</HintPath>
@@ -176,7 +174,7 @@
       <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease">
-      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
