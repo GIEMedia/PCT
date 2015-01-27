@@ -1,0 +1,82 @@
+<!--#include virtual="/ssi/header.html" -->
+
+		<div class="container is-scrollable">
+			<div class="test">
+				<div class="test-head">
+					<h2>PCT Pest Insecticide</h2>
+
+					<div class="test-progress">
+						<span class="test-progress-percent">0%</span>
+
+						<span class="test-progress-label">
+							Test Completed
+						</span><!-- /.test-progress-label -->
+
+						<div class="test-progress-bar">
+							<div class="test-progress-bar-fill" style="width: 0"></div><!-- /.test-progress-bar-fill -->
+						</div><!-- /.test-progress-bar -->
+					</div><!-- /.test-progress -->
+				</div><!-- /.test-head -->
+
+				<div class="test-body">
+					<div class="cols clearfix">
+						<div class="col col-1of2">
+							<div class="test-question">
+								<h3 class="test-question-title">The signal word for this product is Warning.</h3><!-- /.test-question-title -->
+							</div><!-- /.test-question -->
+						</div><!-- /.col col-1of2 -->
+						
+						<div class="col col-1of2">
+							<div class="test-question-answers">
+								<form id="frm" action="/prototype-test-2.html" method="post">
+									<div class="form-body">
+									    <div class="course-question-options">
+									        
+									        <div class="course-question-option course-question-option-header">
+									            Correct!
+									        </div>
+
+									        <div class="course-question-option">
+									            <input type="radio" name="radio" id="option1">
+
+									            <label for="option1">True</label>
+									        </div><!-- /.course-question-option -->
+
+									        <div class="course-question-option">
+									            <input type="radio" name="radio" id="option2">
+
+									            <label for="option2">False</label>
+									        </div><!-- /.course-question-option -->
+                                        
+                                            <div class="course-question-option-description">
+                                                The signal word is Caution, not Warning.
+                                            </div><!-- /.course-question-option -->
+									    </div><!-- /.course-questions-options -->
+									</div><!-- /.form-body -->
+
+									<div class="form-actions">
+										<input type="submit" class="btn" value="Answer">
+									</div><!-- /.form-actions -->
+								</form>
+							</div><!-- /.test-question-answers -->
+						</div><!-- /.col col-1of2 -->
+					</div><!-- /.cols -->
+				</div><!-- /.test-body -->
+			</div><!-- /.test -->
+		</div><!-- /.container -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (getUrlVars() && getUrlVars().retake) {
+                $('#frm').attr('action', $('#frm').attr('action') + '?retake=1');
+                $('.course-question-options').addClass('correct');
+
+
+                $('.course-question-options .course-question-option:nth-child(2)').hide();
+                $('.course-question-options .course-question-option:nth-child(3) input').attr('checked', 'checked');
+                $('.form-actions input[type=submit]').attr('value', 'Continue');
+            }
+        });
+    </script>
+
+<!--#include virtual="/ssi/footer.html" -->

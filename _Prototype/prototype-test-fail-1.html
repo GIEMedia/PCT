@@ -1,0 +1,83 @@
+<!--#include virtual="/ssi/header.html" -->
+
+		<div class="container is-scrollable">
+			<div class="test">
+				<div class="test-head">
+                    <h2>PCT Pest Insecticide</h2>
+
+					<div class="test-progress">
+						<span class="test-progress-percent">100%</span>
+
+						<span class="test-progress-label">
+							Test Completed
+						</span><!-- /.test-progress-label -->
+
+						<div class="test-progress-bar">
+							<div class="test-progress-bar-fill" style="width: 100%"></div><!-- /.test-progress-bar-fill -->
+						</div><!-- /.test-progress-bar -->
+					</div><!-- /.test-progress -->
+				</div><!-- /.test-head -->
+
+				<div class="test-body">
+					<div class="cols">
+						<div class="col col-1of2">
+							<div class="test-certificate">
+							    <div class="test-certificate-title" id="fail1">
+							        You answered 2 out of 4 questions correctly.<br />
+                                    You may review your answers and try again.
+                                </div>
+                                <div class="test-certificate-title" id="fail2">
+                                    You answered 3 out of 4 questions correctly.<br />
+                                    You may review your answers and try again.
+                                </div>
+							</div><!-- /.test-certificate -->
+						</div><!-- /.col col-1of2 -->
+						
+						<div class="col col-1of2">
+							<div class="test-certificate-form">
+								<form action="?" method="post">
+									<div class="form-head">
+										<h4 class="form-title">Would you like to try again?</h4><!-- /.form-title -->
+									</div><!-- /.form-head -->
+                                    
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed mattis ligula. Pellentesque pretium dictum purus, ut venenatis velit dictum in. Pellentesque eu mi eu nisl tincidunt molestie. Aliquam pretium eros ante, a mollis nunc fermentum nec. In a facilisis lectus.
+
+								    <div class="form-actions">
+								        <input id="no" type="button" class="btn btn-lightgray" value="No Thanks!">
+                                        <input id="retake" type="button" value="Retake Test" class="btn btn-green">
+										<!--<input type="submit" value="Retry Missed Questions" class="btn btn-green">-->
+									</div><!-- /.form-actions -->
+								</form>
+							</div><!-- /.test-certificate-form -->
+						</div><!-- /.col col-1of2 -->
+					</div><!-- /.cols -->
+				</div><!-- /.test-body -->
+			</div><!-- /.test -->
+		</div><!-- /.container -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            if (getUrlVars() && getUrlVars().retake) {
+                $('#retake').attr('value', 'Retake Missed Questions');
+                $('#fail1').hide();
+            } else {
+                $('#fail2').hide();
+            }
+
+            $('#retake').click(function (e) {
+                e.preventDefault();
+                if (getUrlVars() && getUrlVars().retake) {
+                    window.location.href = "/prototype-test-4.html?retake2=1";
+                } else {
+                    window.location.href = "/prototype-test-1.html?retake=1";
+                }
+            });
+            $('#no').click(function (e) {
+                e.preventDefault();
+                window.location.href = "/index-logged.html";
+            });
+        });
+    </script>
+
+<!--#include virtual="/ssi/footer.html" -->

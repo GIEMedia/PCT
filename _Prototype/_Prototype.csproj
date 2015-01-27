@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8328263F-341F-41D5-BD62-B454CD556068}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>_Prototype</RootNamespace>
+    <AssemblyName>_Prototype</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="course-format-no-media.html" />
+    <Content Include="course-format-picture-options.html" />
+    <Content Include="course-format-single-image.html" />
+    <Content Include="course-format-video.html" />
+    <Content Include="course-format.html" />
+    <Content Include="css\fonts\font-awesome.min.css" />
+    <Content Include="css\fonts\fontawesome-webfont.svg" />
+    <Content Include="css\images\arrow-down-search-mobile.png" />
+    <Content Include="css\images\arrow-down-search.png" />
+    <Content Include="css\images\arrow-down-select.png" />
+    <Content Include="css\images\arrow-dropdown.png" />
+    <Content Include="css\images\arrows-timeline.png" />
+    <Content Include="css\images\bg-search.png" />
+    <Content Include="css\images\bg-test.png" />
+    <Content Include="css\images\certificate.jpg" />
+    <Content Include="css\images\checks.png" />
+    <Content Include="css\images\favicon.ico" />
+    <Content Include="css\images\ico-book.png" />
+    <Content Include="css\images\ico-check-blue-mobile.png" />
+    <Content Include="css\images\ico-check-blue.png" />
+    <Content Include="css\images\ico-check-gray.png" />
+    <Content Include="css\images\ico-check-green.png" />
+    <Content Include="css\images\ico-check-white.png" />
+    <Content Include="css\images\ico-close.png" />
+    <Content Include="css\images\ico-current-question.png" />
+    <Content Include="css\images\ico-download-cerrtificate.png" />
+    <Content Include="css\images\ico-download.png" />
+    <Content Include="css\images\ico-hamburger.png" />
+    <Content Include="css\images\ico-hat.png" />
+    <Content Include="css\images\ico-magnify.png" />
+    <Content Include="css\images\ico-maximize.png" />
+    <Content Include="css\images\ico-minus-thin.png" />
+    <Content Include="css\images\ico-minus.png" />
+    <Content Include="css\images\ico-new-courses-mobile.png" />
+    <Content Include="css\images\ico-new-courses.png" />
+    <Content Include="css\images\ico-next-question.png" />
+    <Content Include="css\images\ico-next.png" />
+    <Content Include="css\images\ico-open-courses-mobile.png" />
+    <Content Include="css\images\ico-open-courses.png" />
+    <Content Include="css\images\ico-plus-thin.png" />
+    <Content Include="css\images\ico-plus.png" />
+    <Content Include="css\images\ico-prev-question.png" />
+    <Content Include="css\images\ico-prev.png" />
+    <Content Include="css\images\ico-print.png" />
+    <Content Include="css\images\ico-profile.png" />
+    <Content Include="css\images\ico-questions.png" />
+    <Content Include="css\images\ico-rats-mobile.png" />
+    <Content Include="css\images\ico-rats.png" />
+    <Content Include="css\images\ico-reduce.png" />
+    <Content Include="css\images\ico-resume-course.png" />
+    <Content Include="css\images\ico-search-field-mobile.png" />
+    <Content Include="css\images\ico-search-field.png" />
+    <Content Include="css\images\ico-start-course.png" />
+    <Content Include="css\images\ico-switch.png" />
+    <Content Include="css\images\ico-termites-mobile.png" />
+    <Content Include="css\images\ico-termites.png" />
+    <Content Include="css\images\ico-viewer.png" />
+    <Content Include="css\images\ico-write.png" />
+    <Content Include="css\images\ico-zoom-in.png" />
+    <Content Include="css\images\ico-zoom-out.png" />
+    <Content Include="css\images\intro-bg.jpg" />
+    <Content Include="css\images\logo-mobile.png" />
+    <Content Include="css\images\logo.png" />
+    <Content Include="css\images\temp\img-answer-large.jpg" />
+    <Content Include="css\images\temp\img-answer1.jpg" />
+    <Content Include="css\images\temp\img-answer2.jpg" />
+    <Content Include="css\images\temp\img-answer3.jpg" />
+    <Content Include="css\images\temp\img-answer4.jpg" />
+    <Content Include="css\images\temp\img-answer5.jpg" />
+    <Content Include="css\images\temp\img-answer6.jpg" />
+    <Content Include="css\images\temp\pdf-placeholder.jpg" />
+    <Content Include="css\images\test-head.jpg" />
+    <Content Include="css\jquery.fs.selecter.css" />
+    <Content Include="css\magnific-popup.css" />
+    <Content Include="css\responsive.css" />
+    <Content Include="css\style.css" />
+    <Content Include="css\tooltipster.css" />
+    <Content Include="index-logged-no-open.html" />
+    <Content Include="index-logged.html" />
+    <Content Include="index.html" />
+    <Content Include="js\functions.js" />
+    <Content Include="js\jquery-1.11.2.min.js" />
+    <Content Include="js\jquery.fs.selecter.min.js" />
+    <Content Include="js\jquery.magnific-popup.min.js" />
+    <Content Include="js\jquery.mousewheel.js" />
+    <Content Include="js\jquery.nicescroll.min.js" />
+    <Content Include="js\jquery.panzoom.min.js" />
+    <Content Include="js\jquery.tooltipster.min.js" />
+    <Content Include="prototype-course-1.html" />
+    <Content Include="prototype-course-2.html" />
+    <Content Include="prototype-course-3.html" />
+    <Content Include="prototype-course-4.html" />
+    <Content Include="prototype-course-done.html" />
+    <Content Include="prototype-test-1.html" />
+    <Content Include="prototype-test-2.html" />
+    <Content Include="prototype-test-3.html" />
+    <Content Include="prototype-test-4.html" />
+    <Content Include="prototype-test-fail-1.html" />
+    <Content Include="prototype-test-pass-1.html" />
+    <Content Include="prototype-test-pass-2.html" />
+    <Content Include="ssi\course-media-bar.html" />
+    <Content Include="ssi\footer.html" />
+    <Content Include="ssi\header.html" />
+    <Content Include="test-correct.html" />
+    <Content Include="test-fail.html" />
+    <Content Include="test-retry.html" />
+    <Content Include="test-send-certificate.html" />
+    <Content Include="test-send-state-credit.html" />
+    <Content Include="test.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\desktop.ini" />
+    <Content Include="css\fonts\fontawesome-webfont.eot" />
+    <Content Include="css\fonts\fontawesome-webfont.ttf" />
+    <Content Include="css\fonts\fontawesome-webfont.woff" />
+    <Content Include="css\fonts\FontAwesome.otf" />
+    <Content Include="css\images\desktop.ini" />
+    <Content Include="css\images\temp\desktop.ini" />
+    <Content Include="js\desktop.ini" />
+    <Content Include="web.config" />
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>17518</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:17518/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

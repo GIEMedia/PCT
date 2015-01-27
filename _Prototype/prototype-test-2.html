@@ -1,0 +1,81 @@
+<!--#include virtual="/ssi/header.html" -->
+
+		<div class="container is-scrollable">
+			<div class="test">
+				<div class="test-head">
+					<h2>PCT Pest Insecticide</h2>
+
+					<div class="test-progress">
+						<span class="test-progress-percent">25%</span>
+
+						<span class="test-progress-label">
+							Test Completed
+						</span><!-- /.test-progress-label -->
+
+						<div class="test-progress-bar">
+							<div class="test-progress-bar-fill" style="width: 25%"></div><!-- /.test-progress-bar-fill -->
+						</div><!-- /.test-progress-bar -->
+					</div><!-- /.test-progress -->
+				</div><!-- /.test-head -->
+
+				<div class="test-body">
+					<div class="cols clearfix">
+						<div class="col col-1of2">
+							<div class="test-question">
+								<h3 class="test-question-title">Which of the following is TRUE regarding First Aid should someone accidentally swallow this product?</h3><!-- /.test-question-title -->
+							</div><!-- /.test-question -->
+						</div><!-- /.col col-1of2 -->
+						
+						<div class="col col-1of2">
+							<div class="test-question-answers">
+								<form id="frm" action="/prototype-test-3.html" method="post">
+									<div class="form-body">
+                                        <div class="course-question-options">
+									        
+                                            <div class="course-question-option course-question-option-header">
+                                                Retry
+                                            </div>
+
+                                            <div class="course-question-option">
+                                                <input type="radio" name="radio" id="option1">
+                                                <label for="option1">Have the person drink some water.</label>
+                                            </div><!-- /.course-question-option -->
+
+                                            <div class="course-question-option">
+                                                <input type="radio" name="radio" id="option2">
+                                                <label for="option2">Do not induce vomiting.</label>
+                                            </div><!-- /.course-question-option -->
+
+                                            <div class="course-question-option">
+                                                <input type="radio" name="radio" id="option2">
+                                                <label for="option2">Do not induce vomiting unless instructed to do so by a doctor or poison control center.</label>
+                                            </div><!-- /.course-question-option -->
+
+                                            <div class="course-question-option">
+                                                <input type="radio" name="radio" id="option2">
+                                                <label for="option2">Induce vomiting.</label>
+                                            </div><!-- /.course-question-option -->
+                                        </div><!-- /.course-questions-options -->
+									</div><!-- /.form-body -->
+
+									<div class="form-actions">
+										<input type="submit" class="btn" value="Answer">
+									</div><!-- /.form-actions -->
+								</form>
+							</div><!-- /.test-question-answers -->
+						</div><!-- /.col col-1of2 -->
+					</div><!-- /.cols -->
+				</div><!-- /.test-body -->
+			</div><!-- /.test -->
+		</div><!-- /.container -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            if (getUrlVars() && getUrlVars().retake) {
+                $('#frm').attr('action', $('#frm').attr('action') + '?retake=1');
+                $('.course-question-options').addClass('retry');
+            }
+        });
+    </script>
+
+<!--#include virtual="/ssi/footer.html" -->

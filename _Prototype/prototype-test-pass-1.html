@@ -1,0 +1,102 @@
+<!--#include virtual="/ssi/header.html" -->
+
+		<div class="container is-scrollable">
+			<div class="test">
+				<div class="test-head">
+                    <h2>PCT Pest Insecticide</h2>
+
+					<div class="test-progress">
+						<span class="test-progress-percent">100%</span>
+
+						<span class="test-progress-label">
+							Test Completed
+						</span><!-- /.test-progress-label -->
+
+						<div class="test-progress-bar">
+							<div class="test-progress-bar-fill" style="width: 100%"></div><!-- /.test-progress-bar-fill -->
+						</div><!-- /.test-progress-bar -->
+					</div><!-- /.test-progress -->
+				</div><!-- /.test-head -->
+
+				<div class="test-body">
+					<div class="cols">
+						<div class="col col-1of2">
+							<div class="test-certificate">
+	                            <h4 class="test-certificate-title">Congradulations!</h4>
+                                <h4 class="test-certificate-title">You've completed the "PCT Pest Insecticide" module.</h4><!-- /.test-certificate-title -->
+							</div><!-- /.test-certificate -->
+						</div><!-- /.col col-1of2 -->
+						
+						<div class="col col-1of2">
+							<div class="test-certificate-form">
+								<form action="?" method="post">
+									<div class="form-head">
+										<h4 class="form-title">Do you plan to submit this training for state CEU credit?</h4><!-- /.form-title -->
+									</div><!-- /.form-head -->
+
+									<div class="form-body">
+										<div class="form-row">
+											<label class="form-label">State Licensure(s)</label>
+
+											<div class="form-controls">
+												<div class="form-controls-actions">
+													<a href="#" class="btn-add"></a>
+                                                    <a href="#" class="btn-remove"></a>
+                                                </div><!-- /.form-controls-actions -->
+
+												<div class="form-cols-outer">
+													<div class="form-cols">
+														<div class="form-col form-col-1of2">
+														    <select class="field">
+														        <option>State</option>
+                                                                <option>Alabama</option>
+                                                                <option>Utah</option>
+                                                                <option>Ohio</option>
+														    </select>
+														</div><!-- /.form-col form-col-1of2 -->
+														
+													    <div class="form-col form-col-1of2">
+                                                            <select class="field">
+                                                                <option>Certification Category</option>
+                                                                <option>Category 1</option>
+                                                                <option>Category 2</option>
+                                                                <option>Category 3</option>
+                                                            </select>
+													    </div><!-- /.form-col form-col-1of2 -->
+
+                                                        <div class="form-col form-col-1of2">
+                                                            <input type="text" class="field" placeholder="License #">
+                                                        </div><!-- /.form-col form-col-1of2 -->
+
+                                                        <div class="form-col form-col-1of2">
+                                                            <input type="text" class="field" placeholder="Confirm License #">
+                                                        </div><!-- /.form-col form-col-1of2 -->
+													</div><!-- /.form-cols -->
+												</div><!-- /.form-cols-outer -->
+											</div><!-- /.form-controls -->
+										</div><!-- /.form-row -->
+									</div><!-- /.form-body -->
+
+									<div class="form-actions">
+										<input type="button" value="No Thanks!" class="btn btn-lightgray">
+										<input type="submit" value="Send" class="btn btn-green">
+									</div><!-- /.form-actions -->
+								</form>
+							</div><!-- /.test-certificate-form -->
+						</div><!-- /.col col-1of2 -->
+					</div><!-- /.cols -->
+				</div><!-- /.test-body -->
+			</div><!-- /.test -->
+		</div><!-- /.container -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.form-actions input').click(function (e) {
+                e.preventDefault();
+                window.location.href = "/prototype-test-pass-2.html";
+            });
+        });
+    </script>
+
+<!--#include virtual="/ssi/footer.html" -->

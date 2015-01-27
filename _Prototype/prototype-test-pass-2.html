@@ -1,0 +1,87 @@
+<!--#include virtual="/ssi/header.html" -->
+
+		<div class="container is-scrollable">
+			<div class="test">
+				<div class="test-head">
+                    <h2>PCT Pest Insecticide</h2>
+
+					<div class="test-progress">
+						<span class="test-progress-percent">100%</span>
+
+						<span class="test-progress-label">
+							Test Completed
+						</span><!-- /.test-progress-label -->
+
+						<div class="test-progress-bar">
+							<div class="test-progress-bar-fill" style="width: 100%"></div><!-- /.test-progress-bar-fill -->
+						</div><!-- /.test-progress-bar -->
+					</div><!-- /.test-progress -->
+				</div><!-- /.test-head -->
+
+				<div class="test-body">
+					<div class="cols">
+						<div class="col col-1of2">
+							<div class="test-certificate">
+							    <div class="test-certificate-preview">
+							        <img src="/css/images/certificate.jpg" />
+							    </div>
+							</div><!-- /.test-certificate -->
+						</div><!-- /.col col-1of2 -->
+						
+						<div class="col col-1of2">
+							<div class="test-certificate-form">
+								<form action="?" method="post">
+									<div class="form-head">
+										<h4 class="form-title">What would you like to do with your certificate?</h4><!-- /.form-title -->
+									</div><!-- /.form-head -->
+
+								    <a href="#" class="form-label"><i class="fa fa-download"></i> Download It</a>
+
+								    <div class="form-body">
+										<div class="form-row">
+											<label class="form-label"><i class="fa fa-envelope"></i> Email It:</label>
+
+											<div class="form-controls">
+												<div class="form-controls-actions">
+													<a href="#" class="btn-add thin"></a>
+                                                    <a href="#" class="btn-remove thin"></a>
+                                                </div><!-- /.form-controls-actions -->
+
+												<div class="form-cols-outer">
+													<div class="form-cols">
+                                                        <div class="form-col form-col-1of2">
+                                                            <input type="text" class="field" placeholder="Name">
+                                                        </div><!-- /.form-col form-col-1of2 -->
+
+                                                        <div class="form-col form-col-1of2">
+                                                            <input type="text" class="field" placeholder="Email Address">
+                                                        </div><!-- /.form-col form-col-1of2 -->
+													</div><!-- /.form-cols -->
+												</div><!-- /.form-cols-outer -->
+											</div><!-- /.form-controls -->
+										</div><!-- /.form-row -->
+									</div><!-- /.form-body -->
+
+									<div class="form-actions">
+										<input type="button" value="No Thanks!" class="btn btn-lightgray">
+										<input type="submit" value="Send" class="btn btn-green">
+									</div><!-- /.form-actions -->
+								</form>
+							</div><!-- /.test-certificate-form -->
+						</div><!-- /.col col-1of2 -->
+					</div><!-- /.cols -->
+				</div><!-- /.test-body -->
+			</div><!-- /.test -->
+		</div><!-- /.container -->
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.form-actions input').click(function (e) {
+                e.preventDefault();
+                window.location.href = "/index-logged.html";
+            });
+        });
+    </script>
+
+<!--#include virtual="/ssi/footer.html" -->

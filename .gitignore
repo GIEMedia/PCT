@@ -12,3 +12,11 @@
 /PST.Services/obj/Debug
 /packages
 *.suo
+/PST.Api.Models/bin/Debug
+/PST.Data/bin/Debug
+/PST.Declarations/bin/Debug
+/PST.Migrations/bin/Debug
+/PST.Services/bin/Debug
+/_Prototype/bin
+/_Prototype/obj/Debug
+*.user
