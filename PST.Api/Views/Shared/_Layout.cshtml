@@ -1,10 +1,114 @@
 ﻿<!DOCTYPE html>
-<html>
-    <head>
-    </head>
-    <body>
-        This is rendered by /Views/Shared/_Layout.cshtml. Your base angular template should go here.
-    </body>
+<html lang="en" ng-app="pct.elearning">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>GIE Pest Control Training</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="css/images/favicon.ico" />
+    <link rel="stylesheet" href="css/fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
+    <link rel="stylesheet" href="css/magnific-popup.css" />
+    <link rel="stylesheet" href="css/jquery.fs.selecter.css" />
+    <link rel="stylesheet" href="css/tooltipster.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+    <link href="http://vjs.zencdn.net/4.11/video-js.css" rel="stylesheet" />
+    <script src="js/jquery-1.11.2.min.js"></script>
+    <script src="js/jquery.fs.selecter.min.js"></script>
+    <script src="js/jquery.magnific-popup.min.js"></script>
+    <script src="js/jquery.nicescroll.min.js"></script>
+    <script src="js/jquery.tooltipster.min.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="js/jquery.panzoom.min.js"></script>
+    <script src="http://vjs.zencdn.net/4.11/video.js"></script>
+
+    <script src="js/angular_1.3.1/angular.js"></script>
+    <script src="js/angular_1.3.1/angular-resource.min.js"></script>
+    <script src="js/angular_1.3.1/angular-sanitize.min.js"></script>
+    <script src="js/angular_1.3.1/angular-animate.min.js"></script>
+
+    <script src="/js/angular-ui-router.min.js"></script>
+
+    <!-- spa-js start -->
+    <script src="/app/app.js?v=1.0"></script>
+    <script src="/app/authen/authen.js?v=1.0"></script>
+    <script src="/app/course/Course.js?v=1.0"></script>
+    <script src="/app/dashboard/Dashboard.js?v=1.0"></script>
+    <script src="/app/landing/Landing.js?v=1.0"></script>
+    <script src="/app/theme.js?v=1.0"></script>
+    <!-- spa-js end -->
+
+
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <a class="logo">PCT - Pest Control Technology</a>
+            <div class="nav-container" ng-if="User.loggedIn">
+                <a href="#" class="nav-toggle">
+                    {{ User.fullName }}
+
+                    <i class="ico-arrow"></i>
+                </a>
+                <nav class="nav popup popup-point-up-right">
+                    <ul>
+                        <li><a href="/profile.html">Profile</a></li>
+                        <li><a href="/profile.html#certificates">Certificates</a></li>
+                        <li><a href="#">Help</a></li>
+                        <li><a href="/index.html">Sign out</a></li>
+                        <li class="mob-only horizontal-line"></li>
+                        <li class="mob-only"><a href="#">Contact Us</a></li>
+                        <li class="mob-only"><a href="#">Subscribe</a></li>
+                        <li class="mob-only"><a href="#">RSS</a></li>
+                        <li class="mob-only"><a href="#">Privacy Policy</a></li>
+                        <li class="mob-only"><a href="#">Terms of Use</a></li>
+                    </ul>
+                </nav><!-- /.nav -->
+            </div><!-- /.nav-container -->
+            <div class="login-container" ng-if="!User.loggedIn">
+                <label for="EmailAddress">Sign In</label>
+                <form>
+                    <input type="text" class="field" placeholder="Email Address" name="EmailAddress" id="EmailAddress">
+                    <input type="text" class="field" placeholder="Password" name="Password">
+                    <button class="btn btn-green fa fa-sign-in" ng-click="$state.go('dashboard')"></button>
+                </form>
+                <div class="login-footer">
+                    <a href="#">Forgot password?</a>
+                </div>
+                <div class="login-footer">
+                    <input type="checkbox" id="remember" /><label for="remember">Remember me</label>
+                </div>
+            </div>
+        </header>
+
+        <!-- Content start -->
+        <div ui-view >
+        </div>
+
+        <!-- Content end -->
+
+
+
+        <footer class="footer">
+            <p class="copyright">
+                © 1997-2015 GIE Media, Inc. All Right Reserved.<span class="mob-hidden"> &middot; </span><span class="p1">
+                    <script src="//prototype1.io/developed.by.p1.js"></script>
+                </span>
+            </p>
+            <nav class="nav-footer mob-hidden">
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Subscribe</a></li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">RSS</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms Of Use</a></li>
+                </ul>
+            </nav><!-- /.nav-footer -->
+        </footer>
+    </div><!-- /.wrapper -->
+</body>
 </html>
 
 @*This is required to make MVC happy - do not remove*@

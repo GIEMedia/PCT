@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PST.Api", "PST.API\PST.Api.csproj", "{994F126E-1871-41AE-8C29-4F9498C0C563}"
 EndProject
@@ -18,15 +18,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PST.Services", "PST.Services\PST.Services.csproj", "{7E6C338D-5EEB-4825-A2F5-3990DEFF4085}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_Prototype", "_Prototype\_Prototype.csproj", "{8328263F-341F-41D5-BD62-B454CD556068}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{95A06508-BBC2-4AAF-9700-21A951C5E1D8}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PST.Tests", "PST.Tests\PST.Tests.csproj", "{5E0C32AA-A3EF-4713-9977-7E56055CAFEB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,10 +57,6 @@ Global
 		{8328263F-341F-41D5-BD62-B454CD556068}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8328263F-341F-41D5-BD62-B454CD556068}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8328263F-341F-41D5-BD62-B454CD556068}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5E0C32AA-A3EF-4713-9977-7E56055CAFEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E0C32AA-A3EF-4713-9977-7E56055CAFEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E0C32AA-A3EF-4713-9977-7E56055CAFEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E0C32AA-A3EF-4713-9977-7E56055CAFEB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
