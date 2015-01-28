@@ -30,9 +30,11 @@
             return {
                 restrict: "E",
                 link: function($scope, elem, attrs) {
-                    elem.selecter({
-                        label: elem.attr('placeholder')
-                    });
+                    setTimeout(function() {
+                        elem.selecter({
+                            label: elem.attr('placeholder')
+                        });
+                    }, 0);
                 }
             };
         })

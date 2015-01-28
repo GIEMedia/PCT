@@ -50,13 +50,15 @@
             });
         })
 
-        .directive("courseQuestionsContainer", function() {
+        .directive("courseQuestionsContainer", function($state) {
             return {
                 restrict: "C",
                 templateUrl: "/app/spa/course/CourseQuestions.html",
                 scope: true,
                 link: function($scope, elem, attrs) {
                     $scope.next = function() {
+                        $state.go("test");
+
                         return false;
                     };
 

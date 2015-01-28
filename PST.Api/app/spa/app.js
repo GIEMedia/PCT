@@ -6,10 +6,14 @@
             'pct.elearning.theme',
             'pct.elearning.authen',
             'pct.elearning.course',
+            'pct.elearning.test',
+
+            'pct.elearning.api.Test',
 
             'pct.elearning.landing',
             'pct.elearning.dashboard',
-            'ui.router'
+            'ui.router',
+            'ngResource'
     ])
 
         .run(function ($rootScope, $state, $stateParams) {

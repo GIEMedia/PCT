@@ -145,10 +145,8 @@
                                             <div class="form-controls">
                                                 <div class="form-cols">
                                                     <div class="form-col form-col-1of2">
-                                                        <select class="select" placeholder="State">
-                                                            <option value="">State 2</option>
-                                                            <option value="">State 3</option>
-                                                            <option value="">State 4</option>
+                                                        <select class="select" ng-model="aaa" placeholder="State">
+                                                            <option ng-repeat="state in states" value="{{state.code}}">{{state.name}}</option>
                                                         </select>
                                                     </div><!-- /.form-col form-col-1of2 -->
 
