@@ -37,7 +37,7 @@
             };
         })
 
-        .directive("navContainer", function() {
+        .directive("navContainer", function($rootScope) {
             return {
                 restrict: "C",
                 link: function($scope, elem, attrs) {
@@ -55,9 +55,16 @@
                             $nav.removeClass('open');
                         }
                     });
+
+
+                    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
+                        $nav.removeClass('open');
+                    })
                 }
             };
         })
+
+
     ;
 
 })();

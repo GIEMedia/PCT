@@ -17,7 +17,10 @@
             ;
         })
 
-        .controller("landing.Ctrl", function ($scope) {
+        .controller("landing.Ctrl", function ($scope, $state) {
+            $scope.getStarted = function() {
+                $state.go("dashboard");
+            };
         })
 
     ;
