@@ -20,3 +20,8 @@
 /_Prototype/bin
 /_Prototype/obj/Debug
 *.user
+/PST.Api/bin
+/PST.Api.Core/bin/Debug
+/PST.Tests/bin/Debug
+/PST.Tests/obj/Debug
+/PST.Api/App_Data/PST.Api.XML

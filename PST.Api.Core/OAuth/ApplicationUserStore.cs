@@ -85,9 +85,7 @@ namespace PST.Api.Core.OAuth
                     a.PasswordResetToken,
                     a.PasswordResetTokenExpirationDate,
                     a.Status,
-                    a.AdminAccess,
-                    a.Gender,
-                    a.DateOfBirth
+                    a.AdminAccess
                 }).FirstOrDefault();
 
             if (acct == null)
@@ -104,9 +102,7 @@ namespace PST.Api.Core.OAuth
                 PasswordResetToken = acct.PasswordResetToken,
                 PasswordResetTokenExpirationDate = acct.PasswordResetTokenExpirationDate,
                 Status = acct.Status,
-                AdminAccess = acct.AdminAccess,
-                Gender = acct.Gender,
-                DateOfBirth = acct.DateOfBirth
+                AdminAccess = acct.AdminAccess
             };
         }
 
@@ -131,8 +127,6 @@ namespace PST.Api.Core.OAuth
             account.PasswordResetTokenExpirationDate = user.PasswordResetTokenExpirationDate.IfNull(account.PasswordResetTokenExpirationDate);
             account.Status = user.Status.GetValueOrDefault(account.Status);
             account.AdminAccess = user.AdminAccess.GetValueOrDefault(account.AdminAccess);
-            account.Gender = user.Gender ?? account.Gender;
-            account.DateOfBirth = user.DateOfBirth ?? account.DateOfBirth;
 
             _entityRepository.Save(account);
             user.As<ApplicationUser>().Id = account.ID.ToString();

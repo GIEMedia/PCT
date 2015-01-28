@@ -62,7 +62,7 @@ namespace PST.Api.Core.App_Start
         [Obsolete]
         private static void InitSessionFactory()
         {
-            var sessionFactory = Container.Root.Resolve<ISessionFactoryFactory>().CreateSessionFactory("Groupmatics");
+            var sessionFactory = Container.Root.Resolve<ISessionFactoryFactory>().CreateSessionFactory("PST");
             Container.Root.RegisterInstance(sessionFactory, new ContainerControlledLifetimeManager());
             NHibernateSessionManager.Instance.InitSessionFactory(sessionFactory);
         }

@@ -12,7 +12,7 @@ namespace PST.Api.Core.App_Start
             // i.e.:   "dbo.MyTable"
         };
 
-        private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["Groupmatics"].ConnectionString;
+        private static readonly string _connectionString = ConfigurationManager.ConnectionStrings["PST"].ConnectionString;
 
         public static void RegisterCacheDependencies()
         {

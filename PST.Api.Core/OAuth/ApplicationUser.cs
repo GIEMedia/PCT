@@ -19,8 +19,6 @@ namespace PST.Api.Core.OAuth
         public DateTime? PasswordResetTokenExpirationDate { get; set; }
         public AccountStatus? Status { get; set; }
         public AdminAccess? AdminAccess { get; set; }
-        public DateTime? DateOfBirth { get; set; }
-        public Gender? Gender { get; set; }
 
         public static implicit operator ApplicationUser(Account account)
         {
@@ -38,9 +36,7 @@ namespace PST.Api.Core.OAuth
                 PasswordResetToken = account.PasswordResetToken,
                 PasswordResetTokenExpirationDate = account.PasswordResetTokenExpirationDate,
                 Status = account.Status,
-                AdminAccess = account.AdminAccess,
-                Gender = account.Gender,
-                DateOfBirth = account.DateOfBirth
+                AdminAccess = account.AdminAccess
             };
         }
 
@@ -60,9 +56,7 @@ namespace PST.Api.Core.OAuth
                 PasswordResetToken = user.PasswordResetToken,
                 PasswordResetTokenExpirationDate = user.PasswordResetTokenExpirationDate,
                 Status = user.Status.GetValueOrDefault(AccountStatus.None),
-                AdminAccess = user.AdminAccess.GetValueOrDefault(Declarations.AdminAccess.None),
-                Gender = user.Gender,
-                DateOfBirth = user.DateOfBirth
+                AdminAccess = user.AdminAccess.GetValueOrDefault(Declarations.AdminAccess.None)
             };
         }
 
@@ -74,9 +68,7 @@ namespace PST.Api.Core.OAuth
                 FirstName = account.first_name,
                 LastName = account.last_name,
                 UserName = account.email,
-                Email = account.email,
-                Gender = account.gender,
-                DateOfBirth = account.date_of_birth
+                Email = account.email
             };
             if (account.is_admin.HasValue)
                 user.AdminAccess = account.is_admin.Value
@@ -93,9 +85,7 @@ namespace PST.Api.Core.OAuth
                 first_name = user.FirstName,
                 last_name = user.LastName,
                 username = user.UserName,
-                email = user.Email,
-                gender = user.Gender,
-                date_of_birth = user.DateOfBirth
+                email = user.Email
             };
         }
 
@@ -106,9 +96,7 @@ namespace PST.Api.Core.OAuth
                 FirstName = registration.first_name,
                 LastName = registration.last_name,
                 UserName = registration.email,
-                Email = registration.email,
-                Gender = registration.gender,
-                DateOfBirth = registration.date_of_birth
+                Email = registration.email
             };
         }
     }

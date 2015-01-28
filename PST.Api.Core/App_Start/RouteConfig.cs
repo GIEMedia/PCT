@@ -34,13 +34,6 @@ namespace PST.Api.Core.App_Start
                 namespaces: new[] {controllerNamespace},
                 constraints: new { controller = new FromNamespaceConstraint(baseType) }
                 );
-
-            routes.MapRoute(
-                name: "EventAccessCode",
-                url: "{access_code}",
-                defaults: new { controller = "Home", action = "Event", access_code = "" },
-                namespaces: new[] {controllerNamespace}
-                );
         }
 
         private class FromNamespaceConstraint : IRouteConstraint
