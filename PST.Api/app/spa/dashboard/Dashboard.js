@@ -11,7 +11,7 @@
             $stateProvider
                 .state('dashboard', {
                     url: '/dashboard',
-                    templateUrl: "/app/dashboard/Dashboard.html",
+                    templateUrl: "/app/spa/dashboard/Dashboard.html",
                     controller: "dashboard.Ctrl"
                 })
             ;
