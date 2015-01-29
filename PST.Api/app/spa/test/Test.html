@@ -48,7 +48,7 @@
                         </div><!-- /.form-body -->
 
                         <div class="form-actions">
-                            <input type="button" class="btn" value="Answer" ng-click="next()" ng-if="!lastQuestion()">
+                            <input type="button" class="btn" value="{{question.correct ? 'Continue' : 'Answer'}}" ng-click="next()" ng-if="!lastQuestion()">
                             <input type="button" class="btn" value="Grade Test!" ng-click="submit()" ng-if="lastQuestion()">
                         </div><!-- /.form-actions -->
                     </div><!-- /.test-question-answers -->
@@ -147,8 +147,8 @@
                             </div><!-- /.form-body -->
 
                             <div class="form-actions">
-                                <input type="button" value="No Thanks!" class="btn btn-lightgray">
-                                <input type="submit" value="Send" class="btn btn-green">
+                                <input type="button" value="No Thanks!" class="btn btn-lightgray" ng-click="$state.go('dashboard')">
+                                <input type="submit" value="Send" class="btn btn-green" ng-click="$state.go('certificate')">
                             </div><!-- /.form-actions -->
                         </form>
                     </div><!-- /.test-certificate-form -->

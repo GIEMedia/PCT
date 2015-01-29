@@ -7,6 +7,7 @@
             'pct.elearning.authen',
             'pct.elearning.course',
             'pct.elearning.test',
+            'pct.elearning.certificate',
 
             'pct.elearning.api.Test',
 
