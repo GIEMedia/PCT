@@ -51,11 +51,6 @@
                         }
                     });
 
-                    $scope.next = function() {
-                        $state.go("test");
-
-                        return false;
-                    };
 
                     var pdfPreviewLoaded = function () {
                         var $panZoom = elem.find(".course-media-frame-panzoom").panzoom({

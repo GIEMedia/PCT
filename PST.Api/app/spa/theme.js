@@ -66,6 +66,22 @@
             };
         })
 
+        .directive("video", function() {
+            return {
+                restrict: "E",
+                link: function($scope, elem, attrs) {
+                    //<source ng-repeat="(format,src) in question.video" src="{{src}}" type='video/{{format}}'>
+                    $scope.$watch(attrs.source, function(source) {
+                        if (source) {
+                            for (var format in source) {
+                                var src = source[format];
+                                elem.append("<source src=\"" + src + "\" type='video/" + format + "'>");
+                            }
+                        }
+                    });
+                }
+            };
+        })
 
     ;
 

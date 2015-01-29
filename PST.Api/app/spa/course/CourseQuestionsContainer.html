@@ -1,0 +1,36 @@
+<div class="course-progress">
+    <h3>{{course.name}}</h3>
+
+    <h5>#1 - {{section.name}}</h5>
+
+    <div class="course-progress-bar">
+        <p><span class="alignright">Question <span class="current-count">{{progress()+1}}</span> of <span class="total-count">{{section.questions.length}}</span></span> Section Progress</p>
+
+        <div class="course-progress-bar-fill">
+            <div style="width: {{ (progress()+1) / section.questions.length*100 }}%;"></div>
+        </div><!-- /.course-progress-bar-fill -->
+    </div><!-- /.course-progress-bar -->
+</div><!-- /.course-progress -->
+
+<div class="course-questions" questions="section.questions">
+</div><!-- /.course-questions -->
+
+<div class="course-question-answer correct" ng-if="result != null && result.passed">
+    <!-- You're right -->
+    <h4 class="course-question-answer-title">Correct!</h4><!-- /.course-question-answer-title -->
+    <div class="course-question-answer-entry">
+        <p>	{{ result.explanation }}</p>
+    </div><!-- /.course-question-answer-entry -->
+</div><!-- /.course-question-answer -->
+
+<div class="course-question-answer retry" ng-if="result != null && !result.passed">
+    <h4 class="course-question-answer-title">Incorrect.</h4><!-- /.course-question-answer-title -->
+    <div class="course-question-answer-entry">
+        <p>	Please review your answers and try again.</p>
+    </div><!-- /.course-question-answer-entry -->
+</div><!-- /.course-question-answer -->
+
+<nav class="nav-questions" ng-if="result != null && result.passed">
+    <a href="" ng-click="nextQuestion()" class="link-next">Next</a>
+</nav><!-- /.nav-questions -->
+

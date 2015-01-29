@@ -381,7 +381,7 @@ a.form-label { color: #404040 !important; }
 .retry .course-question-option.course-question-option-header { background-color: #e97d00; color: #fff; }
 .correct .course-question-option.course-question-option-header { background-color: #1daa33; color: #fff; }
 
-.course-question-answer { padding: 31px 35px; display: none; }
+.course-question-answer { padding: 31px 35px; }
 .course-question-answer-title { padding-bottom: 16px; }
 .correct .course-question-answer-title { color: #32d24d; }
 .retry .course-question-answer-title { color: #e97d00; }
