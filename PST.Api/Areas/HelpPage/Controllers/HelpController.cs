@@ -65,21 +65,15 @@ namespace PST.Api.Areas.HelpPage.Controllers
                 }
 
                 var newTypes = new List<Type>();
-                foreach (var t in types)
+                foreach (var subTypes in types.Select(t => t.GetProperties(
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty)
+                    .Where(x => x.CustomAttributes.All(c => c.AttributeType != typeof(IgnoreDataMemberAttribute)))
+                    .Select(p => p.PropertyType)
+                    .Where(x => x != null && !types.Contains(x) && !newTypes.Contains(x))
+                    .Where(x => !x.IsPrimitive && ((x.IsClass && !x.Namespace.IfNullOrEmpty("").StartsWith("System")) || (x.IsGenericType && !x.GetGenericArguments()[0].Namespace.IfNullOrEmpty("").StartsWith("System"))))
+                    .ToList()).Where(subTypes => subTypes.Any()))
                 {
-                    var subTypes =
-                        t.GetProperties(
-                            BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty |
-                            BindingFlags.GetProperty)
-                            .Where(x => x.CustomAttributes.All(c => c.AttributeType != typeof(IgnoreDataMemberAttribute)))
-                            .Select(p => p.PropertyType)
-                            .Where(x => x != null && !types.Contains(x) && !newTypes.Contains(x))
-                            .Where(x => !x.IsPrimitive && ((x.IsClass && !x.Namespace.IfNullOrEmpty("").StartsWith("System")) || (x.IsGenericType && !x.GetGenericArguments()[0].Namespace.IfNullOrEmpty("").StartsWith("System"))))
-                            .ToList();
-                    if (subTypes.Any())
-                    {
-                        newTypes.AddRange(subTypes);
-                    }
+                    newTypes.AddRange(subTypes);
                 }
 
                 if (newTypes.Any())
