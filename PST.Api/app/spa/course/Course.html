@@ -1,77 +1,52 @@
-<div class="container">
-    <div class="course">
-        <div class="course-steps">
-            <a href="#" class="link-prev">Previous</a>
 
-            <div class="course-steps-slider">
-                <ul class="course-steps-slides">
-                    <li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">1</a></li>
-                    <li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">2</a></li>
-                    <li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">3</a></li>
-                    <li><a href="#" class="current" data-tip="Weevils: Facts, Identification &amp; Control">4</a></li>
-                    <li><a href="#" data-tip="Weevils: Facts, Identification &amp; Control">5</a></li>
-                </ul>
-            </div><!-- /.course-steps-slider -->
+<div class="course-steps">
+    <a href="#" class="link-prev">Previous</a>
 
-            <a href="#" class="link-next">Next</a>
-        </div><!-- /.course-steps -->
+    <div class="course-steps-slider">
+        <ul class="course-steps-slides">
+            <li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">1</a></li>
+            <li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">2</a></li>
+            <li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">3</a></li>
+            <li><a href="#" class="current" data-tip="Weevils: Facts, Identification &amp; Control">4</a></li>
+            <li><a href="#" data-tip="Weevils: Facts, Identification &amp; Control">5</a></li>
+        </ul>
+    </div><!-- /.course-steps-slider -->
 
-        <div class="course-questions-container no-select is-scrollable">
+    <a href="#" class="link-next">Next</a>
+</div><!-- /.course-steps -->
 
-        </div><!-- /.course-questions-container -->
+<div class="course-questions-container no-select is-scrollable">
+</div><!-- /.course-questions-container -->
 
-        <div class="course-media">
+<div class="course-media">
 
-            <div class="course-media-bar">
-                <div class="course-zoom">
-                    <a href="#" class="course-zoom-out">Zoom Out</a>
-                    <span class="course-zoom-level">100%</span>
-                    <a href="#" class="course-zoom-in">Zoom In</a>
-                </div><!-- /.course-zoom -->
-                <div class="course-controls">
-                    <a href="#" class="course-control-print">Print</a>
-                    <a href="#" class="course-control-download">Download</a>
-                    <a href="#" class="course-control-maximize">Maximize</a>
-                    <a href="#" class="course-control-minimize is-hidden">Minimize</a>
-                </div><!-- /.course-controls -->
-                <div class="course-switch">
-                    <a href="#" class="course-switch-questions">Questions</a>
-                    <a href="#" class="course-switch-arrows"></a>
-                    <a href="#" class="course-switch-document">Document</a>
-                </div><!-- /.course-switch -->
-                <div class="course-paging">
-                    <a href="#" class="course-paging-prev">Previous</a>
-                    <span class="course-paging-label">Page 1 of 1</span>
-                    <a href="#" class="course-paging-next">Next</a>
-                </div><!-- /.course-paging -->
-            </div><!-- /.course-media-bar -->
+    <div class="course-media-bar">
+        <div class="course-zoom">
+            <a href="#" class="course-zoom-out">Zoom Out</a>
+            <span class="course-zoom-level">100%</span>
+            <a href="#" class="course-zoom-in">Zoom In</a>
+        </div><!-- /.course-zoom -->
+        <div class="course-controls">
+            <a href="#" class="course-control-print">Print</a>
+            <a href="#" class="course-control-download">Download</a>
+            <a href="" class="course-control-maximize" ng-click="toggleMaximized()">Maximize</a>
+        </div><!-- /.course-controls -->
+        <div class="course-switch">
+            <a href="#" class="course-switch-questions">Questions</a>
+            <a href="#" class="course-switch-arrows"></a>
+            <a href="#" class="course-switch-document">Document</a>
+        </div><!-- /.course-switch -->
+        <div class="course-paging">
+            <a href="#" class="course-paging-prev">Previous</a>
+            <span class="course-paging-label">Page 1 of 1</span>
+            <a href="#" class="course-paging-next">Next</a>
+        </div><!-- /.course-paging -->
+    </div><!-- /.course-media-bar -->
 
-            <div class="course-media-frame">
-                <div class="course-media-frame-panzoom">
-                    <div class="loading"><i class="fa fa-spinner fa-spin"></i></div>
-                    <img src="app/css/images/temp/pdf-placeholder.jpg" class="course-pdf-preview" width="100" alt="">
-                </div>
-            </div><!-- /.course-media-frame -->
-        </div><!-- /.course-media -->
-    </div><!-- /.course -->
-</div><!-- /.container -->
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        var cnt = 0;
-        $('.course .form-actions input[type=submit]').click(function (e) {
-            cnt++;
-            e.preventDefault();
-            $('.course-question-answer').hide();
-            if (cnt == 1) {
-                $('.course-question-answer.retry').show();
-            } else {
-                $('.form-actions').hide();
-                $('.course-question-answer.correct').show();
-            }
-            scrollTo('.course-question-answer:visible', '.course-questions-container');
-        });
-    });
-</script>
-
-<div class="help-container"></div>
+    <div class="course-media-frame">
+        <div class="course-media-frame-panzoom">
+            <div class="loading"><i class="fa fa-spinner fa-spin"></i></div>
+            <img src="app/css/images/temp/pdf-placeholder.jpg" class="course-pdf-preview" width="100" alt="">
+        </div>
+    </div><!-- /.course-media-frame -->
+</div><!-- /.course-media -->

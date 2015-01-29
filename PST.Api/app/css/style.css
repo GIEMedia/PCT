@@ -419,12 +419,11 @@ a.form-label { color: #404040 !important; }
 .course-controls { float: right; }
 .course-controls [class*='course-control'] { float: left; white-space: nowrap; text-indent: 150%; overflow: hidden; background-repeat: no-repeat; background-position: 0 0; margin: 0 28px; }
 .course-controls [class*='course-control']:hover { opacity: 0.7; }
-.course-controls .is-hidden { display: none; }
 
 .course-control-print { background-image: url(/app/css/images/ico-print.png); width: 23px; height: 20px; }
 .course-control-download { background-image: url(/app/css/images/ico-download.png); width: 20px; height: 18px; }
 .course-control-maximize { background-image: url(/app/css/images/ico-maximize.png); width: 20px; height: 20px; }
-.course-control-minimize { background-image: url(/app/css/images/ico-reduce.png); width: 19px; height: 20px; }
+.course-control-maximize.maximized { background-image: url(/app/css/images/ico-reduce.png); width: 19px; height: 20px; }
 
 .course-switch { display: none; }
 

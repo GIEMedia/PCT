@@ -3,37 +3,13 @@
 var $panZoom = null;
 
 ;(function($, window, document, undefined) {
-	var $doc = $(document);
-	var $course, $courseBtnMaximize, $courseBtnMinimize, $courseQuestions;
+	var $course;
 
 	/**
 	 * Course interactions.
 	 * @type {Object}
 	 */
 	var Course = {};
-
-	/**
-	 * Expand the pdf view.
-	 * @return
-	 */
-	Course.maximize = function() {
-		$courseBtnMinimize.removeClass('is-hidden');
-		$courseBtnMaximize.addClass('is-hidden');
-		$course.addClass('course-maximized');
-	}
-
-	/**
-	 * Collapse the pdf view.
-	 * @return
-	 */
-	Course.minimize = function() {
-		$courseBtnMinimize.addClass('is-hidden');
-		$courseBtnMaximize.removeClass('is-hidden');
-		$course.removeClass('course-maximized');
-		setTimeout(function() {
-			$courseQuestions.getNiceScroll().resize();
-		}, 100);
-	}
 
 	/**
 	 * Swaps the view on mobile devices.
@@ -47,22 +23,9 @@ var $panZoom = null;
 	 * Run the app.
 	 * @return
 	 */
-	$doc.ready(function() {
+	$(document).ready(function() {
 		// cache DOM elements
 		$course            = $('.course');
-		$courseBtnMinimize = $('.course-control-minimize');
-		$courseBtnMaximize = $('.course-control-maximize');
-		$courseQuestions   = $('.course-questions-container');
-
-		$courseBtnMaximize.on('click', function(e) {
-			Course.maximize();
-			e.preventDefault();
-		});
-
-		$courseBtnMinimize.on('click', function(e) {
-			Course.minimize();
-			e.preventDefault();
-		});
 
 		if (!$.browser.mobile) {
 			$('[data-tip]').tooltipster({

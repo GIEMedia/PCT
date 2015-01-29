@@ -11,43 +11,95 @@
             $stateProvider
                 .state('course', {
                     url: '/course',
-                    templateUrl: "/app/spa/course/Course.html",
+                    templateUrl: "/app/spa/course/CoursePage.html",
                     controller: "course.Ctrl"
                 })
             ;
         })
 
         .controller("course.Ctrl", function ($scope) {
+        })
 
-            var pdfPreviewLoaded = function () {
-                var $panZoom = $(".course-media-frame-panzoom").panzoom({
-                    contain: 'invert',
-                    $zoomOut: $('.course-zoom-out'),
-                    $zoomIn: $('.course-zoom-in')
-                    //relative: true,
-                    //minScale: 1
-                });
+        .directive("course", function() {
+            return {
+                restrict: "C",
+                templateUrl: "/app/spa/course/Course.html",
+                controller: function($scope) {
+                    $scope.maximized = false;
 
-                $panZoom.on('panzoomzoom', function (e, panzoom, matrix, changed) {
-                    if (changed) {
-                        $('.course-zoom-level').text(Math.round(100 * matrix) + '%');
-                    }
-                });
+                    var ctrl = this;
+                    ctrl.isMaximized = function() {
+                        return $scope.maximized;
+                    };
+                    ctrl.setMaximized = function(maximized) {
+                        $scope.maximized = maximized;
+                    };
+                },
+                link: function($scope, elem, attrs) {
+                    $scope.$watch("maximized", function(maximized) {
+                        if (maximized) {
+                            elem.addClass('course-maximized');
+                        } else {
+                            elem.removeClass('course-maximized');
 
-                $panZoom.parent().on('mousewheel.focal', function (e) {
-                    e.preventDefault();
-                    var delta = e.delta || e.originalEvent.wheelDelta;
+                            setTimeout(function() {
+                                elem.find('.course-questions-container').getNiceScroll().resize();
+                            }, 100);
+                        }
+                    });
 
-                    var down = delta ? delta < 0 : e.originalEvent.deltaY > 0;
-                    $panZoom.panzoom('pan', 0, 15 * (down ? -1 : 1), { relative: true });
-                });
 
-                $('.course-media-frame .loading').hide();
+                    var pdfPreviewLoaded = function () {
+                        var $panZoom = elem.find(".course-media-frame-panzoom").panzoom({
+                            contain: 'invert',
+                            $zoomOut: $('.course-zoom-out'),
+                            $zoomIn: $('.course-zoom-in')
+                            //relative: true,
+                            //minScale: 1
+                        });
+
+                        $panZoom.on('panzoomzoom', function (e, panzoom, matrix, changed) {
+                            if (changed) {
+                                elem.find('.course-zoom-level').text(Math.round(100 * matrix) + '%');
+                            }
+                        });
+
+                        $panZoom.parent().on('mousewheel.focal', function (e) {
+                            e.preventDefault();
+                            var delta = e.delta || e.originalEvent.wheelDelta;
+
+                            var down = delta ? delta < 0 : e.originalEvent.deltaY > 0;
+                            $panZoom.panzoom('pan', 0, 15 * (down ? -1 : 1), { relative: true });
+                        });
+
+                        elem.find('.course-media-frame .loading').hide();
+                    };
+                    elem.find("img.course-pdf-preview").one("load", pdfPreviewLoaded).each(function () {
+                        if (this.complete) $(this).load();
+                    });
+                }
             };
+        })
 
-            $("img.course-pdf-preview").one("load", pdfPreviewLoaded).each(function () {
-                if (this.complete) $(this).load();
-            });
+        .directive("courseControlMaximize", function() {
+            return {
+                restrict: "C",
+                require: "^course",
+                link: function($scope, elem, attrs, courseCtrl) {
+                    $scope.$watch(function() { return courseCtrl.isMaximized();}, function(maximized) {
+                        if (maximized) {
+                            elem.addClass('maximized');
+                        } else {
+                            elem.removeClass('maximized');
+                        }
+                    });
+
+                    $scope.toggleMaximized = function() {
+                        courseCtrl.setMaximized(!courseCtrl.isMaximized());
+                        return false;
+                    };
+                }
+            };
         })
 
         .directive("courseQuestionsContainer", function($state) {
@@ -71,6 +123,7 @@
                 }
             };
         })
+
         .directive("helpContainer", function() {
             return {
                 restrict: "C",
