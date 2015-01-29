@@ -3,6 +3,7 @@
 (function () {
 
     angular.module('pct.elearning.course', [
+        'pct.elearning.course.questions',
         'ui.router'
     ])
 
@@ -17,10 +18,12 @@
             ;
         })
 
-        .controller("course.Ctrl", function ($scope) {
+        .controller("course.Ctrl", function ($scope, CourseService) {
+            $scope.course = CourseService.get();
+            $scope.courseHelp = false;
         })
 
-        .directive("course", function() {
+        .directive("course", function($state) {
             return {
                 restrict: "C",
                 templateUrl: "/app/spa/course/Course.html",
@@ -48,6 +51,11 @@
                         }
                     });
 
+                    $scope.next = function() {
+                        $state.go("test");
+
+                        return false;
+                    };
 
                     var pdfPreviewLoaded = function () {
                         var $panZoom = elem.find(".course-media-frame-panzoom").panzoom({
@@ -102,27 +110,6 @@
             };
         })
 
-        .directive("courseQuestionsContainer", function($state) {
-            return {
-                restrict: "C",
-                templateUrl: "/app/spa/course/CourseQuestions.html",
-                scope: true,
-                link: function($scope, elem, attrs) {
-                    $scope.next = function() {
-                        $state.go("test");
-
-                        return false;
-                    };
-
-
-                    $('.js-magnify').magnificPopup({
-                        type: 'image',
-                        mainClass: 'mfp-pdf'
-                    });
-
-                }
-            };
-        })
 
         .directive("helpContainer", function() {
             return {
