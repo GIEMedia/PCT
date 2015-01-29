@@ -4,7 +4,7 @@ var $panZoom = null;
 
 ;(function($, window, document, undefined) {
 	var $doc = $(document);
-	var $course, $courseBtnMaximize, $courseBtnMinimize, $courseQuestions, $nav;
+	var $course, $courseBtnMaximize, $courseBtnMinimize, $courseQuestions;
 
 	/**
 	 * Course interactions.
@@ -53,7 +53,6 @@ var $panZoom = null;
 		$courseBtnMinimize = $('.course-control-minimize');
 		$courseBtnMaximize = $('.course-control-maximize');
 		$courseQuestions   = $('.course-questions-container');
-		$nav               = $('.nav-container');
 
 		$courseBtnMaximize.on('click', function(e) {
 			Course.maximize();
