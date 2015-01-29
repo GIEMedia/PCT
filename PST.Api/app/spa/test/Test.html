@@ -1,0 +1,73 @@
+
+<div class="container is-scrollable">
+    <div class="test">
+        <div class="test-head">
+            <h2>PCT Pest Insecticide</h2>
+
+            <div class="test-progress">
+                <span class="test-progress-percent">{{ progress() }}</span>
+
+						<span class="test-progress-label">
+							Test Completed
+						</span><!-- /.test-progress-label -->
+
+                <div class="test-progress-bar">
+                    <div class="test-progress-bar-fill" style="width: {{ progress() }}"></div><!-- /.test-progress-bar-fill -->
+                </div><!-- /.test-progress-bar -->
+            </div><!-- /.test-progress -->
+        </div><!-- /.test-head -->
+
+        <div class="test-body">
+            <div class="cols clearfix">
+                <div class="col col-1of2">
+                    <div class="test-question">
+                        <h3 class="test-question-title">{{question.text}}</h3><!-- /.test-question-title -->
+                    </div><!-- /.test-question -->
+                </div><!-- /.col col-1of2 -->
+
+                <div class="col col-1of2">
+                    <div class="test-question-answers">
+                        <div class="form-body">
+                            <div class="course-question-options">
+
+                                <div class="course-question-option course-question-option-header">
+                                    Correct!
+                                </div>
+
+                                <div class="course-question-option" ng-repeat="option in question.options">
+                                    <input type="radio" name="radio" id="option{{$index}}">
+
+                                    <label for="option{{$index}}">{{option.text}}</label>
+                                </div><!-- /.course-question-option -->
+
+                                <div class="course-question-option-description">
+                                    The signal word for this product is Warning.
+                                </div><!-- /.course-question-option -->
+                            </div><!-- /.course-questions-options -->
+                        </div><!-- /.form-body -->
+
+                        <div class="form-actions">
+                            <input type="button" class="btn" value="Answer" ng-click="next()" ng-if="!lastQuestion()">
+                            <input type="button" class="btn" value="Grade Test!" ng-click="submit()" ng-if="lastQuestion()">
+                        </div><!-- /.form-actions -->
+                    </div><!-- /.test-question-answers -->
+                </div><!-- /.col col-1of2 -->
+            </div><!-- /.cols -->
+        </div><!-- /.test-body -->
+    </div><!-- /.test -->
+</div><!-- /.container -->
+
+<script type="text/javascript">
+//    $(document).ready(function () {
+//        if (getUrlVars() && getUrlVars().retake) {
+//            $('#frm').attr('action', $('#frm').attr('action') + '?retake=1');
+//            $('.course-question-options').addClass('correct');
+//
+//
+//            $('.course-question-options .course-question-option:nth-child(2)').hide();
+//            $('.course-question-options .course-question-option:nth-child(3) input').attr('checked', 'checked');
+//            $('.form-actions input[type=submit]').attr('value', 'Continue');
+//        }
+//    });
+</script>
+

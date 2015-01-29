@@ -118,7 +118,7 @@ h6 { font-size: 12px; text-transform: uppercase; line-height: 1.2; }
 	#Common
 \* ================================================================ */
 
-.link-download { display: inline-block; vertical-align: middle; background: url(/css/images/ico-download-cerrtificate.png) no-repeat 0 4px; padding-left: 26px; font-size: 18px; line-height: 1.2; }
+.link-download { display: inline-block; vertical-align: middle; background: url(/app/css/images/ico-download-cerrtificate.png) no-repeat 0 4px; padding-left: 26px; font-size: 18px; line-height: 1.2; }
 .title-underlined { color: #202020; }
 .title-underlined span { border-bottom: 3px solid #ededed; display: inline-block; vertical-align: top; padding-bottom: 4px; }
 .title-underlined small { position: relative; top: 3px; }
@@ -147,10 +147,10 @@ h6 { font-size: 12px; text-transform: uppercase; line-height: 1.2; }
 
 .btn-add,
 .btn-remove { display: inline-block; width: 50px; height: 50px; vertical-align: top; border: 2px solid #00c7d3; }
-.btn-add { background: url(/css/images/ico-plus.png) no-repeat center 0; }
-.btn-add.thin { background: url(/css/images/ico-plus-thin.png) no-repeat center -2px; }
-.btn-remove { background: url(/css/images/ico-minus.png) no-repeat center 0; }
-.btn-remove.thin { background: url(/css/images/ico-minus-thin.png) no-repeat center -2px; }
+.btn-add { background: url(/app/css/images/ico-plus.png) no-repeat center 0; }
+.btn-add.thin { background: url(/app/css/images/ico-plus-thin.png) no-repeat center -2px; }
+.btn-remove { background: url(/app/css/images/ico-minus.png) no-repeat center 0; }
+.btn-remove.thin { background: url(/app/css/images/ico-minus-thin.png) no-repeat center -2px; }
 .btn-add:hover,
 .btn-add:active,
 .btn-remove:hover,
@@ -178,9 +178,9 @@ h6 { font-size: 12px; text-transform: uppercase; line-height: 1.2; }
 \* ================================================================ */
 
 .ico { display: inline-block; vertical-align: middle; background-repeat: no-repeat; background-position: 0 0; }
-.ico-profile { background-image: url(/css/images/ico-profile.png); width: 30px; height: 33px; }
-.ico-new-courses { background-image: url(/css/images/ico-new-courses.png); width: 28px; height: 37px; }
-.ico-open-courses { background-image: url(/css/images/ico-open-courses.png); width: 37px; height: 35px; }
+.ico-profile { background-image: url(/app/css/images/ico-profile.png); width: 30px; height: 33px; }
+.ico-new-courses { background-image: url(/app/css/images/ico-new-courses.png); width: 28px; height: 37px; }
+.ico-open-courses { background-image: url(/app/css/images/ico-open-courses.png); width: 37px; height: 35px; }
 
 /* ================================================================ *\
 	#Grid
@@ -253,7 +253,7 @@ a.form-label { color: #404040 !important; }
 \* ================================================================ */
 
 .header { position: fixed; top: 0; left: 0; width: 100%; height: 68px; border-bottom: 2px solid #d7e2e6; z-index: 1; background-color: #fff; }
-.logo { float: left; background: url(/css/images/logo.png) no-repeat 0 0; width: 204px; height: 47px; white-space: nowrap; text-indent: 150%; overflow: hidden; margin: 11px 0 0 36px; }
+.logo { float: left; background: url(/app/css/images/logo.png) no-repeat 0 0; width: 204px; height: 47px; white-space: nowrap; text-indent: 150%; overflow: hidden; margin: 11px 0 0 36px; }
 
 .nav-container { position: relative; float: right; margin: 26px 36px 0 0; }
 .login-container { position: relative; float: right; margin: 9px 0 0 0; width: 500px; }
@@ -266,7 +266,7 @@ a.form-label { color: #404040 !important; }
 .login-container .login-footer label { position: relative; display: inline-block; top: -2px; margin-left: 5px; color: #909090; }
 .login-container .login-footer a { color: #909090; }
 
-.nav-toggle { display: block; font-size: 16px; line-height: 1; color: #404040; background: url(/css/images/arrow-dropdown.png) no-repeat right 4px; padding-right: 37px; }
+.nav-toggle { display: block; font-size: 16px; line-height: 1; color: #404040; background: url(/app/css/images/arrow-dropdown.png) no-repeat right 4px; padding-right: 37px; }
 .open .nav-toggle,
 .nav-toggle:hover { color: #e67c00; text-decoration: none; }
 
@@ -304,7 +304,7 @@ a.form-label { color: #404040 !important; }
 .course-steps:before { position: absolute; top: 0; left: 24px; width: 2px; height: 100%; background: #d7e2e6; content: ''; }
 
 .course-steps .link-prev,
-.course-steps .link-next { position: absolute; left: 50%; margin-left: -11px; width: 22px; height: 22px; background: #d5d5d5 url(/css/images/arrows-timeline.png) no-repeat; text-indent: 150%; overflow: hidden; white-space: nowrap; border-radius: 50%; }
+.course-steps .link-next { position: absolute; left: 50%; margin-left: -11px; width: 22px; height: 22px; background: #d5d5d5 url(/app/css/images/arrows-timeline.png) no-repeat; text-indent: 150%; overflow: hidden; white-space: nowrap; border-radius: 50%; }
 .course-steps .link-prev:hover,
 .course-steps .link-next:hover { box-shadow: 0 0 0 1px #e97c00 inset; }
 .course-steps .link-prev:active,
@@ -319,8 +319,8 @@ a.form-label { color: #404040 !important; }
 .course-steps-slides { list-style: none outside none; }
 .course-steps-slides li { padding: 40px 0; }
 .course-steps-slides a { display: block; width: 22px; height: 22px; white-space: nowrap; text-indent: 150%; overflow: hidden; background: #edf3f5; box-shadow: 0 0 0 1px #abb8be inset; border-radius: 50%; }
-.course-steps-slides .answered { box-shadow: none; background: #50cf6e url(/css/images/ico-check-white.png) no-repeat center center; }
-.course-steps-slides .current { box-shadow: none; background: #a86eee url(/css/images/ico-current-question.png) no-repeat center center; }
+.course-steps-slides .answered { box-shadow: none; background: #50cf6e url(/app/css/images/ico-check-white.png) no-repeat center center; }
+.course-steps-slides .current { box-shadow: none; background: #a86eee url(/app/css/images/ico-current-question.png) no-repeat center center; }
 
 .course-questions-container { position: absolute; top: 0; bottom: 0; left: 52px; width: 400px; border-right: 2px solid #d7e2e6; overflow: auto; }
 
@@ -361,20 +361,20 @@ a.form-label { color: #404040 !important; }
 .retry .course-question-option.previous-answer label:hover { color: #767676; }
 .correct .course-question-option.previous-answer input:checked + label,
 .correct .course-question-option.previous-answer label:hover { color: #1daa33; }
-.course-question-option input:checked + label:after { position: absolute; top: 50%; right: 24px; margin-top: -4px; content: ''; background: url(/css/images/ico-check-blue.png) no-repeat 0 0; width: 11px; height: 8px; }
-.retry .course-question-option.previous-answer input:checked + label:after { background-image: url(/css/images/ico-check-gray.png); }
-.correct .course-question-option.previous-answer input:checked + label:after { background-image: url(/css/images/ico-check-green.png); }
+.course-question-option input:checked + label:after { position: absolute; top: 50%; right: 24px; margin-top: -4px; content: ''; background: url(/app/css/images/ico-check-blue.png) no-repeat 0 0; width: 11px; height: 8px; }
+.retry .course-question-option.previous-answer input:checked + label:after { background-image: url(/app/css/images/ico-check-gray.png); }
+.correct .course-question-option.previous-answer input:checked + label:after { background-image: url(/app/css/images/ico-check-green.png); }
 
 .course-question-options-pictures { border: 1px solid #d7e2e6; overflow: hidden; }
 .course-question-option-picture { float: left; position: relative; width: 119px; box-sizing: border-box; box-shadow: -1px 0 0 #d7e2e6; }
 .course-question-option-picture:nth-child(n+4) { box-shadow: -1px 0 0 #d7e2e6, 0 -1px 0 #d7e2e6; }
 .course-question-option-picture img { display: block; min-width: 100%; max-width: 100%; height: auto; }
 .course-single-media-wrapper .js-magnify,
-.course-question-option-picture .js-magnify { position: absolute; top: 0; right: 0; width: 31px; height: 30px; background: rgba(255, 255, 255, 0.6) url(/css/images/ico-magnify.png) no-repeat center center; }
+.course-question-option-picture .js-magnify { position: absolute; top: 0; right: 0; width: 31px; height: 30px; background: rgba(255, 255, 255, 0.6) url(/app/css/images/ico-magnify.png) no-repeat center center; }
 .course-question-option-picture a:hover { opacity: 0.7; }
 .course-question-option-picture input { display: none; }
 .course-question-option-picture label { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(255, 255, 255, 0.5); font-weight: 400; font-size: 14px; line-height: 1.2; cursor: pointer; padding: 3px 0 3px 27px; }
-.course-question-option-picture label:before { position: absolute; top: 2px; left: 5px; width: 16px; height: 16px; content: ''; background: url(/css/images/checks.png) no-repeat 0 0; }
+.course-question-option-picture label:before { position: absolute; top: 2px; left: 5px; width: 16px; height: 16px; content: ''; background: url(/app/css/images/checks.png) no-repeat 0 0; }
 .course-question-option-picture input:checked + label:before { background-position: 0 -17px; }
 
 .course-question-option.course-question-option-header { display: none; text-align: center; line-height: 1.2; padding: 20px 24px; }
@@ -393,8 +393,8 @@ a.form-label { color: #404040 !important; }
 .nav-questions .link-next:hover { background-color: #abb8be; }
 .nav-questions .link-prev:active,
 .nav-questions .link-next:active { background-color: #95a2a8; }
-.nav-questions .link-prev { background-image: url(/css/images/ico-prev-question.png); }
-.nav-questions .link-next { background-image: url(/css/images/ico-next-question.png); }
+.nav-questions .link-prev { background-image: url(/app/css/images/ico-prev-question.png); }
+.nav-questions .link-next { background-image: url(/app/css/images/ico-next-question.png); }
 
 .course-media { position: absolute; top: 0; left: 454px; right: 0; bottom: 0; }
 .course-media-bar { height: 27px; border-bottom: 2px solid #d7e2e6; text-align: center; font-size: 16px; color: #55676e; line-height: 1.20; padding: 8px 0 0 28px; }
@@ -413,18 +413,18 @@ a.form-label { color: #404040 !important; }
 .course-zoom-out:hover { opacity: 0.7; }
 
 .course-zoom-level { min-width: 100px; }
-.course-zoom-in { background-image: url(/css/images/ico-zoom-in.png); }
-.course-zoom-out { background-image: url(/css/images/ico-zoom-out.png); }
+.course-zoom-in { background-image: url(/app/css/images/ico-zoom-in.png); }
+.course-zoom-out { background-image: url(/app/css/images/ico-zoom-out.png); }
 
 .course-controls { float: right; }
 .course-controls [class*='course-control'] { float: left; white-space: nowrap; text-indent: 150%; overflow: hidden; background-repeat: no-repeat; background-position: 0 0; margin: 0 28px; }
 .course-controls [class*='course-control']:hover { opacity: 0.7; }
 .course-controls .is-hidden { display: none; }
 
-.course-control-print { background-image: url(/css/images/ico-print.png); width: 23px; height: 20px; }
-.course-control-download { background-image: url(/css/images/ico-download.png); width: 20px; height: 18px; }
-.course-control-maximize { background-image: url(/css/images/ico-maximize.png); width: 20px; height: 20px; }
-.course-control-minimize { background-image: url(/css/images/ico-reduce.png); width: 19px; height: 20px; }
+.course-control-print { background-image: url(/app/css/images/ico-print.png); width: 23px; height: 20px; }
+.course-control-download { background-image: url(/app/css/images/ico-download.png); width: 20px; height: 18px; }
+.course-control-maximize { background-image: url(/app/css/images/ico-maximize.png); width: 20px; height: 20px; }
+.course-control-minimize { background-image: url(/app/css/images/ico-reduce.png); width: 19px; height: 20px; }
 
 .course-switch { display: none; }
 
@@ -439,8 +439,8 @@ a.form-label { color: #404040 !important; }
 .course-paging-next:hover { opacity: 0.7; }
 
 .course-paging-label { min-width: 130px; }
-.course-paging-prev { background-image: url(/css/images/ico-prev.png); } 
-.course-paging-next { background-image: url(/css/images/ico-next.png); } 
+.course-paging-prev { background-image: url(/app/css/images/ico-prev.png); } 
+.course-paging-next { background-image: url(/app/css/images/ico-next.png); } 
 
 .course-media-frame { position: absolute; top: 37px; bottom: 0; left: 0; right: 0; overflow: hidden; }
 .course-pdf-preview { display: block; min-width: 100%; height: auto; border: solid 1px #d7e2e6; }
@@ -466,7 +466,7 @@ a.form-label { color: #404040 !important; }
 	#Test
 \* ================================================================ */
 
-.test-head { height: 151px; background: url(/css/images/test-head.jpg) no-repeat center center; background-size: cover; padding: 38px 3.5% 0; }
+.test-head { height: 151px; background: url(/app/css/images/test-head.jpg) no-repeat center center; background-size: cover; padding: 38px 3.5% 0; }
 .test-head h6 { color: #adfaff; padding-bottom: 3px; }
 .test-head h2 { font-size: 30px; color: #fff; font-weight: normal; line-height: 1; padding-bottom: 42px; }
 
@@ -506,7 +506,7 @@ a.form-label { color: #404040 !important; }
 	#Intro
 \* ================================================================ */
 
-.intro { height: 93px; padding-top: 77px; background: url(/css/images/intro-bg.jpg) no-repeat center 0; background-size: cover; }
+.intro { height: 93px; padding-top: 77px; background: url(/app/css/images/intro-bg.jpg) no-repeat center 0; background-size: cover; }
 .intro-logged { height: 190px; padding-top: 50px; }
 .intro-title { color: #fff; font-weight: normal; text-align: center; }
 
@@ -515,7 +515,7 @@ a.form-label { color: #404040 !important; }
 .search-field input { font-size: 21px; cursor: pointer; border: none; width: 90%; }
 .search-field:before,
 .search-field:after { position: absolute; content: ''; }
-.search-field:before { top: 19px; left: 18px; background: url(/css/images/ico-search-field.png) no-repeat 0 0; width: 28px; height: 29px; opacity: 0.5; }
+.search-field:before { top: 19px; left: 18px; background: url(/app/css/images/ico-search-field.png) no-repeat 0 0; width: 28px; height: 29px; opacity: 0.5; }
 .search-field:after { top: 26px; right: 25px; width: 0; height: 0; border-width: 15px 10px 0; border-style: solid; border-color: #404040 transparent; }
 .search-expanded .search-field:after { border-width: 0 10px 15px; top: 24px; opacity: 0.6; }
 
@@ -529,7 +529,7 @@ a.form-label { color: #404040 !important; }
 .search-section li a:hover { color: #00b2e6; text-decoration: none; background: #f0f2f2; }
 
 [class^="search-ico"] { position: relative; display: inline-block; vertical-align: middle; background-repeat: no-repeat; background-position: 0 0; }
-.search-ico-rats { background-image: url(/css/images/ico-rats.png); width: 38px; height: 33px; margin-right: 10px; top: -2px; }
+.search-ico-rats { background-image: url(/app/css/images/ico-rats.png); width: 38px; height: 33px; margin-right: 10px; top: -2px; }
 
 .search-expanded .search-field,
 .search-expanded .search-field input { background: #efefef; }
@@ -547,9 +547,9 @@ a.form-label { color: #404040 !important; }
 .feature ~ .feature { margin-top: 25px; }
 
 [class^="feature-ico"] { display: inline-block; background-repeat: no-repeat; background-position: 0 0; vertical-align: middle; }
-.feature-ico-book { background-image: url(/css/images/ico-book.png); width: 53px; height: 49px; }
-.feature-ico-hat { background-image: url(/css/images/ico-hat.png); width: 73px; height: 49px; }
-.feature-ico-write { background-image: url(/css/images/ico-write.png); width: 57px; height: 45px; }
+.feature-ico-book { background-image: url(/app/css/images/ico-book.png); width: 53px; height: 49px; }
+.feature-ico-hat { background-image: url(/app/css/images/ico-hat.png); width: 73px; height: 49px; }
+.feature-ico-write { background-image: url(/app/css/images/ico-write.png); width: 57px; height: 45px; }
 
 .feature-aside,
 .feature-entry { display: table-cell; vertical-align: middle; }
@@ -616,10 +616,10 @@ a.form-label { color: #404040 !important; }
 }
 
 .courses-item-action-resume { background: rgba(230, 124, 0, 0.75); }
-.courses-item-action-resume span { background-image: url(/css/images/ico-resume-course.png); }
+.courses-item-action-resume span { background-image: url(/app/css/images/ico-resume-course.png); }
 
 .courses-item-action-start { background: rgba(17, 172, 237, 0.75); }
-.courses-item-action-start span { background-image: url(/css/images/ico-start-course.png); }
+.courses-item-action-start span { background-image: url(/app/css/images/ico-start-course.png); }
 
 .courses-item:hover [class^="courses-item-action"] { display: block; }
 

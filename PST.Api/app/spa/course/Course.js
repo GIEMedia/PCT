@@ -11,7 +11,7 @@
             $stateProvider
                 .state('course', {
                     url: '/course',
-                    templateUrl: "/app/course/Course.html",
+                    templateUrl: "/app/spa/course/Course.html",
                     controller: "course.Ctrl"
                 })
             ;
@@ -48,18 +48,17 @@
             $("img.course-pdf-preview").one("load", pdfPreviewLoaded).each(function () {
                 if (this.complete) $(this).load();
             });
-
-
-
         })
 
-        .directive("courseQuestionsContainer", function() {
+        .directive("courseQuestionsContainer", function($state) {
             return {
                 restrict: "C",
-                templateUrl: "/app/course/CourseQuestions.html",
+                templateUrl: "/app/spa/course/CourseQuestions.html",
                 scope: true,
                 link: function($scope, elem, attrs) {
                     $scope.next = function() {
+                        $state.go("test");
+
                         return false;
                     };
 
@@ -75,7 +74,7 @@
         .directive("helpContainer", function() {
             return {
                 restrict: "C",
-                templateUrl: "/app/course/CourseHelp.html",
+                templateUrl: "/app/spa/course/CourseHelp.html",
                 scope: true,
                 link: function($scope, elem, attrs) {
                     elem.find('.popup[step] button').click(function () {
