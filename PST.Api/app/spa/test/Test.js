@@ -18,24 +18,31 @@
         })
 
         .controller("test.Ctrl", function ($scope, TestService, $state) {
-            $scope.questions = TestService.query(function() {
+            $scope.round = 1;
+
+            $scope.questions = TestService.query({}, function() {
                 $scope.question = $scope.questions[0];
             });
 
-            $scope.answer = null;
-            $scope.answers = [];
+            $scope.model = {
+                answer: null,
+                answers: []
+            };
+
+            var acceptAnswer = function() {
+                $scope.model.answers.push($scope.model.answer);
+                $scope.model.answer = null;
+            };
 
             $scope.next = function() {
+                acceptAnswer();
+
                 var index = $scope.questions.indexOf($scope.question);
-                if (index < $scope.questions.length - 1) {
-                    $scope.answers.push($scope.answer);
-                    $scope.answer = null;
-                    $scope.question = $scope.questions[index + 1];
-                }
+                $scope.question = $scope.questions[index + 1];
             };
 
             $scope.progress = function() {
-                var index = $scope.questions.indexOf($scope.question);
+                var index = $scope.model.answers.length;
 
                 return Math.round(index / $scope.questions.length * 100) + "%";
             };
@@ -45,7 +52,9 @@
             };
 
             $scope.submit = function() {
-                TestService.submit($scope.answers);
+                acceptAnswer();
+
+                $scope.result = TestService.submit({answers: $scope.answers, round: $scope.round});
             };
         })
 

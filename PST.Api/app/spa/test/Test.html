@@ -18,7 +18,8 @@
         </div><!-- /.test-head -->
 
         <div class="test-body">
-            <div class="cols clearfix">
+
+            <div class="cols clearfix" ng-if="result == null">
                 <div class="col col-1of2">
                     <div class="test-question">
                         <h3 class="test-question-title">{{question.text}}</h3><!-- /.test-question-title -->
@@ -26,6 +27,9 @@
                 </div><!-- /.col col-1of2 -->
 
                 <div class="col col-1of2">
+                    {{ question == null }}
+                    {{ model.answers }}
+                    {{ model.answer }}
                     <div class="test-question-answers">
                         <div class="form-body">
                             <div class="course-question-options">
@@ -35,7 +39,7 @@
                                 </div>
 
                                 <div class="course-question-option" ng-repeat="option in question.options">
-                                    <input type="radio" name="radio" id="option{{$index}}">
+                                    <input type="radio" name="radio" id="option{{$index}}" ng-click="model.answer = $index">
 
                                     <label for="option{{$index}}">{{option.text}}</label>
                                 </div><!-- /.course-question-option -->
@@ -51,6 +55,36 @@
                             <input type="button" class="btn" value="Grade Test!" ng-click="submit()" ng-if="lastQuestion()">
                         </div><!-- /.form-actions -->
                     </div><!-- /.test-question-answers -->
+                </div><!-- /.col col-1of2 -->
+            </div><!-- /.cols -->
+
+
+            <div class="cols" ng-if="result != null">
+                <div class="col col-1of2">
+                    <div class="test-certificate">
+                        <div class="test-certificate-title">
+                            You answered {{ result.corrects.length }} out of {{questions.length}} questions correctly.<br />
+                            You may review your answers and try again.
+                        </div>
+                    </div><!-- /.test-certificate -->
+                </div><!-- /.col col-1of2 -->
+
+                <div class="col col-1of2">
+                    <div class="test-certificate-form">
+                        <form action="?" method="post">
+                            <div class="form-head">
+                                <h4 class="form-title">Would you like to try again?</h4><!-- /.form-title -->
+                            </div><!-- /.form-head -->
+
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed mattis ligula. Pellentesque pretium dictum purus, ut venenatis velit dictum in. Pellentesque eu mi eu nisl tincidunt molestie. Aliquam pretium eros ante, a mollis nunc fermentum nec. In a facilisis lectus.
+
+                            <div class="form-actions">
+                                <button class="btn btn-lightgray" >No Thanks!</button>
+                                <input id="retake" type="button" value="Retake Test" class="btn btn-green">
+                                <!--<input type="submit" value="Retry Missed Questions" class="btn btn-green">-->
+                            </div><!-- /.form-actions -->
+                        </form>
+                    </div><!-- /.test-certificate-form -->
                 </div><!-- /.col col-1of2 -->
             </div><!-- /.cols -->
         </div><!-- /.test-body -->
