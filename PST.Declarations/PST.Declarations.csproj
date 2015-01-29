@@ -196,10 +196,12 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Entities\Account.cs" />
     <Compile Include="Entities\AccountLoginInfo.cs" />
+    <Compile Include="Entities\Components\Address.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Interfaces\IEmailGenerationService.cs" />
     <Compile Include="Models\account.cs" />
     <Compile Include="Models\account_detailed.cs" />
+    <Compile Include="Models\address.cs" />
     <Compile Include="Models\change_password.cs" />
     <Compile Include="Models\external_login.cs" />
     <Compile Include="Models\registration.cs" />

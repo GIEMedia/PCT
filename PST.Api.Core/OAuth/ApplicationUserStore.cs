@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
 using Prototype1.Foundation.Providers;
+using PST.Declarations.Entities.Components;
 
 namespace PST.Api.Core.OAuth
 {
@@ -81,6 +82,7 @@ namespace PST.Api.Core.OAuth
                     a.LastName,
                     a.Username,
                     a.Email,
+                    a.CompanyAddress,
                     a.HashedPassword,
                     a.PasswordResetToken,
                     a.PasswordResetTokenExpirationDate,
@@ -98,6 +100,7 @@ namespace PST.Api.Core.OAuth
                 LastName = acct.LastName,
                 UserName = acct.Username,
                 Email = acct.Email,
+                CompanyAddress = acct.CompanyAddress,
                 HashedPassword = acct.HashedPassword,
                 PasswordResetToken = acct.PasswordResetToken,
                 PasswordResetTokenExpirationDate = acct.PasswordResetTokenExpirationDate,
@@ -122,6 +125,7 @@ namespace PST.Api.Core.OAuth
             account.LastName = user.LastName.IfNullOrEmpty(account.LastName);
             account.Username = user.UserName.IfNullOrEmpty(account.Username);
             account.Email = user.Email.IfNullOrEmpty(account.Email);
+            account.CompanyAddress = user.CompanyAddress ?? new Address();
             account.HashedPassword = user.HashedPassword.IfNullOrEmpty(account.HashedPassword);
             account.PasswordResetToken = user.PasswordResetToken.IfNullOrEmpty(account.PasswordResetToken);
             account.PasswordResetTokenExpirationDate = user.PasswordResetTokenExpirationDate.IfNull(account.PasswordResetTokenExpirationDate);

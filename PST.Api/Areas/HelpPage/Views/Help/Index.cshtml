@@ -9,34 +9,6 @@
 
     // Group APIs by controller
     var apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
-
-    var types =
-        ((from m in Model
-            let type = m.ResponseDescription.ResponseType ?? m.ResponseDescription.DeclaredType
-            where m.ResponseDescription != null && type != null
-            select type.IsArray ? type.GetElementType() : type)
-            .Union(
-                from m in Model
-                from p in m.ParameterDescriptions
-                where p.ParameterDescriptor != null && p.ParameterDescriptor.ParameterType != null
-                select p.ParameterDescriptor.ParameterType.IsArray ? p.ParameterDescriptor.ParameterType.GetElementType() : p.ParameterDescriptor.ParameterType))
-            .Where(x => x != null && !x.IsPrimitive && ((x.IsClass && !x.Namespace.IfNullOrEmpty("").StartsWith("System")) || (x.IsGenericType && !x.GetGenericArguments()[0].Namespace.IfNullOrEmpty("").StartsWith("System"))))
-            .Distinct()
-            .ToList();
-
-    foreach (var gen in types.Where(t => t.IsGenericType).ToArray())
-    {
-        types.Remove(gen);
-        types.Add(gen.GetGenericArguments()[0]);
-    }
-
-    foreach (var abs in types.Where(t => t.IsAbstract).ToArray())
-    {
-        types.Remove(abs);
-        types.AddRange(Assembly.GetAssembly(abs).GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(abs)));
-    }
-
-    types = types.OrderBy(x => x.Name).Distinct().ToList();
 }
 
 <script>
@@ -230,7 +202,7 @@
 	    <section class="definition">
             <h2>Request / Response JSON Objects</h2>
 	        <div class="area controller">
-	            @foreach (var t in types)
+	            @foreach (var t in (List<Type>)ViewBag.Types)
 	            {
 	                @Html.DisplayFor(m => t, "Type")
 	            }

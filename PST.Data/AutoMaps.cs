@@ -16,7 +16,16 @@ namespace PST.Data
 
         private static void MapRootEntities(MagicMapper mapper)
         {
-            mapper.Add().TableFor<Account>();
+            mapper.Add().TableFor<Account>(a =>
+                a.Component(x => x.CompanyAddress, m =>
+                {
+                    m.Map(y => y.Address1, "CompanyAddress1");
+                    m.Map(y => y.Address2, "CompanyAddress2");
+                    m.Map(y => y.City, "CompanyCity");
+                    m.Map(y => y.State, "CompanyState");
+                    m.Map(y => y.ZipCode, "CompanyZipCode");
+                    m.Map(y => y.Phone, "CompanyPhone");
+                }));
         }
     }
 }

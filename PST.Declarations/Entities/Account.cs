@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.Design;
+using PST.Declarations.Entities.Components;
 using PST.Declarations.Models;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data;
@@ -15,6 +16,7 @@ namespace PST.Declarations.Entities
     {
         public Account()
         {
+            this.CompanyAddress = new Address();
             this.DateCreated = DateTime.Now;
         }
 
@@ -26,6 +28,8 @@ namespace PST.Declarations.Entities
 
         [DataType(DataType.EmailAddress)]
         public override string Email { get; set; }
+
+        public virtual Address CompanyAddress { get; set; }
 
         public override string HashedPassword { get; set; }
 
@@ -49,7 +53,8 @@ namespace PST.Declarations.Entities
                 email = account.Email,
                 first_name = account.FirstName,
                 last_name = account.LastName,
-                username = account.Username
+                username = account.Username,
+                company_address = account.CompanyAddress
             };
         }
 
@@ -61,7 +66,8 @@ namespace PST.Declarations.Entities
                 Email = account.email,
                 FirstName = account.first_name,
                 LastName = account.last_name,
-                Username = account.username
+                Username = account.username,
+                CompanyAddress = account.company_address
             };
         }
 

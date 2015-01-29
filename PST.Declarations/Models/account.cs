@@ -1,9 +1,7 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using PST.Declarations.Entities;
 using Prototype1.Foundation.Data;
 using Prototype1.Foundation.Models;
-using Prototype1.Foundation.Providers;
 
 namespace PST.Declarations.Models
 {
@@ -17,9 +15,8 @@ namespace PST.Declarations.Models
             set { email = value; }
         }
         public override string email { get; set; }
+        public address company_address { get; set; }
         public override string ID { get; set; }
-        public DateTime? date_of_birth { get; set; }
-
         public bool? is_admin { get; set; }
 
         [IgnoreDataMember]

@@ -10,6 +10,6 @@ namespace PST.Declarations.Models
         public override string username { get; set; }
         public override string email { get; set; }
         public override string password { get; set; }
-        public DateTime? date_of_birth { get; set; }
+        public address company_address { get; set; }
     }
 }

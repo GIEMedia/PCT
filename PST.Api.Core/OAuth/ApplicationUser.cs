@@ -1,6 +1,7 @@
 ﻿using System;
 using PST.Declarations;
 using PST.Declarations.Entities;
+using PST.Declarations.Entities.Components;
 using PST.Declarations.Models;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Providers;
@@ -14,6 +15,7 @@ namespace PST.Api.Core.OAuth
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public Address CompanyAddress { get; set; }
         public string HashedPassword { get; set; }
         public string PasswordResetToken { get; set; }
         public DateTime? PasswordResetTokenExpirationDate { get; set; }
@@ -32,6 +34,7 @@ namespace PST.Api.Core.OAuth
                 LastName = account.LastName,
                 UserName = account.Username,
                 Email = account.Email,
+                CompanyAddress = account.CompanyAddress,
                 HashedPassword = account.HashedPassword,
                 PasswordResetToken = account.PasswordResetToken,
                 PasswordResetTokenExpirationDate = account.PasswordResetTokenExpirationDate,
@@ -52,6 +55,7 @@ namespace PST.Api.Core.OAuth
                 LastName = user.LastName,
                 Username = user.UserName,
                 Email = user.Email,
+                CompanyAddress = user.CompanyAddress,
                 HashedPassword = user.HashedPassword,
                 PasswordResetToken = user.PasswordResetToken,
                 PasswordResetTokenExpirationDate = user.PasswordResetTokenExpirationDate,
@@ -68,7 +72,8 @@ namespace PST.Api.Core.OAuth
                 FirstName = account.first_name,
                 LastName = account.last_name,
                 UserName = account.email,
-                Email = account.email
+                Email = account.email,
+                CompanyAddress = account.company_address
             };
             if (account.is_admin.HasValue)
                 user.AdminAccess = account.is_admin.Value
@@ -85,7 +90,8 @@ namespace PST.Api.Core.OAuth
                 first_name = user.FirstName,
                 last_name = user.LastName,
                 username = user.UserName,
-                email = user.Email
+                email = user.Email,
+                company_address = user.CompanyAddress
             };
         }
 
@@ -96,7 +102,8 @@ namespace PST.Api.Core.OAuth
                 FirstName = registration.first_name,
                 LastName = registration.last_name,
                 UserName = registration.email,
-                Email = registration.email
+                Email = registration.email,
+                CompanyAddress = registration.company_address
             };
         }
     }
