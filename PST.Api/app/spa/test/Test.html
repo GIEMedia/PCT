@@ -19,6 +19,7 @@
 
         <div class="test-body">
 
+            <!-- Showing test questions -->
             <div class="cols clearfix" ng-if="result == null">
                 <div class="col col-1of2">
                     <div class="test-question">
@@ -27,25 +28,21 @@
                 </div><!-- /.col col-1of2 -->
 
                 <div class="col col-1of2">
-                    {{ question == null }}
-                    {{ model.answers }}
-                    {{ model.answer }}
                     <div class="test-question-answers">
                         <div class="form-body">
-                            <div class="course-question-options">
-
-                                <div class="course-question-option course-question-option-header">
-                                    Correct!
+                            <div class="course-question-options" ng-class="question.correct == null ? '' : question.correct ? 'correct' : 'retry'">
+                                <div class="course-question-option course-question-option-header" ng-if="question.correct != null">
+                                    {{question.correct ? 'Correct!' : 'Retry'}}
                                 </div>
 
-                                <div class="course-question-option" ng-repeat="option in question.options">
-                                    <input type="radio" name="radio" id="option{{$index}}" ng-click="model.answer = $index">
+                                <div class="course-question-option" ng-repeat="option in question.options" ng-if="!question.correct || model.answer == $index" >
+                                    <input type="radio" name="radio" id="option{{$index}}" ng-click="model.answer = $index" ng-checked="model.answer == $index">
 
                                     <label for="option{{$index}}">{{option.text}}</label>
                                 </div><!-- /.course-question-option -->
 
-                                <div class="course-question-option-description">
-                                    The signal word for this product is Warning.
+                                <div class="course-question-option-description" ng-if="question.correct">
+                                    {{ question.explanation }}
                                 </div><!-- /.course-question-option -->
                             </div><!-- /.course-questions-options -->
                         </div><!-- /.form-body -->
@@ -58,8 +55,8 @@
                 </div><!-- /.col col-1of2 -->
             </div><!-- /.cols -->
 
-
-            <div class="cols" ng-if="result != null">
+            <!-- Test result failed -->
+            <div class="cols" ng-if="result != null && !result.passed">
                 <div class="col col-1of2">
                     <div class="test-certificate">
                         <div class="test-certificate-title">
@@ -71,21 +68,92 @@
 
                 <div class="col col-1of2">
                     <div class="test-certificate-form">
+                        <div class="form-head">
+                            <h4 class="form-title">Would you like to try again?</h4><!-- /.form-title -->
+                        </div><!-- /.form-head -->
+
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed mattis ligula. Pellentesque pretium dictum purus, ut venenatis velit dictum in. Pellentesque eu mi eu nisl tincidunt molestie. Aliquam pretium eros ante, a mollis nunc fermentum nec. In a facilisis lectus.
+
+                        <div class="form-actions">
+                            <button class="btn btn-lightgray" ng-click="$state.go('dashboard')" >No Thanks!</button>
+                            <button class="btn btn-green" ng-click="nextRound()">{{round == 1 ? 'Retake Test' : 'Retake Missed Questions'}}</button>
+
+                            <!--<input type="submit" value="Retry Missed Questions" class="btn btn-green">-->
+                        </div><!-- /.form-actions -->
+                    </div><!-- /.test-certificate-form -->
+                </div><!-- /.col col-1of2 -->
+            </div><!-- /.cols -->
+
+
+            <!-- Test result passed -->
+            <div class="cols" ng-if="result != null && result.passed">
+
+
+                <div class="col col-1of2">
+                    <div class="test-certificate">
+                        <h4 class="test-certificate-title">Congratulations!</h4>
+                        <h4 class="test-certificate-title">You've completed the "PCT Pest Insecticide" module.</h4><!-- /.test-certificate-title -->
+                    </div><!-- /.test-certificate -->
+                </div><!-- /.col col-1of2 -->
+
+                <div class="col col-1of2">
+                    <div class="test-certificate-form">
                         <form action="?" method="post">
                             <div class="form-head">
-                                <h4 class="form-title">Would you like to try again?</h4><!-- /.form-title -->
+                                <h4 class="form-title">Do you plan to submit this training for state CEU credit?</h4><!-- /.form-title -->
                             </div><!-- /.form-head -->
 
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed mattis ligula. Pellentesque pretium dictum purus, ut venenatis velit dictum in. Pellentesque eu mi eu nisl tincidunt molestie. Aliquam pretium eros ante, a mollis nunc fermentum nec. In a facilisis lectus.
+                            <div class="form-body">
+                                <div class="form-row">
+                                    <label class="form-label">State Licensure(s)</label>
+
+                                    <div class="form-controls">
+                                        <div class="form-controls-actions">
+                                            <a href="#" class="btn-add"></a>
+                                            <a href="#" class="btn-remove"></a>
+                                        </div><!-- /.form-controls-actions -->
+
+                                        <div class="form-cols-outer">
+                                            <div class="form-cols">
+                                                <div class="form-col form-col-1of2">
+                                                    <select class="field">
+                                                        <option>State</option>
+                                                        <option>Alabama</option>
+                                                        <option>Utah</option>
+                                                        <option>Ohio</option>
+                                                    </select>
+                                                </div><!-- /.form-col form-col-1of2 -->
+
+                                                <div class="form-col form-col-1of2">
+                                                    <select class="field">
+                                                        <option>Certification Category</option>
+                                                        <option>Category 1</option>
+                                                        <option>Category 2</option>
+                                                        <option>Category 3</option>
+                                                    </select>
+                                                </div><!-- /.form-col form-col-1of2 -->
+
+                                                <div class="form-col form-col-1of2">
+                                                    <input type="text" class="field" placeholder="License #">
+                                                </div><!-- /.form-col form-col-1of2 -->
+
+                                                <div class="form-col form-col-1of2">
+                                                    <input type="text" class="field" placeholder="Confirm License #">
+                                                </div><!-- /.form-col form-col-1of2 -->
+                                            </div><!-- /.form-cols -->
+                                        </div><!-- /.form-cols-outer -->
+                                    </div><!-- /.form-controls -->
+                                </div><!-- /.form-row -->
+                            </div><!-- /.form-body -->
 
                             <div class="form-actions">
-                                <button class="btn btn-lightgray" >No Thanks!</button>
-                                <input id="retake" type="button" value="Retake Test" class="btn btn-green">
-                                <!--<input type="submit" value="Retry Missed Questions" class="btn btn-green">-->
+                                <input type="button" value="No Thanks!" class="btn btn-lightgray">
+                                <input type="submit" value="Send" class="btn btn-green">
                             </div><!-- /.form-actions -->
                         </form>
                     </div><!-- /.test-certificate-form -->
                 </div><!-- /.col col-1of2 -->
+
             </div><!-- /.cols -->
         </div><!-- /.test-body -->
     </div><!-- /.test -->

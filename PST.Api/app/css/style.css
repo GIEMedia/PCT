@@ -377,9 +377,9 @@ a.form-label { color: #404040 !important; }
 .course-question-option-picture label:before { position: absolute; top: 2px; left: 5px; width: 16px; height: 16px; content: ''; background: url(/app/css/images/checks.png) no-repeat 0 0; }
 .course-question-option-picture input:checked + label:before { background-position: 0 -17px; }
 
-.course-question-option.course-question-option-header { display: none; text-align: center; line-height: 1.2; padding: 20px 24px; }
-.retry .course-question-option.course-question-option-header { display: block; background-color: #e97d00; color: #fff; }
-.correct .course-question-option.course-question-option-header { display: block; background-color: #1daa33; color: #fff; }
+.course-question-option.course-question-option-header { text-align: center; line-height: 1.2; padding: 20px 24px; }
+.retry .course-question-option.course-question-option-header { background-color: #e97d00; color: #fff; }
+.correct .course-question-option.course-question-option-header { background-color: #1daa33; color: #fff; }
 
 .course-question-answer { padding: 31px 35px; display: none; }
 .course-question-answer-title { padding-bottom: 16px; }
@@ -498,9 +498,7 @@ a.form-label { color: #404040 !important; }
 
 .test-certificate-form .form-controls:first-of-type .btn-remove { display: none; }
 
-.course-question-option-description { display: none; padding: 0 24px 15px 24px; }
-.correct .course-question-option-description,
-.retry .course-question-option-description { display: block; }
+.course-question-option-description { padding: 0 24px 15px 24px; }
 
 /* ================================================================ *\
 	#Intro
