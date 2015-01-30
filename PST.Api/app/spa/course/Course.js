@@ -4,6 +4,7 @@
 
     angular.module('pct.elearning.course', [
         'pct.elearning.course.questions',
+        'pct.elearning.course.questionsContainer',
         'ui.router'
     ])
 
@@ -19,11 +20,13 @@
         })
 
         .controller("course.Ctrl", function ($scope, CourseService) {
-            $scope.course = CourseService.get();
+            $scope.course = CourseService.get({}, function() {
+                $scope.section = $scope.course.sections[0];
+            });
             $scope.courseHelp = false;
         })
 
-        .directive("course", function($state) {
+        .directive("course", function() {
             return {
                 restrict: "C",
                 templateUrl: "/app/spa/course/Course.html",
@@ -37,8 +40,13 @@
                     ctrl.setMaximized = function(maximized) {
                         $scope.maximized = maximized;
                     };
+                    ctrl.nextSection = function() {
+                        console.log(321);
+                    };
                 },
                 link: function($scope, elem, attrs) {
+
+
                     $scope.$watch("maximized", function(maximized) {
                         if (maximized) {
                             elem.addClass('course-maximized');
@@ -52,8 +60,17 @@
                     });
 
 
+                }
+            };
+        })
+
+        .directive("coursePdfPreview", function() {
+            return {
+                restrict: "C",
+                link: function($scope, elem, attrs) {
+
                     var pdfPreviewLoaded = function () {
-                        var $panZoom = elem.find(".course-media-frame-panzoom").panzoom({
+                        var $panZoom = $(".course-media-frame-panzoom").panzoom({
                             contain: 'invert',
                             $zoomOut: $('.course-zoom-out'),
                             $zoomIn: $('.course-zoom-in')
@@ -63,7 +80,7 @@
 
                         $panZoom.on('panzoomzoom', function (e, panzoom, matrix, changed) {
                             if (changed) {
-                                elem.find('.course-zoom-level').text(Math.round(100 * matrix) + '%');
+                                $('.course-zoom-level').text(Math.round(100 * matrix) + '%');
                             }
                         });
 
@@ -75,10 +92,16 @@
                             $panZoom.panzoom('pan', 0, 15 * (down ? -1 : 1), { relative: true });
                         });
 
-                        elem.find('.course-media-frame .loading').hide();
+                        $('.course-media-frame .loading').hide();
                     };
-                    elem.find("img.course-pdf-preview").one("load", pdfPreviewLoaded).each(function () {
-                        if (this.complete) $(this).load();
+
+                    $scope.$watch(attrs.imgSrc, function(src) {
+                        if (src==null) {
+                            return;
+                        }
+                        elem.attr("src", src).one("load", pdfPreviewLoaded).each(function () {
+                            if (this.complete) $(this).load();
+                        });
                     });
                 }
             };
@@ -104,7 +127,6 @@
                 }
             };
         })
-
 
         .directive("helpContainer", function() {
             return {

@@ -12,14 +12,14 @@
             var CourseService = {};
 
             CourseService.get = function(data, onDone) {
-                //$timeout(onDone,0);
+                $timeout(onDone,0);
                 return {
                     "name": "PCT Pest Insecticide",
-                    "pages": [
-                        "app/css/images/temp/pdf-placeholder.jpg"
-                    ],
                     "sections": [
                         {
+                            "pages": [
+                                "app/css/images/temp/pdf-placeholder.jpg"
+                            ],
                             "name": "Trade Name/Ingredients/First Aid",
                             "questions": [
                                 {

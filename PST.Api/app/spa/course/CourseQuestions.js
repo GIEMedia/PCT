@@ -52,52 +52,19 @@
                     courseQuestionsContainerCtrl.nextQuestion = function() {
                         $scope.correctAnswer = false;
                         $scope.answer = emptyAnswer();
-                        var indexOf = _questions.indexOf($scope.question);
-                        $scope.question = _questions[indexOf + 1];
                         courseQuestionsContainerCtrl.showResult(null);
+
+                        var indexOf = _questions.indexOf($scope.question);
+                        if (indexOf > -1) {
+                            $scope.question = _questions[indexOf + 1];
+                            return true;
+                        } else {
+                            return false;
+                        }
                     };
 
                     courseQuestionsContainerCtrl.progress = function() {
-                        var indexOf = _questions == null ? 0 : _questions.indexOf($scope.question);
-                        return indexOf;
-                    };
-                }
-            };
-        })
-
-        .directive("courseQuestionsContainer", function() {
-            return {
-                restrict: "C",
-                templateUrl: "/app/spa/course/CourseQuestionsContainer.html",
-                link: function($scope, elem, attrs) {
-                    $scope.$watch("course", function(course) {
-                        if (course != null) {
-                            $scope.section = course.sections[0];
-                        }
-                    });
-
-                },
-                controller: function($scope) {
-                    $scope.result = null;
-
-                    var ctrl = this;
-                    ctrl.nextQuestion = null;
-                    ctrl.progress = null;
-
-                    $scope.progress = function() {
-                        return ctrl.progress ? ctrl.progress() : 0;
-                    };
-                    $scope.nextQuestion = function() {
-                        ctrl.nextQuestion();
-                        return false;
-                    };
-
-                    ctrl.showResult = function(passed, explanation) {
-                        $scope.result = passed == null ? null : {
-                            passed: passed,
-                            explanation: explanation
-                        };
-                        if (!$scope.$$phase) $scope.$digest();
+                        return _questions == null ? 0 : _questions.indexOf($scope.question);
                     };
                 }
             };
