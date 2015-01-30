@@ -11,7 +11,6 @@
                 require: "^course",
                 templateUrl: "/app/spa/course/CourseQuestionsContainer.html",
                 link: function($scope, elem, attrs, courseCtrl) {
-                    console.log(attrs.section);
                     $scope.$watch(attrs.section, function(section) {
                         $scope.section = section;
                     });

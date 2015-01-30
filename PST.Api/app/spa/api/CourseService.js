@@ -100,6 +100,29 @@
                                     ]
                                 }
                             ]
+                        },
+                        {
+                            "name": "Trade Name/Ingredients/First Aid 3",
+                            "pages": [
+                                "app/css/images/temp/pdf-placeholder.jpg",
+                                "app/css/images/temp/pdf-placeholder2.jpg"
+                            ],
+                            "questions": [
+                                {
+                                    "question": "Which of the following pests can be treated using PCT Pest Insecticide?",
+                                    "type": "pictures",
+                                    "answer": [],
+                                    "explanation": "This product is labeled to treat carpenter ants, German cockroaches and silverfish, but it is NOT labeled for treating bed bugs.",
+                                    "pictures": [
+                                        "app/css/images/temp/img-answer1.jpg",
+                                        "app/css/images/temp/img-answer2.jpg",
+                                        "app/css/images/temp/img-answer3.jpg",
+                                        "app/css/images/temp/img-answer4.jpg",
+                                        "app/css/images/temp/img-answer5.jpg",
+                                        "app/css/images/temp/img-answer6.jpg"
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 };

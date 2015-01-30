@@ -86,6 +86,71 @@
             };
         })
 
+        .directive("courseStepsSlides", function() {
+            return {
+                restrict: "C",
+                link: function($scope, elem, attrs) {
+                    //<li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">1</a></li>
+                    //<li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">2</a></li>
+                    //<li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">3</a></li>
+                    //<li><a href="#" class="current" data-tip="Weevils: Facts, Identification &amp; Control">4</a></li>
+                    //<li><a href="#" data-tip="Weevils: Facts, Identification &amp; Control">5</a></li>
+
+                    var tooltip = function(e, text) {
+                        e.tooltipster({
+                            position: 'right',
+                            maxWidth: 230,
+                            functionBefore: function(origin, continueTooltip) {
+                                origin.tooltipster('content', text);
+                                continueTooltip();
+                            }
+                        })
+                        return e;
+                    };
+
+                    var current = null;
+
+                    var tags = null;
+                    $scope.$watch("course", function(course) {
+                        if (course) {
+                            tags = [];
+                            elem.empty();
+                            for (var i = 0; i < course.sections.length; i++) {
+                                var sec = course.sections[i];
+                                var aTag = tooltip($("<a href=\"\" class=\"answered\" ></a>").text(i + 1), sec.name);
+                                elem.append($("<li/>").append(
+                                    aTag
+                                ));
+                                aTag.click(function() {
+                                    var tag = $(this);
+                                    if (tag.hasClass("current")) {
+                                        ;
+                                    } else {
+                                        console.log("move to section " + (tag.text()*1));
+                                    }
+                                    return false;
+                                });
+                                tags.push(aTag);
+                            }
+                        }
+                    });
+
+                    $scope.$watch("section", function(section) {
+                        var indexOf = $scope.course.sections.indexOf($scope.section);
+                        var newCurrent = tags[indexOf];
+
+                        if (newCurrent != current) {
+                            newCurrent.addClass("current");
+                            if (current != null) {
+                                current.removeClass("current");
+                            }
+                            current = newCurrent;
+                        }
+                    });
+                }
+            };
+        })
+
         .directive("coursePaging", function() {
             return {
                 restrict: "C",
