@@ -29,6 +29,8 @@ namespace PST.Declarations.Entities
         [DataType(DataType.EmailAddress)]
         public override string Email { get; set; }
 
+        public virtual string CompanyName { get; set; }
+
         public virtual Address CompanyAddress { get; set; }
 
         public override string HashedPassword { get; set; }
@@ -54,6 +56,7 @@ namespace PST.Declarations.Entities
                 first_name = account.FirstName,
                 last_name = account.LastName,
                 username = account.Username,
+                company_name = account.CompanyName,
                 company_address = account.CompanyAddress
             };
         }
@@ -67,6 +70,7 @@ namespace PST.Declarations.Entities
                 FirstName = account.first_name,
                 LastName = account.last_name,
                 Username = account.username,
+                CompanyName = account.company_name,
                 CompanyAddress = account.company_address
             };
         }
