@@ -34,7 +34,7 @@
 
                     <a href="app/css/images/temp/img-answer-large.jpg" class="js-magnify"></a>
 
-                    <input type="checkbox" id="check{{$index}}" value="{{$index}}" ng-model="answer.checkeds[$index]">
+                    <input type="checkbox" id="check{{$index}}" value="{{$index}}" ng-model="answer.checks[$index]">
 
                     <label for="check{{$index}}">Select</label>
                 </div><!-- /.course-question-option-picture -->
@@ -51,7 +51,7 @@
             </div><!-- /.course-questions-options -->
         </div><!-- /.form-body -->
 
-        <div class="form-actions" ng-if="!correctAnswer">
+        <div class="form-actions" ng-if="result==null || !result.passed">
             <input type="button" class="btn" value="Answer" ng-click="submitAnswer()">
         </div><!-- /.form-actions -->
 
