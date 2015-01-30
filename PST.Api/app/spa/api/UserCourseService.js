@@ -14,7 +14,7 @@
             UserCourseService.getProgress = function(data, onDone) {
                 //$timeout(onDone,0);
                 return {
-                    "sections": [0,1,0]
+                    "sections": [4,1,0]
                 };
             };
             return UserCourseService;

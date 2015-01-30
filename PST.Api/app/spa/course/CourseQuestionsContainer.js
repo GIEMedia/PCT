@@ -23,19 +23,55 @@
 
                     $scope.$watch(attrs.section, function(section) {
                         $scope.result = null;
+                        $scope.question = null;
 
                         ladyUserProgress.manTurn(function() {
                             var sectionNum = courseCtrl.sectionNum();
                             var progress = $scope.userProgress.sections[sectionNum - 1];
-                            $scope.question = section.questions[progress];
 
-                            if (!$scope.$$phase) $scope.$digest();
+                            if (progress < section.questions.length) {
+                                $scope.question = section.questions[progress];
+
+                                if (!$scope.$$phase) $scope.$digest();
+                            }
                         });
                     });
 
-                    //$scope.nextSection = function() {
-                    //    courseCtrl.nextSection();
-                    //};
+                    $scope.finishedThisSection = function() {
+                        if ($scope.userProgress == null || $scope.course == null) {
+                            return false;
+                        }
+
+                        var sectionNum = courseCtrl.sectionNum();
+                        var progress = $scope.userProgress.sections[sectionNum - 1];
+                        return progress >= $scope.section.questions.length;
+                    };
+
+                    $scope.finishedAllSection = function() {
+                        if ($scope.userProgress == null || $scope.course == null) {
+                            return false;
+                        }
+
+                        for (var i = 0; i < $scope.course.sections.length; i++) {
+                            var sec = $scope.course.sections[i];
+                            var progress = $scope.userProgress.sections[i];
+                            if (progress == null || progress < sec.questions.length) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    };
+
+                    $scope.nextUnfinishedSection = function() {
+                        for (var i = 0; i < $scope.course.sections.length; i++) {
+                            var sec = $scope.course.sections[i];
+                            var progress = $scope.userProgress.sections[i];
+                            if (progress == null || progress < sec.questions.length) {
+                                courseCtrl.gotoSection(i+1);
+                                return;
+                            }
+                        }
+                    };
 
                     $scope.sectionNum = function() {
                         return courseCtrl.sectionNum();
@@ -48,13 +84,13 @@
                         if (indexOf < $scope.section.questions.length - 1) {
                             $scope.question = $scope.section.questions[indexOf + 1];
 
-                            // Update progress
-                            var sectionNum = courseCtrl.sectionNum();
-                            $scope.userProgress.sections[sectionNum - 1] = indexOf + 1;
                         } else {
-                            // TODO
-                            //return false;
+                            $scope.question = null;
                         }
+
+                        // Update progress
+                        var sectionNum = courseCtrl.sectionNum();
+                        $scope.userProgress.sections[sectionNum - 1] = indexOf + 1;
 
                         return false;
                     };
