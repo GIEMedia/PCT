@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201501290811_AccountCompanyName.cs" />
     <Compile Include="Migrations\201501282132_AccountAddress.cs" />
     <Compile Include="Migrations\201501272216_AccountTable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

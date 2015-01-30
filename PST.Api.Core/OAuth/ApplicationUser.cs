@@ -15,6 +15,7 @@ namespace PST.Api.Core.OAuth
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public string CompanyName { get; set; }
         public Address CompanyAddress { get; set; }
         public string HashedPassword { get; set; }
         public string PasswordResetToken { get; set; }
@@ -34,6 +35,7 @@ namespace PST.Api.Core.OAuth
                 LastName = account.LastName,
                 UserName = account.Username,
                 Email = account.Email,
+                CompanyName = account.CompanyName,
                 CompanyAddress = account.CompanyAddress,
                 HashedPassword = account.HashedPassword,
                 PasswordResetToken = account.PasswordResetToken,
@@ -55,6 +57,7 @@ namespace PST.Api.Core.OAuth
                 LastName = user.LastName,
                 Username = user.UserName,
                 Email = user.Email,
+                CompanyName = user.CompanyName,
                 CompanyAddress = user.CompanyAddress,
                 HashedPassword = user.HashedPassword,
                 PasswordResetToken = user.PasswordResetToken,
@@ -73,6 +76,7 @@ namespace PST.Api.Core.OAuth
                 LastName = account.last_name,
                 UserName = account.email,
                 Email = account.email,
+                CompanyName = account.company_name,
                 CompanyAddress = account.company_address
             };
             if (account.is_admin.HasValue)
@@ -91,6 +95,7 @@ namespace PST.Api.Core.OAuth
                 last_name = user.LastName,
                 username = user.UserName,
                 email = user.Email,
+                company_name = user.CompanyName,
                 company_address = user.CompanyAddress
             };
         }
@@ -103,6 +108,7 @@ namespace PST.Api.Core.OAuth
                 LastName = registration.last_name,
                 UserName = registration.email,
                 Email = registration.email,
+                CompanyName = registration.company_name,
                 CompanyAddress = registration.company_address
             };
         }

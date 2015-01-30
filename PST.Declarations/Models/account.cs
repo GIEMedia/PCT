@@ -15,6 +15,7 @@ namespace PST.Declarations.Models
             set { email = value; }
         }
         public override string email { get; set; }
+        public string company_name { get; set; }
         public address company_address { get; set; }
         public override string ID { get; set; }
         public bool? is_admin { get; set; }
