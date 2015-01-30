@@ -88,6 +88,24 @@
             };
         })
 
+        .directive("courseSteps", function() {
+            return {
+                restrict: "C",
+                require: "^course",
+                scope : true,
+                link: function($scope, elem, attrs, courseCtrl) {
+                    $scope.prevSection = function() {
+                        courseCtrl.prevSection();
+                        return false;
+                    };
+                    $scope.nextSection = function() {
+                        courseCtrl.nextSection();
+                        return false;
+                    };
+                }
+            };
+        })
+
     ;
 
 })();

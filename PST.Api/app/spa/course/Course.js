@@ -41,13 +41,26 @@
                     ctrl.setMaximized = function(maximized) {
                         $scope.maximized = maximized;
                     };
+
+                    // Section navigation
                     ctrl.gotoSection = function(sectionNum) {
                         $scope.section = $scope.course.sections[sectionNum - 1];
                         $scope.page = $scope.section.pages[0];
                         if (!$scope.$$phase) $scope.$digest();
                     };
                     ctrl.nextSection = function() {
-                        console.log(321);
+                        var indexOf = $scope.course.sections.indexOf($scope.section);
+                        if (indexOf == $scope.course.sections.length - 1) {
+                            return;
+                        }
+                        ctrl.gotoSection(indexOf + 1 + 1);
+                    };
+                    ctrl.prevSection = function() {
+                        var indexOf = $scope.course.sections.indexOf($scope.section);
+                        if (indexOf == 0) {
+                            return;
+                        }
+                        ctrl.gotoSection(indexOf + 1 - 1);
                     };
                     ctrl.sectionNum = function() {
                         return $scope.course ==null ? 0 : $scope.course.sections.indexOf($scope.section) + 1;
