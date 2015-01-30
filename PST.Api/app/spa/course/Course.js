@@ -102,6 +102,14 @@
                         $scope.page = $scope.section.pages[indexOf - 1];
                         return false;
                     };
+
+                    $scope.print = function() {
+                        var newWindow = window.open($scope.course.pdfUrl, "_blank");
+                        newWindow.print();
+                    };
+                    $scope.download = function() {
+                        window.open($scope.course.pdfUrl, "_blank");
+                    };
                 }
             };
         })

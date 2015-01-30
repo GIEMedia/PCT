@@ -15,6 +15,7 @@
                 $timeout(onDone,0);
                 return {
                     "name": "PCT Pest Insecticide",
+                    "pdfUrl" : "app/temp/sample.pdf",
                     "sections": [
                         {
                             "name": "Trade Name/Ingredients/First Aid",
