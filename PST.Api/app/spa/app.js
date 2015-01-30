@@ -11,6 +11,7 @@
 
             'pct.elearning.api.Test',
             'pct.elearning.api.Course',
+            'pct.elearning.api.UserCourse',
 
             'pct.elearning.landing',
             'pct.elearning.dashboard',

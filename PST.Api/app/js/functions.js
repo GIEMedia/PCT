@@ -27,17 +27,6 @@ var $panZoom = null;
 		// cache DOM elements
 		$course            = $('.course');
 
-		if (!$.browser.mobile) {
-			$('[data-tip]').tooltipster({
-				position: 'right',
-				maxWidth: 230,
-				functionBefore: function(origin, continueTooltip) {
-					origin.tooltipster('content', $(this).data('tip'));
-					continueTooltip();
-				}
-			});
-		}
-
 		// Don't select elements if placeholder is natively supported
 		if (!$.support.placeholder) {
 			$('input[placeholder], textarea[placeholder]').doPlaceholders();
@@ -97,7 +86,7 @@ var $panZoom = null;
 		// Mark the fields as initialized
 		$fields.data('didPlaceholders', true);
 
-		// Alllow
+		// Allow
 		return $fields;
 	};
 

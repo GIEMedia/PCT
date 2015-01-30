@@ -3,6 +3,7 @@
 (function () {
 
     angular.module('pct.elearning.course', [
+        'pct.elearning.course.slider',
         'pct.elearning.course.questions',
         'pct.elearning.course.questionsContainer',
         'ui.router'
@@ -19,9 +20,10 @@
             ;
         })
 
-        .controller("course.Ctrl", function ($scope, CourseService) {
+        .controller("course.Ctrl", function ($scope, CourseService, UserCourseService) {
             $scope.course = CourseService.get({}, function() {
             });
+            $scope.userProgress = UserCourseService.getProgress();
             $scope.courseHelp = false;
         })
 

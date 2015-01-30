@@ -81,8 +81,8 @@
                         {
                             "name": "Trade Name/Ingredients/First Aid 2",
                             "pages": [
-                                "app/css/images/temp/pdf-placeholder2.jpg",
-                                "app/css/images/temp/pdf-placeholder.jpg"
+                                "app/css/images/temp/pdf-placeholder.jpg",
+                                "app/css/images/temp/pdf-placeholder2.jpg"
                             ],
                             "questions": [
                                 {
@@ -101,8 +101,8 @@
                             "name": "Trade Name/Ingredients/First Aid 3",
                             "pages": [
                                 "app/css/images/temp/pdf-placeholder.jpg",
-                                "app/css/images/temp/pdf-placeholder.jpg",
-                                "app/css/images/temp/pdf-placeholder2.jpg"
+                                "app/css/images/temp/pdf-placeholder2.jpg",
+                                "app/css/images/temp/pdf-placeholder3.jpg"
                             ],
                             "questions": [
                                 {
