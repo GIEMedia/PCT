@@ -18,7 +18,8 @@
                     "sections": [
                         {
                             "pages": [
-                                "app/css/images/temp/pdf-placeholder.jpg"
+                                "app/css/images/temp/pdf-placeholder.jpg",
+                                "app/css/images/temp/pdf-placeholder2.jpg"
                             ],
                             "name": "Trade Name/Ingredients/First Aid",
                             "questions": [

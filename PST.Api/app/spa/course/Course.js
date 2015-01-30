@@ -21,7 +21,6 @@
 
         .controller("course.Ctrl", function ($scope, CourseService) {
             $scope.course = CourseService.get({}, function() {
-                $scope.section = $scope.course.sections[0];
             });
             $scope.courseHelp = false;
         })
@@ -45,7 +44,12 @@
                     };
                 },
                 link: function($scope, elem, attrs) {
-
+                    $scope.$watch("course", function(course) {
+                        if (course) {
+                            $scope.section = $scope.course.sections[0];
+                            $scope.page = $scope.section.pages[0];
+                        }
+                    });
 
                     $scope.$watch("maximized", function(maximized) {
                         if (maximized) {
@@ -59,7 +63,37 @@
                         }
                     });
 
+                    $scope.nextPage = function() {
+                        var indexOf = $scope.section.pages.indexOf($scope.page);
+                        if (indexOf >= $scope.section.pages.length - 1) {
+                            return;
+                        }
+                        $scope.page = $scope.section.pages[indexOf + 1];
+                        return false;
+                    };
+                    $scope.prevPage = function() {
+                        var indexOf = $scope.section.pages.indexOf($scope.page);
+                        if (indexOf == 0) {
+                            return;
+                        }
+                        $scope.page = $scope.section.pages[indexOf - 1];
+                        return false;
+                    };
+                }
+            };
+        })
 
+        .directive("coursePaging", function() {
+            return {
+                restrict: "C",
+                //templateUrl: "/app/spa/course/CoursePaging.html",
+                link: function($scope, elem, attrs) {
+                    $scope.currentPage = function() {
+                        if ($scope.section==null) {
+                            return 1;
+                        }
+                        return $scope.section.pages.indexOf($scope.page) + 1;
+                    };
                 }
             };
         })

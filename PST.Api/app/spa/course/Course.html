@@ -36,16 +36,16 @@
             <a href="#" class="course-switch-document">Document</a>
         </div><!-- /.course-switch -->
         <div class="course-paging">
-            <a href="#" class="course-paging-prev">Previous</a>
-            <span class="course-paging-label">Page 1 of 1</span>
-            <a href="#" class="course-paging-next">Next</a>
+            <a href="" class="course-paging-prev" ng-disabled="currentPage()<=1" ng-click="prevPage()">Previous</a>
+            <span class="course-paging-label">Page {{currentPage()}} of {{section.pages.length}}</span>
+            <a href="" class="course-paging-next" ng-click="nextPage()" ng-disabled="currentPage()>=section.pages.length">Next</a>
         </div><!-- /.course-paging -->
     </div><!-- /.course-media-bar -->
 
     <div class="course-media-frame">
         <div class="course-media-frame-panzoom">
             <div class="loading"><i class="fa fa-spinner fa-spin"></i></div>
-            <img img-src="section.pages[0]" class="course-pdf-preview" width="100" alt="">
+            <img img-src="page" class="course-pdf-preview" width="100" alt="">
         </div>
     </div><!-- /.course-media-frame -->
 </div><!-- /.course-media -->

@@ -14,7 +14,6 @@
                     console.log(attrs.section);
                     $scope.$watch(attrs.section, function(section) {
                         $scope.section = section;
-                        console.log(section);
                     });
                     $scope.nextSection = function() {
                         courseCtrl.nextSection();
