@@ -3,6 +3,7 @@
 (function () {
 
     angular.module('pct.elearning.course.questionsContainer', [
+        'pct.elearning.course.question'
     ])
 
         .directive("courseQuestionsContainer", function() {
@@ -27,13 +28,15 @@
                             var sectionNum = courseCtrl.sectionNum();
                             var progress = $scope.userProgress.sections[sectionNum - 1];
                             $scope.question = section.questions[progress];
-                            
+
                             if (!$scope.$$phase) $scope.$digest();
                         });
                     });
+
                     //$scope.nextSection = function() {
                     //    courseCtrl.nextSection();
                     //};
+
                     $scope.sectionNum = function() {
                         return courseCtrl.sectionNum();
                     };
@@ -56,13 +59,20 @@
                         return false;
                     };
 
-
                     $scope.progress = function() {
                         return $scope.section == null ? 0 : $scope.section.questions.indexOf($scope.question);
                     };
 
                 },
                 controller: function($scope) {
+
+                    var showResult = function(passed, explanation) {
+                        $scope.result = passed == null ? null : {
+                            passed: passed,
+                            explanation: explanation
+                        };
+                    };
+
                     var ctrl = this;
 
                     ctrl.submitAnswer = function(answer) {
@@ -76,12 +86,6 @@
                         if (!$scope.$$phase) $scope.$digest();
                     };
 
-                    var showResult = function(passed, explanation) {
-                        $scope.result = passed == null ? null : {
-                            passed: passed,
-                            explanation: explanation
-                        };
-                    };
                 }
             };
         })

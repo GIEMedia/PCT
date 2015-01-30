@@ -2,13 +2,13 @@
 
 (function () {
 
-    angular.module('pct.elearning.course.questions', [
+    angular.module('pct.elearning.course.question', [
     ])
-        .directive("courseQuestions", function() {
+        .directive("courseQuestion", function() {
             return {
-                restrict: "C",
+                restrict: "A",
                 require: "^courseQuestionsContainer",
-                templateUrl: "/app/spa/course/CourseQuestions.html",
+                templateUrl: "/app/spa/course/CourseQuestion.html",
                 scope: true,
                 link: function($scope, elem, attrs, courseQuestionsContainerCtrl) {
                     var emptyAnswer = function() {
@@ -19,7 +19,7 @@
                     };
 
                     var _question;
-                    $scope.$watch(attrs.question, function(question) {
+                    $scope.$watch(attrs.courseQuestion, function(question) {
                         if (question) {
                             $scope.answer = emptyAnswer();
                             _question = question;

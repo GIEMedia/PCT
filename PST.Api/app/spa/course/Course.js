@@ -4,7 +4,6 @@
 
     angular.module('pct.elearning.course', [
         'pct.elearning.course.slider',
-        'pct.elearning.course.questions',
         'pct.elearning.course.questionsContainer',
         'ui.router'
     ])
