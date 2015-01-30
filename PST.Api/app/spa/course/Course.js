@@ -195,6 +195,35 @@
             };
         })
 
+
+        .directive("courseSwitch", function() {
+            return {
+                restrict: "C",
+                link: function($scope, elem, attrs) {
+                    var $course = $('.course');
+                    var swap = function() {
+                        $course.toggleClass('course-swapped');
+                    };
+
+                    function scrollTo(scrollToElement, scrollingElement) {
+                        if (!scrollingElement)
+                            scrollingElement = 'html, body';
+                        $(scrollingElement).animate({
+                            scrollTop: $(scrollToElement).offset().top
+                        }, 200);
+                    };
+
+                    elem.on('click', function(e) {
+                        swap();
+                        scrollTo(".course-media-bar");
+                        e.preventDefault();
+                    })
+                }
+            };
+        })
+
+
+
         .directive("coursePdfPreview", function() {
             return {
                 restrict: "C",

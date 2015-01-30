@@ -3,40 +3,16 @@
 var $panZoom = null;
 
 ;(function($, window, document, undefined) {
-	var $course;
-
-	/**
-	 * Course interactions.
-	 * @type {Object}
-	 */
-	var Course = {};
-
-	/**
-	 * Swaps the view on mobile devices.
-	 * @return 
-	 */
-	Course.swap = function() {
-		$course.toggleClass('course-swapped');
-	}
 
 	/**
 	 * Run the app.
 	 * @return
 	 */
 	$(document).ready(function() {
-		// cache DOM elements
-		$course            = $('.course');
-
 		// Don't select elements if placeholder is natively supported
 		if (!$.support.placeholder) {
 			$('input[placeholder], textarea[placeholder]').doPlaceholders();
 		}
-
-		$('.course-switch').on('click', function(e) {
-		    Course.swap();
-		    scrollTo(".course-media-bar");
-			e.preventDefault();
-		});
 
 	    // prototype - bind answer button
 		bindAddRemove();
@@ -95,11 +71,3 @@ var $panZoom = null;
 	})();
 })(jQuery, window, document);
 
-
-function scrollTo(scrollToElement, scrollingElement) {
-    if (!scrollingElement)
-        scrollingElement = 'html, body';
-    $(scrollingElement).animate({
-        scrollTop: $(scrollToElement).offset().top
-    }, 200);
-};
