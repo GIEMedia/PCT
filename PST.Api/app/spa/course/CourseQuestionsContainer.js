@@ -18,6 +18,9 @@
                     $scope.nextSection = function() {
                         courseCtrl.nextSection();
                     };
+                    $scope.sectionNum = function() {
+                        return courseCtrl.sectionNum();
+                    };
                 },
                 controller: function($scope) {
                     $scope.result = null;

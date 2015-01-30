@@ -1,7 +1,7 @@
 <div class="course-progress">
     <h3>{{course.name}}</h3>
 
-    <h5>#1 - {{section.name}}</h5>
+    <h5>#{{sectionNum()}} - {{section.name}}</h5>
 
     <div class="course-progress-bar">
         <p><span class="alignright">Question <span class="current-count">{{progress()+1}}</span> of <span class="total-count">{{section.questions.length}}</span></span> Section Progress</p>

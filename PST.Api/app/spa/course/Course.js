@@ -42,6 +42,9 @@
                     ctrl.nextSection = function() {
                         console.log(321);
                     };
+                    ctrl.sectionNum = function() {
+                        return $scope.course ==null ? 0 : $scope.course.sections.indexOf($scope.section) + 1;
+                    };
                 },
                 link: function($scope, elem, attrs) {
                     $scope.$watch("course", function(course) {
