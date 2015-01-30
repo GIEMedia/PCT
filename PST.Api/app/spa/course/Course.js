@@ -39,6 +39,11 @@
                     ctrl.setMaximized = function(maximized) {
                         $scope.maximized = maximized;
                     };
+                    ctrl.gotoSection = function(sectionNum) {
+                        $scope.section = $scope.course.sections[sectionNum - 1];
+                        $scope.page = $scope.section.pages[0];
+                        if (!$scope.$$phase) $scope.$digest();
+                    };
                     ctrl.nextSection = function() {
                         console.log(321);
                     };
@@ -89,7 +94,8 @@
         .directive("courseStepsSlides", function() {
             return {
                 restrict: "C",
-                link: function($scope, elem, attrs) {
+                require: "^course",
+                link: function($scope, elem, attrs, courseCtrl) {
                     //<li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">1</a></li>
                     //<li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">2</a></li>
                     //<li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">3</a></li>
@@ -97,15 +103,14 @@
                     //<li><a href="#" data-tip="Weevils: Facts, Identification &amp; Control">5</a></li>
 
                     var tooltip = function(e, text) {
-                        e.tooltipster({
+                        return e.tooltipster({
                             position: 'right',
                             maxWidth: 230,
                             functionBefore: function(origin, continueTooltip) {
                                 origin.tooltipster('content', text);
                                 continueTooltip();
                             }
-                        })
-                        return e;
+                        });
                     };
 
                     var current = null;
@@ -126,7 +131,7 @@
                                     if (tag.hasClass("current")) {
                                         ;
                                     } else {
-                                        console.log("move to section " + (tag.text()*1));
+                                        courseCtrl.gotoSection(tag.text()*1);
                                     }
                                     return false;
                                 });
@@ -137,6 +142,9 @@
 
                     $scope.$watch("section", function(section) {
                         var indexOf = $scope.course.sections.indexOf($scope.section);
+                        if (indexOf == -1) {
+                            return;
+                        }
                         var newCurrent = tags[indexOf];
 
                         if (newCurrent != current) {
@@ -154,7 +162,6 @@
         .directive("coursePaging", function() {
             return {
                 restrict: "C",
-                //templateUrl: "/app/spa/course/CoursePaging.html",
                 link: function($scope, elem, attrs) {
                     $scope.currentPage = function() {
                         if ($scope.section==null) {
