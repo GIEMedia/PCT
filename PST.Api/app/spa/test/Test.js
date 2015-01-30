@@ -17,9 +17,8 @@
             ;
         })
 
-        .controller("test.Ctrl", function ($scope, TestService, $state) {
+        .controller("test.Ctrl", function ($scope, TestService) {
             $scope.round = 1;
-
 
             $scope.model = {
                 answer: null,
@@ -88,41 +87,37 @@
                 $scope.question = null;
                 $scope.model.answer = null;
 
-                $scope.result = TestService.submit({answers: $scope.answers, round: $scope.round});
+                $scope.result = TestService.submit({answers: $scope.model.answers, round: $scope.round});
             };
 
             $scope.nextRound = function() {
-                var setCorrectQuestions = function() {
-                    for (var i in $scope.result.corrects) {
-                        if ($scope.result.corrects.hasOwnProperty(i)) {
-
-                            var correct = $scope.result.corrects[i];
-                            var question = $scope.questions[correct.question * 1];
-                            question.correct = true;
-                            question.explanation = correct.explanation;
+                function getCorrect(i, corrects) {
+                    for (var j = 0; j < corrects.length; j++) {
+                        var correct = corrects[j];
+                        if (correct.question * 1 == i) {
+                            return correct;
                         }
                     }
-                };
-
-                if ($scope.round == 1) {
-                    $scope.round++;
-                    for (var i in $scope.questions) {
-                        if ($scope.questions.hasOwnProperty(i)) {
-                            $scope.questions[i].correct = false;
-                        }
-                    }
-                    setCorrectQuestions();
-
-                    $scope.result = null;
-                    fetchNextQuestion();
-                } else if ($scope.round == 2) {
-                    $scope.round++;
-
-                    setCorrectQuestions();
-
-                    $scope.result = null;
-                    fetchNextQuestion();
+                    return null;
                 }
+
+                $scope.round++;
+
+                for (var i = 0; i < $scope.questions.length; i++) {
+                    var question = $scope.questions[i];
+
+                    var correct = getCorrect(i, $scope.result.corrects);
+                    if (correct != null) {
+                        question.correct = true;
+                        question.explanation = correct.explanation;
+                    } else {
+                        question.correct = false;
+                        $scope.model.answers[i] = null;
+                    }
+                }
+
+                $scope.result = null;
+                fetchNextQuestion();
             };
         })
 
