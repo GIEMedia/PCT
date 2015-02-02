@@ -15,14 +15,16 @@
                 $timeout(onDone,0);
                 return {
                     "name": "PCT Pest Insecticide",
-                    "pdfUrl" : "app/temp/sample.pdf",
                     "sections": [
                         {
                             "name": "Trade Name/Ingredients/First Aid",
-                            "pages": [
-                                "app/css/images/temp/pdf-placeholder.jpg",
-                                "app/css/images/temp/pdf-placeholder2.jpg"
-                            ],
+                            "document": {
+                                "pdf_url" : "app/temp/sample.pdf",
+                                "pages": [
+                                    "app/css/images/temp/pdf-placeholder.jpg",
+                                    "app/css/images/temp/pdf-placeholder2.jpg"
+                                ]
+                            },
                             "questions": [
                                 {
                                     "question": "Which of the following pests can be treated using PCT Pest Insecticide?",
@@ -81,10 +83,13 @@
                         },
                         {
                             "name": "Trade Name/Ingredients/First Aid 2",
-                            "pages": [
-                                "app/css/images/temp/pdf-placeholder.jpg",
-                                "app/css/images/temp/pdf-placeholder2.jpg"
-                            ],
+                            "document": {
+                                "pdf_url" : "app/temp/sample.pdf",
+                                "pages": [
+                                    "app/css/images/temp/pdf-placeholder.jpg",
+                                    "app/css/images/temp/pdf-placeholder2.jpg"
+                                ]
+                            },
                             "questions": [
                                 {
                                     "question": "This product can be used to treat for little black ants.",
@@ -100,11 +105,13 @@
                         },
                         {
                             "name": "Trade Name/Ingredients/First Aid 3",
-                            "pages": [
-                                "app/css/images/temp/pdf-placeholder.jpg",
-                                "app/css/images/temp/pdf-placeholder2.jpg",
-                                "app/css/images/temp/pdf-placeholder3.jpg"
-                            ],
+                            "document": {
+                                "pdf_url" : "app/temp/sample.pdf",
+                                "pages": [
+                                    "app/css/images/temp/pdf-placeholder.jpg",
+                                    "app/css/images/temp/pdf-placeholder2.jpg"
+                                ]
+                            },
                             "questions": [
                                 {
                                     "question": "What is the active ingredient in PCT Pest Insecticide?",

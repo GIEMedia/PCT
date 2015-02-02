@@ -99,6 +99,17 @@
                         return $scope.section == null ? 0 : $scope.section.questions.indexOf($scope.question);
                     };
 
+                    $scope.$watch(function() { return $scope.result == null ? null : $scope.result.passed;}, function(hasResult) {
+                        if (hasResult != null) {
+                            setTimeout(function() {
+                                elem.animate({
+                                    scrollTop: elem.find('.course-question-answer').position().top
+                                }, 200);
+                            }, 200);
+
+                        }
+
+                    });
                 },
                 controller: function($scope) {
 

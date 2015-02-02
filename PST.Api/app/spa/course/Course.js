@@ -44,7 +44,7 @@
                     // Section navigation
                     ctrl.gotoSection = function(sectionNum) {
                         $scope.section = $scope.course.sections[sectionNum - 1];
-                        $scope.page = $scope.section.pages[0];
+                        $scope.page = $scope.section.document.pages[0];
                         if (!$scope.$$phase) $scope.$digest();
                     };
                     ctrl.nextSection = function() {
@@ -69,7 +69,7 @@
                     $scope.$watch("course", function(course) {
                         if (course) {
                             $scope.section = $scope.course.sections[0];
-                            $scope.page = $scope.section.pages[0];
+                            $scope.page = $scope.section.document.pages[0];
                         }
                     });
 
@@ -86,28 +86,28 @@
                     });
 
                     $scope.nextPage = function() {
-                        var indexOf = $scope.section.pages.indexOf($scope.page);
-                        if (indexOf >= $scope.section.pages.length - 1) {
+                        var indexOf = $scope.section.document.pages.indexOf($scope.page);
+                        if (indexOf >= $scope.section.document.pages.length - 1) {
                             return;
                         }
-                        $scope.page = $scope.section.pages[indexOf + 1];
+                        $scope.page = $scope.section.document.pages[indexOf + 1];
                         return false;
                     };
                     $scope.prevPage = function() {
-                        var indexOf = $scope.section.pages.indexOf($scope.page);
+                        var indexOf = $scope.section.document.pages.indexOf($scope.page);
                         if (indexOf == 0) {
                             return;
                         }
-                        $scope.page = $scope.section.pages[indexOf - 1];
+                        $scope.page = $scope.section.document.pages[indexOf - 1];
                         return false;
                     };
 
                     $scope.print = function() {
-                        var newWindow = window.open($scope.course.pdfUrl, "_blank");
+                        var newWindow = window.open($scope.section.document.pdf_url, "_blank");
                         newWindow.print();
                     };
                     $scope.download = function() {
-                        window.open($scope.course.pdfUrl, "_blank");
+                        window.open($scope.section.document.pdf_url, "_blank");
                     };
                 }
             };
@@ -189,7 +189,7 @@
                         if ($scope.section==null) {
                             return 1;
                         }
-                        return $scope.section.pages.indexOf($scope.page) + 1;
+                        return $scope.section.document.pages.indexOf($scope.page) + 1;
                     };
                 }
             };
