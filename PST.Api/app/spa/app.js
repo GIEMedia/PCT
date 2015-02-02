@@ -14,6 +14,7 @@
             'pct.elearning.api.Course',
             'pct.elearning.api.UserCourse',
             'pct.elearning.api.Security',
+            'pct.elearning.api.State',
 
             'pct.elearning.landing',
             'pct.elearning.dashboard',

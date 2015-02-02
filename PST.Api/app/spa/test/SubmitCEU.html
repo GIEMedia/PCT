@@ -1,0 +1,49 @@
+
+<div class="test-certificate-form">
+    <div class="form-head">
+        <h4 class="form-title">Do you plan to submit this training for state CEU credit?</h4><!-- /.form-title -->
+    </div><!-- /.form-head -->
+
+    <div class="form-body">
+        <div class="form-row">
+            <label class="form-label">State Licensure(s)</label>
+
+            <div class="form-controls" ng-repeat="stateLicense in stateLicenses">
+                <div class="form-controls-actions">
+                    <a href="" class="btn-add" ng-click="addStateLicense()"></a>
+                    <a class="btn-remove" ng-click="removeStateLicense($index)"></a>
+                </div><!-- /.form-controls-actions -->
+
+                <div class="form-cols-outer">
+                    <div class="form-cols">
+                        <div class="form-col form-col-1of2">
+                            <select class="field" placeholder="State" ng-model="stateLicense.state" ng-class="{'has-error': !pristine && !stateLicense.state}" ng-options="state.code as state.name for state in states">
+                                <option value="">State</option>
+                            </select>
+                        </div><!-- /.form-col form-col-1of2 -->
+
+                        <div class="form-col form-col-1of2">
+                            <select class="field" placeholder="Certification Category" ng-model="stateLicense.category" ng-options="category.code as category.name for category in categories" ng-class="{'has-error': !pristine && !stateLicense.category}">
+                                <option value="">Certification Category</option>
+                            </select>
+                        </div><!-- /.form-col form-col-1of2 -->
+
+                        <div class="form-col form-col-1of2">
+                            <input type="text" class="field" placeholder="License #" ng-model="stateLicense.num" ng-class="{'has-error': !pristine && !stateLicense.num}">
+                        </div><!-- /.form-col form-col-1of2 -->
+
+                        <div class="form-col form-col-1of2">
+                            <input type="text" class="field" placeholder="Confirm License #" ng-model="stateLicense.confirmNum" ng-class="{'has-error': !pristine && (!stateLicense.confirmNum || stateLicense.confirmNum != stateLicense.num)}">
+                        </div><!-- /.form-col form-col-1of2 -->
+                    </div><!-- /.form-cols -->
+                </div><!-- /.form-cols-outer -->
+            </div><!-- /.form-controls -->
+
+        </div><!-- /.form-row -->
+    </div><!-- /.form-body -->
+
+    <div class="form-actions">
+        <input type="button" value="No Thanks!" class="btn btn-lightgray" ng-click="$state.go('certificate')">
+        <input type="button" value="Send" class="btn btn-green" ng-click="send()">
+    </div><!-- /.form-actions -->
+</div><!-- /.test-certificate-form -->

@@ -3,6 +3,7 @@
 (function () {
 
     angular.module('pct.elearning.test', [
+            'pct.elearning.test.submit_ceu',
             'ui.router'
     ])
     
