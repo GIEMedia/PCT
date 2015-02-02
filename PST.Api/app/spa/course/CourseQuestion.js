@@ -36,7 +36,7 @@
                                 }
                             }
                         } else if (["text","picture","video"].indexOf(_question.type) > -1) {
-                            answer = $scope.answer.choice == null ? -1 : $scope.answer.choice * 1;
+                            answer = $scope.answer.choice;
                         } else {
                             throw "Unknown type: " + _question.type;
                         }

@@ -6,7 +6,7 @@
         'pct.elearning.course.question'
     ])
 
-        .directive("courseQuestionsContainer", function() {
+        .directive("courseQuestionsContainer", function(CourseService) {
             return {
                 restrict: "C",
                 require: "^course",
@@ -105,7 +105,7 @@
                                 elem.animate({
                                     scrollTop: elem.find('.course-question-answer').position().top
                                 }, 200);
-                            }, 200);
+                            }, 0);
 
                         }
 
@@ -123,14 +123,13 @@
                     var ctrl = this;
 
                     ctrl.submitAnswer = function(answer) {
-
-                        if (ObjectUtil.equals(answer, $scope.question.answer)) {
-                            showResult(true, $scope.question.explanation);
-                        } else {
-                            showResult(false);
-                        }
-
-                        if (!$scope.$$phase) $scope.$digest();
+                        CourseService.check($scope.question.question_id, answer, function(correct, explanation) {
+                            if (correct) {
+                                showResult(true, explanation);
+                            } else {
+                                showResult(false);
+                            }
+                        });
                     };
 
                 }

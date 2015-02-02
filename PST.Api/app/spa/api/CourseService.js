@@ -11,6 +11,20 @@
 
             var CourseService = {};
 
+            CourseService.check = function(questionId, answer, callback) {
+                if (questionId == "902c059c-adf9-47c6-957f-80b283dcd913" && answer.length == 0) {
+                    callback(true, "This product is labeled to treat carpenter ants, German cockroaches and silverfish, but it is NOT labeled for treating bed bugs.");
+                } else if (questionId == "16ef5514-059a-4490-a3ac-a43202bd2a21" && answer == "1380e8ac-d486-464c-8197-9a1b5fbcc9a3") {
+                    callback(true, "When you read the list of target pests at the top of the label, it specifically lists four types of ants but little black ants is not one of them. On some labels, it will say \"Ants, including...\" and provide a number of common species, but this label is specific to only four types of ants.");
+                } else if (questionId == "1380e8ac-d486-464c-8197-9a1b5fbcc9a3" && answer == "902c059c-adf9-47c6-957f-80b283dcd913") {
+                    callback(true, "The image is of a carpenter ant.");
+                } else if (questionId == "cba92dd2-47f0-4171-b0f5-2923dba347a3" && answer == "912eac82-b76d-4e49-8c6d-05a91e44f946") {
+                    callback(true, "This product contains 0.1% of the active ingredient, Pestothrin.");
+                } else {
+                    callback(false);
+                }
+            };
+
             CourseService.get = function(data, onDone) {
                 $timeout(onDone,0);
                 return {
@@ -27,43 +41,43 @@
                             },
                             "questions": [
                                 {
+                                    "question_id": "902c059c-adf9-47c6-957f-80b283dcd913",
                                     "question": "Which of the following pests can be treated using PCT Pest Insecticide?",
                                     "type": "pictures",
-                                    "answer": [],
-                                    "explanation": "This product is labeled to treat carpenter ants, German cockroaches and silverfish, but it is NOT labeled for treating bed bugs.",
-                                    "pictures": [
-                                        "app/css/images/temp/img-answer1.jpg",
-                                        "app/css/images/temp/img-answer2.jpg",
-                                        "app/css/images/temp/img-answer3.jpg",
-                                        "app/css/images/temp/img-answer4.jpg",
-                                        "app/css/images/temp/img-answer5.jpg",
-                                        "app/css/images/temp/img-answer6.jpg"
+                                    "options": [
+                                        {"option_id": "902c059c-adf9-47c6-957f-80b283dcd913", "picture": "app/css/images/temp/img-answer1.jpg"},
+                                        {"option_id": "1380e8ac-d486-464c-8197-9a1b5fbcc9a3", "picture": "app/css/images/temp/img-answer2.jpg"},
+                                        {"option_id": "f28a2b88-31de-4d45-9814-f2008a9fcc53", "picture": "app/css/images/temp/img-answer3.jpg"},
+                                        {"option_id": "16ef5514-059a-4490-a3ac-a43202bd2a21", "picture": "app/css/images/temp/img-answer4.jpg"},
+                                        {"option_id": "9a91e716-044f-472e-a357-60f07ff09f03", "picture": "app/css/images/temp/img-answer5.jpg"},
+                                        {"option_id": "9a91e716-044f-472e-a357-60f07ff09f03", "picture": "app/css/images/temp/img-answer6.jpg"}
                                     ]
                                 },
                                 {
+                                    "question_id": "16ef5514-059a-4490-a3ac-a43202bd2a21",
                                     "question": "This product can be used to treat for little black ants.",
                                     "type": "text",
                                     "answer": 0,
-                                    "explanation": "When you read the list of target pests at the top of the label, it specifically lists four types of ants but little black ants is not one of them. On some labels, it will say \"Ants, including...\" and provide a number of common species, but this label is specific to only four types of ants.",
                                     "options": [
-                                        "True",
-                                        "False"
+                                        {"option_id": "902c059c-adf9-47c6-957f-80b283dcd913", "text": "True"},
+                                        {"option_id": "1380e8ac-d486-464c-8197-9a1b5fbcc9a3", "text": "False"}
                                     ]
                                 },
                                 {
+                                    "question_id": "1380e8ac-d486-464c-8197-9a1b5fbcc9a3",
                                     "question": "Identify the bug pictured above.",
                                     "type": "picture",
                                     "picture": "app/css/images/temp/img-answer-large.jpg",
                                     "answer": 0,
-                                    "explanation": "The image is of a carpenter ant.",
                                     "options": [
-                                        "Carpenter ant",
-                                        "German cockroach",
-                                        "Bed bug",
-                                        "None of the above"
+                                        {"option_id": "902c059c-adf9-47c6-957f-80b283dcd913", "text": "Carpenter ant"},
+                                        {"option_id": "1380e8ac-d486-464c-8197-9a1b5fbcc9a3", "text": "German cockroach"},
+                                        {"option_id": "cba92dd2-47f0-4171-b0f5-2923dba347a3", "text": "Bed bug"},
+                                        {"option_id": "b1d61cbe-5105-4c3f-9210-9bd1c9e4ebbb", "text": "None of the above"}
                                     ]
                                 },
                                 {
+                                    "question_id": "cba92dd2-47f0-4171-b0f5-2923dba347a3",
                                     "question": "What is the active ingredient in PCT Pest Insecticide?",
                                     "type": "video",
                                     "video": {
@@ -71,12 +85,11 @@
                                         "webm":"http://vjs.zencdn.net/v/oceans.webm"
                                     },
                                     "answer": 2,
-                                    "explanation": "This product contains 0.1% of the active ingredient, Pestothrin.",
                                     "options": [
-                                        "Cyfluthrin",
-                                        "Pentamyacin",
-                                        "Pestothrin",
-                                        "None of the above"
+                                        {"option_id": "5b3c44f1-48fd-4b59-84a5-bf6a16d111b8", "text": "Cyfluthrin"},
+                                        {"option_id": "91e83fa1-2c93-407c-9f41-2fb0b7b2da4f", "text": "Pentamyacin"},
+                                        {"option_id": "912eac82-b76d-4e49-8c6d-05a91e44f946", "text": "Pestothrin"},
+                                        {"option_id": "cba92dd2-47f0-4171-b0f5-2923dba347a3", "text": "None of the above"}
                                     ]
                                 }
                             ]
@@ -92,13 +105,13 @@
                             },
                             "questions": [
                                 {
+                                    "question_id": "16ef5514-059a-4490-a3ac-a43202bd2a21",
                                     "question": "This product can be used to treat for little black ants.",
                                     "type": "text",
                                     "answer": 0,
-                                    "explanation": "When you read the list of target pests at the top of the label, it specifically lists four types of ants but little black ants is not one of them. On some labels, it will say \"Ants, including...\" and provide a number of common species, but this label is specific to only four types of ants.",
                                     "options": [
-                                        "True",
-                                        "False"
+                                        {"option_id": "902c059c-adf9-47c6-957f-80b283dcd913", "text": "True"},
+                                        {"option_id": "1380e8ac-d486-464c-8197-9a1b5fbcc9a3", "text": "False"}
                                     ]
                                 }
                             ]
@@ -114,6 +127,7 @@
                             },
                             "questions": [
                                 {
+                                    "question_id": "cba92dd2-47f0-4171-b0f5-2923dba347a3",
                                     "question": "What is the active ingredient in PCT Pest Insecticide?",
                                     "type": "video",
                                     "video": {
@@ -121,12 +135,11 @@
                                         "webm":"http://vjs.zencdn.net/v/oceans.webm"
                                     },
                                     "answer": 2,
-                                    "explanation": "This product contains 0.1% of the active ingredient, Pestothrin.",
                                     "options": [
-                                        "Cyfluthrin",
-                                        "Pentamyacin",
-                                        "Pestothrin",
-                                        "None of the above"
+                                        {"option_id": "5b3c44f1-48fd-4b59-84a5-bf6a16d111b8", "text": "Cyfluthrin"},
+                                        {"option_id": "91e83fa1-2c93-407c-9f41-2fb0b7b2da4f", "text": "Pentamyacin"},
+                                        {"option_id": "912eac82-b76d-4e49-8c6d-05a91e44f946", "text": "Pestothrin"},
+                                        {"option_id": "cba92dd2-47f0-4171-b0f5-2923dba347a3", "text": "None of the above"}
                                     ]
                                 }
                             ]
