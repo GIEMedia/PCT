@@ -9,9 +9,11 @@
             'pct.elearning.test',
             'pct.elearning.certificate',
 
+            'pct.elearning.api.Account',
             'pct.elearning.api.Test',
             'pct.elearning.api.Course',
             'pct.elearning.api.UserCourse',
+            'pct.elearning.api.Security',
 
             'pct.elearning.landing',
             'pct.elearning.dashboard',

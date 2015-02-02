@@ -17,9 +17,15 @@
             ;
         })
 
-        .controller("landing.Ctrl", function ($scope, $state) {
+        .controller("landing.Ctrl", function ($scope, $state, AccountService) {
+            //AccountService.getAccount("123");
+
+            $scope.signup = {};
+
             $scope.getStarted = function() {
-                $state.go("dashboard");
+
+                AccountService.createAccount($scope.signup);
+                //$state.go("dashboard");
             };
 
             $scope.states = [

@@ -76,95 +76,100 @@
                 </form>
             </div>
             <div class="form-signup">
-                <form action="/index-logged-no-open.html" method="post">
-                    <div class="form-head">
-                        <h3 class="title-underlined">
-                            <i class="fa fa-user"></i>
-                            <span>Sign Up</span>
-                        </h3><!-- /.title-underlined -->
-                    </div><!-- /.form-head -->
-                    <div class="form-body">
-                        <div class="form-cols">
-                            <div class="form-col form-col-1of2">
-                                <div class="form-section">
-                                    <div class="form-section-head">
-                                        <h4 class="form-section-title">About You</h4><!-- /.form-section-title -->
-                                    </div><!-- /.form-section-head -->
-                                    <div class="form-section-body">
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="text" class="field" placeholder="Name" ng-model="signup.name">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="text" class="field" placeholder="Email Address" ng-model="signup.email">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="password" class="field" placeholder="Password" ng-model="signup.password">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="password" class="field" placeholder="Confirm Password" ng-model="signup.confirmPassword">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                    </div><!-- /.form-section-body -->
-                                </div><!-- /.form-section -->
-                            </div><!-- /.form-col form-col-1of2 -->
 
-                            <div class="form-col form-col-1of2">
-                                <div class="form-section">
-                                    <div class="form-section-head">
-                                        <h4 class="form-section-title">About Your Company</h4><!-- /.form-section-title -->
-                                    </div><!-- /.form-section-head -->
-                                    <div class="form-section-body">
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="text" class="field" placeholder="Company Name">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="text" class="field" placeholder="Company Address">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="password" class="field" placeholder="Suite #">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="password" class="field" placeholder="City">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <div class="form-cols">
-                                                    <div class="form-col form-col-1of2">
-                                                        <select class="select" ng-model="aaa" placeholder="State">
-                                                            <option ng-repeat="state in states" value="{{state.code}}">{{state.code}}</option>
-                                                        </select>
-                                                    </div><!-- /.form-col form-col-1of2 -->
+                <div class="form-head">
+                    <h3 class="title-underlined">
+                        <i class="fa fa-user"></i>
+                        <span>Sign Up</span>
+                    </h3><!-- /.title-underlined -->
+                </div><!-- /.form-head -->
+                <div class="form-body">
+                    <div class="form-cols">
+                        <div class="form-col form-col-1of2">
+                            <div class="form-section">
+                                <div class="form-section-head">
+                                    <h4 class="form-section-title">About You</h4><!-- /.form-section-title -->
+                                </div><!-- /.form-section-head -->
+                                <div class="form-section-body">
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="text" class="field" placeholder="First Name" ng-model="signup.first_name">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="text" class="field" placeholder="Last Name" ng-model="signup.last_name">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="text" class="field" placeholder="Email Address" ng-model="signup.email">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="password" class="field" placeholder="Password" ng-model="signup.password">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="password" class="field" placeholder="Confirm Password" ng-model="signup.confirmPassword">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                </div><!-- /.form-section-body -->
+                            </div><!-- /.form-section -->
+                        </div><!-- /.form-col form-col-1of2 -->
 
-                                                    <div class="form-col form-col-1of2">
-                                                        <input type="password" class="field" placeholder="Zip Code">
-                                                    </div><!-- /.form-col form-col-1of2 -->
-                                                </div><!-- /.form-cols -->
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                    </div><!-- /.form-section-body -->
-                                </div><!-- /.form-section -->
-                            </div><!-- /.form-col form-col-1of2 -->
-                        </div><!-- /.form-cols -->
-                    </div><!-- /.form-body -->
-                    <div class="form-actions">
-                        <input type="button" class="btn" value="Get Started" ng-click="getStarted()">
-                    </div><!-- /.form-actions -->
-                </form>
+                        <div class="form-col form-col-1of2">
+                            <div class="form-section">
+                                <div class="form-section-head">
+                                    <h4 class="form-section-title">About Your Company</h4><!-- /.form-section-title -->
+                                </div><!-- /.form-section-head -->
+                                <div class="form-section-body">
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="text" class="field" placeholder="Company Name" ng-model="signup.company_name">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="text" class="field" placeholder="Company Address" ng-model="signup.company_address.address1">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="password" class="field" placeholder="Suite #" ng-model="signup.company_address.address2">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="password" class="field" placeholder="City" ng-model="signup.company_address.city">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <div class="form-cols">
+                                                <div class="form-col form-col-1of2">
+                                                    <select class="select" placeholder="State" ng-model="signup.company_address.state">
+                                                        <option ng-repeat="state in states" value="{{state.code}}">{{state.code}}</option>
+                                                    </select>
+                                                </div><!-- /.form-col form-col-1of2 -->
+
+                                                <div class="form-col form-col-1of2">
+                                                    <input type="password" class="field" placeholder="Zip Code" ng-model="signup.company_address.zip_code">
+                                                </div><!-- /.form-col form-col-1of2 -->
+                                            </div><!-- /.form-cols -->
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                </div><!-- /.form-section-body -->
+                            </div><!-- /.form-section -->
+                        </div><!-- /.form-col form-col-1of2 -->
+                    </div><!-- /.form-cols -->
+                </div><!-- /.form-body -->
+                <div class="form-actions">
+                    <input type="button" class="btn" value="Get Started" ng-click="getStarted()">
+                </div><!-- /.form-actions -->
+
             </div><!-- /.form-signup -->
         </div><!-- /.col col-1of2 -->
     </div><!-- /.cols -->
