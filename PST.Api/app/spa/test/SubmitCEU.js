@@ -22,13 +22,6 @@
                         {code: "cat3", name:"Category 3"}
                     ];
 
-                    $scope.addStateLicense = function() {
-                        $scope.stateLicenses.push({});
-                    };
-                    $scope.removeStateLicense = function(index) {
-                        $scope.stateLicenses.splice(index, 1);
-                    };
-
                     var validate = function() {
                         for (var i = 0; i < $scope.stateLicenses.length; i++) {
                             var license = $scope.stateLicenses[i];

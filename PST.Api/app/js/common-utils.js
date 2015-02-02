@@ -4,7 +4,7 @@ StringUtil.uppercaseFirstChar = function(str) {
 	return str.substring(0, 1).toUpperCase() + str.substring(1, str.length).toLowerCase();
 };
 StringUtil.isBlank = function(val) {
-	if (isString(val)) {
+	if ((typeof val) == "string") {
 		return val==null || val.replace(/\s/g, "").length == 0;
 	} else {
 		return val == null;

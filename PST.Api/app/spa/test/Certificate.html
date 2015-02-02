@@ -2,7 +2,7 @@
 <div class="container is-scrollable">
     <div class="test">
         <div class="test-head">
-            <h2>PCT Pest Insecticide</h2>
+            <h2>{{certificate.name}}</h2>
 
             <div class="test-progress">
                 <span class="test-progress-percent">100%</span>
@@ -22,7 +22,7 @@
                 <div class="col col-1of2">
                     <div class="test-certificate">
                         <div class="test-certificate-preview">
-                            <img src="/app/css/images/certificate.jpg" />
+                            <img ng-src="{{certificate.picture}}" />
                         </div>
                     </div><!-- /.test-certificate -->
                 </div><!-- /.col col-1of2 -->
@@ -33,26 +33,26 @@
                             <h4 class="form-title">What would you like to do with your certificate?</h4><!-- /.form-title -->
                         </div><!-- /.form-head -->
 
-                        <a href="#" class="form-label"><i class="fa fa-download"></i> Download It</a>
+                        <a href="" class="form-label" ng-click="download()"><i class="fa fa-download"></i> Download It</a>
 
                         <div class="form-body">
                             <div class="form-row">
                                 <label class="form-label"><i class="fa fa-envelope"></i> Email It:</label>
 
-                                <div class="form-controls">
+                                <div class="form-controls" ng-repeat="address in addresses">
                                     <div class="form-controls-actions">
-                                        <a href="#" class="btn-add thin"></a>
-                                        <a href="#" class="btn-remove thin"></a>
+                                        <a href="" class="btn-add thin" ng-click="addresses.push({})"></a>
+                                        <a href="" class="btn-remove thin" ng-click="addresses.splice($index, 1)"></a>
                                     </div><!-- /.form-controls-actions -->
 
                                     <div class="form-cols-outer">
                                         <div class="form-cols">
                                             <div class="form-col form-col-1of2">
-                                                <input type="text" class="field" placeholder="Name">
+                                                <input type="text" class="field" placeholder="Name" ng-model="address.name" ng-class="{'has-error': !pristine && !address.name}">
                                             </div><!-- /.form-col form-col-1of2 -->
 
                                             <div class="form-col form-col-1of2">
-                                                <input type="text" class="field" placeholder="Email Address">
+                                                <input type="text" class="field" placeholder="Email Address" ng-model="address.email" ng-class="{'has-error': (!pristine && !address.email) || (address.email && !validateEmail(address.email))}">
                                             </div><!-- /.form-col form-col-1of2 -->
                                         </div><!-- /.form-cols -->
                                     </div><!-- /.form-cols-outer -->
@@ -62,7 +62,7 @@
 
                         <div class="form-actions">
                             <input type="button" value="No Thanks!" class="btn btn-lightgray" ng-click="$state.go('dashboard')">
-                            <input type="button" value="Send" class="btn btn-green" ng-click="$state.go('dashboard')">
+                            <input type="button" value="Send" class="btn btn-green" ng-click="send()">
                         </div><!-- /.form-actions -->
                     </div><!-- /.test-certificate-form -->
                 </div><!-- /.col col-1of2 -->

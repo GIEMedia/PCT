@@ -10,8 +10,8 @@
 
             <div class="form-controls" ng-repeat="stateLicense in stateLicenses">
                 <div class="form-controls-actions">
-                    <a href="" class="btn-add" ng-click="addStateLicense()"></a>
-                    <a class="btn-remove" ng-click="removeStateLicense($index)"></a>
+                    <a href="" class="btn-add" ng-click="stateLicenses.push({})"></a>
+                    <a class="btn-remove" ng-click="stateLicenses.splice($index, 1)"></a>
                 </div><!-- /.form-controls-actions -->
 
                 <div class="form-cols-outer">
