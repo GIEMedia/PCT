@@ -21,17 +21,15 @@
 
                     $scope.submitAnswer = function() {
                         var answer;
-                        if (_question.type == "pictures") {
+                        if (_question.multi_select) {
                             answer = [];
                             for (var i = 0; i < $scope.answer.length; i++) {
                                 if ($scope.answer[i]) {
-                                    answer.push(i);
+                                    answer.push($scope.question.options[i].option_id);
                                 }
                             }
-                        } else if (["text","picture","video"].indexOf(_question.type) > -1) {
-                            answer = $scope.answer;
                         } else {
-                            throw "Unknown type: " + _question.type;
+                            answer = $scope.answer;
                         }
                         courseQuestionsContainerCtrl.submitAnswer(answer);
                     };

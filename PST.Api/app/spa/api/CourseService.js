@@ -71,21 +71,22 @@
                                 {
                                     "question_id": "902c059c-adf9-47c6-957f-80b283dcd913",
                                     "question": "Which of the following pests can be treated using PCT Pest Insecticide?",
-                                    "type": "pictures",
+                                    "answer_type": "pictures",
+                                    "multi_select": true,
                                     "options": [
                                         {"option_id": "902c059c-adf9-47c6-957f-80b283dcd913", "picture": "app/css/images/temp/img-answer1.jpg"},
                                         {"option_id": "1380e8ac-d486-464c-8197-9a1b5fbcc9a3", "picture": "app/css/images/temp/img-answer2.jpg"},
                                         {"option_id": "f28a2b88-31de-4d45-9814-f2008a9fcc53", "picture": "app/css/images/temp/img-answer3.jpg"},
                                         {"option_id": "16ef5514-059a-4490-a3ac-a43202bd2a21", "picture": "app/css/images/temp/img-answer4.jpg"},
                                         {"option_id": "9a91e716-044f-472e-a357-60f07ff09f03", "picture": "app/css/images/temp/img-answer5.jpg"},
-                                        {"option_id": "9a91e716-044f-472e-a357-60f07ff09f03", "picture": "app/css/images/temp/img-answer6.jpg"}
+                                        {"option_id": "cba92dd2-47f0-4171-b0f5-2923dba347a3", "picture": "app/css/images/temp/img-answer6.jpg"}
                                     ]
                                 },
                                 {
                                     "question_id": "16ef5514-059a-4490-a3ac-a43202bd2a21",
                                     "question": "This product can be used to treat for little black ants.",
-                                    "type": "text",
-                                    "answer": 0,
+                                    "answer_type": "text",
+                                    "multi_select": false,
                                     "options": [
                                         {"option_id": "902c059c-adf9-47c6-957f-80b283dcd913", "text": "True"},
                                         {"option_id": "1380e8ac-d486-464c-8197-9a1b5fbcc9a3", "text": "False"}
@@ -94,9 +95,9 @@
                                 {
                                     "question_id": "1380e8ac-d486-464c-8197-9a1b5fbcc9a3",
                                     "question": "Identify the bug pictured above.",
-                                    "type": "picture",
+                                    "answer_type": "text",
                                     "picture": "app/css/images/temp/img-answer-large.jpg",
-                                    "answer": 0,
+                                    "multi_select": false,
                                     "options": [
                                         {"option_id": "902c059c-adf9-47c6-957f-80b283dcd913", "text": "Carpenter ant"},
                                         {"option_id": "1380e8ac-d486-464c-8197-9a1b5fbcc9a3", "text": "German cockroach"},
@@ -107,12 +108,12 @@
                                 {
                                     "question_id": "cba92dd2-47f0-4171-b0f5-2923dba347a3",
                                     "question": "What is the active ingredient in PCT Pest Insecticide?",
-                                    "type": "video",
+                                    "answer_type": "text",
                                     "video": {
                                         "mp4":"http://vjs.zencdn.net/v/oceans.mp4",
                                         "webm":"http://vjs.zencdn.net/v/oceans.webm"
                                     },
-                                    "answer": 2,
+                                    "multi_select": false,
                                     "options": [
                                         {"option_id": "5b3c44f1-48fd-4b59-84a5-bf6a16d111b8", "text": "Cyfluthrin"},
                                         {"option_id": "91e83fa1-2c93-407c-9f41-2fb0b7b2da4f", "text": "Pentamyacin"},
@@ -135,8 +136,8 @@
                                 {
                                     "question_id": "16ef5514-059a-4490-a3ac-a43202bd2a21",
                                     "question": "This product can be used to treat for little black ants.",
-                                    "type": "text",
-                                    "answer": 0,
+                                    "answer_type": "text",
+                                    "multi_select": false,
                                     "options": [
                                         {"option_id": "902c059c-adf9-47c6-957f-80b283dcd913", "text": "True"},
                                         {"option_id": "1380e8ac-d486-464c-8197-9a1b5fbcc9a3", "text": "False"}
@@ -157,12 +158,12 @@
                                 {
                                     "question_id": "cba92dd2-47f0-4171-b0f5-2923dba347a3",
                                     "question": "What is the active ingredient in PCT Pest Insecticide?",
-                                    "type": "video",
+                                    "answer_type": "text",
                                     "video": {
                                         "mp4":"http://vjs.zencdn.net/v/oceans.mp4",
                                         "webm":"http://vjs.zencdn.net/v/oceans.webm"
                                     },
-                                    "answer": 2,
+                                    "multi_select": false,
                                     "options": [
                                         {"option_id": "5b3c44f1-48fd-4b59-84a5-bf6a16d111b8", "text": "Cyfluthrin"},
                                         {"option_id": "91e83fa1-2c93-407c-9f41-2fb0b7b2da4f", "text": "Pentamyacin"},
