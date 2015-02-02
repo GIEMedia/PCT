@@ -15,9 +15,9 @@
             //};
         })
 
-        .run(function($rootScope, User) {
-            $rootScope.User = User;
-        })
+        //.run(function($rootScope, User) {
+        //    $rootScope.User = User;
+        //})
 
 
         .directive("userInfo", function(User, SecurityService, $state) {
@@ -26,8 +26,10 @@
                 templateUrl: "/app/spa/authen/UserInfo.html",
                 scope: true,
                 link: function($scope, elem, attrs) {
+                    $scope.User = User;
                     $scope.error = null;
                     $scope.$watch(function() {return User.loggedIn;}, function(loggedIn) {
+                        $scope.pristine = true;
                         if (!loggedIn) {
                             $scope.loginForm = {
                                 email: null,
@@ -36,26 +38,30 @@
                         }
                     });
                     $scope.login = function() {
+                        $scope.pristine = false;
+
+                        if (StringUtil.isBlank($scope.loginForm.email)) {
+                            alert("Email is required");
+                            return;
+                        }
+                        if (StringUtil.isBlank($scope.loginForm.password)) {
+                            alert("Password is required");
+                            return;
+                        }
+
                         SecurityService.login({
                             grant_type: "password",
                             username: $scope.loginForm.email,
                             password: $scope.loginForm.password
-                        },
-                        function(resp) {
-                            //console.log(resp);
-                            if (resp != null) {
-                                $scope.error = null;
-                                User.loggedIn = true;
-                                User.firstName = "David";
-                                User.fullName = "David Hurt";
-                            } else {
-                                $scope.error = "Wrong username/password";
-                            }
-                        });
+                        })
+                            .error(function() {
+                                alert('Your login failed.');
+                                $scope.loginForm.password = null;
+                            })
+                        ;
                     };
                     $scope.logout = function() {
                         SecurityService.logout();
-                        $state.go("landing");
                     };
                 }
             };

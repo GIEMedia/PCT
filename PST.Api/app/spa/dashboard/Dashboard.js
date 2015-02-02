@@ -17,7 +17,8 @@
             ;
         })
 
-        .controller("dashboard.Ctrl", function ($scope) {
+        .controller("dashboard.Ctrl", function ($scope, User) {
+            $scope.User = User;
         })
 
 

@@ -261,6 +261,7 @@ a.form-label { color: #404040 !important; }
 .login-container { position: relative; float: right; margin: 9px 0 0 0; width: 500px; }
 .login-container form { display: inline-block; margin-left: 9px; }
 .login-container input[type=text] { width: 168px; height: 36px; padding: 0 13px; }
+.login-container input[type=password] { width: 168px; height: 36px; padding: 0 13px; }
 .login-container .btn { min-width: 0; padding: 0 13px; border-radius: 0; height: 36px; }
 .login-container .login-footer { line-height: 1; font-size: 13px; margin: 3px 100px 0 30px; float: right; }
 .login-container .login-footer + .login-footer { margin-right: 32px; }

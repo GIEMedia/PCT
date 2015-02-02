@@ -28,17 +28,14 @@
                 {}
             ];
 
-            $scope.validateEmail = function (email) {
-                var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-                return re.test(email);
-            };
+            $scope.validEmail = EmailUtil.validEmail;
             var validate = function() {
                 for (var i = 0; i < $scope.addresses.length; i++) {
                     var address = $scope.addresses[i];
                     if (
                         StringUtil.isBlank(address.name)
                         || StringUtil.isBlank(address.email)
-                        || !$scope.validateEmail(address.email)
+                        || !$scope.validEmail(address.email)
                     ) {
                         return false;
                     }

@@ -34,20 +34,6 @@
                         elem.selecter({
                             label: elem.attr('placeholder')
                         });
-
-                        var selector = elem.parent();
-                        $scope.$watch(function() { return elem.hasClass("has-error");}, function(hasError) {
-                            console.log(hasError);
-                            if (hasError) {
-                                selector.addClass("has-error");
-                            } else {
-                                selector.removeClass("has-error");
-                            }
-                        });
-
-                        //elem.selecter({
-                        //    customClass: ""
-                        //});
                     }, 0);
                 }
             };

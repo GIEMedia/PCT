@@ -251,6 +251,7 @@
     <Content Include="app\js\common-utils.js" />
     <Content Include="app\spa\api\AccountService.js" />
     <Content Include="app\spa\api\SecurityService.js" />
+    <Content Include="app\spa\api\StateService.js" />
     <Content Include="app\spa\authen\UserInfo.html" />
     <Content Include="app\spa\course\CourseQuestion.html" />
     <Content Include="app\spa\course\CourseQuestion.js" />

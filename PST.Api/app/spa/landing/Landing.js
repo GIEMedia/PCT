@@ -18,8 +18,6 @@
         })
 
         .controller("landing.Ctrl", function ($scope, $state, AccountService, StateService) {
-            //AccountService.getAccount("123");
-
             $scope.signup = {};
 
             $scope.getStarted = function() {
