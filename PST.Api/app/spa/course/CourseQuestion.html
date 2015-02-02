@@ -30,7 +30,7 @@
 
                 <a href="app/css/images/temp/img-answer-large.jpg" class="js-magnify"></a>
 
-                <input type="checkbox" id="check{{$index}}" value="{{option.option_id}}" ng-model="answer.checks[$index]">
+                <input type="checkbox" id="check{{$index}}" value="{{option.option_id}}" ng-model="answer[$index]">
 
                 <label for="check{{$index}}">Select</label>
             </div><!-- /.course-question-option-picture -->
@@ -39,7 +39,7 @@
 
         <div class="course-question-options" ng-if="question.type=='text' || question.type=='picture' || question.type=='video'">
             <div class="course-question-option" ng-repeat="option in question.options">
-                <input type="radio" name="radio" id="option{{$index}}" ng-model="answer.choice" value="{{option.option_id}}">
+                <input type="radio" name="radio" id="option{{$index}}" ng-model="answer[0]" value="{{option.option_id}}">
 
                 <label for="option{{$index}}">{{option.text}}</label>
             </div><!-- /.course-question-option -->
