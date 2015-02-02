@@ -254,6 +254,8 @@
     <Content Include="app\spa\authen\UserInfo.html" />
     <Content Include="app\spa\course\CourseQuestion.html" />
     <Content Include="app\spa\course\CourseQuestion.js" />
+    <Content Include="app\css\images\temp\pdf-placeholder2.jpg" />
+    <Content Include="app\css\images\temp\pdf-placeholder3.jpg" />
     <Content Include="app\temp\sample.pdf" />
     <None Include="Areas\HelpPage\scripts\jquery-1.10.2.min.map" />
     <None Include="Areas\HelpPage\Views\Help\Api.cshtml" />
@@ -377,6 +379,7 @@
     <Content Include="app\spa\test\Test.html" />
     <Content Include="app\spa\test\Test.js" />
     <Content Include="app\spa\theme.js" />
+    <Content Include="App_Data\PST.Api.XML" />
     <Content Include="web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
