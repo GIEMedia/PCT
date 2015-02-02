@@ -48,7 +48,7 @@
                         </div><!-- /.form-body -->
 
                         <div class="form-actions">
-                            <input type="button" class="btn" value="{{question.correct ? 'Continue' : 'Answer'}}" ng-click="next()" ng-if="!lastQuestion()">
+                            <input type="button" class="btn" value="{{question.correct ? 'Continue' : 'Answer'}}" ng-click="next()" ng-disabled="model.answer == null" ng-if="!lastQuestion()">
                             <input type="button" class="btn" value="Grade Test!" ng-click="submit()" ng-if="lastQuestion()">
                         </div><!-- /.form-actions -->
                     </div><!-- /.test-question-answers -->

@@ -21,7 +21,6 @@
     <h4 class="course-question-title">{{question.question}}</h4><!-- /.course-question-title -->
     <h5 ng-if="question.multi_select">(check all that apply)</h5>
 </div><!-- /.course-question-head -->
-{{answer}}
 <div class="course-question-body">
     <div class="form-body">
         <div class="course-question-options-pictures" ng-if="question.answer_type=='pictures'">
@@ -50,7 +49,7 @@
     </div><!-- /.form-body -->
 
     <div class="form-actions" ng-if="result==null || !result.passed">
-        <input type="button" class="btn" value="Answer" ng-click="submitAnswer()">
+        <input type="button" class="btn" value="Answer" ng-disabled="answer.length == 0" ng-click="submitAnswer()">
     </div><!-- /.form-actions -->
 
 </div><!-- /.course-question-body -->

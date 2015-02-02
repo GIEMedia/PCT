@@ -40,7 +40,7 @@
             var CourseService = {};
 
             CourseService.check = function(questionId, answer, callback) {
-                if (questionId == "902c059c-adf9-47c6-957f-80b283dcd913" && equalSet(answer, [])) {
+                if (questionId == "902c059c-adf9-47c6-957f-80b283dcd913" && equalSet(answer, ["902c059c-adf9-47c6-957f-80b283dcd913"])) {
                     callback(true, "This product is labeled to treat carpenter ants, German cockroaches and silverfish, but it is NOT labeled for treating bed bugs.");
                 } else if (questionId == "16ef5514-059a-4490-a3ac-a43202bd2a21" && equalSet(answer, ["1380e8ac-d486-464c-8197-9a1b5fbcc9a3"])) {
                     callback(true, "When you read the list of target pests at the top of the label, it specifically lists four types of ants but little black ants is not one of them. On some labels, it will say \"Ants, including...\" and provide a number of common species, but this label is specific to only four types of ants.");
