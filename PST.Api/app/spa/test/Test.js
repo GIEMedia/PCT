@@ -26,7 +26,7 @@
             };
 
             var acceptAnswer = function() {
-                $scope.model.answers[$scope.questions.indexOf($scope.question)] = ($scope.model.answer);
+                $scope.model.answers[$scope.test.questions.indexOf($scope.question)] = ($scope.model.answer);
                 $scope.model.answer = null;
             };
 
@@ -34,8 +34,8 @@
                 if (index == -1) {
                     index = 0;
                 }
-                for (;index < $scope.questions.length;index++) {
-                    var question = $scope.questions[index];
+                for (;index < $scope.test.questions.length;index++) {
+                    var question = $scope.test.questions[index];
                     if (question.correct == false) {
                         return question;
                     }
@@ -45,22 +45,22 @@
 
             var fetchNextQuestion = function() {
                 if ($scope.round != 3) {
-                    var index = $scope.questions.indexOf($scope.question);
-                    $scope.question = $scope.questions[index + 1];
+                    var index = $scope.test.questions.indexOf($scope.question);
+                    $scope.question = $scope.test.questions[index + 1];
                     if ($scope.model.answers.length > index + 1) {
                         $scope.model.answer = $scope.model.answers[index + 1];
                     } else {
                         $scope.model.answer = null;
                     }
                 } else {
-                    var index = $scope.questions.indexOf($scope.question);
+                    var index = $scope.test.questions.indexOf($scope.question);
                     $scope.question = nextFailedQuestion(index);
                     $scope.model.answer = null;
                 }
 
             };
 
-            $scope.questions = TestService.query({}, fetchNextQuestion);
+            $scope.test = TestService.query({}, fetchNextQuestion);
 
             $scope.next = function() {
                 acceptAnswer();
@@ -72,13 +72,13 @@
                 if ($scope.question == null) {
                     return "100%";
                 }
-                var index = $scope.questions.indexOf($scope.question);
+                var index = $scope.test.questions.indexOf($scope.question);
 
-                return Math.round(index / $scope.questions.length * 100) + "%";
+                return Math.round(index / $scope.test.questions.length * 100) + "%";
             };
 
             $scope.lastQuestion = function() {
-                return $scope.questions.indexOf($scope.question) == $scope.questions.length - 1;
+                return $scope.test.questions.indexOf($scope.question) == $scope.test.questions.length - 1;
             };
 
             $scope.submit = function() {
@@ -103,8 +103,8 @@
 
                 $scope.round++;
 
-                for (var i = 0; i < $scope.questions.length; i++) {
-                    var question = $scope.questions[i];
+                for (var i = 0; i < $scope.test.questions.length; i++) {
+                    var question = $scope.test.questions[i];
 
                     var correct = getCorrect(i, $scope.result.corrects);
                     if (correct != null) {

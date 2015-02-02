@@ -2,7 +2,7 @@
 <div class="container is-scrollable">
     <div class="test">
         <div class="test-head">
-            <h2>PCT Pest Insecticide</h2>
+            <h2>{{test.test_name}}</h2>
 
             <div class="test-progress">
                 <span class="test-progress-percent">{{ progress() }}</span>
@@ -60,7 +60,7 @@
                 <div class="col col-1of2">
                     <div class="test-certificate">
                         <div class="test-certificate-title">
-                            You answered {{ result.corrects.length }} out of {{questions.length}} questions correctly.<br />
+                            You answered {{ result.corrects.length }} out of {{test.questions.length}} questions correctly.<br />
                             You may review your answers and try again.
                         </div>
                     </div><!-- /.test-certificate -->
@@ -147,7 +147,7 @@
                             </div><!-- /.form-body -->
 
                             <div class="form-actions">
-                                <input type="button" value="No Thanks!" class="btn btn-lightgray" ng-click="$state.go('dashboard')">
+                                <input type="button" value="No Thanks!" class="btn btn-lightgray" ng-click="$state.go('certificate')">
                                 <input type="submit" value="Send" class="btn btn-green" ng-click="$state.go('certificate')">
                             </div><!-- /.form-actions -->
                         </form>
