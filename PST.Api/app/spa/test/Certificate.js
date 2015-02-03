@@ -18,7 +18,6 @@
         })
 
         .controller("certificate.Ctrl", function ($scope, $state) {
-            $scope.pristine = true;
             $scope.certificate = {
                 name: "PCT Pest Insecticide",
                 picture: "/app/css/images/certificate.jpg"
@@ -28,26 +27,9 @@
                 {}
             ];
 
-            $scope.validEmail = EmailUtil.validEmail;
-            var validate = function() {
-                for (var i = 0; i < $scope.addresses.length; i++) {
-                    var address = $scope.addresses[i];
-                    if (
-                        StringUtil.isBlank(address.name)
-                        || StringUtil.isBlank(address.email)
-                        || !$scope.validEmail(address.email)
-                    ) {
-                        return false;
-                    }
-                }
-                return true;
-            };
             $scope.send = function() {
-                $scope.pristine = false;
 
-                if (validate()) {
-                    $state.go("dashboard");
-                }
+                $state.go("dashboard");
 
                 return false;
             };

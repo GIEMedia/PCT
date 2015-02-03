@@ -39,30 +39,32 @@
                             <div class="form-row">
                                 <label class="form-label"><i class="fa fa-envelope"></i> Email It:</label>
 
-                                <div class="form-controls" ng-repeat="address in addresses">
-                                    <div class="form-controls-actions">
-                                        <a href="" class="btn-add thin" ng-click="addresses.push({})"></a>
-                                        <a href="" class="btn-remove thin" ng-click="addresses.splice($index, 1)"></a>
-                                    </div><!-- /.form-controls-actions -->
+                                <form name="form">
+                                    <div class="form-controls" ng-repeat="address in addresses">
+                                        <div class="form-controls-actions">
+                                            <a href="" class="btn-add thin" ng-click="addresses.push({})"></a>
+                                            <a href="" class="btn-remove thin" ng-click="addresses.splice($index, 1)"></a>
+                                        </div><!-- /.form-controls-actions -->
 
-                                    <div class="form-cols-outer">
-                                        <div class="form-cols">
-                                            <div class="form-col form-col-1of2">
-                                                <input type="text" class="field" placeholder="Name" ng-model="address.name" ng-class="{'has-error': !pristine && !address.name}">
-                                            </div><!-- /.form-col form-col-1of2 -->
+                                        <div class="form-cols-outer">
+                                            <div class="form-cols">
+                                                <div class="form-col form-col-1of2">
+                                                    <input type="text" class="field" placeholder="Name" ng-model="address.name" required>
+                                                </div><!-- /.form-col form-col-1of2 -->
 
-                                            <div class="form-col form-col-1of2">
-                                                <input type="text" class="field" placeholder="Email Address" ng-model="address.email" ng-class="{'has-error': (!pristine && !address.email) || (address.email && !validateEmail(address.email))}">
-                                            </div><!-- /.form-col form-col-1of2 -->
-                                        </div><!-- /.form-cols -->
-                                    </div><!-- /.form-cols-outer -->
-                                </div><!-- /.form-controls -->
+                                                <div class="form-col form-col-1of2">
+                                                    <input type="email" class="field" placeholder="Email Address" ng-model="address.email" required>
+                                                </div><!-- /.form-col form-col-1of2 -->
+                                            </div><!-- /.form-cols -->
+                                        </div><!-- /.form-cols-outer -->
+                                    </div><!-- /.form-controls -->
+                                </form>
                             </div><!-- /.form-row -->
                         </div><!-- /.form-body -->
 
                         <div class="form-actions">
                             <input type="button" value="No Thanks!" class="btn btn-lightgray" ng-click="$state.go('dashboard')">
-                            <input type="button" value="Send" class="btn btn-green" ng-click="send()">
+                            <input type="button" value="Send" class="btn btn-green" ng-click="send()" ng-disabled="form.$invalid">
                         </div><!-- /.form-actions -->
                     </div><!-- /.test-certificate-form -->
                 </div><!-- /.col col-1of2 -->

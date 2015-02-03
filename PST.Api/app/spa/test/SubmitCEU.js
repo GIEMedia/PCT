@@ -10,7 +10,6 @@
                 scope: true,
                 templateUrl: "/app/spa/test/SubmitCEU.html",
                 link: function($scope, elem, attrs) {
-                    $scope.pristine = true;
                     $scope.stateLicenses = [
                         {}
                     ];
@@ -22,27 +21,8 @@
                         {code: "cat3", name:"Category 3"}
                     ];
 
-                    var validate = function() {
-                        for (var i = 0; i < $scope.stateLicenses.length; i++) {
-                            var license = $scope.stateLicenses[i];
-                            if (
-                                StringUtil.isBlank(license.state)
-                                || StringUtil.isBlank(license.category)
-                                || StringUtil.isBlank(license.num)
-                                || StringUtil.isBlank(license.confirmNum)
-                                || (license.num != license.confirmNum)
-                            ) {
-                                return false;
-                            }
-                        }
-                        return true;
-                    };
                     $scope.send = function() {
-                        $scope.pristine = false;
-
-                        if (validate()) {
-                            $state.go("certificate");
-                        }
+                        $state.go("certificate");
 
                         return false;
                     };
