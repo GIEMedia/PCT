@@ -83,6 +83,23 @@
             };
         })
 
+
+        .directive("equals", function() {
+            return {
+                require: "ngModel",
+                link: function($scope, element, attrs, ngModel) {
+                    var _value;
+                    ngModel.$validators.equals = function(modelValue) {
+                        return modelValue == _value;
+                    };
+
+                    $scope.$watch(attrs.equals, function(value) {
+                        _value = value;
+                        ngModel.$validate();
+                    });
+                }
+            };
+        })
     ;
 
 })();

@@ -198,6 +198,8 @@ h6 { font-size: 12px; text-transform: uppercase; line-height: 1.2; }
 
 .field.has-error { border-color: red; }
 
+form.ng-dirty .ng-invalid { border-color: red; }
+
 .form-label { text-transform: uppercase; font-size: 13px; font-weight: bold; padding-bottom: 15px; display: block; }
 a.form-label { color: #404040 !important; }
 
@@ -260,8 +262,7 @@ a.form-label { color: #404040 !important; }
 .nav-container { position: relative; float: right; margin: 26px 36px 0 0; }
 .login-container { position: relative; float: right; margin: 9px 0 0 0; width: 500px; }
 .login-container form { display: inline-block; margin-left: 9px; }
-.login-container input[type=text] { width: 168px; height: 36px; padding: 0 13px; }
-.login-container input[type=password] { width: 168px; height: 36px; padding: 0 13px; }
+.login-container input[type=text], .login-container input[type=email], .login-container input[type=password] { width: 168px; height: 36px; padding: 0 13px; }
 .login-container .btn { min-width: 0; padding: 0 13px; border-radius: 0; height: 36px; }
 .login-container .login-footer { line-height: 1; font-size: 13px; margin: 3px 100px 0 30px; float: right; }
 .login-container .login-footer + .login-footer { margin-right: 32px; }

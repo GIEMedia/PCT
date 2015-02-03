@@ -54,6 +54,9 @@
                             username: $scope.loginForm.email,
                             password: $scope.loginForm.password
                         })
+                            .success(function() {
+                                $state.go("dashboard");
+                            })
                             .error(function() {
                                 alert('Your login failed.');
                                 $scope.loginForm.password = null;

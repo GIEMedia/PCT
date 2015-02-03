@@ -17,6 +17,7 @@
             'pct.elearning.api.State',
 
             'pct.elearning.landing',
+            'pct.elearning.signup',
             'pct.elearning.dashboard',
             'ui.router',
             'ngResource'

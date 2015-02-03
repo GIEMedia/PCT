@@ -6,10 +6,10 @@
     ])
 
 
-        .factory("AccountService", function(Api) {
+        .factory("AccountService", function($http) {
             return {
                 createAccount: function(data) {
-                    return Api.post("api/account/register", data);
+                    return $http.post("api/account/register", data);
                 }
             };
         })
