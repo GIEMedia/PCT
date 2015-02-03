@@ -223,7 +223,7 @@ ObjectUtil.clone = function(obj) {
 	} else {
 		var ret = [];
 		for ( var i in obj) {
-			ret[i] = clone(obj[i]);
+			ret[i] = ObjectUtil.clone(obj[i]);
 		}
 		return ret;
 	}
