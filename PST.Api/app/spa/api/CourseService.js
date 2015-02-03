@@ -110,8 +110,7 @@
                                     "question": "What is the active ingredient in PCT Pest Insecticide?",
                                     "answer_type": "text",
                                     "video": {
-                                        "mp4":"http://vjs.zencdn.net/v/oceans.mp4",
-                                        "webm":"http://vjs.zencdn.net/v/oceans.webm"
+                                        "mp4": "http://www.pctonline.com/FileUploads/media/PCT_Online_Training/PCT_Pest_Insecticide_WO.mp4"
                                     },
                                     "multi_select": false,
                                     "options": [
@@ -160,8 +159,7 @@
                                     "question": "What is the active ingredient in PCT Pest Insecticide?",
                                     "answer_type": "text",
                                     "video": {
-                                        "mp4":"http://vjs.zencdn.net/v/oceans.mp4",
-                                        "webm":"http://vjs.zencdn.net/v/oceans.webm"
+                                        "mp4": "http://www.pctonline.com/FileUploads/media/PCT_Online_Training/PCT_Pest_Insecticide_WO.mp4"
                                     },
                                     "multi_select": false,
                                     "options": [
