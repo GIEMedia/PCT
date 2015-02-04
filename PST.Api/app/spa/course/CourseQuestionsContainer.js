@@ -88,6 +88,7 @@
                     // Bring the scroll to bottom of question panel when has result.
                     $scope.$watch(function() { return $scope.result == null ? null : $scope.result.passed;}, function(hasResult) {
                         if (hasResult != null) {
+                            //console.log("Scrolling");
                             setTimeout(function() {
                                 elem.animate({
                                     scrollTop: elem.find('.course-question-answer').position().top

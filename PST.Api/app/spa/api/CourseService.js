@@ -53,7 +53,7 @@
                 }
             };
 
-            CourseService.get = function(data, onDone) {
+            CourseService.get = function(id, onDone) {
                 $timeout(onDone,0);
                 return CourseSampleData.course1;
             };
@@ -194,34 +194,41 @@
             },
             newCourses: [
                 {
+                    "id": 0,
                     "name": "PCT Label Training Course 1",
                     "description": "CEUS Available: AL, AR, IL, OH, FL"
                 },
                 {
+                    "id": 0,
                     "name": "PCT Label Training Course 2",
                     "description": "CEUS Available: AR, IL, OH, FL"
                 },
                 {
+                    "id": 0,
                     "name": "PCT Label Training Course 3",
                     "description": "CEUS Available: AL, IL, OH, FL"
                 },
                 {
+                    "id": 0,
                     "name": "PCT Label Training Course 4",
                     "description": "CEUS Available: AL, AR, OH, FL"
                 }
             ],
             openCourses: [
                 {
+                    "id": 1,
                     "name": "PCT Pest Insecticide 1",
                     "progress": 0,
                     "test": 0
                 },
                 {
+                    "id": 2,
                     "name": "PCT Pest Insecticide 2",
                     "progress": 4/15,
                     "test": 0
                 },
                 {
+                    "id": 3,
                     "name": "PCT Pest Insecticide 3",
                     "progress": 1,
                     "test": 3/10
@@ -234,8 +241,8 @@
                         {
                             "name": "Subterranean and Other",
                             "courses": [
-                                {"name": "Course Name 1"},
-                                {"name": "Course Name 2"}
+                                {"id": 0, "name": "Course Name 1"},
+                                {"id": 0, "name": "Course Name 2"}
                             ]
                         }
                     ]
@@ -246,15 +253,15 @@
                         {
                             "name": "Natural And Cruelty",
                             "courses": [
-                                {"name": "Course Name 3"},
-                                {"name": "Course Name 4"}
+                                {"id": 0, "name": "Course Name 3"},
+                                {"id": 0, "name": "Course Name 4"}
                             ]
                         },
                         {
                             "name": "Killing Rats",
                             "courses": [
-                                {"name": "Course Name 5"},
-                                {"name": "Course Name 6"}
+                                {"id": 0, "name": "Course Name 5"},
+                                {"id": 0, "name": "Course Name 6"}
                             ]
                         }
                     ]

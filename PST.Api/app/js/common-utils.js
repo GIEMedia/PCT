@@ -638,20 +638,20 @@ Async.oneRun = function() {
 };
 
 Async.ladyFirst = function() {
-	var afterLadyDone = null;
+	var afterLadyDone = [];
 	var freeToGo = false;
 	return {
 		ladyDone: function() {
 			freeToGo = true;
-			if (afterLadyDone) {
-				afterLadyDone();
+			if (Cols.isNotEmpty(afterLadyDone)) {
+				Fs.invokeAll(afterLadyDone);
 			}
 		},
 		manTurn: function(func) {
 			if (freeToGo) {
 				func();
 			} else {
-				afterLadyDone = func;
+				afterLadyDone.push(func);
 			}
 		}
 	};

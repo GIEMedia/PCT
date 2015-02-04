@@ -12,18 +12,18 @@
 
             $stateProvider
                 .state('course', {
-                    url: '/course',
+                    url: '/course/:id',
                     templateUrl: "/app/spa/course/CoursePage.html",
                     controller: "course.Ctrl"
                 })
             ;
         })
 
-        .controller("course.Ctrl", function ($scope, CourseService, UserCourseService) {
-            $scope.course = CourseService.get({}, function() {
+        .controller("course.Ctrl", function ($scope, CourseService, UserCourseService, $stateParams) {
+            $scope.course = CourseService.get($stateParams.id, function() {
             });
-            $scope.userProgress = UserCourseService.getProgress();
-            $scope.courseHelp = true;
+            $scope.userProgress = UserCourseService.getProgress($stateParams.id);
+            $scope.courseHelp = $stateParams.id == "0" ? true : false;
         })
 
         .directive("course", function() {
@@ -82,22 +82,39 @@
                     };
 
                     // Change to next unfinished section
-                    ctrl.nextUnfinishedSection = function() {
+                    $scope.nextUnfinishedSection = function() {
                         for (var i = 0; i < $scope.course.sections.length; i++) {
                             var sec = $scope.course.sections[i];
                             var progress = $scope.userProgress.sections[i];
                             if (progress == null || progress < sec.questions.length) {
                                 ctrl.gotoSection(i+1);
-                                return;
+                                return true;
                             }
                         }
+                        return false;
                     };
+                    ctrl.nextUnfinishedSection = $scope.nextUnfinishedSection;
                 },
                 link: function($scope, elem, attrs) {
+                    var ladyUserProgress = Async.ladyFirst();
+                    $scope.$watch("userProgress", function(progress) {
+                        if (progress) {
+                            ladyUserProgress.ladyDone();
+                        }
+                    });
+
                     $scope.$watch("course", function(course) {
                         if (course) {
-                            $scope.section = $scope.course.sections[0];
-                            $scope.page = $scope.section.document.pages[0];
+
+                            ladyUserProgress.manTurn(function() {
+                                var hasSection = $scope.nextUnfinishedSection();
+                                if (!hasSection) {
+                                    $scope.section = $scope.course.sections[0];
+                                }
+                                $scope.page = $scope.section.document.pages[0];
+
+                            });
+
                         }
                     });
 

@@ -11,11 +11,18 @@
 
             var UserCourseService = {};
 
-            UserCourseService.getProgress = function(data, onDone) {
+            UserCourseService.getProgress = function(courseId, onDone) {
                 //$timeout(onDone,0);
-                return {
-                    "sections": [0,1,0]
-                };
+
+                if (courseId == "0") {
+                    return {"sections": [0,0,0]};
+                } else if (courseId == "1") {
+                    return {"sections": [0,0,0]};
+                } else if (courseId == "2") {
+                    return {"sections": [4,1,0]};
+                } else if (courseId == "3") {
+                    return {"sections": [4,1,1]};
+                }
             };
             return UserCourseService;
         })

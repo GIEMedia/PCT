@@ -25,7 +25,7 @@
 
                                 <ul ng-repeat-end>
                                     <li ng-repeat="course in courseCat.courses">
-                                        <a ui-sref="course">{{course.name}}</a>
+                                        <a ui-sref="course({id: course.id})">{{course.name}}</a>
                                     </li>
                                 </ul>
                             </div><!-- /.section-body -->
@@ -67,7 +67,7 @@
                                 <p class="courses-item-meta">{{course.description}}</p><!-- /.courses-item-meta -->
                             </div><!-- /.courses-item-content -->
 
-                            <a ui-sref="course" class="courses-item-action-start">
+                            <a ui-sref="course({id: course.id})" class="courses-item-action-start">
                                 <span>Start Course</span>
                             </a><!-- /.courses-item-action-start -->
                         </li><!-- /.courses-item -->
@@ -124,7 +124,7 @@
                                 </ul><!-- /.courses-item-bars -->
                             </div><!-- /.courses-item-content -->
 
-                            <a ui-sref="course" class="courses-item-action-resume">
+                            <a ui-sref="course({id: course.id})" class="courses-item-action-resume">
                                 <span>Resume Course</span>
                             </a><!-- /.courses-item-action-resume -->
                         </li><!-- /.courses-item -->
