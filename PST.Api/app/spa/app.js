@@ -21,6 +21,7 @@
             'pct.elearning.userInfo',
             'pct.elearning.dashboard',
             'ui.router',
+            'angularMoment',
             'ngResource'
     ])
 

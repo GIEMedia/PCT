@@ -219,19 +219,22 @@
                     "id": 1,
                     "name": "PCT Pest Insecticide 1",
                     "progress": 0,
-                    "test": 0
+                    "test": 0,
+                    "last_activity" : 1423066319046
                 },
                 {
                     "id": 2,
                     "name": "PCT Pest Insecticide 2",
                     "progress": 4/15,
-                    "test": 0
+                    "test": 0,
+                    "last_activity" : 1422817919046
                 },
                 {
                     "id": 3,
                     "name": "PCT Pest Insecticide 3",
                     "progress": 1,
-                    "test": 3/10
+                    "test": 3/10,
+                    "last_activity" : 1417893119046
                 }
             ],
             courseStructure: [
