@@ -23,7 +23,7 @@
             $scope.course = CourseService.get({}, function() {
             });
             $scope.userProgress = UserCourseService.getProgress();
-            $scope.courseHelp = false;
+            $scope.courseHelp = true;
         })
 
         .directive("course", function() {
@@ -63,6 +63,34 @@
                     };
                     ctrl.sectionNum = function() {
                         return $scope.course ==null ? 0 : $scope.course.sections.indexOf($scope.section) + 1;
+                    };
+
+                    // Section query
+                    ctrl.finishedAllSection = function() {
+                        if ($scope.userProgress == null || $scope.course == null) {
+                            return false;
+                        }
+
+                        for (var i = 0; i < $scope.course.sections.length; i++) {
+                            var sec = $scope.course.sections[i];
+                            var progress = $scope.userProgress.sections[i];
+                            if (progress == null || progress < sec.questions.length) {
+                                return false;
+                            }
+                        }
+                        return true;
+                    };
+
+                    // Change to next unfinished section
+                    ctrl.nextUnfinishedSection = function() {
+                        for (var i = 0; i < $scope.course.sections.length; i++) {
+                            var sec = $scope.course.sections[i];
+                            var progress = $scope.userProgress.sections[i];
+                            if (progress == null || progress < sec.questions.length) {
+                                ctrl.gotoSection(i+1);
+                                return;
+                            }
+                        }
                     };
                 },
                 link: function($scope, elem, attrs) {
@@ -118,12 +146,6 @@
                 restrict: "C",
                 require: "^course",
                 link: function($scope, elem, attrs, courseCtrl) {
-                    //<li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">1</a></li>
-                    //<li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">2</a></li>
-                    //<li><a href="#" class="answered" data-tip="Weevils: Facts, Identification &amp; Control">3</a></li>
-                    //<li><a href="#" class="current" data-tip="Weevils: Facts, Identification &amp; Control">4</a></li>
-                    //<li><a href="#" data-tip="Weevils: Facts, Identification &amp; Control">5</a></li>
-
                     var tooltip = function(e, text) {
                         return e.tooltipster({
                             position: 'right',
@@ -292,19 +314,18 @@
             return {
                 restrict: "C",
                 templateUrl: "/app/spa/course/CourseHelp.html",
-                scope: true,
                 link: function($scope, elem, attrs) {
                     elem.find('.popup[step] button').click(function () {
                         var step = parseInt($(this).closest('.popup[step]').attr('step'));
-                        $('.help-container .popup[step="' + step + '"]:visible').removeClass('open');
-                        $('.help-container .popup[step="' + (step + 1) + '"]:visible').addClass('open');
+                        elem.find('.popup[step="' + step + '"]:visible').removeClass('open');
+                        elem.find('.popup[step="' + (step + 1) + '"]:visible').addClass('open');
                     });
 
                     elem.find('.help-wrapper button').click(function() {
-                        $('#helpClose').toggleClass('open');
+                        elem.find('#helpClose').toggleClass('open');
                     });
                     elem.find('#helpClose button').click(function () {
-                        $('.help-container .open').removeClass('open');
+                        elem.find('.open').removeClass('open');
                     });
 
                 }

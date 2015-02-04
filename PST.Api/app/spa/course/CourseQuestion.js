@@ -19,6 +19,7 @@
                         }
                     });
 
+                    // Extract the answer and submit to question container
                     $scope.submitAnswer = function() {
                         var answer;
                         if (_question.multi_select) {
@@ -37,6 +38,7 @@
             };
         })
 
+        // The magnify button in each pictured question option
         .directive("jsMagnify", function() {
             return {
                 restrict: "C",

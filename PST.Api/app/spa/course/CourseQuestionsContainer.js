@@ -14,6 +14,7 @@
                 templateUrl: "/app/spa/course/CourseQuestionsContainer.html",
                 link: function($scope, elem, attrs, courseCtrl) {
 
+                    // Async wait until userProgress var is available
                     var ladyUserProgress = Async.ladyFirst();
                     $scope.$watch("userProgress", function(progress) {
                         if (progress) {
@@ -21,6 +22,7 @@
                         }
                     });
 
+                    // When section is changed, focus to the question
                     $scope.$watch(attrs.section, function(section) {
                         $scope.result = null;
                         $scope.question = null;
@@ -48,42 +50,25 @@
                     };
 
                     $scope.finishedAllSection = function() {
-                        if ($scope.userProgress == null || $scope.course == null) {
-                            return false;
-                        }
-
-                        for (var i = 0; i < $scope.course.sections.length; i++) {
-                            var sec = $scope.course.sections[i];
-                            var progress = $scope.userProgress.sections[i];
-                            if (progress == null || progress < sec.questions.length) {
-                                return false;
-                            }
-                        }
-                        return true;
+                        return courseCtrl.finishedAllSection();
                     };
 
+                    // Change to next unfinished section
                     $scope.nextUnfinishedSection = function() {
-                        for (var i = 0; i < $scope.course.sections.length; i++) {
-                            var sec = $scope.course.sections[i];
-                            var progress = $scope.userProgress.sections[i];
-                            if (progress == null || progress < sec.questions.length) {
-                                courseCtrl.gotoSection(i+1);
-                                return;
-                            }
-                        }
+                        courseCtrl.nextUnfinishedSection();
                     };
 
                     $scope.sectionNum = function() {
                         return courseCtrl.sectionNum();
                     };
 
+                    // Move on to the next question, update the progress
                     $scope.nextQuestion = function() {
                         $scope.result = null;
 
                         var indexOf = $scope.section.questions.indexOf($scope.question);
                         if (indexOf < $scope.section.questions.length - 1) {
                             $scope.question = $scope.section.questions[indexOf + 1];
-
                         } else {
                             $scope.question = null;
                         }
@@ -95,10 +80,12 @@
                         return false;
                     };
 
+                    // Returns index of this question in the sequence of questions
                     $scope.progress = function() {
                         return $scope.section == null ? 0 : $scope.section.questions.indexOf($scope.question);
                     };
 
+                    // Bring the scroll to bottom of question panel when has result.
                     $scope.$watch(function() { return $scope.result == null ? null : $scope.result.passed;}, function(hasResult) {
                         if (hasResult != null) {
                             setTimeout(function() {
