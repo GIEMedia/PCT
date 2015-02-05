@@ -73,7 +73,7 @@
             TestService.submit = function(data, callback) {
                 if (data.round == 1) {
                     return {
-                        passed: true,
+                        passed: false,
                         corrects: [
                             {
                                 question: 0,

@@ -75,10 +75,10 @@
 
         .value("CourseSampleData", {
             course1: {
-                "name": "PCT Pest Insecticide",
+                "title": "PCT Pest Insecticide",
                 "sections": [
                     {
-                        "name": "Trade Name/Ingredients/First Aid",
+                        "title": "Trade Name/Ingredients/First Aid",
                         "document": {
                             "pdf_url" : "app/temp/sample.pdf",
                             "pages": [
@@ -89,22 +89,22 @@
                         "questions": [
                             {
                                 "question_id": "902c059c-adf9-47c6-957f-80b283dcd913",
-                                "question": "Which of the following pests can be treated using PCT Pest Insecticide?",
-                                "answer_type": "pictures",
+                                "question_text": "Which of the following pests can be treated using PCT Pest Insecticide?",
+                                "option_type": "image",
                                 "multi_select": true,
                                 "options": [
-                                    {"option_id": "902c059c-adf9-47c6-957f-80b283dcd913", "picture": "app/css/images/temp/img-answer1.jpg"},
-                                    {"option_id": "1380e8ac-d486-464c-8197-9a1b5fbcc9a3", "picture": "app/css/images/temp/img-answer2.jpg"},
-                                    {"option_id": "f28a2b88-31de-4d45-9814-f2008a9fcc53", "picture": "app/css/images/temp/img-answer3.jpg"},
-                                    {"option_id": "16ef5514-059a-4490-a3ac-a43202bd2a21", "picture": "app/css/images/temp/img-answer4.jpg"},
-                                    {"option_id": "9a91e716-044f-472e-a357-60f07ff09f03", "picture": "app/css/images/temp/img-answer5.jpg"},
-                                    {"option_id": "cba92dd2-47f0-4171-b0f5-2923dba347a3", "picture": "app/css/images/temp/img-answer6.jpg"}
+                                    {"option_id": "902c059c-adf9-47c6-957f-80b283dcd913", "image": "app/css/images/temp/img-answer1.jpg"},
+                                    {"option_id": "1380e8ac-d486-464c-8197-9a1b5fbcc9a3", "image": "app/css/images/temp/img-answer2.jpg"},
+                                    {"option_id": "f28a2b88-31de-4d45-9814-f2008a9fcc53", "image": "app/css/images/temp/img-answer3.jpg"},
+                                    {"option_id": "16ef5514-059a-4490-a3ac-a43202bd2a21", "image": "app/css/images/temp/img-answer4.jpg"},
+                                    {"option_id": "9a91e716-044f-472e-a357-60f07ff09f03", "image": "app/css/images/temp/img-answer5.jpg"},
+                                    {"option_id": "cba92dd2-47f0-4171-b0f5-2923dba347a3", "image": "app/css/images/temp/img-answer6.jpg"}
                                 ]
                             },
                             {
                                 "question_id": "16ef5514-059a-4490-a3ac-a43202bd2a21",
-                                "question": "This product can be used to treat for little black ants.",
-                                "answer_type": "text",
+                                "question_text": "This product can be used to treat for little black ants.",
+                                "option_type": "text",
                                 "multi_select": false,
                                 "options": [
                                     {"option_id": "902c059c-adf9-47c6-957f-80b283dcd913", "text": "True"},
@@ -113,9 +113,9 @@
                             },
                             {
                                 "question_id": "1380e8ac-d486-464c-8197-9a1b5fbcc9a3",
-                                "question": "Identify the bug pictured above.",
-                                "answer_type": "text",
-                                "picture": "app/css/images/temp/img-answer-large.jpg",
+                                "question_text": "Identify the bug pictured above.",
+                                "option_type": "text",
+                                "image": "app/css/images/temp/img-answer-large.jpg",
                                 "multi_select": false,
                                 "options": [
                                     {"option_id": "902c059c-adf9-47c6-957f-80b283dcd913", "text": "Carpenter ant"},
@@ -126,8 +126,8 @@
                             },
                             {
                                 "question_id": "cba92dd2-47f0-4171-b0f5-2923dba347a3",
-                                "question": "What is the active ingredient in PCT Pest Insecticide?",
-                                "answer_type": "text",
+                                "question_text": "What is the active ingredient in PCT Pest Insecticide?",
+                                "option_type": "text",
                                 "video": {
                                     "mp4": "http://www.pctonline.com/FileUploads/media/PCT_Online_Training/PCT_Pest_Insecticide_WO.mp4"
                                 },
@@ -142,7 +142,7 @@
                         ]
                     },
                     {
-                        "name": "Trade Name/Ingredients/First Aid 2",
+                        "title": "Trade Name/Ingredients/First Aid 2",
                         "document": {
                             "pdf_url" : "app/temp/sample.pdf",
                             "pages": [
@@ -153,8 +153,8 @@
                         "questions": [
                             {
                                 "question_id": "16ef5514-059a-4490-a3ac-a43202bd2a21",
-                                "question": "This product can be used to treat for little black ants.",
-                                "answer_type": "text",
+                                "question_text": "This product can be used to treat for little black ants.",
+                                "option_type": "text",
                                 "multi_select": false,
                                 "options": [
                                     {"option_id": "902c059c-adf9-47c6-957f-80b283dcd913", "text": "True"},
@@ -164,7 +164,7 @@
                         ]
                     },
                     {
-                        "name": "Trade Name/Ingredients/First Aid 3",
+                        "title": "Trade Name/Ingredients/First Aid 3",
                         "document": {
                             "pdf_url" : "app/temp/sample.pdf",
                             "pages": [
@@ -175,8 +175,8 @@
                         "questions": [
                             {
                                 "question_id": "cba92dd2-47f0-4171-b0f5-2923dba347a3",
-                                "question": "What is the active ingredient in PCT Pest Insecticide?",
-                                "answer_type": "text",
+                                "question_text": "What is the active ingredient in PCT Pest Insecticide?",
+                                "option_type": "text",
                                 "video": {
                                     "mp4": "http://www.pctonline.com/FileUploads/media/PCT_Online_Training/PCT_Pest_Insecticide_WO.mp4"
                                 },
@@ -194,77 +194,77 @@
             },
             newCourses: [
                 {
-                    "id": 0,
-                    "name": "PCT Label Training Course 1",
+                    "course_id": 0,
+                    "title": "PCT Label Training Course 1",
                     "description": "CEUS Available: AL, AR, IL, OH, FL"
                 },
                 {
-                    "id": 0,
-                    "name": "PCT Label Training Course 2",
+                    "course_id": 0,
+                    "title": "PCT Label Training Course 2",
                     "description": "CEUS Available: AR, IL, OH, FL"
                 },
                 {
-                    "id": 0,
-                    "name": "PCT Label Training Course 3",
+                    "course_id": 0,
+                    "title": "PCT Label Training Course 3",
                     "description": "CEUS Available: AL, IL, OH, FL"
                 },
                 {
-                    "id": 0,
-                    "name": "PCT Label Training Course 4",
+                    "course_id": 0,
+                    "title": "PCT Label Training Course 4",
                     "description": "CEUS Available: AL, AR, OH, FL"
                 }
             ],
             openCourses: [
                 {
-                    "id": 1,
-                    "name": "PCT Pest Insecticide 1",
-                    "progress": 0,
-                    "test": 0,
+                    "course_id": 1,
+                    "title": "PCT Pest Insecticide 1",
+                    "course_progress": 0,
+                    "test_progress": 0,
                     "last_activity" : 1423066319046
                 },
                 {
-                    "id": 2,
-                    "name": "PCT Pest Insecticide 2",
-                    "progress": 4/15,
-                    "test": 0,
+                    "course_id": 2,
+                    "title": "PCT Pest Insecticide 2",
+                    "course_progress": 4/15,
+                    "test_progress": 0,
                     "last_activity" : 1422817919046
                 },
                 {
-                    "id": 3,
-                    "name": "PCT Pest Insecticide 3",
-                    "progress": 1,
-                    "test": 3/10,
+                    "course_id": 3,
+                    "title": "PCT Pest Insecticide 3",
+                    "course_progress": 1,
+                    "test_progress": 3/10,
                     "last_activity" : 1417893119046
                 }
             ],
             courseStructure: [
                 {
-                    "name": "Course Header 1",
+                    "title": "Course Header 1",
                     "categories": [
                         {
-                            "name": "Subterranean and Other",
+                            "title": "Subterranean and Other",
                             "courses": [
-                                {"id": 0, "name": "Course Name 1"},
-                                {"id": 0, "name": "Course Name 2"}
+                                {"course_id": 0, "title": "Course Name 1"},
+                                {"course_id": 0, "title": "Course Name 2"}
                             ]
                         }
                     ]
                 },
                 {
-                    "name": "Course Header 2",
+                    "title": "Course Header 2",
                     "categories": [
                         {
-                            "name": "Natural And Cruelty",
+                            "title": "Natural And Cruelty",
                             "courses": [
-                                {"id": 0, "name": "Course Name 3"},
-                                {"id": 0, "name": "Course Name 4"}
+                                {"course_id": 0, "title": "Course Name 3"},
+                                {"course_id": 0, "title": "Course Name 4"}
                             ]
                         },
                         {
-                            "name": "Killing Rats",
+                            "title": "Killing Rats",
                             "courses": [
-                                {"id": 0, "name": "Course Name 5"},
-                                {"id": 0, "name": "Course Name 6"}
+                                {"course_id": 0, "title": "Course Name 5"},
+                                {"course_id": 0, "title": "Course Name 6"}
                             ]
                         }
                     ]

@@ -1,8 +1,8 @@
-<div class="course-single-media-head" ng-if="question.picture">
+<div class="course-single-media-head" ng-if="question.image">
     <i>Use the following image to answer the question below.</i>
     <div class="course-single-media-wrapper">
-        <img ng-src="{{question.picture}}" width="360" />
-        <a href="{{question.picture}}" class="js-magnify"></a>
+        <img ng-src="{{question.image}}" width="360" />
+        <a href="{{question.image}}" class="js-magnify"></a>
     </div>
 </div><!-- /.course-question-head -->
 
@@ -17,14 +17,14 @@
 
 
 <div class="course-question-head">
-    <h4 class="course-question-title">{{question.question}}</h4><!-- /.course-question-title -->
+    <h4 class="course-question-title">{{question.question_text}}</h4><!-- /.course-question-title -->
     <h5 ng-if="question.multi_select">(check all that apply)</h5>
 </div><!-- /.course-question-head -->
 <div class="course-question-body">
     <div class="form-body">
-        <div class="course-question-options-pictures" ng-if="question.answer_type=='pictures'">
+        <div class="course-question-options-pictures" ng-if="question.option_type=='image'">
             <div class="course-question-option-picture" ng-repeat="option in question.options">
-                <img ng-src="{{option.picture}}" alt="" width="145" height="145">
+                <img ng-src="{{option.image}}" alt="" width="145" height="145">
 
                 <a href="app/css/images/temp/img-answer-large.jpg" class="js-magnify"></a>
 
@@ -36,7 +36,7 @@
 
         </div><!-- /.course-questions-options-pictures -->
 
-        <div class="course-question-options" ng-if="question.answer_type=='text'">
+        <div class="course-question-options" ng-if="question.option_type=='text'">
             <div class="course-question-option" ng-repeat="option in question.options">
                 <input type="checkbox" id="option{{$index}}" value="{{option.option_id}}" ng-model="answer[$index]" ng-if="question.multi_select">
                 <input type="radio" id="option{{$index}}" value="{{option.option_id}}" ng-model="answer[0]" ng-if="!question.multi_select">

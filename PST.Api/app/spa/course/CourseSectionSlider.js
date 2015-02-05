@@ -48,8 +48,8 @@
                             tags = [];
                             elem.empty();
                             for (var i = 0; i < course.sections.length; i++) {
-                                var sec = course.sections[i];
-                                var aTag = tooltip($("<a href=\"\" class=\"answered\" ></a>").text(i + 1), sec.name);
+                                var section = course.sections[i];
+                                var aTag = tooltip($("<a href=\"\" class=\"answered\" ></a>").text(i + 1), section.title);
                                 elem.append($("<li/>").append(
                                     aTag
                                 ));

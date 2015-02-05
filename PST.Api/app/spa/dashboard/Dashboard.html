@@ -16,16 +16,16 @@
                                 <h3 class="section-title">
                                     <i class="search-ico-rats"></i>
 
-                                    {{courseHeader.name}}
+                                    {{courseHeader.title}}
                                 </h3><!-- /.section-title -->
                             </div><!-- /.section-head -->
 
                             <div class="section-body">
-                                <h5 ng-repeat-start="courseCat in courseHeader.categories">{{courseCat.name}}</h5>
+                                <h5 ng-repeat-start="courseCat in courseHeader.categories">{{courseCat.title}}</h5>
 
                                 <ul ng-repeat-end>
                                     <li ng-repeat="course in courseCat.courses">
-                                        <a ui-sref="course({id: course.id})">{{course.name}}</a>
+                                        <a ui-sref="course({id: course.course_id})">{{course.title}}</a>
                                     </li>
                                 </ul>
                             </div><!-- /.section-body -->
@@ -61,13 +61,13 @@
 
                             <div class="courses-item-content">
                                 <h4 class="courses-item-title">
-                                    <a href="#">{{course.name}}</a>
+                                    <a href="#">{{course.title}}</a>
                                 </h4>
 
                                 <p class="courses-item-meta">{{course.description}}</p><!-- /.courses-item-meta -->
                             </div><!-- /.courses-item-content -->
 
-                            <a ui-sref="course({id: course.id})" class="courses-item-action-start">
+                            <a ui-sref="course({id: course.course_id})" class="courses-item-action-start">
                                 <span>Start Course</span>
                             </a><!-- /.courses-item-action-start -->
                         </li><!-- /.courses-item -->
@@ -100,7 +100,7 @@
 
                             <div class="courses-item-content">
                                 <h4 class="courses-item-title">
-                                    <a href="#">{{course.name}}</a>
+                                    <a href="#">{{course.title}}</a>
                                 </h4>
 
                                 <p class="courses-item-meta">Last Activity: <span am-time-ago="course.last_activity"></span></p><!-- /.courses-item-meta -->
@@ -110,7 +110,7 @@
                                         <span class="courses-item-bar-label">Activities</span>
 
 												<span class="courses-item-bar-fill">
-													<span style="width: {{course.progress * 100}}%"></span>
+													<span style="width: {{course.course_progress * 100}}%"></span>
 												</span>
                                     </li><!-- /.courses-item-bar courses-item-bar-purple -->
 
@@ -118,13 +118,13 @@
                                         <span class="courses-item-bar-label">Tests</span>
 
 												<span class="courses-item-bar-fill">
-													<span style="width: {{course.test * 100}}%"></span>
+													<span style="width: {{course.test_progress * 100}}%"></span>
 												</span>
                                     </li><!-- /.courses-item-bar courses-item-bar-blue -->
                                 </ul><!-- /.courses-item-bars -->
                             </div><!-- /.courses-item-content -->
 
-                            <a ui-sref="course({id: course.id})" class="courses-item-action-resume">
+                            <a ui-sref="course({id: course.course_id})" class="courses-item-action-resume">
                                 <span>Resume Course</span>
                             </a><!-- /.courses-item-action-resume -->
                         </li><!-- /.courses-item -->

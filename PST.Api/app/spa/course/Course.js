@@ -158,68 +158,6 @@
             };
         })
 
-        .directive("courseStepsSlides", function() {
-            return {
-                restrict: "C",
-                require: "^course",
-                link: function($scope, elem, attrs, courseCtrl) {
-                    var tooltip = function(e, text) {
-                        return e.tooltipster({
-                            position: 'right',
-                            maxWidth: 230,
-                            functionBefore: function(origin, continueTooltip) {
-                                origin.tooltipster('content', text);
-                                continueTooltip();
-                            }
-                        });
-                    };
-
-                    var current = null;
-
-                    var tags = null;
-                    $scope.$watch("course", function(course) {
-                        if (course) {
-                            tags = [];
-                            elem.empty();
-                            for (var i = 0; i < course.sections.length; i++) {
-                                var sec = course.sections[i];
-                                var aTag = tooltip($("<a href=\"\" class=\"answered\" ></a>").text(i + 1), sec.name);
-                                elem.append($("<li/>").append(
-                                    aTag
-                                ));
-                                aTag.click(function() {
-                                    var tag = $(this);
-                                    if (tag.hasClass("current")) {
-                                        ;
-                                    } else {
-                                        courseCtrl.gotoSection(tag.text()*1);
-                                    }
-                                    return false;
-                                });
-                                tags.push(aTag);
-                            }
-                        }
-                    });
-
-                    $scope.$watch("section", function(section) {
-                        var indexOf = $scope.course.sections.indexOf($scope.section);
-                        if (indexOf == -1) {
-                            return;
-                        }
-                        var newCurrent = tags[indexOf];
-
-                        if (newCurrent != current) {
-                            newCurrent.addClass("current");
-                            if (current != null) {
-                                current.removeClass("current");
-                            }
-                            current = newCurrent;
-                        }
-                    });
-                }
-            };
-        })
-
         .directive("coursePaging", function() {
             return {
                 restrict: "C",
@@ -233,7 +171,6 @@
                 }
             };
         })
-
 
         .directive("courseSwitch", function() {
             return {
