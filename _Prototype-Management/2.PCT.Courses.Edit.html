@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	
+	<title>PCT Admin</title>
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="css/images/favicon.ico" />
+	
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/font-awesome.min.css" />
+	<link rel="stylesheet" href="css/jquery.fancybox.css" />
+	<link rel="stylesheet" href="css/selectboxit.css" />
+	<link rel="stylesheet" href="css/style.css" />
+
+	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
+	<script type="text/javascript" src="js/selectboxit.js"></script>
+	<script type="text/javascript" src="js/functions.js"></script>
+</head>
+<body>
+<div class="wrapper">
+	<aside class="container-sidebar">
+		<a href="#" class="logo">PCT</a>
+	
+		<nav class="nav">
+			<ul>
+				<li class="current">
+					<a href="#">
+						<i class="ico ico-courses-white"></i>
+						<span>Courses</span>
+					</a>
+				</li>
+				
+				<li>
+					<a href="#">
+						<i class="ico ico-tests-white"></i>
+						<span>Tests</span>
+					</a>
+				</li>
+				
+				<li>
+					<a href="#">
+						<i class="ico ico-settings-white"></i>
+						<span>Settings</span>
+					</a>
+				</li>
+				
+				<li>
+					<a href="#">
+						<i class="ico ico-users-white"></i>
+						<span>Users</span>
+					</a>
+				</li>
+				
+				<li>
+					<a href="#">
+						<i class="ico ico-profile-white"></i>
+						<span>My Profile</span>
+					</a>
+				</li>
+			</ul>
+		</nav><!-- /.nav -->
+	</aside><!-- /.container-sidebar -->
+	
+	<section class="container">
+		<header class="header">
+			<div class="shell">
+				<div class="breadcrumbs">
+				    <a href="#">Courses</a>
+
+				    <span>/</span>
+
+				    <a href="#" class="current">New</a>
+				</div><!-- /.breadcrumbs -->
+	
+				<nav class="nav-access">
+					<ul>
+						<li>
+							<a href="#">
+								dave.hurt
+								<i class="ico ico-exit"></i>
+							</a>
+						</li>
+					</ul>
+				</nav><!-- /.nav-access -->
+			</div><!-- /.shell -->
+		</header><!-- /.header -->
+	
+		<main class="main">
+			<section class="section section-courses-edit">
+				<div class="section-nav">
+					<div class="shell">
+						<ul>
+							<li class="highlighted">
+								<span>
+									<i class="fa"></i>
+								</span>
+								Information
+							</li>
+							
+							<li>
+								<span>
+									<i class="fa"></i>
+								</span>
+								Sections
+							</li>
+							
+							<li>
+								<span>
+									<i class="fa"></i>
+								</span>
+								Review Course
+							</li>
+							
+							<li>
+								<span>
+									<i class="fa"></i>
+								</span>
+								Build Test
+							</li>
+							
+							<li>
+								<span>
+									<i class="fa"></i>
+								</span>
+								Review Test
+							</li>
+							
+							<li>
+								<span>
+									<i class="fa"></i>
+								</span>
+								Invite
+							</li>
+							
+							<li>
+								<span>
+									<i class="fa"></i>
+								</span>
+								Publish
+							</li>
+						</ul>
+					</div><!-- /.shell -->
+				</div><!-- /.section-nav -->
+
+				<div class="section-body">
+					<div class="shell">
+						<div class="section-body-inner">
+							<div class="custom-table">
+								<div class="table-row">
+									<div class="table-col col-size-1">
+										<h3>Course Title</h3>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-2">
+										<h4>Bayer: MaxForce Impact Roach Gel Bait</h4>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-3"></div><!-- /.table-col -->
+								</div><!-- /.table-row -->
+								
+								<div class="table-row">
+									<div class="table-col col-size-1">
+										<h3>Category</h3>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-2">
+										<select name="field-select" id="field-select" class="select">
+											<option value="">Select</option>
+											<option value="Category 1">Category 1</option>
+											<option value="Category 2">Category 2</option>
+											<option value="Category 3">Category 3</option>
+											<option value="Category 4">Category 4</option>
+										</select>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-3">
+										<a href="ajax/popup-new-category.html" class="btn btn-grey fancybox.ajax popup-open">ADD NEW</a>
+									</div><!-- /.table-col -->
+								</div><!-- /.table-row -->
+								
+								<div class="table-row">
+									<div class="table-col col-size-1">
+										<h3>Sub Category</h3>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-2">
+										<select name="field-select" id="field-select" class="select">
+											<option value="">Select</option>
+											<option value="Category 1">Category 1</option>
+											<option value="Category 2">Category 2</option>
+											<option value="Category 3">Category 3</option>
+											<option value="Category 4">Category 4</option>
+										</select>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-3">
+										<a href="ajax/popup-new-category.html" class="btn btn-grey fancybox.ajax popup-open">ADD NEW</a>
+									</div><!-- /.table-col -->
+								</div><!-- /.table-row -->
+								
+								<div class="table-row">
+									<div class="table-col col-size-1">
+										<h3>States CEU Available</h3>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-2">
+										<input type="text" class="field" name="field-qty" id="field-qty" value="" placeholder="Qty">
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-3"></div><!-- /.table-col -->
+								</div><!-- /.table-row -->
+							</div><!-- /.custom-table -->
+
+							<div class="custom-table-secondary table-states">
+								<div class="table-row-head">
+									<div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-2">
+										<h3>State</h3>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-3">
+										<h3>Category Code</h3>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-4">
+										<h3>Hours/CEUs</h3>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-5">&nbsp;</div><!-- /.table-col -->
+								</div><!-- /.table-row-head -->
+
+								<div class="table-row table-row-1">
+									<div class="table-col col-size-1">
+										<a href="#" class="ico arrow-circle-down"></a>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-2">
+										<h4>8 States</h4>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-3">
+										<h3>&nbsp;</h3>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-4">
+										<h3>&nbsp;</h3>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-5">&nbsp;</div><!-- /.table-col -->
+								</div><!-- /.table-row -->
+
+								<div class="table-expand">
+									<div class="table-row">
+										<div class="table-col col-size-1">
+											<a href="#" class="ico arrow-circle-up"></a>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-2">
+											<select name="field-add-new-state" id="field-add-new-state" class="select">
+												<option value="">Add New State</option>
+												<option value="New State 1">New State 1</option>
+												<option value="New State 2">New State 2</option>
+												<option value="New State 3">New State 3</option>
+												<option value="New State 4">New State 4</option>
+											</select>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-3">
+											<h4>Code</h4>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-4">
+											<h4>Hours</h4>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-5">
+											<a href="#" class="btn btn-grey">ADD</a>
+										</div><!-- /.table-col -->
+									</div><!-- /.table-row -->
+
+									<div class="table-row">
+										<div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-2">
+											<h3>Alabama</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-3">
+											<h3>Ala1</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-4">
+											<h3>3</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-5">
+											<a href="#" class="fa fa-trash-o"></a>
+										</div><!-- /.table-col -->
+									</div><!-- /.table-row -->
+
+									<div class="table-row">
+										<div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-2">
+											<h3>Arkansas</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-3">
+											<h3>Arka3</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-4">
+											<h3>4</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-5"></div><!-- /.table-col -->
+									</div><!-- /.table-row -->
+
+									<div class="table-row">
+										<div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-2">
+											<h3>Georgia</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-3">
+											<h3>Geo18</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-4">
+											<h3>4</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-5"></div><!-- /.table-col -->
+									</div><!-- /.table-row -->
+
+									<div class="table-row">
+										<div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-2">
+											<h3>Michigan</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-3">
+											<h3>Michi73</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-4">
+											<h3>4</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-5"></div><!-- /.table-col -->
+									</div><!-- /.table-row -->
+
+									<div class="table-row">
+										<div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-2">
+											<h3>Mississippi</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-3">
+											<h3>Missi82</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-4">
+											<h3>3</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-5"></div><!-- /.table-col -->
+									</div><!-- /.table-row -->
+
+									<div class="table-row">
+										<div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-2">
+											<h3>New Jersey</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-3">
+											<h3>Jers22</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-4">
+											<h3>2</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-5"></div><!-- /.table-col -->
+									</div><!-- /.table-row -->
+
+									<div class="table-row">
+										<div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-2">
+											<h3>New York</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-3">
+											<h3>York32</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-4">
+											<h3>2</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-5"></div><!-- /.table-col -->
+									</div><!-- /.table-row -->
+
+									<div class="table-row">
+										<div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-2">
+											<h3>Ohio</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-3">
+											<h3>Ohio49</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-4">
+											<h3>4</h3>
+										</div><!-- /.table-col -->
+										
+										<div class="table-col col-size-5"></div><!-- /.table-col -->
+									</div><!-- /.table-row -->
+								</div><!-- /.table-row-expand -->
+							</div><!-- /.custom-table-secondary -->
+
+							<div class="custom-table table-documents">
+								<div class="table-row-head">
+									<div class="table-col col-size-full">
+										<h3>Documents</h3>
+									</div><!-- /.table-col -->
+								</div><!-- /.table-row-head -->
+
+								<div class="table-row">
+									<div class="table-col col-size-half">
+										<img src="css/images/document-img.jpg" alt="" width="135" height="185">
+
+										<div class="overlay">
+											<div class="icons">
+												<a href="#" class="fa fa-search-plus"></a>
+
+												<a href="#" class="fa fa-trash-o"></a>
+											</div><!-- /.icons -->
+
+												<div class="file-holder">
+													<a href="#" class="btn btn-grey file-trigger file-trigger-new">UPLOAD NEW LABEL</a>
+													<input type="file" class="field field-file" name="field-upload-label" id="field-upload-label" value="" placeholder="UPLOAD LABEL">
+												</div><!-- /.file-holder -->
+										</div><!-- /.overlay -->
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-half">
+										<div class="file-holder">
+											<a href="#" class="btn btn-grey file-trigger">UPLOAD LABEL</a>
+											<input type="file" class="field field-file" name="field-upload-label" id="field-upload-label" value="" placeholder="UPLOAD LABEL">
+										</div><!-- /.file-holder -->
+									</div><!-- /.table-col -->
+								</div><!-- /.table-row -->
+							</div><!-- /.custom-table-teritary -->
+
+							<div class="custom-table table-prerequisites">
+								<div class="table-row">
+									<div class="table-col col-size-1">
+										<h3>Prerequisites</h3>
+									</div><!-- /.table-col -->
+									
+									<div class="table-col col-size-4">
+										<select name="field-select" id="field-select" class="select">
+											<option value="">Select</option>
+											<option value="Prerequisite 1">Prerequisite 1</option>
+											<option value="Prerequisite 2">Prerequisite 2</option>
+											<option value="Prerequisite 3">Prerequisite 3</option>
+											<option value="Prerequisite 4">Prerequisite 4</option>
+										</select>
+									</div><!-- /.table-col -->
+								</div><!-- /.table-row -->
+							</div><!-- /.custom-table -->
+						</div><!-- /.section-body-inner -->
+					</div><!-- /.shell -->
+				</div><!-- /.section-body -->
+			</section><!-- /.section section-courses-list -->
+		</main><!-- /.main -->
+		<div class="push"></div><!-- /.push -->
+	</section><!-- /.container -->
+
+	<footer class="footer">
+		<div class="shell">
+			<div class="footer-inner">
+				<a href="#" class="btn btn-grey alignleft">Cancel</a>
+
+				<div class="btns alignright">
+					<a href="#" class="btn btn-grey">Save</a>
+
+					<a href="#" class="btn btn-green btn-ico-right">
+						Sections
+						<i class="fa fa-chevron-right"></i>
+					</a>
+				</div><!-- /.btns -->
+
+				<div class="footer-draft">Draft</div><!-- /.footer-draft -->
+			</div><!-- /.footer-inner -->
+		</div><!-- /.shell -->
+	</footer><!-- /.footer -->
+</div><!-- /.wrapper -->
+</body>
+</html>

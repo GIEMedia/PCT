@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.Design;
 using PST.Declarations.Entities.Components;
 using PST.Declarations.Models;
 using Prototype1.Foundation;
@@ -18,6 +19,7 @@ namespace PST.Declarations.Entities
         {
             this.CompanyAddress = new Address();
             this.DateCreated = DateTime.Now;
+            this.CourseProgress = new List<CourseProgress>();
         }
 
         public override string FirstName { get; set; }
@@ -46,6 +48,9 @@ namespace PST.Declarations.Entities
         public override AccountStatus Status { get; set; }
 
         public virtual AdminAccess AdminAccess { get; set; }
+
+        [Ownership(Ownership.Exclusive)]
+        public virtual IList<CourseProgress> CourseProgress { get; set; }
 
         public static implicit operator account(Account account)
         {

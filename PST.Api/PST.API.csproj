@@ -234,7 +234,9 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllerBase.cs" />
+    <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\WebControllerBase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -432,6 +434,10 @@
     <ProjectReference Include="..\PST.Api.Core\PST.Api.Core.csproj">
       <Project>{195143e3-a81e-4fe5-a636-99a839a1627f}</Project>
       <Name>PST.Api.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PST.Data\PST.Data.csproj">
+      <Project>{7A9A07D7-B875-413A-8510-93E7A3117F0F}</Project>
+      <Name>PST.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\PST.Declarations\PST.Declarations.csproj">
       <Project>{84865363-cbb4-49f3-bc33-e83c60741de1}</Project>

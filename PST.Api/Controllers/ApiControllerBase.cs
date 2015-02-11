@@ -6,6 +6,7 @@ using Microsoft.AspNet.Identity;
 using Prototype1.Foundation.Data;
 using Prototype1.Foundation.Data.NHibernate;
 using PST.Api.Core.OAuth;
+using PST.Data;
 using PST.Declarations.Entities;
 using Constants = PST.Api.Core.Constants;
 
@@ -53,6 +54,18 @@ namespace PST.Api.Controllers
         protected Account CurrentUser
         {
             get { return _currentAccount ?? (_currentAccount = _userManager.Value.FindById(CurrentUserID.ToString())); }
+        }
+
+        private static readonly TimeZoneInfo EasternStandardTime = TimeZoneInfo.FindSystemTimeZoneById("Eastern Standard Time");
+        protected TimeZoneInfo CurretUserTimeZoneInfo
+        {
+            get
+            {
+                TimeZoneInfo timeZone;
+                return TimeZones.TimeZonesByState.TryGetValue(CurrentUser.CompanyAddress.State, out timeZone)
+                    ? timeZone
+                    : EasternStandardTime;
+            }
         }
 
         protected struct SetValue<TEntity, TProperty> where TEntity : EntityBase

@@ -38,14 +38,16 @@ namespace PST.Api.Controllers
     {
         private readonly Func<UserManager<ApplicationUser>> _userManagerFactory;
         private readonly EmailGenerationService _resetPasswordProvider;
+        private readonly Lazy<ICourseService> _courseService;
 
         public AccountController(Func<UserManager<ApplicationUser>> userManagerFactory,
             EmailGenerationService resetPasswordProvider, IEntityRepository entityRepository,
-            Lazy<UserManager<ApplicationUser>> lazyUserManagerFactory)
+            Lazy<UserManager<ApplicationUser>> lazyUserManagerFactory, Lazy<ICourseService> courseService)
             : base(entityRepository, lazyUserManagerFactory)
         {
             _userManagerFactory = userManagerFactory;
             _resetPasswordProvider = resetPasswordProvider;
+            _courseService = courseService;
         }
 
         #region Account Access & Login Management
@@ -360,6 +362,29 @@ namespace PST.Api.Controllers
             };
 
             return accountDetailed;
+        }
+
+        #endregion
+
+        #region Courses & Certificates
+
+        public course_overview[] OpenCourses()
+        {
+            var courseProgress = _courseService.Value.OpenCourses(CurrentUserID);
+            return (from cp in courseProgress
+                let c = cp.Course
+                from sp in c.Sections
+                select new course_overview
+                {
+                    course_id = c.ID,
+                    title = c.Title,
+                    description =
+                        "CEUs Available: " +
+                        c.StateCEUs.OrderBy(x => x.StateAbbr).Select(x => x.StateAbbr).Aggregate((i, j) => i + "," + j),
+                    course_progress = cp.Sections.Count(s => s.Passed)/(decimal) cp.TotalSections,
+                    test_progress = cp.TestProgress.CompletedQuestions.Count/(decimal) cp.TestProgress.TotalQuestions,
+                    last_activity = cp.LastActivityUtc.ToTimeZone(CurretUserTimeZoneInfo)
+                }).ToArray();
         }
 
         #endregion

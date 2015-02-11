@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PST.Api", "PST.API\PST.Api.csproj", "{994F126E-1871-41AE-8C29-4F9498C0C563}"
 EndProject
@@ -20,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_Prototype", "_Prototype\_Prototype.csproj", "{8328263F-341F-41D5-BD62-B454CD556068}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PST.Tests", "PST.Tests\PST.Tests.csproj", "{5E0C32AA-A3EF-4713-9977-7E56055CAFEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_Prototype-Management", "_Prototype-Management\_Prototype-Management.csproj", "{CFB565A9-54EC-4515-B4CB-ED1F00DA3F29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{5E0C32AA-A3EF-4713-9977-7E56055CAFEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5E0C32AA-A3EF-4713-9977-7E56055CAFEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5E0C32AA-A3EF-4713-9977-7E56055CAFEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFB565A9-54EC-4515-B4CB-ED1F00DA3F29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFB565A9-54EC-4515-B4CB-ED1F00DA3F29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFB565A9-54EC-4515-B4CB-ED1F00DA3F29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFB565A9-54EC-4515-B4CB-ED1F00DA3F29}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,4 @@
-﻿using System;
-using Prototype1.Foundation.Models;
+﻿using Prototype1.Foundation.Models;
 
 namespace PST.Declarations.Models
 {

@@ -195,6 +195,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="ContainerProviders\ApiContainerProviderBase.cs" />
     <Compile Include="ContainerProviders\DevelopmentApiContainerProvider.cs" />
+    <Compile Include="CourseService.cs" />
     <Compile Include="EmailGenerationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />
