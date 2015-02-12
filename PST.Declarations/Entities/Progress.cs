@@ -28,7 +28,7 @@ namespace PST.Declarations.Entities
 
         public virtual TestProgress TestProgress { get; set; }
 
-        [Ownership(Ownership.Exclusive)]
+        [Ownership(Ownership.Shared)]
         public virtual Certificate Certificate { get; set; }
     }
 

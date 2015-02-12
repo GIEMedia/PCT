@@ -21,7 +21,7 @@ namespace PST.Api.Controllers
         }
 
         [HttpGet]
-        [Route]
+        [Route("{courseID}")]
         public course Get(Guid courseID)
         {
             return _courseService.GetCourse(courseID, CurrentUserID);
@@ -43,7 +43,7 @@ namespace PST.Api.Controllers
         }
 
         [HttpPut]
-        [Route]
+        [Route("answer/{courseID}/{questionID}")]
         public answer_result AnswerQuestion(Guid courseID, Guid questionID, Guid[] selectedOptionIDs)
         {
             string correctResponseHeading, correctResponseText;

@@ -8,10 +8,8 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using PST.Api.Core;
 using PST.Api.Core.App_Start;
 using PST.Api.Core.OAuth;
-using PST.Declarations;
 using PST.Declarations.Entities;
 using PST.Declarations.Interfaces;
 using PST.Declarations.Models;
@@ -20,8 +18,6 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
-using Microsoft.Owin.Security.Provider;
-using NHibernate;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
 using Prototype1.Foundation.Providers;
@@ -39,15 +35,18 @@ namespace PST.Api.Controllers
         private readonly Func<UserManager<ApplicationUser>> _userManagerFactory;
         private readonly EmailGenerationService _resetPasswordProvider;
         private readonly Lazy<ICourseService> _courseService;
+        private readonly Lazy<ICertificateService> _cetificateService;
 
         public AccountController(Func<UserManager<ApplicationUser>> userManagerFactory,
             EmailGenerationService resetPasswordProvider, IEntityRepository entityRepository,
-            Lazy<UserManager<ApplicationUser>> lazyUserManagerFactory, Lazy<ICourseService> courseService)
+            Lazy<UserManager<ApplicationUser>> lazyUserManagerFactory, Lazy<ICourseService> courseService,
+            Lazy<ICertificateService> cetificateService)
             : base(entityRepository, lazyUserManagerFactory)
         {
             _userManagerFactory = userManagerFactory;
             _resetPasswordProvider = resetPasswordProvider;
             _courseService = courseService;
+            _cetificateService = cetificateService;
         }
 
         #region Account Access & Login Management
@@ -385,6 +384,16 @@ namespace PST.Api.Controllers
                     test_progress = cp.TestProgress.CompletedQuestions.Count/(decimal) cp.TestProgress.TotalQuestions,
                     last_activity = cp.LastActivityUtc.ToTimeZone(CurretUserTimeZoneInfo)
                 }).ToArray();
+        }
+
+        public certificate[] Certificates()
+        {
+            return new certificate[0];
+        }
+
+        public certificate Certificate(Guid courseID)
+        {
+            return new certificate();
         }
 
         #endregion

@@ -226,10 +226,6 @@
       <Project>{195143E3-A81E-4FE5-A636-99A839A1627F}</Project>
       <Name>PST.Api.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\PST.Api.Models\PST.Api.Models.csproj">
-      <Project>{d40a9b0a-c1f0-4c1d-8206-9e3db45a9765}</Project>
-      <Name>PST.Api.Models</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PST.API\PST.Api.csproj">
       <Project>{994f126e-1871-41ae-8c29-4f9498c0c563}</Project>
       <Name>PST.Api</Name>

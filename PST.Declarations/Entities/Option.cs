@@ -13,7 +13,7 @@ namespace PST.Declarations.Entities
 
         protected abstract void SetCustomModelProperties(option option);
 
-        public option ToModel()
+        public virtual option ToModel()
         {
             var option = new option
             {

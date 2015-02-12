@@ -36,7 +36,7 @@ namespace PST.Declarations.Entities
     {
         protected abstract void SetCustomModelProperties(question question);
 
-        public question ToModel()
+        public virtual question ToModel()
         {
             var question = new question
             {

@@ -21,14 +21,14 @@ namespace PST.Api.Controllers
         }
 
         [HttpGet]
-        [Route]
+        [Route("{courseID}")]
         public test Get(Guid courseID)
         {
             return _courseService.GetTest(courseID, CurrentUserID);
         }
 
         [HttpPut]
-        [Route]
+        [Route("answer/{courseID}/{questionID}")]
         public answer_result AnswerQuestion(Guid courseID, Guid questionID, Guid[] selectedOptionIDs)
         {
             string correctResponseHeading, correctResponseText;

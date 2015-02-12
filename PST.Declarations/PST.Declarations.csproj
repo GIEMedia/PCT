@@ -209,12 +209,14 @@
     <Compile Include="Entities\StateCEU.cs" />
     <Compile Include="Entities\Test.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Interfaces\ICertificateService.cs" />
     <Compile Include="Interfaces\ICourseService.cs" />
     <Compile Include="Interfaces\IEmailGenerationService.cs" />
     <Compile Include="Models\account.cs" />
     <Compile Include="Models\account_detailed.cs" />
     <Compile Include="Models\address.cs" />
     <Compile Include="Models\answer_result.cs" />
+    <Compile Include="Models\certificate.cs" />
     <Compile Include="Models\change_password.cs" />
     <Compile Include="Models\course.cs" />
     <Compile Include="Models\course_overview.cs" />

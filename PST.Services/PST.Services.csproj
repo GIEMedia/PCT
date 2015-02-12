@@ -193,6 +193,7 @@
   <ItemGroup>
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="CertificateService.cs" />
     <Compile Include="ContainerProviders\ApiContainerProviderBase.cs" />
     <Compile Include="ContainerProviders\DevelopmentApiContainerProvider.cs" />
     <Compile Include="CourseService.cs" />
