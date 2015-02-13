@@ -20,15 +20,6 @@
                             }
                         });
                     };
-                    var isAnswered = function(sectionNum) {
-                        return function() {
-                            if ($scope.userProgress == null || $scope.course == null) {
-                                return false;
-                            }
-                            var progress = $scope.userProgress.sections[sectionNum - 1];
-                            return progress >= $scope.course.sections[sectionNum - 1].questions.length;
-                        };
-                    };
 
                     var setClass = function(className, e) {
                         return function(set) {
@@ -64,7 +55,10 @@
                                 });
                                 tags.push(aTag);
 
-                                $scope.$watch(isAnswered(i+1), setClass("answered", aTag));
+                                var isCompleteWatcher = Fs.f0(function (sec) {
+                                    return sec.complete;
+                                }, section);
+                                $scope.$watch(isCompleteWatcher, setClass("answered", aTag));
                             }
                         }
                     });

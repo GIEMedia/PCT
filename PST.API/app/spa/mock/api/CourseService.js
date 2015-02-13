@@ -5,7 +5,7 @@
     angular.module('pct.elearning.api.Course', [
         'pct.elearning.mock.data.Course'
     ])
-        .factory("CourseService", function($timeout, CourseMockData) {
+        .factory("CourseService", function($timeout, CourseMockData, UserCourseService) {
             var equalSet = function (o1, o2) {
                 if (o1 == null) {
                     return o2 == null;
@@ -56,7 +56,11 @@
 
             CourseService.get = function(id, onDone) {
                 $timeout(onDone,0);
-                return CourseMockData.course1;
+                var course = CourseMockData.course1;
+
+                course.id = id;
+
+                return UserCourseService.updateProgress(id, course);
             };
 
             CourseService.getNewCourses = function() {

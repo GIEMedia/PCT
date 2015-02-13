@@ -14,39 +14,32 @@
                 templateUrl: "/app/spa/course/CourseQuestionsContainer.html",
                 link: function($scope, elem, attrs, courseCtrl) {
 
-                    // Async wait until userProgress var is available
-                    var ladyUserProgress = Async.ladyFirst();
-                    $scope.$watch("userProgress", function(progress) {
-                        if (progress) {
-                            ladyUserProgress.ladyDone();
-                        }
-                    });
-
                     // When section is changed, focus to the question
                     $scope.$watch(attrs.section, function(section) {
                         $scope.result = null;
                         $scope.question = null;
 
-                        ladyUserProgress.manTurn(function() {
-                            var sectionNum = courseCtrl.sectionNum();
-                            var progress = $scope.userProgress.sections[sectionNum - 1];
+                        var sectionNum = courseCtrl.sectionNum();
 
-                            if (progress < section.questions.length) {
-                                $scope.question = section.questions[progress];
-
-                                if (!$scope.$$phase) $scope.$digest();
+                        if (!section.complete) {
+                            for (var i = 0; i < section.questions.length; i++) {
+                                var question = section.questions[i];
+                                if (!question.answered) {
+                                    $scope.question = question;
+                                    break;
+                                }
                             }
-                        });
+
+                            if (!$scope.$$phase) $scope.$digest();
+                        }
                     });
 
                     $scope.finishedThisSection = function() {
-                        if ($scope.userProgress == null || $scope.course == null) {
+                        if ( $scope.course == null) {
                             return false;
                         }
 
-                        var sectionNum = courseCtrl.sectionNum();
-                        var progress = $scope.userProgress.sections[sectionNum - 1];
-                        return progress >= $scope.section.questions.length;
+                        return $scope.section.complete;
                     };
 
                     $scope.finishedAllSection = function() {
@@ -66,16 +59,15 @@
                     $scope.nextQuestion = function() {
                         $scope.result = null;
 
+                        $scope.question.answered = true;
+
                         var indexOf = $scope.section.questions.indexOf($scope.question);
                         if (indexOf < $scope.section.questions.length - 1) {
                             $scope.question = $scope.section.questions[indexOf + 1];
                         } else {
                             $scope.question = null;
+                            $scope.section.complete = true;
                         }
-
-                        // Update progress
-                        var sectionNum = courseCtrl.sectionNum();
-                        $scope.userProgress.sections[sectionNum - 1] = indexOf + 1;
 
                         return false;
                     };
