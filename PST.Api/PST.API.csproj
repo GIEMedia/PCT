@@ -250,6 +250,7 @@
     <Content Include="app\css\fonts\fontawesome-webfont.ttf" />
     <Content Include="app\css\fonts\fontawesome-webfont.woff" />
     <Content Include="app\css\fonts\FontAwesome.otf" />
+    <Content Include="app\css\images\ico-send-certificate.png" />
     <Content Include="app\js\common-utils.js" />
     <Content Include="app\js\momentjs_2.8.3\angular-moment.min.js" />
     <Content Include="app\js\momentjs_2.8.3\moment.min.js" />

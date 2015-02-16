@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
+using PST.Declarations;
 using PST.Declarations.Entities;
 using PST.Declarations.Interfaces;
 using PST.Declarations.Models;
@@ -24,7 +25,8 @@ namespace PST.Services
         {
             return
                 _entityRepository.GetByID<Account>(accountID)
-                    .CourseProgress.Where(c => c.Sections.Count(s => s.Passed) != c.TotalSections);
+                    .CourseProgress.Where(c => c.Course.Status == CourseStatus.Active &&
+                                               c.Sections.Count(s => s.Passed) != c.TotalSections);
         }
 
         public IEnumerable<Course> NewCourses(int count = 5, Guid? accountID = null)
@@ -36,7 +38,7 @@ namespace PST.Services
 
             //TODO: Replace with cache lookup
             return (from c in _entityRepository.Queryable<Course>()
-                where !openCourses.Contains(c.ID)
+                where c.Status == CourseStatus.Active && !openCourses.Contains(c.ID)
                 orderby c.DateCreatedUtc descending
                 select c).Take(count);
         }
@@ -48,6 +50,9 @@ namespace PST.Services
 
             if (course == null)
                 throw new ArgumentOutOfRangeException("courseID", "Course not found.");
+
+            if (course.Status != CourseStatus.Active)
+                throw new ArgumentOutOfRangeException("courseID", "Course not active.");
 
             if (!accountID.HasValue)
                 return course;
@@ -77,7 +82,7 @@ namespace PST.Services
         {
             var course = GetCourse(courseID, accountID);
 
-            if (course == null)
+            if (course == null || course.Status != CourseStatus.Active)
                 return null;
 
             if (accountID.HasValue)
@@ -162,6 +167,9 @@ namespace PST.Services
             if (course == null)
                 throw new ArgumentOutOfRangeException("courseID", "Course not found.");
 
+            if (course.Status != CourseStatus.Active)
+                throw new ArgumentOutOfRangeException("courseID", "Course not active.");
+
             var question = (from s in course.Sections
                 from q in s.Questions
                 where q.ID == questionID
@@ -184,6 +192,9 @@ namespace PST.Services
 
             if (course == null)
                 throw new ArgumentOutOfRangeException("courseID", "Course not found.");
+
+            if (course.Status != CourseStatus.Active)
+                throw new ArgumentOutOfRangeException("courseID", "Course not active.");
 
             if(course.Test == null)
                 throw new ArgumentOutOfRangeException("courseID", "Course does not have a test.");

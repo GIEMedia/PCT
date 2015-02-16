@@ -200,6 +200,7 @@
     <Compile Include="Entities\Certificate.cs" />
     <Compile Include="Entities\Components\Address.cs" />
     <Compile Include="Entities\Course.cs" />
+    <Compile Include="Entities\Manager.cs" />
     <Compile Include="Entities\Progress.cs" />
     <Compile Include="Entities\Document.cs" />
     <Compile Include="Entities\Option.cs" />
@@ -207,6 +208,7 @@
     <Compile Include="Entities\Questioned.cs" />
     <Compile Include="Entities\Section.cs" />
     <Compile Include="Entities\StateCEU.cs" />
+    <Compile Include="Entities\StateLicensure.cs" />
     <Compile Include="Entities\Test.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="Interfaces\ICertificateService.cs" />
@@ -222,6 +224,7 @@
     <Compile Include="Models\course_overview.cs" />
     <Compile Include="Models\document.cs" />
     <Compile Include="Models\external_login.cs" />
+    <Compile Include="Models\manager.cs" />
     <Compile Include="Models\option.cs" />
     <Compile Include="Models\question.cs" />
     <Compile Include="Models\questioned.cs" />
@@ -229,6 +232,7 @@
     <Compile Include="Models\registration_external.cs" />
     <Compile Include="Models\reset_password.cs" />
     <Compile Include="Models\section.cs" />
+    <Compile Include="Models\state_licensure.cs" />
     <Compile Include="Models\test.cs" />
     <Compile Include="Models\video.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

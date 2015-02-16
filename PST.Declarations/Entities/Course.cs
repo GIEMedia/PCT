@@ -15,6 +15,7 @@ namespace PST.Declarations.Entities
             this.StateCEUs = new List<StateCEU>();
             this.PrerequisiteCourses = new List<Course>();
             this.Sections = new List<Section>();
+            this.Status = CourseStatus.Draft;
         }
 
         public virtual string Title { get; set; }
@@ -33,6 +34,8 @@ namespace PST.Declarations.Entities
 
         [Ownership(Ownership.Exclusive)]
         public virtual Test Test { get; set; }
+
+        public virtual CourseStatus Status { get; set; }
 
         public virtual DateTime DateCreatedUtc { get; set; }
 

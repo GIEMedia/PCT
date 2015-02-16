@@ -57,9 +57,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="0.PCT.Login.html" />
+    <Content Include="4.PCT.Review.Invite.html" />
+    <Content Include="6.PCT.Report.List.html" />
+    <Content Include="5.PCT.User.Search.html" />
     <Content Include="1.PCT.Courses.List.html" />
     <Content Include="2.PCT.Courses.Edit.html" />
     <Content Include="3.PCT.Section.List.html" />
+    <Content Include="4.PCT.Test.Edit.html" />
     <Content Include="4.PCT.Section.Edit.html" />
     <Content Include="5.PCT.User.html" />
     <Content Include="6.PCT.Report.html" />
@@ -92,6 +97,7 @@
     <Content Include="css\images\document-img.jpg" />
     <Content Include="css\images\favicon.ico" />
     <Content Include="css\images\ico-a-grey.png" />
+    <Content Include="css\images\ico-a-large.png" />
     <Content Include="css\images\ico-add-course-white.png" />
     <Content Include="css\images\ico-building.png" />
     <Content Include="css\images\ico-bulb.png" />
@@ -101,6 +107,7 @@
     <Content Include="css\images\ico-checkbox.png" />
     <Content Include="css\images\ico-circle-check.png" />
     <Content Include="css\images\ico-courses-grey.png" />
+    <Content Include="css\images\ico-courses-large.png" />
     <Content Include="css\images\ico-courses-white.png" />
     <Content Include="css\images\ico-courses.png" />
     <Content Include="css\images\ico-exit.png" />
@@ -111,6 +118,7 @@
     <Content Include="css\images\ico-photo.png" />
     <Content Include="css\images\ico-profile-white.png" />
     <Content Include="css\images\ico-profile.png" />
+    <Content Include="css\images\ico-rename.png" />
     <Content Include="css\images\ico-settings-white.png" />
     <Content Include="css\images\ico-settings.png" />
     <Content Include="css\images\ico-t.png" />
@@ -120,6 +128,7 @@
     <Content Include="css\images\ico-user.png" />
     <Content Include="css\images\ico-users-white.png" />
     <Content Include="css\images\ico-users.png" />
+    <Content Include="css\images\ico-video-orange.png" />
     <Content Include="css\images\insect-1-small.jpg" />
     <Content Include="css\images\insect-1.jpg" />
     <Content Include="css\images\insect-2-small.jpg" />
@@ -132,7 +141,7 @@
     <Content Include="css\images\insect-large.jpg" />
     <Content Include="css\images\logo.png" />
     <Content Include="css\images\select-arrows.png" />
-    <Content Include="css\images\video-image-img.jpg" />
+    <Content Include="css\images\video-image-img.png" />
     <Content Include="css\jquery.fancybox.css" />
     <Content Include="css\selectboxit.css" />
     <Content Include="css\style.css" />
@@ -144,6 +153,7 @@
     <Content Include="ssi\content-header-search.html" />
     <Content Include="ssi\content-header-user.html" />
     <Content Include="ssi\content-side-nav.html" />
+    <Content Include="ssi\content-footer.html" />
     <Content Include="ssi\head.html" />
     <Content Include="Web.config" />
   </ItemGroup>

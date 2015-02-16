@@ -188,6 +188,7 @@ h6 { font-size: 12px; text-transform: uppercase; line-height: 1.2; }
 
 .col { float: left; }
 .col-1of2 { width: 50%; }
+.col-full { width: 100%; }
 
 /* ================================================================ *\
 	#Forms
@@ -566,16 +567,23 @@ a.form-label { color: #404040 !important; }
 	#Signup
 \* ================================================================ */
 
+.user-forms > div:not(.form-signin) + div { padding-top: 0; }
+
 .form-signin { display: none; }
-.form-signup { padding: 65px 11% 65px 5%; }
+.form-signup,
+.form-password,
+.form-licensure-managers,
+.form-certificates { padding: 65px 11% 35px 5%; }
 .user-forms .form-body { position: relative; padding: 36px 0 0; }
-.user-forms .form-body:before { position: absolute; top: 77px; bottom: 20px; left: 50%; margin-left: -1px; width: 2px; background: #ededed; content: ''; }
+.user-forms .form-body.split-form:before { position: absolute; top: 70px; bottom: 36px; left: 50%; margin-left: -1px; width: 2px; background: #ededed; content: ''; }
 
 .user-forms .form-section-head { padding-bottom: 16px; }
 .user-forms .form-row { padding-bottom: 20px; }
 .user-forms .form-section { padding-right: 9px; }
 .user-forms .form-col ~ .form-col .form-section { padding: 0 0 0 9px; }
 .user-forms i.fa { color: #1daa33; font-size: 24px; margin-right: 7px; }
+
+.user-forms .form-controls + .form-controls { margin-top: 20px; }
 
 /* ================================================================ *\
 	#Courses
@@ -608,13 +616,16 @@ a.form-label { color: #404040 !important; }
 .courses-item-bar-blue .courses-item-bar-fill span { background: #00c7d3; }
 
 .courses-item-action-resume,
-.courses-item-action-start { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 5px; color: #fff; font-size: 16px; line-height: 1; font-weight: bold; text-align: center; }
+.courses-item-action-start,
+.courses-item-action-send { display: none; position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 5px; color: #fff; font-size: 16px; line-height: 1; font-weight: bold; text-align: center; }
 
 .courses-item-action-resume span,
-.courses-item-action-start span { position: absolute; top: 50%; left: 50%; display: inline-block; background-repeat: no-repeat; background-position: center 0; vertical-align: top; padding-top: 47px; }
+.courses-item-action-start span,
+.courses-item-action-send span { position: absolute; top: 50%; left: 50%; display: inline-block; background-repeat: no-repeat; background-position: center 0; vertical-align: top; padding-top: 47px; }
 
 .courses-item-action-resume span,
-.courses-item-action-start span {
+.courses-item-action-start span,
+.courses-item-action-send span {
 	-webkit-transform: translate(-50%, -50%); 
 	    -ms-transform: translate(-50%, -50%); 
 	     -o-transform: translate(-50%, -50%); 
@@ -627,7 +638,17 @@ a.form-label { color: #404040 !important; }
 .courses-item-action-start { background: rgba(17, 172, 237, 0.75); }
 .courses-item-action-start span { background-image: url(/css/images/ico-start-course.png); }
 
+.courses-item-action-send { background: rgba(29, 170, 51, 0.75); font-size: 13px; }
+.courses-item-action-send span { background-image: url(/css/images/ico-send-certificate.png); }
+.courses-item-action-send span a { color: #fff; display: inline-block; vertical-align: middle; width: 47px; }
+.courses-item-action-send span a i.fa { color: #fff; font-size: 29px; }
+.courses-item-action-send span a + a { margin-left: 28px; }
+
 .courses-item:hover [class^="courses-item-action"] { display: block; }
+
+.certificates .courses-item { width: 44%; float: left; display: block; margin-bottom: 20px; }
+.certificates .courses-item + .courses-item { margin-top: 0;  }
+.certificates .courses-item:nth-of-type(even) { margin-left: 36px;  }
 
 /* ================================================================ *\
 	#Icon Colors

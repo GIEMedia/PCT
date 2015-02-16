@@ -21,6 +21,7 @@ using Microsoft.Owin.Security.OAuth;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
 using Prototype1.Foundation.Providers;
+using WebGrease.Css.Extensions;
 using ChallengeResult = Prototype1.Foundation.Results.ChallengeResult;
 
 namespace PST.Api.Controllers
@@ -365,8 +366,10 @@ namespace PST.Api.Controllers
 
         #endregion
 
-        #region Courses & Certificates
+        #region Courses, Certificates, Managers & Licensure
 
+        [HttpGet]
+        [Route("courses")]
         public course_overview[] OpenCourses()
         {
             var courseProgress = _courseService.Value.OpenCourses(CurrentUserID);
@@ -386,14 +389,51 @@ namespace PST.Api.Controllers
                 }).ToArray();
         }
 
-        public certificate[] Certificates()
+        [HttpGet]
+        [Route("certificates")]
+        public certificate[] GetCertificates()
         {
             return new certificate[0];
         }
 
-        public certificate Certificate(Guid courseID)
+        [HttpGet]
+        [Route("certificate/{courseID}")]
+        public certificate GetCertificate(Guid courseID)
         {
             return new certificate();
+        }
+
+        [HttpGet]
+        [Route("managers")]
+        public manager[] GetManagers()
+        {
+            //TODO: Refactor to account service
+            return (from a in _entityRepository.Queryable<Account>()
+                where a.ID == CurrentUserID
+                from m in a.Managers
+                select (manager) m).ToArray();
+        }
+
+        [HttpPut]
+        [Route("managers")]
+        public void UpdateManagers(manager[] managers)
+        {
+            //TODO: Refactor to account service
+            var account = _entityRepository.GetByID<Account>(CurrentUserID);
+            account.Managers.Clear();
+            managers.ForEach(m => account.Managers.Add(m));
+            _entityRepository.Save(account);
+        }
+
+        [HttpGet]
+        [Route("licensures")]
+        public state_licensure[] GetLicensures()
+        {
+            //TODO: Refactor to account service
+            return (from a in _entityRepository.Queryable<Account>()
+                where a.ID == CurrentUserID
+                from s in a.StateLicensures
+                select (state_licensure) s).ToArray();
         }
 
         #endregion

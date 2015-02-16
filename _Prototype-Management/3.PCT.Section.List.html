@@ -1,68 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
-	
-	<title>PCT Admin</title>
-
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	
-	<link rel="shortcut icon" type="image/x-icon" href="css/images/favicon.ico" />
-	
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/font-awesome.min.css" />
-	<link rel="stylesheet" href="css/jquery.fancybox.css" />
-	<link rel="stylesheet" href="css/style.css" />
-
-	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
-	<script type="text/javascript" src="js/functions.js"></script>
+    <!--#include virtual="/ssi/head.html" -->
 </head>
 <body>
 <div class="wrapper">
-	<aside class="container-sidebar">
-		<a href="#" class="logo">PCT</a>
-	
-		<nav class="nav">
-			<ul>
-				<li class="current">
-					<a href="#">
-						<i class="ico ico-courses-white"></i>
-						<span>Courses</span>
-					</a>
-				</li>
-				
-				<li>
-					<a href="#">
-						<i class="ico ico-tests-white"></i>
-						<span>Tests</span>
-					</a>
-				</li>
-				
-				<li>
-					<a href="#">
-						<i class="ico ico-settings-white"></i>
-						<span>Settings</span>
-					</a>
-				</li>
-				
-				<li>
-					<a href="#">
-						<i class="ico ico-users-white"></i>
-						<span>Users</span>
-					</a>
-				</li>
-				
-				<li>
-					<a href="#">
-						<i class="ico ico-profile-white"></i>
-						<span>My Profile</span>
-					</a>
-				</li>
-			</ul>
-		</nav><!-- /.nav -->
-	</aside><!-- /.container-sidebar -->
+    <!--#include virtual="/ssi/content-side-nav.html" -->
 	
 	<section class="container">
 		<header class="header">
@@ -75,16 +18,7 @@
 				    <a href="#" class="current">Bayer: MaxForce Impact Roach Gel Bait</a>
 				</div><!-- /.breadcrumbs -->
 	
-				<nav class="nav-access">
-					<ul>
-						<li>
-							<a href="#">
-								dave.hurt
-								<i class="ico ico-exit"></i>
-							</a>
-						</li>
-					</ul>
-				</nav><!-- /.nav-access -->
+                <!--#include virtual="/ssi/content-header-user.html" -->
 			</div><!-- /.shell -->
 		</header><!-- /.header -->
 	
@@ -92,56 +26,42 @@
 			<section class="section section-sections-list">
 				<div class="section-nav">
 					<div class="shell">
-						<ul>
-							<li class="checked">
-								<span>
-									<i class="fa"></i>
-								</span>
-								Information
-							</li>
-							
-							<li class="highlighted highlighted-purple">
-								<span>
-									<i class="fa"></i>
-								</span>
-								Sections
-							</li>
-							
-							<li>
-								<span>
-									<i class="fa"></i>
-								</span>
-								Review Course
-							</li>
-							
-							<li>
-								<span>
-									<i class="fa"></i>
-								</span>
-								Build Test
-							</li>
-							
-							<li>
-								<span>
-									<i class="fa"></i>
-								</span>
-								Review Test
-							</li>
-							
-							<li>
-								<span>
-									<i class="fa"></i>
-								</span>
-								Invite
-							</li>
-							
-							<li>
-								<span>
-									<i class="fa"></i>
-								</span>
-								Publish
-							</li>
-						</ul>
+                        <ul>
+                            <li class="checked">
+                                <span>
+                                    <i class="fa"></i>
+                                </span>
+                                Information
+                            </li>
+
+                            <li class="highlighted">
+                                <span>
+                                    <i class="fa"></i>
+                                </span>
+                                Sections
+                            </li>
+
+                            <li>
+                                <span>
+                                    <i class="fa"></i>
+                                </span>
+                                Test
+                            </li>
+
+                            <li>
+                                <span>
+                                    <i class="fa"></i>
+                                </span>
+                                Review & Invite
+                            </li>
+
+                            <li>
+                                <span>
+                                    <i class="fa"></i>
+                                </span>
+                                Publish
+                            </li>
+                        </ul>
 					</div><!-- /.shell -->
 				</div><!-- /.section-nav -->
 
@@ -151,31 +71,45 @@
 							<div class="table table-section-list">
 								<table>
 									<tr>
-										<th width="55">Section</th>
+										<th width="8%">Section</th>
 
-										<th width="400">&nbsp;</th>
+										<th width="44%">&nbsp;</th>
 
-										<th width="180">&nbsp;</th>
+										<th width="30%">&nbsp;</th>
 
-										<th># Questions</th>
+                                        <th width="9%">Document</th>
+
+										<th width="9%"># Questions</th>
 									</tr>
 									
 									<tr>
 										<td>1</td>
 
-										<td>Trade Name/Ingredients/First Aid</td>
+                                        <td class="section-name">
+                                            <span class="name">Trade Name/Ingredients/First Aid</span>
+                                            <span class="name-edit">
+                                                <input type="text" class="field" value="Trade Name/Ingredients/First Aid" placeholder="Section name" />
+                                                <a href="#" class="fa fa-save"></a>
+                                                <a href="#" class="fa fa-close"></a>
+                                            </span>
+                                        </td>
 
 										<td>
 											<div class="icons">
 												<a href="#" class="fa fa-arrows"></a>
 
-												<a href="#" class="fa fa-text-height"></a>
+												<a href="#" class="ico ico-rename"></a>
 
-												<a href="#" class="fa fa-pencil"></a>
+												<a href="4.PCT.Section.Edit.html" class="fa fa-pencil"></a>
 
 												<a href="#" class="fa fa-trash-o"></a>
 											</div><!-- /.icons -->
 										</td>
+
+									    <td class="text-center padding-vert-0 view-document">
+									        <div class="view-document-info"><i class="fa fa-file-pdf-o"></i> <span>2 page(s)</span></div>
+                                            <div class="view-document-link"><a href="#"><i class="fa fa-search"></i></a><a href="#"><i class="fa fa-upload"></i></a></div>
+									    </td>
 
 										<td>2</td>
 									</tr>
@@ -183,19 +117,31 @@
 									<tr>
 										<td>2</td>
 
-										<td>Precautionary Statements</td>
+                                        <td class="section-name">
+                                            <span class="name">Precautionary Statements</span>
+                                            <span class="name-edit">
+                                                <input type="text" class="field" value="Precautionary Statements" placeholder="Section name" />
+                                                <a href="#" class="fa fa-save"></a>
+                                                <a href="#" class="fa fa-close"></a>
+                                            </span>
+                                        </td>
 
 										<td>
 											<div class="icons">
 												<a href="#" class="fa fa-arrows"></a>
 
-												<a href="#" class="fa fa-text-height"></a>
+												<a href="#" class="ico ico-rename"></a>
 
-												<a href="#" class="fa fa-pencil"></a>
+												<a href="4.PCT.Section.Edit.html" class="fa fa-pencil"></a>
 
 												<a href="#" class="fa fa-trash-o"></a>
 											</div><!-- /.icons -->
 										</td>
+
+                                        <td class="text-center padding-vert-0 view-document">
+                                            <div class="view-document-info"><i class="fa fa-file-pdf-o"></i> <span>1 page(s)</span></div>
+                                            <div class="view-document-link"><a href="#"><i class="fa fa-search"></i></a><a href="#"><i class="fa fa-upload"></i></a></div>
+                                        </td>
 
 										<td>3</td>
 									</tr>
@@ -203,19 +149,31 @@
 									<tr>
 										<td>3</td>
 
-										<td>Directions for Use − Directions for Application</td>
+                                        <td class="section-name">
+                                            <span class="name">Directions for Use − Directions for Application</span>
+                                            <span class="name-edit">
+                                                <input type="text" class="field" value="Directions for Use − Directions for Application" placeholder="Section name" />
+                                                <a href="#" class="fa fa-save"></a>
+                                                <a href="#" class="fa fa-close"></a>
+                                            </span>
+                                        </td>
 
 										<td>
 											<div class="icons">
 												<a href="#" class="fa fa-arrows"></a>
 
-												<a href="#" class="fa fa-text-height"></a>
+												<a href="#" class="ico ico-rename"></a>
 
-												<a href="#" class="fa fa-pencil"></a>
+												<a href="4.PCT.Section.Edit.html" class="fa fa-pencil"></a>
 
 												<a href="#" class="fa fa-trash-o"></a>
 											</div><!-- /.icons -->
 										</td>
+
+                                        <td class="text-center padding-vert-0 view-document">
+                                            <div class="view-document-info"><i class="fa fa-minus-circle"></i></div>
+                                            <a href="#" class="view-document-link"><i class="fa fa-upload"></i></a>
+                                        </td>
 
 										<td>2</td>
 									</tr>
@@ -223,19 +181,31 @@
 									<tr>
 										<td>4</td>
 
-										<td>Directions for Use − Ants Cockroaches</td>
+                                        <td class="section-name">
+                                            <span class="name">Directions for Use − Ants Cockroaches</span>
+                                            <span class="name-edit">
+                                                <input type="text" class="field" value="Directions for Use − Ants Cockroaches" placeholder="Section name" />
+                                                <a href="#" class="fa fa-save"></a>
+                                                <a href="#" class="fa fa-close"></a>
+                                            </span>
+                                        </td>
 
 										<td>
 											<div class="icons">
 												<a href="#" class="fa fa-arrows"></a>
 
-												<a href="#" class="fa fa-text-height"></a>
+												<a href="#" class="ico ico-rename"></a>
 
-												<a href="#" class="fa fa-pencil"></a>
+												<a href="4.PCT.Section.Edit.html" class="fa fa-pencil"></a>
 
 												<a href="#" class="fa fa-trash-o"></a>
 											</div><!-- /.icons -->
 										</td>
+
+                                        <td class="text-center padding-vert-0 view-document">
+                                            <div class="view-document-info"><i class="fa fa-file-pdf-o"></i> <span>1 page(s)</span></div>
+                                            <div class="view-document-link"><a href="#"><i class="fa fa-search"></i></a><a href="#"><i class="fa fa-upload"></i></a></div>
+                                        </td>
 
 										<td>5</td>
 									</tr>
@@ -243,19 +213,31 @@
 									<tr>
 										<td>5</td>
 
-										<td>Directions for Use − Crawling Pests/Stored Food Beetles</td>
+                                        <td class="section-name">
+                                            <span class="name">Directions for Use − Crawling Pests/Stored Food Beetles</span>
+                                            <span class="name-edit">
+                                                <input type="text" class="field" value="Directions for Use − Crawling Pests/Stored Food Beetles" placeholder="Section name" />
+                                                <a href="#" class="fa fa-save"></a>
+                                                <a href="#" class="fa fa-close"></a>
+                                            </span>
+                                        </td>
 
 										<td>
 											<div class="icons">
 												<a href="#" class="fa fa-arrows"></a>
 
-												<a href="#" class="fa fa-text-height"></a>
+												<a href="#" class="ico ico-rename"></a>
 
-												<a href="#" class="fa fa-pencil"></a>
+												<a href="4.PCT.Section.Edit.html" class="fa fa-pencil"></a>
 
 												<a href="#" class="fa fa-trash-o"></a>
 											</div><!-- /.icons -->
 										</td>
+
+                                        <td class="text-center padding-vert-0 view-document">
+                                            <div class="view-document-info"><i class="fa fa-file-pdf-o"></i> <span>12 page(s)</span></div>
+                                            <div class="view-document-link"><a href="#"><i class="fa fa-search"></i></a><a href="#"><i class="fa fa-upload"></i></a></div>
+                                        </td>
 
 										<td>2</td>
 									</tr>
@@ -263,13 +245,13 @@
 									<tr>
 										<td>6</td>
 
-										<td>Add new section</td>
-
-										<td colspan="2">
+										<td><input type="text" class="field" placeholder="Add new section" /></td>
+                                        
+									    <td colspan="3">
 											<div class="btns">
 												<a href="#" class="btn btn-grey">Add</a>
 
-												<a href="#" class="btn btn-green">Add &amp; Build</a>
+                                                <a href="4.PCT.Section.Edit.html" class="btn btn-green">Add &amp; Build</a>
 											</div><!-- /.btns -->
 										</td>
 									</tr>
@@ -279,29 +261,29 @@
 					</div><!-- /.shell -->
 				</div><!-- /.section-body -->
 			</section><!-- /.section section-courses-list -->
+            <div class="push"></div><!-- /.push -->
 		</main><!-- /.main -->
-		<div class="push"></div><!-- /.push -->
+        <!--#include virtual="/ssi/content-footer.html" -->
+        <footer class="footer-nav">
+            <div class="shell">
+                <div class="footer-inner">
+                    <a href="2.PCT.Courses.Edit.html" class="btn btn-grey btn-ico-left alignleft">
+                        <i class="fa fa-chevron-left"></i>
+                        Information
+                    </a>
+
+                    <a href="1.PCT.Courses.List.html" class="fa fa-trash-o alignleft"></a>
+                
+                    <a href="4.PCT.Test.Edit.html" class="btn btn-green btn-ico-right alignright">
+                        Test
+                        <i class="fa fa-chevron-right"></i>
+                    </a>
+
+                    <div class="footer-draft">Draft</div><!-- /.footer-draft -->
+                </div><!-- /.footer-inner -->
+            </div><!-- /.shell -->
+        </footer><!-- /.footer -->
 	</section><!-- /.container -->
-
-	<footer class="footer">
-		<div class="shell">
-			<div class="footer-inner">
-				<a href="#" class="btn btn-grey btn-ico-left alignleft">
-					<i class="fa fa-chevron-left"></i>
-					Information
-				</a>
-
-				<a href="#" class="fa fa-trash-o alignleft"></a>
-
-				<a href="#" class="btn btn-green btn-ico-right alignright">
-					Review Course
-					<i class="fa fa-chevron-right"></i>
-				</a>
-
-				<div class="footer-draft">Draft</div><!-- /.footer-draft -->
-			</div><!-- /.footer-inner -->
-		</div><!-- /.shell -->
-	</footer><!-- /.footer -->
 </div><!-- /.wrapper -->
 </body>
 </html>
