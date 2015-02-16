@@ -102,8 +102,6 @@
                                 $scope.section = $scope.course.sections[0];
                             }
                             $scope.page = $scope.section.document.pages[0];
-
-
                         }
                     });
 

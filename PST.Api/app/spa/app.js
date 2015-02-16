@@ -20,6 +20,8 @@
             'pct.elearning.signup',
             'pct.elearning.userInfo',
             'pct.elearning.dashboard',
+            'pct.elearning.profile',
+            'pct.elearning.certificates',
             'ui.router',
             'angularMoment',
             'ngResource'
