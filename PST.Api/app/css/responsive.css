@@ -86,7 +86,7 @@
 	\* ================================================================ */
 	
 	.form-cols { margin: 0; }
-	.form-col { padding: 0; width: auto; float: none; }
+	.form-col { padding: 0 0 8px; width: auto; float: none; }
 	.form-label { padding-bottom: 7px; font-size: 11px; }
 	.field { height: 36px; padding: 7px; }
 
@@ -259,8 +259,11 @@
 		#Signup
 	\* ================================================================ */
 	
-    .form-signin { display: block; padding: 22px 25px; }
+    .form-password,
+    .form-signin,
+    .form-licensure-managers { display: block; padding: 22px 25px; }
 	.form-signup { padding: 0 25px 22px 25px; }
+    .profile .form-signup { padding: 22px 25px; }
 	.user-forms .form-body { padding-top: 18px; }
 	.user-forms .form-body:before { display: none; }
 	.user-forms .form-section,

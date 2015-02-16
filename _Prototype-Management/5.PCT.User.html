@@ -1,100 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8" />
-	
-	<title>PCT Admin</title>
-
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	
-	<link rel="shortcut icon" type="image/x-icon" href="css/images/favicon.ico" />
-	
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" href="css/font-awesome.min.css" />
-	<link rel="stylesheet" href="css/jquery.fancybox.css" />
-	<link rel="stylesheet" href="css/style.css" />
-
-	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
-	<script type="text/javascript" src="js/jquery.fancybox.pack.js"></script>
-	<script type="text/javascript" src="js/functions.js"></script>
+    <!--#include virtual="/ssi/head.html" -->
 </head>
 <body>
 <div class="wrapper">
-	<aside class="container-sidebar">
-		<a href="#" class="logo">PCT</a>
-	
-		<nav class="nav">
-			<ul>
-				<li>
-					<a href="#">
-						<i class="ico ico-courses-white"></i>
-						<span>Courses</span>
-					</a>
-				</li>
-				
-				<li>
-					<a href="#">
-						<i class="ico ico-tests-white"></i>
-						<span>Tests</span>
-					</a>
-				</li>
-				
-				<li>
-					<a href="#">
-						<i class="ico ico-settings-white"></i>
-						<span>Settings</span>
-					</a>
-				</li>
-				
-				<li>
-					<a href="#">
-						<i class="ico ico-users-white"></i>
-						<span>Users</span>
-					</a>
-				</li>
-				
-				<li class="current">
-					<a href="#">
-						<i class="ico ico-profile-white"></i>
-						<span>My Profile</span>
-					</a>
-				</li>
-			</ul>
-		</nav><!-- /.nav -->
-	</aside><!-- /.container-sidebar -->
+    <!--#include virtual="/ssi/content-side-nav.html" -->
 	
 	<section class="container">
 		<header class="header">
 			<div class="shell">
 				<div class="breadcrumbs">
 				    <a href="#">User Information</a>
+
+                    <span>/</span>
+
+                    <a href="#" class="current">Dave Hurt</a>
 				</div><!-- /.breadcrumbs -->
 	
-				<div class="search">
-					<form action="?" method="get">
-						<label for="q" class="hidden">Search</label>
+			    <!--#include virtual="/ssi/content-header-search.html" -->
 
-						<div class="search-row">
-							<button type="submit" class="search-btn">
-								<i class="fa fa-search"></i>
-							</button>
-							
-							<input type="search" name="q" id="q" value="" placeholder="Search" class="search-field">
-						</div><!-- /.search-row -->
-					</form>
-				</div><!-- /.search -->
-	
-				<nav class="nav-access">
-					<ul>
-						<li>
-							<a href="#">
-								dave.hurt
-								<i class="ico ico-exit"></i>
-							</a>
-						</li>
-					</ul>
-				</nav><!-- /.nav-access -->
+                <!--#include virtual="/ssi/content-header-user.html" -->
 			</div><!-- /.shell -->
 		</header><!-- /.header -->
 	
@@ -168,20 +94,31 @@
 							<div class="table table-courses-list table-user">
 								<table>
 									<tr>
-										<th width="405">Course/Test</th>
+										<th width="48%">Course</th>
 			
-										<th width="90">Progress</th>
+									    <th width="13%" class="text-center">Course</th>
+
+                                        <th width="13%" class="text-center">Test</th>
 			
-										<th width="90">Last Activity</th>
+										<th width="13%">Last Activity</th>
 			
-										<th>Certificate</th>
+                                        <th width="13%" class="text-center">Certificate</th>
 									</tr>
 									
 									<tr>
 										<td>
-											<i class="ico ico-courses-grey"></i>
 											Bayer: Max Force impact Roach Gel Bait
 										</td>
+
+                                        <td>
+                                            <div class="progress progress-checked">
+                                                <i class="fa fa-check"></i>
+
+                                                <p class="progress-bar">
+                                                    <span style="width:100%"></span>
+                                                </p><!-- /.progress-bar -->
+                                            </div><!-- /.progress -->
+                                        </td>
 			
 										<td>
 											<div class="progress">
@@ -195,12 +132,11 @@
 			
 										<td>1/15/2014</td>
 			
-										<td></td>
+										<td class="text-center"></td>
 									</tr>
 
 									<tr>
 										<td>
-											<i class="ico ico-courses-grey"></i>
 											Bayer: Wasp &amp; Hornet Control
 										</td>
 			
@@ -213,20 +149,29 @@
 												</p><!-- /.progress-bar -->
 											</div><!-- /.progress -->
 										</td>
+
+                                        <td>
+                                            <div class="progress progress-checked">
+                                                <i class="fa fa-check"></i>
+
+                                                <p class="progress-bar">
+                                                    <span style="width:100%"></span>
+                                                </p><!-- /.progress-bar -->
+                                            </div><!-- /.progress -->
+                                        </td>
 			
 										<td>12/15/2013</td>
 			
-										<td>
-											<a href="#">
-												<i class="ico ico-certificate"></i>
-												View
-											</a>
-										</td>
+                                        <td class="text-center">
+                                            <a href="#">
+                                                <i class="ico ico-certificate"></i>
+                                                View
+                                            </a>
+                                        </td>
 									</tr>
 
 									<tr>
 										<td>
-											<i class="ico ico-courses-grey"></i>
 											Bayer: Max Force impact Roach Gel Bait
 										</td>
 			
@@ -240,14 +185,23 @@
 											</div><!-- /.progress -->
 										</td>
 			
+										<td>
+											<div class="progress">
+												0%
+
+												<p class="progress-bar">
+													<span style="width:0"></span>
+												</p><!-- /.progress-bar -->
+											</div><!-- /.progress -->
+										</td>
+			
 										<td>2/15/2012</td>
 			
-										<td></td>
+										<td class="text-center"></td>
 									</tr>
 
 									<tr>
 										<td>
-											<i class="ico ico-a-grey"></i>
 											Bayer: Max Force impact Roach Gel Bait
 										</td>
 			
@@ -260,15 +214,24 @@
 												</p><!-- /.progress-bar -->
 											</div><!-- /.progress -->
 										</td>
+
+                                        <td>
+                                            <div class="progress">
+                                                0%
+
+                                                <p class="progress-bar">
+                                                    <span style="width:0%"></span>
+                                                </p><!-- /.progress-bar -->
+                                            </div><!-- /.progress -->
+                                        </td>
 			
 										<td>1/15/2014</td>
 			
-										<td></td>
+										<td class="text-center"></td>
 									</tr>
 
 									<tr>
 										<td>
-											<i class="ico ico-a-grey"></i>
 											Bayer: Crawling Pests Elimination Spray
 										</td>
 			
@@ -281,20 +244,24 @@
 												</p><!-- /.progress-bar -->
 											</div><!-- /.progress -->
 										</td>
+
+                                        <td>
+                                            <div class="progress progress-failed">
+                                                <i class="fa fa-close"></i>
+
+                                                <p class="progress-bar">
+                                                    <span style="width:22%"></span>
+                                                </p><!-- /.progress-bar -->
+                                            </div><!-- /.progress -->
+                                        </td>
 			
 										<td>10/15/2014</td>
 			
-										<td>
-											<a href="#">
-												<i class="ico ico-certificate"></i>
-												View
-											</a>
-										</td>
+										<td class="text-center certificate-failed">Failed</td>
 									</tr>
 
 									<tr>
 										<td>
-											<i class="ico ico-courses-grey"></i>
 											Bayer: Flying Insects Elimination Spray
 										</td>
 			
@@ -307,15 +274,25 @@
 												</p><!-- /.progress-bar -->
 											</div><!-- /.progress -->
 										</td>
+
+                                        <td>
+                                            <div class="progress progress-checked">
+                                                <i class="fa fa-check"></i>
+
+                                                <p class="progress-bar">
+                                                    <span style="width:100%"></span>
+                                                </p><!-- /.progress-bar -->
+                                            </div><!-- /.progress -->
+                                        </td>
 			
 										<td>12/15/2014</td>
 			
-										<td>
-											<a href="#">
-												<i class="ico ico-certificate"></i>
-												View
-											</a>
-										</td>
+                                        <td class="text-center">
+                                            <a href="#">
+                                                <i class="ico ico-certificate"></i>
+                                                View
+                                            </a>
+                                        </td>
 									</tr>
 								</table>
 							</div><!-- /.table -->
@@ -324,6 +301,7 @@
 				</div><!-- /.section-body -->
 			</section><!-- /.section section-courses-list -->
 		</main><!-- /.main -->
+        <!--#include virtual="/ssi/content-footer.html" -->
 	</section><!-- /.container -->
 </div><!-- /.wrapper -->
 </body>

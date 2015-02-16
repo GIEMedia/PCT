@@ -52,6 +52,12 @@ namespace PST.Declarations.Entities
         [Ownership(Ownership.Exclusive)]
         public virtual IList<CourseProgress> CourseProgress { get; set; }
 
+        [Ownership(Ownership.Exclusive)]
+        public virtual IList<StateLicensure> StateLicensures { get; set; }
+
+        [Ownership(Ownership.Exclusive)]
+        public virtual IList<Manager> Managers { get; set; }
+
         public static implicit operator account(Account account)
         {
             return new account

@@ -29,6 +29,8 @@ namespace PST.Data
                     m.Map(y => y.Phone, "CompanyPhone");
                 });
                 a.HasMany(x => x.CourseProgress).LazyLoad().Cascade.AllDeleteOrphan();
+                a.HasMany(x => x.Managers).LazyLoad().Cascade.AllDeleteOrphan();
+                a.HasMany(x => x.StateLicensures).LazyLoad().Cascade.AllDeleteOrphan();
             });
 
             mapper.Add().TableFor<Certificate>(c => c.Map(x => x.EarnedUtc).CustomType<UtcDateTimeType>());
