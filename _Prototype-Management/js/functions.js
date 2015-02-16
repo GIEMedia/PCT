@@ -34,14 +34,14 @@
 		});
 
 		// Table states dropdown
-		$('.table-states .arrow-circle-down').on('click', function (e) {
+		$('.table-states .icon-chevron-down').on('click', function (e) {
 		    $('.table-states').find('.table-row-1').hide();
 			$('.table-states').find('.table-expand').stop(true, true).slideDown(200);
 
 			e.preventDefault();
 		});
 
-		$('.table-states .arrow-circle-up').on('click', function (e) {
+		$('.table-states .icon-chevron-up').on('click', function (e) {
 		    setTimeout(function () { $('.table-states').find('.table-row-1').show(); }, 200);
 		    $('.table-states').find('.table-expand').stop(true, true).slideUp(200);
 
@@ -84,7 +84,7 @@
 	    //    e.preventDefault();
 	    //});
 
-	    //$('.question-icons .arrow-circle-up').on('click', function (e) {
+	    //$('.question-icons .icon-chevron-up').on('click', function (e) {
 	    //    console.log('2');
 	    //    console.log($(this));
 		//    $(this).parents('.table-row').removeClass('expanded').addClass('hovered');
@@ -94,7 +94,7 @@
 	    //});
 
 	    var sliding = false;
-	    $('.custom-table-questions .table-row .col-size-1, .custom-table-questions .arrow-circle-down-blue, .custom-table-questions .arrow-circle-up').on('click', function (e) {
+	    $('.custom-table-questions .table-row .col-size-1, .custom-table-questions .icon-chevron-down, .custom-table-questions .icon-chevron-up').on('click', function (e) {
 	        if (sliding) return;
 	        if ($(this).hasClass('table-col') && $(this).closest('.table-row').hasClass('expanded')) return;
 	        sliding = true;

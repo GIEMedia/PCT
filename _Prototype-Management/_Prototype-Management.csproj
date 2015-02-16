@@ -80,6 +80,8 @@
     <Content Include="css\fancybox_sprite.png" />
     <Content Include="css\font-awesome.min.css" />
     <Content Include="css\fonts\fontawesome-webfont.svg" />
+    <Content Include="css\fonts\icomoon.svg" />
+    <Content Include="css\icomoon.css" />
     <Content Include="css\images\arrow-circle-down-blue.png" />
     <Content Include="css\images\arrow-circle-down.png" />
     <Content Include="css\images\arrow-circle-up.png" />
@@ -129,6 +131,29 @@
     <Content Include="css\images\ico-users-white.png" />
     <Content Include="css\images\ico-users.png" />
     <Content Include="css\images\ico-video-orange.png" />
+    <Content Include="css\images\icons\building.svg" />
+    <Content Include="css\images\icons\certificate.svg" />
+    <Content Include="css\images\icons\chevron-down.svg" />
+    <Content Include="css\images\icons\chevron-up.svg" />
+    <Content Include="css\images\icons\course-plus.svg" />
+    <Content Include="css\images\icons\course.svg" />
+    <Content Include="css\images\icons\exit.svg" />
+    <Content Include="css\images\icons\manager.svg" />
+    <Content Include="css\images\icons\multiphoto-plus.svg" />
+    <Content Include="css\images\icons\multiphoto.svg" />
+    <Content Include="css\images\icons\photo-plus.svg" />
+    <Content Include="css\images\icons\photo.svg" />
+    <Content Include="css\images\icons\profile.svg" />
+    <Content Include="css\images\icons\rename.svg" />
+    <Content Include="css\images\icons\rename.txt" />
+    <Content Include="css\images\icons\settings.svg" />
+    <Content Include="css\images\icons\test-o.svg" />
+    <Content Include="css\images\icons\test.svg" />
+    <Content Include="css\images\icons\text-plus.svg" />
+    <Content Include="css\images\icons\text.svg" />
+    <Content Include="css\images\icons\users.svg" />
+    <Content Include="css\images\icons\video-plus.svg" />
+    <Content Include="css\images\icons\video.svg" />
     <Content Include="css\images\insect-1-small.jpg" />
     <Content Include="css\images\insect-1.jpg" />
     <Content Include="css\images\insect-2-small.jpg" />
@@ -169,6 +194,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="css\images\temp\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\fonts\icomoon.eot" />
+    <Content Include="css\fonts\icomoon.ttf" />
+    <Content Include="css\fonts\icomoon.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\images\icons\icons.ai" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
