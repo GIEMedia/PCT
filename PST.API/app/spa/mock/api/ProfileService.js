@@ -9,9 +9,6 @@
             return {
                 getUserInfo: function() {
                     return ProfileMockData.userInfo;
-                },
-                getCompanyInfo: function() {
-                    return ProfileMockData.companyInfo;
                 }
             };
         })

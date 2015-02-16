@@ -20,13 +20,13 @@
                         <ul class="courses-items">
                             <li class="courses-item" ng-repeat="cert in earnedCertificates">
                                 <a href="#" class="courses-item-image">
-
+                                    <img ng-src="{{cert.image_url}}"/>
                                 </a><!-- /.courses-item-image -->
                                 <div class="courses-item-content">
                                     <h4 class="courses-item-title">
-                                        <a href="#">{{cert.name}}</a>
+                                        <a href="#">{{cert.course_name}}</a>
                                     </h4>
-                                    <p class="courses-item-meta">Passed: {{cert.passed_date | date:'MM/dd/yy'}}</p><!-- /.courses-item-meta -->
+                                    <p class="courses-item-meta">Passed: {{cert.earned | date:'MM/dd/yy'}}</p><!-- /.courses-item-meta -->
                                     <ul class="courses-item-bars">
                                         <li class="courses-item-bar courses-item-bar-purple">
                                             <span class="courses-item-bar-label">Activities</span>
@@ -45,7 +45,7 @@
 
                                 <span class="courses-item-action-send">
                                     <span>
-                                        <a href="#d"><i class="fa fa-download"></i></a>
+                                        <a href="{{cert.pdf_url}}" target="_blank"><i class="fa fa-download"></i></a>
                                         <a href="#s">Email<br />State</a>
                                         <a href="#m">Email<br />Manager</a>
                                     </span>

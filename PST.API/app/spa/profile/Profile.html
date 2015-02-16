@@ -51,22 +51,22 @@
                                 <div class="form-section-body">
                                     <div class="form-row">
                                         <div class="form-controls">
-                                            <input type="text" class="field" placeholder="Company Name" ng-model="companyInfo.company_name">
+                                            <input type="text" class="field" placeholder="Company Name" ng-model="userInfo.company_name">
                                         </div><!-- /.form-controls -->
                                     </div><!-- /.form-row -->
                                     <div class="form-row">
                                         <div class="form-controls">
-                                            <input type="text" class="field" placeholder="Company Address" ng-model="companyInfo.company_address.address1">
+                                            <input type="text" class="field" placeholder="Company Address" ng-model="userInfo.company_address.address1">
                                         </div><!-- /.form-controls -->
                                     </div><!-- /.form-row -->
                                     <div class="form-row">
                                         <div class="form-controls">
-                                            <input type="text" class="field" placeholder="Suite #" ng-model="companyInfo.company_address.address2">
+                                            <input type="text" class="field" placeholder="Suite #" ng-model="userInfo.company_address.address2">
                                         </div><!-- /.form-controls -->
                                     </div><!-- /.form-row -->
                                     <div class="form-row">
                                         <div class="form-controls">
-                                            <input type="text" class="field" placeholder="City" ng-model="companyInfo.company_address.city">
+                                            <input type="text" class="field" placeholder="City" ng-model="userInfo.company_address.city">
                                         </div><!-- /.form-controls -->
                                     </div><!-- /.form-row -->
                                     <div class="form-row">
@@ -74,13 +74,13 @@
                                             <div class="form-cols">
                                                 <div class="form-col form-col-1of2">
 
-                                                    <select formstone-selecter class="select" placeholder="State" ng-model="companyInfo.company_address.state" required ng-options="state.code as state.code for state in states">
+                                                    <select formstone-selecter class="select" placeholder="State" ng-model="userInfo.company_address.state" required ng-options="state.code as state.code for state in states">
 
                                                     </select>
                                                 </div><!-- /.form-col form-col-1of2 -->
 
                                                 <div class="form-col form-col-1of2">
-                                                    <input type="text" class="field" placeholder="Zip Code" ng-model="companyInfo.company_address.zip_code">
+                                                    <input type="text" class="field" placeholder="Zip Code" ng-model="userInfo.company_address.zip_code">
                                                 </div><!-- /.form-col form-col-1of2 -->
                                             </div><!-- /.form-cols -->
                                         </div><!-- /.form-controls -->
@@ -92,12 +92,12 @@
                 </div><!-- /.form-body -->
 
                 <div class="form-actions">
-                    <input type="submit" class="btn" value="Save Info">
+                    <input type="submit" class="btn" value="Save Info" ng-disabled="equals(userInfo, userInfoMaster)">
                 </div><!-- /.form-actions -->
             </div><!-- /.form-signup -->
 
             <div class="form-password">
-                <form action="/index-logged-no-open.html" method="post">
+                <div>
                     <div class="form-head">
                         <h3 class="title-underlined">
                             <i class="fa fa-lock"></i>
@@ -146,7 +146,7 @@
                     <div class="form-actions">
                         <input type="submit" class="btn" value="Update Password">
                     </div><!-- /.form-actions -->
-                </form>
+                </div>
             </div><!-- /.form-signup -->
         </div><!-- /.col col-1of2 -->
 
@@ -159,80 +159,54 @@
                         <span>Licensure & Managers</span>
                     </h3><!-- /.title-underlined -->
                 </div><!-- /.form-head -->
-                <form action="/index-logged-no-open.html" method="post">
+                <div>
                     <div class="form-body">
                         <div class="form-row">
                             <div class="form-section-head">
                                 <h4 class="form-section-title">State Licensure(s)</h4>
                             </div>
-                            <div class="form-controls">
+
+                            <div ng-if="(stateLicensures.length || 0 ) == 0" class="no-record">
                                 <div class="form-controls-actions">
-                                    <a href="#" class="btn-add"></a>
-                                    <a href="#" class="btn-remove"></a>
+                                    <a href="" class="btn-add" ng-click="stateLicensures.push({})"></a>
+                                </div><!-- /.form-controls-actions -->
+
+                                <div class="form-cols-outer">
+
+                                    <div class="form-cols">
+                                        <div class="form-col form-col-2of2">
+                                            No State Licensure(s) is available
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-controls" ng-repeat="stateLicensure in stateLicensures">
+                                <div class="form-controls-actions">
+                                    <a href="" class="btn-add" ng-click="stateLicensures.push({})"></a>
+                                    <a href="" class="btn-remove" ng-click="stateLicensures.splice($index, 1)"></a>
                                 </div><!-- /.form-controls-actions -->
 
                                 <div class="form-cols-outer">
                                     <div class="form-cols">
                                         <div class="form-col form-col-1of2">
-                                            <select class="field">
-                                                <option>State</option>
-                                                <option>Alabama</option>
-                                                <option>Utah</option>
-                                                <option>Ohio</option>
+                                            <select class="field" ng-options="state.code as state.name for state in states" ng-model="stateLicensure.state">
+                                                <option value="">State</option>
                                             </select>
                                         </div><!-- /.form-col form-col-1of2 -->
 
                                         <div class="form-col form-col-1of2">
-                                            <select class="field">
-                                                <option>Certification Category</option>
-                                                <option>Category 1</option>
-                                                <option>Category 2</option>
-                                                <option>Category 3</option>
+                                            <select class="field" ng-options="cat.code as cat.name for cat in certificateCategories" ng-model="stateLicensure.state">
+                                                <option value="">Certification Category</option>
                                             </select>
                                         </div><!-- /.form-col form-col-1of2 -->
 
                                         <div class="form-col form-col-1of2">
-                                            <input type="text" class="field" placeholder="License #">
+                                            <input type="text" class="field" placeholder="License #" ng-model="stateLicensure.num">
                                         </div><!-- /.form-col form-col-1of2 -->
 
                                         <div class="form-col form-col-1of2">
-                                            <input type="text" class="field" placeholder="Confirm License #">
-                                        </div><!-- /.form-col form-col-1of2 -->
-                                    </div><!-- /.form-cols -->
-                                </div><!-- /.form-cols-outer -->
-                            </div><!-- /.form-controls -->
-                            <div class="form-controls">
-                                <div class="form-controls-actions">
-                                    <a href="#" class="btn-add"></a>
-                                    <a href="#" class="btn-remove"></a>
-                                </div><!-- /.form-controls-actions -->
-
-                                <div class="form-cols-outer">
-                                    <div class="form-cols">
-                                        <div class="form-col form-col-1of2">
-                                            <select class="field">
-                                                <option>State</option>
-                                                <option>Alabama</option>
-                                                <option>Utah</option>
-                                                <option>Ohio</option>
-                                            </select>
-                                        </div><!-- /.form-col form-col-1of2 -->
-
-                                        <div class="form-col form-col-1of2">
-                                            <select class="field">
-                                                <option>Certification Category</option>
-                                                <option>Category 1</option>
-                                                <option>Category 2</option>
-                                                <option>Category 3</option>
-                                            </select>
-                                        </div><!-- /.form-col form-col-1of2 -->
-
-                                        <div class="form-col form-col-1of2">
-                                            <input type="text" class="field" placeholder="License #">
-                                        </div><!-- /.form-col form-col-1of2 -->
-
-                                        <div class="form-col form-col-1of2">
-                                            <input type="text" class="field" placeholder="Confirm License #">
+                                            <input type="text" class="field" placeholder="Confirm License #" ng-model="stateLicensure.confirmNum">
                                         </div><!-- /.form-col form-col-1of2 -->
                                     </div><!-- /.form-cols -->
                                 </div><!-- /.form-cols-outer -->
@@ -242,60 +216,43 @@
                     <div class="form-actions">
                         <input type="submit" class="btn" value="Update Licensure">
                     </div><!-- /.form-actions -->
-                </form>
-                <form action="/index-logged-no-open.html" method="post">
+                </div>
+
+                <div>
                     <div class="form-body">
                         <div class="form-row">
                             <div class="form-section-head">
                                 <h4 class="form-section-title">Manager(s)</h4>
                             </div>
-                            <div class="form-controls">
+
+                            <div ng-if="(managers.length || 0 ) == 0" class="no-record">
                                 <div class="form-controls-actions">
-                                    <a href="#" class="btn-add thin"></a>
-                                    <a href="#" class="btn-remove thin"></a>
+                                    <a href="" class="btn-add thin" ng-click="managers.push({})"></a>
+                                </div><!-- /.form-controls-actions -->
+
+                                <div class="form-cols-outer">
+
+                                    <div class="form-cols">
+                                        <div class="form-col form-col-2of2">
+                                            No managers(s) is available
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-controls" ng-repeat="manager in managers">
+                                <div class="form-controls-actions">
+                                    <a href="" class="btn-add thin" ng-click="managers.push({})"></a>
+                                    <a href="" class="btn-remove thin" ng-click="managers.splice($index, 1)"></a>
                                 </div><!-- /.form-controls-actions -->
                                 <div class="form-cols-outer">
                                     <div class="form-cols">
                                         <div class="form-col form-col-1of2">
-                                            <input type="text" class="field" placeholder="Name">
+                                            <input type="text" class="field" placeholder="Name" ng-model="manager.name">
                                         </div><!-- /.form-col form-col-1of2 -->
 
                                         <div class="form-col form-col-1of2">
-                                            <input type="text" class="field" placeholder="Email Address">
-                                        </div><!-- /.form-col form-col-1of2 -->
-                                    </div><!-- /.form-cols -->
-                                </div><!-- /.form-cols-outer -->
-                            </div><!-- /.form-controls -->
-                            <div class="form-controls">
-                                <div class="form-controls-actions">
-                                    <a href="#" class="btn-add thin"></a>
-                                    <a href="#" class="btn-remove thin"></a>
-                                </div><!-- /.form-controls-actions -->
-                                <div class="form-cols-outer">
-                                    <div class="form-cols">
-                                        <div class="form-col form-col-1of2">
-                                            <input type="text" class="field" placeholder="Name">
-                                        </div><!-- /.form-col form-col-1of2 -->
-
-                                        <div class="form-col form-col-1of2">
-                                            <input type="text" class="field" placeholder="Email Address">
-                                        </div><!-- /.form-col form-col-1of2 -->
-                                    </div><!-- /.form-cols -->
-                                </div><!-- /.form-cols-outer -->
-                            </div><!-- /.form-controls -->
-                            <div class="form-controls">
-                                <div class="form-controls-actions">
-                                    <a href="#" class="btn-add thin"></a>
-                                    <a href="#" class="btn-remove thin"></a>
-                                </div><!-- /.form-controls-actions -->
-                                <div class="form-cols-outer">
-                                    <div class="form-cols">
-                                        <div class="form-col form-col-1of2">
-                                            <input type="text" class="field" placeholder="Name">
-                                        </div><!-- /.form-col form-col-1of2 -->
-
-                                        <div class="form-col form-col-1of2">
-                                            <input type="text" class="field" placeholder="Email Address">
+                                            <input type="email" class="field" placeholder="Email Address" ng-model="manager.email">
                                         </div><!-- /.form-col form-col-1of2 -->
                                     </div><!-- /.form-cols -->
                                 </div><!-- /.form-cols-outer -->
@@ -305,7 +262,7 @@
                     <div class="form-actions">
                         <input type="submit" class="btn" value="Update Managers">
                     </div><!-- /.form-actions -->
-                </form>
+                </div>
             </div><!-- /.form-signup -->
         </div><!-- /.col col-1of2 -->
     </div><!-- /.cols -->

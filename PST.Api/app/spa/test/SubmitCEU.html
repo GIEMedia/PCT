@@ -9,32 +9,32 @@
             <label class="form-label">State Licensure(s)</label>
 
             <form name="form">
-                <div class="form-controls" ng-repeat="stateLicense in stateLicenses">
+                <div class="form-controls" ng-repeat="stateLicensure in stateLicensures">
                     <div class="form-controls-actions">
-                        <a href="" class="btn-add" ng-click="stateLicenses.push({})"></a>
-                        <a class="btn-remove" ng-click="stateLicenses.splice($index, 1)"></a>
+                        <a href="" class="btn-add" ng-click="stateLicensures.push({})"></a>
+                        <a class="btn-remove" ng-click="stateLicensures.splice($index, 1)"></a>
                     </div><!-- /.form-controls-actions -->
 
                     <div class="form-cols-outer">
                         <div class="form-cols">
                             <div class="form-col form-col-1of2">
-                                <select class="field" placeholder="State" ng-model="stateLicense.state" required ng-options="state.code as state.name for state in states">
+                                <select class="field" placeholder="State" ng-model="stateLicensure.state" required ng-options="state.code as state.name for state in states">
                                     <option value="">State</option>
                                 </select>
                             </div><!-- /.form-col form-col-1of2 -->
 
                             <div class="form-col form-col-1of2">
-                                <select class="field" placeholder="Certification Category" ng-model="stateLicense.category" ng-options="category.code as category.name for category in categories" required>
+                                <select class="field" placeholder="Certification Category" ng-model="stateLicensure.category" ng-options="category.code as category.name for category in categories" required>
                                     <option value="">Certification Category</option>
                                 </select>
                             </div><!-- /.form-col form-col-1of2 -->
 
                             <div class="form-col form-col-1of2">
-                                <input type="text" class="field" placeholder="License #" ng-model="stateLicense.num" required>
+                                <input type="text" class="field" placeholder="License #" ng-model="stateLicensure.num" required>
                             </div><!-- /.form-col form-col-1of2 -->
 
                             <div class="form-col form-col-1of2">
-                                <input type="text" class="field" placeholder="Confirm License #" ng-model="stateLicense.confirmNum" required equals="stateLicense.num">
+                                <input type="text" class="field" placeholder="Confirm License #" ng-model="stateLicensure.confirmNum" required equals="stateLicensure.num">
                             </div><!-- /.form-col form-col-1of2 -->
                         </div><!-- /.form-cols -->
                     </div><!-- /.form-cols-outer -->

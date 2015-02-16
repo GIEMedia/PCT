@@ -9,9 +9,7 @@
             userInfo: {
                 first_name: "Dave",
                 last_name: "Hurt",
-                email: "dave@prototype1.com"
-            },
-            companyInfo: {
+                email: "dave@prototype1.com",
                 company_name: "Prototype1",
                 company_address: {
                     address1: "P.O. Box 329, 4193 Dolor Street",

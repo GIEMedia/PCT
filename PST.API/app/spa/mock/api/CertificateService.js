@@ -12,6 +12,9 @@
                 },
                 getEarnedCertificates: function() {
                     return CertificateMockData.earnedCertificates;
+                },
+                getCertificateCategories: function() {
+                    return CertificateMockData.certificateCategories;
                 }
             };
         })

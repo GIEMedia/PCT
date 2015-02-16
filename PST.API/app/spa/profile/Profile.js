@@ -15,11 +15,22 @@
             ;
         })
         
-        .controller("profile.Ctrl", function ($scope, StateService, ProfileService) {
+        .controller("profile.Ctrl", function ($scope, StateService, ProfileService, CertificateService) {
+            $scope.stateLicensures = [
+            ];
+            $scope.managers = [
+            ];
             $scope.states = StateService.getStates();
 
-            $scope.companyInfo = ProfileService.getCompanyInfo();
-            $scope.userInfo = ProfileService.getUserInfo();
+            $scope.userInfoMaster = ProfileService.getUserInfo();
+            $scope.userInfo = angular.copy($scope.userInfoMaster);
+
+
+            //return angular.equals(SystemConfigService.config, $scope.config);
+
+            $scope.equals = angular.equals;
+
+            $scope.certificateCategories = CertificateService.getCertificateCategories();
         })
     ;
 
