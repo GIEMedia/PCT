@@ -6,97 +6,94 @@
     <div class="cols">
         <div class="col col-1of2 user-forms">
             <div class="form-signup">
-                <form action="/index-logged-no-open.html" method="post">
-                    <div class="form-head">
-                        <h3 class="title-underlined">
-                            <i class="fa fa-user"></i>
+                <div class="form-head">
+                    <h3 class="title-underlined">
+                        <i class="fa fa-user"></i>
 
-                            <span>Profile Information</span>
-                        </h3><!-- /.title-underlined -->
-                    </div><!-- /.form-head -->
+                        <span>Profile Information</span>
+                    </h3><!-- /.title-underlined -->
+                </div><!-- /.form-head -->
 
-                    <div class="form-body split-form">
-                        <div class="form-cols">
-                            <div class="form-col form-col-1of2">
-                                <div class="form-section">
-                                    <div class="form-section-head">
-                                        <h4 class="form-section-title">About You</h4><!-- /.form-section-title -->
-                                    </div><!-- /.form-section-head -->
-                                    <div class="form-section-body">
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="text" class="field" placeholder="First Name">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
+                <div class="form-body split-form">
+                    <div class="form-cols">
+                        <div class="form-col form-col-1of2">
+                            <div class="form-section">
+                                <div class="form-section-head">
+                                    <h4 class="form-section-title">About You</h4><!-- /.form-section-title -->
+                                </div><!-- /.form-section-head -->
+                                <div class="form-section-body">
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="text" class="field" placeholder="First Name" ng-model="userInfo.first_name">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
 
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="text" class="field" placeholder="Last Name">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="text" class="field" placeholder="Email Address">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="text" class="field" placeholder="Last Name" ng-model="userInfo.last_name">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="text" class="field" placeholder="Email Address" ng-model="userInfo.email">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
 
-                                    </div><!-- /.form-section-body -->
-                                </div><!-- /.form-section -->
-                            </div><!-- /.form-col form-col-1of2 -->
+                                </div><!-- /.form-section-body -->
+                            </div><!-- /.form-section -->
+                        </div><!-- /.form-col form-col-1of2 -->
 
-                            <div class="form-col form-col-1of2">
-                                <div class="form-section">
-                                    <div class="form-section-head">
-                                        <h4 class="form-section-title">About Your Company</h4><!-- /.form-section-title -->
-                                    </div><!-- /.form-section-head -->
-                                    <div class="form-section-body">
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="text" class="field" placeholder="Company Name">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="text" class="field" placeholder="Company Address">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="password" class="field" placeholder="Suite #">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <input type="password" class="field" placeholder="City">
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                        <div class="form-row">
-                                            <div class="form-controls">
-                                                <div class="form-cols">
-                                                    <div class="form-col form-col-1of2">
-                                                        <select class="select" placeholder="State">
-                                                            <option value="">State 2</option>
-                                                            <option value="">State 3</option>
-                                                            <option value="">State 4</option>
-                                                        </select>
-                                                    </div><!-- /.form-col form-col-1of2 -->
+                        <div class="form-col form-col-1of2">
+                            <div class="form-section">
+                                <div class="form-section-head">
+                                    <h4 class="form-section-title">About Your Company</h4><!-- /.form-section-title -->
+                                </div><!-- /.form-section-head -->
+                                <div class="form-section-body">
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="text" class="field" placeholder="Company Name" ng-model="companyInfo.company_name">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="text" class="field" placeholder="Company Address" ng-model="companyInfo.company_address.address1">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="text" class="field" placeholder="Suite #" ng-model="companyInfo.company_address.address2">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <input type="text" class="field" placeholder="City" ng-model="companyInfo.company_address.city">
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                    <div class="form-row">
+                                        <div class="form-controls">
+                                            <div class="form-cols">
+                                                <div class="form-col form-col-1of2">
 
-                                                    <div class="form-col form-col-1of2">
-                                                        <input type="password" class="field" placeholder="Zip Code">
-                                                    </div><!-- /.form-col form-col-1of2 -->
-                                                </div><!-- /.form-cols -->
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                    </div><!-- /.form-section-body -->
-                                </div><!-- /.form-section -->
-                            </div><!-- /.form-col form-col-1of2 -->
-                        </div><!-- /.form-cols -->
-                    </div><!-- /.form-body -->
+                                                    <select formstone-selecter class="select" placeholder="State" ng-model="companyInfo.company_address.state" required ng-options="state.code as state.code for state in states">
 
-                    <div class="form-actions">
-                        <input type="submit" class="btn" value="Save Info">
-                    </div><!-- /.form-actions -->
-                </form>
+                                                    </select>
+                                                </div><!-- /.form-col form-col-1of2 -->
+
+                                                <div class="form-col form-col-1of2">
+                                                    <input type="text" class="field" placeholder="Zip Code" ng-model="companyInfo.company_address.zip_code">
+                                                </div><!-- /.form-col form-col-1of2 -->
+                                            </div><!-- /.form-cols -->
+                                        </div><!-- /.form-controls -->
+                                    </div><!-- /.form-row -->
+                                </div><!-- /.form-section-body -->
+                            </div><!-- /.form-section -->
+                        </div><!-- /.form-col form-col-1of2 -->
+                    </div><!-- /.form-cols -->
+                </div><!-- /.form-body -->
+
+                <div class="form-actions">
+                    <input type="submit" class="btn" value="Save Info">
+                </div><!-- /.form-actions -->
             </div><!-- /.form-signup -->
 
             <div class="form-password">

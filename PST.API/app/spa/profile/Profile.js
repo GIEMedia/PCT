@@ -15,8 +15,11 @@
             ;
         })
         
-        .controller("profile.Ctrl", function ($scope) {
-            
+        .controller("profile.Ctrl", function ($scope, StateService, ProfileService) {
+            $scope.states = StateService.getStates();
+
+            $scope.companyInfo = ProfileService.getCompanyInfo();
+            $scope.userInfo = ProfileService.getUserInfo();
         })
     ;
 

@@ -12,10 +12,11 @@
             'pct.elearning.api.Account',
             'pct.elearning.api.Certificate',
             'pct.elearning.api.Course',
-            'pct.elearning.api.Test',
-            'pct.elearning.api.UserCourse',
+            'pct.elearning.api.Profile',
             'pct.elearning.api.Security',
             'pct.elearning.api.State',
+            'pct.elearning.api.Test',
+            'pct.elearning.api.UserCourse',
 
             'pct.elearning.landing',
             'pct.elearning.signup',
