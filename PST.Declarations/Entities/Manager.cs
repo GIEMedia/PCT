@@ -5,9 +5,9 @@ namespace PST.Declarations.Entities
 {
     public class Manager : EntityBase
     {
-        public string Name { get; set; }
+        public virtual string Name { get; set; }
 
-        public string Email { get; set; }
+        public virtual string Email { get; set; }
 
         public static implicit operator manager(Manager manager)
         {
