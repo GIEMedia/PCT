@@ -436,6 +436,17 @@ namespace PST.Api.Controllers
                 select (state_licensure) s).ToArray();
         }
 
+        [HttpPut]
+        [Route("licensures")]
+        public void UpdateLicensure(state_licensure[] licensures)
+        {
+            //TODO: Refactor to account service
+            var account = _entityRepository.GetByID<Account>(CurrentUserID);
+            account.StateLicensures.Clear();
+            licensures.ForEach(l => account.StateLicensures.Add(l));
+            _entityRepository.Save(account);
+        }
+
         #endregion
 
         #region Helpers

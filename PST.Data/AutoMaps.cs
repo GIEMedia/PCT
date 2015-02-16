@@ -55,6 +55,8 @@ namespace PST.Data
                 o.AddSubclass().OfType<ImageOption>();
             });
 
+            mapper.Add().TableFor<Manager>();
+
             mapper.Add().TableForHierarchy<Progress>(p =>
             {
                 p.AddSubclass()
@@ -93,6 +95,8 @@ namespace PST.Data
             });
 
             mapper.Add().TableFor<StateCEU>();
+
+            mapper.Add().TableFor<StateLicensure>();
         }
     }
 }

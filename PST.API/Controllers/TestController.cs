@@ -39,7 +39,7 @@ namespace PST.Api.Controllers
         }
 
         [HttpPut]
-        [Route("send/licensure")]
+        [Route("send/licensure/{courseID}")]
         public bool SendLicensure(Guid courseID, state_licensure[] licensures)
         {
             //TODO: Verify that they have passed this course
@@ -57,7 +57,7 @@ namespace PST.Api.Controllers
         }
 
         [HttpPut]
-        [Route("send/certificate")]
+        [Route("send/certificate/{courseID}")]
         public bool SendCertificate(Guid courseID, manager[] managers)
         {
             //TODO: Verify that they have passed this course
