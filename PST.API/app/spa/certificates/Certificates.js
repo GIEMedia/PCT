@@ -15,8 +15,8 @@
             ;
         })
         
-        .controller("certificates.Ctrl", function ($scope) {
-            
+        .controller("certificates.Ctrl", function ($scope, CertificateService) {
+            $scope.earnedCertificates = CertificateService.getEarnedCertificates();
         })
     ;
 

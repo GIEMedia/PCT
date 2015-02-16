@@ -18,15 +18,15 @@
 
                     <div class="form-body">
                         <ul class="courses-items">
-                            <li class="courses-item">
+                            <li class="courses-item" ng-repeat="cert in earnedCertificates">
                                 <a href="#" class="courses-item-image">
 
                                 </a><!-- /.courses-item-image -->
                                 <div class="courses-item-content">
                                     <h4 class="courses-item-title">
-                                        <a href="#">PCT Pest Insecticide</a>
+                                        <a href="#">{{cert.name}}</a>
                                     </h4>
-                                    <p class="courses-item-meta">Passed: 11/23/14</p><!-- /.courses-item-meta -->
+                                    <p class="courses-item-meta">Passed: {{cert.passed_date | date:'MM/dd/yy'}}</p><!-- /.courses-item-meta -->
                                     <ul class="courses-item-bars">
                                         <li class="courses-item-bar courses-item-bar-purple">
                                             <span class="courses-item-bar-label">Activities</span>
@@ -42,77 +42,15 @@
                                         </li><!-- /.courses-item-bar courses-item-bar-blue -->
                                     </ul><!-- /.courses-item-bars -->
                                 </div><!-- /.courses-item-content -->
-                                        <span class="courses-item-action-send">
-                                            <span>
-                                                <a href="#d"><i class="fa fa-download"></i></a>
-                                                <a href="#s">Email<br />State</a>
-                                                <a href="#m">Email<br />Manager</a>
-                                            </span>
-                                        </span><!-- /.courses-item-action-resume -->
-                            </li><!-- /.courses-item -->
-                            <li class="courses-item">
-                                <a href="#" class="courses-item-image">
 
-                                </a><!-- /.courses-item-image -->
-                                <div class="courses-item-content">
-                                    <h4 class="courses-item-title">
-                                        <a href="#">PCT Pest Insecticide</a>
-                                    </h4>
-                                    <p class="courses-item-meta">Passed: 11/23/14</p><!-- /.courses-item-meta -->
-                                    <ul class="courses-item-bars">
-                                        <li class="courses-item-bar courses-item-bar-purple">
-                                            <span class="courses-item-bar-label">Activities</span>
-                                                    <span class="courses-item-bar-fill">
-                                                        <span style="width: 100%"></span>
-                                                    </span>
-                                        </li><!-- /.courses-item-bar courses-item-bar-purple -->
-                                        <li class="courses-item-bar courses-item-bar-blue">
-                                            <span class="courses-item-bar-label">Tests</span>
-                                                    <span class="courses-item-bar-fill">
-                                                        <span style="width: 100%"></span>
-                                                    </span>
-                                        </li><!-- /.courses-item-bar courses-item-bar-blue -->
-                                    </ul><!-- /.courses-item-bars -->
-                                </div><!-- /.courses-item-content -->
-                                        <span class="courses-item-action-send">
-                                            <span>
-                                                <a href="#d"><i class="fa fa-download"></i></a>
-                                                <a href="#s">Email<br />State</a>
-                                                <a href="#m">Email<br />Manager</a>
-                                            </span>
-                                        </span><!-- /.courses-item-action-resume -->
-                            </li><!-- /.courses-item -->
-                            <li class="courses-item">
-                                <a href="#" class="courses-item-image">
+                                <span class="courses-item-action-send">
+                                    <span>
+                                        <a href="#d"><i class="fa fa-download"></i></a>
+                                        <a href="#s">Email<br />State</a>
+                                        <a href="#m">Email<br />Manager</a>
+                                    </span>
+                                </span><!-- /.courses-item-action-send -->
 
-                                </a><!-- /.courses-item-image -->
-                                <div class="courses-item-content">
-                                    <h4 class="courses-item-title">
-                                        <a href="#">PCT Pest Insecticide</a>
-                                    </h4>
-                                    <p class="courses-item-meta">Passed: 11/23/14</p><!-- /.courses-item-meta -->
-                                    <ul class="courses-item-bars">
-                                        <li class="courses-item-bar courses-item-bar-purple">
-                                            <span class="courses-item-bar-label">Activities</span>
-                                                    <span class="courses-item-bar-fill">
-                                                        <span style="width: 100%"></span>
-                                                    </span>
-                                        </li><!-- /.courses-item-bar courses-item-bar-purple -->
-                                        <li class="courses-item-bar courses-item-bar-blue">
-                                            <span class="courses-item-bar-label">Tests</span>
-                                                    <span class="courses-item-bar-fill">
-                                                        <span style="width: 100%"></span>
-                                                    </span>
-                                        </li><!-- /.courses-item-bar courses-item-bar-blue -->
-                                    </ul><!-- /.courses-item-bars -->
-                                </div><!-- /.courses-item-content -->
-                                        <span class="courses-item-action-send">
-                                            <span>
-                                                <a href="#d"><i class="fa fa-download"></i></a>
-                                                <a href="#s">Email<br />State</a>
-                                                <a href="#m">Email<br />Manager</a>
-                                            </span>
-                                        </span><!-- /.courses-item-action-resume -->
                             </li><!-- /.courses-item -->
                         </ul><!-- /.courses-items -->
                     </div><!-- /.form-body -->

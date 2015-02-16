@@ -10,8 +10,9 @@
             'pct.elearning.certificate',
 
             'pct.elearning.api.Account',
-            'pct.elearning.api.Test',
+            'pct.elearning.api.Certificate',
             'pct.elearning.api.Course',
+            'pct.elearning.api.Test',
             'pct.elearning.api.UserCourse',
             'pct.elearning.api.Security',
             'pct.elearning.api.State',

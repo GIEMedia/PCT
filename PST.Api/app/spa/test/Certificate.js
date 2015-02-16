@@ -17,11 +17,8 @@
             ;
         })
 
-        .controller("certificate.Ctrl", function ($scope, $state) {
-            $scope.certificate = {
-                name: "PCT Pest Insecticide",
-                picture: "/app/css/images/certificate.jpg"
-            };
+        .controller("certificate.Ctrl", function ($scope, $state, CertificateService) {
+            $scope.certificate = CertificateService.getCertificate();
 
             $scope.addresses = [
                 {}
@@ -35,7 +32,7 @@
             };
 
             $scope.download = function() {
-                window.open($scope.certificate.picture, "_blank");
+                window.open($scope.certificate.image, "_blank");
                 return false;
             };
         })
