@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
 using Prototype1.Foundation.Data.MagicMapper;
 using Prototype1.Foundation.Data.NHibernate;
+using PST.Declarations.Interfaces;
 using PasswordHasher = Microsoft.AspNet.Identity.PasswordHasher;
 
 namespace PST.Services.ContainerProviders
@@ -21,6 +22,8 @@ namespace PST.Services.ContainerProviders
                         UserValidator = new ApplicationUserValidator(c.Resolve<IEntityRepository>()),
                         PasswordValidator = new MinimumLengthValidator(5)
                     }))
+                .RegisterType<ICourseService, CourseService>(new ContainerControlledLifetimeManager())
+                .RegisterType<ICertificateService, CertificateService>(new ContainerControlledLifetimeManager())
                 ;
         }
     }
