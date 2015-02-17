@@ -57,13 +57,18 @@ namespace PST.Services
             if (!accountID.HasValue)
                 return course;
 
-            //var passedCourses =
-            //    (from c in courseProgress
-            //        where c.TestProgress != null && c.TestProgress.Passed
-            //        select c.Course.ID).ToArray();
+            var courseProgress = (from a in _entityRepository.Queryable<Account>()
+                where a.ID == accountID
+                from c in a.CourseProgress
+                select c).ToList();
 
-            //if(!course.PrerequisiteCourses.All(c => passedCourses.Contains(c.ID)))
-            //    return null;
+            var passedCourses =
+                (from c in courseProgress
+                    where c.TestProgress != null && c.TestProgress.Passed
+                    select c.Course.ID).ToArray();
+
+            if (!course.PrerequisiteCourses.All(c => passedCourses.Contains(c.ID)))
+                throw new Exception("Prerquisites not met.");
 
             var completedSectionIDs = (from a in _entityRepository.Queryable<Account>()
                 where a.ID == accountID.Value
@@ -132,7 +137,7 @@ namespace PST.Services
                 if (courseProgress == null)
                 {
                     var account = _entityRepository.GetByID<Account>(accountID);
-                    courseProgress = new CourseProgress { Course = course };
+                    courseProgress = new CourseProgress {Course = course, TotalSections = course.Sections.Count};
                     account.CourseProgress.Add(courseProgress);
                     _entityRepository.Save(account);
                 }

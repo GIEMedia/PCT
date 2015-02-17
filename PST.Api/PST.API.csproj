@@ -252,6 +252,7 @@
     <Compile Include="Controllers\ApiControllerBase.cs" />
     <Compile Include="Controllers\CourseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InitSetupController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\WebControllerBase.cs" />
     <Compile Include="Global.asax.cs">

@@ -26,7 +26,7 @@ namespace PST.Declarations.Entities
         [Ownership(Ownership.Exclusive)]
         public virtual IList<StateCEU> StateCEUs { get; set; }
 
-        [Ownership(Ownership.None)]
+        [Ownership(Ownership.Shared)]
         public virtual IList<Course> PrerequisiteCourses { get; set; }
 
         [Ownership(Ownership.Exclusive)]
@@ -41,11 +41,14 @@ namespace PST.Declarations.Entities
 
         public static implicit operator course(Course course)
         {
+            if (course == null)
+                return new course();
+
             return new course
             {
                 course_id = course.ID,
                 title = course.Title,
-                sections = course.Sections.Select(s => (section) s).ToArray()
+                sections = course.Sections != null ? course.Sections.Select(s => (section) s).ToArray() : new section[0]
             };
         }
     }

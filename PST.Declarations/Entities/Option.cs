@@ -1,17 +1,20 @@
 ﻿using System;
 using Prototype1.Foundation.Data;
+using PST.Declarations.Interfaces;
 using PST.Declarations.Models;
 
 namespace PST.Declarations.Entities
 {
     [Serializable]
-    public abstract class Option : EntityBase
+    public abstract class Option : EntityBase, ISorted
     {
         public virtual string Text { get; set; }
 
         public virtual bool Correct { get; set; }
 
         protected abstract void SetCustomModelProperties(option option);
+
+        public virtual int SortOrder { get; set; }
 
         public virtual option ToModel()
         {

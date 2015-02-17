@@ -41,7 +41,12 @@ namespace PST.Data
             {
                 c.Map(x => x.DateCreatedUtc).CustomType<UtcDateTimeType>();
                 c.HasMany(x => x.StateCEUs).KeyColumn("CourseID").LazyLoad().Cascade.AllDeleteOrphan();
-                c.HasMany(x => x.PrerequisiteCourses).KeyColumn("CourseID").LazyLoad().Cascade.None();
+                c.HasManyToMany(x => x.PrerequisiteCourses)
+                    .Table("PrerequisiteCourses")
+                    .ParentKeyColumn("CourseID")
+                    .ChildKeyColumn("PrerequisiteCourseID")
+                    .LazyLoad()
+                    .Cascade.None();
                 c.HasMany(x => x.Sections).KeyColumn("CourseID").OrderBy("SortOrder").LazyLoad().Cascade.AllDeleteOrphan();
             });
 
@@ -70,18 +75,29 @@ namespace PST.Data
                 p.AddSubclass()
                     .OfType<CourseProgress>(x =>
                     {
-                        x.HasMany(y => y.Sections).KeyColumn("ProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan();
+                        x.HasMany(y => y.Sections).KeyColumn("ParentProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan();
+                        x.References(y => y.TestProgress).Not.LazyLoad().Cascade.All();
+                        x.References(y => y.Certificate).Not.LazyLoad().Cascade.All();
                         x.References(y => y.Course).Column("ItemID").LazyLoad().Cascade.None();
                         x.Map(y => y.TotalSections).Column("Total");
                     });
-                p.AddSubclass().OfType<SectionProgress>(x => x.References(y => y.Section).Column("ItemID").LazyLoad().Cascade.None());
-                p.AddSubclass().OfType<TestProgress>(x =>
+                p.AddSubclass()
+                    .OfType<SectionProgress>(x =>
                     {
-                        x.HasMany(y => y.CompletedQuestions).KeyColumn("ProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan();
+                        x.References(y => y.Section).Column("ItemID").LazyLoad().Cascade.None();
+                        x.HasMany(y => y.CompletedQuestions).KeyColumn("ParentProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan();
+                        x.Map(y => y.TotalQuestions).Column("Total");
+                    });
+                p.AddSubclass()
+                    .OfType<TestProgress>(x =>
+                    {
+                        x.HasMany(y => y.CompletedQuestions).KeyColumn("ParentProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan();
                         x.References(y => y.Test).Column("ItemID").LazyLoad().Cascade.None();
                         x.Map(y => y.TotalQuestions).Column("Total");
                     });
-                p.AddSubclass().OfType<QuestionProgress>(x => x.References(y => y.Question).Column("ItemID").LazyLoad().Cascade.None());
+                p.AddSubclass()
+                    .OfType<QuestionProgress>(x =>
+                        x.References(y => y.Question).Column("ItemID").LazyLoad().Cascade.None());
 
                 p.Map(x => x.LastActivityUtc).CustomType<UtcDateTimeType>();
             });

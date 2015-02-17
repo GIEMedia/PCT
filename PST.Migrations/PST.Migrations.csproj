@@ -44,6 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201502171355_ParentProgressID.cs" />
+    <Compile Include="Migrations\201502171349_OptionSortOrder.cs" />
+    <Compile Include="Migrations\201502171008_PrerequisiteCourses.cs" />
+    <Compile Include="Migrations\201502170933_FixForeignKey.cs" />
     <Compile Include="Migrations\201502161953_TableCreation.cs" />
     <Compile Include="Migrations\201501290811_AccountCompanyName.cs" />
     <Compile Include="Migrations\201501282132_AccountAddress.cs" />

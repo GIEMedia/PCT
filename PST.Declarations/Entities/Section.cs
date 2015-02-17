@@ -22,7 +22,7 @@ namespace PST.Declarations.Entities
                 title = section.Title,
                 complete = section.Complete,
                 document = section.Document,
-                questions = section.Questions.OfType<Question<Option>>().Select(q => q.ToModel()).ToArray()
+                questions = section.Questions.Select(q => q.ToModel()).ToArray()
             };
         }
 

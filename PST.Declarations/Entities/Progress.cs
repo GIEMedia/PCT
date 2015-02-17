@@ -7,6 +7,11 @@ namespace PST.Declarations.Entities
     [Serializable]
     public abstract class Progress : EntityBase
     {
+        public Progress()
+        {
+            LastActivityUtc = DateTime.UtcNow;
+        }
+
         public virtual DateTime LastActivityUtc { get; set; }
     }
 

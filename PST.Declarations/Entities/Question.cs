@@ -31,12 +31,7 @@ namespace PST.Declarations.Entities
         public virtual bool Answered { get; set; }
 
         public virtual int SortOrder { get; set; }
-    }
 
-    [Serializable]
-    public abstract class Question<TOption> : Question
-        where TOption : Option
-    {
         protected abstract void SetCustomModelProperties(question question);
 
         public virtual question ToModel()
@@ -45,7 +40,7 @@ namespace PST.Declarations.Entities
             {
                 question_id = ID,
                 question_text = QuestionText,
-                options = Options.OfType<TOption>().Select(o => o.ToModel()).ToArray(),
+                options = Options.Select(o => o.ToModel()).ToArray(),
                 multi_select = Options.Count(o => o.Correct) > 1,
                 option_type = Models.question.option_types.text,
                 answered = Answered
@@ -55,6 +50,12 @@ namespace PST.Declarations.Entities
 
             return question;
         }
+    }
+
+    [Serializable]
+    public abstract class Question<TOption> : Question
+        where TOption : Option
+    {
     }
 
     [Serializable]
