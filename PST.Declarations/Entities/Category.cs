@@ -15,11 +15,11 @@ namespace PST.Declarations.Entities
     {
         public MainCategory()
         {
-            this.SubCategories = new List<Category>();
+            this.SubCategories = new List<SubCategory>();
         }
 
         [Ownership(Ownership.Exclusive)]
-        public virtual IList<Category> SubCategories { get; set; }
+        public virtual IList<SubCategory> SubCategories { get; set; }
     }
 
     [Serializable]

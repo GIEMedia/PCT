@@ -374,6 +374,8 @@ namespace PST.Api.Controllers
         [Route("courses")]
         public course_overview[] OpenCourses()
         {
+            return new course_overview[0];
+
             var courseProgress = _courseService.Value.OpenCourses(CurrentUserID);
             return (from cp in courseProgress
                 let c = cp.Course

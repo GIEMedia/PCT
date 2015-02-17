@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
@@ -68,6 +69,39 @@ namespace PST.Api.Controllers
                     }).ToArray()
                 }).ToArray()
             }).ToArray();
+        }
+
+        [HttpPut]
+        [Route("test")]
+        public void Insert()
+        {
+            var subcategory = new SubCategory {Title = "Sub Cat"};
+            _entityRepository.Save(subcategory);
+
+            var category = new MainCategory {Title = "Main Cat", SubCategories = new List<SubCategory>() {subcategory}};
+            _entityRepository.Save(category);
+
+            var course = new Course
+            {
+                Title = "Test Course 1",
+                DateCreatedUtc = DateTime.UtcNow,
+                StateCEUs = new List<StateCEU>
+                {
+                    new StateCEU {StateAbbr = "OH", CategoryCode = "a", Hours = 1}
+                },
+                Category = subcategory,
+                Status = CourseStatus.Active
+            };
+            _entityRepository.Save(course);
+
+            var courseProgress = new CourseProgress
+            {
+                Course = course,
+                LastActivityUtc = DateTime.UtcNow,
+                TestProgress = null,
+                Sections = null
+            };
+            _entityRepository.Save(courseProgress);
         }
 
         /// <summary>

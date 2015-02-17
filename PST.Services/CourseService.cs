@@ -57,14 +57,13 @@ namespace PST.Services
             if (!accountID.HasValue)
                 return course;
 
-            var passedCourses = (from a in _entityRepository.Queryable<Account>()
-                where a.ID == accountID.Value
-                from c in a.CourseProgress
-                where c.TestProgress.Passed
-                select c.Course.ID).ToArray();
+            //var passedCourses =
+            //    (from c in courseProgress
+            //        where c.TestProgress != null && c.TestProgress.Passed
+            //        select c.Course.ID).ToArray();
 
-            if(!course.PrerequisiteCourses.All(c => passedCourses.Contains(c.ID)))
-                return null;
+            //if(!course.PrerequisiteCourses.All(c => passedCourses.Contains(c.ID)))
+            //    return null;
 
             var completedSectionIDs = (from a in _entityRepository.Queryable<Account>()
                 where a.ID == accountID.Value
