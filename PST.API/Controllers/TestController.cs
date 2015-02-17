@@ -22,13 +22,25 @@ namespace PST.Api.Controllers
             _courseService = courseService;
         }
 
+        /// <summary>
+        /// Get test for specific course
+        /// </summary>
+        /// <param name="courseID">ID of course</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{courseID}")]
-        public test Get(Guid courseID)
+        public test GetTest(Guid courseID)
         {
             return _courseService.GetTest(courseID, CurrentUserID);
         }
 
+        /// <summary>
+        /// Answer test question
+        /// </summary>
+        /// <param name="courseID">ID of course</param>
+        /// <param name="questionID">ID of question</param>
+        /// <param name="selectedOptionIDs">IDs of all secected options</param>
+        /// <returns></returns>
         [HttpPut]
         [Route("answer/{courseID}/{questionID}")]
         public answer_result AnswerQuestion(Guid courseID, Guid questionID, Guid[] selectedOptionIDs)
@@ -38,6 +50,12 @@ namespace PST.Api.Controllers
             return new answer_result(correct, correctResponseHeading, correctResponseText);
         }
 
+        /// <summary>
+        /// Send licensure upon passing course
+        /// </summary>
+        /// <param name="courseID">ID of course</param>
+        /// <param name="licensures">Collection of kicensures to send info to</param>
+        /// <returns></returns>
         [HttpPut]
         [Route("send/licensure/{courseID}")]
         public bool SendLicensure(Guid courseID, state_licensure[] licensures)
@@ -56,6 +74,12 @@ namespace PST.Api.Controllers
             return true;
         }
 
+        /// <summary>
+        /// Send certificate upon passing course
+        /// </summary>
+        /// <param name="courseID">ID of course</param>
+        /// <param name="managers">Collection of managers to send certificate to</param>
+        /// <returns></returns>
         [HttpPut]
         [Route("send/certificate/{courseID}")]
         public bool SendCertificate(Guid courseID, manager[] managers)

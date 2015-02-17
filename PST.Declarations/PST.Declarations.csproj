@@ -225,6 +225,7 @@
     <Compile Include="Models\course_overview.cs" />
     <Compile Include="Models\document.cs" />
     <Compile Include="Models\external_login.cs" />
+    <Compile Include="Models\category.cs" />
     <Compile Include="Models\manager.cs" />
     <Compile Include="Models\option.cs" />
     <Compile Include="Models\question.cs" />

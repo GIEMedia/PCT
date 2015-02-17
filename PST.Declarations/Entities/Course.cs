@@ -21,7 +21,7 @@ namespace PST.Declarations.Entities
         public virtual string Title { get; set; }
 
         [Ownership(Ownership.None)]
-        public virtual Category Category { get; set; }
+        public virtual SubCategory Category { get; set; }
 
         [Ownership(Ownership.Exclusive)]
         public virtual IList<StateCEU> StateCEUs { get; set; }

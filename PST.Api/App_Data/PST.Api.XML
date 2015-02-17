@@ -647,6 +647,66 @@
             <param name="providerKey">External login provider key</param>
             <returns>HTTP Response</returns>
         </member>
+        <member name="M:PST.Api.Controllers.CourseController.GetCourse(System.Guid)">
+            <summary>
+            Get specific course
+            </summary>
+            <param name="courseID">ID of course</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Controllers.CourseController.GetCourses">
+            <summary>
+            Get all categoriezed courses
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Controllers.CourseController.NewCourses">
+            <summary>
+            Get new courses
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Controllers.CourseController.AnswerQuestion(System.Guid,System.Guid,System.Guid[])">
+            <summary>
+            Answer section question
+            </summary>
+            <param name="courseID"></param>
+            <param name="questionID"></param>
+            <param name="selectedOptionIDs"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Controllers.TestController.GetTest(System.Guid)">
+            <summary>
+            Get test for specific course
+            </summary>
+            <param name="courseID">ID of course</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Controllers.TestController.AnswerQuestion(System.Guid,System.Guid,System.Guid[])">
+            <summary>
+            Answer test question
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="questionID">ID of question</param>
+            <param name="selectedOptionIDs">IDs of all secected options</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Controllers.TestController.SendLicensure(System.Guid,PST.Declarations.Models.state_licensure[])">
+            <summary>
+            Send licensure upon passing course
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="licensures">Collection of kicensures to send info to</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Controllers.TestController.SendCertificate(System.Guid,PST.Declarations.Models.manager[])">
+            <summary>
+            Send certificate upon passing course
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="managers">Collection of managers to send certificate to</param>
+            <returns></returns>
+        </member>
         <member name="T:SqlServerTypes.Utilities">
             <summary>
             Utility methods related to CLR Types for SQL Server 

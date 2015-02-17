@@ -33,8 +33,9 @@ namespace PST.Declarations.Interfaces
         /// <summary>
         /// Get all courses
         /// </summary>
+        /// <param name="status">Course status to filter on</param>
         /// <returns>All courses</returns>
-        IEnumerable<Course> GetCourses();
+        IEnumerable<Course> GetCourses(CourseStatus? status);
             
         /// <summary>
         /// Gets a specified test by its course's ID

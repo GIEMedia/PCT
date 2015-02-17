@@ -78,9 +78,12 @@ namespace PST.Services
             return course;
         }
 
-        public IEnumerable<Course> GetCourses()
+        public IEnumerable<Course> GetCourses(CourseStatus? status)
         {
-            throw new NotImplementedException();
+            var courses = _entityRepository.Queryable<Course>();
+            if (status.HasValue)
+                courses = courses.Where(c => c.Status == status);
+            return courses;
         }
 
         public Test GetTest(Guid courseID, Guid? accountID = null)

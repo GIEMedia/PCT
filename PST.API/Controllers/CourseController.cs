@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using PST.Declarations;
+using PST.Declarations.Entities;
 using PST.Declarations.Interfaces;
 using PST.Declarations.Models;
 
@@ -20,13 +19,53 @@ namespace PST.Api.Controllers
             _courseService = courseService;
         }
 
+        /// <summary>
+        /// Get specific course
+        /// </summary>
+        /// <param name="courseID">ID of course</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{courseID}")]
-        public course Get(Guid courseID)
+        public course GetCourse(Guid courseID)
         {
             return _courseService.GetCourse(courseID, CurrentUserID);
         }
 
+        /// <summary>
+        /// Get all categorized courses
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("list")]
+        public main_category[] GetCourses()
+        {
+            var courses = _courseService.GetCourses(CourseStatus.Active);
+            var categories = _entityRepository.Queryable<MainCategory>().ToList();
+
+            return categories.Select(mainCategory => new main_category
+            {
+                title = mainCategory.Title,
+                categories = mainCategory.SubCategories.Select(s => new sub_category
+                {
+                    title = s.Title,
+                    courses = courses.Where(c => c.Category.ID == s.ID).Select(c => new course_overview
+                    {
+                        course_id = c.ID,
+                        title = c.Title,
+                        description =
+                            "CEUs Available: " +
+                            c.StateCEUs.OrderBy(x => x.StateAbbr)
+                                .Select(x => x.StateAbbr)
+                                .Aggregate((i, j) => i + "," + j),
+                    }).ToArray()
+                }).ToArray()
+            }).ToArray();
+        }
+
+        /// <summary>
+        /// Get new courses
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("new")]
         public course_overview[] NewCourses()
@@ -42,6 +81,13 @@ namespace PST.Api.Controllers
                     }).ToArray();
         }
 
+        /// <summary>
+        /// Answer section question
+        /// </summary>
+        /// <param name="courseID"></param>
+        /// <param name="questionID"></param>
+        /// <param name="selectedOptionIDs"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("answer/{courseID}/{questionID}")]
         public answer_result AnswerQuestion(Guid courseID, Guid questionID, Guid[] selectedOptionIDs)
