@@ -31,6 +31,12 @@ namespace PST.Declarations.Interfaces
         Course GetCourse(Guid courseID, Guid? accountID = null);
 
         /// <summary>
+        /// Get all courses
+        /// </summary>
+        /// <returns>All courses</returns>
+        IEnumerable<Course> GetCourses();
+            
+        /// <summary>
         /// Gets a specified test by its course's ID
         /// </summary>
         /// <param name="courseID">ID of course that the test belongs to</param>

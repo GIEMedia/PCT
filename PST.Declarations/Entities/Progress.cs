@@ -35,6 +35,10 @@ namespace PST.Declarations.Entities
     [Serializable]
     public abstract class QuestionedProgress : Progress
     {
+        public QuestionedProgress()
+        {
+            this.CompletedQuestions = new List<QuestionProgress>();
+        }
 
         [Ownership(Ownership.Exclusive)]
         public virtual IList<QuestionProgress> CompletedQuestions { get; set; }
@@ -61,6 +65,7 @@ namespace PST.Declarations.Entities
         public virtual int RetriesLeft { get; set; }
     }
 
+    [Serializable]
     public class QuestionProgress : Progress
     {
         [Ownership(Ownership.None)]

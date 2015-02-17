@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Prototype1.Foundation.Data;
+using PST.Declarations.Interfaces;
 using PST.Declarations.Models;
 
 namespace PST.Declarations.Entities
 {
     [Serializable]
-    public abstract class Question : EntityBase
+    public abstract class Question : EntityBase, ISorted
     {
         public Question()
         {
@@ -28,6 +29,8 @@ namespace PST.Declarations.Entities
 
         [Transient]
         public virtual bool Answered { get; set; }
+
+        public virtual int SortOrder { get; set; }
     }
 
     [Serializable]

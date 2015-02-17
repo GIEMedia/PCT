@@ -7,6 +7,8 @@ namespace PST.Data
 {
     public class AutoMaps : IAutoMaps
     {
+        private const int Max = 4001;
+
         public void Map(MappingConfiguration m)
         {
             var mapper = new MagicMapper(m);
@@ -40,12 +42,18 @@ namespace PST.Data
                 c.Map(x => x.DateCreatedUtc).CustomType<UtcDateTimeType>();
                 c.HasMany(x => x.StateCEUs).KeyColumn("CourseID").LazyLoad().Cascade.AllDeleteOrphan();
                 c.HasMany(x => x.PrerequisiteCourses).KeyColumn("CourseID").LazyLoad().Cascade.None();
-                c.HasMany(x => x.Sections).KeyColumn("CourseID").LazyLoad().Cascade.AllDeleteOrphan();
+                c.HasMany(x => x.Sections).KeyColumn("CourseID").OrderBy("SortOrder").LazyLoad().Cascade.AllDeleteOrphan();
             });
 
-            mapper.Add().TableFor<Category>(c =>
-                c.HasMany(x => x.SubCategories).Not.LazyLoad().Cascade.AllDeleteOrphan()
-                );
+            mapper.Add().TableForHierarchy<Category>(c =>
+            {
+                c.AddSubclass().OfType<MainCategory>(x =>
+                    x.HasMany(y => y.SubCategories)
+                        .KeyColumn("ParentCategoryID")
+                        .Not.LazyLoad()
+                        .Cascade.AllDeleteOrphan());
+                c.AddSubclass().OfType<SubCategory>();
+            });
 
             mapper.Add().TableFor<Document>();
 
@@ -62,14 +70,14 @@ namespace PST.Data
                 p.AddSubclass()
                     .OfType<CourseProgress>(x =>
                     {
-                        x.HasMany(y => y.Sections).Not.LazyLoad().Cascade.AllDeleteOrphan();
+                        x.HasMany(y => y.Sections).KeyColumn("ProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan();
                         x.References(y => y.Course).Column("ItemID").LazyLoad().Cascade.None();
                         x.Map(y => y.TotalSections).Column("Total");
                     });
                 p.AddSubclass().OfType<SectionProgress>(x => x.References(y => y.Section).Column("ItemID").LazyLoad().Cascade.None());
                 p.AddSubclass().OfType<TestProgress>(x =>
                     {
-                        x.HasMany(y => y.CompletedQuestions).Not.LazyLoad().Cascade.AllDeleteOrphan();
+                        x.HasMany(y => y.CompletedQuestions).KeyColumn("ProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan();
                         x.References(y => y.Test).Column("ItemID").LazyLoad().Cascade.None();
                         x.Map(y => y.TotalQuestions).Column("Total");
                     });
@@ -80,6 +88,9 @@ namespace PST.Data
 
             mapper.Add().TableForHierarchy<Question>(q =>
             {
+                q.Map(x => x.QuestionText).Length(Max);
+                q.Map(x => x.CorrectResponseHeading).Length(Max);
+                q.Map(x => x.CorrectResponseText).Length(Max);
                 q.HasMany(x => x.Options).Not.LazyLoad().Cascade.AllDeleteOrphan();
                 q.AddSubclass().OfType<SingleImageQuestion>();
                 q.AddSubclass().OfType<VideoQuestion>();
@@ -89,7 +100,7 @@ namespace PST.Data
 
             mapper.Add().TableForHierarchy<Questioned>(s =>
             {
-                s.HasMany(x => x.Questions).Not.LazyLoad().Cascade.AllDeleteOrphan();
+                s.HasMany(x => x.Questions).OrderBy("SortOrder").Not.LazyLoad().Cascade.AllDeleteOrphan();
                 s.AddSubclass().OfType<Section>(x => x.References(y => y.Document).Not.LazyLoad().Cascade.All());
                 s.AddSubclass().OfType<Test>();
             });

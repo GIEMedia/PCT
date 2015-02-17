@@ -339,8 +339,9 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .table-section-list table tr:last-child:hover td:first-child { border: 0; border-left: 1px solid #d6e2e6; }
 .table-section-list table tr td .icons .fa,
 .table-section-list table tr td .icons .icon { font-size: 20px; line-height: 20px; color: #808080; margin-left: 20px; }
-.table-section-list table tr td .icons .fa:hover { color: #00aded; }
-.table-section-list table tr td .icons .fa:first-child { margin-left: 0; }
+.table-section-list table tr td .icons .fa:hover,
+.table-section-list table tr td .icons .icon:hover { color: #00aded; }
+.table-section-list table tr td .icons i:first-child { margin-left: 0; }
 .table-section-list table tr td .icons { opacity: 0; -moz-opacity: 0;
 	-webkit-transition: 200ms; 
 	     -o-transition: 200ms; 
@@ -512,7 +513,8 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .answer { padding: 11px 10px; position: relative; overflow: hidden; height: 51px; }
 
 .answer-icons { background-color: #e5f7fd; display: none; position: absolute; top: 0; right: 10px; height: 50px; padding-top: 15px; padding-left: 10px; }
-.answer-icons .fa { font-size: 20px; color: #73858b; }
+.answer-icons .fa,
+.answer-icons .icon { font-size: 20px; color: #73858b; }
 .answer-icons a { float: left; margin-left: 10px; }
 .answer-icons a:first-child { margin-left: 0; }
 

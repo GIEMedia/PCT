@@ -7,14 +7,23 @@ namespace PST.Declarations.Entities
     [Serializable]
     public class Category : EntityBase
     {
-        public Category()
+        public virtual string Title { get; set; }
+    }
+
+    [Serializable]
+    public class MainCategory : Category
+    {
+        public MainCategory()
         {
             this.SubCategories = new List<Category>();
         }
 
-        public virtual string Title { get; set; }
-
         [Ownership(Ownership.Exclusive)]
         public virtual IList<Category> SubCategories { get; set; }
+    }
+
+    [Serializable]
+    public class SubCategory : Category
+    {
     }
 }

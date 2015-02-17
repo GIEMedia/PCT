@@ -214,6 +214,7 @@
     <Compile Include="Interfaces\ICertificateService.cs" />
     <Compile Include="Interfaces\ICourseService.cs" />
     <Compile Include="Interfaces\IEmailGenerationService.cs" />
+    <Compile Include="Interfaces\ISorted.cs" />
     <Compile Include="Models\account.cs" />
     <Compile Include="Models\account_detailed.cs" />
     <Compile Include="Models\address.cs" />

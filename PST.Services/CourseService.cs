@@ -78,6 +78,11 @@ namespace PST.Services
             return course;
         }
 
+        public IEnumerable<Course> GetCourses()
+        {
+            throw new NotImplementedException();
+        }
+
         public Test GetTest(Guid courseID, Guid? accountID = null)
         {
             var course = GetCourse(courseID, accountID);

@@ -20,6 +20,8 @@ namespace PST.Declarations.Entities
             this.CompanyAddress = new Address();
             this.DateCreated = DateTime.Now;
             this.CourseProgress = new List<CourseProgress>();
+            this.StateLicensures = new List<StateLicensure>();
+            this.Managers = new List<Manager>();
         }
 
         public override string FirstName { get; set; }

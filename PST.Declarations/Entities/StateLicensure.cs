@@ -1,8 +1,10 @@
-﻿using Prototype1.Foundation.Data;
+﻿using System;
+using Prototype1.Foundation.Data;
 using PST.Declarations.Models;
 
 namespace PST.Declarations.Entities
 {
+    [Serializable]
     public class StateLicensure : EntityBase
     {
         public virtual string StateAbbr { get; set; }

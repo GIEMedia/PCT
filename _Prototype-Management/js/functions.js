@@ -48,7 +48,7 @@
 			e.preventDefault();
 		});
 
-		$('.ico-rename').on('click', function (e) {
+		$('.icon-rename').on('click', function (e) {
 		    $(this).parents('tr').addClass('editing');
 		    $(this).closest('tr').find('.section-name .field').focus();
 
@@ -75,23 +75,6 @@
 		}).on('mouseleave', function () {
 		    $(this).removeClass('hovered');
 		});
-
-	    //$('.custom-table-questions .col-size-1').on('click', function (e) {
-	    //    console.log('1');
-	    //    console.log($(this).width());
-	    //    $(this).parents('.table-row').addClass('expanded').removeClass('hovered');
-	    //    $(this).parents('.table-row').find('.table-row-expand').slideDown(200);
-	    //    e.preventDefault();
-	    //});
-
-	    //$('.question-icons .icon-chevron-up').on('click', function (e) {
-	    //    console.log('2');
-	    //    console.log($(this));
-		//    $(this).parents('.table-row').removeClass('expanded').addClass('hovered');
-		//	$(this).parents('.table-row').find('.table-row-expand').slideUp(200);
-
-		//	e.preventDefault();
-	    //});
 
 	    var sliding = false;
 	    $('.custom-table-questions .table-row .col-size-1, .custom-table-questions .icon-chevron-down, .custom-table-questions .icon-chevron-up').on('click', function (e) {

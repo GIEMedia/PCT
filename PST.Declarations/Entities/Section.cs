@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Linq;
 using Prototype1.Foundation.Data;
+using PST.Declarations.Interfaces;
 using PST.Declarations.Models;
 
 namespace PST.Declarations.Entities
 {
     [Serializable]
-    public class Section : Questioned
+    public class Section : Questioned, ISorted
     {
         [Ownership(Ownership.Exclusive)]
         public virtual Document Document { get; set; }
+
+        public virtual int SortOrder { get; set; }
 
         public static implicit operator section(Section section)
         {

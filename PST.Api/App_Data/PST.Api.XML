@@ -396,6 +396,190 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.GetResults(System.Guid)">
+            <summary>
+            Get results of a course's test
+            </summary>
+            <param name="courseID">ID of course</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.GetUsers(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+            <summary>
+            Get list of users
+            </summary>
+            <param name="page">Page to show (default = 1)</param>
+            <param name="qty">Quantity of results to show (default = 20)</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.SearchUser(System.String,System.Int32)">
+            <summary>
+            Search user list by last name, first name, and/or email
+            </summary>
+            <param name="search">String to perform search on - minimum 2 characters required</param>
+            <param name="max">Maximum results to show (default = 20, absolute max = 100)</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.GetUser(System.Guid)">
+            <summary>
+            Get details about a specific user
+            </summary>
+            <param name="userID">ID of user</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.GetUser(System.Guid,PST.Declarations.AdminAccess)">
+            <summary>
+            Update user's admin access
+            </summary>
+            <param name="userID"></param>
+            <param name="access"></param>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.GetQuestions(System.Guid,System.Nullable{System.Guid})">
+            <summary>
+            Get list of questions for section or test
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="sectionID">ID of section (null if test)</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.DeleteQuestion(System.Guid,System.Nullable{System.Guid},System.Guid)">
+            <summary>
+            Delete a question from section or test
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="sectionID">ID of section (null if test)</param>
+            <param name="questionID"></param>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.UpdateSortOrder(System.Guid,System.Nullable{System.Guid},System.Guid[])">
+            <summary>
+            Update sort order of questions on section or test
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="sectionID">ID of section (null if test)</param>
+            <param name="questionIDs">Collection of section IDs, sorted in new order</param>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.UpsertQuestions(System.Guid,System.Nullable{System.Guid},PST.Api.Areas.Management.Models.m_question[])">
+            <summary>
+            Upsert questions for a section or test
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="sectionID">ID of section (null if test)</param>
+            <param name="questions">Collection of questions to upsert. If new, leave ID blank. If existing, properties will be merged into existing entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.UploadImage">
+            <summary>
+            Uploads an image to then be used in either a question or option
+            </summary>
+            <returns>The "returnData" property of the response will contain the url of the uploaded image</returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.GetSections(System.Guid)">
+            <summary>
+            Get list of sections of a course
+            </summary>
+            <param name="courseID">ID of course</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.Rename(System.Guid,System.Guid,System.String)">
+            <summary>
+            Rename section of a course
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="sectionID">ID of section</param>
+            <param name="title">New title for section</param>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.UpsertSection(System.Guid,PST.Api.Areas.Management.Models.m_section_overview)">
+            <summary>
+            Upsert section
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="section">Section to be upserted. If new, leave ID blank. If existing, properties will be merged into existing entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.UpdateSortOrder(System.Guid,System.Guid[])">
+            <summary>
+            Update sort order of sections of a course
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="sectionIDs">Collection of section IDs, sorted in new order</param>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.DeleteSection(System.Guid,System.Guid)">
+            <summary>
+            Delete section from course
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="sectionID">ID of section</param>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.UploadDocument(System.Guid,System.Guid)">
+            <summary>
+            Upload document to section of a course
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="sectionID">ID of section</param>
+            <returns>The "returnData" property of the response will contain the url of the uploaded pdf</returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.DeleteDocument(System.Guid,System.Guid)">
+            <summary>
+            Delete document from a section of a course
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="sectionID">ID of section</param>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.GetCourses(System.Boolean)">
+            <summary>
+            Get list of courses
+            </summary>
+            <param name="activeOnly">Indicates if all or only active courses should be returned</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.DeleteCourse(System.Guid)">
+            <summary>
+            Delete course
+            </summary>
+            <param name="courseID">ID of course</param>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.GetCourse(System.Guid)">
+            <summary>
+            Get specific course
+            </summary>
+            <param name="courseID">ID of course</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.GetCategories">
+            <summary>
+            Get available categories
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.AddCategory(System.Nullable{System.Guid},System.String)">
+            <summary>
+            Add category or sub-category
+            </summary>
+            <param name="topCategoryID">ID of top category (if sub-category)</param>
+            <param name="title">Title of category to add</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.UpsertCourse(PST.Api.Areas.Management.Models.m_course)">
+            <summary>
+            Upsert course
+            </summary>
+            <param name="course">Course to be upserted. If new, leave ID blank. If existing, properties will be merged into existing entity.</param>
+            <returns></returns>
+        </member>
+        <member name="P:PST.Api.Areas.Management.Models.m_option.image">
+            <summary>
+            Url to image (used for Multi-Image question only)
+            </summary>
+        </member>
+        <member name="P:PST.Api.Areas.Management.Models.m_question.image">
+            <summary>
+            Url to image (used for Single Image question only)
+            </summary>
+        </member>
+        <member name="P:PST.Api.Areas.Management.Models.m_question.video">
+            <summary>
+            Url to video (used for Video question only)
+            </summary>
+        </member>
         <member name="T:PST.Api.Controllers.AccountController">
             <summary>
             Manage user account information
