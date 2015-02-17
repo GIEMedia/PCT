@@ -144,6 +144,7 @@
 
 	.course-questions { padding: 24px 25px 10px; }
 	.course-question-head { padding-bottom: 25px; }
+    .course-question-head .tip:hover + .popup { top: 188px; right: 55px; }
 	.course-questions .form-body { padding-bottom: 10px; }
 
     .course-question-option.course-question-option-header,

@@ -81,8 +81,8 @@ namespace PST.Api.Controllers
                                 SortOrder = 1,
                                 Options = new List<Option>
                                 {
-                                    new TextOption {Text = "Wrong", Correct = false},
-                                    new TextOption {Text = "Right", Correct = true}
+                                    new TextOption {Text = "Wrong", Correct = false, SortOrder = 1},
+                                    new TextOption {Text = "Right", Correct = true, SortOrder = 2}
                                 }
                             },
                             new TextQuestion
@@ -93,9 +93,9 @@ namespace PST.Api.Controllers
                                 SortOrder = 2,
                                 Options = new List<Option>
                                 {
-                                    new TextOption {Text = "Right", Correct = true},
-                                    new TextOption {Text = "Also Right", Correct = true},
-                                    new TextOption {Text = "Wrong", Correct = false},
+                                    new TextOption {Text = "Right", Correct = true, SortOrder = 1},
+                                    new TextOption {Text = "Also Right", Correct = true, SortOrder = 2},
+                                    new TextOption {Text = "Wrong", Correct = false, SortOrder = 3}
                                 }
                             }
                         }
@@ -120,8 +120,8 @@ namespace PST.Api.Controllers
                                 SortOrder = 1,
                                 Options = new List<Option>
                                 {
-                                    new TextOption {Text = "Wrong", Correct = false},
-                                    new TextOption {Text = "Right", Correct = true}
+                                    new TextOption {Text = "Wrong", Correct = false, SortOrder = 1},
+                                    new TextOption {Text = "Right", Correct = true, SortOrder = 2}
                                 }
                             },
                             new TextQuestion
@@ -132,9 +132,9 @@ namespace PST.Api.Controllers
                                 SortOrder = 2,
                                 Options = new List<Option>
                                 {
-                                    new TextOption {Text = "Right", Correct = true},
-                                    new TextOption {Text = "Also Right", Correct = true},
-                                    new TextOption {Text = "Wrong", Correct = false},
+                                    new TextOption {Text = "Right", Correct = true, SortOrder = 1},
+                                    new TextOption {Text = "Also Right", Correct = true, SortOrder = 2},
+                                    new TextOption {Text = "Wrong", Correct = false, SortOrder = 3}
                                 }
                             }
                         }
@@ -154,8 +154,8 @@ namespace PST.Api.Controllers
                                 SortOrder = 1,
                                 Options = new List<Option>
                                 {
-                                    new TextOption {Text = "Wrong", Correct = false},
-                                    new TextOption {Text = "Right", Correct = true}
+                                    new TextOption {Text = "Wrong", Correct = false, SortOrder = 1},
+                                    new TextOption {Text = "Right", Correct = true, SortOrder = 2}
                                 }
                             },
                             new TextQuestion
@@ -166,9 +166,9 @@ namespace PST.Api.Controllers
                                 SortOrder = 2,
                                 Options = new List<Option>
                                 {
-                                    new TextOption {Text = "Right", Correct = true},
-                                    new TextOption {Text = "Also Right", Correct = true},
-                                    new TextOption {Text = "Wrong", Correct = false},
+                                    new TextOption {Text = "Right", Correct = true, SortOrder = 1},
+                                    new TextOption {Text = "Also Right", Correct = true, SortOrder = 2},
+                                    new TextOption {Text = "Wrong", Correct = false, SortOrder = 3}
                                 }
                             }
                         }

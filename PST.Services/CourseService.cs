@@ -150,7 +150,7 @@ namespace PST.Services
 
                 if (questionProgress == null)
                 {
-                    questionProgress = new QuestionProgress();
+                    questionProgress = new QuestionProgress {Question = question};
                     questionedProgress.CompletedQuestions.Add(questionProgress);
                 }
 

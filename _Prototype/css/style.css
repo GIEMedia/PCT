@@ -359,7 +359,6 @@ a.form-label { color: #404040 !important; }
 .course-question-head .tip + .popup span { padding: 20px; }
 .course-question-head .tip:hover { color: #00aded; }
 .course-question-head .tip:hover + .popup { display: block; visibility: visible; opacity: 1; top: 165px; left: auto; position: absolute; right: 50px; }
-@media (max-width: 1024px) { .course-question-head .tip:hover + .popup { top: 188px; right: 55px; } }
 .course-question-title { color: #404040; }
 
 .course-question-options { background: #fff; border: 1px solid #d7e2e6; }
