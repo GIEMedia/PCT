@@ -656,7 +656,7 @@
         </member>
         <member name="M:PST.Api.Controllers.CourseController.GetCourses">
             <summary>
-            Get all categoriezed courses
+            Get all categorized courses
             </summary>
             <returns></returns>
         </member>

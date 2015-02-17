@@ -14,16 +14,14 @@ namespace PST.Api.Controllers
 {
     public class ApiControllerBase : ApiController
     {
-        protected readonly IEntityRepository _entityRepository;
         private readonly Lazy<UserManager<ApplicationUser>> _userManager;
 
         protected ApiControllerBase()
         {
         }
 
-        protected ApiControllerBase(IEntityRepository entityRepository, Lazy<UserManager<ApplicationUser>> userManager)
+        protected ApiControllerBase(Lazy<UserManager<ApplicationUser>> userManager)
         {
-            _entityRepository = entityRepository;
             _userManager = userManager;
         }
 

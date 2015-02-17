@@ -35,17 +35,19 @@ namespace PST.Api.Controllers
     {
         private readonly Func<UserManager<ApplicationUser>> _userManagerFactory;
         private readonly EmailGenerationService _resetPasswordProvider;
+        private readonly IEntityRepository _entityRepository;
         private readonly Lazy<ICourseService> _courseService;
         private readonly Lazy<ICertificateService> _cetificateService;
 
         public AccountController(Func<UserManager<ApplicationUser>> userManagerFactory,
             EmailGenerationService resetPasswordProvider, IEntityRepository entityRepository,
-            Lazy<UserManager<ApplicationUser>> lazyUserManagerFactory, Lazy<ICourseService> courseService,
+            Lazy<UserManager<ApplicationUser>> userManager, Lazy<ICourseService> courseService,
             Lazy<ICertificateService> cetificateService)
-            : base(entityRepository, lazyUserManagerFactory)
+            : base(userManager)
         {
             _userManagerFactory = userManagerFactory;
             _resetPasswordProvider = resetPasswordProvider;
+            _entityRepository = entityRepository;
             _courseService = courseService;
             _cetificateService = cetificateService;
         }

@@ -15,11 +15,13 @@ namespace PST.Api.Controllers
     [RoutePrefix("api/course")]
     public class CourseController : ApiControllerBase
     {
+        private readonly IEntityRepository _entityRepository;
         private readonly ICourseService _courseService;
 
         public CourseController(Lazy<UserManager<ApplicationUser>> userManager, IEntityRepository entityRepository, ICourseService courseService)
-            : base(entityRepository, userManager)
+            : base(userManager)
         {
+            _entityRepository = entityRepository;
             _courseService = courseService;
         }
 
