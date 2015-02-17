@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Http;
+using Microsoft.AspNet.Identity;
+using Prototype1.Foundation.Data.NHibernate;
+using PST.Api.Core.OAuth;
 using PST.Declarations;
 using PST.Declarations.Entities;
 using PST.Declarations.Interfaces;
@@ -14,7 +17,8 @@ namespace PST.Api.Controllers
     {
         private readonly ICourseService _courseService;
 
-        public CourseController(ICourseService courseService)
+        public CourseController(Lazy<UserManager<ApplicationUser>> userManager, IEntityRepository entityRepository, ICourseService courseService)
+            : base(entityRepository, userManager)
         {
             _courseService = courseService;
         }
