@@ -14,7 +14,7 @@
                         "document": {
                             "pdf_url" : "app/temp/sample.pdf",
                             "pages": [
-                                "app/css/images/temp/pdf-placeholder.jpg",
+                                "app/css/images/temp/pdf-placeholder1.jpg",
                                 "app/css/images/temp/pdf-placeholder2.jpg"
                             ]
                         },
@@ -78,7 +78,7 @@
                         "document": {
                             "pdf_url" : "app/temp/sample.pdf",
                             "pages": [
-                                "app/css/images/temp/pdf-placeholder.jpg",
+                                "app/css/images/temp/pdf-placeholder1.jpg",
                                 "app/css/images/temp/pdf-placeholder2.jpg"
                             ]
                         },
@@ -100,7 +100,7 @@
                         "document": {
                             "pdf_url" : "app/temp/sample.pdf",
                             "pages": [
-                                "app/css/images/temp/pdf-placeholder.jpg",
+                                "app/css/images/temp/pdf-placeholder1.jpg",
                                 "app/css/images/temp/pdf-placeholder2.jpg"
                             ]
                         },

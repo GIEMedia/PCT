@@ -20,9 +20,15 @@
         .controller("dashboard.Ctrl", function ($scope, User, CourseService, DashboardHelper) {
             $scope.User = User;
 
-            $scope.newCourses = CourseService.getNewCourses();
+            CourseService.getNewCourses().success(function(courses) {
+                $scope.newCourses = courses;
+            });
             $scope.openCourses = CourseService.getOpenCourses();
-            var _courseStructure = CourseService.getCourseStructure();
+
+            var _courseStructure;
+            CourseService.getCourseStructure().success(function(cs1) {
+                _courseStructure = cs1;
+            });
 
             $scope.view = {
                 search: null

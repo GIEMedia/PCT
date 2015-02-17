@@ -20,7 +20,8 @@
         })
 
         .controller("course.Ctrl", function ($scope, CourseService, $stateParams) {
-            $scope.course = CourseService.get($stateParams.id, function() {
+            CourseService.get($stateParams.id).success(function(course) {
+                $scope.course = course;
             });
             //$scope.userProgress = UserCourseService.getProgress($stateParams.id);
             $scope.courseHelp = $stateParams.id == "0" ? true : false;

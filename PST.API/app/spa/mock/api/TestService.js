@@ -2,7 +2,7 @@
 
 (function () {
 
-    angular.module('pct.elearning.api.Test', [
+    angular.module('pct.elearning.mock.api.Test', [
         'pct.elearning.mock.data.CourseTest'
     ])
         .factory("TestService", function($timeout, CourseTestMockData) {
@@ -21,6 +21,8 @@
                 if (data.round == 1) {
                     return {
                         passed: false,
+                        //passed: true,
+
                         corrects: [
                             {
                                 question: 0,
