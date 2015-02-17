@@ -2,7 +2,7 @@
 
 (function () {
 
-    angular.module('pct.elearning.api.State', [
+    angular.module('pct.elearning.mock.api.State', [
         'pct.elearning.mock.data.State'
     ])
         .factory("StateService", function(StateMockData) {

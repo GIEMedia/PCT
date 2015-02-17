@@ -2,7 +2,7 @@
 
 (function () {
 
-    angular.module('pct.elearning.api.UserCourse', [
+    angular.module('pct.elearning.mock.api.UserCourse', [
     ])
         .factory("UserCourseService", function($timeout) {
             //var TestService = $resource("/api/test", {}, {

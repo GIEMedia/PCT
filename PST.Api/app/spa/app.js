@@ -9,14 +9,12 @@
             'pct.elearning.test',
             'pct.elearning.certificate',
 
+            'pct.elearning.mock',
+
             'pct.elearning.api.Account',
-            'pct.elearning.api.Certificate',
-            'pct.elearning.api.Course',
-            'pct.elearning.api.Profile',
             'pct.elearning.api.Security',
-            'pct.elearning.api.State',
-            'pct.elearning.api.Test',
-            'pct.elearning.api.UserCourse',
+
+            'pct.elearning.api.Course',
 
             'pct.elearning.landing',
             'pct.elearning.signup',
