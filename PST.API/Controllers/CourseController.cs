@@ -53,10 +53,12 @@ namespace PST.Api.Controllers
                         course_id = c.ID,
                         title = c.Title,
                         description =
-                            "CEUs Available: " +
-                            c.StateCEUs.OrderBy(x => x.StateAbbr)
-                                .Select(x => x.StateAbbr)
-                                .Aggregate((i, j) => i + "," + j),
+                            c.StateCEUs.Any()
+                                ? "CEUs Available: " +
+                                  c.StateCEUs.OrderBy(x => x.StateAbbr)
+                                      .Select(x => x.StateAbbr)
+                                      .Aggregate((i, j) => i + "," + j)
+                                : "",
                     }).ToArray()
                 }).ToArray()
             }).ToArray();
@@ -71,14 +73,18 @@ namespace PST.Api.Controllers
         public course_overview[] NewCourses()
         {
             return (from c in _courseService.NewCourses(accountID: CurrentUserID)
-                    select new course_overview
-                    {
-                        course_id = c.ID,
-                        title = c.Title,
-                        description =
-                            "CEUs Available: " +
-                            c.StateCEUs.OrderBy(x => x.StateAbbr).Select(x => x.StateAbbr).Aggregate((i, j) => i + "," + j),
-                    }).ToArray();
+                select new course_overview
+                {
+                    course_id = c.ID,
+                    title = c.Title,
+                    description =
+                        c.StateCEUs.Any()
+                            ? "CEUs Available: " +
+                              c.StateCEUs.OrderBy(x => x.StateAbbr)
+                                  .Select(x => x.StateAbbr)
+                                  .Aggregate((i, j) => i + "," + j)
+                            : "",
+                }).ToArray();
         }
 
         /// <summary>
