@@ -10,16 +10,20 @@
             'pct.elearning.certificate',
 
             'pct.elearning.api.Account',
-            'pct.elearning.api.Test',
+            'pct.elearning.api.Certificate',
             'pct.elearning.api.Course',
-            'pct.elearning.api.UserCourse',
+            'pct.elearning.api.Profile',
             'pct.elearning.api.Security',
             'pct.elearning.api.State',
+            'pct.elearning.api.Test',
+            'pct.elearning.api.UserCourse',
 
             'pct.elearning.landing',
             'pct.elearning.signup',
             'pct.elearning.userInfo',
             'pct.elearning.dashboard',
+            'pct.elearning.profile',
+            'pct.elearning.certificates',
             'ui.router',
             'angularMoment',
             'ngResource'

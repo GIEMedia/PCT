@@ -291,6 +291,11 @@ Fs.p0 = function(p1, a) {
 		p1(a);
 	}
 };
+Fs.f0 = function(f1, a) {
+	return function() {
+		return f1(a);
+	}
+};
 
 Fs.invokeAll = function(funcs, data1, data2) {
 	for (var i in funcs) {

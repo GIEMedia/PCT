@@ -19,10 +19,10 @@
             ;
         })
 
-        .controller("course.Ctrl", function ($scope, CourseService, UserCourseService, $stateParams) {
+        .controller("course.Ctrl", function ($scope, CourseService, $stateParams) {
             $scope.course = CourseService.get($stateParams.id, function() {
             });
-            $scope.userProgress = UserCourseService.getProgress($stateParams.id);
+            //$scope.userProgress = UserCourseService.getProgress($stateParams.id);
             $scope.courseHelp = $stateParams.id == "0" ? true : false;
         })
 
@@ -67,14 +67,13 @@
 
                     // Section query
                     ctrl.finishedAllSection = function() {
-                        if ($scope.userProgress == null || $scope.course == null) {
+                        if ($scope.course == null) {
                             return false;
                         }
 
                         for (var i = 0; i < $scope.course.sections.length; i++) {
                             var sec = $scope.course.sections[i];
-                            var progress = $scope.userProgress.sections[i];
-                            if (progress == null || progress < sec.questions.length) {
+                            if (!sec.complete) {
                                 return false;
                             }
                         }
@@ -85,8 +84,7 @@
                     $scope.nextUnfinishedSection = function() {
                         for (var i = 0; i < $scope.course.sections.length; i++) {
                             var sec = $scope.course.sections[i];
-                            var progress = $scope.userProgress.sections[i];
-                            if (progress == null || progress < sec.questions.length) {
+                            if (!sec.complete) {
                                 ctrl.gotoSection(i+1);
                                 return true;
                             }
@@ -96,25 +94,14 @@
                     ctrl.nextUnfinishedSection = $scope.nextUnfinishedSection;
                 },
                 link: function($scope, elem, attrs) {
-                    var ladyUserProgress = Async.ladyFirst();
-                    $scope.$watch("userProgress", function(progress) {
-                        if (progress) {
-                            ladyUserProgress.ladyDone();
-                        }
-                    });
-
                     $scope.$watch("course", function(course) {
                         if (course) {
 
-                            ladyUserProgress.manTurn(function() {
-                                var hasSection = $scope.nextUnfinishedSection();
-                                if (!hasSection) {
-                                    $scope.section = $scope.course.sections[0];
-                                }
-                                $scope.page = $scope.section.document.pages[0];
-
-                            });
-
+                            var hasSection = $scope.nextUnfinishedSection();
+                            if (!hasSection) {
+                                $scope.section = $scope.course.sections[0];
+                            }
+                            $scope.page = $scope.section.document.pages[0];
                         }
                     });
 
