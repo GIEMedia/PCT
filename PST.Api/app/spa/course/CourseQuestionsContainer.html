@@ -52,9 +52,9 @@
 
 <div class="course-question-answer correct" ng-if="result != null && result.passed">
     <!-- You're right -->
-    <h4 class="course-question-answer-title">Correct!</h4><!-- /.course-question-answer-title -->
+    <h4 class="course-question-answer-title">{{result.correct_heading}}</h4><!-- /.course-question-answer-title -->
     <div class="course-question-answer-entry">
-        <p>	{{ result.explanation }}</p>
+        <p>	{{ result.correct_text }}</p>
     </div><!-- /.course-question-answer-entry -->
 </div><!-- /.course-question-answer -->
 

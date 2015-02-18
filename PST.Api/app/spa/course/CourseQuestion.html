@@ -22,7 +22,7 @@
 </div><!-- /.course-question-head -->
 <div class="course-question-body">
     <div class="form-body">
-        <div class="course-question-options-pictures" ng-if="question.option_type==0">
+        <div class="course-question-options-pictures" ng-if="question.option_type==1">
             <div class="course-question-option-picture" ng-repeat="option in question.options">
                 <img ng-src="{{option.image}}" alt="" width="145" height="145">
 
@@ -36,7 +36,7 @@
 
         </div><!-- /.course-questions-options-pictures -->
 
-        <div class="course-question-options" ng-if="question.option_type==1">
+        <div class="course-question-options" ng-if="question.option_type==0">
             <div class="course-question-option" ng-repeat="option in question.options">
                 <input type="checkbox" id="option{{$index}}" value="{{option.option_id}}" ng-model="answer[$index]" ng-if="question.multi_select">
                 <input type="radio" id="option{{$index}}" value="{{option.option_id}}" ng-model="answer[0]" ng-if="!question.multi_select">
