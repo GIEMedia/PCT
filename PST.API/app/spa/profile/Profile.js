@@ -15,7 +15,7 @@
             ;
         })
         
-        .controller("profile.Ctrl", function ($scope, StateService, ProfileService, CertificateService, AccountService) {
+        .controller("profile.Ctrl", function ($scope, StateService, CertificateService, AccountService) {
             $scope.stateLicensures = [
             ];
             $scope.managers = [

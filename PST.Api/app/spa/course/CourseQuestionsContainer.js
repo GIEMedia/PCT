@@ -16,8 +16,13 @@
 
                     // When section is changed, focus to the question
                     $scope.$watch(attrs.section, function(section) {
+
                         $scope.result = null;
                         $scope.question = null;
+
+                        if (section == null) {
+                            return;
+                        }
 
                         var sectionNum = courseCtrl.sectionNum();
 
@@ -39,7 +44,7 @@
                             return false;
                         }
 
-                        return $scope.section.complete;
+                        return $scope.section.complete || $scope.section.questions.length == 0;
                     };
 
                     $scope.finishedAllSection = function() {
