@@ -11,16 +11,15 @@
 
             $stateProvider
                 .state('test', {
-                    url: '/test',
+                    url: '/test/:courseId',
                     templateUrl: "/app/spa/test/Test.html",
                     controller: "test.Ctrl"
                 })
             ;
         })
 
-        .controller("test.Ctrl", function ($scope, TestService) {
+        .controller("test.Ctrl", function ($scope, TestService, $stateParams) {
             $scope.round = 1;
-
             $scope.model = {
                 answer: null,
                 answers: []
@@ -61,7 +60,10 @@
 
             };
 
-            $scope.test = TestService.query({}, fetchNextQuestion);
+            TestService.get($stateParams.courseId).success(function(test) {
+                $scope.test = test;
+                fetchNextQuestion();
+            });
 
             $scope.next = function() {
                 acceptAnswer();
@@ -79,6 +81,9 @@
             };
 
             $scope.lastQuestion = function() {
+                if ($scope.test == null) {
+                    return false;
+                }
                 return $scope.test.questions.indexOf($scope.question) == $scope.test.questions.length - 1;
             };
 

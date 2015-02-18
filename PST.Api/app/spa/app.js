@@ -15,6 +15,7 @@
             'pct.elearning.api.Security',
 
             'pct.elearning.api.Course',
+            'pct.elearning.api.Test',
 
             'pct.elearning.landing',
             'pct.elearning.signup',

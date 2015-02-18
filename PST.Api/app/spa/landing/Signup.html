@@ -73,8 +73,8 @@
                             <div class="form-controls">
                                 <div class="form-cols">
                                     <div class="form-col form-col-1of2">
-                                        <select formstone-selecter class="select" placeholder="State" ng-model="signup.company_address.state" required>
-                                            <option ng-repeat="state in states" value="{{state.code}}">{{state.code}}</option>
+                                        <select class="field" placeholder="State" ng-model="signup.company_address.state" ng-options="state.code as state.code for state in states" required>
+                                            <option value="">State</option>
                                         </select>
                                     </div><!-- /.form-col form-col-1of2 -->
 
