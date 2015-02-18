@@ -127,6 +127,7 @@ namespace PST.Api.Core.OAuth
             account.LastName = user.LastName.IfNullOrEmpty(account.LastName);
             account.Username = user.UserName.IfNullOrEmpty(account.Username);
             account.Email = user.Email.IfNullOrEmpty(account.Email);
+            account.CompanyName = user.CompanyName;
             account.CompanyAddress = user.CompanyAddress ?? new Address();
             account.HashedPassword = user.HashedPassword.IfNullOrEmpty(account.HashedPassword);
             account.PasswordResetToken = user.PasswordResetToken.IfNullOrEmpty(account.PasswordResetToken);
