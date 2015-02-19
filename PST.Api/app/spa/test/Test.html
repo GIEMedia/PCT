@@ -1,6 +1,24 @@
 
 <div class="container is-scrollable">
     <div class="test">
+        <div class="test-single-media-head" ng-if="question.image">
+            <i>Use the following image to answer the question below.</i>
+            <div class="test-single-media-wrapper">
+                <img ng-src="{{question.image}}" width="360" />
+                <a href="{{question.image}}" class="js-magnify"></a>
+            </div>
+        </div><!-- /.course-question-head -->
+
+        <div class="test-single-media-head" ng-if="question.video">
+            <i>Watch the following video to answer the question below.</i>
+            <div class="test-single-media-wrapper">
+                <video id="MY_VIDEO_1" class="video-js vjs-default-skin" controls preload="auto" source="question.video">
+                    <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+                </video>
+            </div>
+        </div><!-- /.course-question-head -->
+
+
         <div class="test-head">
             <h2>{{test.test_name}}</h2>
 
