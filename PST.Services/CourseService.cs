@@ -88,7 +88,7 @@ namespace PST.Services
 
             course.Sections.Where(s => completedSections.ContainsKey(s.ID)).Apply(s =>
             {
-                s.Complete = true;
+                s.Complete = s.Questions.Count == completedSections[s.ID].Count;
                 var completedQuestions = completedSections[s.ID].Select(q => q.Question.ID).ToList();
                 s.Questions.Where(q => completedQuestions.Contains(q.ID)).Apply(q => q.Answered = true);
             });
