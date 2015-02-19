@@ -17,6 +17,9 @@
                     </div><!-- /.form-head -->
 
                     <div class="form-body">
+                        <div class="no-record" ng-if="(earnedCertificates.length || 0) == 0">
+                            No certificate(s) available
+                        </div>
                         <ul class="courses-items">
                             <li class="courses-item" ng-repeat="cert in earnedCertificates">
                                 <a href="#" class="courses-item-image">

@@ -2,7 +2,7 @@
 <div class="container is-scrollable">
     <div class="test">
         <div class="test-head">
-            <h2>{{certificate.name}}</h2>
+            <h2>{{certificate.course_name}}</h2>
 
             <div class="test-progress">
                 <span class="test-progress-percent">100%</span>
@@ -22,7 +22,7 @@
                 <div class="col col-1of2">
                     <div class="test-certificate">
                         <div class="test-certificate-preview">
-                            <img ng-src="{{certificate.image}}" />
+                            <img ng-src="{{certificate.image_url}}" />
                         </div>
                     </div><!-- /.test-certificate -->
                 </div><!-- /.col col-1of2 -->
@@ -40,20 +40,20 @@
                                 <label class="form-label"><i class="fa fa-envelope"></i> Email It:</label>
 
                                 <form name="form">
-                                    <div class="form-controls" ng-repeat="address in addresses">
+                                    <div class="form-controls" ng-repeat="manager in managers">
                                         <div class="form-controls-actions">
-                                            <a href="" class="btn-add thin" ng-click="addresses.push({})"></a>
-                                            <a href="" class="btn-remove thin" ng-click="addresses.splice($index, 1)"></a>
+                                            <a href="" class="btn-add thin" ng-click="managers.push({})"></a>
+                                            <a href="" class="btn-remove thin" ng-click="managers.splice($index, 1)"></a>
                                         </div><!-- /.form-controls-actions -->
 
                                         <div class="form-cols-outer">
                                             <div class="form-cols">
                                                 <div class="form-col form-col-1of2">
-                                                    <input type="text" class="field" placeholder="Name" ng-model="address.name" required>
+                                                    <input type="text" class="field" placeholder="Name" ng-model="manager.name" required>
                                                 </div><!-- /.form-col form-col-1of2 -->
 
                                                 <div class="form-col form-col-1of2">
-                                                    <input type="email" class="field" placeholder="Email Address" ng-model="address.email" required>
+                                                    <input type="email" class="field" placeholder="Email Manager" ng-model="manager.email" required>
                                                 </div><!-- /.form-col form-col-1of2 -->
                                             </div><!-- /.form-cols -->
                                         </div><!-- /.form-cols-outer -->

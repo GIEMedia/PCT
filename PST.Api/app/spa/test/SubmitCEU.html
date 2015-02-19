@@ -44,7 +44,7 @@
     </div><!-- /.form-body -->
 
     <div class="form-actions">
-        <input type="button" value="No Thanks!" class="btn btn-lightgray" ng-click="$state.go('certificate')">
+        <input type="button" value="No Thanks!" class="btn btn-lightgray" ng-click="$state.go('certificate', {courseId: $stateParams.courseId})">
         <input type="button" value="Send" class="btn btn-green" ng-click="send()" ng-disabled="form.$invalid">
     </div><!-- /.form-actions -->
 </div><!-- /.test-certificate-form -->

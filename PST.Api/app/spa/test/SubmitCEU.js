@@ -17,6 +17,10 @@
                     StateLicensureService.get().success(function(licensures) {
                         if (Cols.isNotEmpty(licensures)) {
                             $scope.stateLicensures = licensures;
+                            for (var i = 0; i < $scope.stateLicensures.length; i++) {
+                                var sl = $scope.stateLicensures[i];
+                                sl.confirmNum = sl.license_num;
+                            }
                         }
                     });
 
@@ -26,7 +30,7 @@
 
                     $scope.send = function() {
                         StateLicensureService.send($stateParams.courseId, $scope.stateLicensures).success(function() {
-                            $state.go("certificate");
+                            $state.go("certificate", {courseId: $stateParams.courseId});
                         });
 
                         return false;

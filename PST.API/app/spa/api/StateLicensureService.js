@@ -2,7 +2,7 @@
 
 (function () {
 
-    angular.module('pct.elearning.api.StateLicensureService', [
+    angular.module('pct.elearning.api.StateLicensure', [
     ])
         .factory("StateLicensureService", function(Api) {
 
