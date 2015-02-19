@@ -47,16 +47,16 @@ namespace PST.Api.Controllers
         /// Answer test question
         /// </summary>
         /// <param name="courseID">ID of course</param>
-        /// <param name="questionID">ID of question</param>
-        /// <param name="selectedOptionIDs">IDs of all secected options</param>
+        /// <param name="answers">Answers to all of the questions in a test</param>
         /// <returns></returns>
         [HttpPut]
-        [Route("answer/{courseID}/{questionID}")]
-        public answer_result AnswerQuestion(Guid courseID, Guid questionID, Guid[] selectedOptionIDs)
+        [Route("answer/{courseID}")]
+        public answer_result[] AnswerQuestions(Guid courseID, answer[] answers)
         {
-            string correctResponseHeading, correctResponseText;
-            var correct = _courseService.AnswerTestQuestion(CurrentUserID, courseID, questionID, selectedOptionIDs, out correctResponseHeading, out correctResponseText);
-            return new answer_result(correct, correctResponseHeading, correctResponseText);
+            var results = _courseService.AnswerTestQuestion(CurrentUserID, courseID, answers);
+            if (results == null)
+                throw new HttpResponseException(HttpStatusCode.Forbidden);
+            return results.ToArray();
         }
 
         /// <summary>

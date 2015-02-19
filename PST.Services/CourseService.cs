@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
 using PST.Declarations;
@@ -24,9 +27,12 @@ namespace PST.Services
         public IEnumerable<CourseProgress> OpenCourses(Guid accountID)
         {
             return
-                _entityRepository.GetByID<Account>(accountID)
-                    .CourseProgress.Where(c => c.Course.Status == CourseStatus.Active &&
-                                               c.Sections.Count(s => s.Passed) != c.TotalSections);
+                _entityRepository.GetByID<Account>(accountID).CourseProgress
+                    .Where(c => c.Course.Status == CourseStatus.Active &&
+                                (c.Sections.Count(s => s.Passed) != c.TotalSections ||  // havent completed all of the questions
+                                c.TestProgress == null || // havent started the test
+                                (c.TestProgress.CompletedQuestions.Count() != c.TestProgress.TotalQuestions && // havent completed test
+                                 c.TestProgress.RetriesLeft > 0))); // havent failed test
         }
 
         public IEnumerable<Course> NewCourses(int count = 5, Guid? accountID = null)
@@ -127,6 +133,25 @@ namespace PST.Services
             return course.Test;
         }
 
+        private CourseProgress GetCourseProgress(Guid accountID, Course course)
+        {
+            var courseProgress = (from a in _entityRepository.Queryable<Account>()
+                                  where a.ID == accountID
+                                  from c in a.CourseProgress
+                                  where c.Course.ID == course.ID
+                                  select c).FirstOrDefault();
+
+            if (courseProgress == null)
+            {
+                var account = _entityRepository.GetByID<Account>(accountID);
+                courseProgress = new CourseProgress { Course = course, TotalSections = course.Sections.Count };
+                account.CourseProgress.Add(courseProgress);
+                _entityRepository.Save(account);
+            }
+
+            return courseProgress;
+        }
+
         private bool IsCorrectAnswer(Guid accountID, Course course, Question question, Questioned questioned, IList<Guid> selectedOptionIDs, out string correctResponseHeading, out string correctResponseText)
         {
             var correctOptions =
@@ -137,19 +162,7 @@ namespace PST.Services
 
             if (correct)
             {
-                var courseProgress = (from a in _entityRepository.Queryable<Account>()
-                                      where a.ID == accountID
-                                      from c in a.CourseProgress
-                                      where c.Course.ID == course.ID
-                                      select c).FirstOrDefault();
-
-                if (courseProgress == null)
-                {
-                    var account = _entityRepository.GetByID<Account>(accountID);
-                    courseProgress = new CourseProgress {Course = course, TotalSections = course.Sections.Count};
-                    account.CourseProgress.Add(courseProgress);
-                    _entityRepository.Save(account);
-                }
+                var courseProgress = GetCourseProgress(accountID, course);
 
                 var questionedProgress = questioned.GetProgress(courseProgress) ??
                                          questioned.CreateAndAddProgress(courseProgress);
@@ -204,11 +217,8 @@ namespace PST.Services
                 out correctResponseHeading, out correctResponseText);
         }
 
-        public bool AnswerTestQuestion(Guid accountID, Guid courseID, Guid questionID, IList<Guid> selectedOptionIDs, out string correctResponseHeading, out string correctResponseText)
+        public IEnumerable<answer_result> AnswerTestQuestion(Guid accountID, Guid courseID, answer[] answers)
         {
-            if (!selectedOptionIDs.Any())
-                throw new ArgumentOutOfRangeException("selectedOptionIDs", "No options selected.");
-
             var course = GetCourse(courseID);
 
             if (course == null)
@@ -217,19 +227,47 @@ namespace PST.Services
             if (course.Status != CourseStatus.Active)
                 throw new ArgumentOutOfRangeException("courseID", "Course not active.");
 
-            if(course.Test == null)
+            if (course.Test == null)
                 throw new ArgumentOutOfRangeException("courseID", "Course does not have a test.");
 
-            var question = (from q in course.Test.Questions
-                            where q.ID == questionID
-                            select q).FirstOrDefault();
+            var courseProgress = GetCourseProgress(accountID, course);
+            var testProgress = (TestProgress)(course.Test.GetProgress(courseProgress) ??
+                               course.Test.CreateAndAddProgress(courseProgress));
+            
+            if (testProgress.RetriesLeft == 0)
+                return null;
 
-            if (question == null || question == null)
-                throw new ArgumentOutOfRangeException("questionID",
-                    "Question not found in course (" + course.Title + ")");
+            var results = new List<answer_result>();
+            foreach (var answer in answers)
+            {
+                if (!answer.selected_option_ids.Any())
+                    results.Add(new answer_result(answer.question_id, false));
 
-            return IsCorrectAnswer(accountID, course, question, course.Test, selectedOptionIDs,
-                out correctResponseHeading, out correctResponseText);
+                var question = (from q in course.Test.Questions
+                    where q.ID == answer.question_id
+                    select q).FirstOrDefault();
+
+                if (question == null)
+                    continue;
+
+                string correctResponseHeading, correctResponseText;
+                var isCorrect = IsCorrectAnswer(accountID, course, question, course.Test, answer.selected_option_ids,
+                    out correctResponseHeading, out correctResponseText);
+
+                results.Add(new answer_result(answer.question_id, isCorrect, correctResponseHeading, correctResponseText));
+            }
+
+            courseProgress = GetCourseProgress(accountID, course);
+            testProgress = (TestProgress) (course.Test.GetProgress(courseProgress) ??
+                               course.Test.CreateAndAddProgress(courseProgress));
+            
+            if (results.Count(r => r.correct)/(decimal) course.Test.Questions.Count < course.Test.PassingPercentage)
+            {
+                testProgress.RetriesLeft = Math.Max(0, testProgress.RetriesLeft - 1);
+                _entityRepository.Save(testProgress);
+            }
+
+            return results;
         }
     }
 }
