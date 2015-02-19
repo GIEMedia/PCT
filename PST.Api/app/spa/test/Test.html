@@ -35,34 +35,36 @@
                             <!-- TODO image options? -->
 
 
-                            <div class="course-question-options" ng-class="question.correct == null ? '' : question.correct ? 'correct' : 'retry'">
+                            <div class="course-question-options" ng-class="question.correct == null ? '' : question.correct.correct ? 'correct' : 'retry'">
                                 <div class="course-question-option course-question-option-header" ng-if="question.correct != null">
-                                    {{question.correct ? question.correct_response_heading : 'Retry'}}
+                                    {{question.correct.correct ? question.correct.correct_response_heading : 'Retry'}}
                                 </div>
 
-                                <div class="course-question-option" ng-repeat="option in question.options" ng-if="!question.correct" >
+                                <div>
+                                    <div class="course-question-option" ng-repeat="option in question.options" ng-if="!question.correct.correct" >
 
-                                    <input type="checkbox" id="option{{$index}}" value="{{option.option_id}}" ng-model="model.answer[$index]" ng-if="question.multi_select">
-                                    <input type="radio" id="option{{$index}}" value="{{option.option_id}}" ng-model="model.answer[0]" ng-if="!question.multi_select">
+                                        <input type="checkbox" id="option{{$index}}" value="{{option.option_id}}" ng-model="model.answer[$index]" ng-if="question.multi_select">
+                                        <input type="radio" id="option{{$index}}" value="{{option.option_id}}" ng-model="model.answer[0]" ng-if="!question.multi_select">
 
-                                    <label for="option{{$index}}">{{option.text}}</label>
-                                </div><!-- /.course-question-option -->
+                                        <label for="option{{$index}}">{{option.text}}</label>
+                                    </div><!-- /.course-question-option -->
+                                </div>
 
-                                <div class="course-question-option" ng-repeat="option in question.options | filter:hasIdIn(model.answer)" ng-if="question.correct" >
+                                <div class="course-question-option" ng-repeat="option in question.options | filter:hasIdIn(model.answer)" ng-if="question.correct.correct" >
 
                                     <input type="radio" checked="checked">
 
                                     <label for="option{{$index}}">{{option.text}}</label>
                                 </div><!-- /.course-question-option -->
 
-                                <div class="course-question-option-description" ng-if="question.correct">
-                                    {{ question.correct_response_text }}
+                                <div class="course-question-option-description" ng-if="question.correct.correct">
+                                    {{ question.correct.correct_response_text }}
                                 </div><!-- /.course-question-option -->
                             </div><!-- /.course-questions-options -->
                         </div><!-- /.form-body -->
 
                         <div class="form-actions">
-                            <input type="button" class="btn" value="{{question.correct ? 'Continue' : 'Answer'}}" ng-click="next()" ng-disabled="model.answer == null" ng-if="!lastQuestion()">
+                            <input type="button" class="btn" value="{{question.correct.correct ? 'Continue' : 'Answer'}}" ng-click="next()" ng-disabled="model.answer == null" ng-if="!lastQuestion()">
                             <input type="button" class="btn" value="Grade Test!" ng-click="submit()" ng-if="lastQuestion()">
                         </div><!-- /.form-actions -->
                     </div><!-- /.test-question-answers -->
@@ -70,7 +72,7 @@
             </div><!-- /.cols -->
 
             <!-- Test result failed -->
-            <div class="cols" ng-if="result != null && !result.passed">
+            <div class="cols" ng-if="result != null && result.passed != 1">
                 <div class="col col-1of2">
                     <div class="test-certificate">
                         <div class="test-certificate-title">
@@ -111,7 +113,7 @@
             </div><!-- /.cols -->
 
             <!-- Test result passed -->
-            <div class="cols" ng-if="result != null && result.passed">
+            <div class="cols" ng-if="result != null && result.passed == 1">
 
 
                 <div class="col col-1of2">

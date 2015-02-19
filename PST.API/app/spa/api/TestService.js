@@ -24,7 +24,7 @@
                     });
 
                     $q.all(waits).then(function() {
-                        finalResult.passed = Cols.length(answers) == Cols.length(finalResult.corrects);
+                        finalResult.passed = Cols.length(finalResult.corrects) / Cols.length(answers);
                         callback(finalResult);
                     });
                 }

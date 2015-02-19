@@ -40,6 +40,7 @@
                     })
                     .error(function() {
                         sessionStorage.access_token = null;
+                        $state.go("landing");
                     });
             };
 

@@ -25,6 +25,11 @@
                 answers: {}
             };
 
+            TestService.get($stateParams.courseId).success(function(test) {
+                $scope.test = test;
+                fetchNextQuestion();
+            });
+
             var acceptAnswer = function() {
                 if (!$scope.question.correct) {
                     var answer = QuestionHelper.extractAnswer($scope.model.answer, $scope.question);
@@ -64,13 +69,6 @@
 
             };
 
-            $scope.length = Cols.length;
-
-            TestService.get($stateParams.courseId).success(function(test) {
-                $scope.test = test;
-                fetchNextQuestion();
-            });
-
             $scope.next = function() {
                 acceptAnswer();
 
@@ -84,12 +82,6 @@
                 var index = $scope.test.questions.indexOf($scope.question);
 
                 return Math.round(index / $scope.test.questions.length * 100) + "%";
-            };
-
-            $scope.hasIdIn = function(col) {
-                return function(e) {
-                    return col.indexOf(e.option_id) > -1;
-                }
             };
 
             $scope.lastQuestion = function() {
@@ -109,7 +101,7 @@
 
                 TestService.submit($scope.model.answers, $stateParams.courseId, function(result) {
                     $scope.result = result;
-                    if (result.passed) {
+                    if (result.passed == 1) {
                         CourseService.get($stateParams.courseId).success(function(course) {
                             $scope.test.title = course.title;
                         });
@@ -128,9 +120,7 @@
 
                     var correct = $scope.result.corrects[question.question_id];
                     if (correct != null) {
-                        question.correct = true;
-                        question.correct_response_heading = correct.correct_response_heading;
-                        question.correct_response_text = correct.correct_response_text;
+                        question.correct = correct;
                     } else {
                         question.correct = false;
                         delete $scope.model.answers[question.question_id];
@@ -140,6 +130,16 @@
                 $scope.result = null;
                 fetchNextQuestion();
             };
+
+
+
+            $scope.hasIdIn = function(col) {
+                return function(e) {
+                    return col.indexOf(e.option_id) > -1;
+                }
+            };
+            $scope.length = Cols.length;
+
         })
 
     ;
