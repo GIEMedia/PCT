@@ -18,7 +18,7 @@
             ;
         })
 
-        .controller("test.Ctrl", function ($scope, TestService, $stateParams, QuestionHelper, CourseService) {
+        .controller("test.Ctrl", function ($scope, TestService, $stateParams, CourseService) {
             $scope.round = 1;
             $scope.model = {
                 answer: [],
@@ -38,8 +38,7 @@
 
             var acceptAnswer = function() {
                 if (!$scope.question.correct) {
-                    var answer = QuestionHelper.extractAnswer($scope.model.answer, $scope.question);
-                    $scope.model.answers[$scope.question.question_id] = answer;
+                    $scope.model.answers[$scope.question.question_id] = $scope.model.answer;
                     $scope.model.answer = [];
                 }
             };

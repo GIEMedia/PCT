@@ -4,7 +4,7 @@
 
     angular.module('pct.elearning.course.question', [
     ])
-        .directive("courseQuestion", function(QuestionHelper) {
+        .directive("courseQuestion", function() {
             return {
                 restrict: "A",
                 require: "^courseQuestionsContainer",
@@ -21,28 +21,66 @@
 
                     // Extract the answer and submit to question container
                     $scope.submitAnswer = function() {
-                        var answer = QuestionHelper.extractAnswer($scope.answer, _question);
-                        courseQuestionsContainerCtrl.submitAnswer(answer);
+                        courseQuestionsContainerCtrl.submitAnswer($scope.answer);
+                        return false;
                     };
                 }
             };
         })
 
-        .factory("QuestionHelper", function() {
+        .directive("eOptions", function() {
             return {
-                extractAnswer: function(scopeAnswer, question) {
+                restrict: "E",
+                scope: {
+                    "question": "=",
+                    "answer": "="
+                },
+                templateUrl: "/app/spa/course/eOptions.html",
+                link: function($scope, elem, attrs) {
+                    $scope.view = {
+                        answer : []
+                    };
 
-                    if (question.multi_select) {
-                        var answer = [];
-                        for (var i = 0; i < scopeAnswer.length; i++) {
-                            if (scopeAnswer[i]) {
-                                answer.push(question.options[i].option_id);
-                            }
+                    var extractAnswer = function() {
+                        if ($scope.question==null) {
+                            return "[]";
                         }
-                        return answer;
-                    } else {
-                        return scopeAnswer;
-                    }
+
+                        if ($scope.question.multi_select) {
+                            var answer = [];
+                            for (var i = 0; i < $scope.view.answer.length; i++) {
+                                if ($scope.view.answer[i]) {
+                                    answer.push($scope.question.options[i].option_id);
+                                }
+                            }
+                            return JSON.stringify(answer);
+                        } else {
+                            return JSON.stringify($scope.view.answer);
+                        }
+                    };
+
+                    $scope.$watch("question", function(value) {
+                        $scope.view.answer = [];
+                    });
+                    $scope.$watch(extractAnswer, function(value) {
+                        $scope.answer = JSON.parse(value);
+                    });
+                    $scope.$watch("answer", function(value) {
+                        if ($scope.question == null && Cols.isEmpty(value)) {
+                            return;
+                        }
+                        if ($scope.question.multi_select) {
+                            $scope.view.answer = [];
+
+                            var answer = [];
+                            for (var i = 0; i < $scope.question.options.length; i++) {
+                                answer[i] = value.indexOf($scope.question.options[i].option_id) > -1;
+                            }
+                            $scope.view.answer = answer;
+                        } else {
+                            $scope.view.answer = value;
+                        }
+                    });
                 }
             };
         })

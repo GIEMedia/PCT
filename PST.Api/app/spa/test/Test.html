@@ -24,6 +24,7 @@
                 <div class="col col-1of2">
                     <div class="test-question">
                         <h3 class="test-question-title">{{question.question_text}}</h3><!-- /.test-question-title -->
+                        <h5 ng-if="question.multi_select">(check all that apply)</h5>
                     </div><!-- /.test-question -->
                 </div><!-- /.col col-1of2 -->
 
@@ -31,30 +32,18 @@
                     <div class="test-question-answers">
                         <div class="form-body">
 
+                            <e-options question="question" answer="model.answer" ng-if="question.correct == null || !question.correct.correct" ng-class="question.correct == null ? '' : 'retry'"></e-options>
 
-                            <!-- TODO image options? -->
-
-
-                            <div class="course-question-options" ng-class="question.correct == null ? '' : question.correct.correct ? 'correct' : 'retry'">
-                                <div class="course-question-option course-question-option-header" ng-if="question.correct != null">
-                                    {{question.correct.correct ? question.correct.correct_response_heading : 'Retry'}}
+                            <div class="course-question-options correct" ng-if="question.correct.correct">
+                                <div class="course-question-option course-question-option-header">
+                                    {{question.correct.correct_response_heading}}
                                 </div>
 
-                                <div>
-                                    <div class="course-question-option" ng-repeat="option in question.options" ng-if="!question.correct.correct" >
-
-                                        <input type="checkbox" id="option{{$index}}" value="{{option.option_id}}" ng-model="model.answer[$index]" ng-if="question.multi_select">
-                                        <input type="radio" id="option{{$index}}" value="{{option.option_id}}" ng-model="model.answer[0]" ng-if="!question.multi_select">
-
-                                        <label for="option{{$index}}">{{option.text}}</label>
-                                    </div><!-- /.course-question-option -->
-                                </div>
-
-                                <div class="course-question-option" ng-repeat="option in question.options | filter:hasIdIn(model.answer)" ng-if="question.correct.correct" >
+                                <div class="course-question-option" ng-repeat="option in question.options | filter:hasIdIn(model.answer)"  ng-if="question.correct.correct" >
 
                                     <input type="radio" checked="checked">
 
-                                    <label for="option{{$index}}">{{option.text}}</label>
+                                    <label>{{option.text}}</label>
                                 </div><!-- /.course-question-option -->
 
                                 <div class="course-question-option-description" ng-if="question.correct.correct">
