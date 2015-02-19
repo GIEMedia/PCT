@@ -19,7 +19,6 @@
         })
 
         .controller("test.Ctrl", function ($scope, TestService, $stateParams, CourseService) {
-            $scope.round = 1;
             $scope.model = {
                 answer: [],
                 answers: {}
@@ -33,6 +32,11 @@
 
             TestService.get($stateParams.courseId).success(function(test) {
                 $scope.test = test;
+
+                // TODO Temp: waiting for real API from Oleg
+                if (test.retries_left == null) {
+                    test.retries_left = 3;
+                }
                 fetchNextQuestion();
             });
 
@@ -57,7 +61,7 @@
             };
 
             var fetchNextQuestion = function() {
-                if ($scope.round != 3) {
+                if ($scope.test.retries_left > 1) {
                     var index = $scope.test.questions.indexOf($scope.question);
                     $scope.question = $scope.test.questions[index + 1];
                     var oldAnswer = $scope.model.answers[$scope.question.question_id];
@@ -80,20 +84,11 @@
                 fetchNextQuestion();
             };
 
-            $scope.progress = function() {
-                if ($scope.question == null) {
-                    return "100%";
-                }
-                var index = $scope.test.questions.indexOf($scope.question);
-
-                return Math.round(index / $scope.test.questions.length * 100) + "%";
-            };
-
             $scope.lastQuestion = function() {
                 if ($scope.test == null) {
                     return false;
                 }
-                if ($scope.round < 3) {
+                if ($scope.test.retries_left > 1) {
                     return $scope.test.questions.indexOf($scope.question) == $scope.test.questions.length - 1;
                 } else {
                     var index = $scope.test.questions.indexOf($scope.question);
@@ -118,7 +113,7 @@
 
             $scope.nextRound = function() {
 
-                $scope.round++;
+                $scope.test.retries_left--;
 
                 for (var i = 0; i < $scope.test.questions.length; i++) {
                     var question = $scope.test.questions[i];
@@ -145,6 +140,15 @@
                 }
             };
             $scope.length = Cols.length;
+
+            $scope.progress = function() {
+                if ($scope.question == null) {
+                    return "100%";
+                }
+                var index = $scope.test.questions.indexOf($scope.question);
+
+                return Math.round(index / $scope.test.questions.length * 100) + "%";
+            };
 
         })
 
