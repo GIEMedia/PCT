@@ -74,7 +74,7 @@ namespace PST.Services
                     select c.Course.ID).ToArray();
 
             if (!course.PrerequisiteCourses.All(c => passedCourses.Contains(c.ID)))
-                throw new Exception("Prerquisites not met.");
+                return null;
 
             var completedSections = (from a in _entityRepository.Queryable<Account>()
                 where a.ID == accountID.Value

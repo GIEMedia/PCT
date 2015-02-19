@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web.Http;
 using Antlr.Runtime.Misc;
 using Microsoft.AspNet.Identity;
@@ -36,7 +37,10 @@ namespace PST.Api.Controllers
         [Route("{courseID}")]
         public course GetCourse(Guid courseID)
         {
-            return _courseService.GetCourse(courseID, CurrentUserID);
+            var course = _courseService.GetCourse(courseID, CurrentUserID);
+            if(course == null)
+                throw new HttpResponseException(HttpStatusCode.Forbidden);
+            return course;
         }
 
         /// <summary>
