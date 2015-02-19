@@ -26,9 +26,11 @@
             };
 
             var acceptAnswer = function() {
-                var answer = QuestionHelper.extractAnswer($scope.model.answer, $scope.question);
-                $scope.model.answers[$scope.question.question_id] = answer;
-                $scope.model.answer = [];
+                if (!$scope.question.correct) {
+                    var answer = QuestionHelper.extractAnswer($scope.model.answer, $scope.question);
+                    $scope.model.answers[$scope.question.question_id] = answer;
+                    $scope.model.answer = [];
+                }
             };
 
             var nextFailedQuestion = function(index) {
@@ -84,11 +86,22 @@
                 return Math.round(index / $scope.test.questions.length * 100) + "%";
             };
 
+            $scope.hasIdIn = function(col) {
+                return function(e) {
+                    return col.indexOf(e.option_id) > -1;
+                }
+            };
+
             $scope.lastQuestion = function() {
                 if ($scope.test == null) {
                     return false;
                 }
-                return $scope.test.questions.indexOf($scope.question) == $scope.test.questions.length - 1;
+                if ($scope.round < 3) {
+                    return $scope.test.questions.indexOf($scope.question) == $scope.test.questions.length - 1;
+                } else {
+                    var index = $scope.test.questions.indexOf($scope.question);
+                    return nextFailedQuestion(index + 1) == null;
+                }
             };
 
             $scope.submit = function() {
@@ -116,9 +129,6 @@
                     var correct = $scope.result.corrects[question.question_id];
                     if (correct != null) {
                         question.correct = true;
-                        //correct	Boolean
-                        //correct_response_heading	String
-                        //correct_response_text
                         question.correct_response_heading = correct.correct_response_heading;
                         question.correct_response_text = correct.correct_response_text;
                     } else {

@@ -40,10 +40,17 @@
                                     {{question.correct ? question.correct_response_heading : 'Retry'}}
                                 </div>
 
-                                <div class="course-question-option" ng-repeat="option in question.options" ng-if="!question.correct || model.answer.indexOf(option.option_id) > -1" >
+                                <div class="course-question-option" ng-repeat="option in question.options" ng-if="!question.correct" >
 
                                     <input type="checkbox" id="option{{$index}}" value="{{option.option_id}}" ng-model="model.answer[$index]" ng-if="question.multi_select">
                                     <input type="radio" id="option{{$index}}" value="{{option.option_id}}" ng-model="model.answer[0]" ng-if="!question.multi_select">
+
+                                    <label for="option{{$index}}">{{option.text}}</label>
+                                </div><!-- /.course-question-option -->
+
+                                <div class="course-question-option" ng-repeat="option in question.options | filter:hasIdIn(model.answer)" ng-if="question.correct" >
+
+                                    <input type="radio" checked="checked">
 
                                     <label for="option{{$index}}">{{option.text}}</label>
                                 </div><!-- /.course-question-option -->
