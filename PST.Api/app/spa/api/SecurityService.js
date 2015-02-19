@@ -21,6 +21,9 @@
                 post: function(url, data) {
                     return sendHttp("POST", url, data);
                 },
+                put: function(url, data) {
+                    return sendHttp("PUT", url, data);
+                },
                 delete: function(url) {
                     return sendHttp("DELETE", url);
                 }

@@ -23,7 +23,9 @@
             CourseService.getNewCourses().success(function(courses) {
                 $scope.newCourses = courses;
             });
-            $scope.openCourses = CourseService.getOpenCourses();
+            CourseService.getOpenCourses().success(function(openCourses) {
+                $scope.openCourses = openCourses;
+            });
 
             var _courseStructure;
             CourseService.getCourseStructure().success(function(cs1) {

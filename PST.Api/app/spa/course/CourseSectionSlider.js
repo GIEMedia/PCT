@@ -64,6 +64,9 @@
                     });
 
                     $scope.$watch("section", function(section) {
+                        if (section==null) {
+                            return;
+                        }
                         var indexOf = $scope.course.sections.indexOf($scope.section);
                         if (indexOf == -1) {
                             return;

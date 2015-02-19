@@ -16,8 +16,13 @@
 
                     // When section is changed, focus to the question
                     $scope.$watch(attrs.section, function(section) {
+
                         $scope.result = null;
                         $scope.question = null;
+
+                        if (section == null) {
+                            return;
+                        }
 
                         var sectionNum = courseCtrl.sectionNum();
 
@@ -39,7 +44,7 @@
                             return false;
                         }
 
-                        return $scope.section.complete;
+                        return $scope.section.complete || $scope.section.questions.length == 0;
                     };
 
                     $scope.finishedAllSection = function() {
@@ -93,22 +98,19 @@
                 },
                 controller: function($scope) {
 
-                    var showResult = function(passed, explanation) {
+                    var showResult = function(passed, correct_heading, correct_text) {
                         $scope.result = passed == null ? null : {
                             passed: passed,
-                            explanation: explanation
+                            correct_heading: correct_heading,
+                            correct_text: correct_text
                         };
                     };
 
                     var ctrl = this;
 
                     ctrl.submitAnswer = function(answer) {
-                        CourseService.check($scope.question.question_id, answer, function(correct, explanation) {
-                            if (correct) {
-                                showResult(true, explanation);
-                            } else {
-                                showResult(false);
-                            }
+                        CourseService.check($scope.question.question_id, $scope.course.course_id, answer).success(function(resp) {
+                            showResult(resp.correct, resp.correct_response_heading, resp.correct_response_text);
                         });
                     };
 

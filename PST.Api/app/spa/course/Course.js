@@ -74,7 +74,7 @@
 
                         for (var i = 0; i < $scope.course.sections.length; i++) {
                             var sec = $scope.course.sections[i];
-                            if (!sec.complete) {
+                            if (!sec.complete && sec.questions.length > 0) {
                                 return false;
                             }
                         }
@@ -85,7 +85,7 @@
                     $scope.nextUnfinishedSection = function() {
                         for (var i = 0; i < $scope.course.sections.length; i++) {
                             var sec = $scope.course.sections[i];
-                            if (!sec.complete) {
+                            if (!sec.complete && sec.questions.length > 0) {
                                 ctrl.gotoSection(i+1);
                                 return true;
                             }
