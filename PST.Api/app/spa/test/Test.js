@@ -101,7 +101,7 @@
 
                 TestService.submit($scope.model.answers, $stateParams.courseId, function(result) {
                     $scope.result = result;
-                    if (result.passed == 1) {
+                    if (result.passed == 1 || (result.passed)) {
                         CourseService.get($stateParams.courseId).success(function(course) {
                             $scope.test.title = course.title;
                         });
@@ -118,6 +118,7 @@
                 for (var i = 0; i < $scope.test.questions.length; i++) {
                     var question = $scope.test.questions[i];
 
+                    // Merge answer result into questions data
                     var correct = $scope.result.corrects[question.question_id];
                     if (correct != null) {
                         question.correct = correct;

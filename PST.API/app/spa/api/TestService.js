@@ -11,22 +11,34 @@
                     return Api.get("api/test/" + courseId);
                 },
                 submit : function(answers, courseId, callback) {
-                    var finalResult = {
-                        corrects: {}
-                    };
-                    var waits = [];
+                    var sending = [];
                     Cols.eachEntry(answers, function(questionId, answer) {
-                        waits.push(Api.put("api/test/answer/" + courseId + "/" + questionId, answer).success(function(result) {
-                            if (result.correct) {
-                                finalResult.corrects[questionId] = result;
-                            }
-                        }));
+                        sending.push({
+                            "question_id": questionId,
+                            "selected_option_ids": answer
+                        });
                     });
 
-                    $q.all(waits).then(function() {
+                    Api.put("api/test/answer/" + courseId, sending).success(function(answerResults) {
+                        var finalResult = {
+                            corrects: {}
+                        };
+
+                        for (var i = 0; i < answerResults.length; i++) {
+                            var answerResult = answerResults[i];
+                            if (answerResult.correct) {
+                                finalResult.corrects[answerResult.question_id] = {
+                                    correct : true,
+                                    correct_response_heading : answerResult.correct_response_heading,
+                                    correct_response_text : answerResult.correct_response_text
+                                };
+                            }
+                        }
+
                         finalResult.passed = Cols.length(finalResult.corrects) / Cols.length(answers);
                         callback(finalResult);
                     });
+
                 }
             };
         })

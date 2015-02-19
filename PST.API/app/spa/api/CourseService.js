@@ -7,7 +7,10 @@
         .factory("CourseService", function($timeout, Api) {
             return {
                 check : function(questionId, courseId, answer) {
-                    return Api.put("api/course/answer/" + courseId + "/" + questionId, answer);
+                    return Api.put("api/course/answer/" + courseId, {
+                        question_id: questionId,
+                        selected_option_ids: answer
+                    });
                 },
                 get : function(id) {
                     return Api.get("api/course/" + id);
