@@ -666,13 +666,12 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:PST.Api.Controllers.CourseController.AnswerQuestion(System.Guid,System.Guid,System.Guid[])">
+        <member name="M:PST.Api.Controllers.CourseController.AnswerQuestion(System.Guid,PST.Declarations.Models.answer)">
             <summary>
             Answer section question
             </summary>
-            <param name="courseID"></param>
-            <param name="questionID"></param>
-            <param name="selectedOptionIDs"></param>
+            <param name="courseID">ID of course</param>
+            <param name="answer">Answer to a course question</param>
             <returns></returns>
         </member>
         <member name="M:PST.Api.Controllers.TestController.GetTest(System.Guid)">
@@ -682,13 +681,12 @@
             <param name="courseID">ID of course</param>
             <returns></returns>
         </member>
-        <member name="M:PST.Api.Controllers.TestController.AnswerQuestion(System.Guid,System.Guid,System.Guid[])">
+        <member name="M:PST.Api.Controllers.TestController.AnswerQuestions(System.Guid,PST.Declarations.Models.answer[])">
             <summary>
             Answer test question
             </summary>
             <param name="courseID">ID of course</param>
-            <param name="questionID">ID of question</param>
-            <param name="selectedOptionIDs">IDs of all secected options</param>
+            <param name="answers">Answers to all of the questions in a test</param>
             <returns></returns>
         </member>
         <member name="M:PST.Api.Controllers.TestController.SendLicensure(System.Guid,PST.Declarations.Models.state_licensure[])">

@@ -64,6 +64,11 @@ namespace PST.Declarations.Entities
     [Serializable]
     public class TestProgress : QuestionedProgress
     {
+        public TestProgress()
+        {
+            this.RetriesLeft = 2;
+        }
+
         [Ownership(Ownership.None)]
         public virtual Test Test { get; set; }
 

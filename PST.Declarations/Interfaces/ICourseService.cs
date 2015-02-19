@@ -63,12 +63,8 @@ namespace PST.Declarations.Interfaces
         /// </summary>
         /// <param name="accountID">ID of account.</param>
         /// <param name="courseID">ID of course.</param>
-        /// <param name="questionID">ID of question being answered.</param>
-        /// <param name="selectedOptionIDs">List of selected answers.</param>
-        /// <param name="correctResponseHeading">The heading to show if the answer was correct.</param>
-        /// <param name="correctResponseText">The text to show if the answer was correct.</param>
-        /// <returns>A boolean indicating if the answer(s) are/were correct and if so, the heading and text to show.</returns>
-        bool AnswerTestQuestion(Guid accountID, Guid courseID, Guid questionID, IList<Guid> selectedOptionIDs,
-            out string correctResponseHeading, out string correctResponseText);
+        /// <param name="answers">Answers to the questions</param>
+        /// <returns>An list of answer results indicating the correctness of each question. If correct, correct response heading & text returned.</returns>
+        IEnumerable<answer_result> AnswerTestQuestion(Guid accountID, Guid courseID, answer[] answers);
     }
 }

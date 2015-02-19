@@ -218,6 +218,7 @@
     <Compile Include="Models\account.cs" />
     <Compile Include="Models\account_detailed.cs" />
     <Compile Include="Models\address.cs" />
+    <Compile Include="Models\answer.cs" />
     <Compile Include="Models\answer_result.cs" />
     <Compile Include="Models\certificate.cs" />
     <Compile Include="Models\change_password.cs" />

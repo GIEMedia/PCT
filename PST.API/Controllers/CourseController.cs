@@ -98,17 +98,16 @@ namespace PST.Api.Controllers
         /// <summary>
         /// Answer section question
         /// </summary>
-        /// <param name="courseID"></param>
-        /// <param name="questionID"></param>
-        /// <param name="selectedOptionIDs"></param>
+        /// <param name="courseID">ID of course</param>
+        /// <param name="answer">Answer to a course question</param>
         /// <returns></returns>
         [HttpPut]
-        [Route("answer/{courseID}/{questionID}")]
-        public answer_result AnswerQuestion(Guid courseID, Guid questionID, Guid[] selectedOptionIDs)
+        [Route("answer/{courseID}")]
+        public answer_result AnswerQuestion(Guid courseID, answer answer)
         {
             string correctResponseHeading, correctResponseText;
-            var correct = _courseService.AnswerCourseQuestion(CurrentUserID, courseID, questionID, selectedOptionIDs, out correctResponseHeading, out correctResponseText);
-            return new answer_result(correct, correctResponseHeading, correctResponseText);
+            var correct = _courseService.AnswerCourseQuestion(CurrentUserID, courseID, answer.question_id, answer.selected_option_ids, out correctResponseHeading, out correctResponseText);
+            return new answer_result(answer.question_id, correct, correctResponseHeading, correctResponseText);
         }
     }
 }
