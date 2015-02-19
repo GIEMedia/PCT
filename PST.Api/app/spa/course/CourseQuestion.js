@@ -4,7 +4,7 @@
 
     angular.module('pct.elearning.course.question', [
     ])
-        .directive("courseQuestion", function() {
+        .directive("courseQuestion", function(QuestionHelper) {
             return {
                 restrict: "A",
                 require: "^courseQuestionsContainer",
@@ -21,19 +21,28 @@
 
                     // Extract the answer and submit to question container
                     $scope.submitAnswer = function() {
-                        var answer;
-                        if (_question.multi_select) {
-                            answer = [];
-                            for (var i = 0; i < $scope.answer.length; i++) {
-                                if ($scope.answer[i]) {
-                                    answer.push($scope.question.options[i].option_id);
-                                }
-                            }
-                        } else {
-                            answer = $scope.answer;
-                        }
+                        var answer = QuestionHelper.extractAnswer($scope.answer, _question);
                         courseQuestionsContainerCtrl.submitAnswer(answer);
                     };
+                }
+            };
+        })
+
+        .factory("QuestionHelper", function() {
+            return {
+                extractAnswer: function(scopeAnswer, question) {
+
+                    if (question.multi_select) {
+                        var answer = [];
+                        for (var i = 0; i < scopeAnswer.length; i++) {
+                            if (scopeAnswer[i]) {
+                                answer.push(question.options[i].option_id);
+                            }
+                        }
+                        return answer;
+                    } else {
+                        return scopeAnswer;
+                    }
                 }
             };
         })

@@ -376,6 +376,17 @@ Cols.values = function(map) {
     }
     return ret;
 };
+
+Cols.length = function(obj) {
+	var count = 0;
+	for (var k in obj) {
+		if (obj.hasOwnProperty(k) && obj[k] != null) {
+			count++;
+		}
+	}
+	return count;
+};
+
 Cols.find = function(col, func) {
     for (var i in col) {
         var e = col[i];

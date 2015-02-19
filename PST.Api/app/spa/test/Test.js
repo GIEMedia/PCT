@@ -18,16 +18,17 @@
             ;
         })
 
-        .controller("test.Ctrl", function ($scope, TestService, $stateParams) {
+        .controller("test.Ctrl", function ($scope, TestService, $stateParams, QuestionHelper, CourseService) {
             $scope.round = 1;
             $scope.model = {
-                answer: null,
-                answers: []
+                answer: [],
+                answers: {}
             };
 
             var acceptAnswer = function() {
-                $scope.model.answers[$scope.test.questions.indexOf($scope.question)] = ($scope.model.answer);
-                $scope.model.answer = null;
+                var answer = QuestionHelper.extractAnswer($scope.model.answer, $scope.question);
+                $scope.model.answers[$scope.question.question_id] = answer;
+                $scope.model.answer = [];
             };
 
             var nextFailedQuestion = function(index) {
@@ -47,18 +48,21 @@
                 if ($scope.round != 3) {
                     var index = $scope.test.questions.indexOf($scope.question);
                     $scope.question = $scope.test.questions[index + 1];
-                    if ($scope.model.answers.length > index + 1) {
-                        $scope.model.answer = $scope.model.answers[index + 1];
+                    var oldAnswer = $scope.model.answers[$scope.question.question_id];
+                    if (oldAnswer != null) {
+                        $scope.model.answer = oldAnswer;
                     } else {
-                        $scope.model.answer = null;
+                        $scope.model.answer = [];
                     }
                 } else {
                     var index = $scope.test.questions.indexOf($scope.question);
-                    $scope.question = nextFailedQuestion(index);
-                    $scope.model.answer = null;
+                    $scope.question = nextFailedQuestion(index + 1);
+                    $scope.model.answer = [];
                 }
 
             };
+
+            $scope.length = Cols.length;
 
             TestService.get($stateParams.courseId).success(function(test) {
                 $scope.test = test;
@@ -90,35 +94,36 @@
             $scope.submit = function() {
                 acceptAnswer();
 
-                $scope.question = null;
-                $scope.model.answer = null;
+                TestService.submit($scope.model.answers, $stateParams.courseId, function(result) {
+                    $scope.result = result;
+                    if (result.passed) {
+                        CourseService.get($stateParams.courseId).success(function(course) {
+                            $scope.test.title = course.title;
+                        });
+                    }
+                });
 
-                $scope.result = TestService.submit({answers: $scope.model.answers, round: $scope.round});
+                $scope.question = null;
             };
 
             $scope.nextRound = function() {
-                function getCorrect(i, corrects) {
-                    for (var j = 0; j < corrects.length; j++) {
-                        var correct = corrects[j];
-                        if (correct.question * 1 == i) {
-                            return correct;
-                        }
-                    }
-                    return null;
-                }
 
                 $scope.round++;
 
                 for (var i = 0; i < $scope.test.questions.length; i++) {
                     var question = $scope.test.questions[i];
 
-                    var correct = getCorrect(i, $scope.result.corrects);
+                    var correct = $scope.result.corrects[question.question_id];
                     if (correct != null) {
                         question.correct = true;
-                        question.explanation = correct.explanation;
+                        //correct	Boolean
+                        //correct_response_heading	String
+                        //correct_response_text
+                        question.correct_response_heading = correct.correct_response_heading;
+                        question.correct_response_text = correct.correct_response_text;
                     } else {
                         question.correct = false;
-                        $scope.model.answers[i] = null;
+                        delete $scope.model.answers[question.question_id];
                     }
                 }
 

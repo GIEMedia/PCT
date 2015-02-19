@@ -30,19 +30,26 @@
                 <div class="col col-1of2">
                     <div class="test-question-answers">
                         <div class="form-body">
+
+
+                            <!-- TODO image options? -->
+
+
                             <div class="course-question-options" ng-class="question.correct == null ? '' : question.correct ? 'correct' : 'retry'">
                                 <div class="course-question-option course-question-option-header" ng-if="question.correct != null">
-                                    {{question.correct ? 'Correct!' : 'Retry'}}
+                                    {{question.correct ? question.correct_response_heading : 'Retry'}}
                                 </div>
 
-                                <div class="course-question-option" ng-repeat="option in question.options" ng-if="!question.correct || model.answer == $index" >
-                                    <input type="radio" name="radio" id="option{{$index}}" ng-click="model.answer = $index" ng-checked="model.answer == $index">
+                                <div class="course-question-option" ng-repeat="option in question.options" ng-if="!question.correct || model.answer.indexOf(option.option_id) > -1" >
+
+                                    <input type="checkbox" id="option{{$index}}" value="{{option.option_id}}" ng-model="model.answer[$index]" ng-if="question.multi_select">
+                                    <input type="radio" id="option{{$index}}" value="{{option.option_id}}" ng-model="model.answer[0]" ng-if="!question.multi_select">
 
                                     <label for="option{{$index}}">{{option.text}}</label>
                                 </div><!-- /.course-question-option -->
 
                                 <div class="course-question-option-description" ng-if="question.correct">
-                                    {{ question.explanation }}
+                                    {{ question.correct_response_text }}
                                 </div><!-- /.course-question-option -->
                             </div><!-- /.course-questions-options -->
                         </div><!-- /.form-body -->
@@ -60,18 +67,21 @@
                 <div class="col col-1of2">
                     <div class="test-certificate">
                         <div class="test-certificate-title">
-                            You answered {{ result.corrects.length }} out of {{test.questions.length}} questions correctly.<br />
-                            You may review your answers and try again.
+                            You answered {{ length(result.corrects) }} out of {{test.questions.length}} questions correctly.
+                            <div ng-if="round < 3">
+                                You may review your answers and try again.
+                            </div>
                         </div>
                     </div><!-- /.test-certificate -->
                 </div><!-- /.col col-1of2 -->
 
                 <div class="col col-1of2">
-                    <div class="test-certificate-form">
+                    <div class="test-certificate-form" ng-if="round < 3">
                         <div class="form-head">
                             <h4 class="form-title">Would you like to try again?</h4><!-- /.form-title -->
                         </div><!-- /.form-head -->
 
+                        <!-- TODO This is mock text -->
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed mattis ligula. Pellentesque pretium dictum purus, ut venenatis velit dictum in. Pellentesque eu mi eu nisl tincidunt molestie. Aliquam pretium eros ante, a mollis nunc fermentum nec. In a facilisis lectus.
 
                         <div class="form-actions">
@@ -79,6 +89,15 @@
                             <button class="btn btn-green" ng-click="nextRound()">{{round == 1 ? 'Retake Test' : 'Retake Missed Questions'}}</button>
 
                             <!--<input type="submit" value="Retry Missed Questions" class="btn btn-green">-->
+                        </div><!-- /.form-actions -->
+                    </div><!-- /.test-certificate-form -->
+                    <div class="test-certificate-form" ng-if="round >= 3">
+                        <div class="form-head">
+                            <h4 class="form-title"></h4><!-- /.form-title -->
+                        </div><!-- /.form-head -->
+
+                        <div class="form-actions">
+                            <button class="btn btn-lightgray" ng-click="$state.go('dashboard')" >Go back</button>
                         </div><!-- /.form-actions -->
                     </div><!-- /.test-certificate-form -->
                 </div><!-- /.col col-1of2 -->
@@ -91,7 +110,7 @@
                 <div class="col col-1of2">
                     <div class="test-certificate">
                         <h4 class="test-certificate-title">Congratulations!</h4>
-                        <h4 class="test-certificate-title">You've completed the "{{test.test_name}}" module.</h4><!-- /.test-certificate-title -->
+                        <h4 class="test-certificate-title">You've completed the "{{test.title}}" module.</h4><!-- /.test-certificate-title -->
                     </div><!-- /.test-certificate -->
                 </div><!-- /.col col-1of2 -->
 
