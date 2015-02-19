@@ -176,7 +176,14 @@ namespace PST.Api.Controllers
             };
             _entityRepository.Save(course);
 
-            
+            var StateLicensure = new StateLicensure
+            {
+                LicenseNum = "12345",
+                Category = "cat1",
+                StateAbbr = "LA"
+            };
+            _entityRepository.Save(StateLicensure);
+
 
             return course.ID;
         }

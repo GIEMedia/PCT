@@ -3,9 +3,8 @@
 (function () {
 
     angular.module('pct.elearning.api.Course', [
-        'pct.elearning.mock.data.Course'
     ])
-        .factory("CourseService", function($timeout, CourseMockData, UserCourseService, Api) {
+        .factory("CourseService", function($timeout, Api) {
             return {
                 check : function(questionId, courseId, answer) {
                     return Api.put("api/course/answer/" + courseId + "/" + questionId, answer);

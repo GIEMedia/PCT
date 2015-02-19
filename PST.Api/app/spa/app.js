@@ -16,6 +16,7 @@
 
             'pct.elearning.api.Course',
             'pct.elearning.api.Test',
+            'pct.elearning.api.State',
 
             'pct.elearning.landing',
             'pct.elearning.signup',
