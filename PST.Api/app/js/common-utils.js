@@ -17,6 +17,9 @@ StringUtil.isEmpty = function(val) {
 StringUtil.isNotEmpty = function(val) {
     return !StringUtil.isEmpty(val);
 };
+StringUtil.isNotBlank = function(val) {
+    return !StringUtil.isBlank(val);
+};
 
 StringUtil.getLastWord = function(str) {
     return /\b\w+$/.exec(str)[0];
@@ -29,6 +32,19 @@ StringUtil.trim = function(val) {
 
     return val.replace(/^\s+/, "").replace(/\s+$/, "");
 };
+
+StringUtil.equalsIgnoreCase = function(s1, s2) {
+    if (s1 == null) {
+        return s2 == null;
+    }
+    if (s2 == null) {
+        return false;
+    }
+
+    s1 = s1.toLowerCase();
+    s2 = s2.toLowerCase();
+    return s1 == s2;
+}
 
 
 var DateUtil = DateUtil || {};
@@ -427,6 +443,14 @@ Cols.each = function(col, p1) {
     }
 };
 
+Cols.eachEntry = function(obj, p2) {
+	for (var key in obj) {
+		if (obj.hasOwnProperty(key)) {
+			p2(key, obj[key]);
+		}
+	}
+};
+
 /**
  * collect(ele, total)
  */
@@ -448,7 +472,7 @@ Cols.sum = function(col, getNum) {
 };
 
 /**
- * p2<Element,P0 onDone> 
+ * p2<Element,P0 onDone>
  */
 Cols.eachPar = function(col, p2) {
     Cols.eachPar1(0, col, p2);
@@ -482,8 +506,8 @@ Cols.copy = function(arr1) {
     return ret;
 };
 Cols.eachChildRecursive = function(/*A*/ a,
-        /*F1<A, Collection<A>>*/ digF,
-        /*P1<A>*/ p1) {
+                                   /*F1<A, Collection<A>>*/ digF,
+                                   /*P1<A>*/ p1) {
     var col = digF(a);
     if (col==null) {
         return;
@@ -502,6 +526,10 @@ Cols.addList = function(key, value, maps) {
         maps[key] = list;
     }
     list.push(value);
+
+    return function() {
+        Cols.remove(value, list);
+    }
 };
 
 Cols.isEmpty = function(col) {
@@ -580,10 +608,10 @@ Cols.sortBy = function(byF) {
 
         if ((typeof by1) == "string" ) {
             if (by1 < by2)
-                 return -1;
-              if (by1 > by2)
+                return -1;
+            if (by1 > by2)
                 return 1;
-              return 0;
+            return 0;
         }
         return by1 - by2;
     };
@@ -609,7 +637,19 @@ Cols.index = function(col, by) {
 Cols.group = function(col, by) {
     return Cols.values(Cols.index(col, by));
 };
+Cols.arraysEqual = function (a, b) {
+    if (a === b) return true;
+    if (a == null || b == null) return false;
+    if (a.length != b.length) return false;
 
+    // If you don't care about the order of the elements inside
+    // the array, you should sort both arrays here.
+
+    for (var i = 0; i < a.length; ++i) {
+        if (a[i] !== b[i]) return false;
+    }
+    return true;
+};
 
 
 var Async = Async || {};
@@ -617,7 +657,7 @@ var Async = Async || {};
 
 /**
  * var oneRun = Async.oneRun();
- * 
+ *
  * var run1 = oneRun();
  * var run2 = oneRun();
  * // Async post
