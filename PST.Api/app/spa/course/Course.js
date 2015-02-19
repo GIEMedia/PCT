@@ -23,7 +23,8 @@
             CourseService.get($stateParams.id).success(function(course) {
                 $scope.course = course;
             });
-            //$scope.userProgress = UserCourseService.getProgress($stateParams.id);
+
+            // TODO Help API
             $scope.courseHelp = $stateParams.id == "0" ? true : false;
         })
 

@@ -25,6 +25,12 @@
                 answers: {}
             };
 
+
+            // Un-comment code below to develop Submit licensure form
+            //$scope.result = {
+            //    passed: 1
+            //};
+
             TestService.get($stateParams.courseId).success(function(test) {
                 $scope.test = test;
                 fetchNextQuestion();
