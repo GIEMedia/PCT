@@ -444,7 +444,7 @@ namespace PST.Api.Controllers
             return (from a in _entityRepository.Queryable<Account>()
                 where a.ID == CurrentUserID
                 from s in a.StateLicensures
-                select (state_licensure) s).ToArray();
+                select s).ToList().Select(s => (state_licensure) s).ToArray();
         }
 
         [HttpPut]

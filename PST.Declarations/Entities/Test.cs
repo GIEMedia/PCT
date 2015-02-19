@@ -9,6 +9,9 @@ namespace PST.Declarations.Entities
     [Serializable]
     public class Test : Questioned
     {
+        [Transient]
+        public const decimal PassingPercentage = .8M;
+
         public static implicit operator test(Test test)
         {
             if (test == null)
@@ -17,6 +20,7 @@ namespace PST.Declarations.Entities
             return new test
             {
                 test_id = test.ID,
+                passing_percentage = PassingPercentage,
                 questions = test.Questions.Select(q => q.ToModel()).ToArray()
             };
         }
