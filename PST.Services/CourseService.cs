@@ -70,14 +70,22 @@ namespace PST.Services
             if (!course.PrerequisiteCourses.All(c => passedCourses.Contains(c.ID)))
                 throw new Exception("Prerquisites not met.");
 
-            var completedSectionIDs = (from a in _entityRepository.Queryable<Account>()
+            var completedSections = (from a in _entityRepository.Queryable<Account>()
                 where a.ID == accountID.Value
                 from c in a.CourseProgress
                 where c.Course.ID == course.ID
                 from s in c.Sections
-                select s.Section.ID).ToArray();
+                from q in s.CompletedQuestions
+                group q by s
+                into g
+                select g).ToDictionary(g => g.Key.Section.ID, g => g.ToList());
 
-            course.Sections.Where(s => completedSectionIDs.Contains(s.ID)).Apply(a => a.Complete = true);
+            course.Sections.Where(s => completedSections.ContainsKey(s.ID)).Apply(s =>
+            {
+                s.Complete = true;
+                var completedQuestions = completedSections[s.ID].Select(q => q.Question.ID).ToList();
+                s.Questions.Where(q => completedQuestions.Contains(q.ID)).Apply(q => q.Answered = true);
+            });
 
             return course;
         }
@@ -105,7 +113,8 @@ namespace PST.Services
                     where c.Course.ID == courseID
                     select c).FirstOrDefault();
 
-                if (courseProgress == null || courseProgress.Sections.Any(s => !s.Passed))
+                if (courseProgress == null || courseProgress.Sections.Any(s => !s.Passed) ||
+                    courseProgress.Sections.Count != courseProgress.TotalSections)
                     return null;
 
                 if(courseProgress.TestProgress != null)
@@ -158,7 +167,7 @@ namespace PST.Services
                     questionedProgress.LastActivityUtc =
                         questionProgress.LastActivityUtc = DateTime.UtcNow;
 
-                questionedProgress.TotalQuestions = course.Test.Questions.Count;
+                questionedProgress.TotalQuestions = questioned.Questions.Count;
 
                 _entityRepository.Save(courseProgress);
             }

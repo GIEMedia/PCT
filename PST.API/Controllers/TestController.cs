@@ -37,7 +37,10 @@ namespace PST.Api.Controllers
         [Route("{courseID}")]
         public test GetTest(Guid courseID)
         {
-            return _courseService.GetTest(courseID, CurrentUserID);
+            var test = _courseService.GetTest(courseID, CurrentUserID);
+            if (test == null)
+                throw new HttpResponseException(HttpStatusCode.Forbidden);
+            return test;
         }
 
         /// <summary>

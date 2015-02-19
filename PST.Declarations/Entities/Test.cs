@@ -11,10 +11,13 @@ namespace PST.Declarations.Entities
     {
         public static implicit operator test(Test test)
         {
+            if (test == null)
+                return new test();
+
             return new test
             {
                 test_id = test.ID,
-                questions = test.Questions.OfType<Question<Option>>().Select(q => q.ToModel()).ToArray()
+                questions = test.Questions.Select(q => q.ToModel()).ToArray()
             };
         }
 

@@ -34,7 +34,7 @@
 		});
 
 		// Table states dropdown
-		$('.table-states .icon-chevron-down').on('click', function (e) {
+		$('.table-states .table-row-1').on('click', function (e) {
 		    $('.table-states').find('.table-row-1').hide();
 			$('.table-states').find('.table-expand').stop(true, true).slideDown(200);
 

@@ -8,6 +8,6 @@ namespace PST.Declarations.Models
 {
     public class test : questioned
     {
-        public Guid test_id { get; set; }
+        public Guid? test_id { get; set; }
     }
 }

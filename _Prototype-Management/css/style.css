@@ -538,7 +538,7 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .table-row-expand .col-1 .inner { padding: 10px 0 0 0; position: relative; }
 .table-row-expand .col-1 .inner img { display: block; margin: auto; }
 .table-row-expand .col-1 .inner .video-wrapper { width: 300px; margin: auto; }
-.table-row-expand .col-1 .inner .overlay { position: absolute; top: 0; left: 0; width: 323px; height: 190px; background: url(images/blue-45.png); z-index: 10; text-align: center; }
+.table-row-expand .col-1 .inner .overlay { position: absolute; top: 0; left: 0; width: 323px; height: 190px; background: url(images/blue-45.png); text-align: center; }
 .table-row-expand .col-1 .inner .overlay .btn { background: #00aded; border: 1px solid #fff; margin-top: 70px; }
 .table-row-expand .col-1 .inner.hovered .overlay { opacity: 1; -moz-opacity: 1; filter:alpha(opacity=100);  }
 
