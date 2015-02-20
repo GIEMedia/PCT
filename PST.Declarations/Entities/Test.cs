@@ -12,6 +12,9 @@ namespace PST.Declarations.Entities
         [Transient]
         public virtual decimal PassingPercentage { get { return .8M; } }
 
+        [Transient]
+        public virtual int RetriesLeft { get; set; }
+
         public static implicit operator test(Test test)
         {
             if (test == null)
@@ -21,7 +24,8 @@ namespace PST.Declarations.Entities
             {
                 test_id = test.ID,
                 passing_percentage = test.PassingPercentage,
-                questions = test.Questions.Select(q => q.ToModel()).ToArray()
+                questions = test.Questions.Select(q => q.ToModel()).ToArray(),
+                retries_left = test.RetriesLeft
             };
         }
 
@@ -30,7 +34,7 @@ namespace PST.Declarations.Entities
             var questionedProgress = new TestProgress
             {
                 Test = this,
-                TotalQuestions = this.Questions.Count
+                TotalQuestions = this.Questions.Count,
             };
             courseProgress.TestProgress = questionedProgress;
 

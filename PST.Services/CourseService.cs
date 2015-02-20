@@ -74,7 +74,7 @@ namespace PST.Services
                     select c.Course.ID).ToArray();
 
             if (!course.PrerequisiteCourses.All(c => passedCourses.Contains(c.ID)))
-                throw new Exception("Prerquisites not met.");
+                return null;
 
             var completedSections = (from a in _entityRepository.Queryable<Account>()
                 where a.ID == accountID.Value
@@ -123,11 +123,15 @@ namespace PST.Services
                     courseProgress.Sections.Count != courseProgress.TotalSections)
                     return null;
 
-                if(courseProgress.TestProgress != null)
-                    (from a in courseProgress.TestProgress.CompletedQuestions
+                var testProgress = courseProgress.TestProgress ??
+                                   (TestProgress) course.Test.CreateAndAddProgress(courseProgress);
+                {
+                    (from a in testProgress.CompletedQuestions
                         join n in course.Test.Questions
                             on a.Question.ID equals n.ID
                         select n).Apply(a => a.Answered = true);
+                    course.Test.RetriesLeft = testProgress.RetriesLeft;
+                }
             }
 
             return course.Test;

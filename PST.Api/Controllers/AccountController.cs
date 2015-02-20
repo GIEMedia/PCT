@@ -422,7 +422,7 @@ namespace PST.Api.Controllers
             return (from a in _entityRepository.Queryable<Account>()
                 where a.ID == CurrentUserID
                 from m in a.Managers
-                select (manager) m).ToArray();
+                select m).ToList().Select(m => (manager) m).ToArray();
         }
 
         [HttpPut]
