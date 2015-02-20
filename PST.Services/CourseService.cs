@@ -123,11 +123,15 @@ namespace PST.Services
                     courseProgress.Sections.Count != courseProgress.TotalSections)
                     return null;
 
-                if(courseProgress.TestProgress != null)
-                    (from a in courseProgress.TestProgress.CompletedQuestions
+                var testProgress = courseProgress.TestProgress ??
+                                   (TestProgress) course.Test.CreateAndAddProgress(courseProgress);
+                {
+                    (from a in testProgress.CompletedQuestions
                         join n in course.Test.Questions
                             on a.Question.ID equals n.ID
                         select n).Apply(a => a.Answered = true);
+                    course.Test.RetriesLeft = testProgress.RetriesLeft;
+                }
             }
 
             return course.Test;
