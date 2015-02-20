@@ -30,7 +30,7 @@
             };
         })
 
-        .factory("SecurityService", function($http, Api, User, $state) {
+        .factory("SecurityService", function($http, $rootScope, $timeout, Api, User, $state) {
             var fetchUser = function() {
                 Api.get("api/account")
                     .success(function(account) {
@@ -46,7 +46,18 @@
 
             if (sessionStorage.access_token != null && sessionStorage.access_token != "null") {
                 fetchUser();
+            } else {
+                $timeout(function() {
+                    $state.go("landing");
+                }, 0);
             }
+
+            $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+                if (fromState.name == "landing" && sessionStorage.access_token == null) {
+                    event.preventDefault();
+                }
+            });
+
             return {
                 login: function(data) {
                     return $http({

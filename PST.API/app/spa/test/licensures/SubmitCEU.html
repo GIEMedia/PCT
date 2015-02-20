@@ -1,0 +1,50 @@
+
+<div class="test-certificate-form">
+    <div class="form-head">
+        <h4 class="form-title">Do you plan to submit this training for state CEU credit?</h4><!-- /.form-title -->
+    </div><!-- /.form-head -->
+
+    <div class="form-body">
+        <div class="form-row">
+            <label class="form-label">State Licensure(s)</label>
+
+            <form name="form">
+                <div class="form-controls" ng-repeat="stateLicensure in stateLicensures">
+                    <div class="form-controls-actions">
+                        <a href="" class="btn-add" ng-click="stateLicensures.push({})"></a>
+                        <a class="btn-remove" ng-click="stateLicensures.splice($index, 1)"></a>
+                    </div><!-- /.form-controls-actions -->
+
+                    <div class="form-cols-outer">
+                        <div class="form-cols">
+                            <div class="form-col form-col-1of2">
+                                <select class="field" placeholder="State" ng-model="stateLicensure.state" required ng-options="state.code as state.name for state in states">
+                                    <option value="">State</option>
+                                </select>
+                            </div><!-- /.form-col form-col-1of2 -->
+
+                            <div class="form-col form-col-1of2">
+                                <select class="field" placeholder="Certification Category" ng-model="stateLicensure.category" ng-options="category.code as category.name for category in categories" required>
+                                    <option value="">Certification Category</option>
+                                </select>
+                            </div><!-- /.form-col form-col-1of2 -->
+
+                            <div class="form-col form-col-1of2">
+                                <input type="text" class="field" placeholder="License #" ng-model="stateLicensure.license_num" required>
+                            </div><!-- /.form-col form-col-1of2 -->
+
+                            <div class="form-col form-col-1of2">
+                                <input type="text" class="field" placeholder="Confirm License #" ng-model="stateLicensure.confirmNum" required equals="stateLicensure.license_num">
+                            </div><!-- /.form-col form-col-1of2 -->
+                        </div><!-- /.form-cols -->
+                    </div><!-- /.form-cols-outer -->
+                </div><!-- /.form-controls -->
+            </form>
+        </div><!-- /.form-row -->
+    </div><!-- /.form-body -->
+
+    <div class="form-actions">
+        <input type="button" value="No Thanks!" class="btn btn-lightgray" ng-click="$state.go('certificate', {courseId: $stateParams.courseId})">
+        <input type="button" value="Send" class="btn btn-green" ng-click="send()" ng-disabled="form.$invalid">
+    </div><!-- /.form-actions -->
+</div><!-- /.test-certificate-form -->

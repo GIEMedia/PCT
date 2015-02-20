@@ -1,0 +1,144 @@
+
+<div class="container is-scrollable">
+    <div class="test">
+
+        <div class="test-head">
+            <h2>{{test.test_name}}</h2>
+
+            <div class="test-progress">
+                <span class="test-progress-percent">{{ progress() }}</span>
+
+						<span class="test-progress-label">
+							Test Completed
+						</span><!-- /.test-progress-label -->
+
+                <div class="test-progress-bar">
+                    <div class="test-progress-bar-fill" style="width: {{ progress() }}"></div><!-- /.test-progress-bar-fill -->
+                </div><!-- /.test-progress-bar -->
+            </div><!-- /.test-progress -->
+        </div><!-- /.test-head -->
+
+        <div class="test-body">
+
+            <!-- Showing test questions -->
+            <div class="cols clearfix" ng-if="result == null">
+                <div class="col col-1of2">
+                    <div class="test-question">
+
+                        <div class="test-single-media-head" ng-if="question.image">
+                            <i>Use the following image to answer the question below.</i>
+                            <div class="test-single-media-wrapper">
+                                <img ng-src="{{question.image}}" width="360" />
+                                <a href="{{question.image}}" class="js-magnify"></a>
+                            </div>
+                        </div><!-- /.course-question-head -->
+
+                        <div class="test-single-media-head" ng-if="question.video">
+                            <i>Watch the following video to answer the question below.</i>
+                            <div class="test-single-media-wrapper">
+                                <video id="MY_VIDEO_1" class="video-js vjs-default-skin" controls preload="auto" source="question.video">
+                                    <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+                                </video>
+                            </div>
+                        </div><!-- /.course-question-head -->
+
+
+                        <h3 class="test-question-title">{{question.question_text}}</h3><!-- /.test-question-title -->
+                        <h5 ng-if="question.multi_select">(check all that apply)</h5>
+                    </div><!-- /.test-question -->
+                </div><!-- /.col col-1of2 -->
+
+                <div class="col col-1of2">
+                    <div class="test-question-answers">
+                        <div class="form-body">
+
+                            <e-options question="question" answer="model.answer" ng-if="question.correct == null || !question.correct.correct" ng-class="question.correct == null ? '' : 'retry'"></e-options>
+
+                            <div class="course-question-options correct" ng-if="question.correct.correct">
+                                <div class="course-question-option course-question-option-header">
+                                    {{question.correct.correct_response_heading}}
+                                </div>
+
+                                <div class="course-question-option" ng-repeat="option in question.options | filter:hasIdIn(model.answer)"  ng-if="question.correct.correct" >
+
+                                    <input type="radio" checked="checked">
+
+                                    <label>{{option.text}}</label>
+                                </div><!-- /.course-question-option -->
+
+                                <div class="course-question-option-description" ng-if="question.correct.correct">
+                                    {{ question.correct.correct_response_text }}
+                                </div><!-- /.course-question-option -->
+                            </div><!-- /.course-questions-options -->
+                        </div><!-- /.form-body -->
+
+                        <div class="form-actions">
+                            <input type="button" class="btn" value="{{question.correct.correct ? 'Continue' : 'Answer'}}" ng-click="next()" ng-disabled="model.answer == null" ng-if="!lastQuestion()">
+                            <input type="button" class="btn" value="Grade Test!" ng-click="submit()" ng-if="lastQuestion()">
+                        </div><!-- /.form-actions -->
+                    </div><!-- /.test-question-answers -->
+                </div><!-- /.col col-1of2 -->
+            </div><!-- /.cols -->
+
+            <!-- Test result failed -->
+            <div class="cols" ng-if="result != null && result.passed != 1">
+                <div class="col col-1of2">
+                    <div class="test-certificate">
+                        <div class="test-certificate-title">
+                            You answered {{ length(result.corrects) }} out of {{test.questions.length}} questions correctly.
+                            <div ng-if="test.retries_left > 1">
+                                You may review your answers and try again.
+                            </div>
+                        </div>
+                    </div><!-- /.test-certificate -->
+                </div><!-- /.col col-1of2 -->
+
+                <div class="col col-1of2">
+                    <div class="test-certificate-form" ng-if="test.retries_left > 1">
+                        <div class="form-head">
+                            <h4 class="form-title">Would you like to try again?</h4><!-- /.form-title -->
+                        </div><!-- /.form-head -->
+
+                        <!-- TODO This is mock text -->
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed mattis ligula. Pellentesque pretium dictum purus, ut venenatis velit dictum in. Pellentesque eu mi eu nisl tincidunt molestie. Aliquam pretium eros ante, a mollis nunc fermentum nec. In a facilisis lectus.
+
+                        <div class="form-actions">
+                            <button class="btn btn-lightgray" ng-click="$state.go('dashboard')" >No Thanks!</button>
+                            <button class="btn btn-green" ng-click="nextRound()">{{test.retries_left > 2 ? 'Retake Test' : 'Retake Missed Questions'}}</button>
+
+                            <!--<input type="submit" value="Retry Missed Questions" class="btn btn-green">-->
+                        </div><!-- /.form-actions -->
+                    </div><!-- /.test-certificate-form -->
+                    <div class="test-certificate-form" ng-if="test.retries_left == 1">
+                        <div class="form-head">
+                            <h4 class="form-title"></h4><!-- /.form-title -->
+                        </div><!-- /.form-head -->
+
+                        <div class="form-actions">
+                            <button class="btn btn-lightgray" ng-click="$state.go('dashboard')" >Go back</button>
+                        </div><!-- /.form-actions -->
+                    </div><!-- /.test-certificate-form -->
+                </div><!-- /.col col-1of2 -->
+            </div><!-- /.cols -->
+
+            <!-- Test result passed -->
+            <div class="cols" ng-if="result != null && result.passed == 1">
+
+
+                <div class="col col-1of2">
+                    <div class="test-certificate">
+                        <h4 class="test-certificate-title">Congratulations!</h4>
+                        <h4 class="test-certificate-title">You've completed the "{{test.title}}" module.</h4><!-- /.test-certificate-title -->
+                    </div><!-- /.test-certificate -->
+                </div><!-- /.col col-1of2 -->
+
+                <div class="col col-1of2">
+
+                    <submit-ceu/>
+
+                </div><!-- /.col col-1of2 -->
+
+            </div><!-- /.cols -->
+        </div><!-- /.test-body -->
+    </div><!-- /.test -->
+</div><!-- /.container -->

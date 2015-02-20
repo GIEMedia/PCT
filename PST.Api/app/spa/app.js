@@ -38,9 +38,9 @@
         })
 
         .config(function ($compileProvider) {
-            //if ($compileProvider.debugInfoEnabled) {
-            //    $compileProvider.debugInfoEnabled(false);
-            //}
+            if ($compileProvider.debugInfoEnabled) {
+                $compileProvider.debugInfoEnabled(false);
+            }
         })
 
         .config(function ($stateProvider, $urlRouterProvider) {

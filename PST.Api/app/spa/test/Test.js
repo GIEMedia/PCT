@@ -12,7 +12,7 @@
             $stateProvider
                 .state('test', {
                     url: '/test/:courseId',
-                    templateUrl: "/app/spa/test/Test.html",
+                    templateUrl: "/app/spa/test/TestPage.html",
                     controller: "test.Ctrl"
                 })
             ;
