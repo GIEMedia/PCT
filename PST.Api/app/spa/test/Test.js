@@ -19,96 +19,35 @@
         })
 
         .controller("test.Ctrl", function ($scope, TestService, $stateParams, CourseService) {
+            $scope.testView = {
+                progress: "0%"
+            };
             $scope.model = {
                 answer: [],
                 answers: {}
             };
 
-
-            // Un-comment code below to develop Submit licensure form
-            //$scope.result = {
-            //    passed: 1
-            //};
-
             TestService.get($stateParams.courseId).success(function(test) {
                 $scope.test = test;
 
-                // TODO Temp: waiting for real API from Oleg
-                if (test.retries_left == null) {
-                    test.retries_left = 3;
-                }
-                fetchNextQuestion();
+                test.passing_percentage = 0.1;
+
+                CourseService.get($stateParams.courseId).success(function(course) {
+                    $scope.test.title = course.title;
+                });
             });
 
-            var acceptAnswer = function() {
-                if (!$scope.question.correct) {
-                    $scope.model.answers[$scope.question.question_id] = $scope.model.answer;
-                    $scope.model.answer = [];
-                }
-            };
-
-            var nextFailedQuestion = function(index) {
-                if (index == -1) {
-                    index = 0;
-                }
-                for (;index < $scope.test.questions.length;index++) {
-                    var question = $scope.test.questions[index];
-                    if (question.correct == false) {
-                        return question;
-                    }
-                }
-                return null;
-            };
-
-            var fetchNextQuestion = function() {
-                if ($scope.test.retries_left > 1) {
-                    var index = $scope.test.questions.indexOf($scope.question);
-                    $scope.question = $scope.test.questions[index + 1];
-                    var oldAnswer = $scope.model.answers[$scope.question.question_id];
-                    if (oldAnswer != null) {
-                        $scope.model.answer = oldAnswer;
-                    } else {
-                        $scope.model.answer = [];
-                    }
-                } else {
-                    var index = $scope.test.questions.indexOf($scope.question);
-                    $scope.question = nextFailedQuestion(index + 1);
-                    $scope.model.answer = [];
-                }
-
-            };
-
-            $scope.next = function() {
-                acceptAnswer();
-
-                fetchNextQuestion();
-            };
-
-            $scope.lastQuestion = function() {
-                if ($scope.test == null) {
+            $scope.isPassed = function() {
+                if ($scope.result == null) {
                     return false;
                 }
-                if ($scope.test.retries_left > 1) {
-                    return $scope.test.questions.indexOf($scope.question) == $scope.test.questions.length - 1;
-                } else {
-                    var index = $scope.test.questions.indexOf($scope.question);
-                    return nextFailedQuestion(index + 1) == null;
-                }
+                return $scope.result.passed == 1 || ($scope.result.passed > $scope.test.passing_percentage && $scope.test.retries_left == 0);
             };
 
-            $scope.submit = function() {
-                acceptAnswer();
-
+            $scope.doSubmit = function() {
                 TestService.submit($scope.model.answers, $stateParams.courseId, function(result) {
                     $scope.result = result;
-                    if (result.passed == 1 || (result.passed)) {
-                        CourseService.get($stateParams.courseId).success(function(course) {
-                            $scope.test.title = course.title;
-                        });
-                    }
                 });
-
-                $scope.question = null;
             };
 
             $scope.nextRound = function() {
@@ -129,10 +68,7 @@
                 }
 
                 $scope.result = null;
-                fetchNextQuestion();
             };
-
-
 
             $scope.hasIdIn = function(col) {
                 return function(e) {
@@ -141,15 +77,93 @@
             };
             $scope.length = Cols.length;
 
-            $scope.progress = function() {
-                if ($scope.question == null) {
-                    return "100%";
+        })
+
+        .directive("testQuestionsContainer", function() {
+            return {
+                restrict: "E",
+                scope: false,
+                templateUrl: "/app/spa/test/TestQuestionsContainer.html",
+                link: function($scope, elem, attrs) {
+                    $scope.$watch("question", function(value) {
+                        if (value == null) {
+                            $scope.testView.progress = "100%";
+                            return;
+                        }
+                        var index = $scope.test.questions.indexOf(value);
+                        $scope.testView.progress = Math.round(index / $scope.test.questions.length * 100) + "%";
+                    });
+
+                    var nextFailedQuestion = function(index) {
+                        if (index == -1) {
+                            index = 0;
+                        }
+                        for (;index < $scope.test.questions.length;index++) {
+                            var question = $scope.test.questions[index];
+                            if (question.correct == false) {
+                                return question;
+                            }
+                        }
+                        return null;
+                    };
+
+                    $scope.lastQuestion = function() {
+                        if ($scope.test == null) {
+                            return false;
+                        }
+                        if ($scope.test.retries_left > 1) {
+                            return $scope.test.questions.indexOf($scope.question) == $scope.test.questions.length - 1;
+                        } else {
+                            var index = $scope.test.questions.indexOf($scope.question);
+                            return nextFailedQuestion(index + 1) == null;
+                        }
+                    };
+
+
+                    var acceptAnswer = function() {
+                        if (!$scope.question.correct) {
+                            $scope.model.answers[$scope.question.question_id] = $scope.model.answer;
+                            $scope.model.answer = [];
+                        }
+                    };
+                    $scope.next = function() {
+                        acceptAnswer();
+
+                        fetchNextQuestion();
+                    };
+
+                    $scope.submit = function() {
+                        acceptAnswer();
+                        $scope.question = null;
+                        $scope.doSubmit();
+                    };
+
+                    var fetchNextQuestion = function() {
+                        if ($scope.test.retries_left > 1) {
+                            var index = $scope.test.questions.indexOf($scope.question);
+                            $scope.question = $scope.test.questions[index + 1];
+                            var oldAnswer = $scope.model.answers[$scope.question.question_id];
+                            if (oldAnswer != null) {
+                                $scope.model.answer = oldAnswer;
+                            } else {
+                                $scope.model.answer = [];
+                            }
+                        } else {
+                            var index = $scope.test.questions.indexOf($scope.question);
+                            $scope.question = nextFailedQuestion(index + 1);
+                            $scope.model.answer = [];
+                        }
+
+                    };
+
+                    $scope.$watch("test.questions", function(value) {
+                        if (value != null) {
+                            fetchNextQuestion();
+                        }
+                    });
+
                 }
-                var index = $scope.test.questions.indexOf($scope.question);
-
-                return Math.round(index / $scope.test.questions.length * 100) + "%";
             };
-
         })
 
     ;

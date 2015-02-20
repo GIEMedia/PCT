@@ -1,0 +1,59 @@
+
+<div class="cols clearfix" >
+    <div class="col col-1of2">
+        <div class="test-question">
+
+            <div class="test-single-media-head" ng-if="question.image">
+                <i>Use the following image to answer the question below.</i>
+                <div class="test-single-media-wrapper">
+                    <img ng-src="{{question.image}}" width="360" />
+                    <a href="{{question.image}}" class="js-magnify"></a>
+                </div>
+            </div><!-- /.course-question-head -->
+
+            <div class="test-single-media-head" ng-if="question.video">
+                <i>Watch the following video to answer the question below.</i>
+                <div class="test-single-media-wrapper">
+                    <video id="MY_VIDEO_1" class="video-js vjs-default-skin" controls preload="auto" source="question.video">
+                        <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+                    </video>
+                </div>
+            </div><!-- /.course-question-head -->
+
+
+            <h3 class="test-question-title">{{question.question_text}}</h3><!-- /.test-question-title -->
+            <h5 ng-if="question.multi_select">(check all that apply)</h5>
+        </div><!-- /.test-question -->
+    </div><!-- /.col col-1of2 -->
+
+    <div class="col col-1of2">
+        <div class="test-question-answers">
+            <div class="form-body">
+
+                <e-options question="question" answer="model.answer" ng-if="question.correct == null || !question.correct.correct" ng-class="question.correct == null ? '' : 'retry'"></e-options>
+
+                <div class="course-question-options correct" ng-if="question.correct.correct">
+                    <div class="course-question-option course-question-option-header">
+                        {{question.correct.correct_response_heading}}
+                    </div>
+
+                    <div class="course-question-option" ng-repeat="option in question.options | filter:hasIdIn(model.answer)"  ng-if="question.correct.correct" >
+
+                        <input type="radio" checked="checked">
+
+                        <label>{{option.text}}</label>
+                    </div><!-- /.course-question-option -->
+
+                    <div class="course-question-option-description" ng-if="question.correct.correct">
+                        {{ question.correct.correct_response_text }}
+                    </div><!-- /.course-question-option -->
+                </div><!-- /.course-questions-options -->
+            </div><!-- /.form-body -->
+
+            <div class="form-actions">
+                <input type="button" class="btn" value="{{question.correct.correct ? 'Continue' : 'Answer'}}" ng-click="next()" ng-disabled="model.answer == null" ng-if="!lastQuestion()">
+                <input type="button" class="btn" value="Grade Test!" ng-click="submit()" ng-if="lastQuestion()">
+            </div><!-- /.form-actions -->
+        </div><!-- /.test-question-answers -->
+    </div><!-- /.col col-1of2 -->
+</div><!-- /.cols -->
