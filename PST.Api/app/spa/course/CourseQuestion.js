@@ -33,7 +33,8 @@
                 restrict: "E",
                 scope: {
                     "question": "=",
-                    "answer": "="
+                    "answer": "=",
+                    "retry": "="
                 },
                 templateUrl: "/app/spa/course/eOptions.html",
                 link: function($scope, elem, attrs) {

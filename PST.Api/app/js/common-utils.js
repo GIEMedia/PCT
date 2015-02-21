@@ -431,6 +431,22 @@ Cols.merge = function(map1, map2) {
     for ( var k in map2) {
         map1[k] = map2[k];
     }
+    return map1;
+};
+
+/**
+ * Add from map1 to map2
+ * @param map1
+ * @param map2
+ * @returns {*}
+ */
+Cols.mapAddAll = function(map1, map2) {
+    for ( var k in map1) {
+        if (map1.hasOwnProperty(k)) {
+            map2[k] = map1[k];
+        }
+    }
+    return map2;
 };
 
 Cols.eachLine = function(/*final List<F>*/ steps, /*final P2<F,P1<N>>*/ digF, /*final List<N>*/ collecteds, /*final P1<List<N>>*/ resultF) {
@@ -701,6 +717,7 @@ Async.ladyFirst = function() {
             freeToGo = true;
             if (Cols.isNotEmpty(afterLadyDone)) {
                 Fs.invokeAll(afterLadyDone);
+                afterLadyDone = [];
             }
         },
         manTurn: function(func) {

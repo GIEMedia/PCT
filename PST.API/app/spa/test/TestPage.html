@@ -6,14 +6,14 @@
             <h2>{{test.title}}</h2>
 
             <div class="test-progress">
-                <span class="test-progress-percent">{{ testView.progress }}</span>
+                <span class="test-progress-percent">{{ showResult ? '100%' : testView.progress }}</span>
 
 						<span class="test-progress-label">
 							Test Completed
 						</span><!-- /.test-progress-label -->
 
                 <div class="test-progress-bar">
-                    <div class="test-progress-bar-fill" style="width: {{ testView.progress }}"></div><!-- /.test-progress-bar-fill -->
+                    <div class="test-progress-bar-fill" style="width: {{ showResult ? '100%' : testView.progress }}"></div><!-- /.test-progress-bar-fill -->
                 </div><!-- /.test-progress-bar -->
             </div><!-- /.test-progress -->
         </div><!-- /.test-head -->
@@ -21,9 +21,9 @@
         <div class="test-body">
 
             <!-- Showing test questions -->
-            <test-questions-container ng-if="result == null"></test-questions-container>
+            <test-questions-container ng-if="!showResult"></test-questions-container>
 
-            <div ng-if="result != null">
+            <div ng-if="showResult">
 
                 <!-- Test result failed -->
                 <div class="cols" ng-if="!isPassed()">

@@ -2,7 +2,7 @@
 <div class="col col-1of2">
     <div class="test-certificate">
         <div class="test-certificate-title">
-            You answered {{ length(result.corrects) }} out of {{test.questions.length}} questions correctly.
+            You answered {{ length(progress.corrects) }} out of {{test.questions.length}} questions correctly.
             <div ng-if="test.retries_left > 0">
                 You may review your answers and try again.
             </div>
@@ -13,7 +13,7 @@
 <div class="col col-1of2">
 
     <!-- Try again -->
-    <div class="test-certificate-form" ng-if="test.retries_left > 0">
+    <div class="test-certificate-form" ng-if="progress.retries_left > 0">
         <div class="form-head">
             <h4 class="form-title">Would you like to try again?</h4><!-- /.form-title -->
         </div><!-- /.form-head -->
@@ -23,13 +23,13 @@
 
         <div class="form-actions">
             <button class="btn btn-lightgray" ng-click="$state.go('dashboard')" >No Thanks!</button>
-            <button class="btn btn-green" ng-click="nextRound()">{{test.retries_left > 2 ? 'Retake Test' : 'Retake Missed Questions'}}</button>
+            <button class="btn btn-green" ng-click="nextRound()">{{progress.retries_left > 1 ? 'Retake Test' : 'Retake Missed Questions'}}</button>
 
             <!--<input type="submit" value="Retry Missed Questions" class="btn btn-green">-->
         </div><!-- /.form-actions -->
     </div><!-- /.test-certificate-form -->
 
-    <div class="test-certificate-form" ng-if="test.retries_left == 0">
+    <div class="test-certificate-form" ng-if="progress.retries_left == 0">
         <div class="form-head">
             <h4 class="form-title"></h4><!-- /.form-title -->
         </div><!-- /.form-head -->

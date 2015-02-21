@@ -25,57 +25,48 @@
             $scope.model = {
                 answers: {}
             };
-
-            // TODO
-            //$scope.result = {
-            //    passed: 0
-            //};
+            $scope.progress = null;
+            $scope.showResult = false;
 
             TestService.get($stateParams.courseId).success(function(test) {
                 $scope.test = test;
+            });
+
+            TestService.getProgress($stateParams.courseId).success(function(progress) {
+                $scope.progress = progress;
 
                 // TODO
-                test.title = "Mock Test title";
-                //test.retries_left = 0;
+                //progress.retries_left = 0;
+            });
+
+            $scope.$watch(function() { return $scope.test != null && $scope.progress != null;}, function(value) {
+                if (value) {
+                    if ($scope.isPassed() || $scope.progress.retries_left == 0) {
+                        $scope.showResult = true;
+                    }
+                }
             });
 
             $scope.isPassed = function() {
-                if ($scope.result == null) {
+                if ($scope.progress == null || $scope.test == null) {
                     return false;
                 }
-                return $scope.result.passed == 1 || ($scope.result.passed > $scope.test.passing_percentage && $scope.test.retries_left == 0);
+                var correctCount = Cols.length($scope.progress.corrects);
+                return correctCount == $scope.test.questions.length || (correctCount / $scope.test.questions.length >= $scope.test.passing_percentage && $scope.progress.retries_left == 0);
             };
 
             $scope.doSubmit = function() {
                 TestService.submit($scope.model.answers, $stateParams.courseId, function(result) {
-                    $scope.result = result;
-                    $scope.test.retries_left--;
+                    $scope.showResult = true;
+                    Cols.mapAddAll(result, $scope.progress.corrects);
+                    $scope.progress.retries_left--;
                 });
             };
 
             $scope.nextRound = function() {
-                for (var i = 0; i < $scope.test.questions.length; i++) {
-                    var question = $scope.test.questions[i];
-
-                    // Merge answer result into questions data
-                    var correct = $scope.result.corrects[question.question_id];
-                    if (correct != null) {
-                        question.correct = correct;
-                    } else {
-                        question.correct = false;
-                        delete $scope.model.answers[question.question_id];
-                    }
-                }
-
-                $scope.result = null;
+                $scope.showResult = false;
+                $scope.model.answers = {};
             };
-
-            $scope.hasIdIn = function(col) {
-                return function(e) {
-                    return col.indexOf(e.option_id) > -1;
-                }
-            };
-            $scope.length = Cols.length;
 
         })
 
@@ -104,7 +95,9 @@
                         }
                         for (;index < $scope.test.questions.length;index++) {
                             var question = $scope.test.questions[index];
-                            if (question.correct == false) {
+
+                            var correctModel = $scope.progress.corrects[question.question_id];
+                            if (correctModel == null) {
                                 return question;
                             }
                         }
@@ -112,10 +105,10 @@
                     };
 
                     $scope.lastQuestion = function() {
-                        if ($scope.test == null) {
+                        if ($scope.test == null || $scope.progress == null) {
                             return false;
                         }
-                        if ($scope.test.retries_left > 1) {
+                        if ($scope.progress.retries_left > 1) {
                             return $scope.test.questions.indexOf($scope.question) == $scope.test.questions.length - 1;
                         } else {
                             var index = $scope.test.questions.indexOf($scope.question);
@@ -125,7 +118,8 @@
 
 
                     var acceptAnswer = function() {
-                        if (!$scope.question.correct) {
+                        var correctModel = $scope.progress.corrects[$scope.question.question_id];
+                        if (correctModel == null) {
                             $scope.model.answers[$scope.question.question_id] = $scope.tqc.answer;
                             $scope.tqc.answer = [];
                         }
@@ -138,34 +132,41 @@
 
                     $scope.submit = function() {
                         acceptAnswer();
-                        $scope.question = null;
                         $scope.doSubmit();
                     };
 
                     var fetchNextQuestion = function() {
-                        if ($scope.test.retries_left > 1) {
-                            var index = $scope.test.questions.indexOf($scope.question);
+                        $scope.tqc.answer = [];
+                        var index = $scope.test.questions.indexOf($scope.question);
+
+                        if ($scope.progress.retries_left > 1) {
                             $scope.question = $scope.test.questions[index + 1];
-                            var oldAnswer = $scope.model.answers[$scope.question.question_id];
-                            if (oldAnswer != null) {
-                                $scope.tqc.answer = oldAnswer;
-                            } else {
-                                $scope.tqc.answer = [];
-                            }
                         } else {
-                            var index = $scope.test.questions.indexOf($scope.question);
                             $scope.question = nextFailedQuestion(index + 1);
-                            $scope.tqc.answer = [];
                         }
 
                     };
 
-                    $scope.$watch("test.questions", function(value) {
-                        if (value != null) {
-                            fetchNextQuestion();
+                    var waitTestAvai = Async.ladyFirst();
+                    $scope.$watch(function() { return $scope.test != null && $scope.progress != null;}, function(value) {
+                        if (value) {
+                            waitTestAvai.ladyDone();
                         }
                     });
 
+                    $scope.$watch("showResult", function(value) {
+                        if (value != null && !value) {
+                            waitTestAvai.manTurn(function() {
+                                fetchNextQuestion();
+                            });
+                        }
+                    });
+
+                    $scope.hasIdIn = function(col) {
+                        return function(e) {
+                            return col.indexOf(e.option_id) > -1;
+                        }
+                    };
                 }
             };
         })
@@ -183,6 +184,7 @@
                 restrict: "E",
                 templateUrl: "/app/spa/test/TestFailed.html",
                 link: function($scope, elem, attrs) {
+                    $scope.length = Cols.length;
                 }
             };
         })

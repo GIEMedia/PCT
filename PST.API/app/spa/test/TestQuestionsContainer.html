@@ -30,28 +30,29 @@
         <div class="test-question-answers">
             <div class="form-body">
 
-                <e-options question="question" answer="tqc.answer" ng-if="question.correct == null || !question.correct.correct" ng-class="question.correct == null ? '' : 'retry'"></e-options>
+                <e-options question="question" answer="tqc.answer" ng-if="progress.corrects[question.question_id] == null" ng-class="progress.retries_left == 3 ? '' : 'retry'" retry="progress.retries_left != progress.max_retries"></e-options>
 
-                <div class="course-question-options correct" ng-if="question.correct.correct">
+                <div class="course-question-options correct" ng-if="progress.corrects[question.question_id]">
                     <div class="course-question-option course-question-option-header">
-                        {{question.correct.correct_response_heading}}
+                        {{progress.corrects[question.question_id].correct_response_heading}}
                     </div>
 
-                    <div class="course-question-option" ng-repeat="option in question.options | filter:hasIdIn(tqc.answer)"  ng-if="question.correct.correct" >
+                    <div class="course-question-option" ng-repeat="option in question.options | filter:hasIdIn(progress.corrects[question.question_id].answer)"  ng-if="progress.corrects[question.question_id]" >
 
                         <input type="radio" checked="checked">
 
                         <label>{{option.text}}</label>
                     </div><!-- /.course-question-option -->
 
-                    <div class="course-question-option-description" ng-if="question.correct.correct">
-                        {{ question.correct.correct_response_text }}
+                    <div class="course-question-option-description" ng-if="progress.corrects[question.question_id]">
+                        {{ progress.corrects[question.question_id].correct_response_text }}
                     </div><!-- /.course-question-option -->
                 </div><!-- /.course-questions-options -->
             </div><!-- /.form-body -->
 
             <div class="form-actions">
-                <input type="button" class="btn" value="{{question.correct.correct ? 'Continue' : 'Answer'}}" ng-click="next()" ng-disabled="tqc.answer == null" ng-if="!lastQuestion()">
+                <input type="button" class="btn" value="Continue" ng-click="next()" ng-if="!lastQuestion() && progress.corrects[question.question_id]">
+                <input type="button" class="btn" value="Answer" ng-click="next()" ng-disabled="(tqc.answer.length || 0) == 0" ng-if="!lastQuestion() && progress.corrects[question.question_id] == null">
                 <input type="button" class="btn" value="Grade Test!" ng-click="submit()" ng-if="lastQuestion()">
             </div><!-- /.form-actions -->
         </div><!-- /.test-question-answers -->
