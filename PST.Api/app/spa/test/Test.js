@@ -34,9 +34,6 @@
 
             TestService.getProgress($stateParams.courseId).success(function(progress) {
                 $scope.progress = progress;
-
-                // TODO
-                //progress.retries_left = 0;
             });
 
             $scope.$watch(function() { return $scope.test != null && $scope.progress != null;}, function(value) {

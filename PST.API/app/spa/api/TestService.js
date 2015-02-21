@@ -28,7 +28,7 @@
             var testFirst = Async.ladyFirst();
 
             var _progress = {
-                retries_left : 0,
+                retries_left : 3,
                 max_retries: 3
             };
 
