@@ -18,23 +18,25 @@
             ;
         })
 
-        .controller("test.Ctrl", function ($scope, TestService, $stateParams, CourseService) {
+        .controller("test.Ctrl", function ($scope, TestService, $stateParams) {
             $scope.testView = {
-                progress: "0%"
+                progress: "100%"
             };
             $scope.model = {
-                answer: [],
                 answers: {}
             };
+
+            // TODO
+            //$scope.result = {
+            //    passed: 0
+            //};
 
             TestService.get($stateParams.courseId).success(function(test) {
                 $scope.test = test;
 
-                test.passing_percentage = 0.1;
-
-                CourseService.get($stateParams.courseId).success(function(course) {
-                    $scope.test.title = course.title;
-                });
+                // TODO
+                test.title = "Mock Test title";
+                //test.retries_left = 0;
             });
 
             $scope.isPassed = function() {
@@ -47,13 +49,11 @@
             $scope.doSubmit = function() {
                 TestService.submit($scope.model.answers, $stateParams.courseId, function(result) {
                     $scope.result = result;
+                    $scope.test.retries_left--;
                 });
             };
 
             $scope.nextRound = function() {
-
-                $scope.test.retries_left--;
-
                 for (var i = 0; i < $scope.test.questions.length; i++) {
                     var question = $scope.test.questions[i];
 
@@ -85,6 +85,10 @@
                 scope: false,
                 templateUrl: "/app/spa/test/TestQuestionsContainer.html",
                 link: function($scope, elem, attrs) {
+                    $scope.tqc = {
+                        answer: []
+                    };
+
                     $scope.$watch("question", function(value) {
                         if (value == null) {
                             $scope.testView.progress = "100%";
@@ -122,8 +126,8 @@
 
                     var acceptAnswer = function() {
                         if (!$scope.question.correct) {
-                            $scope.model.answers[$scope.question.question_id] = $scope.model.answer;
-                            $scope.model.answer = [];
+                            $scope.model.answers[$scope.question.question_id] = $scope.tqc.answer;
+                            $scope.tqc.answer = [];
                         }
                     };
                     $scope.next = function() {
@@ -144,14 +148,14 @@
                             $scope.question = $scope.test.questions[index + 1];
                             var oldAnswer = $scope.model.answers[$scope.question.question_id];
                             if (oldAnswer != null) {
-                                $scope.model.answer = oldAnswer;
+                                $scope.tqc.answer = oldAnswer;
                             } else {
-                                $scope.model.answer = [];
+                                $scope.tqc.answer = [];
                             }
                         } else {
                             var index = $scope.test.questions.indexOf($scope.question);
                             $scope.question = nextFailedQuestion(index + 1);
-                            $scope.model.answer = [];
+                            $scope.tqc.answer = [];
                         }
 
                     };
@@ -166,6 +170,22 @@
             };
         })
 
+        .directive("testPassed", function() {
+            return {
+                restrict: "E",
+                templateUrl: "/app/spa/test/TestPassed.html",
+                link: function($scope, elem, attrs) {
+                }
+            };
+        })
+        .directive("testFailed", function() {
+            return {
+                restrict: "E",
+                templateUrl: "/app/spa/test/TestFailed.html",
+                link: function($scope, elem, attrs) {
+                }
+            };
+        })
     ;
 
 })();

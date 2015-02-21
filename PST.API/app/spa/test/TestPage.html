@@ -23,65 +23,21 @@
             <!-- Showing test questions -->
             <test-questions-container ng-if="result == null"></test-questions-container>
 
-            <!-- Test result failed -->
-            <div class="cols" ng-if="result != null && !isPassed()">
-                <div class="col col-1of2">
-                    <div class="test-certificate">
-                        <div class="test-certificate-title">
-                            You answered {{ length(result.corrects) }} out of {{test.questions.length}} questions correctly.
-                            <div ng-if="test.retries_left > 1">
-                                You may review your answers and try again.
-                            </div>
-                        </div>
-                    </div><!-- /.test-certificate -->
-                </div><!-- /.col col-1of2 -->
+            <div ng-if="result != null">
 
-                <div class="col col-1of2">
-                    <div class="test-certificate-form" ng-if="test.retries_left > 1">
-                        <div class="form-head">
-                            <h4 class="form-title">Would you like to try again?</h4><!-- /.form-title -->
-                        </div><!-- /.form-head -->
+                <!-- Test result failed -->
+                <div class="cols" ng-if="!isPassed()">
+                    <test-failed></test-failed>
+                </div>
 
-                        <!-- TODO This is mock text -->
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed mattis ligula. Pellentesque pretium dictum purus, ut venenatis velit dictum in. Pellentesque eu mi eu nisl tincidunt molestie. Aliquam pretium eros ante, a mollis nunc fermentum nec. In a facilisis lectus.
 
-                        <div class="form-actions">
-                            <button class="btn btn-lightgray" ng-click="$state.go('dashboard')" >No Thanks!</button>
-                            <button class="btn btn-green" ng-click="nextRound()">{{test.retries_left > 2 ? 'Retake Test' : 'Retake Missed Questions'}}</button>
-
-                            <!--<input type="submit" value="Retry Missed Questions" class="btn btn-green">-->
-                        </div><!-- /.form-actions -->
-                    </div><!-- /.test-certificate-form -->
-                    <div class="test-certificate-form" ng-if="test.retries_left == 1">
-                        <div class="form-head">
-                            <h4 class="form-title"></h4><!-- /.form-title -->
-                        </div><!-- /.form-head -->
-
-                        <div class="form-actions">
-                            <button class="btn btn-lightgray" ng-click="$state.go('dashboard')" >Go back</button>
-                        </div><!-- /.form-actions -->
-                    </div><!-- /.test-certificate-form -->
-                </div><!-- /.col col-1of2 -->
+                <!-- Test result passed -->
+                <div class="cols" ng-if="isPassed()">
+                    <test-passed></test-passed>
+                </div><!-- /.cols -->
             </div><!-- /.cols -->
 
-            <!-- Test result passed -->
 
-            <div class="cols" ng-if="isPassed()">
-
-                <div class="col col-1of2">
-                    <div class="test-certificate">
-                        <h4 class="test-certificate-title">Congratulations!</h4>
-                        <h4 class="test-certificate-title">You've completed the "{{test.title}}" module.</h4><!-- /.test-certificate-title -->
-                    </div><!-- /.test-certificate -->
-                </div><!-- /.col col-1of2 -->
-
-                <div class="col col-1of2">
-
-                    <submit-ceu/>
-
-                </div><!-- /.col col-1of2 -->
-
-            </div><!-- /.cols -->
         </div><!-- /.test-body -->
     </div><!-- /.test -->
 </div><!-- /.container -->

@@ -1,0 +1,41 @@
+
+<div class="col col-1of2">
+    <div class="test-certificate">
+        <div class="test-certificate-title">
+            You answered {{ length(result.corrects) }} out of {{test.questions.length}} questions correctly.
+            <div ng-if="test.retries_left > 0">
+                You may review your answers and try again.
+            </div>
+        </div>
+    </div><!-- /.test-certificate -->
+</div><!-- /.col col-1of2 -->
+
+<div class="col col-1of2">
+
+    <!-- Try again -->
+    <div class="test-certificate-form" ng-if="test.retries_left > 0">
+        <div class="form-head">
+            <h4 class="form-title">Would you like to try again?</h4><!-- /.form-title -->
+        </div><!-- /.form-head -->
+
+        <!-- TODO This is mock text -->
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sed mattis ligula. Pellentesque pretium dictum purus, ut venenatis velit dictum in. Pellentesque eu mi eu nisl tincidunt molestie. Aliquam pretium eros ante, a mollis nunc fermentum nec. In a facilisis lectus.
+
+        <div class="form-actions">
+            <button class="btn btn-lightgray" ng-click="$state.go('dashboard')" >No Thanks!</button>
+            <button class="btn btn-green" ng-click="nextRound()">{{test.retries_left > 2 ? 'Retake Test' : 'Retake Missed Questions'}}</button>
+
+            <!--<input type="submit" value="Retry Missed Questions" class="btn btn-green">-->
+        </div><!-- /.form-actions -->
+    </div><!-- /.test-certificate-form -->
+
+    <div class="test-certificate-form" ng-if="test.retries_left == 0">
+        <div class="form-head">
+            <h4 class="form-title"></h4><!-- /.form-title -->
+        </div><!-- /.form-head -->
+
+        <div class="form-actions">
+            <button class="btn btn-lightgray" ng-click="$state.go('dashboard')" >Go back</button>
+        </div><!-- /.form-actions -->
+    </div><!-- /.test-certificate-form -->
+</div><!-- /.col col-1of2 -->

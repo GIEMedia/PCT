@@ -30,14 +30,14 @@
         <div class="test-question-answers">
             <div class="form-body">
 
-                <e-options question="question" answer="model.answer" ng-if="question.correct == null || !question.correct.correct" ng-class="question.correct == null ? '' : 'retry'"></e-options>
+                <e-options question="question" answer="tqc.answer" ng-if="question.correct == null || !question.correct.correct" ng-class="question.correct == null ? '' : 'retry'"></e-options>
 
                 <div class="course-question-options correct" ng-if="question.correct.correct">
                     <div class="course-question-option course-question-option-header">
                         {{question.correct.correct_response_heading}}
                     </div>
 
-                    <div class="course-question-option" ng-repeat="option in question.options | filter:hasIdIn(model.answer)"  ng-if="question.correct.correct" >
+                    <div class="course-question-option" ng-repeat="option in question.options | filter:hasIdIn(tqc.answer)"  ng-if="question.correct.correct" >
 
                         <input type="radio" checked="checked">
 
@@ -51,7 +51,7 @@
             </div><!-- /.form-body -->
 
             <div class="form-actions">
-                <input type="button" class="btn" value="{{question.correct.correct ? 'Continue' : 'Answer'}}" ng-click="next()" ng-disabled="model.answer == null" ng-if="!lastQuestion()">
+                <input type="button" class="btn" value="{{question.correct.correct ? 'Continue' : 'Answer'}}" ng-click="next()" ng-disabled="tqc.answer == null" ng-if="!lastQuestion()">
                 <input type="button" class="btn" value="Grade Test!" ng-click="submit()" ng-if="lastQuestion()">
             </div><!-- /.form-actions -->
         </div><!-- /.test-question-answers -->
