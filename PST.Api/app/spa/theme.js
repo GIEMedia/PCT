@@ -100,6 +100,24 @@
                 }
             };
         })
+
+        .directive("eFocus", function($parse) {
+            return {
+                restrict: "A",
+                scope: false,
+                link: function($scope, elem, attrs) {
+                    var focusModel = $parse(attrs.eFocus);
+
+                    $scope.$watch(attrs.eFocus, function(value) {
+                        if (value) {
+                            elem.focus();
+                            focusModel.assign($scope, false);
+                        }
+                    });
+
+                }
+            };
+        })
     ;
 
 })();

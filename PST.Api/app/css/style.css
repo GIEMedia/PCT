@@ -198,6 +198,7 @@ h6 { font-size: 12px; text-transform: uppercase; line-height: 1.2; }
 .field:focus { border-color: #878787; color: #404040; }
 
 .field.has-error { border-color: red; }
+.text-danger { color: red; }
 
 form.ng-dirty .ng-invalid { border-color: red; }
 
@@ -659,3 +660,8 @@ a.form-label { color: #404040 !important; }
 .fa.fa-print { color: #42b3e0; }
 .fa.fa-download { color: #e97c00; }
 .fa.fa-expand { color: #5fd771; }
+
+input.btn[disabled] {
+	background: #88DDFC;
+	cursor: not-allowed;
+}
