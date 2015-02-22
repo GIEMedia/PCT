@@ -347,7 +347,6 @@
     <Content Include="app\css\images\temp\img-answer4.jpg" />
     <Content Include="app\css\images\temp\img-answer5.jpg" />
     <Content Include="app\css\images\temp\img-answer6.jpg" />
-    <Content Include="app\css\images\temp\pdf-placeholder.jpg" />
     <Content Include="app\css\images\temp\pdf-placeholder1.jpg" />
     <Content Include="app\css\images\temp\pdf-placeholder2.jpg" />
     <Content Include="app\css\images\temp\pdf-placeholder3.jpg" />
@@ -375,11 +374,13 @@
     <Content Include="app\js\momentjs_2.8.3\angular-moment.min.js" />
     <Content Include="app\js\momentjs_2.8.3\moment.min.js" />
     <Content Include="app\spa\api\AccountService.js" />
+    <Content Include="app\spa\api\CertificateService.js" />
     <Content Include="app\spa\api\CourseService.js" />
+    <Content Include="app\spa\api\ManagerService.js" />
     <Content Include="app\spa\api\SecurityService.js" />
+    <Content Include="app\spa\api\StateLicensureService.js" />
     <Content Include="app\spa\api\StateService.js" />
     <Content Include="app\spa\api\TestService.js" />
-    <Content Include="app\spa\api\UserCourseService.js" />
     <Content Include="app\spa\app.js" />
     <Content Include="app\spa\authen\authen.js" />
     <Content Include="app\spa\authen\UserInfo.html" />
@@ -395,6 +396,7 @@
     <Content Include="app\spa\course\CourseQuestionsContainer.html" />
     <Content Include="app\spa\course\CourseQuestionsContainer.js" />
     <Content Include="app\spa\course\CourseSectionSlider.js" />
+    <Content Include="app\spa\course\eOptions.html" />
     <Content Include="app\spa\dashboard\Dashboard.html" />
     <Content Include="app\spa\dashboard\Dashboard.js" />
     <Content Include="app\spa\landing\Landing.html" />
@@ -402,25 +404,17 @@
     <Content Include="app\spa\landing\Signup.html" />
     <Content Include="app\spa\landing\Signup.js" />
     <Content Include="app\spa\mock\api\CertificateService.js" />
-    <Content Include="app\spa\mock\api\CourseService.js" />
-    <Content Include="app\spa\mock\api\ProfileService.js" />
-    <Content Include="app\spa\mock\api\StateService.js" />
-    <Content Include="app\spa\mock\api\TestService.js" />
-    <Content Include="app\spa\mock\api\UserCourseService.js" />
     <Content Include="app\spa\mock\data\CertificateData.js" />
-    <Content Include="app\spa\mock\data\CourseData.js" />
-    <Content Include="app\spa\mock\data\CourseTestData.js" />
-    <Content Include="app\spa\mock\data\ProfileData.js" />
-    <Content Include="app\spa\mock\data\StateData.js" />
     <Content Include="app\spa\mock\Mock.js" />
     <Content Include="app\spa\profile\Profile.html" />
     <Content Include="app\spa\profile\Profile.js" />
-    <Content Include="app\spa\test\Certificate.html" />
-    <Content Include="app\spa\test\Certificate.js" />
-    <Content Include="app\spa\test\SubmitCEU.html" />
-    <Content Include="app\spa\test\SubmitCEU.js" />
-    <Content Include="app\spa\test\Test.html" />
+    <Content Include="app\spa\test\certificate\Certificate.html" />
+    <Content Include="app\spa\test\certificate\Certificate.js" />
+    <Content Include="app\spa\test\licensures\SubmitCEU.html" />
+    <Content Include="app\spa\test\licensures\SubmitCEU.js" />
     <Content Include="app\spa\test\Test.js" />
+    <Content Include="app\spa\test\TestPage.html" />
+    <Content Include="app\spa\test\TestQuestionsContainer.html" />
     <Content Include="app\spa\theme.js" />
     <Content Include="app\temp\sample.pdf" />
     <Content Include="Areas\Management\Views\web.config" />
@@ -432,6 +426,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <None Include="Properties\PublishProfiles\Staging.pubxml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>

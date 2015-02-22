@@ -64,6 +64,7 @@ namespace PST.Api.Controllers
                     new Section
                     {
                         Title = "Section 1",
+                        SortOrder = 1,
                         Document = new Document
                         {
                             PageCount = 2,
@@ -74,7 +75,7 @@ namespace PST.Api.Controllers
                         {
                             new SingleImageQuestion
                             {
-                                QuestionText = "1 Question test 1",
+                                QuestionText = "S1 Question 1",
                                 CorrectResponseHeading = "Correct!",
                                 CorrectResponseText = "Yay",
                                 ImageUrl = "app/css/images/temp/img-answer-large.jpg",
@@ -87,7 +88,7 @@ namespace PST.Api.Controllers
                             },
                             new TextQuestion
                             {
-                                QuestionText = "1 Question test 2",
+                                QuestionText = "S1 Question 2",
                                 CorrectResponseHeading = "Correct!",
                                 CorrectResponseText = "Yay",
                                 SortOrder = 2,
@@ -103,6 +104,7 @@ namespace PST.Api.Controllers
                     new Section
                     {
                         Title = "Section 2",
+                        SortOrder = 2,
                         Document = new Document
                         {
                             PageCount = 2,
@@ -113,7 +115,7 @@ namespace PST.Api.Controllers
                         {
                             new SingleImageQuestion
                             {
-                                QuestionText = "2 Question test 1",
+                                QuestionText = "S2 Question 1",
                                 CorrectResponseHeading = "Correct!",
                                 CorrectResponseText = "Yay",
                                 ImageUrl = "app/css/images/temp/img-answer-large.jpg",
@@ -126,7 +128,7 @@ namespace PST.Api.Controllers
                             },
                             new TextQuestion
                             {
-                                QuestionText = "2 Question test 2",
+                                QuestionText = "S2 Question 2",
                                 CorrectResponseHeading = "Correct!",
                                 CorrectResponseText = "Yay",
                                 SortOrder = 2,
@@ -147,7 +149,7 @@ namespace PST.Api.Controllers
                         {
                             new SingleImageQuestion
                             {
-                                QuestionText = "T Question test 1",
+                                QuestionText = "T Question 1",
                                 CorrectResponseHeading = "Correct!",
                                 CorrectResponseText = "Yay",
                                 ImageUrl = "app/css/images/temp/img-answer-large.jpg",
@@ -160,7 +162,7 @@ namespace PST.Api.Controllers
                             },
                             new TextQuestion
                             {
-                                QuestionText = "T Question test 2",
+                                QuestionText = "T Question 2",
                                 CorrectResponseHeading = "Correct!",
                                 CorrectResponseText = "Yay",
                                 SortOrder = 2,
