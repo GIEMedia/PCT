@@ -1,0 +1,45 @@
+<form name="form">
+    <div class="form-body">
+        <div class="form-row">
+            <div class="form-section-head">
+                <h4 class="form-section-title">Manager(s)</h4>
+            </div>
+
+            <div ng-if="(managers.length || 0 ) == 0" class="no-record">
+                <div class="form-controls-actions">
+                    <a href="" class="btn-add thin" ng-click="managers.push({})"></a>
+                </div><!-- /.form-controls-actions -->
+
+                <div class="form-cols-outer">
+
+                    <div class="form-cols">
+                        <div class="form-col form-col-2of2">
+                            No managers(s) is available
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-controls" ng-repeat="manager in managers">
+                <div class="form-controls-actions">
+                    <a href="" class="btn-add thin" ng-click="managers.push({})"></a>
+                    <a href="" class="btn-remove thin" ng-click="managers.splice($index, 1)"></a>
+                </div><!-- /.form-controls-actions -->
+                <div class="form-cols-outer">
+                    <div class="form-cols">
+                        <div class="form-col form-col-1of2">
+                            <input type="text" class="field" placeholder="Name" ng-model="manager.name" required>
+                        </div><!-- /.form-col form-col-1of2 -->
+
+                        <div class="form-col form-col-1of2">
+                            <input type="email" class="field" placeholder="Email Address" ng-model="manager.email" required>
+                        </div><!-- /.form-col form-col-1of2 -->
+                    </div><!-- /.form-cols -->
+                </div><!-- /.form-cols-outer -->
+            </div><!-- /.form-controls -->
+        </div>
+    </div>
+    <div class="form-actions">
+        <input type="submit" class="btn" value="Update Managers" ng-disabled="equals(managersMaster, managers) || form.$invalid" ng-click="update()">
+    </div><!-- /.form-actions -->
+</form>

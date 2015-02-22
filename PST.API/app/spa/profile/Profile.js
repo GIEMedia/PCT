@@ -15,27 +15,19 @@
             ;
         })
         
-        .controller("profile.Ctrl", function ($scope, CertificateService ) {
-            $scope.stateLicensures = [
-            ];
-            $scope.managers = [
-            ];
+        .controller("profile.Ctrl", function ($scope, StateService ) {
 
-            //return angular.equals(SystemConfigService.config, $scope.config);
-
+            $scope.states = StateService.getStates();
             $scope.equals = angular.equals;
 
-            $scope.certificateCategories = CertificateService.getCertificateCategories();
         })
 
-        .directive("accountForm", function(AccountService, StateService) {
+        .directive("accountForm", function(AccountService) {
             return {
                 restrict: "E",
+                scope: true,
                 templateUrl: "/app/spa/profile/AccountForm.html",
                 link: function($scope, elem, attrs) {
-
-                    $scope.states = StateService.getStates();
-
                     AccountService.getAccount().success(function(account) {
                         $scope.userInfo = account;
                         $scope.userInfoMaster = angular.copy($scope.userInfo);
@@ -53,6 +45,7 @@
         .directive("passwordForm", function(AccountService) {
             return {
                 restrict: "E",
+                scope: true,
                 templateUrl: "/app/spa/profile/PasswordForm.html",
                 link: function($scope, elem, attrs) {
                     function newForm() {
@@ -83,7 +76,6 @@
                     };
 
                     $scope.$watch("error != null && passwordForm.old_password.length", function(value) {
-                        console.log(value);
                         if (value) {
                             $scope.error = null;
                         }
@@ -91,6 +83,51 @@
                     
                     $scope.invalid = function() {
                         return StringUtil.isEmpty($scope.passwordForm.old_password);
+                    };
+                }
+            };
+        })
+
+        .directive("stateLicensuresForm", function(CertificateService, StateLicensureService) {
+            return {
+                restrict: "E",
+                scope: true,
+                templateUrl: "/app/spa/profile/StateLicensuresForm.html",
+                link: function($scope, elem, attrs) {
+                    StateLicensureService.get().success(function(sls) {
+                        $scope.stateLicensures = sls;
+                        for (var i = 0; i < sls.length; i++) {
+                            var sl = sls[i];
+                            sl.confirmNum = sl.license_num;
+                        }
+                        $scope.stateLicensuresMaster = angular.copy($scope.stateLicensures);
+                    });
+                    $scope.certificateCategories = CertificateService.getCertificateCategories();
+
+
+                    $scope.update = function() {
+                        StateLicensureService.update($scope.stateLicensures).success(function() {
+                            $scope.stateLicensuresMaster = angular.copy($scope.stateLicensures);
+                        });
+                    };
+                }
+            };
+        })
+        .directive("managersForm", function(ManagerService) {
+            return {
+                restrict: "E",
+                scope: true,
+                templateUrl: "/app/spa/profile/ManagersForm.html",
+                link: function($scope, elem, attrs) {
+                    ManagerService.get().success(function(managers) {
+                        $scope.managers = managers;
+                        $scope.managersMaster = angular.copy($scope.managers);
+                    });
+
+                    $scope.update = function() {
+                        ManagerService.update($scope.managers).success(function() {
+                            $scope.managersMaster = angular.copy($scope.managers);
+                        });
                     };
                 }
             };

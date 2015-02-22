@@ -10,6 +10,9 @@
                 get : function() {
                     return Api.get("api/account/licensures");
                 },
+                update: function(licensures) {
+                    return Api.put("api/account/licensures", licensures);
+                },
                 send : function(courseId, licensures) {
                     return Api.put("api/test/send/licensure/" + courseId, licensures);
                 }

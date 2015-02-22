@@ -3,7 +3,7 @@
 (function () {
 
     angular.module('pct.elearning.api.Certificate', [
-        'pct.elearning.mock.data.Certificate'
+        'pct.elearning.data.Certificate'
     ])
         .factory("CertificateService", function(Api, CertificateMockData) {
             return {

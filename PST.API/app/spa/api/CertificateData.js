@@ -2,7 +2,7 @@
 
 (function () {
 
-    angular.module('pct.elearning.mock.data.Certificate', [
+    angular.module('pct.elearning.data.Certificate', [
     ])
 
         .value("CertificateMockData", {

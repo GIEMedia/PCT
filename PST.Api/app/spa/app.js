@@ -9,8 +9,6 @@
             'pct.elearning.test',
             'pct.elearning.certificate',
 
-            'pct.elearning.mock',
-
             'pct.elearning.api.Account',
             'pct.elearning.api.Security',
 
