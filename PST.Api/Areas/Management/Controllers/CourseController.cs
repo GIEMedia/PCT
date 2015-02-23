@@ -24,7 +24,7 @@ namespace PST.Api.Areas.Management.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("list")]
-        public m_course_overview[] GetCourses(bool activeOnly)
+        public m_course_overview[] GetCourses(bool activeOnly = false)
         {
             //var courses = _courseService.GetCourses().Select(c => new m_course
             //{
@@ -79,7 +79,7 @@ namespace PST.Api.Areas.Management.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("category/{topCategoryID?}")]
-        public m_category AddCategory(Guid? topCategoryID, string title)
+        public m_category UpsertCategory(Guid? topCategoryID, [FromBody]string title)
         {
             return new m_category();
         }

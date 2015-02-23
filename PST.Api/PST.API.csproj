@@ -232,6 +232,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\Management\Controllers\HomeController.cs" />
     <Compile Include="Areas\Management\Controllers\ManagementController.cs" />
     <Compile Include="Areas\Management\Controllers\QuestionController.cs" />
     <Compile Include="Areas\Management\Controllers\SectionController.cs" />
@@ -418,6 +419,8 @@
     <Content Include="app\spa\theme.js" />
     <Content Include="app\temp\sample.pdf" />
     <Content Include="Areas\Management\Views\web.config" />
+    <Content Include="Areas\Management\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Management\Views\Home\Index.cshtml" />
     <None Include="packages.config" />
     <Content Include="App_Data\PST.Api.XML" />
     <Content Include="web.config" />
@@ -486,7 +489,6 @@
   <ItemGroup>
     <Folder Include="Areas\HelpPage\images\ClassDiagrams\" />
     <Folder Include="Areas\HelpPage\images\SequenceDiagrams\" />
-    <Folder Include="Areas\Management\Views\Shared\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

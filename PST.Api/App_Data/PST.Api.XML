@@ -550,7 +550,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.AddCategory(System.Nullable{System.Guid},System.String)">
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.UpsertCategory(System.Nullable{System.Guid},System.String)">
             <summary>
             Add category or sub-category
             </summary>

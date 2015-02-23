@@ -31,7 +31,7 @@ namespace PST.Api.Areas.Management.Controllers
         /// <param name="title">New title for section</param>
         [HttpPut]
         [Route("rename/{courseID}/{sectionID}")]
-        public void Rename(Guid courseID, Guid sectionID, string title)
+        public void Rename(Guid courseID, Guid sectionID, [FromBody]string title)
         {
             
         }
