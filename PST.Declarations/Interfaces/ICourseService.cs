@@ -30,6 +30,8 @@ namespace PST.Declarations.Interfaces
         /// <returns>Course with specified ID. Returns null if course not found or account doesn't meet prereqs.</returns>
         Course GetCourse(Guid courseID, Guid? accountID = null);
 
+        course_progress GetCourseProgress(Guid accountID, Guid courseID);
+
         /// <summary>
         /// Get all courses
         /// </summary>
@@ -44,6 +46,8 @@ namespace PST.Declarations.Interfaces
         /// <param name="accountID">Account to ensure prereqs met.</param>
         /// <returns>Test belonging to the course with specified ID. Returns null if test not found or account doesn't meet prereqs.</returns>
         Test GetTest(Guid courseID, Guid? accountID = null);
+
+        test_progress GetTestProgress(Guid accountID, Guid courseID);
 
         /// <summary>
         /// Verifies the answer(s) to a question and updates the section progress if correct.

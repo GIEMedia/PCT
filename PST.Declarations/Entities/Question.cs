@@ -13,7 +13,6 @@ namespace PST.Declarations.Entities
         public Question()
         {
             this.Options = new List<Option>();
-            this.Answered = false;
         }
 
         public virtual string QuestionText { get; set; }
@@ -27,9 +26,6 @@ namespace PST.Declarations.Entities
         [Ownership(Ownership.Exclusive)]
         public virtual IList<Option> Options { get; set; }
 
-        [Transient]
-        public virtual bool Answered { get; set; }
-
         public virtual int SortOrder { get; set; }
 
         protected abstract void SetCustomModelProperties(question question);
@@ -42,8 +38,7 @@ namespace PST.Declarations.Entities
                 question_text = QuestionText,
                 options = Options.Select(o => o.ToModel()).ToArray(),
                 multi_select = Options.Count(o => o.Correct) > 1,
-                option_type = Models.question.option_types.text,
-                answered = Answered
+                option_type = Models.question.option_types.text
             };
 
             SetCustomModelProperties(question);

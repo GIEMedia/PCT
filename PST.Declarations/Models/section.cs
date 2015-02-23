@@ -6,8 +6,6 @@ namespace PST.Declarations.Models
     {
         public Guid section_id { get; set; }
 
-        public bool complete { get; set; }
-
         public document document { get; set; }
     }
 }

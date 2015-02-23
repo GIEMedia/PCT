@@ -2,7 +2,7 @@
 
 namespace PST.Declarations.Models
 {
-    public class answer_result
+    public class answer_result : question_progress
     {
         public answer_result(Guid questionID, bool correct, string correctResonseHeading = "", string correctResponseText = "")
         {
@@ -15,12 +15,6 @@ namespace PST.Declarations.Models
             }
         }
 
-        public Guid question_id { get; protected set; }
-
         public bool correct { get; protected set; }
-
-        public string correct_response_heading { get; protected set; }
-
-        public string correct_response_text { get; protected set; }
     }
 }

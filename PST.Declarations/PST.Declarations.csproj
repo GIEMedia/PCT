@@ -213,6 +213,7 @@
     <Compile Include="Enums.cs" />
     <Compile Include="Interfaces\ICertificateService.cs" />
     <Compile Include="Interfaces\ICourseService.cs" />
+    <Compile Include="Interfaces\IDocumentService.cs" />
     <Compile Include="Interfaces\IEmailGenerationService.cs" />
     <Compile Include="Interfaces\ISorted.cs" />
     <Compile Include="Models\account.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Models\option.cs" />
     <Compile Include="Models\question.cs" />
     <Compile Include="Models\questioned.cs" />
+    <Compile Include="Models\progress.cs" />
     <Compile Include="Models\registration.cs" />
     <Compile Include="Models\registration_external.cs" />
     <Compile Include="Models\reset_password.cs" />

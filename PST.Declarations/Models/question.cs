@@ -23,7 +23,5 @@ namespace PST.Declarations.Models
         public string image { get; set; }
 
         public video video { get; set; }
-
-        public bool answered { get; set; }
     }
 }

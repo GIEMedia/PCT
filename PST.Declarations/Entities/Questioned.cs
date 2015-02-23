@@ -13,16 +13,12 @@ namespace PST.Declarations.Entities
         public Questioned()
         {
             this.Questions = new List<Question>();
-            this.Complete = false;
         }
 
         public virtual string Title { get; set; }
 
         [Ownership(Ownership.Exclusive)]
         public virtual IList<Question> Questions { get; set; }
-
-        [Transient]
-        public virtual bool Complete { get; set; }
 
         public abstract QuestionedProgress CreateAndAddProgress(CourseProgress courseProgress);
 

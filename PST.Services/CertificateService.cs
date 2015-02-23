@@ -24,5 +24,10 @@ namespace PST.Services
                 where courseID == null || cp.Course.ID == courseID
                 select cp.Certificate);
         }
+
+        public Certificate CreateCertificate(Account account, Course course, DateTime dateEarnedUtc)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
