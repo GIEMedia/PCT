@@ -20,7 +20,6 @@ namespace PST.Declarations.Entities
             {
                 section_id = section.ID,
                 title = section.Title,
-                complete = section.Complete,
                 document = section.Document,
                 questions = section.Questions.Select(q => q.ToModel()).ToArray()
             };

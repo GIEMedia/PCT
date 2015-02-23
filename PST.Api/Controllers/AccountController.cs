@@ -401,6 +401,20 @@ namespace PST.Api.Controllers
         }
 
         [HttpGet]
+        [Route("progress/course/{courseID}")]
+        public course_progress GetCourseProgress(Guid courseID)
+        {
+            return _courseService.Value.GetCourseProgress(CurrentUserID, courseID);
+        }
+
+        [HttpGet]
+        [Route("progress/test/{courseID}")]
+        public test_progress GetTestProgress(Guid courseID)
+        {
+            return _courseService.Value.GetTestProgress(CurrentUserID, courseID);
+        }
+
+        [HttpGet]
         [Route("certificates")]
         public certificate[] GetCertificates()
         {

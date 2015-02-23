@@ -76,24 +76,49 @@ namespace PST.Services
             if (!course.PrerequisiteCourses.All(c => passedCourses.Contains(c.ID)))
                 return null;
 
-            var completedSections = (from a in _entityRepository.Queryable<Account>()
-                where a.ID == accountID.Value
-                from c in a.CourseProgress
-                where c.Course.ID == course.ID
-                from s in c.Sections
-                from q in s.CompletedQuestions
-                group q by s
-                into g
-                select g).ToDictionary(g => g.Key.Section.ID, g => g.ToList());
-
-            course.Sections.Where(s => completedSections.ContainsKey(s.ID)).Apply(s =>
-            {
-                s.Complete = s.Questions.Count == completedSections[s.ID].Count;
-                var completedQuestions = completedSections[s.ID].Select(q => q.Question.ID).ToList();
-                s.Questions.Where(q => completedQuestions.Contains(q.ID)).Apply(q => q.Answered = true);
-            });
-
             return course;
+        }
+
+        public course_progress GetCourseProgress(Guid accountID, Guid courseID)
+        {
+            var course = GetCourse(courseID);
+
+            if(course == null)
+                return new course_progress();
+
+            var completedSections = (from a in _entityRepository.Queryable<Account>()
+                                     where a.ID == accountID
+                                     from c in a.CourseProgress
+                                     where c.Course.ID == course.ID
+                                     from s in c.Sections
+                                     from q in s.CompletedQuestions
+                                     group q by s
+                                         into g
+                                         select g).ToDictionary(g => g.Key.Section.ID, g => g.ToList());
+
+            return new course_progress
+            {
+                course_id = course.ID,
+                sections =
+                    course.Sections.Where(s => completedSections.ContainsKey(s.ID)).Select(s =>
+                    {
+                        var completedQuestions = completedSections[s.ID].Select(q => q.Question.ID).ToArray();
+                        return new section_progress
+                        {
+                            section_id = s.ID,
+                            complete = s.Questions.Count == completedSections[s.ID].Count,
+                            correctly_answered_questions =
+                                s.Questions.Where(q => completedQuestions.Contains(q.ID))
+                                    .Select(q => new question_progress
+                                    {
+                                        question_id = q.ID,
+                                        correct_response_heading = q.CorrectResponseHeading,
+                                        correct_response_text = q.CorrectResponseText,
+                                        correct_options = q.Options.Where(o => o.Correct).Select(o => o.ID).ToArray()
+                                    }).ToArray()
+                        };
+                    }).ToArray()
+            };
         }
 
         public IEnumerable<Course> GetCourses(CourseStatus? status)
@@ -111,30 +136,47 @@ namespace PST.Services
             if (course == null || course.Status != CourseStatus.Active)
                 return null;
 
-            if (accountID.HasValue)
-            {
-                var courseProgress = (from a in _entityRepository.Queryable<Account>()
-                    where a.ID == accountID.Value
-                    from c in a.CourseProgress
-                    where c.Course.ID == courseID
-                    select c).FirstOrDefault();
-
-                if (courseProgress == null || courseProgress.Sections.Any(s => !s.Passed) ||
-                    courseProgress.Sections.Count != courseProgress.TotalSections)
-                    return null;
-
-                var testProgress = courseProgress.TestProgress ??
-                                   (TestProgress) course.Test.CreateAndAddProgress(courseProgress);
-                {
-                    (from a in testProgress.CompletedQuestions
-                        join n in course.Test.Questions
-                            on a.Question.ID equals n.ID
-                        select n).Apply(a => a.Answered = true);
-                    course.Test.RetriesLeft = testProgress.RetriesLeft;
-                }
-            }
-
             return course.Test;
+        }
+
+        public test_progress GetTestProgress(Guid accountID, Guid courseID)
+        {
+            var test = GetTest(courseID, accountID);
+
+            if (test == null)
+                return null;
+
+            var courseProgress = (from a in _entityRepository.Queryable<Account>()
+                where a.ID == accountID
+                from c in a.CourseProgress
+                where c.Course.ID == courseID
+                select c).FirstOrDefault();
+
+            if (courseProgress == null || courseProgress.Sections.Any(s => !s.Passed) ||
+                courseProgress.Sections.Count != courseProgress.TotalSections)
+                return null;
+
+            var testProgress = courseProgress.TestProgress ??
+                               (TestProgress) test.CreateAndAddProgress(courseProgress);
+
+
+            var completedQuestions = testProgress.CompletedQuestions.Select(q => q.ID).ToArray();
+            return new test_progress
+            {
+                test_id = test.ID,
+                course_id = courseID,
+                max_retries = test.MaxRetries,
+                retries_left = testProgress.RetriesLeft,
+                correctly_answered_questions =
+                    test.Questions.Where(q => completedQuestions.Contains(q.ID))
+                        .Select(q => new question_progress
+                        {
+                            question_id = q.ID,
+                            correct_response_heading = q.CorrectResponseHeading,
+                            correct_response_text = q.CorrectResponseText,
+                            correct_options = q.Options.Where(o => o.Correct).Select(o => o.ID).ToArray()
+                        }).ToArray()
+            };
         }
 
         private CourseProgress GetCourseProgress(Guid accountID, Course course)

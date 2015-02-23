@@ -13,7 +13,7 @@ namespace PST.Declarations.Entities
         public virtual decimal PassingPercentage { get { return .8M; } }
 
         [Transient]
-        public virtual int RetriesLeft { get; set; }
+        public virtual int MaxRetries { get { return 3; } }
 
         public static implicit operator test(Test test)
         {
@@ -25,8 +25,7 @@ namespace PST.Declarations.Entities
                 test_id = test.ID,
                 title = test.Title,
                 passing_percentage = test.PassingPercentage,
-                questions = test.Questions.Select(q => q.ToModel()).ToArray(),
-                retries_left = test.RetriesLeft
+                questions = test.Questions.Select(q => q.ToModel()).ToArray()
             };
         }
 
