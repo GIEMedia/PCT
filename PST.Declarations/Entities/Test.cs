@@ -23,6 +23,7 @@ namespace PST.Declarations.Entities
             return new test
             {
                 test_id = test.ID,
+                title = test.Title,
                 passing_percentage = test.PassingPercentage,
                 questions = test.Questions.Select(q => q.ToModel()).ToArray(),
                 retries_left = test.RetriesLeft

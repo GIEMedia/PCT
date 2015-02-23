@@ -8,8 +8,6 @@ namespace PST.Declarations.Models
 
         public bool complete { get; set; }
 
-        public string title { get; set; }
-
         public document document { get; set; }
     }
 }
