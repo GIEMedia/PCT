@@ -19,13 +19,12 @@
             ;
         })
 
-        .controller("course.Ctrl", function ($scope, CourseService, $stateParams) {
+        .controller("course.Ctrl", function ($scope, CourseService, $stateParams, PreferenceService) {
             CourseService.get($stateParams.id).success(function(course) {
                 $scope.course = course;
             });
 
-            // TODO Help API
-            $scope.courseHelp = $stateParams.id == "0" ? true : false;
+            $scope.courseHelp = PreferenceService.isHelpEnabled();
         })
 
         .directive("course", function() {
@@ -253,7 +252,7 @@
             };
         })
 
-        .directive("helpContainer", function() {
+        .directive("helpContainer", function(PreferenceService) {
             return {
                 restrict: "C",
                 templateUrl: "/app/spa/course/CourseHelp.html",
@@ -269,6 +268,9 @@
                     });
                     elem.find('#helpClose button').click(function () {
                         elem.find('.open').removeClass('open');
+                    });
+                    elem.find('#helpClose button.no').click(function () {
+                        PreferenceService.setHelpEnabled(false);
                     });
 
                 }

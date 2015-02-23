@@ -19,6 +19,8 @@
             'pct.elearning.api.StateLicensure',
             'pct.elearning.api.Manager',
 
+            'pct.elearning.local.Preference',
+
             'pct.elearning.landing',
             'pct.elearning.signup',
             'pct.elearning.userInfo',
