@@ -35,16 +35,8 @@
                 restrict: "C",
                 templateUrl: "/app/spa/course/Course.html",
                 controller: function($scope) {
-                    $scope.maximized = false;
 
                     var ctrl = this;
-                    ctrl.isMaximized = function() {
-                        return $scope.maximized;
-                    };
-                    ctrl.setMaximized = function(maximized) {
-                        $scope.maximized = maximized;
-                    };
-
                     // Section navigation
                     ctrl.gotoSection = function(sectionNum) {
                         $scope.section = $scope.course.sections[sectionNum - 1];
@@ -121,17 +113,6 @@
                         }
                     });
 
-                    $scope.$watch("maximized", function(maximized) {
-                        if (maximized) {
-                            elem.addClass('course-maximized');
-                        } else {
-                            elem.removeClass('course-maximized');
-
-                            setTimeout(function() {
-                                elem.find('.course-questions-container').getNiceScroll().resize();
-                            }, 100);
-                        }
-                    });
 
                     $scope.nextPage = function() {
                         var indexOf = $scope.section.document.pages.indexOf($scope.page);
@@ -246,27 +227,6 @@
             };
         })
 
-        .directive("courseControlMaximize", function() {
-            return {
-                restrict: "C",
-                require: "^course",
-                link: function($scope, elem, attrs, courseCtrl) {
-                    $scope.$watch(function() { return courseCtrl.isMaximized();}, function(maximized) {
-                        if (maximized) {
-                            elem.addClass('maximized');
-                        } else {
-                            elem.removeClass('maximized');
-                        }
-                    });
-
-                    $scope.toggleMaximized = function() {
-                        courseCtrl.setMaximized(!courseCtrl.isMaximized());
-                        return false;
-                    };
-                }
-            };
-        })
-
         .directive("helpContainer", function(PreferenceService) {
             return {
                 restrict: "C",
@@ -291,6 +251,61 @@
                 }
             };
         })
+
+        .directive("courseMaximizer", function() {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+
+                    $scope.$watch("maximized", function(maximized) {
+                        if (maximized) {
+                            elem.addClass('course-maximized');
+                        } else {
+                            elem.removeClass('course-maximized');
+
+                            setTimeout(function() {
+                                elem.find('.course-questions-container').getNiceScroll().resize();
+                            }, 100);
+                        }
+                    });
+                },
+                controller: function($scope) {
+
+                    $scope.maximized = false;
+
+                    var ctrl = this;
+                    ctrl.isMaximized = function() {
+                        return $scope.maximized;
+                    };
+                    ctrl.setMaximized = function(maximized) {
+                        $scope.maximized = maximized;
+                    };
+
+                }
+            };
+        })
+
+        .directive("courseControlMaximize", function() {
+            return {
+                restrict: "C",
+                require: "^courseMaximizer",
+                link: function($scope, elem, attrs, courseMaximizerCtrl) {
+                    $scope.$watch(function() { return courseMaximizerCtrl.isMaximized();}, function(maximized) {
+                        if (maximized) {
+                            elem.addClass('maximized');
+                        } else {
+                            elem.removeClass('maximized');
+                        }
+                    });
+
+                    $scope.toggleMaximized = function() {
+                        courseMaximizerCtrl.setMaximized(!courseMaximizerCtrl.isMaximized());
+                        return false;
+                    };
+                }
+            };
+        })
+
     ;
 
 })();
