@@ -21,6 +21,14 @@
 
         })
 
+        .directive("eIntroduction", function() {
+            return {
+                restrict: "E",
+                templateUrl: "/app/spa/landing/eIntroduction.html",
+                link: function($scope, elem, attrs) {
+                }
+            };
+        })
     ;
 
 })();
