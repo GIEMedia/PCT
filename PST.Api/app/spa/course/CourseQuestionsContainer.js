@@ -13,6 +13,13 @@
                 scope: true,
                 templateUrl: "/app/spa/course/CourseQuestionsContainer.html",
                 link: function($scope, elem, attrs, courseCtrl) {
+                    var waitProgress = Async.ladyFirst();
+
+                    $scope.$watch("progress", function(value) {
+                        if (value) {
+                            waitProgress.ladyDone();
+                        }
+                    });
 
                     // When section is changed, focus to the question
                     $scope.$watch(attrs.section, function(section) {
@@ -24,27 +31,24 @@
                             return;
                         }
 
-                        var sectionNum = courseCtrl.sectionNum();
+                        waitProgress.manTurn(function() {
+                            var sectionNum = courseCtrl.sectionNum();
 
-                        if (!section.complete) {
-                            for (var i = 0; i < section.questions.length; i++) {
-                                var question = section.questions[i];
-                                if (!question.answered) {
-                                    $scope.question = question;
-                                    break;
-                                }
+                            var secProgress = $scope.progress[$scope.section.section_id];
+                            secProgress = secProgress == null ? 0 : secProgress;
+                            if (!(secProgress >= $scope.section.questions.length)) {
+                                $scope.question = section.questions[secProgress];
+
+                                if (!$scope.$$phase) $scope.$digest();
                             }
-
-                            if (!$scope.$$phase) $scope.$digest();
-                        }
+                        });
                     });
 
                     $scope.finishedThisSection = function() {
-                        if ( $scope.course == null) {
+                        if ( $scope.section == null || $scope.progress == null) {
                             return false;
                         }
-
-                        return $scope.section.complete || $scope.section.questions.length == 0;
+                        return $scope.progress[$scope.section.section_id] >= $scope.section.questions.length;
                     };
 
                     $scope.finishedAllSection = function() {
@@ -53,14 +57,16 @@
 
                     // Change to next unfinished section
                     $scope.nextUnfinishedSection = function() {
-                        courseCtrl.nextUnfinishedSection();
+                        waitProgress.manTurn(function () {
+                            courseCtrl.nextUnfinishedSection();
+                        });
                     };
 
                     $scope.sectionNum = function() {
                         return courseCtrl.sectionNum();
                     };
 
-                    // Move on to the next question, update the progress
+                    // Move on to the next question
                     $scope.nextQuestion = function() {
                         $scope.result = null;
 
@@ -71,14 +77,13 @@
                             $scope.question = $scope.section.questions[indexOf + 1];
                         } else {
                             $scope.question = null;
-                            $scope.section.complete = true;
                         }
 
                         return false;
                     };
 
                     // Returns index of this question in the sequence of questions
-                    $scope.progress = function() {
+                    $scope.questionIndex = function() {
                         return $scope.section == null ? 0 : $scope.section.questions.indexOf($scope.question);
                     };
 
@@ -110,6 +115,11 @@
 
                     ctrl.submitAnswer = function(answer) {
                         CourseService.check($scope.question.question_id, $scope.course.course_id, answer).success(function(resp) {
+                            // update the progress
+                            if (resp.correct) {
+                                var currentProgress = $scope.progress[$scope.section.section_id];
+                                $scope.progress[$scope.section.section_id] = (currentProgress == null ? 0 : currentProgress) + 1;
+                            }
                             showResult(resp.correct, resp.correct_response_heading, resp.correct_response_text);
                         });
                     };

@@ -56,7 +56,7 @@
                                 tags.push(aTag);
 
                                 var isCompleteWatcher = Fs.f0(function (sec) {
-                                    return sec.complete;
+                                    return $scope.progress == null ? false : $scope.progress[sec.section_id] >= sec.questions.length;
                                 }, section);
                                 $scope.$watch(isCompleteWatcher, setClass("answered", aTag));
                             }

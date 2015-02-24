@@ -15,6 +15,17 @@
                 get : function(id) {
                     return Api.get("api/course/" + id);
                 },
+                getProgress : function(id, callback) {
+                    return Api.get("api/account/progress/course/" + id).success(function(resp) {
+                        var progress = {};
+                        for (var i = 0; i < resp.sections.length; i++) {
+                            var sec = resp.sections[i];
+
+                            progress[sec.section_id] = sec.correctly_answered_questions.length;
+                        }
+                        callback(progress);
+                    });
+                },
                 getNewCourses : function() {
                     return Api.get("api/course/new");
                 },

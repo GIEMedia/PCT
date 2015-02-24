@@ -4,10 +4,10 @@
     <h5>#{{sectionNum()}} - {{section.title}}</h5>
 
     <div class="course-progress-bar" ng-if="question">
-        <p><span class="alignright">Question <span class="current-count">{{progress()+1}}</span> of <span class="total-count">{{section.questions.length}}</span></span> Section Progress</p>
+        <p><span class="alignright">Question <span class="current-count">{{questionIndex()+1}}</span> of <span class="total-count">{{section.questions.length}}</span></span> Section Progress</p>
 
         <div class="course-progress-bar-fill">
-            <div style="width: {{ (progress()+1) / section.questions.length*100 }}%;"></div>
+            <div style="width: {{ (questionIndex()+1) / section.questions.length*100 }}%;"></div>
         </div><!-- /.course-progress-bar-fill -->
     </div><!-- /.course-progress-bar -->
 </div><!-- /.course-progress -->

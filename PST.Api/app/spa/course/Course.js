@@ -23,6 +23,9 @@
             CourseService.get($stateParams.id).success(function(course) {
                 $scope.course = course;
             });
+            CourseService.getProgress($stateParams.id, function(progress) {
+                $scope.progress = progress;
+            });
 
             $scope.courseHelp = PreferenceService.isHelpEnabled();
         })
@@ -68,13 +71,13 @@
 
                     // Section query
                     ctrl.finishedAllSection = function() {
-                        if ($scope.course == null) {
+                        if ($scope.course == null || $scope.progress == null) {
                             return false;
                         }
 
                         for (var i = 0; i < $scope.course.sections.length; i++) {
                             var sec = $scope.course.sections[i];
-                            if (!sec.complete && sec.questions.length > 0) {
+                            if (!($scope.progress[sec.section_id] >= sec.questions.length)) {
                                 return false;
                             }
                         }
@@ -85,7 +88,7 @@
                     $scope.nextUnfinishedSection = function() {
                         for (var i = 0; i < $scope.course.sections.length; i++) {
                             var sec = $scope.course.sections[i];
-                            if (!sec.complete && sec.questions.length > 0) {
+                            if (!($scope.progress[sec.section_id] >= sec.questions.length)) {
                                 ctrl.gotoSection(i+1);
                                 return true;
                             }
@@ -95,14 +98,26 @@
                     ctrl.nextUnfinishedSection = $scope.nextUnfinishedSection;
                 },
                 link: function($scope, elem, attrs) {
+
+                    var waitProgress = Async.ladyFirst();
+
+                    $scope.$watch("progress", function(value) {
+                        if (value) {
+                            waitProgress.ladyDone();
+                        }
+                    });
+
+
+
                     $scope.$watch("course", function(course) {
                         if (course) {
-
-                            var hasSection = $scope.nextUnfinishedSection();
-                            if (!hasSection) {
-                                $scope.section = $scope.course.sections[0];
-                            }
-                            $scope.page = $scope.section.document.pages[0];
+                            waitProgress.manTurn(function() {
+                                var hasSection = $scope.nextUnfinishedSection();
+                                if (!hasSection) {
+                                    $scope.section = $scope.course.sections[0];
+                                }
+                                $scope.page = $scope.section.document.pages[0];
+                            });
                         }
                     });
 
