@@ -29,7 +29,7 @@ namespace PST.Declarations.Models
     {
         public question_progress()
         {
-            correct_options = new Guid[0];
+            correct_options = null;
         }
 
         public Guid question_id { get; set; }
@@ -44,6 +44,8 @@ namespace PST.Declarations.Models
     public class course_progress
     {
         public Guid course_id { get; set; }
+
+        public bool complete { get; set; }
 
         public section_progress[] sections { get; set; }
     }

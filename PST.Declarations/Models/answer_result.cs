@@ -4,7 +4,7 @@ namespace PST.Declarations.Models
 {
     public class answer_result : question_progress
     {
-        public answer_result(Guid questionID, bool correct, string correctResonseHeading = "", string correctResponseText = "")
+        public answer_result(Guid questionID, bool correct, string correctResonseHeading = "", string correctResponseText = "", Guid[] correctOptions = null)
         {
             this.question_id = questionID;
             this.correct = correct;
@@ -12,6 +12,7 @@ namespace PST.Declarations.Models
             {
                 this.correct_response_heading = correctResonseHeading;
                 this.correct_response_text = correctResponseText;
+                this.correct_options = correctOptions;
             }
         }
 

@@ -13,7 +13,7 @@ namespace PST.Declarations.Entities
         public virtual decimal PassingPercentage { get { return .8M; } }
 
         [Transient]
-        public virtual int MaxRetries { get { return 3; } }
+        public virtual int MaxRetries { get { return 2; } }
 
         public static implicit operator test(Test test)
         {

@@ -29,18 +29,22 @@ namespace PST.Services
             return
                 _entityRepository.GetByID<Account>(accountID).CourseProgress
                     .Where(c => c.Course.Status == CourseStatus.Active &&
-                                (c.Sections.Count(s => s.Passed) != c.TotalSections ||  // havent completed all of the questions
-                                c.TestProgress == null || // havent started the test
-                                (c.TestProgress.CompletedQuestions.Count() != c.TestProgress.TotalQuestions && // havent completed test
-                                 c.TestProgress.RetriesLeft > 0))); // havent failed test
+                                (c.Sections.Count(s => s.Passed) != c.TotalSections ||
+                                 // havent completed all of the questions
+                                 c.TestProgress == null || // havent started the test
+                                 (c.TestProgress.CompletedQuestions.Count() != c.TestProgress.TotalQuestions &&
+                                  // havent completed test
+                                  c.TestProgress.RetriesLeft > 0))); // havent failed test
         }
 
         public IEnumerable<Course> NewCourses(int count = 5, Guid? accountID = null)
         {
-            var openCourses = accountID.HasValue ? (from a in _entityRepository.Queryable<Account>()
-                where a.ID == accountID
-                from c in a.CourseProgress
-                select c.Course.ID).ToArray() : new Guid[0];
+            var openCourses = accountID.HasValue
+                ? (from a in _entityRepository.Queryable<Account>()
+                    where a.ID == accountID
+                    from c in a.CourseProgress
+                    select c.Course.ID).ToArray()
+                : new Guid[0];
 
             //TODO: Replace with cache lookup
             return (from c in _entityRepository.Queryable<Course>()
@@ -48,7 +52,7 @@ namespace PST.Services
                 orderby c.DateCreatedUtc descending
                 select c).Take(count);
         }
-        
+
         public Course GetCourse(Guid courseID, Guid? accountID = null)
         {
             //TODO: Replace with cache lookup
@@ -83,22 +87,23 @@ namespace PST.Services
         {
             var course = GetCourse(courseID);
 
-            if(course == null)
+            if (course == null)
                 return new course_progress();
 
             var completedSections = (from a in _entityRepository.Queryable<Account>()
-                                     where a.ID == accountID
-                                     from c in a.CourseProgress
-                                     where c.Course.ID == course.ID
-                                     from s in c.Sections
-                                     from q in s.CompletedQuestions
-                                     group q by s
-                                         into g
-                                         select g).ToDictionary(g => g.Key.Section.ID, g => g.ToList());
+                where a.ID == accountID
+                from c in a.CourseProgress
+                where c.Course.ID == course.ID
+                from s in c.Sections
+                from q in s.CompletedQuestions
+                group q by s
+                into g
+                select g).ToDictionary(g => g.Key.Section.ID, g => g.ToList());
 
             return new course_progress
             {
                 course_id = course.ID,
+                complete = completedSections.Keys.Count == course.Sections.Count,
                 sections =
                     course.Sections.Where(s => completedSections.ContainsKey(s.ID)).Select(s =>
                     {
@@ -160,7 +165,7 @@ namespace PST.Services
                                (TestProgress) test.CreateAndAddProgress(courseProgress);
 
 
-            var completedQuestions = testProgress.CompletedQuestions.Select(q => q.ID).ToArray();
+            var completedQuestions = testProgress.CompletedQuestions.Select(q => q.Question.ID).ToArray();
             return new test_progress
             {
                 test_id = test.ID,
@@ -182,15 +187,15 @@ namespace PST.Services
         private CourseProgress GetCourseProgress(Guid accountID, Course course)
         {
             var courseProgress = (from a in _entityRepository.Queryable<Account>()
-                                  where a.ID == accountID
-                                  from c in a.CourseProgress
-                                  where c.Course.ID == course.ID
-                                  select c).FirstOrDefault();
+                where a.ID == accountID
+                from c in a.CourseProgress
+                where c.Course.ID == course.ID
+                select c).FirstOrDefault();
 
             if (courseProgress == null)
             {
                 var account = _entityRepository.GetByID<Account>(accountID);
-                courseProgress = new CourseProgress { Course = course, TotalSections = course.Sections.Count };
+                courseProgress = new CourseProgress {Course = course, TotalSections = course.Sections.Count};
                 account.CourseProgress.Add(courseProgress);
                 _entityRepository.Save(account);
             }
@@ -198,13 +203,23 @@ namespace PST.Services
             return courseProgress;
         }
 
-        private bool IsCorrectAnswer(Guid accountID, Course course, Question question, Questioned questioned, IList<Guid> selectedOptionIDs, out string correctResponseHeading, out string correctResponseText)
+        private bool IsCorrectAnswer(Guid accountID, Course course, Question question, Questioned questioned,
+            IList<Guid> selectedOptionIDs, out string correctResponseHeading, out string correctResponseText)
         {
-            var correctOptions =
+            Guid[] correctOptions;
+            return IsCorrectAnswer(accountID, course, question, questioned, selectedOptionIDs,
+                out correctResponseHeading, out correctResponseText, out correctOptions);
+        }
+
+        private bool IsCorrectAnswer(Guid accountID, Course course, Question question, Questioned questioned,
+            IList<Guid> selectedOptionIDs, out string correctResponseHeading, out string correctResponseText,
+            out Guid[] correctOptions)
+        {
+            correctOptions =
                 question.Options.Where(o => o.Correct).Select(o => o.ID).ToArray();
 
             var correct = correctOptions.Count() == selectedOptionIDs.Count() &&
-                   new HashSet<Guid>(correctOptions).SetEquals(selectedOptionIDs);
+                          new HashSet<Guid>(correctOptions).SetEquals(selectedOptionIDs);
 
             if (correct)
             {
@@ -237,9 +252,10 @@ namespace PST.Services
             return correct;
         }
 
-        public bool AnswerCourseQuestion(Guid accountID, Guid courseID, Guid questionID, IList<Guid> selectedOptionIDs, out string correctResponseHeading, out string correctResponseText)
+        public bool AnswerCourseQuestion(Guid accountID, Guid courseID, Guid questionID, IList<Guid> selectedOptionIDs,
+            out string correctResponseHeading, out string correctResponseText)
         {
-            if(!selectedOptionIDs.Any())
+            if (!selectedOptionIDs.Any())
                 throw new ArgumentOutOfRangeException("selectedOptionIDs", "No options selected.");
 
             var course = GetCourse(courseID);
@@ -277,9 +293,9 @@ namespace PST.Services
                 throw new ArgumentOutOfRangeException("courseID", "Course does not have a test.");
 
             var courseProgress = GetCourseProgress(accountID, course);
-            var testProgress = (TestProgress)(course.Test.GetProgress(courseProgress) ??
-                               course.Test.CreateAndAddProgress(courseProgress));
-            
+            var testProgress = (TestProgress) (course.Test.GetProgress(courseProgress) ??
+                                               course.Test.CreateAndAddProgress(courseProgress));
+
             if (testProgress.RetriesLeft == 0)
                 return null;
 
@@ -297,16 +313,18 @@ namespace PST.Services
                     continue;
 
                 string correctResponseHeading, correctResponseText;
+                Guid[] correctOptions;
                 var isCorrect = IsCorrectAnswer(accountID, course, question, course.Test, answer.selected_option_ids,
-                    out correctResponseHeading, out correctResponseText);
+                    out correctResponseHeading, out correctResponseText, out correctOptions);
 
-                results.Add(new answer_result(answer.question_id, isCorrect, correctResponseHeading, correctResponseText));
+                results.Add(new answer_result(answer.question_id, isCorrect, correctResponseHeading, correctResponseText,
+                    correctOptions));
             }
 
             courseProgress = GetCourseProgress(accountID, course);
             testProgress = (TestProgress) (course.Test.GetProgress(courseProgress) ??
-                               course.Test.CreateAndAddProgress(courseProgress));
-            
+                                           course.Test.CreateAndAddProgress(courseProgress));
+
             if (results.Count(r => r.correct)/(decimal) course.Test.Questions.Count < course.Test.PassingPercentage)
             {
                 testProgress.RetriesLeft = Math.Max(0, testProgress.RetriesLeft - 1);
