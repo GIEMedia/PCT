@@ -8,7 +8,18 @@
             </div><!-- /.search-field -->
 
             <div class="search-dropdown">
-                <div class="cols">
+                <div class="cols"  ng-if="(courseHeaderCols.length || 0) == 0">
+
+                    <div class="col col-2of2 no-record">
+                        <div ng-if="(view.search.length || 0) == 0">
+                            No course(s) found
+                        </div>
+                        <div ng-if="view.search.length">
+                            No course(s) with title "<b>{{view.search}}</b>" found
+                        </div>
+                    </div>
+                </div>
+                <div class="cols" ng-if="courseHeaderCols.length">
 
                     <div class="col col-1of2" ng-repeat="col in courseHeaderCols">
                         <div class="search-section" ng-repeat="courseHeader in col">
@@ -54,6 +65,11 @@
 
                 <div class="section-body">
                     <ul class="courses-items">
+
+
+                        <li class="no-record" ng-if="(newCourses.length || 0)==0">
+                            No new course(s)
+                        </li>
                         <li class="courses-item" ng-repeat="course in newCourses">
                             <a href="#" class="courses-item-image">
 
@@ -78,7 +94,10 @@
         </div><!-- /.col col-1of2 -->
 
         <div class="col col-1of2">
-            <div class="section-courses">
+
+            <e-introduction ng-if="(openCourses.length || 0)==0"></e-introduction>
+
+            <div class="section-courses" ng-if="openCourses.length">
                 <div class="section-head">
                     <h3 class="section-title title-underlined">
                         <i class="ico ico-open-courses"></i>

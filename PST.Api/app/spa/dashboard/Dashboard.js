@@ -51,13 +51,13 @@
 
                     var filterCat = function(cat) {
                         var courses = Cols.filter(cat.courses, function(course) {
-                            return course.name.toLowerCase().indexOf(lowerSearch) > -1;
+                            return course.title.toLowerCase().indexOf(lowerSearch) > -1;
                         });
                         if (Cols.isEmpty(courses)) {
                             return null;
                         }
 
-                        return {name: cat.name, courses: courses};
+                        return {title: cat.title, courses: courses};
                     };
 
 
@@ -69,7 +69,7 @@
                             continue;
                         }
 
-                        headers.push({name: _headers[i].name, categories: categories});
+                        headers.push({title: _headers[i].title, categories: categories});
                     }
                     return headers;
                 },
