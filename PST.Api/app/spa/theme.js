@@ -39,7 +39,7 @@
             };
         })
 
-        .directive("navContainer", function($rootScope) {
+        .directive("navContainer", ["$rootScope", function($rootScope) {
             return {
                 restrict: "C",
                 link: function($scope, elem, attrs) {
@@ -64,7 +64,7 @@
                     })
                 }
             };
-        })
+        }])
 
         .directive("video", function() {
             return {
@@ -101,7 +101,7 @@
             };
         })
 
-        .directive("eFocus", function($parse) {
+        .directive("eFocus", ["$parse", function($parse) {
             return {
                 restrict: "A",
                 scope: false,
@@ -115,6 +115,27 @@
                         }
                     });
 
+                }
+            };
+        }])
+
+        .directive("numberOnly", function() {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+                    $(elem).keydown(function(e) {
+                        if (e.ctrlKey || e.altKey || e.metaKey) {
+                            return true;
+                        }
+
+                        var keyCode = e.keyCode;
+                        if (keyCode == 32) { // Space
+                            return false;
+                        } else if (keyCode >= 65 && keyCode <= 90) {
+                            return false;
+                        }
+                        return true;
+                    });
                 }
             };
         })

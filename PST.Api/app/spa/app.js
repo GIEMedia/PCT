@@ -32,25 +32,22 @@
             'ngResource'
     ])
 
-        .run(function ($rootScope, $state, $stateParams) {
+        .run(["$rootScope", "$state", "$stateParams", function ($rootScope, $state, $stateParams) {
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
-        })
+        }])
 
-        .config(function ($compileProvider) {
+        .config(["$compileProvider", function ($compileProvider) {
             if ($compileProvider.debugInfoEnabled) {
                 $compileProvider.debugInfoEnabled(false);
             }
-        })
+        }])
 
-        .config(function ($stateProvider, $urlRouterProvider) {
+        .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
             $urlRouterProvider
                 // If the url is ever invalid, e.g. '/asdf', then redirect to '/' aka the home state
                 .otherwise("/landing");
-        })
+        }])
 
-        .config(function ($locationProvider) {
-            $locationProvider.html5Mode(false).hashPrefix("!");
-        })
     ;
 })();

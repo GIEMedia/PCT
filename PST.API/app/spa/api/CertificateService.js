@@ -5,7 +5,7 @@
     angular.module('pct.elearning.api.Certificate', [
         'pct.elearning.data.Certificate'
     ])
-        .factory("CertificateService", function(Api, CertificateMockData) {
+        .factory("CertificateService", ["Api", "CertificateMockData", function(Api, CertificateMockData) {
             return {
                 getCertificate: function(courseId) {
                     return Api.get("api/account/certificate/" + courseId);
@@ -17,7 +17,7 @@
                     return CertificateMockData.certificateCategories;
                 }
             };
-        })
+        }])
     ;
 
 })();

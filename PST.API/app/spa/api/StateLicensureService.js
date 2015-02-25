@@ -4,7 +4,7 @@
 
     angular.module('pct.elearning.api.StateLicensure', [
     ])
-        .factory("StateLicensureService", function(Api) {
+        .factory("StateLicensureService", ["Api", function(Api) {
 
             return {
                 get : function() {
@@ -17,7 +17,7 @@
                     return Api.put("api/test/send/licensure/" + courseId, licensures);
                 }
             };
-        })
+        }])
     ;
 
 })();

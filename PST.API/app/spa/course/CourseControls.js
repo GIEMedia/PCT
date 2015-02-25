@@ -135,7 +135,7 @@
             };
         })
 
-        .directive("helpContainer", function(PreferenceService) {
+        .directive("helpContainer", ["PreferenceService", function(PreferenceService) {
             return {
                 restrict: "C",
                 templateUrl: "/app/spa/course/CourseHelp.html",
@@ -158,7 +158,7 @@
 
                 }
             };
-        })
+        }])
 
         .directive("courseMaximizer", function() {
             return {
@@ -177,7 +177,7 @@
                         }
                     });
                 },
-                controller: function($scope) {
+                controller: ["$scope", function($scope) {
 
                     $scope.maximized = false;
 
@@ -189,7 +189,7 @@
                         $scope.maximized = maximized;
                     };
 
-                }
+                }]
             };
         })
 

@@ -6,7 +6,7 @@
         'ui.router'
     ])
 
-        .config(function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
 
             $stateProvider
                 .state('dashboard', {
@@ -15,9 +15,9 @@
                     controller: "dashboard.Ctrl"
                 })
             ;
-        })
+        }])
 
-        .controller("dashboard.Ctrl", function ($scope, User, CourseService, DashboardHelper) {
+        .controller("dashboard.Ctrl", ["$scope", "User", "CourseService", "DashboardHelper", function ($scope, User, CourseService, DashboardHelper) {
             $scope.User = User;
 
             CourseService.getNewCourses().success(function(courses) {
@@ -39,7 +39,7 @@
             $scope.$watch("view.search", function(search) {
                 $scope.courseHeaderCols = DashboardHelper.toCols(DashboardHelper.filter(_courseStructure, search));
             });
-        })
+        }])
 
         .factory("DashboardHelper", function() {
             return {
@@ -110,12 +110,12 @@
                         }
                     });
                 },
-                controller: function($scope) {
+                controller: ["$scope", function($scope) {
                     var ctrl = this;
                     ctrl.setClearTextF = function(clearTextF) {
                         $scope.clearSearchText = clearTextF;
                     };
-                }
+                }]
 
             };
         })

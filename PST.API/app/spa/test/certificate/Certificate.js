@@ -6,7 +6,7 @@
             'ui.router'
     ])
     
-        .config(function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
 
             $stateProvider
                 .state('certificate', {
@@ -15,9 +15,9 @@
                     controller: "certificate.Ctrl"
                 })
             ;
-        })
+        }])
 
-        .controller("certificate.Ctrl", function ($scope, $state, $stateParams, CertificateService, ManagerService) {
+        .controller("certificate.Ctrl", ["$scope", "$state", "$stateParams", "CertificateService", "ManagerService", function ($scope, $state, $stateParams, CertificateService, ManagerService) {
             $scope.certificate = CertificateService.getCertificate($stateParams.courseId);
 
             $scope.managers = [
@@ -45,7 +45,7 @@
                 window.open($scope.certificate.pdf_url, "_blank");
                 return false;
             };
-        })
+        }])
 
     ;
 

@@ -4,13 +4,13 @@
 
     angular.module('pct.elearning.api.State', [
     ])
-        .factory("StateService", function(StateData) {
+        .factory("StateService", ["StateData", function(StateData) {
             return {
                 getStates: function() {
                     return StateData;
                 }
             };
-        })
+        }])
 
 
         .value("StateData", [

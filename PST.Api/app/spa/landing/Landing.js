@@ -6,7 +6,7 @@
             'ui.router'
     ])
     
-        .config(function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
 
             $stateProvider
                 .state('landing', {
@@ -15,11 +15,11 @@
                     controller: "landing.Ctrl"
                 })
             ;
-        })
+        }])
 
-        .controller("landing.Ctrl", function ($scope) {
+        .controller("landing.Ctrl", ["$scope", function ($scope) {
 
-        })
+        }])
 
         .directive("eIntroduction", function() {
             return {

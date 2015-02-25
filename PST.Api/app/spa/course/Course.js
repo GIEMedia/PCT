@@ -9,7 +9,7 @@
         'ui.router'
     ])
 
-        .config(function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
 
             $stateProvider
                 .state('course', {
@@ -18,9 +18,9 @@
                     controller: "course.Ctrl"
                 })
             ;
-        })
+        }])
 
-        .controller("course.Ctrl", function ($scope, CourseService, $stateParams, PreferenceService) {
+        .controller("course.Ctrl", ["$scope", "CourseService", "$stateParams", "PreferenceService", function ($scope, CourseService, $stateParams, PreferenceService) {
             CourseService.get($stateParams.id).success(function(course) {
                 $scope.course = course;
             });
@@ -29,13 +29,13 @@
             });
 
             $scope.courseHelp = PreferenceService.isHelpEnabled();
-        })
+        }])
 
         .directive("course", function() {
             return {
                 restrict: "C",
                 templateUrl: "/app/spa/course/Course.html",
-                controller: function($scope) {
+                controller: ["$scope", function($scope) {
 
                     var ctrl = this;
                     // Section navigation
@@ -88,7 +88,7 @@
                         return false;
                     };
                     ctrl.nextUnfinishedSection = $scope.nextUnfinishedSection;
-                },
+                }],
                 link: function($scope, elem, attrs) {
 
                     var waitProgress = Async.ladyFirst();
