@@ -6,7 +6,7 @@
         'pct.elearning.course.question'
     ])
 
-        .directive("courseQuestionsContainer", function(CourseService) {
+        .directive("courseQuestionsContainer", ["CourseService", function(CourseService) {
             return {
                 restrict: "C",
                 require: "^course",
@@ -101,7 +101,7 @@
 
                     });
                 },
-                controller: function($scope) {
+                controller: ["$scope", function($scope) {
 
                     var showResult = function(passed, correct_heading, correct_text) {
                         $scope.result = passed == null ? null : {
@@ -124,9 +124,9 @@
                         });
                     };
 
-                }
+                }]
             };
-        })
+        }])
 
     ;
 

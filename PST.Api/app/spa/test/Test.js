@@ -7,7 +7,7 @@
             'ui.router'
     ])
     
-        .config(function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
 
             $stateProvider
                 .state('test', {
@@ -16,9 +16,9 @@
                     controller: "test.Ctrl"
                 })
             ;
-        })
+        }])
 
-        .controller("test.Ctrl", function ($scope, TestService, $stateParams) {
+        .controller("test.Ctrl", ["$scope", "TestService", "$stateParams", function ($scope, TestService, $stateParams) {
             $scope.testView = {
                 progress: "100%"
             };
@@ -66,7 +66,7 @@
                 $scope.model.answers = {};
             };
 
-        })
+        }])
 
         .directive("testQuestionsContainer", function() {
             return {

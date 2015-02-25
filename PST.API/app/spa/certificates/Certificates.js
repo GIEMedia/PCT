@@ -4,7 +4,7 @@
 
     angular.module('pct.elearning.certificates', [
     ])
-        .config(function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
         
             $stateProvider
                 .state('certificates', {
@@ -13,13 +13,13 @@
                     controller: "certificates.Ctrl"
                 })
             ;
-        })
+        }])
         
-        .controller("certificates.Ctrl", function ($scope, CertificateService) {
+        .controller("certificates.Ctrl", ["$scope", "CertificateService", function ($scope, CertificateService) {
             CertificateService.getEarnedCertificates().success(function(certificates) {
                 $scope.earnedCertificates = certificates;
             });
-        })
+        }])
     ;
 
 })();

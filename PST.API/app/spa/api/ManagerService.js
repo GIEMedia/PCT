@@ -4,7 +4,7 @@
 
     angular.module('pct.elearning.api.Manager', [
     ])
-        .factory("ManagerService", function(Api) {
+        .factory("ManagerService", ["Api", function(Api) {
 
             return {
                 get : function() {
@@ -17,7 +17,7 @@
                     return Api.put("api/test/send/certificate/" + courseId, managers);
                 }
             };
-        })
+        }])
     ;
 
 })();

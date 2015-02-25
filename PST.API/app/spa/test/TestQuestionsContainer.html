@@ -51,9 +51,9 @@
             </div><!-- /.form-body -->
 
             <div class="form-actions">
-                <input type="button" class="btn" value="Continue" ng-click="next()" ng-if="!lastQuestion() && progress.corrects[question.question_id]">
-                <input type="button" class="btn" value="Answer" ng-click="next()" ng-disabled="(tqc.answer.length || 0) == 0" ng-if="!lastQuestion() && progress.corrects[question.question_id] == null">
-                <input type="button" class="btn" value="Grade Test!" ng-click="submit()" ng-if="lastQuestion()">
+                <input type="button" class="btn" value="Continue"    ng-click="next()"                                               ng-if="!lastQuestion() && progress.corrects[question.question_id]">
+                <input type="button" class="btn" value="Answer"      ng-click="next()"   ng-disabled="(tqc.answer.length || 0) == 0" ng-if="!lastQuestion() && progress.corrects[question.question_id] == null">
+                <input type="button" class="btn" value="Grade Test!" ng-click="submit()" ng-disabled="(tqc.answer.length || 0) == 0" ng-if="lastQuestion()">
             </div><!-- /.form-actions -->
         </div><!-- /.test-question-answers -->
     </div><!-- /.col col-1of2 -->

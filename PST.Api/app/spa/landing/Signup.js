@@ -4,7 +4,7 @@
 
     angular.module('pct.elearning.signup', [
     ])
-        .directive("signUp", function(AccountService, StateService, SecurityService, $state) {
+        .directive("signUp", ["AccountService", "StateService", "SecurityService", "$state", function(AccountService, StateService, SecurityService, $state) {
             return {
                 restrict: "E",
                 templateUrl: "/app/spa/landing/Signup.html",
@@ -36,7 +36,7 @@
                     $scope.states = StateService.getStates();
                 }
             };
-        })
+        }])
     ;
 
 })();

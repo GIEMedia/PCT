@@ -4,7 +4,7 @@
 
     angular.module('pct.elearning.userInfo', [
     ])
-        .factory("LoginFormLink", function( User, SecurityService, $state ) {
+        .factory("LoginFormLink", ["User", "SecurityService", "$state", function( User, SecurityService, $state ) {
             return function($scope, elem, attrs) {
                 $scope.User = User;
                 $scope.error = null;
@@ -47,23 +47,23 @@
                     SecurityService.logout();
                 };
             }
-        })
+        }])
 
-        .directive("formSignin", function(LoginFormLink) {
+        .directive("formSignin", ["LoginFormLink", function(LoginFormLink) {
             return {
                 restrict: "C",
                 scope: true,
                 link: LoginFormLink
             };
-        })
-        .directive("userInfo", function(LoginFormLink) {
+        }])
+        .directive("userInfo", ["LoginFormLink", function(LoginFormLink) {
             return {
                 restrict: "E",
                 templateUrl: "/app/spa/authen/UserInfo.html",
                 scope: true,
                 link: LoginFormLink
             };
-        })
+        }])
     ;
 
 })();

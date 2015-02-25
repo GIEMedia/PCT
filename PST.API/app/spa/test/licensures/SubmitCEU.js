@@ -4,7 +4,7 @@
 
     angular.module('pct.elearning.test.submit_ceu', [
     ])
-        .directive("submitCeu", function(StateService, $state, $stateParams, CertificateService, StateLicensureService) {
+        .directive("submitCeu", ["StateService", "$state", "$stateParams", "CertificateService", "StateLicensureService", function(StateService, $state, $stateParams, CertificateService, StateLicensureService) {
             return {
                 restrict: "E",
                 scope: true,
@@ -37,7 +37,7 @@
                     };
                 }
             };
-        })
+        }])
     ;
 
 })();

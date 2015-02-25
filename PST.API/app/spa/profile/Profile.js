@@ -4,7 +4,7 @@
 
     angular.module('pct.elearning.profile', [
     ])
-        .config(function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
         
             $stateProvider
                 .state('profile', {
@@ -13,16 +13,16 @@
                     controller: "profile.Ctrl"
                 })
             ;
-        })
+        }])
         
-        .controller("profile.Ctrl", function ($scope, StateService ) {
+        .controller("profile.Ctrl", ["$scope", "StateService", function ($scope, StateService ) {
 
             $scope.states = StateService.getStates();
             $scope.equals = angular.equals;
 
-        })
+        }])
 
-        .directive("accountForm", function(AccountService) {
+        .directive("accountForm", ["AccountService", function(AccountService) {
             return {
                 restrict: "E",
                 scope: true,
@@ -40,9 +40,9 @@
                     };
                 }
             };
-        })
+        }])
 
-        .directive("passwordForm", function(AccountService) {
+        .directive("passwordForm", ["AccountService", function(AccountService) {
             return {
                 restrict: "E",
                 scope: true,
@@ -86,9 +86,9 @@
                     };
                 }
             };
-        })
+        }])
 
-        .directive("stateLicensuresForm", function(CertificateService, StateLicensureService) {
+        .directive("stateLicensuresForm", ["CertificateService", "StateLicensureService", function(CertificateService, StateLicensureService) {
             return {
                 restrict: "E",
                 scope: true,
@@ -112,8 +112,8 @@
                     };
                 }
             };
-        })
-        .directive("managersForm", function(ManagerService) {
+        }])
+        .directive("managersForm", ["ManagerService", function(ManagerService) {
             return {
                 restrict: "E",
                 scope: true,
@@ -131,7 +131,7 @@
                     };
                 }
             };
-        })
+        }])
     ;
 
 })();

@@ -5,7 +5,7 @@
     angular.module('pct.elearning.api.Test', [
     ])
 
-        .factory("TestService", function($timeout, Api) {
+        .factory("TestService", ["$timeout", "Api", function($timeout, Api) {
 
             return {
                 get : function(courseId) {
@@ -59,7 +59,7 @@
 
                 }
             };
-        })
+        }])
     ;
 
 })();

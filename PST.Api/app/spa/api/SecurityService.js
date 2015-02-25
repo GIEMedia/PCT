@@ -5,7 +5,7 @@
     angular.module('pct.elearning.api.Security', [
     ])
 
-        .factory("Api", function($http) {
+        .factory("Api", ["$http", function($http) {
             var sendHttp = function(method, url, data) {
                 return $http({
                     method: method,
@@ -28,9 +28,9 @@
                     return sendHttp("DELETE", url);
                 }
             };
-        })
+        }])
 
-        .factory("SecurityService", function($http, $rootScope, $timeout, Api, User, $state) {
+        .factory("SecurityService", ["$http", "$rootScope", "$timeout", "Api", "User", "$state", function($http, $rootScope, $timeout, Api, User, $state) {
             var fetchUser = function() {
                 Api.get("api/account")
                     .success(function(account) {
@@ -90,7 +90,7 @@
                     });
                 }
             };
-        })
+        }])
     ;
 
 })();
