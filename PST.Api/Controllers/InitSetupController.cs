@@ -205,7 +205,7 @@ namespace PST.Api.Controllers
                     {
                         Test = course.Test,
                         TotalQuestions = 2,
-                        RetriesLeft = 3,
+                        TriesLeft = 3,
                         LastActivityUtc = DateTime.UtcNow
                     },
                 Sections = new List<SectionProgress>
