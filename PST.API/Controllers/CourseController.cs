@@ -110,7 +110,8 @@ namespace PST.Api.Controllers
         public answer_result AnswerQuestion(Guid courseID, answer answer)
         {
             string correctResponseHeading, correctResponseText;
-            var correct = _courseService.AnswerCourseQuestion(CurrentUserID, courseID, answer.question_id, answer.selected_option_ids, out correctResponseHeading, out correctResponseText);
+            var correct = _courseService.AnswerCourseQuestion(CurrentUserID, courseID, answer.question_id,
+                answer.selected_option_ids, out correctResponseHeading, out correctResponseText);
             return new answer_result(answer.question_id, correct, correctResponseHeading, correctResponseText);
         }
     }
