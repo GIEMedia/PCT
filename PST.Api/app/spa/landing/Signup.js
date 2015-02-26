@@ -9,10 +9,12 @@
                 restrict: "E",
                 templateUrl: "/app/spa/landing/Signup.html",
                 link: function($scope, elem, attrs) {
-                    $scope.signup = {};
+                    $scope.signup = {
+                        loading: false
+                    };
 
                     $scope.getStarted = function() {
-
+                        $scope.signup.loading = true;
                         AccountService.createAccount($scope.signup)
                             .success(function() {
                                 SecurityService.login({
@@ -28,6 +30,7 @@
                             .error(function(data) {
                                 //{"Message":"The request is invalid.","ModelState":{"":["Account with this UserName already exists"]}}
                                 alert(JSON.stringify(data));
+                                $scope.signup.loading = false;
                             })
                         ;
                         //$state.go("dashboard");

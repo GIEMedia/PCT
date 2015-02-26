@@ -53,6 +53,6 @@
         </div><!-- /.form-row -->
     </div><!-- /.form-body -->
     <div class="form-actions">
-        <input type="button" class="btn" value="Update Licensure" ng-disabled="equals(stateLicensuresMaster, stateLicensures) || form.$invalid" ng-click="update()">
+        <input type="button" class="btn" value="Update Licensure" ng-disabled="equals(stateLicensuresMaster, stateLicensures) || form.$invalid || stateLicensuresForm.loading" ng-click="update()">
     </div><!-- /.form-actions -->
 </form>

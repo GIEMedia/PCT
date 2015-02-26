@@ -28,14 +28,19 @@
                 scope: true,
                 templateUrl: "/app/spa/profile/AccountForm.html",
                 link: function($scope, elem, attrs) {
+                    $scope.accountForm = {
+                        loading: false
+                    };
                     AccountService.getAccount().success(function(account) {
                         $scope.userInfo = account;
                         $scope.userInfoMaster = angular.copy($scope.userInfo);
                     });
 
                     $scope.updateAccount = function() {
+                        $scope.accountForm.loading = true;
                         AccountService.updateAccount($scope.userInfo).success(function() {
                             $scope.userInfoMaster = angular.copy($scope.userInfo);
+                            $scope.accountForm.loading = false;
                         });
                     };
                 }
@@ -94,6 +99,10 @@
                 scope: true,
                 templateUrl: "/app/spa/profile/StateLicensuresForm.html",
                 link: function($scope, elem, attrs) {
+                    $scope.stateLicensuresForm = {
+                        loading: true
+                    };
+
                     StateLicensureService.get().success(function(sls) {
                         $scope.stateLicensures = sls;
                         for (var i = 0; i < sls.length; i++) {
@@ -101,12 +110,15 @@
                             sl.confirmNum = sl.license_num;
                         }
                         $scope.stateLicensuresMaster = angular.copy($scope.stateLicensures);
+                        $scope.stateLicensuresForm.loading = false;
                     });
                     $scope.certificateCategories = CertificateService.getCertificateCategories();
 
 
                     $scope.update = function() {
+                        $scope.stateLicensuresForm.loading = true;
                         StateLicensureService.update($scope.stateLicensures).success(function() {
+                            $scope.stateLicensuresForm.loading = false;
                             $scope.stateLicensuresMaster = angular.copy($scope.stateLicensures);
                         });
                     };
@@ -119,14 +131,22 @@
                 scope: true,
                 templateUrl: "/app/spa/profile/ManagersForm.html",
                 link: function($scope, elem, attrs) {
+                    $scope.managersForm = {
+                        loading: true
+                    };
+
                     ManagerService.get().success(function(managers) {
                         $scope.managers = managers;
                         $scope.managersMaster = angular.copy($scope.managers);
+
+                        $scope.managersForm.loading = false;
                     });
 
                     $scope.update = function() {
+                        $scope.managersForm.loading = true;
                         ManagerService.update($scope.managers).success(function() {
                             $scope.managersMaster = angular.copy($scope.managers);
+                            $scope.managersForm.loading = false;
                         });
                     };
                 }

@@ -86,6 +86,6 @@
     </div><!-- /.form-body -->
 
     <div class="form-actions">
-        <input type="submit" class="btn" value="Save Info" ng-disabled="equals(userInfo, userInfoMaster) || form.$invalid" ng-click="updateAccount()">
+        <input type="submit" class="btn" value="Save Info" ng-disabled="equals(userInfo, userInfoMaster) || form.$invalid || accountForm.loading" ng-click="updateAccount()">
     </div><!-- /.form-actions -->
 </form><!-- /.form-signup -->
