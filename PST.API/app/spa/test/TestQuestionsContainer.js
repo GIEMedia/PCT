@@ -8,28 +8,36 @@
         .directive("testQuestionsContainer", function() {
             return {
                 restrict: "E",
-                scope: true,
+                scope: {
+                    reportProgress: "=",
+                    questions: "=",
+                    sendResult: "&",
+                    progress: "=",
+                    showing: "="
+                },
                 templateUrl: "/app/spa/test/TestQuestionsContainer.html",
                 link: function($scope, elem, attrs) {
                     $scope.tqc = {
-                        answer: []
+                        answer: [],
+                        answers: {}
                     };
 
+                    // Report progress
                     $scope.$watch("question", function(value) {
                         if (value == null) {
-                            $scope.testView.progress = "100%";
                             return;
                         }
-                        var index = $scope.test.questions.indexOf(value);
-                        $scope.testView.progress = Math.round(index / $scope.test.questions.length * 100) + "%";
+                        var index = $scope.questions.indexOf(value);
+                        $scope.reportProgress = Math.round(index / $scope.questions.length * 100) + "%";
                     });
+
 
                     var nextFailedQuestion = function(index) {
                         if (index == -1) {
                             index = 0;
                         }
-                        for (;index < $scope.test.questions.length;index++) {
-                            var question = $scope.test.questions[index];
+                        for (;index < $scope.questions.length;index++) {
+                            var question = $scope.questions[index];
 
                             var correctModel = $scope.progress.corrects[question.question_id];
                             if (correctModel == null) {
@@ -40,22 +48,21 @@
                     };
 
                     $scope.lastQuestion = function() {
-                        if ($scope.test == null || $scope.progress == null) {
+                        if ($scope.questions == null || $scope.progress == null) {
                             return false;
                         }
                         if ($scope.progress.tries_left > 1) {
-                            return $scope.test.questions.indexOf($scope.question) == $scope.test.questions.length - 1;
+                            return $scope.questions.indexOf($scope.question) == $scope.questions.length - 1;
                         } else {
-                            var index = $scope.test.questions.indexOf($scope.question);
+                            var index = $scope.questions.indexOf($scope.question);
                             return nextFailedQuestion(index + 1) == null;
                         }
                     };
 
-
                     var acceptAnswer = function() {
                         var correctModel = $scope.progress.corrects[$scope.question.question_id];
                         if (correctModel == null) {
-                            $scope.model.answers[$scope.question.question_id] = $scope.tqc.answer;
+                            $scope.tqc.answers[$scope.question.question_id] = $scope.tqc.answer;
                             $scope.tqc.answer = [];
                         }
                     };
@@ -67,15 +74,18 @@
 
                     $scope.submit = function() {
                         acceptAnswer();
-                        $scope.doSubmit();
+
+                        $scope.sendResult({"$answers": $scope.tqc.answers});
+
+                        $scope.tqc.answers = {};
                     };
 
                     var fetchNextQuestion = function() {
                         $scope.tqc.answer = [];
-                        var index = $scope.test.questions.indexOf($scope.question);
+                        var index = $scope.questions.indexOf($scope.question);
 
                         if ($scope.progress.tries_left > 1) {
-                            $scope.question = $scope.test.questions[index + 1];
+                            $scope.question = $scope.questions[index + 1];
                         } else {
                             $scope.question = nextFailedQuestion(index + 1);
                         }
@@ -83,14 +93,14 @@
                     };
 
                     var waitTestAvai = Async.ladyFirst();
-                    $scope.$watch(function() { return $scope.test != null && $scope.progress != null;}, function(value) {
+                    $scope.$watch(function() { return $scope.questions != null && $scope.progress != null;}, function(value) {
                         if (value) {
                             waitTestAvai.ladyDone();
                         }
                     });
 
-                    $scope.$watch("showResult", function(value) {
-                        if (value != null && !value) {
+                    $scope.$watch("showing", function(value) {
+                        if (value != null && value) {
                             waitTestAvai.manTurn(function() {
                                 fetchNextQuestion();
                             });

@@ -21,10 +21,7 @@
 
         .controller("test.Ctrl", ["$scope", "TestService", "$stateParams", function ($scope, TestService, $stateParams) {
             $scope.testView = {
-                progress: "100%"
-            };
-            $scope.model = {
-                answers: {}
+                questionProgress: "100%"
             };
             $scope.progress = null;
             $scope.showResult = false;
@@ -37,8 +34,8 @@
                 $scope.progress = progress;
             });
 
-            $scope.$watch(function() { return $scope.test != null && $scope.progress != null;}, function(value) {
-                if (value) {
+            $scope.$watch(function() { return $scope.test != null && $scope.progress != null;}, function(ready) {
+                if (ready) {
                     if ($scope.isPassed() || $scope.progress.tries_left == 0) {
                         $scope.showResult = true;
                     }
@@ -53,8 +50,8 @@
                 return correctCount == $scope.test.questions.length || (correctCount / $scope.test.questions.length >= $scope.test.passing_percentage && $scope.progress.tries_left == 0);
             };
 
-            $scope.doSubmit = function() {
-                TestService.submit($scope.model.answers, $stateParams.courseId, function(result) {
+            $scope.sendResult = function(answers) {
+                TestService.submit(answers, $stateParams.courseId, function(result) {
                     $scope.showResult = true;
                     Cols.mapAddAll(result, $scope.progress.corrects);
                     $scope.progress.tries_left--;
@@ -63,7 +60,6 @@
 
             $scope.nextRound = function() {
                 $scope.showResult = false;
-                $scope.model.answers = {};
             };
 
         }])
