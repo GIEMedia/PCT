@@ -375,29 +375,21 @@ namespace PST.Api.Controllers
         public course_overview[] OpenCourses()
         {
             var courseProgress = _courseService.Value.OpenCourses(CurrentUserID);
-            return (from cp in courseProgress
-                let c = cp.Course
-                from sp in c.Sections
-                select new course_overview
-                {
-                    course_id = c.ID,
-                    title = c.Title,
-                    description =
-                        c.StateCEUs.Any()
-                            ? "CEUs Available: " +
-                              c.StateCEUs.OrderBy(x => x.StateAbbr)
-                                  .Select(x => x.StateAbbr)
-                                  .Aggregate((i, j) => i + "," + j)
-                            : "",
-                    course_progress = cp.Sections.Count(s => s.Passed)/(decimal) cp.TotalSections,
-                    test_progress =
-                        cp.TestProgress != null
-                            ? cp.TestProgress.CompletedQuestions.Count/(decimal) cp.TestProgress.TotalQuestions
-                            : 0,
-                    last_activity = cp.LastActivityUtc.ToTimeZone(CurretUserTimeZoneInfo)
-                }).ToArray()
+
+            return courseProgress.Select(cp =>
+            {
+                var co = (course_overview) cp.Course;
+                co.course_progress = cp.Sections.Count(s => s.Passed)/(decimal) cp.TotalSections;
+                co.test_progress =
+                    cp.TestProgress != null
+                        ? cp.TestProgress.CompletedQuestions.Count/(decimal) cp.TestProgress.TotalQuestions
+                        : 0;
+                co.last_activity = cp.LastActivityUtc.ToTimeZone(CurretUserTimeZoneInfo);
+
+                return co;
+            }).ToArray()
                 //TODO: Remove this hack - multiple results being returned for same course
-                .GroupBy(g=>g.course_id).Select(g=>g.First()).ToArray();
+                .GroupBy(g => g.course_id).Select(g => g.First()).ToArray();
         }
 
         [HttpGet]

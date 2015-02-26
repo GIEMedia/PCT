@@ -53,8 +53,10 @@ namespace PST.Services
                 select c).Take(count);
         }
 
-        public Course GetCourse(Guid courseID, Guid? accountID = null)
+        public Course GetCourse(Guid courseID, Guid? accountID, out List<Course> prerequisiteCourses)
         {
+            prerequisiteCourses = null;
+
             //TODO: Replace with cache lookup
             var course = _entityRepository.GetByID<Course>(courseID);
 
@@ -68,19 +70,28 @@ namespace PST.Services
                 return course;
 
             var courseProgress = (from a in _entityRepository.Queryable<Account>()
-                where a.ID == accountID
-                from c in a.CourseProgress
-                select c).ToList();
+                                  where a.ID == accountID
+                                  from c in a.CourseProgress
+                                  select c).ToList();
 
             var passedCourses =
                 (from c in courseProgress
-                    where c.TestProgress != null && c.TestProgress.Passed
-                    select c.Course.ID).ToArray();
+                 where c.TestProgress != null && c.TestProgress.Passed
+                 select c.Course.ID).ToArray();
 
             if (!course.PrerequisiteCourses.All(c => passedCourses.Contains(c.ID)))
+            {
+                prerequisiteCourses = course.PrerequisiteCourses.ToList();
                 return null;
+            }
 
             return course;
+        }
+
+        public Course GetCourse(Guid courseID, Guid? accountID = null)
+        {
+            List<Course> preqCourses;
+            return GetCourse(courseID, accountID, out preqCourses);
         }
 
         public course_progress GetCourseProgress(Guid accountID, Guid courseID)

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Http;
 using Antlr.Runtime.Misc;
 using Microsoft.AspNet.Identity;
+using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
 using PST.Api.Core.OAuth;
 using PST.Declarations;
@@ -37,10 +39,12 @@ namespace PST.Api.Controllers
         [Route("{courseID}")]
         public course GetCourse(Guid courseID)
         {
-            var course = _courseService.GetCourse(courseID, CurrentUserID);
-            if(course == null)
-                throw new HttpResponseException(HttpStatusCode.Forbidden);
-            return course;
+            List<Course> prereqCourses;
+            var course = _courseService.GetCourse(courseID, CurrentUserID, out prereqCourses);
+            if (course == null && prereqCourses == null)
+                return null;
+            return course ??
+                   new course {prerequisite_courses = prereqCourses.Select(c => (course_overview) c).ToArray()};
         }
 
         /// <summary>
@@ -60,18 +64,7 @@ namespace PST.Api.Controllers
                 categories = mainCategory.SubCategories.Select(s => new sub_category
                 {
                     title = s.Title,
-                    courses = courses.Where(c => c.Category.ID == s.ID).Select(c => new course_overview
-                    {
-                        course_id = c.ID,
-                        title = c.Title,
-                        description =
-                            c.StateCEUs.Any()
-                                ? "CEUs Available: " +
-                                  c.StateCEUs.OrderBy(x => x.StateAbbr)
-                                      .Select(x => x.StateAbbr)
-                                      .Aggregate((i, j) => i + "," + j)
-                                : "",
-                    }).ToArray()
+                    courses = courses.Where(c => c.Category.ID == s.ID).Select(c => (course_overview) c).ToArray()
                 }).ToArray()
             }).ToArray();
         }
@@ -85,18 +78,7 @@ namespace PST.Api.Controllers
         public course_overview[] NewCourses()
         {
             return (from c in _courseService.NewCourses(accountID: CurrentUserID)
-                select new course_overview
-                {
-                    course_id = c.ID,
-                    title = c.Title,
-                    description =
-                        c.StateCEUs.Any()
-                            ? "CEUs Available: " +
-                              c.StateCEUs.OrderBy(x => x.StateAbbr)
-                                  .Select(x => x.StateAbbr)
-                                  .Aggregate((i, j) => i + "," + j)
-                            : "",
-                }).ToArray();
+                select (course_overview) c).ToArray();
         }
 
         /// <summary>
