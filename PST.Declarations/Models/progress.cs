@@ -20,9 +20,9 @@ namespace PST.Declarations.Models
 
         public Guid course_id { get; set; }
 
-        public int max_retries { get; set; }
+        public int max_tries { get; set; }
 
-        public int retries_left { get; set; }
+        public int tries_left { get; set; }
     }
 
     public class question_progress

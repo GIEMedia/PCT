@@ -34,7 +34,7 @@ namespace PST.Services
                                  c.TestProgress == null || // havent started the test
                                  (c.TestProgress.CompletedQuestions.Count() != c.TestProgress.TotalQuestions &&
                                   // havent completed test
-                                  c.TestProgress.RetriesLeft > 0))); // havent failed test
+                                  c.TestProgress.TriesLeft > 0))); // havent failed test
         }
 
         public IEnumerable<Course> NewCourses(int count = 5, Guid? accountID = null)
@@ -170,8 +170,8 @@ namespace PST.Services
             {
                 test_id = test.ID,
                 course_id = courseID,
-                max_retries = test.MaxRetries,
-                retries_left = testProgress.RetriesLeft,
+                max_tries = test.MaxTries,
+                tries_left = testProgress.TriesLeft,
                 correctly_answered_questions =
                     test.Questions.Where(q => completedQuestions.Contains(q.ID))
                         .Select(q => new question_progress
@@ -296,7 +296,7 @@ namespace PST.Services
             var testProgress = (TestProgress) (course.Test.GetProgress(courseProgress) ??
                                                course.Test.CreateAndAddProgress(courseProgress));
 
-            if (testProgress.RetriesLeft == 0)
+            if (testProgress.TriesLeft == 0)
                 return null;
 
             var results = new List<answer_result>();
@@ -327,7 +327,7 @@ namespace PST.Services
 
             if (results.Count(r => r.correct)/(decimal) course.Test.Questions.Count < course.Test.PassingPercentage)
             {
-                testProgress.RetriesLeft = Math.Max(0, testProgress.RetriesLeft - 1);
+                testProgress.TriesLeft = Math.Max(0, testProgress.TriesLeft - 1);
                 _entityRepository.Save(testProgress);
             }
 

@@ -66,13 +66,13 @@ namespace PST.Declarations.Entities
     {
         public TestProgress()
         {
-            this.RetriesLeft = 2;
+            this.TriesLeft = 3;
         }
 
         [Ownership(Ownership.None)]
         public virtual Test Test { get; set; }
 
-        public virtual int RetriesLeft { get; set; }
+        public virtual int TriesLeft { get; set; }
     }
 
     [Serializable]
