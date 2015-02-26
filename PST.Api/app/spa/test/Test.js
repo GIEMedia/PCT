@@ -67,9 +67,7 @@
         .directive("testPassed", function() {
             return {
                 restrict: "E",
-                templateUrl: "/app/spa/test/TestPassed.html",
-                link: function($scope, elem, attrs) {
-                }
+                templateUrl: "/app/spa/test/TestPassed.html"
             };
         })
         .directive("testFailed", function() {

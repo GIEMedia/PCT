@@ -12,8 +12,7 @@
                     reportProgress: "=",
                     questions: "=",
                     sendResult: "&",
-                    progress: "=",
-                    showing: "="
+                    progress: "="
                 },
                 templateUrl: "/app/spa/test/TestQuestionsContainer.html",
                 link: function($scope, elem, attrs) {
@@ -99,7 +98,7 @@
                         }
                     });
 
-                    $scope.$watch("showing", function(value) {
+                    $scope.$watch("questions!=null && progress!=null", function(value) {
                         if (value != null && value) {
                             waitTestAvai.manTurn(function() {
                                 fetchNextQuestion();
