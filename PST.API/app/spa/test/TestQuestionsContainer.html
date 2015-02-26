@@ -20,7 +20,6 @@
                 </div>
             </div><!-- /.course-question-head -->
 
-
             <h3 class="test-question-title">{{question.question_text}}</h3><!-- /.test-question-title -->
             <h5 ng-if="question.multi_select">(check all that apply)</h5>
         </div><!-- /.test-question -->
@@ -30,7 +29,7 @@
         <div class="test-question-answers">
             <div class="form-body">
 
-                <e-options question="question" answer="tqc.answer" ng-if="progress.corrects[question.question_id] == null" ng-class="progress.retries_left == 3 ? '' : 'retry'" retry="progress.retries_left != progress.max_retries"></e-options>
+                <e-options question="question" answer="tqc.answer" ng-if="progress.corrects[question.question_id] == null" ng-class="progress.tries_left == progress.max_tries ? '' : 'retry'" retry="progress.tries_left != progress.max_tries"></e-options>
 
                 <div class="course-question-options correct" ng-if="progress.corrects[question.question_id]">
                     <div class="course-question-option course-question-option-header">

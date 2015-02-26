@@ -24,8 +24,8 @@
                             };
                         }
                         callback({
-                            max_retries: resp.max_retries,
-                            retries_left : resp.retries_left,
+                            max_tries: resp.max_tries,
+                            tries_left : resp.tries_left,
                             corrects: corrects
                         });
                     });
