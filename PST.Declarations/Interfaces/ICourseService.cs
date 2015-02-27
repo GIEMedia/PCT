@@ -27,6 +27,15 @@ namespace PST.Declarations.Interfaces
         /// </summary>
         /// <param name="courseID">ID of course to get</param>
         /// <param name="accountID">Account to ensure prereqs met.</param>
+        /// <param name="prerequisiteCourses">Prerequisite courses if prereqs not met.</param>
+        /// <returns>Course with specified ID. Returns null if course not found or account doesn't meet prereqs (out prerequisite courses set).</returns>
+        Course GetCourse(Guid courseID, Guid? accountID, out List<Course> prerequisiteCourses);
+
+        /// <summary>
+        /// Gets a specific course by ID.
+        /// </summary>
+        /// <param name="courseID">ID of course to get</param>
+        /// <param name="accountID">Account to ensure prereqs met.</param>
         /// <returns>Course with specified ID. Returns null if course not found or account doesn't meet prereqs.</returns>
         Course GetCourse(Guid courseID, Guid? accountID = null);
 

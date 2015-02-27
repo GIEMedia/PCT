@@ -51,5 +51,24 @@ namespace PST.Declarations.Entities
                 sections = course.Sections != null ? course.Sections.Select(s => (section) s).ToArray() : new section[0]
             };
         }
+
+        public static implicit operator course_overview(Course course)
+        {
+            if (course == null)
+                return new course_overview();
+
+            return new course_overview
+            {
+                course_id = course.ID,
+                title = course.Title,
+                description =
+                    course.StateCEUs.Any()
+                        ? "CEUs Available: " +
+                          course.StateCEUs.OrderBy(x => x.StateAbbr)
+                              .Select(x => x.StateAbbr)
+                              .Aggregate((i, j) => i + "," + j)
+                        : ""
+            };
+        }
     }
 }
