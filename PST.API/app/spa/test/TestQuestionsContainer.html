@@ -36,7 +36,7 @@
                         {{progress.corrects[question.question_id].correct_response_heading}}
                     </div>
 
-                    <div ng-if="question.option_type==1">
+                    <div class="course-question-options-pictures" ng-if="question.option_type==1">
 
                         <div class="course-question-option-picture" ng-repeat="option in question.options" ng-init="isChecked = hasIdIn(progress.corrects[question.question_id].answer)">
                             <img ng-src="{{option.image}}" alt="" width="145" height="145">
