@@ -36,7 +36,7 @@
 
                                 <ul ng-repeat-end>
                                     <li ng-repeat="course in courseCat.courses">
-                                        <a ui-sref="course({id: course.course_id})">{{course.title}}</a>
+                                        <a href="" ng-click="loadCourse(course)">{{course.title}}</a>
                                     </li>
                                 </ul>
                             </div><!-- /.section-body -->
@@ -83,7 +83,7 @@
                                 <p class="courses-item-meta">{{course.description}}</p><!-- /.courses-item-meta -->
                             </div><!-- /.courses-item-content -->
 
-                            <a ui-sref="course({id: course.course_id})" class="courses-item-action-start">
+                            <a  href="" ng-click="loadCourse(course)" class="courses-item-action-start">
                                 <span>Start Course</span>
                             </a><!-- /.courses-item-action-start -->
                         </li><!-- /.courses-item -->

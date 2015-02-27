@@ -17,7 +17,7 @@
             ;
         }])
 
-        .controller("dashboard.Ctrl", ["$scope", "User", "CourseService", "DashboardHelper", function ($scope, User, CourseService, DashboardHelper) {
+        .controller("dashboard.Ctrl", ["$scope", "$state", "User", "CourseService", "DashboardHelper", function ($scope, $state, User, CourseService, DashboardHelper) {
             $scope.User = User;
 
             CourseService.getNewCourses().success(function(courses) {
@@ -39,6 +39,16 @@
             $scope.$watch("view.search", function(search) {
                 $scope.courseHeaderCols = DashboardHelper.toCols(DashboardHelper.filter(_courseStructure, search));
             });
+
+            $scope.loadCourse = function(course) {
+                CourseService.get(course.course_id).success(function(resp) {
+                    if (resp.prerequisite_courses) {
+                        alert("You need to finish these courses first: " + Cols.join(Cols.yield(resp.prerequisite_courses, function(pc) { return pc.title;}), ", "));
+                    } else {
+                        $state.go("course", {id: course.course_id});
+                    }
+                });
+            };
         }])
 
         .factory("DashboardHelper", function() {
