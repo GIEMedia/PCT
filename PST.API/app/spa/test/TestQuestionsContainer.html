@@ -36,14 +36,29 @@
                         {{progress.corrects[question.question_id].correct_response_heading}}
                     </div>
 
-                    <div class="course-question-option" ng-repeat="option in question.options | filter:hasIdIn(progress.corrects[question.question_id].answer)"  ng-if="progress.corrects[question.question_id]" >
+                    <div ng-if="question.option_type==1">
 
-                        <input type="radio" checked="checked">
+                        <div class="course-question-option-picture" ng-repeat="option in question.options" ng-init="isChecked = hasIdIn(progress.corrects[question.question_id].answer)">
+                            <img ng-src="{{option.image}}" alt="" width="145" height="145">
 
-                        <label>{{option.text}}</label>
-                    </div><!-- /.course-question-option -->
+                            <a href="app/css/images/temp/img-answer-large.jpg" class="js-magnify"></a>
 
-                    <div class="course-question-option-description" ng-if="progress.corrects[question.question_id]">
+                            <input type="radio" ng-checked="isChecked(option)">
+
+                            <label>Select</label>
+                        </div><!-- /.course-question-option-picture -->
+                    </div>
+                    <div ng-if="question.option_type==0">
+
+                        <div class="course-question-option" ng-repeat="option in question.options | filter:hasIdIn(progress.corrects[question.question_id].answer)" >
+
+                            <input type="radio" checked="checked">
+
+                            <label>{{option.text}}</label>
+                        </div><!-- /.course-question-option -->
+                    </div>
+
+                    <div class="course-question-option-description">
                         {{ progress.corrects[question.question_id].correct_response_text }}
                     </div><!-- /.course-question-option -->
                 </div><!-- /.course-questions-options -->

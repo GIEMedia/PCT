@@ -28,6 +28,15 @@
 
             TestService.get($stateParams.courseId).success(function(test) {
                 $scope.test = test;
+                // For testing image options
+                //for (var i = 0; i < test.questions.length; i++) {
+                //    var q = test.questions[i];
+                //    q.option_type = 1;
+                //    for (var j = 0; j < q.options.length; j++) {
+                //        var o = q.options[j];
+                //        o.image = "app/css/images/temp/img-answer" + (j+1) + ".jpg";
+                //    }
+                //}
             });
 
             TestService.getProgress($stateParams.courseId, function(progress) {
