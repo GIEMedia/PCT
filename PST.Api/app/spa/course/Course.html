@@ -12,13 +12,13 @@
 
 <div class="course-questions-container no-select is-scrollable" section="section"></div><!-- /.course-questions-container -->
 
-<div class="course-media" course-page-controller>
+<div class="course-media" course-page-controller course-media="page">
 
     <div class="course-media-bar">
         <div class="course-zoom">
-            <a href="#" class="course-zoom-out">Zoom Out</a>
+            <a href="" class="course-zoom-out">Zoom Out</a>
             <span class="course-zoom-level">100%</span>
-            <a href="#" class="course-zoom-in">Zoom In</a>
+            <a href="" class="course-zoom-in">Zoom In</a>
         </div><!-- /.course-zoom -->
         <div class="course-controls">
             <a href="" class="course-control-print" ng-click="print()">Print</a>
@@ -26,9 +26,9 @@
             <a href="" class="course-control-maximize" ng-click="toggleMaximized()">Maximize</a>
         </div><!-- /.course-controls -->
         <div class="course-switch">
-            <a href="#" class="course-switch-questions">Questions</a>
-            <a href="#" class="course-switch-arrows"></a>
-            <a href="#" class="course-switch-document">Document</a>
+            <a href="" class="course-switch-questions">Questions</a>
+            <a href="" class="course-switch-arrows"></a>
+            <a href="" class="course-switch-document">Document</a>
         </div><!-- /.course-switch -->
         <div class="course-paging">
             <a href="" class="course-paging-prev" ng-disabled="currentPage()<=1" ng-click="prevPage()">Previous</a>
@@ -40,7 +40,7 @@
     <div class="course-media-frame">
         <div class="course-media-frame-panzoom">
             <div class="loading"><i class="fa fa-spinner fa-spin"></i></div>
-            <img img-src="page" class="course-pdf-preview" width="100" alt="">
+            <img class="course-pdf-preview" width="100" alt="">
         </div>
     </div><!-- /.course-media-frame -->
 </div><!-- /.course-media -->

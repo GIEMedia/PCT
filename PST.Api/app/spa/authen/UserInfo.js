@@ -4,6 +4,9 @@
 
     angular.module('pct.elearning.userInfo', [
     ])
+        /**
+         * This link function is used for both userInfo component (in page layout header) and formSignin component (used by mobile view)
+         */
         .factory("LoginFormLink", ["User", "SecurityService", "$state", function( User, SecurityService, $state ) {
             return function($scope, elem, attrs) {
                 $scope.User = User;
@@ -49,6 +52,9 @@
             }
         }])
 
+        /**
+         * Used in mobile view, landing page
+         */
         .directive("formSignin", ["LoginFormLink", function(LoginFormLink) {
             return {
                 restrict: "C",
@@ -56,6 +62,12 @@
                 link: LoginFormLink
             };
         }])
+
+        /**
+         * Used in _Layout's header (which mean appear in all app pages).
+         * If logged in, this will show user's full name, dropdown for all profile links.
+         * If not logged in, this will show a login form
+         */
         .directive("userInfo", ["LoginFormLink", function(LoginFormLink) {
             return {
                 restrict: "E",

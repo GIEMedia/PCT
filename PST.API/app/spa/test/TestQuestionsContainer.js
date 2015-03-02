@@ -91,21 +91,18 @@
 
                     };
 
-                    var waitTestAvai = Async.ladyFirst();
-                    $scope.$watch(function() { return $scope.questions != null && $scope.progress != null;}, function(value) {
-                        if (value) {
-                            waitTestAvai.ladyDone();
-                        }
-                    });
 
                     $scope.$watch("questions!=null && progress!=null", function(value) {
-                        if (value != null && value) {
-                            waitTestAvai.manTurn(function() {
-                                fetchNextQuestion();
-                            });
+                        if (value) {
+                            fetchNextQuestion();
                         }
                     });
 
+                    /**
+                     * Check question option, return if its id is in col
+                     * @param col
+                     * @returns {Function}
+                     */
                     $scope.hasIdIn = function(col) {
                         return function(e) {
                             return col.indexOf(e.option_id) > -1;

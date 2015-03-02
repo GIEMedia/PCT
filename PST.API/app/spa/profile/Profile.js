@@ -22,6 +22,9 @@
 
         }])
 
+        /**
+         * For the account form in Profile page
+         */
         .directive("accountForm", ["AccountService", function(AccountService) {
             return {
                 restrict: "E",
@@ -47,6 +50,9 @@
             };
         }])
 
+        /**
+         * For the password form in Profile page
+         */
         .directive("passwordForm", ["AccountService", function(AccountService) {
             return {
                 restrict: "E",
@@ -93,6 +99,9 @@
             };
         }])
 
+        /**
+         * For the State Licensures form in Profile page
+         */
         .directive("stateLicensuresForm", ["CertificateService", "StateLicensureService", function(CertificateService, StateLicensureService) {
             return {
                 restrict: "E",
@@ -125,6 +134,10 @@
                 }
             };
         }])
+
+        /**
+         * For the Managers form in Profile page
+         */
         .directive("managersForm", ["ManagerService", function(ManagerService) {
             return {
                 restrict: "E",

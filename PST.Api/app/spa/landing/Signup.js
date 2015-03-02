@@ -4,6 +4,9 @@
 
     angular.module('pct.elearning.signup', [
     ])
+        /**
+         * For the signup box in Landing page
+         */
         .directive("signUp", ["AccountService", "StateService", "SecurityService", "$state", function(AccountService, StateService, SecurityService, $state) {
             return {
                 restrict: "E",

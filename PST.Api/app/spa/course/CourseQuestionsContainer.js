@@ -6,6 +6,10 @@
         'pct.elearning.course.question'
     ])
 
+        /**
+         * Move to the current question - based on progress.
+         * Change question when answered correctly.
+         */
         .directive("courseQuestionsContainer", ["CourseService", function(CourseService) {
             return {
                 restrict: "C",
@@ -51,17 +55,6 @@
                         return $scope.progress[$scope.section.section_id] >= $scope.section.questions.length;
                     };
 
-                    $scope.finishedAllSection = function() {
-                        return courseCtrl.finishedAllSection();
-                    };
-
-                    // Change to next unfinished section
-                    $scope.nextUnfinishedSection = function() {
-                        waitProgress.manTurn(function () {
-                            courseCtrl.nextUnfinishedSection();
-                        });
-                    };
-
                     $scope.sectionNum = function() {
                         return courseCtrl.sectionNum();
                     };
@@ -87,8 +80,12 @@
                         return $scope.section == null ? 0 : $scope.section.questions.indexOf($scope.question);
                     };
 
-                    // Bring the scroll to bottom of question panel when has result.
-                    $scope.$watch(function() { return $scope.result == null ? null : $scope.result.passed;}, function(hasResult) {
+                    // Bring the scroll to bottom of question panel when has question answer result.
+                    var checkHasResult = function () {
+                        // Has to check 2 levels because result.passed can also be null, which will affect hasResult != null
+                        return $scope.result == null ? null : $scope.result.passed;
+                    };
+                    $scope.$watch(checkHasResult, function(hasResult) {
                         if (hasResult != null) {
                             //console.log("Scrolling");
                             setTimeout(function() {

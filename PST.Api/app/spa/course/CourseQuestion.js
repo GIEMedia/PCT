@@ -4,6 +4,9 @@
 
     angular.module('pct.elearning.course.question', [
     ])
+        /**
+         * Display 1 question in course page. Allow user to submit answer (delegate to courseQuestionsContainerCtrl)
+         */
         .directive("courseQuestion", function() {
             return {
                 restrict: "A",
@@ -28,6 +31,9 @@
             };
         })
 
+        /**
+         * Display 1 question's options. Used in both course page and test page.
+         */
         .directive("eOptions", function() {
             return {
                 restrict: "E",

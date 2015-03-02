@@ -5,9 +5,10 @@
     angular.module('pct.elearning.course.controls', [
     ])
 
-        .directive("courseMediaBar", function() {
+        .directive("courseControls", function() {
             return {
                 restrict: "C",
+                scope: true,
                 link: function($scope, elem, attrs) {
                     $scope.print = function() {
                         var newWindow = window.open($scope.section.document.pdf_url, "_blank");
@@ -23,6 +24,7 @@
         .directive("coursePaging", function() {
             return {
                 restrict: "C",
+                scope: true,
                 link: function($scope, elem, attrs) {
                     $scope.currentPage = function() {
                         if ($scope.section==null) {
@@ -34,6 +36,9 @@
             };
         })
 
+        /**
+         * Handle changing page
+         */
         .directive("coursePageController", function() {
             return {
                 restrict: "A",
@@ -66,6 +71,9 @@
             };
         })
 
+        /**
+         * For mobile view, switch between section/questions panel and the document
+         */
         .directive("courseSwitch", function() {
             return {
                 restrict: "C",
@@ -81,7 +89,7 @@
                         $(scrollingElement).animate({
                             scrollTop: $(scrollToElement).offset().top
                         }, 200);
-                    };
+                    }
 
                     elem.on('click', function(e) {
                         swap();
@@ -92,23 +100,26 @@
             };
         })
 
-        .directive("coursePdfPreview", function() {
+        /**
+         * Handing showing document page
+         */
+        .directive("courseMedia", function() {
             return {
-                restrict: "C",
+                restrict: "A",
                 link: function($scope, elem, attrs) {
 
                     var pdfPreviewLoaded = function () {
-                        var $panZoom = $(".course-media-frame-panzoom").panzoom({
+                        var $panZoom = elem.find(".course-media-frame-panzoom").panzoom({
                             contain: 'invert',
-                            $zoomOut: $('.course-zoom-out'),
-                            $zoomIn: $('.course-zoom-in')
+                            $zoomOut: elem.find('.course-zoom-out'),
+                            $zoomIn: elem.find('.course-zoom-in')
                             //relative: true,
                             //minScale: 1
                         });
 
                         $panZoom.on('panzoomzoom', function (e, panzoom, matrix, changed) {
                             if (changed) {
-                                $('.course-zoom-level').text(Math.round(100 * matrix) + '%');
+                                elem.find('.course-zoom-level').text(Math.round(100 * matrix) + '%');
                             }
                         });
 
@@ -120,14 +131,14 @@
                             $panZoom.panzoom('pan', 0, 15 * (down ? -1 : 1), { relative: true });
                         });
 
-                        $('.course-media-frame .loading').hide();
+                        elem.find('.course-media-frame .loading').hide();
                     };
 
-                    $scope.$watch(attrs.imgSrc, function(src) {
+                    $scope.$watch(attrs.courseMedia, function(src) {
                         if (src==null) {
                             return;
                         }
-                        elem.attr("src", src).one("load", pdfPreviewLoaded).each(function () {
+                        elem.find(".course-pdf-preview").attr("src", src).one("load", pdfPreviewLoaded).each(function () {
                             if (this.complete) $(this).load();
                         });
                     });
@@ -160,6 +171,9 @@
             };
         }])
 
+        /**
+         * Provide parent controller for courseControlMaximize
+         */
         .directive("courseMaximizer", function() {
             return {
                 restrict: "A",
@@ -193,6 +207,9 @@
             };
         })
 
+        /**
+         * Maximize the document page, hide section/questions panel
+         */
         .directive("courseControlMaximize", function() {
             return {
                 restrict: "C",

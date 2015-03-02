@@ -31,7 +31,7 @@
                         };
                     };
 
-                    var current = null;
+                    var currentTag = null;
 
                     var tags = null;
                     $scope.$watch("course", function(course) {
@@ -71,34 +71,16 @@
                         if (indexOf == -1) {
                             return;
                         }
-                        var newCurrent = tags[indexOf];
+                        var newTag = tags[indexOf];
 
-                        if (newCurrent != current) {
-                            newCurrent.addClass("current");
-                            if (current != null) {
-                                current.removeClass("current");
+                        if (newTag != currentTag) {
+                            newTag.addClass("current");
+                            if (currentTag != null) {
+                                currentTag.removeClass("current");
                             }
-                            current = newCurrent;
+                            currentTag = newTag;
                         }
                     });
-                }
-            };
-        })
-
-        .directive("courseSteps", function() {
-            return {
-                restrict: "C",
-                require: "^course",
-                scope : true,
-                link: function($scope, elem, attrs, courseCtrl) {
-                    $scope.prevSection = function() {
-                        courseCtrl.prevSection();
-                        return false;
-                    };
-                    $scope.nextSection = function() {
-                        courseCtrl.nextSection();
-                        return false;
-                    };
                 }
             };
         })

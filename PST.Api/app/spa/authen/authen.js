@@ -6,20 +6,11 @@
     ])
         .factory("User", function() {
             return {
-                loggedIn: false
+                loggedIn: false,
+                firstName: null,
+                fullName: null
             };
-            //return {
-            //    loggedIn: true,
-            //    firstName: "David",
-            //    fullName: "David Hurt"
-            //};
         })
-
-        //.run(function($rootScope, User) {
-        //    $rootScope.User = User;
-        //})
-
-
     ;
 
 })();

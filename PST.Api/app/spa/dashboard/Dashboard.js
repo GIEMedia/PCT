@@ -40,6 +40,11 @@
                 $scope.courseHeaderCols = DashboardHelper.toCols(DashboardHelper.filter(_courseStructure, search));
             });
 
+            /**
+             * This is invoked when user click on a new course (either in the New Courses list or in the search dropdown).
+             * This will load the desired course, to check if the server will allow that course to be loaded when user proceed to the Course Page.
+             * @param course
+             */
             $scope.loadCourse = function(course) {
                 CourseService.get(course.course_id).success(function(resp) {
                     if (resp.prerequisite_courses) {
@@ -51,8 +56,21 @@
             };
         }])
 
+        /**
+         * Provide helper functions for processing search text box.
+         * Filter out all courses that does not contain the text in the search box.
+         * Filter out all categories that does not have any courses (because no course match the 1st condition).
+         * Filter out all headers that does not have any categories (because no categories match the 2nd condition).
+         */
         .factory("DashboardHelper", function() {
             return {
+                /**
+                 * Take in the headers with their full structure, then filter out all courses which does not contain the search text.
+                 * All resulted empty categories and headers are filtered out too.
+                 * @param _headers
+                 * @param search
+                 * @returns {*}
+                 */
                 filter: function(_headers, search) {
                     if (StringUtil.isBlank(search)) {
                         return _headers;
@@ -83,6 +101,11 @@
                     }
                     return headers;
                 },
+                /**
+                 * Divide 1 collection to 2, cut in the middle, or the later one is 1 element longer.
+                 * @param list
+                 * @returns 1 list with 2 elements, each one is 1 list
+                 */
                 toCols: function(list) {
                     if (Cols.isEmpty(list)) {
                         return null;
@@ -97,13 +120,16 @@
             };
         })
 
+        /**
+         * Control the search text box, the wrapper div and the search dropdown
+         */
         .directive("searchField", function() {
             return {
                 restrict: "C",
                 scope: true,
                 link: function($scope, elem, attrs) {
 
-                    var $search = $('.search');
+                    var $search = elem.parent();
 
                     elem.on('click', function (e) {
                         $search.toggleClass('search-expanded');
@@ -111,13 +137,20 @@
                         e.preventDefault();
                     });
 
-                    $('.wrapper').on('click', function(e) {
+                    var wrapperOnClick = function (e) {
                         var $clicked = $(e.target);
 
-                        if (!$clicked.closest($search).length && !$clicked.is($search)) {
+                        if ( !$clicked.closest($search).length && !$clicked.is($search) ) {
                             $search.removeClass('search-expanded');
                             $scope.clearSearchText();
                         }
+                    };
+
+                    var wrapper = $('.wrapper');
+                    wrapper.on('click', wrapperOnClick);
+
+                    $scope.$on("$destroy", function() {
+                        wrapper.off('click', wrapperOnClick);
                     });
                 },
                 controller: ["$scope", function($scope) {
@@ -130,6 +163,9 @@
             };
         })
 
+        /**
+         * Register the search input box to the search field (which handle the search dropdown).
+         */
         .directive("searchInput", function() {
             return {
                 require: ["ngModel", "^searchField"],
