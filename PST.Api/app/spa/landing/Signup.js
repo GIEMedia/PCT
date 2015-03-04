@@ -30,10 +30,11 @@
                                     })
                                 ;
                             })
-                            .error(function(data) {
+                            .onError(function(data) {
                                 //{"Message":"The request is invalid.","ModelState":{"":["Account with this UserName already exists"]}}
                                 alert(JSON.stringify(data));
                                 $scope.signup.loading = false;
+                                return true;
                             })
                         ;
                         //$state.go("dashboard");

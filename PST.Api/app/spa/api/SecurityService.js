@@ -6,13 +6,35 @@
     ])
 
         .factory("Api", ["$http", function($http) {
+
+            var handleError = function(httpPromise) {
+
+                var _handler = null;
+
+                httpPromise.onError = function(handler) {
+                    _handler = handler;
+                };
+
+                httpPromise.error(function(data, status, headers, config) {
+                    if (_handler != null) {
+                        var handleResult = _handler(data, status, headers, config);
+                        if (handleResult) {
+                            return;
+                        }
+                    }
+                    alert("Unhandled api error:\nUrl: " + config.url + "\nResponse: " + status + "\n" + JSON.stringify(data));
+                });
+
+                return httpPromise;
+            };
+
             var sendHttp = function(method, url, data) {
-                return $http({
+                return handleError($http({
                     method: method,
                     url: url,
                     headers: {'Authorization': "Bearer " + sessionStorage.access_token},
                     data: data
-                });
+                }));
             };
             return {
                 get: function(url) {
@@ -26,7 +48,8 @@
                 },
                 delete: function(url) {
                     return sendHttp("DELETE", url);
-                }
+                },
+                handleError: handleError
             };
         }])
 
@@ -60,7 +83,7 @@
 
             return {
                 login: function(data) {
-                    return $http({
+                    return Api.handleError($http({
                         method: 'POST',
                         url: "/api/account/login",
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
@@ -76,9 +99,7 @@
                             sessionStorage.access_token = resp.access_token;
                             fetchUser();
                         })
-
-
-                    ;
+                    );
                 },
                 logout: function() {
                     Api.delete("api/account/logout").then(function() {

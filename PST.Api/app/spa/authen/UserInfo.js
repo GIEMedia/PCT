@@ -40,9 +40,14 @@
                         .success(function() {
                             $state.go("dashboard");
                         })
-                        .error(function() {
-                            alert('Your login failed.');
-                            $scope.loginForm.password = null;
+                        .onError(function(error, status) {
+                            if (status == 400) {
+                                alert('Your login failed.');
+                                $scope.loginForm.password = null;
+                                return true;
+                            } else {
+                                return false;
+                            }
                         })
                     ;
                 };

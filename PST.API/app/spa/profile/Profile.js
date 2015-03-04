@@ -68,6 +68,7 @@
                     }
 
                     $scope.error = null;
+                    $scope.success = false;
 
                     $scope.focusPassword = null;
 
@@ -77,18 +78,25 @@
                         AccountService.changePassword($scope.passwordForm)
                             .success(function() {
                                 $scope.passwordForm = newForm();
+                                $scope.success = true;
                             })
-                            .error(function(error) {
-                                $scope.passwordForm.old_password = null;
-                                $scope.focusPassword = true;
-                                $scope.error = error.ModelState[""][0];
+                            .onError(function(error, status) {
+                                if (status == 400) {
+                                    $scope.passwordForm.old_password = null;
+                                    $scope.focusPassword = true;
+                                    $scope.error = error.ModelState[""][0];
+                                    return true;
+                                } else {
+                                    return false;
+                                }
                             })
                         ;
                     };
 
-                    $scope.$watch("error != null && passwordForm.old_password.length", function(value) {
+                    $scope.$watch("(error != null || success) && passwordForm.old_password.length", function(value) {
                         if (value) {
                             $scope.error = null;
+                            $scope.success = false;
                         }
                     });
                     
