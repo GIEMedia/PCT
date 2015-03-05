@@ -396,14 +396,29 @@ namespace PST.Api.Controllers
         [Route("progress/course/{courseID}")]
         public course_progress GetCourseProgress(Guid courseID)
         {
-            return _courseService.Value.GetCourseProgress(CurrentUserID, courseID);
+            return _courseService.Value.GetCourseProgress(CurrentUserID, courseID)
+                ?? new course_progress {course_id = courseID, complete = false};
         }
 
         [HttpGet]
         [Route("progress/test/{courseID}")]
         public test_progress GetTestProgress(Guid courseID)
         {
-            return _courseService.Value.GetTestProgress(CurrentUserID, courseID);
+            var testProgress = _courseService.Value.GetTestProgress(CurrentUserID, courseID);
+            if (testProgress != null)
+                return testProgress;
+
+            var test = _courseService.Value.GetTest(courseID);
+            if (test == null)
+                return null;
+
+            return new test_progress
+            {
+                course_id = courseID,
+                test_id = test.ID,
+                tries_left = test.MaxTries,
+                max_tries = test.MaxTries
+            };
         }
 
         [HttpGet]

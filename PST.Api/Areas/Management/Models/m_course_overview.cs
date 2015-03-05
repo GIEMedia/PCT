@@ -11,6 +11,8 @@ namespace PST.Api.Areas.Management.Models
 
         public DateTime date_created { get; set; }
 
+        public DateTime last_activity { get; set; }
+
         public int open { get; set; }
         
         public int complete { get; set; }
