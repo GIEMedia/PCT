@@ -121,6 +121,13 @@
                         });
                     };
 
+                    ctrl.answerChanged = function() {
+                        if ($scope.result != null && !$scope.result.passed) {
+                            $scope.result = null;
+                            if (!$scope.$$phase) $scope.$digest();
+                        }
+                    };
+
                 }]
             };
         }])

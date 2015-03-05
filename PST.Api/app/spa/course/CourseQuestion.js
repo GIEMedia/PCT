@@ -22,6 +22,10 @@
                         }
                     });
 
+                    $scope.$watch("answer", function(value) {
+                        courseQuestionsContainerCtrl.answerChanged();
+                    });
+
                     // Extract the answer and submit to question container
                     $scope.submitAnswer = function() {
                         courseQuestionsContainerCtrl.submitAnswer($scope.answer);
@@ -40,7 +44,8 @@
                 scope: {
                     "question": "=",
                     "answer": "=",
-                    "retry": "="
+                    "retry": "=",
+                    "disabled": "="
                 },
                 templateUrl: "/app/spa/course/eOptions.html",
                 link: function($scope, elem, attrs) {
