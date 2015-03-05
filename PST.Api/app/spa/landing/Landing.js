@@ -11,10 +11,19 @@
             $stateProvider
                 .state('landing', {
                     url: '/landing',
-                    templateUrl: "/app/spa/landing/Landing.html"
+                    templateUrl: "/app/spa/landing/Landing.html",
+                    controller: "landing.Ctrl"
                 })
             ;
         }])
+
+
+        .controller("landing.Ctrl", ["$scope", "$state", "User", function ($scope, $state, User) {
+            if (User.loggedIn) {
+                $state.go("dashboard");
+            }
+        }])
+
 
         .directive("eIntroduction", function() {
             return {

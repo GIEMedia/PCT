@@ -13,6 +13,7 @@
 
                 httpPromise.onError = function(handler) {
                     _handler = handler;
+                    return httpPromise;
                 };
 
                 httpPromise.error(function(data, status, headers, config) {
@@ -55,20 +56,29 @@
 
         .factory("SecurityService", ["$http", "$rootScope", "$timeout", "Api", "User", "$state", function($http, $rootScope, $timeout, Api, User, $state) {
             var fetchUser = function() {
-                Api.get("api/account")
+                return Api.get("api/account")
                     .success(function(account) {
                         User.loggedIn = true;
                         User.firstName = account.first_name;
                         User.lastName = account.last_name;
                     })
-                    .error(function() {
-                        sessionStorage.access_token = null;
-                        $state.go("landing");
+                    .onError(function(error, status) {
+                        if (status == 401) {
+                            sessionStorage.access_token = null;
+                            $state.go("landing");
+                            return true;
+                        } else {
+                            return false;
+                        }
                     });
             };
 
             if (sessionStorage.access_token != null && sessionStorage.access_token != "null") {
-                fetchUser();
+                fetchUser().success(function() {
+                    if ($state.current.name == "landing") {
+                        $state.go("dashboard");
+                    }
+                });
             } else {
                 $timeout(function() {
                     $state.go("landing");
