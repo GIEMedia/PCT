@@ -1,0 +1,21 @@
+@using System.Web.Http
+@using System.Web.Http.Description
+@using PST.Api.Areas.Help
+@model IGrouping<System.Web.Http.Controllers.HttpControllerDescriptor, ApiDescription>
+
+@{
+	var provider = GlobalConfiguration.Configuration.Services.GetService(typeof (IDocumentationProvider)) as IDocumentationProvider;
+	var description = provider.GetDocumentation(Model.Key) ?? string.Empty;
+}
+
+<div class="area controller">
+	<h3 id="@Model.Key.ControllerName">@Model.Key.ControllerName</h3>
+	@MvcHtmlString.Create(description)
+
+	<div class="action-methods">
+		@foreach (var api in Model)
+		{
+			@Html.Partial("Api", GlobalConfiguration.Configuration.GetHelpApiModel(api.GetFriendlyId()))
+		}
+	</div>
+</div>

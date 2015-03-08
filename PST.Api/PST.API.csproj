@@ -423,6 +423,14 @@
     <Content Include="Areas\Help\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Help\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Help\Views\Help\Api.cshtml" />
+    <Content Include="Areas\Help\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
+    <Content Include="Areas\Help\Views\Help\DisplayTemplates\HelpPageApiModel.cshtml" />
+    <Content Include="Areas\Help\Views\Help\DisplayTemplates\ImageSample.cshtml" />
+    <Content Include="Areas\Help\Views\Help\DisplayTemplates\InvalidSample.cshtml" />
+    <Content Include="Areas\Help\Views\Help\DisplayTemplates\Parameters.cshtml" />
+    <Content Include="Areas\Help\Views\Help\DisplayTemplates\Samples.cshtml" />
+    <Content Include="Areas\Help\Views\Help\DisplayTemplates\TextSample.cshtml" />
+    <Content Include="Areas\Help\Views\Help\DisplayTemplates\Type.cshtml" />
     <None Include="packages.config" />
     <Content Include="App_Data\PST.Api.XML" />
     <Content Include="Content\Certificates\Template\certificate_template.jpg" />
@@ -485,7 +493,6 @@
   <ItemGroup>
     <Folder Include="Areas\Help\images\ClassDiagrams\" />
     <Folder Include="Areas\Help\images\SequenceDiagrams\" />
-    <Folder Include="Areas\Help\Views\Help\DisplayTemplates\" />
     <Folder Include="Areas\Management\Models\" />
     <Folder Include="Content\Documents\" />
     <Folder Include="Content\Images\" />
