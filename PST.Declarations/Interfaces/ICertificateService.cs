@@ -6,8 +6,8 @@ namespace PST.Declarations.Interfaces
 {
     public interface ICertificateService
     {
-        IEnumerable<Certificate> GetCertificate(Guid accountID, Guid? courseID);
+        IEnumerable<Certificate> GetCertificates(Guid accountID, Guid? courseID = null);
 
-        Certificate CreateCertificate(Account account, Course course, DateTime dateEarnedUtc);
+        void CreateCertificate(Account account, CourseProgress courseProgress, DateTime dateEarnedUtc);
     }
 }

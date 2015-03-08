@@ -35,9 +35,10 @@
                         </div><!-- /.form-col form-col-1of2 -->
 
                         <div class="form-col form-col-1of2">
-                            <select class="field" ng-options="cat.code as cat.name for cat in certificateCategories" ng-model="stateLicensure.category" required>
-                                <option value="">Certification Category</option>
-                            </select>
+                            <!--<select class="field" ng-options="cat.code as cat.name for cat in certificateCategories" ng-model="stateLicensure.category" required>
+                                    <option value="">Certification Category</option>
+                                </select>-->
+                            <input type="text" class="field" placeholder="Certification Category" ng-model="stateLicensure.category" required ng-maxlength="200">
                         </div><!-- /.form-col form-col-1of2 -->
 
                         <div class="form-col form-col-1of2">

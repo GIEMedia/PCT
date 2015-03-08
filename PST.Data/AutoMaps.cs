@@ -35,7 +35,11 @@ namespace PST.Data
                 a.HasMany(x => x.StateLicensures).LazyLoad().Cascade.AllDeleteOrphan();
             });
 
-            mapper.Add().TableFor<Certificate>(c => c.Map(x => x.EarnedUtc).CustomType<UtcDateTimeType>());
+            mapper.Add().TableFor<Certificate>(c =>
+            {
+                c.Map(x => x.EarnedUtc).CustomType<UtcDateTimeType>();
+                c.References(x => x.Course).LazyLoad().Cascade.None();
+            });
 
             mapper.Add().TableFor<Course>(c =>
             {
@@ -56,8 +60,11 @@ namespace PST.Data
                     x.HasMany(y => y.SubCategories)
                         .KeyColumn("ParentCategoryID")
                         .Not.LazyLoad()
+                        .Inverse()
                         .Cascade.AllDeleteOrphan());
-                c.AddSubclass().OfType<SubCategory>();
+                c.AddSubclass().OfType<SubCategory>(x =>
+                    x.References(y => y.ParentCategory)
+                        .Cascade.None());
             });
 
             mapper.Add().TableFor<Document>();

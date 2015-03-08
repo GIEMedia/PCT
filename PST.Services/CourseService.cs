@@ -18,10 +18,12 @@ namespace PST.Services
     public class CourseService : ICourseService
     {
         private readonly IEntityRepository _entityRepository;
+        private readonly ICertificateService _certificateService;
 
-        public CourseService(IEntityRepository entityRepository)
+        public CourseService(IEntityRepository entityRepository, ICertificateService certificateService)
         {
             _entityRepository = entityRepository;
+            _certificateService = certificateService;
         }
 
         public IEnumerable<CourseProgress> OpenCourses(Guid accountID)
@@ -128,9 +130,9 @@ namespace PST.Services
                                     .Select(q => new question_progress
                                     {
                                         question_id = q.ID,
-                                        correct_response_heading = q.CorrectResponseHeading,
-                                        correct_response_text = q.CorrectResponseText,
-                                        correct_options = q.Options.Where(o => o.Correct).Select(o => o.ID).ToArray()
+                                        //correct_response_heading = q.CorrectResponseHeading,
+                                        //correct_response_text = q.CorrectResponseText,
+                                        //correct_options = q.Options.Where(o => o.Correct).Select(o => o.ID).ToArray()
                                     }).ToArray()
                         };
                     }).ToArray()
@@ -341,8 +343,22 @@ namespace PST.Services
                 testProgress.TriesLeft = Math.Max(0, testProgress.TriesLeft - 1);
                 _entityRepository.Save(testProgress);
             }
+            else if(courseProgress.Certificate == null)
+            {
+                var account = _entityRepository.GetByID<Account>(accountID);
+                _certificateService.CreateCertificate(account, courseProgress, DateTime.UtcNow);
+            }
 
             return results;
+        }
+
+        public bool DeleteCourse(Guid courseID)
+        {
+            var course = GetCourse(courseID);
+            if (course == null)
+                return false;
+            _entityRepository.Delete(course);
+            return true;
         }
     }
 }

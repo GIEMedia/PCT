@@ -4,40 +4,28 @@
         <name>PST.Api</name>
     </assembly>
     <members>
-        <member name="M:PST.Api.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+        <member name="M:PST.Api.Areas.Help.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>
             Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
             </summary>
             <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
             <returns>The ID as a string.</returns>
         </member>
-        <member name="T:PST.Api.Areas.HelpPage.HelpPageConfig">
-            <summary>
-            Use this class to customize the Help Page.
-            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
-            or you can provide the samples for the requests/responses.
-            </summary>
-        </member>
-        <member name="T:PST.Api.Areas.HelpPage.Controllers.HelpController">
-            <summary>
-            The controller that will handle requests for the help page.
-            </summary>
-        </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+        <member name="M:PST.Api.Areas.Help.HelpConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
             <summary>
             Sets the documentation provider for help page.
             </summary>
             <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
             <param name="documentationProvider">The documentation provider.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+        <member name="M:PST.Api.Areas.Help.HelpConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
             <summary>
             Sets the objects that will be used by the formatters to produce sample requests/responses.
             </summary>
             <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
             <param name="sampleObjects">The sample objects.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+        <member name="M:PST.Api.Areas.Help.HelpConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
             <summary>
             Sets the sample request directly for the specified media type and action.
             </summary>
@@ -47,7 +35,7 @@
             <param name="controllerName">Name of the controller.</param>
             <param name="actionName">Name of the action.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+        <member name="M:PST.Api.Areas.Help.HelpConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
             <summary>
             Sets the sample request directly for the specified media type and action with parameters.
             </summary>
@@ -58,7 +46,7 @@
             <param name="actionName">Name of the action.</param>
             <param name="parameterNames">The parameter names.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+        <member name="M:PST.Api.Areas.Help.HelpConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
             <summary>
             Sets the sample request directly for the specified media type of the action.
             </summary>
@@ -68,7 +56,7 @@
             <param name="controllerName">Name of the controller.</param>
             <param name="actionName">Name of the action.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+        <member name="M:PST.Api.Areas.Help.HelpConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
             <summary>
             Sets the sample response directly for the specified media type of the action with specific parameters.
             </summary>
@@ -79,7 +67,7 @@
             <param name="actionName">Name of the action.</param>
             <param name="parameterNames">The parameter names.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+        <member name="M:PST.Api.Areas.Help.HelpConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
             <summary>
             Sets the sample directly for all actions with the specified type and media type.
             </summary>
@@ -88,7 +76,7 @@
             <param name="mediaType">The media type.</param>
             <param name="type">The parameter type or return type of an action.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+        <member name="M:PST.Api.Areas.Help.HelpConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
             <summary>
             Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
             The help page will use this information to produce more accurate request samples.
@@ -98,7 +86,7 @@
             <param name="controllerName">Name of the controller.</param>
             <param name="actionName">Name of the action.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+        <member name="M:PST.Api.Areas.Help.HelpConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
             <summary>
             Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
             The help page will use this information to produce more accurate request samples.
@@ -109,7 +97,7 @@
             <param name="actionName">Name of the action.</param>
             <param name="parameterNames">The parameter names.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+        <member name="M:PST.Api.Areas.Help.HelpConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
             <summary>
             Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
             The help page will use this information to produce more accurate response samples.
@@ -119,7 +107,7 @@
             <param name="controllerName">Name of the controller.</param>
             <param name="actionName">Name of the action.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+        <member name="M:PST.Api.Areas.Help.HelpConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
             <summary>
             Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
             The help page will use this information to produce more accurate response samples.
@@ -130,85 +118,85 @@
             <param name="actionName">Name of the action.</param>
             <param name="parameterNames">The parameter names.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+        <member name="M:PST.Api.Areas.Help.HelpConfigurationExtensions.GetHelpSampleGenerator(System.Web.Http.HttpConfiguration)">
             <summary>
             Gets the help page sample generator.
             </summary>
             <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
             <returns>The help page sample generator.</returns>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,PST.Api.Areas.HelpPage.HelpPageSampleGenerator)">
+        <member name="M:PST.Api.Areas.Help.HelpConfigurationExtensions.SetHelpSampleGenerator(System.Web.Http.HttpConfiguration,PST.Api.Areas.Help.HelpSampleGenerator)">
             <summary>
             Sets the help page sample generator.
             </summary>
             <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
             <param name="sampleGenerator">The help page sample generator.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+        <member name="M:PST.Api.Areas.Help.HelpConfigurationExtensions.GetHelpApiModel(System.Web.Http.HttpConfiguration,System.String)">
             <summary>
             Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
             </summary>
             <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
             <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
             <returns>
-            An <see cref="T:PST.Api.Areas.HelpPage.Models.HelpPageApiModel"/>
+            An <see cref="T:PST.Api.Areas.Help.Models.HelpApiModel"/>
             </returns>
         </member>
-        <member name="T:PST.Api.Areas.HelpPage.Models.HelpPageApiModel">
+        <member name="T:PST.Api.Areas.Help.Models.HelpApiModel">
             <summary>
             The model that represents an API displayed on the help page.
             </summary>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+        <member name="M:PST.Api.Areas.Help.Models.HelpApiModel.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:PST.Api.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            Initializes a new instance of the <see cref="T:PST.Api.Areas.Help.Models.HelpApiModel"/> class.
             </summary>
         </member>
-        <member name="P:PST.Api.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+        <member name="P:PST.Api.Areas.Help.Models.HelpApiModel.ApiDescription">
             <summary>
-            Gets or sets the <see cref="P:PST.Api.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            Gets or sets the <see cref="P:PST.Api.Areas.Help.Models.HelpApiModel.ApiDescription"/> that describes the API.
             </summary>
         </member>
-        <member name="P:PST.Api.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+        <member name="P:PST.Api.Areas.Help.Models.HelpApiModel.SampleRequests">
             <summary>
             Gets the sample requests associated with the API.
             </summary>
         </member>
-        <member name="P:PST.Api.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+        <member name="P:PST.Api.Areas.Help.Models.HelpApiModel.SampleResponses">
             <summary>
             Gets the sample responses associated with the API.
             </summary>
         </member>
-        <member name="P:PST.Api.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+        <member name="P:PST.Api.Areas.Help.Models.HelpApiModel.ErrorMessages">
             <summary>
             Gets the error messages associated with this model.
             </summary>
         </member>
-        <member name="T:PST.Api.Areas.HelpPage.HelpPageSampleGenerator">
+        <member name="T:PST.Api.Areas.Help.HelpSampleGenerator">
             <summary>
             This class will generate the samples for the help page.
             </summary>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+        <member name="M:PST.Api.Areas.Help.HelpSampleGenerator.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:PST.Api.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            Initializes a new instance of the <see cref="T:PST.Api.Areas.Help.HelpSampleGenerator"/> class.
             </summary>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+        <member name="M:PST.Api.Areas.Help.HelpSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
             <summary>
             Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
             </summary>
             <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
             <returns>The samples keyed by media type.</returns>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+        <member name="M:PST.Api.Areas.Help.HelpSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
             <summary>
             Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
             </summary>
             <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
             <returns>The samples keyed by media type.</returns>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,PST.Api.Areas.HelpPage.SampleDirection)">
+        <member name="M:PST.Api.Areas.Help.HelpSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,PST.Api.Areas.Help.SampleDirection)">
             <summary>
             Gets the request or response body samples.
             </summary>
@@ -216,9 +204,9 @@
             <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
             <returns>The samples keyed by media type.</returns>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,PST.Api.Areas.HelpPage.SampleDirection)">
+        <member name="M:PST.Api.Areas.Help.HelpSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,PST.Api.Areas.Help.SampleDirection)">
             <summary>
-            Search for samples that are provided directly through <see cref="P:PST.Api.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            Search for samples that are provided directly through <see cref="P:PST.Api.Areas.Help.HelpSampleGenerator.ActionSamples"/>.
             </summary>
             <param name="controllerName">Name of the controller.</param>
             <param name="actionName">Name of the action.</param>
@@ -229,15 +217,15 @@
             <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
             <returns>The sample that matches the parameters.</returns>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+        <member name="M:PST.Api.Areas.Help.HelpSampleGenerator.GetSampleObject(System.Type)">
             <summary>
             Gets the sample object that will be serialized by the formatters. 
-            First, it will look at the <see cref="P:PST.Api.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create one using <see cref="T:PST.Api.Areas.HelpPage.ObjectGenerator"/>.
+            First, it will look at the <see cref="P:PST.Api.Areas.Help.HelpSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create one using <see cref="T:PST.Api.Areas.Help.ObjectGenerator"/>.
             </summary>
             <param name="type">The type.</param>
             <returns>The sample object.</returns>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},PST.Api.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+        <member name="M:PST.Api.Areas.Help.HelpSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},PST.Api.Areas.Help.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
             <summary>
             Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
             </summary>
@@ -248,7 +236,7 @@
             <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
             <param name="formatters">The formatters.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+        <member name="M:PST.Api.Areas.Help.HelpSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
             <summary>
             Writes the sample object using formatter.
             </summary>
@@ -258,53 +246,53 @@
             <param name="mediaType">Type of the media.</param>
             <returns></returns>
         </member>
-        <member name="P:PST.Api.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+        <member name="P:PST.Api.Areas.Help.HelpSampleGenerator.ActualHttpMessageTypes">
             <summary>
             Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
             </summary>
         </member>
-        <member name="P:PST.Api.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+        <member name="P:PST.Api.Areas.Help.HelpSampleGenerator.ActionSamples">
             <summary>
             Gets the objects that are used directly as samples for certain actions.
             </summary>
         </member>
-        <member name="P:PST.Api.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+        <member name="P:PST.Api.Areas.Help.HelpSampleGenerator.SampleObjects">
             <summary>
             Gets the objects that are serialized as samples by the supported formatters.
             </summary>
         </member>
-        <member name="T:PST.Api.Areas.HelpPage.HelpPageSampleKey">
+        <member name="T:PST.Api.Areas.Help.HelpSampleKey">
             <summary>
             This is used to identify the place where the sample should be applied.
             </summary>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+        <member name="M:PST.Api.Areas.Help.HelpSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
             <summary>
-            Creates a new <see cref="T:PST.Api.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            Creates a new <see cref="T:PST.Api.Areas.Help.HelpSampleKey"/> based on media type and CLR type.
             </summary>
             <param name="mediaType">The media type.</param>
             <param name="type">The CLR type.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageSampleKey.#ctor(PST.Api.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:PST.Api.Areas.Help.HelpSampleKey.#ctor(PST.Api.Areas.Help.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Creates a new <see cref="T:PST.Api.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:PST.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            Creates a new <see cref="T:PST.Api.Areas.Help.HelpSampleKey"/> based on <see cref="P:PST.Api.Areas.Help.HelpSampleKey.SampleDirection"/>, controller name, action name and parameter names.
             </summary>
-            <param name="sampleDirection">The <see cref="P:PST.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="sampleDirection">The <see cref="P:PST.Api.Areas.Help.HelpSampleKey.SampleDirection"/>.</param>
             <param name="controllerName">Name of the controller.</param>
             <param name="actionName">Name of the action.</param>
             <param name="parameterNames">The parameter names.</param>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,PST.Api.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:PST.Api.Areas.Help.HelpSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,PST.Api.Areas.Help.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Creates a new <see cref="T:PST.Api.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:PST.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            Creates a new <see cref="T:PST.Api.Areas.Help.HelpSampleKey"/> based on media type, <see cref="P:PST.Api.Areas.Help.HelpSampleKey.SampleDirection"/>, controller name, action name and parameter names.
             </summary>
             <param name="mediaType">The media type.</param>
-            <param name="sampleDirection">The <see cref="P:PST.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="sampleDirection">The <see cref="P:PST.Api.Areas.Help.HelpSampleKey.SampleDirection"/>.</param>
             <param name="controllerName">Name of the controller.</param>
             <param name="actionName">Name of the action.</param>
             <param name="parameterNames">The parameter names.</param>
         </member>
-        <member name="P:PST.Api.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+        <member name="P:PST.Api.Areas.Help.HelpSampleKey.ControllerName">
             <summary>
             Gets the name of the controller.
             </summary>
@@ -312,7 +300,7 @@
             The name of the controller.
             </value>
         </member>
-        <member name="P:PST.Api.Areas.HelpPage.HelpPageSampleKey.ActionName">
+        <member name="P:PST.Api.Areas.Help.HelpSampleKey.ActionName">
             <summary>
             Gets the name of the action.
             </summary>
@@ -320,7 +308,7 @@
             The name of the action.
             </value>
         </member>
-        <member name="P:PST.Api.Areas.HelpPage.HelpPageSampleKey.MediaType">
+        <member name="P:PST.Api.Areas.Help.HelpSampleKey.MediaType">
             <summary>
             Gets the media type.
             </summary>
@@ -328,38 +316,38 @@
             The media type.
             </value>
         </member>
-        <member name="P:PST.Api.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+        <member name="P:PST.Api.Areas.Help.HelpSampleKey.ParameterNames">
             <summary>
             Gets the parameter names.
             </summary>
         </member>
-        <member name="P:PST.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+        <member name="P:PST.Api.Areas.Help.HelpSampleKey.SampleDirection">
             <summary>
-            Gets the <see cref="P:PST.Api.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            Gets the <see cref="P:PST.Api.Areas.Help.HelpSampleKey.SampleDirection"/>.
             </summary>
         </member>
-        <member name="T:PST.Api.Areas.HelpPage.ImageSample">
+        <member name="T:PST.Api.Areas.Help.ImageSample">
             <summary>
             This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
             </summary>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.ImageSample.#ctor(System.String)">
+        <member name="M:PST.Api.Areas.Help.ImageSample.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:PST.Api.Areas.HelpPage.ImageSample"/> class.
+            Initializes a new instance of the <see cref="T:PST.Api.Areas.Help.ImageSample"/> class.
             </summary>
             <param name="src">The URL of an image.</param>
         </member>
-        <member name="T:PST.Api.Areas.HelpPage.InvalidSample">
+        <member name="T:PST.Api.Areas.Help.InvalidSample">
             <summary>
             This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
             </summary>
         </member>
-        <member name="T:PST.Api.Areas.HelpPage.ObjectGenerator">
+        <member name="T:PST.Api.Areas.Help.ObjectGenerator">
             <summary>
             This class will create an object of a given type and populate it with sample data.
             </summary>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+        <member name="M:PST.Api.Areas.Help.ObjectGenerator.GenerateObject(System.Type)">
             <summary>
             Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
             Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
@@ -375,24 +363,24 @@
             <param name="type">The type.</param>
             <returns>An object of the given type.</returns>
         </member>
-        <member name="T:PST.Api.Areas.HelpPage.SampleDirection">
+        <member name="T:PST.Api.Areas.Help.SampleDirection">
             <summary>
             Indicates whether the sample is used for request or response
             </summary>
         </member>
-        <member name="T:PST.Api.Areas.HelpPage.TextSample">
+        <member name="T:PST.Api.Areas.Help.TextSample">
             <summary>
             This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
             </summary>
         </member>
-        <member name="T:PST.Api.Areas.HelpPage.XmlDocumentationProvider">
+        <member name="T:PST.Api.Areas.Help.XmlDocumentationProvider">
             <summary>
             A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
             </summary>
         </member>
-        <member name="M:PST.Api.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+        <member name="M:PST.Api.Areas.Help.XmlDocumentationProvider.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:PST.Api.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            Initializes a new instance of the <see cref="T:PST.Api.Areas.Help.XmlDocumentationProvider"/> class.
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
@@ -403,12 +391,13 @@
             <param name="courseID">ID of course</param>
             <returns></returns>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.GetUsers(System.Nullable{System.Int32},System.Nullable{System.Int32})">
+        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.GetUsers(System.Nullable{System.Int32},System.Nullable{System.Int32},System.String)">
             <summary>
             Get list of users
             </summary>
             <param name="page">Page to show (default = 1)</param>
             <param name="qty">Quantity of results to show (default = 20)</param>
+            <param name="search">String to search for users on</param>
             <returns></returns>
         </member>
         <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.SearchUser(System.String,System.Int32)">
@@ -426,7 +415,7 @@
             <param name="userID">ID of user</param>
             <returns></returns>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.GetUser(System.Guid,PST.Declarations.AdminAccess)">
+        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.UpdateUser(System.Guid,PST.Declarations.AdminAccess)">
             <summary>
             Update user's admin access
             </summary>
@@ -449,15 +438,7 @@
             <param name="sectionID">ID of section (null if test)</param>
             <param name="questionID"></param>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.UpdateSortOrder(System.Guid,System.Nullable{System.Guid},System.Guid[])">
-            <summary>
-            Update sort order of questions on section or test
-            </summary>
-            <param name="courseID">ID of course</param>
-            <param name="sectionID">ID of section (null if test)</param>
-            <param name="questionIDs">Collection of section IDs, sorted in new order</param>
-        </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.UpsertQuestions(System.Guid,System.Nullable{System.Guid},PST.Api.Areas.Management.Models.m_question[])">
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.UpsertQuestions(System.Guid,System.Nullable{System.Guid},PST.Declarations.Models.Management.m_question[])">
             <summary>
             Upsert questions for a section or test
             </summary>
@@ -466,10 +447,13 @@
             <param name="questions">Collection of questions to upsert. If new, leave ID blank. If existing, properties will be merged into existing entity.</param>
             <returns></returns>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.UploadImage">
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.UploadImage(System.Nullable{System.Int32},System.Nullable{System.Int32},System.Boolean)">
             <summary>
             Uploads an image to then be used in either a question or option
             </summary>
+            <param name="width">Optionally specifies the resize width of the image</param>
+            <param name="height">Optionally specifies the resize height of the image</param>
+            <param name="forceCanvas">Optionally indicates if the canvas should be resized to the width/height specified regardless of proportinal resizing (default = false)</param>
             <returns>The "returnData" property of the response will contain the url of the uploaded image</returns>
         </member>
         <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.GetSections(System.Guid)">
@@ -487,7 +471,7 @@
             <param name="sectionID">ID of section</param>
             <param name="title">New title for section</param>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.UpsertSection(System.Guid,PST.Api.Areas.Management.Models.m_section_overview)">
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.UpsertSection(System.Guid,PST.Declarations.Models.Management.m_section_overview)">
             <summary>
             Upsert section
             </summary>
@@ -550,35 +534,21 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.UpsertCategory(System.Nullable{System.Guid},System.String)">
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.UpsertCategory(System.String,System.Nullable{System.Guid},System.Nullable{System.Guid})">
             <summary>
             Add category or sub-category
             </summary>
-            <param name="topCategoryID">ID of top category (if sub-category)</param>
+            <param name="categoryID">ID of category to upsert</param>
+            <param name="parentCategoryID">ID of parent category (if sub-category)</param>
             <param name="title">Title of category to add</param>
             <returns></returns>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.UpsertCourse(PST.Api.Areas.Management.Models.m_course)">
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.UpsertCourse(PST.Declarations.Models.Management.m_course)">
             <summary>
             Upsert course
             </summary>
             <param name="course">Course to be upserted. If new, leave ID blank. If existing, properties will be merged into existing entity.</param>
             <returns></returns>
-        </member>
-        <member name="P:PST.Api.Areas.Management.Models.m_option.image">
-            <summary>
-            Url to image (used for Multi-Image question only)
-            </summary>
-        </member>
-        <member name="P:PST.Api.Areas.Management.Models.m_question.image">
-            <summary>
-            Url to image (used for Single Image question only)
-            </summary>
-        </member>
-        <member name="P:PST.Api.Areas.Management.Models.m_question.video">
-            <summary>
-            Url to video (used for Video question only)
-            </summary>
         </member>
         <member name="T:PST.Api.Controllers.AccountController">
             <summary>

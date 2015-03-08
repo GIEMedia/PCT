@@ -30,13 +30,20 @@
                         });
                     });
                 },
-                submit : function(answers, courseId, callback) {
+                submit: function (answers, courseId, startingCorrects, callback) {
                     var sending = [];
                     Cols.eachEntry(answers, function(questionId, answer) {
                         sending.push({
                             "question_id": questionId,
                             "selected_option_ids": answer
                         });
+                    });
+                    Cols.eachEntry(startingCorrects, function (questionId, correctAnswer) {
+                        if (Cols.find(sending, function(s) { return s.question_id == questionId; }) == null)
+                            sending.push({
+                                "question_id": questionId,
+                                "selected_option_ids": correctAnswer.answer
+                            });
                     });
 
                     Api.put("api/test/answer/" + courseId, sending).success(function(answerResults) {

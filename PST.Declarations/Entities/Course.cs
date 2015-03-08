@@ -4,6 +4,7 @@ using System.Linq;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data;
 using PST.Declarations.Models;
+using PST.Declarations.Models.Management;
 
 namespace PST.Declarations.Entities
 {
@@ -68,6 +69,39 @@ namespace PST.Declarations.Entities
                               .Select(x => x.StateAbbr)
                               .Aggregate((i, j) => i + "," + j)
                         : ""
+            };
+        }
+
+        public static implicit operator m_course_overview(Course course)
+        {
+            if (course == null)
+                return new m_course_overview();
+
+            return new m_course_overview
+            {
+                id = course.ID,
+                date_created = course.DateCreatedUtc,
+                status = course.Status,
+                title = course.Title
+            };
+        }
+
+        public static implicit operator m_course(Course course)
+        {
+            if (course == null)
+                return new m_course();
+
+            var prereq = course.PrerequisiteCourses.FirstOrDefault();
+            return new m_course
+            {
+                id = course.ID,
+                date_created = course.DateCreatedUtc,
+                status = course.Status,
+                title = course.Title,
+                sub_category = course.Category.ID,
+                category = course.Category.ParentCategory.ID,
+                prerequisite_course = prereq == null ? (Guid?) null : prereq.ID,
+                state_ceus = course.StateCEUs.Select(s => (m_state_ceu) s).ToArray()
             };
         }
     }

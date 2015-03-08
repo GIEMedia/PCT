@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Prototype1.Foundation;
 using Prototype1.Foundation.Data;
 using PST.Declarations.Interfaces;
 using PST.Declarations.Models;
+using PST.Declarations.Models.Management;
 
 namespace PST.Declarations.Entities
 {
@@ -28,6 +30,9 @@ namespace PST.Declarations.Entities
 
         public virtual int SortOrder { get; set; }
 
+        [Transient]
+        public abstract QuestionType QuestionType { get; }
+
         protected abstract void SetCustomModelProperties(question question);
 
         public virtual question ToModel()
@@ -38,57 +43,175 @@ namespace PST.Declarations.Entities
                 question_text = QuestionText,
                 options = Options.Select(o => o.ToModel()).ToArray(),
                 multi_select = Options.Count(o => o.Correct) > 1,
-                option_type = Models.question.option_types.text
+                option_type = Models.question.option_types.text,
+                tip = Tip
             };
 
             SetCustomModelProperties(question);
 
             return question;
         }
+
+        protected abstract void SetCustomManagementModelProperties(m_question question);
+
+        public virtual m_question ToManagementModel()
+        {
+            var question = new m_question
+            {
+                id = ID,
+                question_text = QuestionText,
+                options = Options.Select(o => o.ToManagementModel()).ToArray(),
+                response_heading = CorrectResponseHeading,
+                response_message = CorrectResponseText,
+                tip = Tip,
+                question_type = QuestionType
+            };
+
+            SetCustomManagementModelProperties(question);
+
+            return question;
+        }
+
+        protected abstract void SetCustomEntityProperties(m_question model);
+
+        public abstract void SyncOptionsFromManagementModel(m_question model);
+
+        public virtual void FromManagementModel(m_question model, int sortOrder)
+        {
+            QuestionText = model.question_text;
+            CorrectResponseHeading = model.response_heading;
+            CorrectResponseText = model.response_message;
+            Tip = model.tip;
+            SortOrder = sortOrder;
+
+            SetCustomEntityProperties(model);
+
+            SyncOptionsFromManagementModel(model);
+        }
     }
 
     [Serializable]
     public abstract class Question<TOption> : Question
-        where TOption : Option
+        where TOption : Option, new()
     {
+        public override void SyncOptionsFromManagementModel(m_question model)
+        {
+            var updateOptions = new List<Option>();
+            foreach (var o in model.options)
+            {
+                Option option = null;
+                if (!o.id.IsNullOrEmpty())
+                    option = this.Options.FindById(o.id);
+                if (option == null)
+                    option = new TOption();
+                option.FromManagementModel(o, updateOptions.Count);
+                updateOptions.Add(option);
+            }
+
+            this.Options = updateOptions;
+        }
     }
 
     [Serializable]
+    [QuestionTypeAttribute(QuestionType.SingleImage)]
     public class SingleImageQuestion : Question<TextOption>
     {
         public virtual string ImageUrl { get; set; }
+
+        [Transient]
+        public override QuestionType QuestionType
+        {
+            get { return QuestionType.SingleImage; }
+        }
 
         protected override void SetCustomModelProperties(question question)
         {
             question.image = ImageUrl;
         }
+
+        protected override void SetCustomManagementModelProperties(m_question question)
+        {
+            question.image = ImageUrl;
+        }
+
+        protected override void SetCustomEntityProperties(m_question model)
+        {
+            ImageUrl = model.image;
+        }
     }
 
     [Serializable]
+    [QuestionTypeAttribute(QuestionType.Video)]
     public class VideoQuestion : Question<TextOption>
     {
         public virtual string Mp4Url { get; set; }
+
+        [Transient]
+        public override QuestionType QuestionType
+        {
+            get { return QuestionType.Video; }
+        }
 
         protected override void SetCustomModelProperties(question question)
         {
             question.video = new video { mp4 = Mp4Url };
         }
+
+        protected override void SetCustomManagementModelProperties(m_question question)
+        {
+            question.video = new video { mp4 = Mp4Url };
+        }
+
+        protected override void SetCustomEntityProperties(m_question model)
+        {
+            Mp4Url = (model.video ?? new video()).mp4;
+        }
     }
 
     [Serializable]
+    [QuestionTypeAttribute(QuestionType.Text)]
     public class TextQuestion : Question<TextOption>
     {
+        [Transient]
+        public override QuestionType QuestionType
+        {
+            get { return QuestionType.Text; }
+        }
+
         protected override void SetCustomModelProperties(question question)
+        {
+        }
+
+        protected override void SetCustomManagementModelProperties(m_question question)
+        {
+        }
+
+        protected override void SetCustomEntityProperties(m_question model)
         {
         }
     }
 
     [Serializable]
+    [QuestionTypeAttribute(QuestionType.MultiImage)]
     public class MultiImageQuestion : Question<ImageOption>
     {
+        [Transient]
+        public override QuestionType QuestionType
+        {
+            get { return QuestionType.MultiImage; }
+        }
+
         protected override void SetCustomModelProperties(question question)
         {
             question.option_type = question.option_types.image;
+        }
+
+        protected override void SetCustomManagementModelProperties(m_question question)
+        {
+        }
+
+        protected override void SetCustomEntityProperties(m_question model)
+        {
         }
     }
 }

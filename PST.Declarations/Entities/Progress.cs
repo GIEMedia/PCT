@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Prototype1.Foundation.Data;
+using PST.Declarations.Models;
+using PST.Declarations.Models.Management;
 
 namespace PST.Declarations.Entities
 {
@@ -33,8 +36,38 @@ namespace PST.Declarations.Entities
 
         public virtual TestProgress TestProgress { get; set; }
 
-        [Ownership(Ownership.Shared)]
-        public virtual Certificate Certificate { get; set; }
+        private Certificate certificate;
+
+        [Ownership(Ownership.Exclusive)]
+        public virtual Certificate Certificate
+        {
+            get { return certificate; }
+            set
+            {
+                certificate = value;
+                if (certificate != null)
+                    certificate.Course = Course;
+            }
+        }
+
+        public static implicit operator m_user_course_stat(CourseProgress courseProgress)
+        {
+            var stat = new m_user_course_stat
+            {
+                title = courseProgress.Course.Title,
+                last_activity = courseProgress.LastActivityUtc,
+                certificate_url =
+                    courseProgress.Certificate == null ? string.Empty : courseProgress.Certificate.ID.ToString(),
+                course_percent = courseProgress.Sections.Count(s => s.Passed)/(decimal) courseProgress.TotalSections,
+                test_percent = courseProgress.TestProgress == null
+                    ? 0
+                    : courseProgress.TestProgress.CompletedQuestions.Count()/
+                      (decimal) courseProgress.TestProgress.TotalQuestions,
+                test_failed = courseProgress.TestProgress != null && courseProgress.TestProgress.TriesLeft > 0
+            };
+
+            return stat;
+        }
     }
 
     [Serializable]

@@ -28,12 +28,18 @@ namespace PST.Api.Core.App_Start
             routes.IgnoreRoute("{*alljs}", new { alljs = @".*\.js(/.*)?" });
 
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new {controller = "Home", action = "Index", id = UrlParameter.Optional},
-                namespaces: new[] {controllerNamespace},
-                constraints: new { controller = new FromNamespaceConstraint(baseType) }
+                "Default",
+                "{controller}/{action}/{id}",
+                new {controller = "Home", action = "Index", id = UrlParameter.Optional},
+                new[] {controllerNamespace}
                 );
+            //routes.MapRoute(
+            //    name: "Default",
+            //    url: "{controller}/{action}/{id}",
+            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+            //    namespaces: new[] { controllerNamespace },
+            //    constraints: new { controller = new FromNamespaceConstraint(baseType) }
+            //    );
         }
 
         private class FromNamespaceConstraint : IRouteConstraint

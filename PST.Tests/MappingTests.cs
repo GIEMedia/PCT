@@ -1,10 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using FluentNHibernate.Cfg;
+using Microsoft.Practices.Unity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PST.Data;
 using NHibernate.Tool.hbm2ddl;
 using Prototype1.Foundation.Data.NHibernate;
+using PST.Declarations.Entities;
 
 namespace PST.Tests
 {

@@ -79,5 +79,7 @@ namespace PST.Declarations.Interfaces
         /// <param name="answers">Answers to the questions</param>
         /// <returns>An list of answer results indicating the correctness of each question. If correct, correct response heading & text returned.</returns>
         IEnumerable<answer_result> AnswerTestQuestion(Guid accountID, Guid courseID, answer[] answers);
+
+        bool DeleteCourse(Guid courseID);
     }
 }

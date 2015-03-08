@@ -69,7 +69,7 @@
              * @param answers
              */
             $scope.sendResult = function(answers) {
-                TestService.submit(answers, $stateParams.courseId, function(result) {
+                TestService.submit(answers, $stateParams.courseId, $scope.progress.corrects, function (result) {
                     $scope.showResult = true;
                     Cols.mapAddAll(result, $scope.progress.corrects);
                     $scope.progress.tries_left--;

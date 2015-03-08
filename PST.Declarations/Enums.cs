@@ -15,4 +15,12 @@ namespace PST.Declarations
         InReview = 2,
         Active = 1
     }
+
+    public enum QuestionType
+    {
+        SingleImage,
+        MultiImage,
+        Video,
+        Text
+    }
 }

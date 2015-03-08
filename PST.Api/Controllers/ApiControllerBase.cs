@@ -1,19 +1,32 @@
 ﻿using System;
+using System.Configuration;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
+using Prototype1.Foundation;
 using Prototype1.Foundation.Data;
 using Prototype1.Foundation.Data.NHibernate;
 using PST.Api.Core.OAuth;
 using PST.Data;
 using PST.Declarations.Entities;
+using PST.Declarations.Interfaces;
 using Constants = PST.Api.Core.Constants;
 
 namespace PST.Api.Controllers
 {
     public class ApiControllerBase : ApiController
     {
+        protected static readonly string BaseUrl = ConfigurationManager.AppSettings["BaseUrl"].Replace("http://", "//").Replace("https://", "//");
         private readonly Lazy<UserManager<ApplicationUser>> _userManager;
 
         protected ApiControllerBase()

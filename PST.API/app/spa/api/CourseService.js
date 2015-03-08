@@ -20,8 +20,7 @@
                         var progress = {};
                         for (var i = 0; i < resp.sections.length; i++) {
                             var sec = resp.sections[i];
-
-                            progress[sec.section_id] = sec.correctly_answered_questions.length;
+                            progress[sec.section_id] = sec.complete ? sec.correctly_answered_questions.length : 0;
                         }
                         callback(progress);
                     });

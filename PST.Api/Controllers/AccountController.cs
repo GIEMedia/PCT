@@ -425,14 +425,14 @@ namespace PST.Api.Controllers
         [Route("certificates")]
         public certificate[] GetCertificates()
         {
-            return new certificate[0];
+            return _cetificateService.Value.GetCertificates(CurrentUserID).Select(c => (certificate) c).ToArray();
         }
 
         [HttpGet]
         [Route("certificate/{courseID}")]
         public certificate GetCertificate(Guid courseID)
         {
-            return new certificate();
+            return _cetificateService.Value.GetCertificates(CurrentUserID, courseID).FirstOrDefault();
         }
 
         [HttpGet]

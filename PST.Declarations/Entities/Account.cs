@@ -8,6 +8,7 @@ using Prototype1.Foundation;
 using Prototype1.Foundation.Data;
 using Prototype1.Foundation.Models;
 using Prototype1.Foundation.Providers;
+using PST.Declarations.Models.Management;
 
 namespace PST.Declarations.Entities
 {
@@ -85,6 +86,18 @@ namespace PST.Declarations.Entities
                 Username = account.username,
                 CompanyName = account.company_name,
                 CompanyAddress = account.company_address
+            };
+        }
+
+        public static implicit operator m_user_overview(Account account)
+        {
+            return new m_user_overview
+            {
+                id = account.ID,
+                email = account.Email,
+                first_name = account.FirstName,
+                last_name = account.LastName,
+                last_sign_in = account.DateLastLoggedIn
             };
         }
 

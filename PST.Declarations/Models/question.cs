@@ -8,6 +8,8 @@ namespace PST.Declarations.Models
 
         public string question_text { get; set; }
 
+        public string tip { get; set; }
+
         public bool multi_select { get; set; }
 
         public enum option_types

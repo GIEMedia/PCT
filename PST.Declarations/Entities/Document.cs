@@ -1,11 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using NHibernate.Mapping;
-using Prototype1.Foundation;
 using Prototype1.Foundation.Data;
 using PST.Declarations.Models;
-using WebGrease.Css.Extensions;
 
 namespace PST.Declarations.Entities
 {

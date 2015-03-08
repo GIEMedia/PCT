@@ -42,12 +42,11 @@ namespace PST.Api.Controllers
             //var subcategory = _entityRepository.GetByID<SubCategory>("".ToGuid());
             
             // ADD TO NEW CATEGORY:
-            var subcategory = new SubCategory { Title = "Sub Cat" };
-            _entityRepository.Save(subcategory);
-
-            var category = new MainCategory { Title = "Main Cat", SubCategories = new List<SubCategory> { subcategory } };
+            var category = new MainCategory {Title = "Main Cat"};
             _entityRepository.Save(category);
-            
+
+            var subcategory = new SubCategory(category) {Title = "Sub Cat"};
+            _entityRepository.Save(subcategory);
 
             var course = new Course
             {

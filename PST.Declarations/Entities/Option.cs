@@ -2,6 +2,7 @@
 using Prototype1.Foundation.Data;
 using PST.Declarations.Interfaces;
 using PST.Declarations.Models;
+using PST.Declarations.Models.Management;
 
 namespace PST.Declarations.Entities
 {
@@ -28,12 +29,47 @@ namespace PST.Declarations.Entities
 
             return option;
         }
+
+        protected abstract void SetCustomManagementModelProperties(m_option option);
+
+        public virtual m_option ToManagementModel()
+        {
+            var option = new m_option
+            {
+                id = ID,
+                text = Text
+            };
+
+            SetCustomManagementModelProperties(option);
+
+            return option;
+        }
+
+        protected abstract void SetCustomEntityProperties(m_option model);
+
+        public virtual Option FromManagementModel(m_option model, int sortOrder)
+        {
+            Text = model.text;
+            SortOrder = sortOrder;
+
+            SetCustomEntityProperties(model);
+
+            return this;
+        }
     }
 
     [Serializable]
     public class TextOption : Option
     {
         protected override void SetCustomModelProperties(option option)
+        {
+        }
+
+        protected override void SetCustomManagementModelProperties(m_option option)
+        {
+        }
+
+        protected override void SetCustomEntityProperties(m_option model)
         {
         }
     }
@@ -45,6 +81,16 @@ namespace PST.Declarations.Entities
         protected override void SetCustomModelProperties(option option)
         {
             option.image = ImageUrl;
+        }
+
+        protected override void SetCustomManagementModelProperties(m_option option)
+        {
+            option.image = ImageUrl;
+        }
+
+        protected override void SetCustomEntityProperties(m_option model)
+        {
+            ImageUrl = model.image;
         }
     }
 }

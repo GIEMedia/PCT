@@ -24,6 +24,7 @@ namespace PST.Services.ContainerProviders
                     }))
                 .RegisterType<ICourseService, CourseService>(new ContainerControlledLifetimeManager())
                 .RegisterType<ICertificateService, CertificateService>(new ContainerControlledLifetimeManager())
+                .RegisterType<IUploadService, UploadService>(new ContainerControlledLifetimeManager())
                 ;
         }
     }

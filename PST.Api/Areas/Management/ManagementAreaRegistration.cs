@@ -12,13 +12,13 @@ namespace PST.Api.Areas.Management
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
                 "Management_default",
                 "Management/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
-            );
+                new {controller = "Home", action = "Index", id = UrlParameter.Optional}
+                );
         }
     }
 }
