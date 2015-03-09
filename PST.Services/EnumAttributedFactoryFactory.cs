@@ -18,11 +18,14 @@ namespace PST.Services
                 var assemblyName in
                     Assembly.GetExecutingAssembly()
                         .GetReferencedAssemblies()
-                        .Where(a => a.FullName.StartsWith("Groupmatics"))
-                        .Select(a => a.FullName).Union(new[] { Assembly.GetExecutingAssembly().FullName }))
+                        .Where(
+                            a =>
+                                a.FullName.StartsWith(
+                                    Assembly.GetExecutingAssembly().FullName.Split('.').FirstOrDefault() ?? "Prototype1"))
+                        .Select(a => a.FullName).Union(new[] {Assembly.GetExecutingAssembly().FullName}))
                 entryTypes.AddRange(Assembly.Load(assemblyName)
                     .GetTypes()
-                    .Where(t => typeof(TType).IsAssignableFrom(t)));
+                    .Where(t => typeof (TType).IsAssignableFrom(t)));
 
             foreach (var entryType in entryTypes)
             {

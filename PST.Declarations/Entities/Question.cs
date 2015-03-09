@@ -96,24 +96,33 @@ namespace PST.Declarations.Entities
     {
         public override void SyncOptionsFromManagementModel(m_question model)
         {
-            var updateOptions = new List<Option>();
-            foreach (var o in model.options)
+            // Remove any options that existed but no longer in the model
+            this.Options.Where(o => !model.options.Select(x => x.id).Contains(o.ID))
+                .ToList()
+                .Apply(o => this.Options.Remove(o));
+
+            for (var i = 0; i < model.options.Length; i++)
             {
+                var o = model.options[i];
+                var found = false;
                 Option option = null;
                 if (!o.id.IsNullOrEmpty())
+                {
                     option = this.Options.FindById(o.id);
+                    found = true;
+                }
                 if (option == null)
                     option = new TOption();
-                option.FromManagementModel(o, updateOptions.Count);
-                updateOptions.Add(option);
-            }
+                option.FromManagementModel(o, i);
 
-            this.Options = updateOptions;
+                if (!found)
+                    this.Options.Add(option);
+            }
         }
     }
 
     [Serializable]
-    [QuestionTypeAttribute(QuestionType.SingleImage)]
+    [QuestionType(QuestionType.SingleImage)]
     public class SingleImageQuestion : Question<TextOption>
     {
         public virtual string ImageUrl { get; set; }
@@ -141,7 +150,7 @@ namespace PST.Declarations.Entities
     }
 
     [Serializable]
-    [QuestionTypeAttribute(QuestionType.Video)]
+    [QuestionType(QuestionType.Video)]
     public class VideoQuestion : Question<TextOption>
     {
         public virtual string Mp4Url { get; set; }
@@ -169,7 +178,7 @@ namespace PST.Declarations.Entities
     }
 
     [Serializable]
-    [QuestionTypeAttribute(QuestionType.Text)]
+    [QuestionType(QuestionType.Text)]
     public class TextQuestion : Question<TextOption>
     {
         [Transient]
@@ -192,7 +201,7 @@ namespace PST.Declarations.Entities
     }
 
     [Serializable]
-    [QuestionTypeAttribute(QuestionType.MultiImage)]
+    [QuestionType(QuestionType.MultiImage)]
     public class MultiImageQuestion : Question<ImageOption>
     {
         [Transient]

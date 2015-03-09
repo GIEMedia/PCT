@@ -16,7 +16,7 @@ using PST.Declarations.Models.Management;
 
 namespace PST.Api.Areas.Management.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api/manage/course/section")]
     public class ManageSectionController : ApiControllerBase
     {
@@ -40,11 +40,11 @@ namespace PST.Api.Areas.Management.Controllers
         [Route("list/{courseID}")]
         public m_section_overview[] GetSections(Guid courseID)
         {
-            var course = _courseService.GetCourse(courseID);
+            var course = _courseService.GetCourse(courseID, status: null);
             if(course == null)
                 throw new NullReferenceException("Course not found");
 
-            return course.Sections.Select(s => (m_section_overview) s).ToArray();
+            return course.Sections.ToList().Select(s => (m_section_overview) s).ToArray();
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace PST.Api.Areas.Management.Controllers
         [Route("rename/{courseID}/{sectionID}")]
         public void Rename(Guid courseID, Guid sectionID, [FromBody]string title)
         {
-            var course = _courseService.GetCourse(courseID);
+            var course = _courseService.GetCourse(courseID, status: null);
             if (course == null)
                 throw new NullReferenceException("Course not found");
 
@@ -80,7 +80,7 @@ namespace PST.Api.Areas.Management.Controllers
         [Route("{courseID}")]
         public m_section_overview UpsertSection(Guid courseID, m_section_overview section)
         {
-            var course = _courseService.GetCourse(courseID);
+            var course = _courseService.GetCourse(courseID, status: null);
             if (course == null)
                 throw new NullReferenceException("Course not found");
 
@@ -109,11 +109,10 @@ namespace PST.Api.Areas.Management.Controllers
         [Route("sort/{courseID}")]
         public void UpdateSortOrder(Guid courseID, Guid[] sectionIDs)
         {
-            var course = _courseService.GetCourse(courseID);
+            var course = _courseService.GetCourse(courseID, status: null);
             if (course == null)
                 throw new NullReferenceException("Course not found");
 
-            var sections = new List<Section>();
             for (var i = 0; i < sectionIDs.Length; i++)
             {
                 var id = sectionIDs[i];
@@ -121,10 +120,7 @@ namespace PST.Api.Areas.Management.Controllers
                 if (section == null)
                     throw new NullReferenceException("Section not found: " + id);
                 section.SortOrder = i;
-                sections.Add(section);
             }
-
-            course.Sections = sections;
 
             _entityRepository.Save(course);
         }
@@ -138,7 +134,7 @@ namespace PST.Api.Areas.Management.Controllers
         [Route("{courseID}/{sectionID}")]
         public void DeleteSection(Guid courseID, Guid sectionID)
         {
-            var course = _courseService.GetCourse(courseID);
+            var course = _courseService.GetCourse(courseID, status: null);
             if (course == null)
                 throw new NullReferenceException("Course not found");
 
@@ -198,7 +194,7 @@ namespace PST.Api.Areas.Management.Controllers
         private Section DeleteDocumentFromSection(Guid courseID, Guid sectionID)
         {
 
-            var course = _courseService.GetCourse(courseID);
+            var course = _courseService.GetCourse(courseID, status: null);
             if (course == null)
                 throw new NullReferenceException("Course not found");
 

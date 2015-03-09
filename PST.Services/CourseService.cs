@@ -55,7 +55,7 @@ namespace PST.Services
                 select c).Take(count);
         }
 
-        public Course GetCourse(Guid courseID, Guid? accountID, out List<Course> prerequisiteCourses)
+        public Course GetCourse(Guid courseID, Guid? accountID, out List<Course> prerequisiteCourses, CourseStatus? status = null)
         {
             prerequisiteCourses = null;
 
@@ -65,8 +65,8 @@ namespace PST.Services
             if (course == null)
                 throw new ArgumentOutOfRangeException("courseID", "Course not found.");
 
-            if (course.Status != CourseStatus.Active)
-                throw new ArgumentOutOfRangeException("courseID", "Course not active.");
+            if (status.HasValue && course.Status != status)
+                throw new ArgumentOutOfRangeException("courseID", "Course status not " + status + ".");
 
             if (!accountID.HasValue)
                 return course;
@@ -90,10 +90,10 @@ namespace PST.Services
             return course;
         }
 
-        public Course GetCourse(Guid courseID, Guid? accountID = null)
+        public Course GetCourse(Guid courseID, Guid? accountID = null, CourseStatus? status = null)
         {
             List<Course> preqCourses;
-            return GetCourse(courseID, accountID, out preqCourses);
+            return GetCourse(courseID, accountID, out preqCourses, status);
         }
 
         public course_progress GetCourseProgress(Guid accountID, Guid courseID)

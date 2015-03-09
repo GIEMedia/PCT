@@ -193,7 +193,10 @@
     <Compile Include="ContainerScope.cs" />
     <Compile Include="Declarations\Entities\EntityRules.cs" />
     <Compile Include="DevelopmentApiContainerProvider.cs" />
+    <Compile Include="ManagementTests\ApiTestControllerBase.cs" />
     <Compile Include="ManagementTests\CourseControllerTests.cs" />
+    <Compile Include="ManagementTests\QuestionControllerTests.cs" />
+    <Compile Include="ManagementTests\SectionControllerTests.cs" />
     <Compile Include="MappingTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlServerTypes\Loader.cs" />

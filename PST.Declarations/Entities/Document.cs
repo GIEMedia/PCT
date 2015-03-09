@@ -16,6 +16,9 @@ namespace PST.Declarations.Entities
 
         public static implicit operator document(Document document)
         {
+            if(document == null)
+                return new document();
+
             var pages = new List<string>();
             for (var p = 1; p <= document.PageCount; p++)
                 pages.Add(string.Format(document.PageImageUrlFormat, p));

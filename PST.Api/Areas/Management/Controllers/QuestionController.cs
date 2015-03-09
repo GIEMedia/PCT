@@ -16,7 +16,7 @@ using PST.Services;
 
 namespace PST.Api.Areas.Management.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api/manage/course/question")]
     public class ManageQuestionController : ApiControllerBase
     {
@@ -41,7 +41,7 @@ namespace PST.Api.Areas.Management.Controllers
         [Route("list/{courseID}/{sectionID?}")]
         public m_question[] GetQuestions(Guid courseID, Guid? sectionID)
         {
-            var course = _courseService.GetCourse(courseID);
+            var course = _courseService.GetCourse(courseID, status: null);
             if(course == null)
                 throw new NullReferenceException("Course not found");
 
@@ -60,7 +60,8 @@ namespace PST.Api.Areas.Management.Controllers
                     : course.Test.Questions.Select(q => q.ToManagementModel()).ToArray();
             }
         }
-
+        
+        /*
         /// <summary>
         /// Delete a question from section or test
         /// </summary>
@@ -82,19 +83,6 @@ namespace PST.Api.Areas.Management.Controllers
 
             _entityRepository.Save(course);
         }
-
-        /*
-        /// <summary>
-        /// Update sort order of questions on section or test
-        /// </summary>
-        /// <param name="courseID">ID of course</param>
-        /// <param name="sectionID">ID of section (null if test)</param>
-        /// <param name="questionIDs">Collection of section IDs, sorted in new order</param>
-        [HttpPut]
-        [Route("sort/{courseID}/{sectionID?}")]
-        public void UpdateSortOrder(Guid courseID, Guid? sectionID, Guid[] questionIDs)
-        {
-        }
         */
 
         /// <summary>
@@ -111,22 +99,31 @@ namespace PST.Api.Areas.Management.Controllers
             Course course;
             var questioned = GetQuestioned(courseID, sectionID, out course);
 
-            var updatedQuestions = new List<Question>();
-            foreach(var q in questions)
+            // Remove any options that existed but no longer in the model
+            questioned.Questions.Where(o => !questions.Select(x => x.id).Contains(o.ID))
+                .ToList()
+                .Apply(o => questioned.Questions.Remove(o));
+
+            for (var i = 0; i < questions.Length; i++)
             {
+                var q = questions[i];
+                var found = false;
                 Question question = null;
                 if (!q.id.IsNullOrEmpty())
-                    question = questioned.Questions.FindById(q.id);
-                if(question == null)
                 {
-                    question =
-                        new EnumAttributedFactoryFactory<Question, QuestionTypeAttribute, QuestionType>().Create(q.question_type);
+                    question = questioned.Questions.FindById(q.id);
+                    found = true;
                 }
-                question.FromManagementModel(q, updatedQuestions.Count);
-                updatedQuestions.Add(question);
-            }
+                if (question == null)
+                    question =
+                        new EnumAttributedFactoryFactory<Question, QuestionTypeAttribute, QuestionType>().Create(
+                            q.question_type);
 
-            questioned.Questions = updatedQuestions;
+                question.FromManagementModel(q, i);
+
+                if (!found)
+                    questioned.Questions.Add(question);
+            }
 
             _entityRepository.Save(course);
 
@@ -153,7 +150,7 @@ namespace PST.Api.Areas.Management.Controllers
 
         private Questioned GetQuestioned(Guid courseID, Guid? sectionID, out Course course)
         {
-            course = _courseService.GetCourse(courseID);
+            course = _courseService.GetCourse(courseID, status: null);
             if (course == null)
                 throw new NullReferenceException("Course not found");
 

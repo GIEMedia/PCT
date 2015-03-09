@@ -28,23 +28,25 @@ namespace PST.Declarations.Interfaces
         /// <param name="courseID">ID of course to get</param>
         /// <param name="accountID">Account to ensure prereqs met.</param>
         /// <param name="prerequisiteCourses">Prerequisite courses if prereqs not met.</param>
+        /// <param name="status">Only return a crouse if it's status matches supplied value. (default: Active)</param>
         /// <returns>Course with specified ID. Returns null if course not found or account doesn't meet prereqs (out prerequisite courses set).</returns>
-        Course GetCourse(Guid courseID, Guid? accountID, out List<Course> prerequisiteCourses);
+        Course GetCourse(Guid courseID, Guid? accountID, out List<Course> prerequisiteCourses, CourseStatus? status = CourseStatus.Active);
 
         /// <summary>
         /// Gets a specific course by ID.
         /// </summary>
         /// <param name="courseID">ID of course to get</param>
         /// <param name="accountID">Account to ensure prereqs met.</param>
+        /// <param name="status">Only return a crouse if it's status matches supplied value. (default: Active)</param>
         /// <returns>Course with specified ID. Returns null if course not found or account doesn't meet prereqs.</returns>
-        Course GetCourse(Guid courseID, Guid? accountID = null);
+        Course GetCourse(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active);
 
         course_progress GetCourseProgress(Guid accountID, Guid courseID);
 
         /// <summary>
         /// Get all courses
         /// </summary>
-        /// <param name="status">Course status to filter on</param>
+        /// <param name="status">Only return a crouse if it's status matches supplied value, otherwise all statuses allowed.</param>
         /// <returns>All courses</returns>
         IEnumerable<Course> GetCourses(CourseStatus? status);
             

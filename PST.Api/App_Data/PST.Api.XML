@@ -430,14 +430,6 @@
             <param name="sectionID">ID of section (null if test)</param>
             <returns></returns>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.DeleteQuestion(System.Guid,System.Nullable{System.Guid},System.Guid)">
-            <summary>
-            Delete a question from section or test
-            </summary>
-            <param name="courseID">ID of course</param>
-            <param name="sectionID">ID of section (null if test)</param>
-            <param name="questionID"></param>
-        </member>
         <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.UpsertQuestions(System.Guid,System.Nullable{System.Guid},PST.Declarations.Models.Management.m_question[])">
             <summary>
             Upsert questions for a section or test

@@ -60,7 +60,7 @@ namespace PST.Api.Areas.Management.Controllers
         [Route("{courseID}")]
         public m_course GetCourse(Guid courseID)
         {
-            var course = _courseService.GetCourse(courseID);
+            var course = _courseService.GetCourse(courseID, status: null);
             if (course == null)
                 throw new NullReferenceException("Course not found.");
             return course;
@@ -89,7 +89,7 @@ namespace PST.Api.Areas.Management.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("category")]
-        public m_category UpsertCategory([FromBody]string title, Guid? categoryID = null, Guid? parentCategoryID = null)
+        public m_category UpsertCategory([FromBody]string title, [FromUri]Guid? categoryID = null, [FromUri]Guid? parentCategoryID = null)
         {
             if (parentCategoryID.HasValue)
             {
@@ -134,7 +134,7 @@ namespace PST.Api.Areas.Management.Controllers
             Course c = null;
             if (!course.id.IsNullOrEmpty())
             {
-                c = _courseService.GetCourse(course.id);
+                c = _courseService.GetCourse(course.id, status: null);
                 if (c == null)
                     throw new NullReferenceException("Course not found to update.");
             }
@@ -148,7 +148,7 @@ namespace PST.Api.Areas.Management.Controllers
             c.PrerequisiteCourses.Clear();
             if (course.prerequisite_course.HasValue)
             {
-                var prereq = _courseService.GetCourse(course.prerequisite_course.Value);
+                var prereq = _courseService.GetCourse(course.prerequisite_course.Value, status: null);
                 if(prereq != null)
                 c.PrerequisiteCourses.Add(prereq);
             }
@@ -162,6 +162,8 @@ namespace PST.Api.Areas.Management.Controllers
                         CategoryCode = s.category_code,
                         Hours = s.hours
                     }));
+
+            _entityRepository.Save(c);
 
             return c;
         }
