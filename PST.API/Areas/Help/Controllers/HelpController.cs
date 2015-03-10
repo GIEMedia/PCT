@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Web;
+using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Mvc;
+using System.Web.Security;
 using Prototype1.Foundation;
+using PST.Api.Areas.Help.Models;
 
 namespace PST.Api.Areas.Help.Controllers
 {
@@ -21,6 +25,7 @@ namespace PST.Api.Areas.Help.Controllers
 
         public HttpConfiguration Configuration { get; private set; }
 
+        [HelpAuthorizationAttribute]
         public ActionResult Index()
         {
             ViewBag.Types = GetTypes(Configuration.Services.GetApiExplorer().ApiDescriptions);
@@ -82,6 +87,45 @@ namespace PST.Api.Areas.Help.Controllers
             }
 
             return types.OrderBy(x => x.Name).Distinct().ToList();
+        }
+
+        public ActionResult Login()
+        {
+            var host = HttpContext != null && HttpContext.Request != null && HttpContext.Request.Url != null
+                ? HttpContext.Request.Url.Host
+                : "";
+            if (host != "localhost") return View();
+
+            FormsAuthentication.SetAuthCookie("localhost", false);
+            return RedirectToAction("Index");
+        }
+
+        [System.Web.Mvc.HttpPost]
+        public ActionResult Login(HelpLogin helpLogin)
+        {
+            if (helpLogin.Username.IsNullOrEmpty() || helpLogin.Password.IsNullOrEmpty())
+                return View();
+
+            user[] users;
+            using (
+                var streamReader =
+                    new StreamReader(HostingEnvironment.MapPath("/") + "Areas/Help/AuthorizedUsers.json.protected"))
+                users = streamReader.ReadToEnd().FromJson<user[]>();
+
+            if (users.Any(u => u.username == helpLogin.Username && u.password == helpLogin.Password))
+            {
+                FormsAuthentication.SetAuthCookie(helpLogin.Username, false);
+                return RedirectToAction("Index");
+            }
+
+            ModelState.AddModelError("", "The username or password you provided is not valid.");
+            return View(helpLogin);
+        }
+
+        private class user
+        {
+            public string username { get; set; }
+            public string password { get; set; }
         }
     }
 }

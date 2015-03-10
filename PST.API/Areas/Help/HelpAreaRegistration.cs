@@ -17,7 +17,7 @@ namespace PST.Api.Areas.Help
         {
             context.MapRoute(
                 "Help_default",
-                "Help/{controller}/{action}/{id}",
+                "Help/{action}/{id}",
                 new { controller = "Help", action = "Index", id = UrlParameter.Optional }
             );
 

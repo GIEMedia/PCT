@@ -1,0 +1,39 @@
+﻿@model PST.Api.Areas.Help.Models.HelpLogin
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width" />
+        <title>API Documentation Login</title>
+        <link rel="stylesheet" href="/Areas/Help/css/login.css">
+    </head>
+    <body>
+        @using (Html.BeginForm("Login", "Help", FormMethod.Post, new {@class = "login"}))
+        {
+            <p>
+                @Html.LabelFor(model => model.Username)
+                @Html.EditorFor(model => model.Username)
+            </p>
+
+            <p>
+                @Html.LabelFor(model => model.Password)
+                @Html.EditorFor(model => model.Password)
+            </p>
+
+            <p class="login-submit">
+                <button type="submit" class="login-button">Login</button>
+            </p>
+            
+            <div>
+                @Html.ValidationSummary()
+            </div>
+        }
+    </body>
+</html>
