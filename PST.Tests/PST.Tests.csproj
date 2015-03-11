@@ -195,6 +195,7 @@
     <Compile Include="DevelopmentApiContainerProvider.cs" />
     <Compile Include="ManagementTests\ApiTestControllerBase.cs" />
     <Compile Include="ManagementTests\CourseControllerTests.cs" />
+    <Compile Include="ManagementTests\ManagementControllerTests.cs" />
     <Compile Include="ManagementTests\QuestionControllerTests.cs" />
     <Compile Include="ManagementTests\SectionControllerTests.cs" />
     <Compile Include="MappingTests.cs" />

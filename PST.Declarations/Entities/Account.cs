@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using PST.Declarations.Entities.Components;
 using PST.Declarations.Models;
 using Prototype1.Foundation;
@@ -91,6 +92,9 @@ namespace PST.Declarations.Entities
 
         public static implicit operator m_user_overview(Account account)
         {
+            if (account == null)
+                return new m_user_overview();
+
             return new m_user_overview
             {
                 id = account.ID,
@@ -98,6 +102,27 @@ namespace PST.Declarations.Entities
                 first_name = account.FirstName,
                 last_name = account.LastName,
                 last_sign_in = account.DateLastLoggedIn
+            };
+        }
+
+        public static implicit operator m_user(Account account)
+        {
+            if(account == null)
+                return new m_user();
+
+            return new m_user
+            {
+                id = account.ID,
+                email = account.Email,
+                first_name = account.FirstName,
+                last_name = account.LastName,
+                last_sign_in = account.DateLastLoggedIn,
+                admin_access = account.AdminAccess,
+                company_address = account.CompanyAddress,
+                company_name = account.CompanyName,
+                licensures = account.StateLicensures.Select(l => (state_licensure) l).ToArray(),
+                managers = account.Managers.Select(m => (manager) m).ToArray(),
+                courses = account.CourseProgress.Select(m => (m_user_course_stat) m).ToArray()
             };
         }
 

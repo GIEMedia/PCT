@@ -12,7 +12,7 @@ using PST.Declarations.Models.Management;
 
 namespace PST.Api.Areas.Management.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [RoutePrefix("api/manage")]
     public class ManagementController : ApiControllerBase
     {
@@ -52,16 +52,18 @@ namespace PST.Api.Areas.Management.Controllers
 
             var accounts = _entityRepository.Queryable<Account>();
 
-            if(!search.IsNullOrEmpty())
-                accounts = accounts.Where(a=>
-                    a.FirstName.Contains(search) ||
-                    a.LastName.Contains(search) ||
-                    a.Email.Contains(search));
+            if (!search.IsNullOrEmpty())
+                accounts = search.Trim().Split(new[] {" "}, StringSplitOptions.RemoveEmptyEntries)
+                    .Where(s => !s.Trim().IsNullOrWhiteSpace())
+                    .Aggregate(accounts,
+                        (current, s) =>
+                            current.Where(a => a.FirstName.Contains(s) || a.LastName.Contains(s) || a.Email.Contains(s)));
 
             return accounts
                 .OrderBy(a => a.LastName)
                 .Skip(qty.Value*(page.Value - 1))
                 .Take(qty.Value)
+                .ToList()
                 .Select(a => (m_user_overview) a)
                 .ToArray();
         }
@@ -74,21 +76,14 @@ namespace PST.Api.Areas.Management.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("user/search")]
-        public m_user_overview[] SearchUser(string search, int max = 20)
+        public m_user_overview[] SearchUsers(string search, int max = 20)
         {
             search = search.IfNullOrWhiteSpace("").Trim();
             if (search.Length < 2) return new m_user_overview[0];
 
             if (max > 100) max = 100;
 
-            return _entityRepository.Queryable<Account>().Where(a =>
-                a.FirstName.Contains(search) ||
-                a.LastName.Contains(search) ||
-                a.Email.Contains(search))
-                .OrderBy(a => a.LastName)
-                .Take(max)
-                .Select(a => (m_user_overview) a)
-                .ToArray();
+            return GetUsers(null, max, search);
         }
 
         /// <summary>
@@ -104,22 +99,7 @@ namespace PST.Api.Areas.Management.Controllers
             if (account == null)
                 throw new NullReferenceException("User not found.");
 
-            var user = new m_user
-            {
-                id = account.ID,
-                email = account.Email,
-                first_name = account.FirstName,
-                last_name = account.LastName,
-                last_sign_in = account.DateLastLoggedIn,
-                admin_access = account.AdminAccess,
-                company_address = account.CompanyAddress,
-                company_name = account.CompanyName,
-                licensures = account.StateLicensures.Select(l => (state_licensure) l).ToArray(),
-                managers = account.Managers.Select(m => (manager) m).ToArray(),
-                courses = account.CourseProgress.Select(m => (m_user_course_stat)m).ToArray()
-            };
-
-            return user;
+            return account;
         }
 
         /// <summary>
@@ -129,7 +109,7 @@ namespace PST.Api.Areas.Management.Controllers
         /// <param name="access"></param>
         [HttpPut]
         [Route("user/admin/{userID}")]
-        public void UpdateUser(Guid userID, AdminAccess access)
+        public void UpdateUserAdminAccess(Guid userID, AdminAccess access)
         {
             var account = _entityRepository.GetByID<Account>(userID);
             if(account == null)

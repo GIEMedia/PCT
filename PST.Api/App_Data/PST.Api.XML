@@ -400,7 +400,7 @@
             <param name="search">String to search for users on</param>
             <returns></returns>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.SearchUser(System.String,System.Int32)">
+        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.SearchUsers(System.String,System.Int32)">
             <summary>
             Search user list by last name, first name, and/or email
             </summary>
@@ -415,7 +415,7 @@
             <param name="userID">ID of user</param>
             <returns></returns>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.UpdateUser(System.Guid,PST.Declarations.AdminAccess)">
+        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.UpdateUserAdminAccess(System.Guid,PST.Declarations.AdminAccess)">
             <summary>
             Update user's admin access
             </summary>
