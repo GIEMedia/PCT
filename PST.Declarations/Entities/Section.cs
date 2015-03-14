@@ -20,7 +20,7 @@ namespace PST.Declarations.Entities
             var questionedProgress = new SectionProgress
             {
                 Section = this,
-                TotalQuestions = this.Questions.Count
+                TotalQuestions = Questions.Count
             };
             courseProgress.Sections.Add(questionedProgress);
 
@@ -29,17 +29,18 @@ namespace PST.Declarations.Entities
 
         public override QuestionedProgress GetProgress(CourseProgress courseProgress)
         {
-            return courseProgress.Sections.FirstOrDefault(s => s.Section.ID == this.ID);
+            return courseProgress.Sections.FirstOrDefault(s => s.Section.ID == ID);
         }
 
-        public static implicit operator section(Section section)
+        public virtual section<TQuestion> ToModel<TQuestion>()
+            where TQuestion : question_base, new()
         {
-            return new section
+            return new section<TQuestion>
             {
-                section_id = section.ID,
-                title = section.Title,
-                document = section.Document,
-                questions = section.Questions.Select(q => q.ToModel()).ToArray()
+                section_id = ID,
+                title = Title,
+                document = Document,
+                questions = Questions.Select(q => q.ToModel<TQuestion>()).ToArray()
             };
         }
 

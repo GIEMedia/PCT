@@ -33,19 +33,26 @@ namespace PST.Declarations.Entities
         [Transient]
         public abstract QuestionType QuestionType { get; }
 
-        protected abstract void SetCustomModelProperties(question question);
+        protected abstract void SetCustomModelProperties<TQuestion>(TQuestion question) where TQuestion : question_base;
 
-        public virtual question ToModel()
+        public virtual TQuestion ToModel<TQuestion>()
+            where TQuestion : question_base, new()
         {
-            var question = new question
+            var question = new TQuestion
             {
                 question_id = ID,
                 question_text = QuestionText,
                 options = Options.Select(o => o.ToModel()).ToArray(),
                 multi_select = Options.Count(o => o.Correct) > 1,
-                option_type = Models.question.option_types.text,
+                option_type = question_base.option_types.text,
                 tip = Tip
             };
+
+
+            var questionWithAnswers = question as question_with_answers;
+            if (questionWithAnswers != null)
+                questionWithAnswers.answer = new answer_result(ID, true, CorrectResponseHeading, CorrectResponseText,
+                    Options.Where(o => o.Correct).Select(o => o.ID).ToArray());
 
             SetCustomModelProperties(question);
 
@@ -133,7 +140,7 @@ namespace PST.Declarations.Entities
             get { return QuestionType.SingleImage; }
         }
 
-        protected override void SetCustomModelProperties(question question)
+        protected override void SetCustomModelProperties<TQuestion>(TQuestion question)
         {
             question.image = ImageUrl;
         }
@@ -161,7 +168,7 @@ namespace PST.Declarations.Entities
             get { return QuestionType.Video; }
         }
 
-        protected override void SetCustomModelProperties(question question)
+        protected override void SetCustomModelProperties<TQuestion>(TQuestion question)
         {
             question.video = new video { mp4 = Mp4Url };
         }
@@ -187,7 +194,7 @@ namespace PST.Declarations.Entities
             get { return QuestionType.Text; }
         }
 
-        protected override void SetCustomModelProperties(question question)
+        protected override void SetCustomModelProperties<TQuestion>(TQuestion question)
         {
         }
 
@@ -210,9 +217,9 @@ namespace PST.Declarations.Entities
             get { return QuestionType.MultiImage; }
         }
 
-        protected override void SetCustomModelProperties(question question)
+        protected override void SetCustomModelProperties<TQuestion>(TQuestion question)
         {
-            question.option_type = question.option_types.image;
+            question.option_type = question_base.option_types.image;
         }
 
         protected override void SetCustomManagementModelProperties(m_question question)

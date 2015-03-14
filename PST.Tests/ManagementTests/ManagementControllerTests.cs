@@ -121,18 +121,18 @@ namespace PST.Tests.ManagementTests
 
             var origAccess = foundUser.admin_access;
 
-            UpdateuserAdminAccess(user.id, origAccess == AdminAccess.System ? AdminAccess.None : AdminAccess.System);
+            UpdateUserAdminAccess(user.id, origAccess == AdminAccess.System ? AdminAccess.None : AdminAccess.System);
 
             foundUser = GetUser(user.id);
             Assert.AreNotEqual(origAccess, foundUser.admin_access);
 
-            UpdateuserAdminAccess(user.id, origAccess);
+            UpdateUserAdminAccess(user.id, origAccess);
 
             foundUser = GetUser(user.id);
             Assert.AreEqual(origAccess, foundUser.admin_access);
         }
 
-        public void UpdateuserAdminAccess(Guid userID, AdminAccess access)
+        public void UpdateUserAdminAccess(Guid userID, AdminAccess access)
         {
             ExecutePutRequest("user/admin/" + userID + "?access=" + ((int) access),"");
         }

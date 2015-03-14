@@ -167,5 +167,23 @@ namespace PST.Api.Areas.Management.Controllers
 
             return c;
         }
+
+        /// <summary>
+        /// Send course to reviewer
+        /// </summary>
+        /// <param name="reviewer">Details about who will be reviewing this course</param>
+        [HttpPut]
+        [Route("review/{courseID}")]
+        public void SendCourseToReviewer(Guid courseID, m_course_reviewer reviewer)
+        {
+            var course = _courseService.GetCourse(courseID, status: null);
+            if (course.Status == CourseStatus.Draft)
+            {
+                course.Status = CourseStatus.InReview;
+                _entityRepository.Save(course);
+            }
+
+            //TODO: Send email
+        }
     }
 }

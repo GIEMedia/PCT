@@ -37,14 +37,29 @@ namespace PST.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{courseID}")]
-        public course GetCourse(Guid courseID)
+        public course<question> GetCourse(Guid courseID)
         {
             List<Course> prereqCourses;
             var course = _courseService.GetCourse(courseID, CurrentUserID, out prereqCourses);
             if (course == null && prereqCourses == null)
                 return null;
+
             return course ??
-                   new course {prerequisite_courses = prereqCourses.Select(c => (course_overview) c).ToArray()};
+                   new course<question> { prerequisite_courses = prereqCourses.Select(c => (course_overview)c).ToArray() };
+        }
+
+        /// <summary>
+        /// Get specific course in preview mode
+        /// </summary>
+        /// <param name="courseID">ID of course</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{courseID}/preview")]
+        public course<question_with_answers> GetCoursePreview(Guid courseID)
+        {
+            List<Course> prereqCourses;
+            var course = _courseService.GetCourse(courseID, CurrentUserID, out prereqCourses);
+            return course;
         }
 
         /// <summary>
@@ -65,8 +80,8 @@ namespace PST.Api.Controllers
                 {
                     title = s.Title,
                     courses = courses.Where(c => c.Category.ID == s.ID).Select(c => (course_overview) c).ToArray()
-                }).ToArray()
-            }).ToArray();
+                }).Where(c => c.courses.Any()).ToArray()
+            }).Where(c => c.categories.Any(s => s.courses.Any())).ToArray();
         }
 
         /// <summary>

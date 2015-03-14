@@ -14,9 +14,6 @@
                         var newWindow = window.open($scope.section.document.pdf_url, "_blank");
                         newWindow.print();
                     };
-                    $scope.download = function() {
-                        window.open($scope.section.document.pdf_url, "_blank");
-                    };
                 }
             };
         })

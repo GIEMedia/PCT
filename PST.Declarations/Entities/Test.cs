@@ -15,18 +15,14 @@ namespace PST.Declarations.Entities
         [Transient]
         public virtual int MaxTries { get { return 3; } }
 
-        public static implicit operator test(Test test)
+        public static implicit operator test<question>(Test test)
         {
-            if (test == null)
-                return new test();
+            return test.ToModel<question>();
+        }
 
-            return new test
-            {
-                test_id = test.ID,
-                title = test.Title,
-                passing_percentage = test.PassingPercentage,
-                questions = test.Questions.Select(q => q.ToModel()).ToArray()
-            };
+        public static implicit operator test<question_with_answers>(Test test)
+        {
+            return test.ToModel<question_with_answers>();
         }
 
         public override QuestionedProgress CreateAndAddProgress(CourseProgress courseProgress)
@@ -44,6 +40,18 @@ namespace PST.Declarations.Entities
         public override QuestionedProgress GetProgress(CourseProgress courseProgress)
         {
             return courseProgress.TestProgress;
+        }
+
+        public virtual test<TQuestion> ToModel<TQuestion>()
+            where TQuestion : question_base, new()
+        {
+            return new test<TQuestion>
+            {
+                test_id = ID,
+                title = Title,
+                passing_percentage = PassingPercentage,
+                questions = Questions.Select(q => q.ToModel<TQuestion>()).ToArray()
+            };
         }
     }
 }

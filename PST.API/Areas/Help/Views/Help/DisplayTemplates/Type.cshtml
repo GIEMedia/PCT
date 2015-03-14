@@ -4,14 +4,20 @@
 @model Type
 
 @{
-    var properties = @Model.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+    var properties = Model.GetProperties(BindingFlags.Public | BindingFlags.Instance)
         .Where(x => !x.GetCustomAttributes(typeof (IgnoreDataMemberAttribute), false).Any());
-    var aName = "type_" + @Model.Name.Replace(" ", "");
+    var typeName = Model.Name;
+    if (Model.IsGenericType)
+    {
+        typeName = typeName.Replace("`1", "") + "<" + Model.GetGenericArguments()[0].Name + ">";
+    }
+
+    var aName = "type_" + typeName.Replace(" ", "");
 }
 
 <div class="action-method area">
     <a name="@aName"></a>
-    <h4 class="summary">@Model.Name</h4>
+    <h4 class="summary">@typeName</h4>
     <table>
         <thead>
             <tr>
@@ -23,12 +29,15 @@
         <tbody>
             @foreach (var prop in properties)
             {
-                var propType = !prop.PropertyType.IsGenericType
-                    ? prop.PropertyType.Name
-                    : prop.PropertyType.Name.Replace("`1", "") + "<" + prop.PropertyType.GenericTypeArguments[0].Name + ">";
+                var propType = prop.PropertyType.IsArray ? prop.PropertyType.GetElementType() : prop.PropertyType;
+
+                var propTypeName =
+                    (!propType.IsGenericType ? propType.Name : propType.Name.Replace("`1", "") + "<" + propType.GenericTypeArguments[0].Name + ">")
+                    + (prop.PropertyType.IsArray ? "[]" : "");
+
                 var aLinkName =
-                    (!prop.PropertyType.IsPrimitive && prop.PropertyType.IsClass && !(prop.PropertyType.Namespace ?? "").StartsWith("System"))
-                        ? "type_" + prop.PropertyType.Name.Replace(" ", "").Replace("[", "").Replace("]", "")
+                    (!propType.IsPrimitive && propType.IsClass && !(propType.Namespace ?? "").StartsWith("System"))
+                        ? "type_" + propTypeName.Replace(" ", "").Replace("[", "").Replace("]", "")
                         : "";
 
                 <tr>
@@ -36,35 +45,39 @@
                     <td>
                         @if (aLinkName.IsNullOrEmpty())
                         {
-                            @propType
+                            @propTypeName
                         }
                         else
                         {
-                            <a href="#@aLinkName">@propType</a>
+                            <a href="#@aLinkName">@propTypeName</a>
                         }
-                        
-                        @if (prop.PropertyType.IsEnum)
+
+                        @if (propType.IsEnum)
                         {
                             <i>(Enum)</i>
                         }
                     </td>
                     <td>
-                        @if (prop.PropertyType.IsEnum)
+                        @if (propType.IsEnum)
                         {
                             var first = true;
-                            foreach (var n in Enum.GetNames(prop.PropertyType))
+                            foreach (var n in Enum.GetNames(propType))
                             {
                                 if (!first)
                                 {
-                                    <br/>
+                                    <br />
                                 }
-                                @MvcHtmlString.Create(n + " = " + (int)Enum.Parse(prop.PropertyType, n));
-                                first = false;
+                                @MvcHtmlString.Create(n + " = " + (int)Enum.Parse(propType, n));
+                                                                                                        first = false;
                             }
                         }
                     </td>
                 </tr>
             }
         </tbody>
+
+
+
+
     </table>
 </div>

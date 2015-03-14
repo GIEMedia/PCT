@@ -40,16 +40,30 @@ namespace PST.Declarations.Entities
 
         public virtual DateTime DateCreatedUtc { get; set; }
 
-        public static implicit operator course(Course course)
+        public static implicit operator course<question>(Course course)
+        {
+            return ToCourse<question>(course);
+        }
+
+        public static implicit operator course<question_with_answers>(Course course)
+        {
+            return ToCourse<question_with_answers>(course);
+        }
+
+        private static course<TQuestion> ToCourse<TQuestion>(Course course)
+            where TQuestion : question_base, new()
         {
             if (course == null)
-                return new course();
+                return new course<TQuestion>();
 
-            return new course
+            return new course<TQuestion>
             {
                 course_id = course.ID,
                 title = course.Title,
-                sections = course.Sections != null ? course.Sections.Select(s => (section) s).ToArray() : new section[0]
+                sections =
+                    course.Sections != null
+                        ? course.Sections.Select(s => s.ToModel<TQuestion>()).ToArray()
+                        : new section<TQuestion>[0]
             };
         }
 
@@ -66,7 +80,7 @@ namespace PST.Declarations.Entities
                     course.StateCEUs.Any()
                         ? "CEUs Available: " +
                           course.StateCEUs.OrderBy(x => x.StateAbbr)
-                              .Select(x => x.StateAbbr)
+                              .Select(x => string.Format("{0} ({1:#.0} hrs)", x.StateAbbr, x.Hours))
                               .Aggregate((i, j) => i + "," + j)
                         : ""
             };

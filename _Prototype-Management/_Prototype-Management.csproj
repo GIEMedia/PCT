@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="0.PCT.Login.html" />
+    <Content Include="4.PCT.Publish.html" />
     <Content Include="4.PCT.Review.Invite.html" />
     <Content Include="index.html" />
     <Content Include="6.PCT.Report.List.html" />

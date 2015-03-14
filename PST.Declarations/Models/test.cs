@@ -2,7 +2,8 @@
 
 namespace PST.Declarations.Models
 {
-    public class test : questioned
+    public class test<TQuestion> : questioned<TQuestion>
+        where TQuestion : question_base
     {
         public Guid? test_id { get; set; }
 

@@ -2,14 +2,12 @@
 @using PST.Api.Areas.Help.Models
 @using Prototype1.Foundation
 @model HelpApiModel
-
 @{
     var description = Model.ApiDescription;
     bool hasParameters = description.ParameterDescriptions.Count > 0;
     bool hasRequestSamples = Model.SampleRequests.Count > 0;
     bool hasResponseSamples = Model.SampleResponses.Count > 0;
 }
-
 <div class="action-method area">
     @if (!string.IsNullOrEmpty(description.Documentation))
     {
@@ -22,7 +20,6 @@
         <p class="uri"><code>@description.HttpMethod.Method @description.RelativePath</code></p>
         <p class="documentation-unavailale">No documentation available.</p>
     }
-
     @if (description.ResponseDescription != null)
     {
         if (!description.ResponseDescription.Documentation.IsNullOrEmpty())
@@ -30,7 +27,7 @@
             <p class="api-section-subheader">Returns</p>
             @MvcHtmlString.Create(@description.ResponseDescription.Documentation)
         }
-        
+
         var respType = description.ResponseDescription.ResponseType ?? description.ResponseDescription.DeclaredType;
         if (respType != null)
         {
@@ -50,7 +47,7 @@
 
                 //var aName = "type_" + respType.Name.Replace(" ", "").Replace("[", "").Replace("]", "");
                 <p class="api-section-subheader">Return Type</p>
-                if (!respType.IsAbstract)
+                if (!respType.IsAbstract && !respType.IsGenericType)
                 {
                     if (aName.IsNullOrEmpty())
                     {
@@ -64,6 +61,16 @@
                 else if (respType.IsAbstract && respType.GetGenericArguments().Any())
                 {
                     @MvcHtmlString.Create(respType.Name.Replace("`1", "") + "<<a href='#type_" + respType.GetGenericArguments()[0].Name.Replace(" ", "").Replace("[", "").Replace("]", "") + "'>" + respType.GetGenericArguments()[0].Name + "</a>>")
+                }
+                else if (respType.IsGenericType && respType.GetGenericArguments().Any())
+                {
+                    @MvcHtmlString.Create(
+                        "<a href='#type_"
+                        + respType.Name.Replace("`1", "").Replace(" ", "").Replace("[", "").Replace("]", "")
+                        + "<" + respType.GetGenericArguments()[0].Name.Replace(" ", "").Replace("[", "").Replace("]", "") + ">"
+                        + "'>"
+                        + respType.Name.Replace("`1", "") + "&lt;" + respType.GetGenericArguments()[0].Name + "&gt;"
+                        + "</a>")
                 }
                 else
                 {
@@ -87,7 +94,6 @@
         <p class="api-section-subheader">Return Type</p>
         @MvcHtmlString.Create("void")
     }
-
     @if (hasParameters || hasRequestSamples)
     {
         if (hasParameters)
@@ -105,7 +111,6 @@
             </div>
         }
     }
-
     @if (hasResponseSamples)
     {
         <div class="codeSample">

@@ -2,7 +2,7 @@
 
 namespace PST.Declarations.Models
 {
-    public class question
+    public abstract class question_base
     {
         public Guid question_id { get; set; }
 
@@ -17,7 +17,7 @@ namespace PST.Declarations.Models
             text,
             image
         }
-
+        
         public option_types option_type { get; set; }
 
         public option[] options { get; set; }
@@ -25,5 +25,15 @@ namespace PST.Declarations.Models
         public string image { get; set; }
 
         public video video { get; set; }
+    }
+
+    public class question : question_base
+    {
+        
+    }
+
+    public class question_with_answers : question_base
+    {
+        public answer_result answer { get; set; }
     }
 }

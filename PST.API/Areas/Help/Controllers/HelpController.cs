@@ -37,6 +37,8 @@ namespace PST.Api.Areas.Help.Controllers
 
         private static List<Type> GetTypes(Collection<ApiDescription> apiDescriptions)
         {
+            var customNamespace = Assembly.GetExecutingAssembly().FullName.Split('.').FirstOrDefault() ?? "none";
+
             var types =
                 ((from m in apiDescriptions
                   let type = m.ResponseDescription.ResponseType ?? m.ResponseDescription.DeclaredType
@@ -55,7 +57,8 @@ namespace PST.Api.Areas.Help.Controllers
             {
                 foreach (var gen in types.Where(t => t.IsGenericType).ToArray())
                 {
-                    types.Remove(gen);
+                    if (!(gen.Namespace ?? "namespace").StartsWith(customNamespace + "."))
+                        types.Remove(gen);
                     types.Add(gen.GetGenericArguments()[0]);
                 }
 

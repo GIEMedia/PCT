@@ -542,6 +542,12 @@
             <param name="course">Course to be upserted. If new, leave ID blank. If existing, properties will be merged into existing entity.</param>
             <returns></returns>
         </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.SendCourseToReviewer(System.Guid,PST.Declarations.Models.Management.m_course_reviewer)">
+            <summary>
+            Send course to reviewer
+            </summary>
+            <param name="reviewer">Details about who will be reviewing this course</param>
+        </member>
         <member name="T:PST.Api.Controllers.AccountController">
             <summary>
             Manage user account information
@@ -616,6 +622,13 @@
             <param name="courseID">ID of course</param>
             <returns></returns>
         </member>
+        <member name="M:PST.Api.Controllers.CourseController.GetCoursePreview(System.Guid)">
+            <summary>
+            Get specific course in preview mode
+            </summary>
+            <param name="courseID">ID of course</param>
+            <returns></returns>
+        </member>
         <member name="M:PST.Api.Controllers.CourseController.GetCourses">
             <summary>
             Get all categorized courses
@@ -639,6 +652,13 @@
         <member name="M:PST.Api.Controllers.TestController.GetTest(System.Guid)">
             <summary>
             Get test for specific course
+            </summary>
+            <param name="courseID">ID of course</param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Controllers.TestController.GetTestPreview(System.Guid)">
+            <summary>
+            Get test in preview mode for specific course
             </summary>
             <param name="courseID">ID of course</param>
             <returns></returns>

@@ -4,7 +4,7 @@
         <h3 class="intro-title">Welcome back, <strong>{{User.firstName}}</strong>!</h3><!-- /.intro-title -->
         <div class="search">
             <div class="search-field">
-                <input placeholder="Find a course" ng-model="view.search" search-input/>
+                <input placeholder="Find a course" ng-model="view.search" search-input />
             </div><!-- /.search-field -->
 
             <div class="search-dropdown">
@@ -59,7 +59,7 @@
 
                         <small class="bull">&bull;</small>
 
-                        <small class="count">{{newCourses.length}}</small>
+                        <small class="count" ng-if="newCourses && (newCourses.length || 0) > 0">{{newCourses.length}}</small>
                     </h3><!-- /.section-title -->
                 </div><!-- /.section-head -->
 
@@ -67,7 +67,10 @@
                     <ul class="courses-items">
 
 
-                        <li class="no-record" ng-if="(newCourses.length || 0)==0">
+                        <li class="no-record" ng-if="!newCourses">
+                            Loading new courses...
+                        </li>
+                        <li class="no-record" ng-if="newCourses && (newCourses.length || 0)==0">
                             No new course(s)
                         </li>
                         <li class="courses-item" ng-repeat="course in newCourses">

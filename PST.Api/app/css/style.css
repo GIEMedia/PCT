@@ -456,6 +456,8 @@ a.form-label { color: #404040 !important; }
 .course-paging-prev { background-image: url(/app/css/images/ico-prev.png); } 
 .course-paging-next { background-image: url(/app/css/images/ico-next.png); } 
 
+.course-paging a[disabled="disabled"] { visibility: hidden; }
+
 .course-media-frame { position: absolute; top: 37px; bottom: 0; left: 0; right: 0; overflow: hidden; }
 .course-pdf-preview { display: block; min-width: 100%; height: auto; border: solid 1px #d7e2e6; }
 
@@ -534,7 +536,7 @@ a.form-label { color: #404040 !important; }
 .search-dropdown { position: absolute; top: 60px; left: 0; right: 0; background: #fff; border-radius: 5px; box-shadow: 0 1px 10px rgba(0,0,0, .25); padding: 33px 0 20px; z-index: 1; display: none; }
 .search-section { padding: 0 3%; }
 .search-section .section-title { color: #2cb142; border-bottom: 2px solid #eaeaea; padding-bottom: 10px; min-height: 42px; }
-.search-section .section-body { padding-top: 40px; }
+.search-section .section-body { padding-top: 10px; }
 .search-section h5 { font-size: 16px; color: #909090; font-weight: bold; padding-bottom: 10px; }
 .search-section ul { list-style: none outside none; padding-bottom: 20px; }
 .search-section li a { display: inline-block; font-size: 16px; color: #202020; line-height: 1.2; padding: 8px 15px 10px; border-radius: 3px; }

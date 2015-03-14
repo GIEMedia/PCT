@@ -241,6 +241,7 @@
     <Compile Include="Models\Management\m_category.cs" />
     <Compile Include="Models\Management\m_course.cs" />
     <Compile Include="Models\Management\m_course_overview.cs" />
+    <Compile Include="Models\Management\m_course_reviewer.cs" />
     <Compile Include="Models\Management\m_option.cs" />
     <Compile Include="Models\Management\m_question.cs" />
     <Compile Include="Models\Management\m_question_stats.cs" />

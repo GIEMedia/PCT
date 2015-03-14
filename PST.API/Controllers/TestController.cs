@@ -35,12 +35,30 @@ namespace PST.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{courseID}")]
-        public test GetTest(Guid courseID)
+        public test<question> GetTest(Guid courseID)
+        {
+            return GetTest<question>(courseID);
+        }
+
+        /// <summary>
+        /// Get test in preview mode for specific course
+        /// </summary>
+        /// <param name="courseID">ID of course</param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("{courseID}/preview")]
+        public test<question_with_answers> GetTestPreview(Guid courseID)
+        {
+            return GetTest<question_with_answers>(courseID);
+        }
+
+        private test<TQuestion> GetTest<TQuestion>(Guid courseID)
+            where TQuestion : question_base, new()
         {
             var test = _courseService.GetTest(courseID, CurrentUserID);
             if (test == null)
                 throw new HttpResponseException(HttpStatusCode.Forbidden);
-            return test;
+            return test.ToModel<TQuestion>();
         }
 
         /// <summary>
