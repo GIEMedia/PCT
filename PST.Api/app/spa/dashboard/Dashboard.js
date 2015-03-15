@@ -27,9 +27,11 @@
                 $scope.openCourses = openCourses;
             });
 
-            var _courseStructure;
+            $scope.courseStructure = null;
             CourseService.getCourseStructure().success(function(cs1) {
-                _courseStructure = cs1;
+                $scope.courseStructure = cs1;
+
+                $scope.courseHeaderCols = DashboardHelper.toCols(DashboardHelper.filter($scope.courseStructure, $scope.view.search));
             });
 
             $scope.view = {
@@ -37,7 +39,7 @@
             };
 
             $scope.$watch("view.search", function(search) {
-                $scope.courseHeaderCols = DashboardHelper.toCols(DashboardHelper.filter(_courseStructure, search));
+                $scope.courseHeaderCols = DashboardHelper.toCols(DashboardHelper.filter($scope.courseStructure, search));
             });
 
             /**
@@ -123,7 +125,7 @@
         /**
          * Control the search text box, the wrapper div and the search dropdown
          */
-        .directive("searchField", function() {
+        .directive("searchField", function($parse) {
             return {
                 restrict: "C",
                 scope: true,
@@ -131,7 +133,12 @@
 
                     var $search = elem.parent();
 
+                    var allowSearch = $parse(attrs.allowSearch);
+
                     elem.on('click', function (e) {
+                        if (!allowSearch($scope)) {
+                            return;
+                        }
                         $search.toggleClass('search-expanded');
                         $scope.clearSearchText();
                         e.preventDefault();

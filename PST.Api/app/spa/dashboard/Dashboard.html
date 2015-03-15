@@ -3,8 +3,8 @@
     <div class="intro intro-logged">
         <h3 class="intro-title">Welcome back, <strong>{{User.firstName}}</strong>!</h3><!-- /.intro-title -->
         <div class="search">
-            <div class="search-field">
-                <input placeholder="Find a course" ng-model="view.search" search-input />
+            <div class="search-field" allow-search="courseStructure!=null">
+                <input placeholder="{{courseStructure!=null ? 'Find a course': 'Loading courses…'}}" ng-model="view.search" search-input />
             </div><!-- /.search-field -->
 
             <div class="search-dropdown">
