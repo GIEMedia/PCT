@@ -93,19 +93,83 @@
                             $scope.view.answer = value;
                         }
                     });
+
+                    if (attrs.resetOn) {
+                        Cols.each(attrs.resetOn.split(/, */), function(on) {
+                            $scope.$watch(on, function() {
+                                $scope.reset();
+                            });
+                        })
+                    }
+                    $scope.magnifyClass = attrs.magnifyClass;
+                },
+                controller: function($scope) {
+                    var _resetFuncs = [];
+
+                    var ctrl = this;
+
+                    ctrl.registerResetFunc = function(resetFunc) {
+                        _resetFuncs.push(resetFunc);
+
+                        return function() {
+                            Cols.remove(resetFunc, _resetFuncs);
+                        };
+                    };
+                    ctrl.magnifyClass = function() {
+                        return $scope.magnifyClass;
+                    };
+
+                    $scope.reset = function() {
+                        Fs.invokeAll(_resetFuncs);
+                    };
                 }
             };
         })
 
         // The magnify button in each pictured question option
-        .directive("jsMagnify", function() {
+        .directive("optionMagnify", function() {
             return {
-                restrict: "C",
-                link: function($scope, elem, attrs) {
-                    elem.magnificPopup({
+                restrict: "A",
+                require: "^eOptions",
+                link: function($scope, elem, attrs, eOptionsCtrl) {
+                    var popup = elem.magnificPopup({
                         type: 'image',
-                        mainClass: 'mfp-pdf'
-                    })
+                        mainClass: eOptionsCtrl.magnifyClass
+                    });
+
+                    var deregister = eOptionsCtrl.registerResetFunc(function() {
+                        popup.magnificPopup("close");
+                    });
+
+                    $scope.$on("$destroy", function() {
+                        deregister();
+                        popup.magnificPopup("close");
+                    });
+                }
+            };
+        })
+
+        // The magnify button in each pictured question option
+        .directive("questionMagnify", function() {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+                    var popup = elem.magnificPopup({
+                        type: 'image',
+                        mainClass: attrs.questionMagnify
+                    });
+
+                    if (attrs.closeOn) {
+                        Cols.each(attrs.closeOn.split(/, */), function(on) {
+                            $scope.$watch(on, function() {
+                                popup.magnificPopup("close");
+                            });
+                        })
+                    }
+
+                    $scope.$on("$destroy", function() {
+                        popup.magnificPopup("close");
+                    });
                 }
             };
         })

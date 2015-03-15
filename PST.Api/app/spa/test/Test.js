@@ -39,6 +39,14 @@
 
             TestService.get($stateParams.courseId).success(function(test) {
                 $scope.test = test;
+
+
+                // To test option type image
+                //var question = test.questions[0];
+                //question.option_type = 1;
+                //Cols.each(question.options, function(option) {
+                //    option.image = "/app/css/images/temp/img-answer1.jpg";
+                //});
             });
 
             TestService.getProgress($stateParams.courseId, function(progress) {

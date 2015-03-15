@@ -2,7 +2,7 @@
     <i>Use the following image to answer the question below.</i>
     <div class="course-single-media-wrapper">
         <img ng-src="{{question.image}}" width="360" />
-        <a href="{{question.image}}" class="js-magnify"></a>
+        <a href="{{question.image}}" class="js-magnify" question-magnify="mfp-pdf" close-on="section,question"></a>
     </div>
 </div><!-- /.course-question-head -->
 
@@ -22,7 +22,7 @@
 </div><!-- /.course-question-head -->
 <div class="course-question-body">
     <div class="form-body">
-        <e-options question="question" answer="answer" disabled="result.passed"></e-options>
+        <e-options question="question" answer="answer" disabled="result.passed" reset-on="section,question" magnify-class="mfp-pdf"></e-options>
     </div><!-- /.form-body -->
 
     <div class="form-actions" ng-if="result==null || !result.passed">

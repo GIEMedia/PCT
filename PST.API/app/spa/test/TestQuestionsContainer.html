@@ -7,7 +7,7 @@
                 <i>Use the following image to answer the question below.</i>
                 <div class="test-single-media-wrapper">
                     <img ng-src="{{question.image}}" width="360" />
-                    <a href="{{question.image}}" class="js-magnify"></a>
+                    <a href="{{question.image}}" class="js-magnify" question-magnify="mfp-full" close-on="question"></a>
                 </div>
             </div><!-- /.course-question-head -->
 
@@ -29,7 +29,7 @@
         <div class="test-question-answers">
             <div class="form-body">
 
-                <e-options question="question" answer="tqc.answer" ng-if="progress.corrects[question.question_id] == null" ng-class="progress.tries_left == progress.max_tries ? '' : 'retry'" retry="progress.tries_left != progress.max_tries"></e-options>
+                <e-options question="question" answer="tqc.answer" ng-if="progress.corrects[question.question_id] == null" ng-class="progress.tries_left == progress.max_tries ? '' : 'retry'" retry="progress.tries_left != progress.max_tries" reset-on="question" magnify-class="mfp-full"></e-options>
 
                 <div class="course-question-options correct" ng-if="progress.corrects[question.question_id]">
                     <div class="course-question-option course-question-option-header">

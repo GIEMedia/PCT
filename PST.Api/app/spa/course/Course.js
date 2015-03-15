@@ -23,6 +23,13 @@
         .controller("course.Ctrl", ["$scope", "CourseService", "$stateParams", "PreferenceService", function ($scope, CourseService, $stateParams, PreferenceService) {
             CourseService.get($stateParams.id).success(function(course) {
                 $scope.course = course;
+
+                // To test option type image
+                //var question = course.sections[0].questions[0];
+                //question.option_type = 1;
+                //Cols.each(question.options, function(option) {
+                //    option.image = "/app/css/images/temp/img-answer1.jpg";
+                //});
             });
             CourseService.getProgress($stateParams.id, function(progress) {
                 $scope.progress = progress;
