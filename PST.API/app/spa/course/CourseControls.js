@@ -104,6 +104,10 @@
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
+                    var reset = null;
+                    $scope.$watch("section", function() {
+                        if (reset) reset();
+                    });
 
                     var pdfPreviewLoaded = function () {
                         var $panZoom = elem.find(".course-media-frame-panzoom").panzoom({
@@ -113,6 +117,11 @@
                             //relative: true,
                             //minScale: 1
                         });
+
+                        reset = function() {
+                            $panZoom.panzoom("reset");
+                            elem.find('.course-zoom-level').text('100%');
+                        };
 
                         $panZoom.on('panzoomzoom', function (e, panzoom, matrix, changed) {
                             if (changed) {
