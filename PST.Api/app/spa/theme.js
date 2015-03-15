@@ -139,6 +139,26 @@
                 }
             };
         })
+
+        .directive("buttonLoading", function() {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+                    var oldHtml;
+                    var changed = false;
+                    $scope.$watch(attrs.buttonLoading, function(value) {
+                        if (value) {
+                            changed = true;
+                            oldHtml = elem.html();
+                            elem.html(angular.element("<i class='fa fa-lg fa-spinner fa-pulse'></i>"));
+                        } else if (changed) {
+                            changed = false;
+                            elem.html(oldHtml);
+                        }
+                    });
+                }
+            };
+        })
     ;
 
 })();

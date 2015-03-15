@@ -18,7 +18,8 @@
                 link: function($scope, elem, attrs) {
                     $scope.tqc = {
                         answer: [],
-                        answers: {}
+                        answers: {},
+                        submitting: false
                     };
 
                     // Report progress
@@ -74,7 +75,10 @@
                     $scope.submit = function() {
                         acceptAnswer();
 
-                        $scope.sendResult({"$answers": $scope.tqc.answers});
+                        $scope.tqc.submitting = true;
+                        $scope.sendResult({"$answers": $scope.tqc.answers}).then(function() {
+                            $scope.tqc.submitting = false;
+                        });
 
                         $scope.tqc.answers = {};
                     };

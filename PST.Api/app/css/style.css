@@ -670,3 +670,7 @@ input.btn[disabled] {
 	background: #88DDFC;
 	cursor: not-allowed;
 }
+button[disabled], button[disabled]:hover {
+	background: #88DDFC;
+	cursor: not-allowed;
+}

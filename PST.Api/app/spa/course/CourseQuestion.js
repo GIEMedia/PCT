@@ -14,6 +14,10 @@
                 templateUrl: "/app/spa/course/CourseQuestion.html",
                 scope: true,
                 link: function($scope, elem, attrs, courseQuestionsContainerCtrl) {
+                    $scope.questionView = {
+                        submitting: false
+                    };
+
                     var _question;
                     $scope.$watch(attrs.courseQuestion, function(question) {
                         if (question) {
@@ -28,7 +32,10 @@
 
                     // Extract the answer and submit to question container
                     $scope.submitAnswer = function() {
-                        courseQuestionsContainerCtrl.submitAnswer($scope.answer);
+                        $scope.questionView.submitting = true;
+                        courseQuestionsContainerCtrl.submitAnswer($scope.answer).then(function() {
+                            $scope.questionView.submitting = false;
+                        });
                         return false;
                     };
                 }

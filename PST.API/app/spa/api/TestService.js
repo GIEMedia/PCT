@@ -46,7 +46,7 @@
                             });
                     });
 
-                    Api.put("api/test/answer/" + courseId, sending).success(function(answerResults) {
+                    return Api.put("api/test/answer/" + courseId, sending).success(function(answerResults) {
                         var finalResult = {
                         };
 

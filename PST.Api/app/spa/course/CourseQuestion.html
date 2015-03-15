@@ -26,7 +26,7 @@
     </div><!-- /.form-body -->
 
     <div class="form-actions" ng-if="result==null || !result.passed">
-        <input type="button" class="btn" value="Answer" ng-disabled="answer.length == 0" ng-click="submitAnswer()">
+        <button class="btn" ng-disabled="answer.length == 0 || questionView.submitting" button-loading="questionView.submitting" ng-click="submitAnswer()">Answer</button>
     </div><!-- /.form-actions -->
 
 </div><!-- /.course-question-body -->

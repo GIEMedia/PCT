@@ -65,9 +65,10 @@
             </div><!-- /.form-body -->
 
             <div class="form-actions">
-                <input type="button" class="btn" value="Continue"    ng-click="next()"                                                                                                  ng-if="!lastQuestion() && progress.corrects[question.question_id]">
-                <input type="button" class="btn" value="Answer"      ng-click="next()"   ng-disabled="(tqc.answer.length || 0) == 0"                                                    ng-if="!lastQuestion() && progress.corrects[question.question_id] == null">
-                <input type="button" class="btn" value="Grade Test!" ng-click="submit()" ng-disabled="(tqc.answer.length || 0) == 0 && progress.corrects[question.question_id] == null" ng-if="lastQuestion()">
+                <input type="button" class="btn" value="Continue"    ng-click="next()"                                               ng-if="!lastQuestion() && progress.corrects[question.question_id]">
+                <input type="button" class="btn" value="Answer"      ng-click="next()"   ng-disabled="(tqc.answer.length || 0) == 0" ng-if="!lastQuestion() && progress.corrects[question.question_id] == null">
+
+                <button class="btn" ng-click="submit()" ng-disabled="(tqc.answer.length || 0) == 0 && progress.corrects[question.question_id] == null || tqc.submitting" button-loading="tqc.submitting" ng-if="lastQuestion()">Grade Test!</button>
             </div><!-- /.form-actions -->
         </div><!-- /.test-question-answers -->
     </div><!-- /.col col-1of2 -->

@@ -111,7 +111,7 @@
                     var ctrl = this;
 
                     ctrl.submitAnswer = function(answer) {
-                        CourseService.check($scope.question.question_id, $scope.course.course_id, answer).success(function(resp) {
+                        return CourseService.check($scope.question.question_id, $scope.course.course_id, answer).success(function(resp) {
                             // update the progress
                             if (resp.correct) {
                                 var currentProgress = $scope.progress[$scope.section.section_id];
