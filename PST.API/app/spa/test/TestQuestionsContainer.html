@@ -32,43 +32,42 @@
                 <e-options
                         question="question"
                         answer="tqc.answer"
-                        ng-if="progress.corrects[question.question_id] == null"
+                        ng-if="!previewMode && progress.corrects[question.question_id] == null"
                         ng-class="progress.tries_left == progress.max_tries ? '' : 'retry'"
                         retry="progress.tries_left != progress.max_tries"
                         reset-on="question"
                         magnify-class="mfp-full"
-                        highlight-correct="previewMode && question.answer.correct_options.indexOf( $option.option_id ) > -1"
                         ></e-options>
 
-                <div class="course-question-options correct" ng-if="progress.corrects[question.question_id]">
+                <div class="course-question-options correct" ng-if="correctAnswer(question)">
                     <div class="course-question-option course-question-option-header">
-                        {{progress.corrects[question.question_id].correct_response_heading}}
+                        {{correctAnswer(question).correct_response_heading}}
                     </div>
 
                     <div class="course-question-options-pictures" ng-if="question.option_type==1">
 
-                        <div class="course-question-option-picture" ng-repeat="option in question.options" ng-init="isChecked = hasIdIn(progress.corrects[question.question_id].answer)">
+                        <div class="course-question-option-picture" ng-repeat="option in question.options" >
                             <img ng-src="{{option.image}}" alt="" width="145" height="145">
 
                             <a href="app/css/images/temp/img-answer-large.jpg" class="js-magnify"></a>
 
-                            <input type="radio" ng-checked="isChecked(option)">
+                            <input type="radio" ng-checked="hasIdIn(correctAnswer(question).correct_options)(option)">
 
                             <label>Select</label>
                         </div><!-- /.course-question-option-picture -->
                     </div>
                     <div ng-if="question.option_type==0">
 
-                        <div class="course-question-option" ng-repeat="option in question.options | filter:hasIdIn(progress.corrects[question.question_id].answer)" >
+                        <div class="course-question-option" ng-repeat="option in question.options" ng-if="previewMode || hasIdIn(correctAnswer(question).correct_options)(option)">
 
-                            <input type="radio" checked="checked">
+                            <input type="radio" ng-checked="hasIdIn(correctAnswer(question).correct_options)(option)">
 
                             <label>{{option.text}}</label>
                         </div><!-- /.course-question-option -->
                     </div>
 
                     <div class="course-question-option-description">
-                        {{ progress.corrects[question.question_id].correct_response_text }}
+                        {{ correctAnswer(question).correct_response_text }}
                     </div><!-- /.course-question-option -->
                 </div><!-- /.course-questions-options -->
             </div><!-- /.form-body -->

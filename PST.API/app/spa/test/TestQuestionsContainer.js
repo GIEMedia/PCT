@@ -119,6 +119,17 @@
                         $scope.question = $scope.questions[indexOf - 1];
                     };
 
+                    $scope.correctAnswer = function(question) {
+                        if (question==null) {
+                            return null;
+                        }
+                        if ($scope.previewMode) {
+                            return $scope.question == null ? null : $scope.question.answer;
+                        } else {
+                            return $scope.progress == null ? null : $scope.progress.corrects[question.question_id];
+                        }
+                    };
+
                     /**
                      * Check question option, return if its id is in col
                      * @param col

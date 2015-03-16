@@ -125,7 +125,7 @@
         /**
          * Control the search text box, the wrapper div and the search dropdown
          */
-        .directive("searchField", function($parse) {
+        .directive("searchField", ["$parse", function($parse) {
             return {
                 restrict: "C",
                 scope: true,
@@ -168,7 +168,7 @@
                 }]
 
             };
-        })
+        }])
 
         /**
          * Register the search input box to the search field (which handle the search dropdown).

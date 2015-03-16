@@ -21,7 +21,7 @@
                         for (var i = 0; i < rawCaq.length; i++) {
                             var caq = rawCaq[i];
                             corrects[caq.question_id] = {
-                                answer: caq.correct_options,
+                                correct_options: caq.correct_options,
                                 correct_response_heading : caq.correct_response_heading,
                                 correct_response_text : caq.correct_response_text
                             };
@@ -33,20 +33,15 @@
                         });
                     });
                 },
-                submit: function (answers, courseId, startingCorrects, callback) {
+                submit: function (answers, courseId, callback) {
                     var sending = [];
                     Cols.eachEntry(answers, function(questionId, answer) {
-                        sending.push({
-                            "question_id": questionId,
-                            "selected_option_ids": answer
-                        });
-                    });
-                    Cols.eachEntry(startingCorrects, function (questionId, correctAnswer) {
-                        if (Cols.find(sending, function(s) { return s.question_id == questionId; }) == null)
+                        if (Cols.isNotEmpty(answer)) {
                             sending.push({
                                 "question_id": questionId,
-                                "selected_option_ids": correctAnswer.answer
+                                "selected_option_ids": answer
                             });
+                        }
                     });
 
                     return Api.put("api/test/answer/" + courseId, sending).success(function(answerResults) {
@@ -57,7 +52,7 @@
                             var answerResult = answerResults[i];
                             if (answerResult.correct) {
                                 finalResult[answerResult.question_id] = {
-                                    answer : answers[answerResult.question_id],
+                                    correct_options : answers[answerResult.question_id],
                                     correct_response_heading : answerResult.correct_response_heading,
                                     correct_response_text : answerResult.correct_response_text
                                 };
