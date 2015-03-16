@@ -12,6 +12,17 @@
         .config(["$stateProvider", function ($stateProvider) {
 
             $stateProvider
+                .state('coursePreview', {
+                    url: '/course/:id/preview',
+                    templateUrl: "/app/spa/course/CoursePage.html",
+                    controller: "course.PreviewCtrl"
+                })
+            ;
+        }])
+
+        .config(["$stateProvider", function ($stateProvider) {
+
+            $stateProvider
                 .state('course', {
                     url: '/course/:id',
                     templateUrl: "/app/spa/course/CoursePage.html",
@@ -36,6 +47,18 @@
             });
 
             $scope.courseHelp = PreferenceService.isHelpEnabled();
+        }])
+        .controller("course.PreviewCtrl", ["$scope", "CourseService", "$stateParams", "PreferenceService", function ($scope, CourseService, $stateParams, PreferenceService) {
+            CourseService.getPreview($stateParams.id).success(function(course) {
+                $scope.course = course;
+
+                // To test option type image
+                //var question = course.sections[0].questions[1];
+                //question.option_type = 1;
+                //Cols.each(question.options, function(option) {
+                //    option.image = "/app/css/images/temp/img-answer1.jpg";
+                //});
+            });
         }])
 
         .directive("course", function() {
@@ -98,25 +121,35 @@
                     };
                 }],
                 link: function($scope, elem, attrs) {
+                    $scope.previewMode = $scope.$eval(attrs.previewMode);
+                    if ($scope.previewMode) {
 
-                    var waitProgress = Async.ladyFirst();
+                        $scope.$watch("course", function(course) {
+                            if (course) {
+                                $scope.section = $scope.course.sections[0];
+                            }
+                        });
+                    } else {
 
-                    $scope.$watch("progress", function(value) {
-                        if (value) {
-                            waitProgress.ladyDone();
-                        }
-                    });
+                        var waitProgress = Async.ladyFirst();
 
-                    $scope.$watch("course", function(course) {
-                        if (course) {
-                            waitProgress.manTurn(function() {
-                                var hasSection = $scope.nextUnfinishedSection();
-                                if (!hasSection) {
-                                    $scope.section = $scope.course.sections[0];
-                                }
-                            });
-                        }
-                    });
+                        $scope.$watch("progress", function(value) {
+                            if (value) {
+                                waitProgress.ladyDone();
+                            }
+                        });
+
+                        $scope.$watch("course", function(course) {
+                            if (course) {
+                                waitProgress.manTurn(function() {
+                                    var hasSection = $scope.nextUnfinishedSection();
+                                    if (!hasSection) {
+                                        $scope.section = $scope.course.sections[0];
+                                    }
+                                });
+                            }
+                        });
+                    }
 
                 }
             };

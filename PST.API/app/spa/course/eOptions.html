@@ -10,9 +10,9 @@
         <a href="app/css/images/temp/img-answer-large.jpg" class="js-magnify" option-magnify></a>
 
         <input type="checkbox" id="option{{$index}}" value="{{option.option_id}}" ng-model="view.answer[$index]" ng-if="question.multi_select" ng-disabled="disabled">
-        <input type="radio" id="option{{$index}}" value="{{option.option_id}}" ng-model="view.answer[0]" ng-if="!question.multi_select" ng-disabled="disabled">
+        <input type="radio"    id="option{{$index}}" value="{{option.option_id}}" ng-model="view.answer[0]" ng-if="!question.multi_select"     ng-disabled="disabled" >
 
-        <label for="option{{$index}}">Select</label>
+        <label for="option{{$index}}" ng-class="{correct: isHighlightCorrect(option)}">Select</label>
     </div><!-- /.course-question-option-picture -->
 </div><!-- /.course-questions-options-pictures -->
 
@@ -23,10 +23,10 @@
     </div>
 
     <div class="course-question-option" ng-repeat="option in question.options">
-        <input type="checkbox" id="option{{$index}}" value="{{option.option_id}}" ng-model="view.answer[$index]" ng-if="question.multi_select" ng-disabled="disabled">
-        <input type="radio" id="option{{$index}}" value="{{option.option_id}}" ng-model="view.answer[0]" ng-if="!question.multi_select" ng-disabled="disabled">
+        <input type="checkbox" id="option{{$index}}" value="{{option.option_id}}" ng-model="view.answer[$index]" ng-if="question.multi_select"  ng-disabled="disabled">
+        <input type="radio"    id="option{{$index}}" value="{{option.option_id}}" ng-model="view.answer[0]"      ng-if="!question.multi_select" ng-disabled="disabled">
 
-        <label for="option{{$index}}">{{option.text}}</label>
+        <label for="option{{$index}}" ng-class="{correct: isHighlightCorrect(option)}">{{option.text}}</label>
     </div><!-- /.course-question-option -->
 
 </div><!-- /.course-questions-options -->

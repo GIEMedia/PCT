@@ -69,3 +69,8 @@
     <a href="" ng-click="nextQuestion()" class="link-next">Next</a>
 </nav><!-- /.nav-questions -->
 
+<nav class="nav-questions" ng-if="previewMode">
+    <a href="" ng-click="prevQuestion()" class="link-prev" ng-if="questionIndex() > 0">Prev</a>
+    <a href="" ng-click="nextQuestion()" class="link-next" ng-if="questionIndex() < section.questions.length - 1">Next</a>
+</nav><!-- /.nav-questions -->
+

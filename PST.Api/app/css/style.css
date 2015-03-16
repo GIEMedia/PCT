@@ -674,3 +674,7 @@ button[disabled], button[disabled]:hover {
 	background: #88DDFC;
 	cursor: not-allowed;
 }
+
+label.correct {
+	color: limegreen;
+}

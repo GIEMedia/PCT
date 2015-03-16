@@ -52,7 +52,8 @@
                     "question": "=",
                     "answer": "=",
                     "retry": "=",
-                    "disabled": "="
+                    "disabled": "=",
+                    "highlightCorrect": "&"
                 },
                 templateUrl: "/app/spa/course/eOptions.html",
                 link: function($scope, elem, attrs) {
@@ -109,6 +110,10 @@
                         })
                     }
                     $scope.magnifyClass = attrs.magnifyClass;
+
+                    $scope.isHighlightCorrect = function(option) {
+                        return $scope.highlightCorrect({"$option": option});
+                    };
                 },
                 controller: function($scope) {
                     var _resetFuncs = [];

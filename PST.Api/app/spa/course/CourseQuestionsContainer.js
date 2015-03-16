@@ -17,36 +17,52 @@
                 scope: true,
                 templateUrl: "/app/spa/course/CourseQuestionsContainer.html",
                 link: function($scope, elem, attrs, courseCtrl) {
-                    var waitProgress = Async.ladyFirst();
 
-                    $scope.$watch("progress", function(value) {
-                        if (value) {
-                            waitProgress.ladyDone();
-                        }
-                    });
+                    if ($scope.previewMode) {
 
-                    // When section is changed, focus to the question
-                    $scope.$watch(attrs.section, function(section) {
+                        // When section is changed, focus to the question
+                        $scope.$watch(attrs.section, function(section) {
 
-                        $scope.result = null;
-                        $scope.question = null;
+                            $scope.result = null;
+                            $scope.question = null;
 
-                        if (section == null) {
-                            return;
-                        }
+                            if (section == null) {
+                                return;
+                            }
+                            $scope.question = section.questions[0];
+                        });
+                    } else {
+                        var waitProgress = Async.ladyFirst();
 
-                        waitProgress.manTurn(function() {
-                            var sectionNum = courseCtrl.sectionNum();
-
-                            var secProgress = $scope.progress[$scope.section.section_id];
-                            secProgress = secProgress == null ? 0 : secProgress;
-                            if (!(secProgress >= $scope.section.questions.length)) {
-                                $scope.question = section.questions[secProgress];
-
-                                if (!$scope.$$phase) $scope.$digest();
+                        $scope.$watch("progress", function(value) {
+                            if (value) {
+                                waitProgress.ladyDone();
                             }
                         });
-                    });
+
+                        // When section is changed, focus to the question
+                        $scope.$watch(attrs.section, function(section) {
+
+                            $scope.result = null;
+                            $scope.question = null;
+
+                            if (section == null) {
+                                return;
+                            }
+
+                            waitProgress.manTurn(function() {
+                                var sectionNum = courseCtrl.sectionNum();
+
+                                var secProgress = $scope.progress[$scope.section.section_id];
+                                secProgress = secProgress == null ? 0 : secProgress;
+                                if (!(secProgress >= $scope.section.questions.length)) {
+                                    $scope.question = section.questions[secProgress];
+
+                                    if (!$scope.$$phase) $scope.$digest();
+                                }
+                            });
+                        });
+                    }
 
                     $scope.finishedThisSection = function() {
                         if ( $scope.section == null || $scope.progress == null) {
@@ -68,11 +84,20 @@
                         var indexOf = $scope.section.questions.indexOf($scope.question);
                         if (indexOf < $scope.section.questions.length - 1) {
                             $scope.question = $scope.section.questions[indexOf + 1];
-                        } else {
+                        } else if (!$scope.previewMode) {
                             $scope.question = null;
                         }
 
                         return false;
+                    };
+
+                    $scope.prevQuestion = function() {
+                        var indexOf = $scope.section.questions.indexOf($scope.question);
+                        if (indexOf == 0) {
+                            return;
+                        } else {
+                            $scope.question = $scope.section.questions[indexOf - 1];
+                        }
                     };
 
                     // Returns index of this question in the sequence of questions

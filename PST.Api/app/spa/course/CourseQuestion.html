@@ -22,10 +22,10 @@
 </div><!-- /.course-question-head -->
 <div class="course-question-body">
     <div class="form-body">
-        <e-options question="question" answer="answer" disabled="result.passed" reset-on="section,question" magnify-class="mfp-pdf"></e-options>
+        <e-options question="question" answer="answer" disabled="result.passed" reset-on="section,question" magnify-class="mfp-pdf" highlight-correct="previewMode && question.answer.correct_options.indexOf( $option.option_id ) > -1"></e-options>
     </div><!-- /.form-body -->
 
-    <div class="form-actions" ng-if="result==null || !result.passed">
+    <div class="form-actions" ng-if="(result==null || !result.passed) && !previewMode">
         <button class="btn" ng-disabled="answer.length == 0 || questionView.submitting" button-loading="questionView.submitting" ng-click="submitAnswer()">Answer</button>
     </div><!-- /.form-actions -->
 
