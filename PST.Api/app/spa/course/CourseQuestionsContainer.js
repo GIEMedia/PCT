@@ -84,7 +84,7 @@
                         var indexOf = $scope.section.questions.indexOf($scope.question);
                         if (indexOf < $scope.section.questions.length - 1) {
                             $scope.question = $scope.section.questions[indexOf + 1];
-                        } else if (!$scope.previewMode) {
+                        } else {
                             $scope.question = null;
                         }
 
@@ -93,11 +93,7 @@
 
                     $scope.prevQuestion = function() {
                         var indexOf = $scope.section.questions.indexOf($scope.question);
-                        if (indexOf == 0) {
-                            return;
-                        } else {
-                            $scope.question = $scope.section.questions[indexOf - 1];
-                        }
+                        $scope.question = $scope.section.questions[indexOf - 1];
                     };
 
                     // Returns index of this question in the sequence of questions

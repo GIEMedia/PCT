@@ -12,7 +12,8 @@
                     reportProgress: "=",
                     questions: "=",
                     sendResult: "&",
-                    progress: "="
+                    progress: "=",
+                    previewMode: "="
                 },
                 templateUrl: "/app/spa/test/TestQuestionsContainer.html",
                 link: function($scope, elem, attrs) {
@@ -87,7 +88,7 @@
                         $scope.tqc.answer = [];
                         var index = $scope.questions.indexOf($scope.question);
 
-                        if ($scope.progress.tries_left > 1) {
+                        if ($scope.previewMode || $scope.progress.tries_left > 1) {
                             $scope.question = $scope.questions[index + 1];
                         } else {
                             $scope.question = nextFailedQuestion(index + 1);
@@ -96,11 +97,27 @@
                     };
 
 
-                    $scope.$watch("questions!=null && progress!=null", function(value) {
+                    $scope.$watch("questions!=null && (progress!=null || previewMode)", function(value) {
                         if (value) {
                             fetchNextQuestion();
                         }
                     });
+
+                    // Returns index of this question in the sequence of questions
+                    $scope.questionIndex = function() {
+                        return $scope.questions == null ? 0 : $scope.questions.indexOf($scope.question);
+                    };
+
+                    // Move on to the next question
+                    $scope.nextQuestion = function() {
+                        var indexOf = $scope.questions.indexOf($scope.question);
+                        $scope.question = $scope.questions[indexOf + 1];
+                    };
+
+                    $scope.prevQuestion = function() {
+                        var indexOf = $scope.questions.indexOf($scope.question);
+                        $scope.question = $scope.questions[indexOf - 1];
+                    };
 
                     /**
                      * Check question option, return if its id is in col

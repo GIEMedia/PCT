@@ -11,6 +11,9 @@
                 get : function(courseId) {
                     return Api.get("api/test/" + courseId);
                 },
+                getPreview : function(courseId) {
+                    return Api.get("api/test/" + courseId + "/preview");
+                },
                 getProgress: function(courseId, callback) {
                     return Api.get("api/account/progress/test/" + courseId).success(function(resp) {
                         var rawCaq = resp.correctly_answered_questions;

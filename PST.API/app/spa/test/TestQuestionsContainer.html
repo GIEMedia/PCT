@@ -29,7 +29,16 @@
         <div class="test-question-answers">
             <div class="form-body">
 
-                <e-options question="question" answer="tqc.answer" ng-if="progress.corrects[question.question_id] == null" ng-class="progress.tries_left == progress.max_tries ? '' : 'retry'" retry="progress.tries_left != progress.max_tries" reset-on="question" magnify-class="mfp-full"></e-options>
+                <e-options
+                        question="question"
+                        answer="tqc.answer"
+                        ng-if="progress.corrects[question.question_id] == null"
+                        ng-class="progress.tries_left == progress.max_tries ? '' : 'retry'"
+                        retry="progress.tries_left != progress.max_tries"
+                        reset-on="question"
+                        magnify-class="mfp-full"
+                        highlight-correct="previewMode && question.answer.correct_options.indexOf( $option.option_id ) > -1"
+                        ></e-options>
 
                 <div class="course-question-options correct" ng-if="progress.corrects[question.question_id]">
                     <div class="course-question-option course-question-option-header">
@@ -64,12 +73,18 @@
                 </div><!-- /.course-questions-options -->
             </div><!-- /.form-body -->
 
-            <div class="form-actions">
+            <div class="form-actions" ng-if="!previewMode">
                 <input type="button" class="btn" value="Continue"    ng-click="next()"                                               ng-if="!lastQuestion() && progress.corrects[question.question_id]">
                 <input type="button" class="btn" value="Answer"      ng-click="next()"   ng-disabled="(tqc.answer.length || 0) == 0" ng-if="!lastQuestion() && progress.corrects[question.question_id] == null">
 
                 <button class="btn" ng-click="submit()" ng-disabled="(tqc.answer.length || 0) == 0 && progress.corrects[question.question_id] == null || tqc.submitting" button-loading="tqc.submitting" ng-if="lastQuestion()">Grade Test!</button>
             </div><!-- /.form-actions -->
+
+            <nav class="nav-questions" ng-if="previewMode">
+                <a href="" ng-click="prevQuestion()" class="link-prev" ng-if="questionIndex() > 0">Prev</a>
+                <a href="" ng-click="nextQuestion()" class="link-next" ng-if="questionIndex() < questions.length - 1">Next</a>
+            </nav><!-- /.nav-questions -->
+
         </div><!-- /.test-question-answers -->
     </div><!-- /.col col-1of2 -->
 </div><!-- /.cols -->

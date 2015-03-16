@@ -11,6 +11,16 @@
         .config(["$stateProvider", function ($stateProvider) {
 
             $stateProvider
+                .state('testPreview', {
+                    url: '/test/:courseId/preview',
+                    templateUrl: "/app/spa/test/TestPage.html",
+                    controller: "test.Ctrl"
+                })
+            ;
+        }])
+        .config(["$stateProvider", function ($stateProvider) {
+
+            $stateProvider
                 .state('test', {
                     url: '/test/:courseId',
                     templateUrl: "/app/spa/test/TestPage.html",
@@ -19,7 +29,7 @@
             ;
         }])
 
-        .controller("test.Ctrl", ["$scope", "TestService", "$stateParams", function ($scope, TestService, $stateParams) {
+        .controller("test.Ctrl", ["$scope", "TestService", "$stateParams", "$state", function ($scope, TestService, $stateParams, $state) {
             $scope.testView = {
                 questionProgress: "100%"
             };
@@ -37,7 +47,10 @@
              */
             $scope.showResult = false;
 
-            TestService.get($stateParams.courseId).success(function(test) {
+            $scope.previewMode = $state.current.name.indexOf('Preview') > -1;
+
+            var getTest = $scope.previewMode ? TestService.getPreview : TestService.get;
+            getTest($stateParams.courseId).success(function(test) {
                 $scope.test = test;
 
 
@@ -49,20 +62,22 @@
                 //});
             });
 
-            TestService.getProgress($stateParams.courseId, function(progress) {
-                $scope.progress = progress;
-            });
+            if (!$scope.previewMode) {
+                TestService.getProgress($stateParams.courseId, function(progress) {
+                    $scope.progress = progress;
+                });
 
-            /**
-             * Check when both test and progress is available then decide to show result immediately
-             */
-            $scope.$watch("test != null && progress != null", function(ready) {
-                if (ready) {
-                    if ($scope.isPassed() || $scope.progress.tries_left == 0) {
-                        $scope.showResult = true;
+                /**
+                 * Check when both test and progress is available then decide to show result immediately
+                 */
+                $scope.$watch("test != null && progress != null", function(ready) {
+                    if (ready) {
+                        if ($scope.isPassed() || $scope.progress.tries_left == 0) {
+                            $scope.showResult = true;
+                        }
                     }
-                }
-            });
+                });
+            }
 
             $scope.isPassed = function() {
                 if ($scope.progress == null || $scope.test == null) {
