@@ -23,7 +23,9 @@
                         var progress = {};
                         for (var i = 0; i < resp.sections.length; i++) {
                             var sec = resp.sections[i];
-                            progress[sec.section_id] = sec.complete ? sec.correctly_answered_questions.length : 0;
+                            if (sec.correctly_answered_questions != null) {
+                                progress[sec.section_id] = sec.correctly_answered_questions.length;
+                            }
                         }
                         callback(progress);
                     });
