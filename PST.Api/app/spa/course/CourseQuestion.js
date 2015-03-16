@@ -115,7 +115,7 @@
                         return $scope.highlightCorrect({"$option": option});
                     };
                 },
-                controller: function($scope) {
+                controller: ["$scope", function($scope) {
                     var _resetFuncs = [];
 
                     var ctrl = this;
@@ -134,7 +134,7 @@
                     $scope.reset = function() {
                         Fs.invokeAll(_resetFuncs);
                     };
-                }
+                }]
             };
         })
 
