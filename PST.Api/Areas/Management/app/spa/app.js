@@ -3,9 +3,14 @@
 (function () {
     /* App Module */
     angular.module("pct.management", [
+        'pct.Security',
+
         'pct.management.layout',
+
         'pct.management.login',
         'pct.management.courses',
+        'pct.management.testResults',
+        'pct.management.users',
 
             //'pct.elearning.theme',
             //'pct.elearning.authen',

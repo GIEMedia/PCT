@@ -1,0 +1,20 @@
+<div class="shell">
+    <div class="breadcrumbs">
+        <a href="">{{$state.current.data.name}}</a>
+    </div>
+    <!-- /.breadcrumbs -->
+
+    <content-header-search ng-if="layout.search"></content-header-search>
+
+    <nav class="nav-access" ng-if="User.loggedIn">
+        <ul>
+            <li>
+                <a href="" ng-click="logout()">
+                    {{User.fullName}}
+                    <i class="icon icon-exit"></i>
+                </a>
+            </li>
+        </ul>
+    </nav><!-- /.nav-access -->
+</div>
+<!-- /.shell -->

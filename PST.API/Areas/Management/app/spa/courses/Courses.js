@@ -10,13 +10,18 @@
                 .state('courses', {
                     url: '/courses',
                     templateUrl: "/Areas/Management/app/spa/courses/Courses.html",
+                    data: {
+                        name: "Courses"
+                    },
                     controller: "courses.Ctrl"
                 })
             ;
         })
 
-        .controller("courses.Ctrl", function ($scope) {
-
+        .controller("courses.Ctrl", function ($scope, LayoutService) {
+            LayoutService.supportSearch($scope, {
+                placeholder: "Search course"
+            });
         })
     ;
 
