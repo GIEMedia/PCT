@@ -143,7 +143,8 @@ namespace PST.Api.Areas.Management.Controllers
 
             c.Title = course.title;
 
-            c.Category = _entityRepository.GetByID<SubCategory>(course.sub_category);
+            if (course.sub_category.HasValue)
+                c.Category = _entityRepository.GetByID<SubCategory>(course.sub_category.Value);
 
             c.PrerequisiteCourses.Clear();
             if (course.prerequisite_course.HasValue)

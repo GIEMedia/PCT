@@ -112,8 +112,11 @@ namespace PST.Declarations.Entities
                 date_created = course.DateCreatedUtc,
                 status = course.Status,
                 title = course.Title,
-                sub_category = course.Category.ID,
-                category = course.Category.ParentCategory.ID,
+                sub_category = course.Category != null ? course.Category.ID : (Guid?) null,
+                category =
+                    course.Category != null && course.Category.ParentCategory != null
+                        ? course.Category.ParentCategory.ID
+                        : (Guid?) null,
                 prerequisite_course = prereq == null ? (Guid?) null : prereq.ID,
                 state_ceus = course.StateCEUs.Select(s => (m_state_ceu) s).ToArray()
             };
