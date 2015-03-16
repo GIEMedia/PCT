@@ -1,10 +1,82 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en" ng-app="pct.management">
 <head>
-    
+
+    <meta charset="UTF-8"/>
+
+    <title>PCT Admin</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="shortcut icon" type="image/x-icon" href="Areas/Management/app/css/images/favicon.ico"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/Areas/Management/app/css/selectboxit.css"/>
+    <link rel="stylesheet" href="/Areas/Management/app/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/Areas/Management/app/css/icomoon.css"/>
+    <link rel="stylesheet" href="/Areas/Management/app/css/jquery.fancybox.css"/>
+    <link rel="stylesheet" href="/Areas/Management/app/css/style.css"/>
+    <link href="http://vjs.zencdn.net/4.11/video-js.css" rel="stylesheet"/>
+
+    <script type="text/javascript" src="/Areas/Management/app/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/Areas/Management/app/js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script type="text/javascript" src="/Areas/Management/app/js/selectboxit.js"></script>
+    <script type="text/javascript" src="/Areas/Management/app/js/jquery.fancybox.pack.js"></script>
+    <script type="text/javascript" src="/Areas/Management/app/js/functions.js"></script>
+    <script src="http://vjs.zencdn.net/4.11/video.js"></script>
+
+    <script src="/Areas/Management/app/js/common-utils.js"></script>
+
+    <script src="/Areas/Management/app/js/angular_1.3.1/angular.js"></script>
+    <script src="/Areas/Management/app/js/angular_1.3.1/angular-sanitize.min.js"></script>
+
+    <script src="/Areas/Management/app/js/angular-ui-router.min.js"></script>
+
+    <!-- spa-js start -->
+    <script src="Areas/Management/app/spa/app.js?v=1.0"></script>
+    <script src="Areas/Management/app/spa/courses/Courses.js?v=1.0"></script>
+    <script src="Areas/Management/app/spa/layout/Layout.js?v=1.0"></script>
+    <script src="Areas/Management/app/spa/login/Login.js?v=1.0"></script>
+    <!-- spa-js end -->
+
 </head>
 <body>
-    
+<div class="wrapper">
+    <content-side-nav ng-if="$state.current.name != 'login'"></content-side-nav>
+
+    <aside class="container-sidebar" ng-if="$state.current.name == 'login'">
+        <a href="#" class="logo">PCT</a>
+    </aside>
+    <!-- /.container-sidebar -->
+
+    <section class="container">
+        <header class="header">
+            <div class="shell">
+                <div class="breadcrumbs">
+                    <a href="#">Login</a>
+                </div>
+                <!-- /.breadcrumbs -->
+            </div>
+            <!-- /.shell -->
+        </header>
+        <!-- /.header -->
+
+        <main class="main" ui-view>
+        </main>
+        <!-- /.main -->
+
+        <footer class="footer">
+            <div class="shell">
+                Copyright &copy; 2015 PCT. All rights reserved. |
+                <script type="text/javascript" src="//prototype1.io/developed.by.p1.js"></script>
+            </div>
+        </footer>
+    </section>
+    <!-- /.container -->
+</div>
+<!-- /.wrapper -->
 </body>
 </html>
 
