@@ -26,7 +26,7 @@
             $scope.setCel({
                 step: 0,
                 save: function() {
-                    return CourseService.upsert($scope.course).success(function(course) {
+                    return CourseService.upsert($scope.cei.course).success(function(course) {
                         ObjectUtil.clear($scope.course);
                         ObjectUtil.clear($scope.cei.course);
                         ObjectUtil.copy(course, $scope.course);
@@ -34,9 +34,6 @@
                     });
                 },
                 needSaving: function() {
-                    //console.log("============");
-                    //console.log($scope.course);
-                    //console.log($scope.cei.course);
                     return !ObjectUtil.equals($scope.cei.course, $scope.course);
                 }
             });
@@ -46,6 +43,12 @@
             };
             $scope.$watch("course", function(value) {
                 $scope.cei.course = ObjectUtil.clone(value);
+
+            });
+            $scope.$watch('cei.course.category', function (newValue, oldValue) {
+                if (oldValue != null) {
+                    $scope.cei.course.sub_category = null;
+                }
             });
 
 
@@ -62,8 +65,7 @@
                 });
             };
             $scope.addState = function(state) {
-                console.log(state);
-                $scope.course.state_ceus.push(state);
+                $scope.cei.course.state_ceus.push(state);
             };
 
             $scope.getCat = function(catId) {

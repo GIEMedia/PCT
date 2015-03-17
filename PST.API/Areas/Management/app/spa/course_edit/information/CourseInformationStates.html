@@ -22,7 +22,7 @@
     </div><!-- /.table-col -->
 
     <div class="table-col col-size-2">
-        <h4>{{courseEdit.state_ceus.length}} States</h4>
+        <h4>{{cei.course.state_ceus.length}} States</h4>
     </div><!-- /.table-col -->
 
     <div class="table-col col-size-3">
@@ -46,7 +46,7 @@
         <div state-adder="addState($value)"></div>
     </div><!-- /.table-row -->
 
-    <div class="table-row no-record" ng-if="(courseEdit.state_ceus.length || 0)==0">
+    <div class="table-row no-record" ng-if="(cei.course.state_ceus.length || 0)==0">
         <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
 
         <div class="table-col col-size-2">
@@ -54,7 +54,7 @@
         </div><!-- /.table-col -->
     </div><!-- /.table-row -->
 
-    <div class="table-row" ng-repeat="state_ceu in courseEdit.state_ceus">
+    <div class="table-row" ng-repeat="state_ceu in cei.course.state_ceus">
         <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
 
         <div class="table-col col-size-2">

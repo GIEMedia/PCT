@@ -73,6 +73,7 @@
                         autoWidth: false,
                         defaultText: "Select..."
                     });
+                    var neverSelected = true;
 
                     var model = $parse(attrs.pctModel);
 
@@ -87,8 +88,9 @@
                         var control = elem.data("selectBox-selectBoxIt");
 
                         var index = Cols.indexOf(value, list, valueM);
-                        if (index != -1 && index != control.currentFocus) {
+                        if (index != -1 && (neverSelected || index != control.currentFocus)) { // Force change when neverSelected because it maybe the defaultText (==0)
                             control.selectOption(index);
+                            neverSelected = false;
                         }
                     };
 
@@ -110,17 +112,14 @@
                         // Populate current value
                         var value = model($scope);
                         updateV(value);
-                        //var index = Cols.indexOf(value, list, valueM);
-                        //if (index != -1 && index != control.currentFocus) {
-                        //    control.selectOption(index);
-                        //}
                     });
 
                     elem.bind({
                         "change": function(ev, obj) {
                             var control = elem.data("selectBox-selectBoxIt");
+                            var vValue = valueM(list[control.currentFocus]);
                             $scope.$applyAsync(function() {
-                                model.assign($scope, valueM(list[control.currentFocus]));
+                                model.assign($scope, vValue);
                             });
                         }
                     });

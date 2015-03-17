@@ -22,7 +22,7 @@
             ;
         })
 
-        .controller("courseEdit.Ctrl", function ($scope, LayoutService, $stateParams, CourseService) {
+        .controller("courseEdit.Ctrl", function ($scope, $state, $stateParams, LayoutService, CourseService) {
             var footerControl = LayoutService.setCustomFooter($scope, {
                 templateUrl: "/Areas/Management/app/spa/course_edit/CourseEditFooter.html"
             });
@@ -38,8 +38,8 @@
                 });
             }
 
-            $scope.$watch("course.status", function(value) {
-                footerControl.setClass({2: "footer-secondary", 1: "footer-finished"}[value]);
+            $scope.$watch("{2: 'footer-secondary'}[course.status]", function(styleClass) {
+                footerControl.setClass(styleClass);
             });
 
             $scope.steps = [
@@ -76,7 +76,14 @@
             };
 
             $scope.nextPage = function() {
-                $state.go('courseEdit.' + $scope.steps[$scope.cel.step + 1].state, {courseId: $scope.course.id});
+                var go = function() {
+                    $state.go('courseEdit.' + $scope.steps[$scope.cel.step + 1].state, {courseId: $scope.course.id});
+                };
+                if ($scope.cel.needSaving == null || !$scope.cel.needSaving()) {
+                    go();
+                } else {
+                    $scope.cel.save().then(go);
+                }
             };
         })
 
