@@ -3,6 +3,7 @@
 (function () {
 
     angular.module('pct.management.courses', [
+        'pct.common.sorter'
     ])
         .config(function ($stateProvider) {
 
@@ -18,10 +19,16 @@
             ;
         })
 
-        .controller("courses.Ctrl", function ($scope, LayoutService) {
+        .controller("courses.Ctrl", function ($scope, LayoutService, CourseService, Sorters) {
             LayoutService.supportSearch($scope, {
                 placeholder: "Search course"
             });
+
+            CourseService.getList().success(function(list) {
+                $scope.list = list;
+            });
+
+            $scope.sorter = Sorters.create();
         })
     ;
 
