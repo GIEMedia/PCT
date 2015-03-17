@@ -65,12 +65,18 @@
                 }
             ];
             $scope.cel = {
-                step: 0
+                step: 0,
+                save: null,
+                needSaving: null
             };
 
             $scope.setCel = function(cel) {
                 ObjectUtil.clear($scope.cel);
                 ObjectUtil.copy(cel, $scope.cel);
+            };
+
+            $scope.nextPage = function() {
+                $state.go('courseEdit.' + $scope.steps[$scope.cel.step + 1].state, {courseId: $scope.course.id});
             };
         })
 

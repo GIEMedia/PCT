@@ -9,9 +9,9 @@
         <!--<a href="1.PCT.Courses.List.html" class="fa fa-trash-o alignleft"></a>-->
 
         <div class="btns alignright">
-            <a href="" class="btn btn-grey" ng-if="cel.save" ng-click="cel.save()">Save</a>
+            <a href="" class="btn btn-grey" ng-if="cel.save && (cel.needSaving == null || cel.needSaving())" ng-click="cel.save()">Save</a>
 
-            <a href="" ng-click="$state.go('courseEdit.' + steps[cel.step + 1].state, {courseId: course.id})" class="btn btn-green btn-icon-right" ng-if="cel.step < steps.length - 1">
+            <a href="" ng-click="nextPage()" class="btn btn-green btn-icon-right" ng-if="cel.step < steps.length - 1">
                 {{steps[cel.step + 1].title}}
                 <i class="fa fa-chevron-right"></i>
             </a>

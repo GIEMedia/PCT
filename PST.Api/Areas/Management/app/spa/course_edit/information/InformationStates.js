@@ -25,7 +25,7 @@
                 templateUrl: "/Areas/Management/app/spa/course_edit/information/CourseInformationStates.html",
                 link: function($scope, elem, attrs) {
                     $scope.remove = function(stateCeu) {
-                        Cols.remove(stateCeu, $scope.course.state_ceus);
+                        Cols.remove(stateCeu, $scope.cei.course.state_ceus);
                     };
                 }
             };

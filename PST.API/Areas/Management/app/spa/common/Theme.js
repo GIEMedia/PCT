@@ -41,32 +41,26 @@
             };
         })
 
-        .directive("select", function() {
-            return {
-                restrict: "E",
-                link: function($scope, elem, attrs, ngModelCtrl) {
-                    elem.selectBoxIt({
-                        autoWidth: false,
-                        defaultText: "Select"
-                    });
-
-                }
-            };
-        })
+        //.directive("select", function() {
+        //    return {
+        //        restrict: "E",
+        //        link: function($scope, elem, attrs, ngModelCtrl) {
+        //            elem.selectBoxIt({
+        //                autoWidth: false,
+        //                defaultText: "Select"
+        //            });
+        //
+        //        }
+        //    };
+        //})
         .directive("pctOptions", function($parse) {
             var parse = function(exp) {
                 var getter;
                 if (exp.indexOf(".") == -1) {
-                    getter = function (o) {
-                            return o;
-                        }
-                        ;
+                    getter = function (o) {return o;};
                 } else {
                     var cut = exp.replace(/.+\./,"");
-                    getter = function (o) {
-                            return o[cut];
-                        }
-                        ;
+                    getter = function (o) {return o[cut];};
                 }
 
                 return getter;
@@ -75,6 +69,11 @@
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
+                    elem.selectBoxIt({
+                        autoWidth: false,
+                        defaultText: "Select..."
+                    });
+
                     var model = $parse(attrs.pctModel);
 
                     var list = null;
@@ -83,6 +82,16 @@
                     var valueM = parse(match[1]);
                     var textM = parse(match[2]);
                     var listExp = match[4];
+
+                    var updateV = function (value) {
+                        var control = elem.data("selectBox-selectBoxIt");
+
+                        var index = Cols.indexOf(value, list, valueM);
+                        if (index != -1 && index != control.currentFocus) {
+                            control.selectOption(index);
+                        }
+                    };
+
 
                     $scope.$watch(listExp, function(listVal) {
                         var control = elem.data("selectBox-selectBoxIt");
@@ -100,29 +109,23 @@
 
                         // Populate current value
                         var value = model($scope);
-
-                        var index = Cols.indexOf(value, list, valueM);
-                        if (index != -1) {
-                            control.selectOption(index);
-                        }
+                        updateV(value);
+                        //var index = Cols.indexOf(value, list, valueM);
+                        //if (index != -1 && index != control.currentFocus) {
+                        //    control.selectOption(index);
+                        //}
                     });
 
                     elem.bind({
                         "change": function(ev, obj) {
                             var control = elem.data("selectBox-selectBoxIt");
-                            model.assign($scope, valueM(list[control.currentFocus]));
-                            if (!$scope.$$phase) $scope.$digest();
+                            $scope.$applyAsync(function() {
+                                model.assign($scope, valueM(list[control.currentFocus]));
+                            });
                         }
                     });
 
-                    $scope.$watch(attrs.pctModel, function(value) {
-                        var control = elem.data("selectBox-selectBoxIt");
-
-                        var index = Cols.indexOf(value, list, valueM);
-                        if (index != -1) {
-                            control.selectOption(index);
-                        }
-                    });
+                    $scope.$watch(attrs.pctModel, updateV);
                 }
             };
         })

@@ -215,11 +215,17 @@ ObjectUtil.equals = function (o1, o2) {
     }
 
     for (var i in o1) {
+        if (typeof i == "string" && i[0] == "$") {
+            continue;
+        }
         if (!ObjectUtil.equals(o1[i], o2[i])) {
             return false;
         }
     }
     for (var i in o2) {
+        if (typeof i == "string" && i[0] == "$") {
+            continue;
+        }
         if (!ObjectUtil.equals(o1[i], o2[i])) {
             return false;
         }
@@ -234,7 +240,9 @@ ObjectUtil.copy = function(fromO, toO) {
     }
 };
 ObjectUtil.clone = function(obj) {
-    if (obj.length == null) {
+    if (obj == null) {
+        return null;
+    } else if (obj.length == null) {
         return jQuery.extend(true, {}, obj);
     } else {
         var ret = [];
@@ -518,7 +526,7 @@ Cols.eachPar1 = function(index, col, p2) {
 Cols.indexOf = function(ele, col, colExtract) {
     for (var i in col) {
         if (colExtract(col[i]) == ele) {
-            return i;
+            return i * 1;
         }
     }
     return -1;

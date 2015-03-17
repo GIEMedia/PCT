@@ -26,16 +26,28 @@
             $scope.setCel({
                 step: 0,
                 save: function() {
-                    CourseService.upsert($scope.course).success(function(course) {
+                    return CourseService.upsert($scope.course).success(function(course) {
                         ObjectUtil.clear($scope.course);
+                        ObjectUtil.clear($scope.cei.course);
                         ObjectUtil.copy(course, $scope.course);
+                        ObjectUtil.copy(course, $scope.cei.course);
                     });
+                },
+                needSaving: function() {
+                    //console.log("============");
+                    //console.log($scope.course);
+                    //console.log($scope.cei.course);
+                    return !ObjectUtil.equals($scope.cei.course, $scope.course);
                 }
             });
 
-            $scope.view = {
-
+            $scope.cei = {
+                course: null
             };
+            $scope.$watch("course", function(value) {
+                $scope.cei.course = ObjectUtil.clone(value);
+            });
+
 
             CategoryService.getList().success(function(categories) {
                 $scope.categories = categories;
