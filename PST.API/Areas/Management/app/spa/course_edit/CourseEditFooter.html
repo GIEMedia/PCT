@@ -1,12 +1,18 @@
 <div class="shell">
     <div class="footer-inner">
-        <a ui-sref="courses" class="btn btn-grey alignleft">Cancel</a>
+        <a ui-sref="courses" class="btn btn-grey alignleft" ng-if="cel.step == 0">Cancel</a>
+
+        <a ui-sref="courseEdit.{{steps[cel.step-1].state}}" class="btn btn-grey btn-icon-left alignleft" ng-if="cel.step > 0">
+            <i class="fa fa-chevron-left"></i>
+            {{steps[cel.step - 1].title}}
+        </a>
+        <a href="1.PCT.Courses.List.html" class="fa fa-trash-o alignleft"></a>
 
         <div class="btns alignright">
-            <a href="#" class="btn btn-grey">Save</a>
+            <a href="#" class="btn btn-grey" ng-if="cel.save">Save</a>
 
-            <a href="3.PCT.Section.List.html" class="btn btn-green btn-icon-right">
-                Sections
+            <a ui-sref="courseEdit.sections" class="btn btn-green btn-icon-right">
+                {{steps[cel.step + 1].title}}
                 <i class="fa fa-chevron-right"></i>
             </a>
         </div><!-- /.btns -->

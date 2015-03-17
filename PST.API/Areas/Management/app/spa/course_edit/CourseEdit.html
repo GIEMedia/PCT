@@ -2,40 +2,13 @@
     <div class="section-nav">
         <div class="shell">
             <ul>
-                <li class="highlighted">
+                <li ng-class="{highlighted: $index == cel.step, checked: $index < cel.step}" ng-repeat="step in steps">
                     <span>
                         <i class="fa"></i>
                     </span>
-                    Information
+                    {{step.title}}
                 </li>
 
-                <li>
-                    <span>
-                        <i class="fa"></i>
-                    </span>
-                    Sections
-                </li>
-
-                <li>
-                    <span>
-                        <i class="fa"></i>
-                    </span>
-                    Test
-                </li>
-
-                <li>
-                    <span>
-                        <i class="fa"></i>
-                    </span>
-                    Review & Invite
-                </li>
-
-                <li>
-                    <span>
-                        <i class="fa"></i>
-                    </span>
-                    Publish
-                </li>
             </ul>
         </div>
         <!-- /.shell -->

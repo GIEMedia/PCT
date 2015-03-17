@@ -20,6 +20,11 @@
                 sub: "New",
                 rootState: "courses"
             });
+
+            $scope.setCel({
+                step: 0,
+                save: function() {}
+            });
         })
     ;
 

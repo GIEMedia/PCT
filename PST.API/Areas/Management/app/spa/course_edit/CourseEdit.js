@@ -3,7 +3,8 @@
 (function () {
 
     angular.module('pct.management.courseEdit', [
-        'pct.management.courseEdit.information'
+        'pct.management.courseEdit.information',
+        'pct.management.courseEdit.sections',
     ])
         .config(function ($stateProvider) {
             $stateProvider
@@ -23,12 +24,32 @@
                 templateUrl: "/Areas/Management/app/spa/course_edit/CourseEditFooter.html"
             });
 
-            $scope.footer = {
-
+            $scope.steps = [
+                {
+                    state: "information",
+                    title: 'Information'
+                },
+                {
+                    state: "sections",
+                    title: 'Sections'
+                },
+                {
+                    title: 'Test'
+                },
+                {
+                    title: 'Review & Invite'
+                },
+                {
+                    title: 'Publish'
+                }
+            ];
+            $scope.cel = {
+                step: 0
             };
 
-            $scope.setFooter = function(options) {
-                //options.save
+            $scope.setCel = function(cel) {
+                ObjectUtil.clear($scope.cel);
+                ObjectUtil.copy(cel, $scope.cel);
             };
         })
 
