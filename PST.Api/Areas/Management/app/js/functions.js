@@ -33,20 +33,6 @@
 			e.preventDefault();
 		});
 
-		// Table states dropdown
-		$('.table-states .table-row-1').on('click', function (e) {
-		    $('.table-states').find('.table-row-1').hide();
-			$('.table-states').find('.table-expand').stop(true, true).slideDown(200);
-
-			e.preventDefault();
-		});
-
-		$('.table-states .icon-chevron-up').on('click', function (e) {
-		    setTimeout(function () { $('.table-states').find('.table-row-1').show(); }, 200);
-		    $('.table-states').find('.table-expand').stop(true, true).slideUp(200);
-
-			e.preventDefault();
-		});
 
 		$('.icon-rename').on('click', function (e) {
 		    $(this).parents('tr').addClass('editing');

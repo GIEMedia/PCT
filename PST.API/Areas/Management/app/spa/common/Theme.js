@@ -101,6 +101,29 @@
                 }
             };
         })
+
+        .directive("tableStates", function() {
+            return {
+                restrict: "C",
+                link: function($scope, elem, attrs) {
+
+                    // Table states dropdown
+                    elem.find('.table-row-1').on('click', function (e) {
+                        $(this).hide();
+                        elem.find('.table-expand').stop(true, true).slideDown(200);
+
+                        e.preventDefault();
+                    });
+
+                    elem.find('.icon-chevron-up').on('click', function (e) {
+                        setTimeout(function () { elem.find('.table-row-1').show(); }, 200);
+                        elem.find('.table-expand').stop(true, true).slideUp(200);
+
+                        e.preventDefault();
+                    });
+                }
+            };
+        })
     ;
 
 })();
