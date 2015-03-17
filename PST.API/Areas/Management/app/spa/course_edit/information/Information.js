@@ -15,7 +15,11 @@
             ;
         })
 
-        .controller("courseEdit.information.Ctrl", function ($scope, LayoutService) {
+        .controller("courseEdit.information.Ctrl", function ($scope, LayoutService, $stateParams, CourseService, CategoryService) {
+            $scope.view = {
+
+            };
+
             LayoutService.setBreadCrumbs($scope, {
                 sub: "New",
                 rootState: "courses"
@@ -25,6 +29,25 @@
                 step: 0,
                 save: function() {}
             });
+
+
+            if ($stateParams.courseId == "new") {
+                $scope.course = {
+
+                };
+            } else {
+                CourseService.get($stateParams.courseId).success(function(course) {
+                    $scope.course = course;
+                });
+            }
+
+            CategoryService.getList().success(function(categories) {
+                $scope.categories = categories;
+            });
+
+            $scope.getCat = function(catId) {
+                return Cols.find($scope.categories, function(cat) { return cat.id == catId;});
+            };
         })
     ;
 

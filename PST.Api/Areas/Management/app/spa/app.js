@@ -14,7 +14,8 @@
         'pct.management.testResults',
         'pct.management.users',
 
-        'pct.management.course',
+        'pct.management.api.course',
+        'pct.management.api.category',
 
             //'angularMoment',
             //'ngResource'

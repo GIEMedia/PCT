@@ -5,7 +5,7 @@
         </div><!-- /.table-col -->
 
         <div class="table-col col-size-2">
-            <input type="text" class="field" value="Bayer: MaxForce Impact Roach Gel Bait" placeholder="Course Title">
+            <input type="text" class="field" placeholder="Course Title" ng-model="course.title">
         </div><!-- /.table-col -->
 
         <div class="table-col col-size-3"></div><!-- /.table-col -->
@@ -17,12 +17,7 @@
         </div><!-- /.table-col -->
 
         <div class="table-col col-size-2">
-            <select name="field-select" id="field-select" class="select">
-                <option value="">Select</option>
-                <option value="Category 1">Category 1</option>
-                <option value="Category 2">Category 2</option>
-                <option value="Category 3">Category 3</option>
-                <option value="Category 4">Category 4</option>
+            <select name="field-select" class="select" pct-model="course.category" pct-options="category.id as category.title for category in categories">
             </select>
         </div><!-- /.table-col -->
 
@@ -37,12 +32,7 @@
         </div><!-- /.table-col -->
 
         <div class="table-col col-size-2">
-            <select name="field-select" id="field-select" class="select">
-                <option value="">Select</option>
-                <option value="Category 1">Category 1</option>
-                <option value="Category 2">Category 2</option>
-                <option value="Category 3">Category 3</option>
-                <option value="Category 4">Category 4</option>
+            <select name="field-select" class="select" pct-model="course.sub_category" pct-options="subcat.id as subcat.title for subcat in getCat(course.category).sub_categories">
             </select>
         </div><!-- /.table-col -->
 

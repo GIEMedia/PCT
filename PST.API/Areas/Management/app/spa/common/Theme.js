@@ -44,11 +44,60 @@
         .directive("select", function() {
             return {
                 restrict: "E",
-                link: function($scope, elem, attrs) {
+                link: function($scope, elem, attrs, ngModelCtrl) {
                     elem.selectBoxIt({
                         autoWidth: false,
-                        showFirstOption: false
+                        defaultText: "Select"
                     });
+
+                }
+            };
+        })
+        .directive("pctOptions", function($parse) {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+                    var model = $parse(attrs.pctModel);
+
+                    var list = null;
+                    var match = /^(.+?) as (.+?) for (.+?) in (.+?)$/.exec(attrs.pctOptions);
+
+                    var valueExp = match[1].replace(/.+\./,"");
+                    var textExp = match[2].replace(/.+\./,"");
+                    var listExp = match[4];
+
+                    $scope.$watch(listExp, function(listVal) {
+                        var control = elem.data("selectBox-selectBoxIt");
+                        list = listVal;
+
+                        control.remove();
+                        if (listVal == null) {
+                            return;
+                        }
+                        Cols.each(listVal, function(e) {
+                            var value = e[valueExp];
+                            var text = e[textExp];
+                            control.add({value: value, text: text});
+                        });
+
+                        // Populate current value
+                        var value = model($scope);
+
+                        var index = Cols.indexOf(value, list, function (e) {
+                            return e[valueExp];
+                        });
+                        if (index != -1) {
+                            control.selectOption(index);
+                        }
+                    });
+
+                    elem.bind({
+                        "change": function(ev, obj) {
+                            var control = elem.data("selectBox-selectBoxIt");
+                            model.assign($scope, list[control.currentFocus][valueExp]);
+                            if (!$scope.$$phase) $scope.$digest();
+                        }
+                    })
                 }
             };
         })
