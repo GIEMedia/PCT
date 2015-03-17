@@ -5,6 +5,9 @@
     angular.module('pct.management.courseEdit', [
         'pct.management.courseEdit.information',
         'pct.management.courseEdit.sections',
+        'pct.management.courseEdit.test',
+        'pct.management.courseEdit.reviewInvite',
+        'pct.management.courseEdit.publish'
     ])
         .config(function ($stateProvider) {
             $stateProvider
@@ -34,12 +37,15 @@
                     title: 'Sections'
                 },
                 {
+                    state: "test",
                     title: 'Test'
                 },
                 {
+                    state: "reviewInvite",
                     title: 'Review & Invite'
                 },
                 {
+                    state: "publish",
                     title: 'Publish'
                 }
             ];

@@ -2,7 +2,7 @@
     <div class="footer-inner">
         <a ui-sref="courses" class="btn btn-grey alignleft" ng-if="cel.step == 0">Cancel</a>
 
-        <a ui-sref="courseEdit.{{steps[cel.step-1].state}}" class="btn btn-grey btn-icon-left alignleft" ng-if="cel.step > 0">
+        <a ui-sref="courseEdit.{{steps[cel.step - 1].state}}" class="btn btn-grey btn-icon-left alignleft" ng-if="cel.step > 0">
             <i class="fa fa-chevron-left"></i>
             {{steps[cel.step - 1].title}}
         </a>
@@ -11,7 +11,7 @@
         <div class="btns alignright">
             <a href="#" class="btn btn-grey" ng-if="cel.save">Save</a>
 
-            <a ui-sref="courseEdit.sections" class="btn btn-green btn-icon-right">
+            <a ui-sref="courseEdit.{{steps[cel.step + 1].state}}" class="btn btn-green btn-icon-right" ng-if="cel.step < steps.length - 1">
                 {{steps[cel.step + 1].title}}
                 <i class="fa fa-chevron-right"></i>
             </a>
