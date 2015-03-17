@@ -13,9 +13,9 @@ namespace PST.Declarations.Models.Management
 
         public CourseStatus status { get; set; }
 
-        public Guid category { get; set; }
+        public Guid? category { get; set; }
 
-        public Guid sub_category { get; set; }
+        public Guid? sub_category { get; set; }
 
         public m_state_ceu[] state_ceus { get; set; }
 
