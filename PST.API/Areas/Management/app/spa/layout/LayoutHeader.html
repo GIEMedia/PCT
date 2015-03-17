@@ -1,6 +1,15 @@
 <div class="shell">
     <div class="breadcrumbs">
-        <a href="">{{$state.current.data.name}}</a>
+
+        <a href="" ng-if="layout.breadcrumbs == null">{{$state.current.data.name}}</a>
+        <div ng-if="layout.breadcrumbs!=null">
+
+            <a ui-sref="{{layout.breadcrumbs.rootState}}">{{$state.current.data.name}}</a>
+
+            <span>/</span>
+
+            <a href="" class="current" >{{layout.breadcrumbs.sub}}</a>
+        </div>
     </div>
     <!-- /.breadcrumbs -->
 

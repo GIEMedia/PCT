@@ -15,8 +15,11 @@
             ;
         })
 
-        .controller("courseEdit.information.Ctrl", function ($scope) {
-
+        .controller("courseEdit.information.Ctrl", function ($scope, LayoutService) {
+            LayoutService.setBreadCrumbs($scope, {
+                sub: "New",
+                rootState: "courses"
+            });
         })
     ;
 

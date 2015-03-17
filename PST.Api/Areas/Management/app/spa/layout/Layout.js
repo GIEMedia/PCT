@@ -14,7 +14,6 @@
                             state: "courses",
                             icon: "course",
                             highlightOn: function(stateName) {
-
                                 return stateName.indexOf("course") == 0;
                             },
                             title: "Courses"
@@ -83,6 +82,7 @@
 
         .factory("LayoutService", function() {
             var layout = {};
+            //var inform = function() {};
             return {
                 layout: layout,
                 supportSearch: function($scope, options) {
@@ -93,8 +93,19 @@
                     $scope.$on("$destroy", function() {
                         layout.search = null;
                     });
-
+                },
+                setBreadCrumbs: function($scope, breadcrumbs) {
+                    layout.breadcrumbs = breadcrumbs;
+                    $scope.$on("$destroy", function() {
+                        layout.breadcrumbs = null;
+                    });
                 }
+                //hook : function($scope) {
+                //    inform = function () {
+                //        if (!$scope.$$phase) $scope.$digest();
+                //        console.log("digest");
+                //    };
+                //}
             };
         })
     ;
