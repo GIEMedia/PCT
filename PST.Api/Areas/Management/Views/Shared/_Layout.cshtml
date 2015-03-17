@@ -44,6 +44,7 @@
     <script src="Areas/Management/app/spa/course_edit/information/Information.js?v=1.0"></script>
     <script src="Areas/Management/app/spa/layout/Layout.js?v=1.0"></script>
     <script src="Areas/Management/app/spa/login/Login.js?v=1.0"></script>
+    <script src="Areas/Management/app/spa/modal.js?v=1.0"></script>
     <script src="Areas/Management/app/spa/security/SecurityService.js?v=1.0"></script>
     <script src="Areas/Management/app/spa/test_results/TestResults.js?v=1.0"></script>
     <script src="Areas/Management/app/spa/users/Users.js?v=1.0"></script>
@@ -75,25 +76,7 @@
             </div>
         </footer>
 
-
-        <footer class="footer-nav" ng-if="$state.current.name.indexOf('courseEdit') == 0">
-            <div class="shell">
-                <div class="footer-inner">
-                    <a href="1.PCT.Courses.List.html" class="btn btn-grey alignleft">Cancel</a>
-
-                    <div class="btns alignright">
-                        <a href="#" class="btn btn-grey">Save</a>
-
-                        <a href="3.PCT.Section.List.html" class="btn btn-green btn-icon-right">
-                            Sections
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
-                    </div><!-- /.btns -->
-
-                    <div class="footer-draft">Draft</div><!-- /.footer-draft -->
-                </div><!-- /.footer-inner -->
-            </div><!-- /.shell -->
-        </footer><!-- /.footer -->
+        <footer class="footer-nav" layout-custom-footer ></footer>
     </section>
     <!-- /.container -->
 </div>

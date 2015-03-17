@@ -80,9 +80,12 @@
             };
         })
 
-        .factory("LayoutService", function() {
+        .factory("LayoutService", function($http, $templateCache, $compile) {
             var layout = {};
             //var inform = function() {};
+
+            var customFooterElem;
+
             return {
                 layout: layout,
                 supportSearch: function($scope, options) {
@@ -99,13 +102,56 @@
                     $scope.$on("$destroy", function() {
                         layout.breadcrumbs = null;
                     });
+                },
+                registerCustomFooter: function(elem) {
+                    customFooterElem = elem;
+                },
+                setCustomFooter: function($scope, options) {
+
+                    var templatePromise = $http.get(options.templateUrl, {cache: $templateCache}).then(function (result) {
+                        return result.data;
+                    });
+
+                    var remove;
+                    templatePromise.then(function(content) {
+                        //var modalScope = $scope.$new();
+
+                        var contentEl = $compile(angular.element(content))($scope);
+                        customFooterElem.html(contentEl);
+                        customFooterElem.show();
+
+                        remove = function () {
+                            //modalScope.$destroy();
+                            customFooterElem.hide();
+                            contentEl.remove();
+                        };
+                    });
+
+                    $scope.$on("$destroy", function() {
+                        if (remove) {
+                            remove();
+                            remove = null;
+                        }
+                    });
                 }
+
+
                 //hook : function($scope) {
                 //    inform = function () {
                 //        if (!$scope.$$phase) $scope.$digest();
                 //        console.log("digest");
                 //    };
                 //}
+            };
+        })
+
+        .directive("layoutCustomFooter", function(LayoutService) {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+                    elem.hide();
+                    LayoutService.registerCustomFooter(elem);
+                }
             };
         })
     ;

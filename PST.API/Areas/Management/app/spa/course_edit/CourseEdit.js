@@ -18,8 +18,18 @@
             ;
         })
 
-        .controller("courseEdit.Ctrl", function ($scope) {
+        .controller("courseEdit.Ctrl", function ($scope, LayoutService) {
+            LayoutService.setCustomFooter($scope, {
+                templateUrl: "/Areas/Management/app/spa/course_edit/CourseEditFooter.html"
+            });
 
+            $scope.footer = {
+
+            };
+
+            $scope.setFooter = function(options) {
+                //options.save
+            };
         })
 
     ;
