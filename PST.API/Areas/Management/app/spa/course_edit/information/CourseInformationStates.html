@@ -43,7 +43,15 @@
             <a href="#" class="icon icon-chevron-up"></a>
         </div><!-- /.table-col -->
 
-        <div state-adder></div>
+        <div state-adder="addState($value)"></div>
+    </div><!-- /.table-row -->
+
+    <div class="table-row no-record" ng-if="(course.state_ceus.length || 0)==0">
+        <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
+
+        <div class="table-col col-size-2">
+            <h3>No state(s) available</h3>
+        </div><!-- /.table-col -->
     </div><!-- /.table-row -->
 
     <div class="table-row" ng-repeat="state_ceu in course.state_ceus">

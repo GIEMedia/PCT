@@ -85,6 +85,7 @@
             //var inform = function() {};
 
             var customFooterElem;
+            var customFooterElemOriClass;
 
             return {
                 layout: layout,
@@ -105,6 +106,7 @@
                 },
                 registerCustomFooter: function(elem) {
                     customFooterElem = elem;
+                    customFooterElemOriClass = elem.attr("class");
                 },
                 setCustomFooter: function($scope, options) {
 
@@ -133,6 +135,12 @@
                             remove = null;
                         }
                     });
+
+                    return {
+                        setClass: function(styleClass) {
+                            customFooterElem.attr("class", customFooterElemOriClass + (styleClass ? " " + styleClass : ""));
+                        }
+                    };
                 }
 
 
@@ -149,7 +157,6 @@
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
-                    elem.hide();
                     LayoutService.registerCustomFooter(elem);
                 }
             };

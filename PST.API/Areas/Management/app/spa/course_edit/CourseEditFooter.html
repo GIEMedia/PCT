@@ -17,6 +17,7 @@
             </a>
         </div><!-- /.btns -->
 
-        <div class="footer-draft">Draft</div><!-- /.footer-draft -->
+        <div class="footer-draft" ng-if="cel.status == 0">Draft</div><!-- /.footer-draft -->
+        <div class="footer-review" ng-if="cel.status == 2">In Review</div><!-- /.footer-draft -->
     </div><!-- /.footer-inner -->
 </div><!-- /.shell -->

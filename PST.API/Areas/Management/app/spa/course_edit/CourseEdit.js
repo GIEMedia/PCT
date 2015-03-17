@@ -23,9 +23,10 @@
         })
 
         .controller("courseEdit.Ctrl", function ($scope, LayoutService) {
-            LayoutService.setCustomFooter($scope, {
+            var footerControl = LayoutService.setCustomFooter($scope, {
                 templateUrl: "/Areas/Management/app/spa/course_edit/CourseEditFooter.html"
             });
+            //footerControl.setClass("footer-secondary");
 
             $scope.steps = [
                 {

@@ -54,12 +54,7 @@
         </div><!-- /.table-col -->
 
         <div class="table-col col-size-4">
-            <select name="field-select" id="field-select" class="select">
-                <option value="">Select</option>
-                <option value="Prerequisite 1">Prerequisite 1</option>
-                <option value="Prerequisite 2">Prerequisite 2</option>
-                <option value="Prerequisite 3">Prerequisite 3</option>
-                <option value="Prerequisite 4">Prerequisite 4</option>
+            <select name="field-select" id="field-select" class="select" pct-model="course.prerequisite_course" pct-options="pc.id as pc.title for pc in courses">
             </select>
         </div><!-- /.table-col -->
     </div><!-- /.table-row -->

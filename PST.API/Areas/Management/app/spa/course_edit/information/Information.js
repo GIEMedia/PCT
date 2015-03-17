@@ -34,7 +34,7 @@
 
             if ($stateParams.courseId == "new") {
                 $scope.course = {
-
+                    state_ceus: []
                 };
             } else {
                 CourseService.get($stateParams.courseId).success(function(course) {
@@ -54,10 +54,19 @@
                     return e.code == code;
                 });
             };
+            $scope.addState = function(state) {
+                console.log(state);
+                $scope.course.state_ceus.push(state);
+            };
 
             $scope.getCat = function(catId) {
                 return Cols.find($scope.categories, function(cat) { return cat.id == catId;});
             };
+
+
+            CourseService.getList().success(function(list) {
+                $scope.courses = list;
+            });
         })
     ;
 
