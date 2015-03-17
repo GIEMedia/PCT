@@ -56,6 +56,7 @@
             $scope.setCel = function(cel) {
                 ObjectUtil.clear($scope.cel);
                 ObjectUtil.copy(cel, $scope.cel);
+                //if (!$scope.$$phase) $scope.$digest();
             };
         })
 
