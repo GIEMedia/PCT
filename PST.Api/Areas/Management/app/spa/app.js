@@ -16,6 +16,7 @@
 
         'pct.management.api.course',
         'pct.management.api.category',
+        'pct.management.api.state',
 
             //'angularMoment',
             //'ngResource'

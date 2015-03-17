@@ -15,7 +15,7 @@
             ;
         })
 
-        .controller("courseEdit.information.Ctrl", function ($scope, LayoutService, $stateParams, CourseService, CategoryService) {
+        .controller("courseEdit.information.Ctrl", function ($scope, LayoutService, $stateParams, CourseService, CategoryService, StateService) {
             $scope.view = {
 
             };
@@ -44,6 +44,14 @@
             CategoryService.getList().success(function(categories) {
                 $scope.categories = categories;
             });
+
+            $scope.states = StateService.getStates();
+
+            $scope.stateByCode = function(code) {
+                return Cols.find($scope.states, function (e) {
+                    return e.code == code;
+                });
+            };
 
             $scope.getCat = function(catId) {
                 return Cols.find($scope.categories, function(cat) { return cat.id == catId;});

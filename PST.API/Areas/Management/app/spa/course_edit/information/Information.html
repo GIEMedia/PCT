@@ -88,12 +88,7 @@
             </div><!-- /.table-col -->
 
             <div class="table-col col-size-2">
-                <select name="field-add-new-state" id="field-add-new-state" class="select">
-                    <option value="">Add New State</option>
-                    <option value="New State 1">New State 1</option>
-                    <option value="New State 2">New State 2</option>
-                    <option value="New State 3">New State 3</option>
-                    <option value="New State 4">New State 4</option>
+                <select name="field-add-new-state" id="field-add-new-state" class="select" pct-model="addingState.state">
                 </select>
             </div><!-- /.table-col -->
 
@@ -110,149 +105,24 @@
             </div><!-- /.table-col -->
         </div><!-- /.table-row -->
 
-        <div class="table-row">
+        <div class="table-row" ng-repeat="state_ceu in course.state_ceus">
             <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
 
             <div class="table-col col-size-2">
-                <h3>Alabama</h3>
+                <h3>{{stateByCode(state_ceu.state).name}}</h3>
             </div><!-- /.table-col -->
 
             <div class="table-col col-size-3">
-                <h3>Ala1</h3>
+                <h3>{{state_ceu.category_code}}</h3>
             </div><!-- /.table-col -->
 
             <div class="table-col col-size-4">
-                <h3>3</h3>
+                <h3>{{state_ceu.hours}}</h3>
             </div><!-- /.table-col -->
 
             <div class="table-col col-size-5"><a href="#" class="fa fa-trash-o"></a></div><!-- /.table-col -->
         </div><!-- /.table-row -->
 
-        <div class="table-row">
-            <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
-
-            <div class="table-col col-size-2">
-                <h3>Arkansas</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-3">
-                <h3>Arka3</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-4">
-                <h3>4</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-5"><a href="#" class="fa fa-trash-o"></a></div><!-- /.table-col -->
-        </div><!-- /.table-row -->
-
-        <div class="table-row">
-            <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
-
-            <div class="table-col col-size-2">
-                <h3>Georgia</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-3">
-                <h3>Geo18</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-4">
-                <h3>4</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-5"><a href="#" class="fa fa-trash-o"></a></div><!-- /.table-col -->
-        </div><!-- /.table-row -->
-
-        <div class="table-row">
-            <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
-
-            <div class="table-col col-size-2">
-                <h3>Michigan</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-3">
-                <h3>Michi73</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-4">
-                <h3>4</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-5"><a href="#" class="fa fa-trash-o"></a></div><!-- /.table-col -->
-        </div><!-- /.table-row -->
-
-        <div class="table-row">
-            <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
-
-            <div class="table-col col-size-2">
-                <h3>Mississippi</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-3">
-                <h3>Missi82</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-4">
-                <h3>3</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-5"><a href="#" class="fa fa-trash-o"></a></div><!-- /.table-col -->
-        </div><!-- /.table-row -->
-
-        <div class="table-row">
-            <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
-
-            <div class="table-col col-size-2">
-                <h3>New Jersey</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-3">
-                <h3>Jers22</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-4">
-                <h3>2</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-5"><a href="#" class="fa fa-trash-o"></a></div><!-- /.table-col -->
-        </div><!-- /.table-row -->
-
-        <div class="table-row">
-            <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
-
-            <div class="table-col col-size-2">
-                <h3>New York</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-3">
-                <h3>York32</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-4">
-                <h3>2</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-5"><a href="#" class="fa fa-trash-o"></a></div><!-- /.table-col -->
-        </div><!-- /.table-row -->
-
-        <div class="table-row">
-            <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
-
-            <div class="table-col col-size-2">
-                <h3>Ohio</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-3">
-                <h3>Ohio49</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-4">
-                <h3>4</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-5"><a href="#" class="fa fa-trash-o"></a></div><!-- /.table-col -->
-        </div><!-- /.table-row -->
     </div><!-- /.table-row-expand -->
 </div><!-- /.custom-table-secondary -->
 
