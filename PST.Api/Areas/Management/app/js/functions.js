@@ -130,13 +130,6 @@
 		    $(this).parent('.table-row').toggleClass('expanded').find('.table-row-expand').slideToggle(200);
 		});
 
-		// Custom selectbox
-		if ($('select').length) {
-			$('select').selectBoxIt({
-				autoWidth: false,
-				showFirstOption: false
-			});
-		};
 
 		// Popup
 		$(".popup-open").fancybox({

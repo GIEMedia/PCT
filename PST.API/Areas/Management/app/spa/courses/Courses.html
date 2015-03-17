@@ -26,13 +26,13 @@
                         </tr>
 
                         <tr ng-if="list == null">
-                            <td colspan="4" class="loading">Loading...</td>
+                            <td colspan="5" class="loading">Loading...</td>
                         </tr>
                         <tr ng-if="list.length == 0">
-                            <td colspan="4" class="no-record">No course(s) available</td>
+                            <td colspan="5" class="no-record">No course(s) available</td>
                         </tr>
                         <tr ng-if="view.filteredList.length == 0 && view.search">
-                            <td colspan="4" class="no-record">No course(s) found matching "<b>{{view.search}}</b>"</td>
+                            <td colspan="5" class="no-record">No course(s) found matching "<b>{{view.search}}</b>"</td>
                         </tr>
 
                         <tr ng-repeat="course in view.filteredList = ( list | filter:view.search | sorterFilter:sorter)" ng-class="{0: 'row-draft', 2: 'row-review'}[course.status]">
@@ -42,7 +42,7 @@
 
                             <td>
                                 <div class="icons">
-                                    <a href="2.PCT.Courses.Edit.html" class="fa fa-pencil"></a>
+                                    <a ui-sref="courseEdit.information({courseId: course.id})" class="fa fa-pencil"></a>
                                     <a href="6.PCT.Report.html" class="icon icon-test" ng-if="course.status == 1"></a>
                                     <a href="#" class="fa fa-trash-o"></a>
                                 </div><!-- /.icons -->

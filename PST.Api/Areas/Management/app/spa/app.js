@@ -10,6 +10,7 @@
 
         'pct.management.login',
         'pct.management.courses',
+        'pct.management.courseEdit',
         'pct.management.testResults',
         'pct.management.users',
 

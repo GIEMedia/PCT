@@ -3,7 +3,7 @@
 
     <nav class="nav">
         <ul>
-            <li ng-repeat="link in links" ng-class="{current: $state.current.name == link.state}" >
+            <li ng-repeat="link in links" ng-class="{current: link.highlightOn ? link.highlightOn($state.current.name) : ($state.current.name == link.state)}" >
                 <a ui-sref="{{link.state}}">
                     <i class="icon icon-{{link.icon}}"></i>
                     <span>{{link.title}}</span>

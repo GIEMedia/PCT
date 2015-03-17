@@ -40,6 +40,18 @@
                 }
             };
         })
+
+        .directive("select", function() {
+            return {
+                restrict: "E",
+                link: function($scope, elem, attrs) {
+                    elem.selectBoxIt({
+                        autoWidth: false,
+                        showFirstOption: false
+                    });
+                }
+            };
+        })
     ;
 
 })();

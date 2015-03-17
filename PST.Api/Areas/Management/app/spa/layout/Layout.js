@@ -13,6 +13,10 @@
                         {
                             state: "courses",
                             icon: "course",
+                            highlightOn: function(stateName) {
+
+                                return stateName.indexOf("course") == 0;
+                            },
                             title: "Courses"
                         },
                         {
