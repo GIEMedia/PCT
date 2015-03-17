@@ -25,22 +25,17 @@
 
             $scope.setCel({
                 step: 0,
-                save: function() {}
+                save: function() {
+                    CourseService.upsert($scope.course).success(function(course) {
+                        ObjectUtil.clear($scope.course);
+                        ObjectUtil.copy(course, $scope.course);
+                    });
+                }
             });
 
             $scope.view = {
 
             };
-
-            if ($stateParams.courseId == "new") {
-                $scope.course = {
-                    state_ceus: []
-                };
-            } else {
-                CourseService.get($stateParams.courseId).success(function(course) {
-                    $scope.course = course;
-                });
-            }
 
             CategoryService.getList().success(function(categories) {
                 $scope.categories = categories;

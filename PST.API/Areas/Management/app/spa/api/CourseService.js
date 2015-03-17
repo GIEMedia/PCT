@@ -30,6 +30,9 @@
                 },
                 get: function(id) {
                     return Api.get("api/manage/course/" + id);
+                },
+                upsert: function(course) {
+                    return Api.put("api/manage/course", course);
                 }
             };
         })

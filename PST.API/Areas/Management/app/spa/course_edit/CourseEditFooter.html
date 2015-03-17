@@ -9,15 +9,16 @@
         <!--<a href="1.PCT.Courses.List.html" class="fa fa-trash-o alignleft"></a>-->
 
         <div class="btns alignright">
-            <a href="#" class="btn btn-grey" ng-if="cel.save">Save</a>
+            <a href="" class="btn btn-grey" ng-if="cel.save" ng-click="cel.save()">Save</a>
 
-            <a href="" ng-click="$state.go('courseEdit.' + steps[cel.step + 1].state)" class="btn btn-green btn-icon-right" ng-if="cel.step < steps.length - 1">
+            <a href="" ng-click="$state.go('courseEdit.' + steps[cel.step + 1].state, {courseId: course.id})" class="btn btn-green btn-icon-right" ng-if="cel.step < steps.length - 1">
                 {{steps[cel.step + 1].title}}
                 <i class="fa fa-chevron-right"></i>
             </a>
         </div><!-- /.btns -->
 
-        <div class="footer-draft" ng-if="cel.status == 0">Draft</div><!-- /.footer-draft -->
-        <div class="footer-review" ng-if="cel.status == 2">In Review</div><!-- /.footer-draft -->
+        <div class="footer-draft" ng-if="course.status == 0">Draft</div><!-- /.footer-draft -->
+        <div class="footer-publish" ng-if="course.status == 1">Publish</div><!-- /.footer-draft -->
+        <div class="footer-review" ng-if="course.status == 2">In Review</div><!-- /.footer-draft -->
     </div><!-- /.footer-inner -->
 </div><!-- /.shell -->

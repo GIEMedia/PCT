@@ -103,7 +103,6 @@
 
                         var index = Cols.indexOf(value, list, valueM);
                         if (index != -1) {
-                            console.log(index);
                             control.selectOption(index);
                         }
                     });
@@ -114,7 +113,16 @@
                             model.assign($scope, valueM(list[control.currentFocus]));
                             if (!$scope.$$phase) $scope.$digest();
                         }
-                    })
+                    });
+
+                    $scope.$watch(attrs.pctModel, function(value) {
+                        var control = elem.data("selectBox-selectBoxIt");
+
+                        var index = Cols.indexOf(value, list, valueM);
+                        if (index != -1) {
+                            control.selectOption(index);
+                        }
+                    });
                 }
             };
         })
