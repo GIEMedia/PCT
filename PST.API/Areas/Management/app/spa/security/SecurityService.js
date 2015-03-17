@@ -6,8 +6,8 @@
     ])
         .factory("User", function() {
             return {
-                loggedIn: true,
-                fullName: "dave.hurt"
+                loggedIn: false,
+                fullName: null
             };
         })
 
@@ -56,6 +56,20 @@
                 delete: function(url) {
                     return sendHttp("DELETE", url);
                 },
+                postForm: function(url, data) {
+                    return handleError($http({
+                        method: 'POST',
+                        url: url,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        transformRequest: function(obj) {
+                            var str = [];
+                            for(var p in obj)
+                                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                            return str.join("&");
+                        },
+                        data: data
+                    }));
+                },
                 handleError: handleError
             };
         })
@@ -66,7 +80,7 @@
                     .success(function(account) {
                         User.loggedIn = true;
                         User.firstName = account.first_name;
-                        User.lastName = account.last_name;
+                        User.fullName = account.first_name + " " + account.last_name;
                     })
                     .onError(function(error, status) {
                         if (status == 401) {
@@ -99,23 +113,11 @@
 
             return {
                 login: function(data) {
-                    return Api.handleError($http({
-                            method: 'POST',
-                            url: "/api/account/login",
-                            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                            transformRequest: function(obj) {
-                                var str = [];
-                                for(var p in obj)
-                                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                                return str.join("&");
-                            },
-                            data: data
-                        })
+                    return Api.postForm("api/account/login", data)
                             .success(function(resp) {
                                 sessionStorage.access_token = resp.access_token;
                                 fetchUser();
-                            })
-                    );
+                            });
                 },
                 logout: function() {
                     Api.delete("api/account/logout").then(function() {

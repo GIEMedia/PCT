@@ -37,7 +37,7 @@
                 }
             };
         })
-        .directive("layoutHeader", function(LayoutService, User, $state) {
+        .directive("layoutHeader", function(LayoutService, SecurityService, User, $state) {
             return {
                 restrict: "A",
                 templateUrl: "/Areas/Management/app/spa/layout/LayoutHeader.html",
@@ -46,10 +46,7 @@
                     $scope.layout = LayoutService.layout;
 
                     $scope.logout = function() {
-                        User.loggedIn = false;
-                        User.fullName = null;
-
-                        $state.go("login");
+                        SecurityService.logout();
                     };
                 }
             };

@@ -6,6 +6,7 @@
         'pct.Security',
 
         'pct.management.layout',
+        'pct.management.theme',
 
         'pct.management.login',
         'pct.management.courses',
