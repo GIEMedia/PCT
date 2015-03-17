@@ -3,6 +3,7 @@
 (function () {
 
     angular.module('pct.management.courseEdit.information', [
+        'pct.management.courseEdit.information.states'
     ])
 
         .config(function ($stateProvider) {
@@ -16,10 +17,7 @@
         })
 
         .controller("courseEdit.information.Ctrl", function ($scope, LayoutService, $stateParams, CourseService, CategoryService, StateService) {
-            $scope.view = {
-
-            };
-
+            // Layout
             LayoutService.setBreadCrumbs($scope, {
                 sub: "New",
                 rootState: "courses"
@@ -30,6 +28,9 @@
                 save: function() {}
             });
 
+            $scope.view = {
+
+            };
 
             if ($stateParams.courseId == "new") {
                 $scope.course = {
@@ -45,6 +46,7 @@
                 $scope.categories = categories;
             });
 
+            // States
             $scope.states = StateService.getStates();
 
             $scope.stateByCode = function(code) {

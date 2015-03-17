@@ -54,6 +54,24 @@
             };
         })
         .directive("pctOptions", function($parse) {
+            var parse = function(exp) {
+                var getter;
+                if (exp.indexOf(".") == -1) {
+                    getter = function (o) {
+                            return o;
+                        }
+                        ;
+                } else {
+                    var cut = exp.replace(/.+\./,"");
+                    getter = function (o) {
+                            return o[cut];
+                        }
+                        ;
+                }
+
+                return getter;
+            };
+
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -62,8 +80,8 @@
                     var list = null;
                     var match = /^(.+?) as (.+?) for (.+?) in (.+?)$/.exec(attrs.pctOptions);
 
-                    var valueExp = match[1].replace(/.+\./,"");
-                    var textExp = match[2].replace(/.+\./,"");
+                    var valueM = parse(match[1]);
+                    var textM = parse(match[2]);
                     var listExp = match[4];
 
                     $scope.$watch(listExp, function(listVal) {
@@ -75,18 +93,17 @@
                             return;
                         }
                         Cols.each(listVal, function(e) {
-                            var value = e[valueExp];
-                            var text = e[textExp];
+                            var value = valueM(e);
+                            var text = textM(e);
                             control.add({value: value, text: text});
                         });
 
                         // Populate current value
                         var value = model($scope);
 
-                        var index = Cols.indexOf(value, list, function (e) {
-                            return e[valueExp];
-                        });
+                        var index = Cols.indexOf(value, list, valueM);
                         if (index != -1) {
+                            console.log(index);
                             control.selectOption(index);
                         }
                     });
@@ -94,7 +111,7 @@
                     elem.bind({
                         "change": function(ev, obj) {
                             var control = elem.data("selectBox-selectBoxIt");
-                            model.assign($scope, list[control.currentFocus][valueExp]);
+                            model.assign($scope, valueM(list[control.currentFocus]));
                             if (!$scope.$$phase) $scope.$digest();
                         }
                     })

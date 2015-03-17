@@ -42,89 +42,10 @@
     </div><!-- /.table-row -->
 </div><!-- /.custom-table -->
 
-<div class="custom-table-secondary table-states">
-    <div class="table-row-head">
-        <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
 
-        <div class="table-col col-size-2">
-            <h3>State</h3>
-        </div><!-- /.table-col -->
 
-        <div class="table-col col-size-3">
-            <h3>Category Code</h3>
-        </div><!-- /.table-col -->
+<div class="custom-table-secondary table-states" course-information-states></div><!-- /.custom-table-secondary -->
 
-        <div class="table-col col-size-4">
-            <h3>Hours/CEUs</h3>
-        </div><!-- /.table-col -->
-
-        <div class="table-col col-size-5">&nbsp;</div><!-- /.table-col -->
-    </div><!-- /.table-row-head -->
-
-    <div class="table-row table-row-1">
-        <div class="table-col col-size-1">
-            <a href="#" class="icon icon-chevron-down"></a>
-        </div><!-- /.table-col -->
-
-        <div class="table-col col-size-2">
-            <h4>{{course.state_ceus.length}} States</h4>
-        </div><!-- /.table-col -->
-
-        <div class="table-col col-size-3">
-            <h3>&nbsp;</h3>
-        </div><!-- /.table-col -->
-
-        <div class="table-col col-size-4">
-            <h3>&nbsp;</h3>
-        </div><!-- /.table-col -->
-
-        <div class="table-col col-size-5">&nbsp;</div><!-- /.table-col -->
-    </div><!-- /.table-row -->
-
-    <div class="table-expand">
-        <div class="table-row">
-            <div class="table-col col-size-1">
-                <a href="#" class="icon icon-chevron-up"></a>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-2">
-                <select name="field-add-new-state" id="field-add-new-state" class="select" pct-model="addingState.state">
-                </select>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-3">
-                <input type="text" placeholder="Code" />
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-4">
-                <input type="text" placeholder="Hours" />
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-5">
-                <a href="#" class="btn btn-grey">ADD</a>
-            </div><!-- /.table-col -->
-        </div><!-- /.table-row -->
-
-        <div class="table-row" ng-repeat="state_ceu in course.state_ceus">
-            <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
-
-            <div class="table-col col-size-2">
-                <h3>{{stateByCode(state_ceu.state).name}}</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-3">
-                <h3>{{state_ceu.category_code}}</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-4">
-                <h3>{{state_ceu.hours}}</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-5"><a href="#" class="fa fa-trash-o"></a></div><!-- /.table-col -->
-        </div><!-- /.table-row -->
-
-    </div><!-- /.table-row-expand -->
-</div><!-- /.custom-table-secondary -->
 
 <div class="custom-table table-prerequisites">
     <div class="table-row">
