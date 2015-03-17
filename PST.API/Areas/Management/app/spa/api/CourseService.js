@@ -31,6 +31,9 @@
                 get: function(id) {
                     return Api.get("api/manage/course/" + id);
                 },
+                delete: function(course) {
+                    return Api.delete("api/manage/course/" + course.id);
+                },
                 upsert: function(course) {
                     return Api.put("api/manage/course", course);
                 }

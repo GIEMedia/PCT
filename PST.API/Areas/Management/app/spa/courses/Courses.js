@@ -34,6 +34,15 @@
             });
 
             $scope.sorter = Sorters.create();
+
+            $scope.remove = function(course) {
+                if (!confirm("Are you sure to remove this course?")) {
+                    return;
+                }
+                CourseService.delete(course).success(function() {
+                    Cols.remove(course, $scope.list);
+                });
+            };
         })
     ;
 
