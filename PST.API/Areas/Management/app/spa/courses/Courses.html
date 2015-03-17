@@ -8,40 +8,34 @@
                         <tr>
                             <th width="55%" sort-by="title">
                                 Course Title
-                                <!--<a href="#" class="sort-arrow">-->
-                                    <!--<i class="fa fa-caret-down"></i>-->
-                                <!--</a>-->
                             </th>
 
                             <th width="11%">&nbsp;</th>
 
                             <th width="12%" sort-by="date_created">
                                 Created
-                                <!--<a href="#" class="sort-arrow">-->
-                                    <!--<i class="fa fa-caret-down"></i>-->
-                                <!--</a>-->
                             </th>
 
                             <th width="11%" class="text-center" sort-by="open">
                                 Open
-                                <!--<a href="#" class="sort-arrow visible">-->
-                                    <!--<i class="fa fa-caret-down"></i>-->
-                                <!--</a>-->
                             </th>
 
                             <th width="11%" class="text-center" sort-by="complete">
                                 Complete
-                                <!--<a href="#" class="sort-arrow">-->
-                                    <!--<i class="fa fa-caret-down"></i>-->
-                                <!--</a>-->
                             </th>
                         </tr>
 
                         <tr ng-if="list == null">
-                            <td colspan="4">Loading...</td>
+                            <td colspan="4" class="loading">Loading...</td>
+                        </tr>
+                        <tr ng-if="list.length == 0">
+                            <td colspan="4" class="no-record">No course(s) available</td>
+                        </tr>
+                        <tr ng-if="view.filteredList.length == 0 && view.search">
+                            <td colspan="4" class="no-record">No course(s) found matching "<b>{{view.search}}</b>"</td>
                         </tr>
 
-                        <tr ng-repeat="course in list | sorterFilter:sorter" ng-class="{0: 'row-draft', 2: 'row-review'}[course.status]">
+                        <tr ng-repeat="course in view.filteredList = ( list | filter:view.search | sorterFilter:sorter)" ng-class="{0: 'row-draft', 2: 'row-review'}[course.status]">
                             <td>
                                 {{course.title}}
                             </td>

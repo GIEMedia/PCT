@@ -292,7 +292,7 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .table table tr th a{ color: #666; }
 /*.table table tr th .sort-arrow { display: none; }*/
 /*.table table tr th .sort-arrow.visible { display: inline-block; }*/
-/*.table table tr th .sort-arrow .fa { color: #000; font-size: 14px; line-height: 5px; }*/
+.table table tr > th > a > i.fa { color: #000; }
 .table table tr:hover { background-color: #e5f7fd; }
 .table table tr.row-review { background-color: #4d4d4d; }
 .table table tr.row-review td { color: #e6e6e6; }
@@ -767,3 +767,15 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .footer .shell { text-align: center; padding-top: 7px; }
 
 
+/* ================================================================ *\
+    No record
+\* ================================================================ */
+
+.table table tr td.no-record {
+	font-weight: normal;
+	color: #666;
+}
+.table table tr td.loading {
+	font-weight: normal;
+	color: #666;
+}

@@ -1,12 +1,12 @@
 <div class="search">
     <form action="?" method="get">
-        <label for="q" class="hidden">Search</label>
+        <label for="headerSearchInput" class="hidden">Search</label>
         <div class="search-row">
             <button type="submit" class="search-btn">
                 <i class="fa fa-search"></i>
             </button>
 
-            <input type="search" name="q" id="q" value="" placeholder="{{layout.search.placeholder}}" class="search-field">
+            <input type="search" id="headerSearchInput" placeholder="{{layout.search.options.placeholder}}" class="search-field" ng-model="chs.search">
         </div><!-- /.search-row -->
     </form>
 </div><!-- /.search -->

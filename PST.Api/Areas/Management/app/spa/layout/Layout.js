@@ -37,17 +37,42 @@
                 }
             };
         })
-        .directive("layoutHeader", function(LayoutService, SecurityService, User, $state) {
+        .directive("layoutHeader", function(LayoutService, SecurityService, User, $parse) {
             return {
                 restrict: "A",
                 templateUrl: "/Areas/Management/app/spa/layout/LayoutHeader.html",
                 link: function($scope, elem, attrs) {
+                    $scope.chs = {
+                        search: null
+                    };
+
                     $scope.User = User;
                     $scope.layout = LayoutService.layout;
 
                     $scope.logout = function() {
                         SecurityService.logout();
                     };
+
+                    var applySearch = null;
+                    $scope.$watch("layout.search", function(value) {
+                        $scope.chs.search = null;
+
+                        if (value) {
+                            var model = $parse(value.options.model);
+
+                            applySearch = function(searchValue) {
+                                value.scope.$applyAsync(function() {
+                                    model.assign(value.scope, searchValue);
+                                });
+                            };
+                        } else {
+                            applySearch = null;
+                        }
+                    });
+
+                    $scope.$watch("chs.search", function(value) {
+                        if (applySearch) applySearch(value);
+                    });
                 }
             };
         })
@@ -57,7 +82,10 @@
             return {
                 layout: layout,
                 supportSearch: function($scope, options) {
-                    layout.search = options;
+                    layout.search = {
+                        scope: $scope,
+                        options: options
+                    };
                     $scope.$on("$destroy", function() {
                         layout.search = null;
                     });

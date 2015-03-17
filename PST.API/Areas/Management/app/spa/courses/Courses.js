@@ -20,8 +20,13 @@
         })
 
         .controller("courses.Ctrl", function ($scope, LayoutService, CourseService, Sorters) {
+            $scope.view = {
+                search: null
+            };
+
             LayoutService.supportSearch($scope, {
-                placeholder: "Search course"
+                placeholder: "Search course",
+                model: "view.search"
             });
 
             CourseService.getList().success(function(list) {
