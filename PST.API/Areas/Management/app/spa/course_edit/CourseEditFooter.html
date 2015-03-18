@@ -2,14 +2,14 @@
     <div class="footer-inner">
         <a ui-sref="courses" class="btn btn-grey alignleft" ng-if="cel.step == 0">Cancel</a>
 
-        <a href="" ng-click="$state.go('courseEdit.' + steps[cel.step - 1].state)" class="btn btn-grey btn-icon-left alignleft" ng-if="cel.step > 0">
+        <a href="" ng-click="prevPage()" class="btn btn-grey btn-icon-left alignleft" ng-if="cel.step > 0">
             <i class="fa fa-chevron-left"></i>
             {{steps[cel.step - 1].title}}
         </a>
         <!--<a href="1.PCT.Courses.List.html" class="fa fa-trash-o alignleft"></a>-->
 
         <div class="btns alignright">
-            <a href="" class="btn btn-grey" ng-if="cel.save && (cel.needSaving == null || cel.needSaving())" ng-click="cel.save()">Save</a>
+            <button class="btn btn-grey" button-loading="ce.saving" ng-disabled="ce.saving" ng-if="needSaving()" ng-click="saveCourse()">Save</button>
 
             <a href="" ng-click="nextPage()" class="btn btn-green btn-icon-right" ng-if="cel.step < steps.length - 1">
                 {{steps[cel.step + 1].title}}
@@ -18,7 +18,7 @@
         </div><!-- /.btns -->
 
         <div class="footer-draft" ng-if="course.status == 0">Draft</div><!-- /.footer-draft -->
-        <div class="footer-publish" ng-if="course.status == 1">Publish</div><!-- /.footer-draft -->
+        <div class="footer-publish" ng-if="course.status == 1">Published</div><!-- /.footer-draft -->
         <div class="footer-review" ng-if="course.status == 2">In Review</div><!-- /.footer-draft -->
     </div><!-- /.footer-inner -->
 </div><!-- /.shell -->

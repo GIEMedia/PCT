@@ -22,7 +22,7 @@
             ;
         })
 
-        .controller("courseEdit.Ctrl", function ($scope, $state, $stateParams, LayoutService, CourseService) {
+        .controller("courseEdit.Ctrl", function ($scope, $state, $q, $stateParams, LayoutService, CourseService) {
             var footerControl = LayoutService.setCustomFooter($scope, {
                 templateUrl: "/Areas/Management/app/spa/course_edit/CourseEditFooter.html"
             });
@@ -64,6 +64,10 @@
                     title: 'Publish'
                 }
             ];
+
+            $scope.ce = {
+                saving: false
+            };
             $scope.cel = {
                 step: 0,
                 save: null,
@@ -75,15 +79,37 @@
                 ObjectUtil.copy(cel, $scope.cel);
             };
 
-            $scope.nextPage = function() {
-                var go = function() {
-                    $state.go('courseEdit.' + $scope.steps[$scope.cel.step + 1].state, {courseId: $scope.course.id});
-                };
-                if ($scope.cel.needSaving == null || !$scope.cel.needSaving()) {
+            $scope.needSaving = function() {
+                return $scope.cel.save && ($scope.cel.needSaving == null || $scope.cel.needSaving());
+            };
+
+            $scope.saveCourse = function(then) {
+                var defer = $q.defer();
+                $scope.ce.saving = true;
+                $scope.cel.save().then(function() {
+                    $scope.ce.saving = false;
+                    defer.resolve();
+                });
+                return defer.promise;
+            };
+
+            function nav(go) {
+                if ($scope.needSaving()) {
                     go();
                 } else {
-                    $scope.cel.save().then(go);
+                    $scope.saveCourse().then(go);
                 }
+            }
+
+            $scope.prevPage = function() {
+                nav(function() {
+                    $state.go('courseEdit.' + $scope.steps[$scope.cel.step - 1].state, {courseId: $scope.course.id});
+                });
+            };
+            $scope.nextPage = function() {
+                nav(function() {
+                    $state.go('courseEdit.' + $scope.steps[$scope.cel.step + 1].state, {courseId: $scope.course.id});
+                });
             };
         })
 

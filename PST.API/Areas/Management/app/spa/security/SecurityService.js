@@ -120,13 +120,12 @@
                             });
                 },
                 logout: function() {
-                    Api.delete("api/account/logout").then(function() {
-                        sessionStorage.access_token = null;
-                        User.loggedIn = false;
-                        User.firstName = null;
-                        User.fullName = null;
-                        $state.go("login");
-                    });
+                    Api.delete("api/account/logout");
+                    sessionStorage.access_token = null;
+                    User.loggedIn = false;
+                    User.firstName = null;
+                    User.fullName = null;
+                    $state.go("login");
                 }
             };
         })

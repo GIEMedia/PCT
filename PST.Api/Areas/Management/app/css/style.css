@@ -781,3 +781,17 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 	font-weight: normal;
 	color: #666;
 }
+
+
+
+/* ================================================================ *\
+    Buttons
+\* ================================================================ */
+
+button {
+	border: none;
+}
+
+a[disabled], button[disabled] {
+	cursor: not-allowed;
+}
