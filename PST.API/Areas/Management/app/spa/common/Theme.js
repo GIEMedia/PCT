@@ -173,6 +173,23 @@
                 }
             };
         })
+
+        //.directive("popupOpen", function() {
+        //    return {
+        //        restrict: "C",
+        //        link: function($scope, elem, attrs) {
+        //            // Popup
+        //            elem.fancybox({
+        //                maxWidth	: 750,
+        //                width		: 'auto',
+        //                height		: 'auto',
+        //                fitToView	: false,
+        //                autoSize	: false,
+        //                closeClick	: false
+        //            });
+        //        }
+        //    };
+        //})
     ;
 
 })();

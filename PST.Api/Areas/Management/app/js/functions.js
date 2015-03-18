@@ -116,15 +116,5 @@
 		    $(this).parent('.table-row').toggleClass('expanded').find('.table-row-expand').slideToggle(200);
 		});
 
-
-		// Popup
-		$(".popup-open").fancybox({
-			maxWidth	: 750,
-			width		: 'auto',
-			height		: 'auto',
-			fitToView	: false,
-			autoSize	: false,
-			closeClick	: false
-		});
 	});
 })(jQuery, window, document);

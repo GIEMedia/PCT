@@ -3,7 +3,8 @@
 (function () {
 
     angular.module('pct.management.courseEdit.information', [
-        'pct.management.courseEdit.information.states'
+        'pct.management.courseEdit.information.states',
+        'pct.management.courseEdit.information.categories'
     ])
 
         .config(function ($stateProvider) {
@@ -16,7 +17,7 @@
             ;
         })
 
-        .controller("courseEdit.information.Ctrl", function ($scope, $stateParams, $parse, $q, LayoutService, CourseService, CategoryService, StateService) {
+        .controller("courseEdit.information.Ctrl", function ($scope, $stateParams, $parse, $q, LayoutService, CourseService) {
             // Layout
             LayoutService.setBreadCrumbs($scope, {
                 sub: "New",
@@ -28,9 +29,8 @@
                 save: function() {
                     return CourseService.upsert($scope.cei.course).success(function(course) {
                         ObjectUtil.clear($scope.course);
-                        ObjectUtil.clear($scope.cei.course);
                         ObjectUtil.copy(course, $scope.course);
-                        ObjectUtil.copy(course, $scope.cei.course);
+                        $scope.cei.course = course;
                     });
                 },
                 needSaving: function() {
@@ -43,21 +43,9 @@
             };
             $scope.$watch("course", function(value) {
                 $scope.cei.course = ObjectUtil.clone(value);
-                //console.log("Cloned");
-            });
-
-            CategoryService.getList().success(function(categories) {
-                $scope.categories = categories;
             });
 
             // States
-            $scope.states = StateService.getStates();
-
-            $scope.stateByCode = function(code) {
-                return Cols.find($scope.states, function (e) {
-                    return e.code == code;
-                });
-            };
             $scope.addState = function(state) {
                 $scope.cei.course.state_ceus.push(state);
             };
@@ -70,6 +58,7 @@
                 $scope.courses = list;
             });
 
+            ///Areas/Management/app/spa/course_edit/information/ajax/popup-new-category.html
         })
     ;
 

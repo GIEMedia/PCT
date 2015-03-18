@@ -12,33 +12,36 @@
 
         <div class="table-col col-size-3"></div><!-- /.table-col -->
     </div><!-- /.table-row -->
-    <div class="table-row">
-        <div class="table-col col-size-1">
-            <h3>Category</h3>
-        </div><!-- /.table-col -->
 
-        <div class="table-col col-size-2">
-            <select name="field-select" class="select" pct-model="cei.course.category" pct-options="category.id as category.title for category in categories">
-            </select>
-        </div><!-- /.table-col -->
+    <div course-information-categories>
+        <div class="table-row">
+            <div class="table-col col-size-1">
+                <h3>Category</h3>
+            </div><!-- /.table-col -->
 
-        <div class="table-col col-size-3">
-            <a href="ajax/popup-new-category.html" class="btn btn-grey fancybox.ajax popup-open">ADD NEW</a>
-        </div><!-- /.table-col -->
-    </div><!-- /.table-row -->
-    <div class="table-row">
-        <div class="table-col col-size-1">
-            <h3>Sub Category</h3>
-        </div><!-- /.table-col -->
-        <div class="table-col col-size-2">
-            <select name="field-select" class="select" pct-model="cei.course.sub_category" pct-options="subcat.id as subcat.title for subcat in getCat(cei.course.category).sub_categories">
-            </select>
-        </div><!-- /.table-col -->
+            <div class="table-col col-size-2">
+                <select name="field-select" class="select" pct-model="cei.course.category" pct-options="category.id as category.title for category in categories">
+                </select>
+            </div><!-- /.table-col -->
 
-        <div class="table-col col-size-3">
-            <a href="ajax/popup-new-category.html" class="btn btn-grey fancybox.ajax popup-open">ADD NEW</a>
-        </div><!-- /.table-col -->
-    </div><!-- /.table-row -->
+            <div class="table-col col-size-3">
+                <a href="" ng-click="addNewCategory()" class="btn btn-grey">ADD NEW</a>
+            </div><!-- /.table-col -->
+        </div><!-- /.table-row -->
+        <div class="table-row">
+            <div class="table-col col-size-1">
+                <h3>Sub Category</h3>
+            </div><!-- /.table-col -->
+            <div class="table-col col-size-2">
+                <select name="field-select" class="select" pct-model="cei.course.sub_category" pct-options="subcat.id as subcat.title for subcat in getCat(cei.course.category).sub_categories">
+                </select>
+            </div><!-- /.table-col -->
+
+            <div class="table-col col-size-3">
+                <a href="/Areas/Management/app/spa/course_edit/information/ajax/popup-new-category.html" class="btn btn-grey fancybox.ajax popup-open">ADD NEW</a>
+            </div><!-- /.table-col -->
+        </div><!-- /.table-row -->
+    </div>
 </div><!-- /.custom-table -->
 
 
