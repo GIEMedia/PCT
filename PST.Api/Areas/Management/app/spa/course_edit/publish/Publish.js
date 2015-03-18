@@ -23,7 +23,7 @@
 
             $scope.setCel({
                 step: 4,
-                save: function() {}
+                save: null
             });
         })
     ;

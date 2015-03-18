@@ -3,9 +3,11 @@
         <div class="shell">
             <ul>
                 <li ng-class="{highlighted: $index == cel.step, checked: $index < cel.step}" ng-repeat="step in steps">
-                    <span>
-                        <i class="fa"></i>
-                    </span>
+                    <a href="" ng-click="toPage($index)">
+                        <span>
+                            <i class="fa"></i>
+                        </span>
+                    </a>
                     {{step.title}}
                 </li>
 

@@ -88,8 +88,10 @@
                         var control = elem.data("selectBox-selectBoxIt");
 
                         var index = Cols.indexOf(value, list, valueM);
+                        //console.log("Index: " + index + ", currentFocus: " + control.currentFocus);
                         if (index != -1 && (neverSelected || index != control.currentFocus)) { // Force change when neverSelected because it maybe the defaultText (==0)
                             control.selectOption(index);
+                            //console.log("Go to index: " + index);
                             neverSelected = false;
                         }
                     };
@@ -100,6 +102,7 @@
                         list = listVal;
 
                         control.remove();
+                        neverSelected = true;
                         if (listVal == null) {
                             return;
                         }
@@ -119,6 +122,7 @@
                             var control = elem.data("selectBox-selectBoxIt");
                             var vValue = valueM(list[control.currentFocus]);
                             $scope.$applyAsync(function() {
+                                //console.log("Change model to " + vValue);
                                 model.assign($scope, vValue);
                             });
                         }

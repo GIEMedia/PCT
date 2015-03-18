@@ -16,7 +16,7 @@
             ;
         })
 
-        .controller("courseEdit.information.Ctrl", function ($scope, LayoutService, $stateParams, CourseService, CategoryService, StateService) {
+        .controller("courseEdit.information.Ctrl", function ($scope, $stateParams, $parse, $q, LayoutService, CourseService, CategoryService, StateService) {
             // Layout
             LayoutService.setBreadCrumbs($scope, {
                 sub: "New",
@@ -43,14 +43,7 @@
             };
             $scope.$watch("course", function(value) {
                 $scope.cei.course = ObjectUtil.clone(value);
-
             });
-            $scope.$watch('cei.course.category', function (newValue, oldValue) {
-                if (oldValue != null) {
-                    $scope.cei.course.sub_category = null;
-                }
-            });
-
 
             CategoryService.getList().success(function(categories) {
                 $scope.categories = categories;

@@ -94,7 +94,7 @@
             };
 
             function nav(go) {
-                if ($scope.needSaving()) {
+                if (!$scope.needSaving()) {
                     go();
                 } else {
                     $scope.saveCourse().then(go);
@@ -109,6 +109,11 @@
             $scope.nextPage = function() {
                 nav(function() {
                     $state.go('courseEdit.' + $scope.steps[$scope.cel.step + 1].state, {courseId: $scope.course.id});
+                });
+            };
+            $scope.toPage = function(page) {
+                nav(function() {
+                    $state.go('courseEdit.' + $scope.steps[page].state, {courseId: $scope.course.id});
                 });
             };
         })

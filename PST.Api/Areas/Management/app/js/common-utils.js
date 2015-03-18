@@ -239,15 +239,25 @@ ObjectUtil.copy = function(fromO, toO) {
         toO[name] = fromO[name];
     }
 };
+
 ObjectUtil.clone = function(obj) {
-    if (obj == null) {
-        return null;
+    if (obj == null
+        || typeof obj == "string"
+        || typeof obj == "number"
+    ) {
+        return obj;
     } else if (obj.length == null) {
-        return jQuery.extend(true, {}, obj);
+        var ret = {};
+        for ( var i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                ret[i] = ObjectUtil.clone(obj[i]);
+            }
+        }
+        return ret;
     } else {
         var ret = [];
-        for ( var i in obj) {
-            ret[i] = ObjectUtil.clone(obj[i]);
+        for (var i = 0; i < obj.length; i++) {
+            ret[i] = obj[i];
         }
         return ret;
     }
@@ -524,9 +534,12 @@ Cols.eachPar1 = function(index, col, p2) {
 
 
 Cols.indexOf = function(ele, col, colExtract) {
-    for (var i in col) {
+    if (col==null) {
+        return -1;
+    }
+    for (var i = 0; i < col.length; i++) {
         if (colExtract(col[i]) == ele) {
-            return i * 1;
+            return i;
         }
     }
     return -1;
