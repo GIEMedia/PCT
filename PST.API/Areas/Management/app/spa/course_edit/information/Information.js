@@ -44,9 +44,6 @@
                     });
                 },
                 needSaving: function() {
-                    //console.log("compare: ===========");
-                    //console.log($scope.course);
-                    //console.log($scope.cei.course);
                     return !ObjectUtil.equals($scope.cei.course, $scope.course);
                 }
             });
@@ -56,16 +53,15 @@
             };
 
             // States
-            $scope.addState = function(state) {
-                $scope.cei.course.state_ceus.push(state);
-            };
 
             $scope.getCat = function(catId) {
                 return Cols.find($scope.categories, function(cat) { return cat.id == catId;});
             };
 
             CourseService.getList().success(function(list) {
-                $scope.courses = list;
+                $scope.prerequisites = Cols.filter(list, function(e) {
+                    return e.id != $stateParams.courseId;
+                });
             });
 
         })
