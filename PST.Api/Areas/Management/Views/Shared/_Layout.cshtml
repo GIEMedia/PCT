@@ -58,7 +58,7 @@
     <!-- spa-js end -->
 
 </head>
-<body>
+<body onbeforeunload="return beforeUnload()">
 <div class="wrapper">
     <content-side-nav ng-if="$state.current.name != 'login'"></content-side-nav>
 

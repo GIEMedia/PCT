@@ -48,7 +48,6 @@
                     function addCategoryModal() {
                         var defer = $q.defer();
                         Modals.promptText("New category name").then(function(newName) {
-
                             CategoryService.addCategory(newName).then(function(resp) {
                                 defer.resolve(resp.data);
                             });

@@ -180,6 +180,28 @@
                 }
             };
         })
+
+        .factory("WindowService", function() {
+            var beforeUnloads = [];
+            window.beforeUnload = function() {
+                for (var i = 0; i < beforeUnloads.length; i++) {
+                    var check = beforeUnloads[i]();
+                    if (check != null) {
+                        return check;
+                    }
+                }
+                return null;
+            };
+            return {
+                beforeUnload: function($scope, func) {
+                    beforeUnloads.push(func);
+                    $scope.$on("$destroy", function() {
+                        Cols.remove(func, beforeUnloads);
+                    });
+
+                }
+            };
+        })
     ;
 
 })();

@@ -22,7 +22,7 @@
             ;
         })
 
-        .controller("courseEdit.Ctrl", function ($scope, $state, $q, $stateParams, LayoutService, CourseService) {
+        .controller("courseEdit.Ctrl", function ($scope, $state, $q, $stateParams, LayoutService, CourseService, WindowService) {
             var footerControl = LayoutService.setCustomFooter($scope, {
                 templateUrl: "/Areas/Management/app/spa/course_edit/CourseEditFooter.html"
             });
@@ -36,11 +36,19 @@
                 }
             });
 
-            //$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-            //    if (fromState.name == "login" && sessionStorage.access_token == null) {
-            //        event.preventDefault();
-            //    }
-            //});
+            // Confirm leave if has unsaved changes
+            WindowService.beforeUnload($scope, function() {
+                return $scope.needSaving() ? "Course changes hasn't been saved." : null;
+            });
+
+            $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+                if (toState.name.indexOf("courseEdit.") != 0
+                    && $scope.needSaving()
+                    && !confirm("Course changes hasn't been saved." + "\n\nAre you sure want to leave this page?")
+                ) {
+                    event.preventDefault();
+                }
+            });
 
             if ($stateParams.courseId == "new") {
                 $scope.course = {
@@ -134,5 +142,4 @@
         })
 
     ;
-
 })();
