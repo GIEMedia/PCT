@@ -41,27 +41,6 @@
             };
         })
 
-        .directive("iconRename", function() {
-            return {
-                restrict: "C",
-                link: function($scope, elem, attrs) {
-                    elem.on('click', function (e) {
-                        var tr = elem.closest('tr');
-                        tr.addClass('editing');
-                        tr.find('.section-name .field').focus();
-
-                        tr.find('.name-edit .fa').on('click', function (e) {
-                            tr.removeClass('editing');
-                            e.preventDefault();
-                        });
-
-                        e.preventDefault();
-                    });
-                }
-            };
-        })
-
-
         .directive("pctOptions", function($parse) {
             var parse = function(exp) {
                 var getter;

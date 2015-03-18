@@ -8,24 +8,24 @@
             <th width="9%"># Questions</th>
         </tr>
 
-        <tr ng-repeat="section in sections">
+        <tr ng-repeat="section in sections" edit-name ng-class="{editing: editName.editing}">
             <td>{{$index + 1}}</td>
 
             <td class="section-name">
                 <span class="name">{{section.title}}</span>
                 <span class="name-edit">
-                    <input type="text" class="field" value="Trade Name/Ingredients/First Aid" placeholder="Section name" />
-                    <a href="#" class="fa fa-save"></a>
-                    <a href="#" class="fa fa-close"></a>
+                    <input type="text" class="field" ng-model="editName.title" placeholder="Section name" pct-focus="editName.editing"/>
+                    <a href="" class="fa fa-save" ng-click="saveTitle()"></a>
+                    <a href="" class="fa fa-close" ng-click="editName.editing = false"></a>
                 </span>
             </td>
 
             <td>
                 <div class="icons">
-                    <a href="#" class="fa fa-arrows"></a>
-                    <a href="#" class="icon icon-rename"></a>
+                    <a href="" class="fa fa-arrows"></a>
+                    <a href="" class="icon icon-rename" ng-click="editName.editing = true"></a>
                     <a href="4.PCT.Section.Edit.html" class="fa fa-pencil"></a>
-                    <a href="#" class="fa fa-trash-o"></a>
+                    <a href="" class="fa fa-trash-o"></a>
                 </div><!-- /.icons -->
             </td>
 
@@ -33,7 +33,7 @@
                 <div class="view-document-info"><i class="fa fa-file-pdf-o"></i> <span>{{section.document.pages.length}} page(s)</span></div>
                 <div class="view-document-link"><a href="#"><i class="fa fa-search"></i></a><a href="#"><i class="fa fa-upload"></i></a><a href="#"><i class="fa fa-trash"></i></a></div>
             </td>
-            
+
             <td class="text-center padding-vert-0 view-document" ng-if="!section.document.pages.length">
                 <div class="view-document-info"><i class="fa fa-minus-circle"></i></div>
                 <a href="#" class="view-document-link"><i class="fa fa-upload"></i></a>
