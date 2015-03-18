@@ -65,7 +65,6 @@
 
                 return getter;
             };
-
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -73,6 +72,7 @@
                         autoWidth: false,
                         defaultText: "Select..."
                     });
+
                     var neverSelected = true;
 
                     var model = $parse(attrs.pctModel);
@@ -88,14 +88,21 @@
                     var updateV = function (value) {
                         var control = elem.data("selectBox-selectBoxIt");
 
-                        var index = Cols.indexOf(value, list, valueM);
+                        var index = (value == null && attrs.nullOption) ? -1 : Cols.indexOf(value, list, valueM);
                         //console.log("Index: " + index + ", currentFocus: " + control.currentFocus);
-                        if (index != -1 && (neverSelected || index != control.currentFocus)) { // Force change when neverSelected because it maybe the defaultText (==0)
-                            updatingView = true;
-                            control.selectOption(index);
-                            updatingView = false;
-                            //console.log("Go to index: " + index);
-                            neverSelected = false;
+
+                        if (index != -1 || (value == null && attrs.nullOption)) {
+                            if (attrs.nullOption) {
+                                index += 1;
+                            }
+
+                            if (neverSelected || index != control.currentFocus) { // Force change when neverSelected because it maybe the defaultText (==0)
+                                updatingView = true;
+                                control.selectOption(index);
+                                updatingView = false;
+                                //console.log("Go to index: " + index);
+                                neverSelected = false;
+                            }
                         }
                     };
 
@@ -118,6 +125,9 @@
                             return;
                         }
 
+                        if (attrs.nullOption) {
+                            control.add({value: null, text: attrs.nullOption});
+                        }
                         control.add(Cols.yield(listVal, function(e) {
                             var value = valueM(e);
                             var text = textM(e);
@@ -130,13 +140,26 @@
 
                     });
 
+                    var currentValue = function() {
+                        var control = elem.data("selectBox-selectBoxIt");
+                        var index = control.currentFocus;
+
+                        if (attrs.nullOption) {
+                            index -= 1;
+                        }
+
+                        if (index == -1) {
+                            return null;
+                        }
+                        return valueM(list[index]);
+                    };
+
                     elem.bind({
                         "change": function(ev, obj) {
                             if (updatingView) {
                                 return;
                             }
-                            var control = elem.data("selectBox-selectBoxIt");
-                            var vValue = valueM(list[control.currentFocus]);
+                            var vValue = currentValue();
                             $scope.$applyAsync(function() {
                                 //console.log("Change model to " + vValue);
                                 model.assign($scope, vValue);

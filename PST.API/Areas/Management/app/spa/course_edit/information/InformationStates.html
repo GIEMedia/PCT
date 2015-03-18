@@ -22,7 +22,7 @@
     </div><!-- /.table-col -->
 
     <div class="table-col col-size-2">
-        <h4>{{cei.course.state_ceus.length}} States</h4>
+        <h4>{{(cei.course.state_ceus.length || 0) == 0 ? "No state(s) selected" : cei.course.state_ceus.length + " States"}}</h4>
     </div><!-- /.table-col -->
 
     <div class="table-col col-size-3">
@@ -50,7 +50,7 @@
         <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
 
         <div class="table-col col-size-2">
-            <h3>No state(s) available</h3>
+            <h3>No state(s) selected</h3>
         </div><!-- /.table-col -->
     </div><!-- /.table-row -->
 
