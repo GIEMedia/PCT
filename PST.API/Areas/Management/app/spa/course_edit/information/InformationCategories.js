@@ -15,9 +15,11 @@
 
                     $scope.$watch("cei.course != null && categories != null", function(value) {
                         if (value) {
-                            $scope.$watch("cei.course.category", function(value) {
-                                $scope.cei.course.sub_category = null;
-                            });
+                            setTimeout(function () {
+                                $scope.$watch("cei.course.category", function(value) {
+                                    $scope.cei.course.sub_category = null;
+                                });
+                            }, 0);
                         }
                     });
 
