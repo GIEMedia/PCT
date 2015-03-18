@@ -22,12 +22,6 @@
 
             $scope.$watch("course", function(course) {
                 $scope.cei.course = ObjectUtil.clone(course);
-                if (course) {
-                    LayoutService.setBreadCrumbs($scope, {
-                        sub: course.id == null ? "New" : course.title,
-                        rootState: "courses"
-                    });
-                }
             });
 
             $scope.setCel({

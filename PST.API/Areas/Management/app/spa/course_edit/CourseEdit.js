@@ -27,6 +27,16 @@
                 templateUrl: "/Areas/Management/app/spa/course_edit/CourseEditFooter.html"
             });
 
+            $scope.$watch("course", function(course) {
+                if (course) {
+                    LayoutService.setBreadCrumbs($scope, {
+                        sub: course.id == null ? "New" : course.title,
+                        rootState: "courses"
+                    });
+                }
+            });
+
+
             if ($stateParams.courseId == "new") {
                 $scope.course = {
                     state_ceus: [],
@@ -80,7 +90,7 @@
             };
 
             $scope.needSaving = function() {
-                return $scope.cel.save && ($scope.cel.needSaving == null || $scope.cel.needSaving());
+                return $scope.cel.save && $scope.cel.needSaving != null && $scope.cel.needSaving();
             };
 
             $scope.saveCourse = function(then) {

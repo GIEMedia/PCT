@@ -16,11 +16,6 @@
         })
 
         .controller("courseEdit.sections.Ctrl", function ($scope, LayoutService) {
-            LayoutService.setBreadCrumbs($scope, {
-                sub: $scope.course.title,
-                rootState: "courses"
-            });
-
             $scope.setCel({
                 step: 1
             });
