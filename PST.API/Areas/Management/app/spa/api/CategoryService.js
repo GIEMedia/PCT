@@ -22,6 +22,9 @@
                 },
                 addCategory: function(catName) {
                     return Api.put("api/manage/course/category", JSON.stringify(catName));
+                },
+                addSubCategory: function(parentId, catName) {
+                    return Api.put("api/manage/course/category?parentCategoryID=" + parentId, JSON.stringify(catName));
                 }
             };
         })

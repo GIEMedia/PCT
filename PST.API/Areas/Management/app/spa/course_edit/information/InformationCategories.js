@@ -32,12 +32,32 @@
                             $scope.cei.course.category = newCat.id;
                         });
                     };
+                    $scope.addNewSubCategory = function() {
+                        var cat = $scope.getCat($scope.cei.course.category);
+                        addSubCategoryModal(cat.id).then(function(newSubCat) {
+                            var newSubCats = ObjectUtil.clone(cat.sub_categories);
+                            newSubCats.push(newSubCat);
+                            cat.sub_categories = newSubCats;
+
+                            $scope.cei.course.sub_category = newSubCat.id;
+                        });
+                    };
 
                     function addCategoryModal() {
                         var defer = $q.defer();
                         Modals.promptText("New category name").then(function(newName) {
 
                             CategoryService.addCategory(newName).then(function(resp) {
+                                defer.resolve(resp.data);
+                            });
+                        });
+                        return defer.promise;
+                    }
+                    function addSubCategoryModal(parentId) {
+                        var defer = $q.defer();
+                        Modals.promptText("New sub category name").then(function(newName) {
+
+                            CategoryService.addSubCategory(parentId, newName).then(function(resp) {
                                 defer.resolve(resp.data);
                             });
                         });
