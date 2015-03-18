@@ -3,8 +3,9 @@
 (function () {
 
     angular.module('pct.management.courseEdit.information.categories', [
+        'pct.fancybox'
     ])
-        .directive("courseInformationCategories", function($q, CategoryService, Modals) {
+        .directive("courseInformationCategories", function($q, CategoryService, Fancybox) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -47,19 +48,19 @@
 
                     function addCategoryModal() {
                         var defer = $q.defer();
-                        Modals.promptText("New category name").then(function(newName) {
-                            CategoryService.addCategory(newName).then(function(resp) {
-                                defer.resolve(resp.data);
+                        Fancybox.promptText("New category name").then(function(newName) {
+                            CategoryService.addCategory(newName).success(function(cat) {
+                                defer.resolve(cat);
                             });
                         });
                         return defer.promise;
                     }
                     function addSubCategoryModal(parentId) {
                         var defer = $q.defer();
-                        Modals.promptText("New sub category name").then(function(newName) {
+                        Fancybox.promptText("New sub category name").then(function(newName) {
 
-                            CategoryService.addSubCategory(parentId, newName).then(function(resp) {
-                                defer.resolve(resp.data);
+                            CategoryService.addSubCategory(parentId, newName).success(function(subCat) {
+                                defer.resolve(subCat);
                             });
                         });
                         return defer.promise;
@@ -68,79 +69,6 @@
             };
         })
 
-        .factory("Modals", function($q, $compile, $templateCache, $http, $controller, $rootScope) {
-            var open = function($scope, options) {
-                //options.templateUrl
-                var templatePromise = $http.get(options.templateUrl, {cache: $templateCache}).then(function (result) {
-                    return result.data;
-                });
-
-                var closeListeners = [];
-                templatePromise.then(function(content) {
-
-                    var invokeCloseListeners = function() {
-                        Fs.invokeAll(closeListeners);
-                        closeListeners = [];
-                    };
-
-                    var close = function () {
-                        $.fancybox.close();
-                    };
-                    $controller(options.controller, {'$scope': $scope, "$modalInstance": { close: close, dismiss: close }});
-                    var contentEl = $compile(angular.element(content))($scope);
-
-                    var fancybox = $.fancybox({
-                        content: contentEl,
-                        maxWidth: 750,
-                        width: 'auto',
-                        height: 'auto',
-                        fitToView: false,
-                        autoSize: false,
-                        afterClose: invokeCloseListeners,
-                        closeClick: false
-                    });
-
-                    $scope.$on("$destroy", close);
-
-                });
-
-                return {
-                    onClose: function(cl) {
-                        closeListeners.push(cl);
-                    }
-                };
-
-            };
-
-            return {
-                open: open,
-                promptText: function (prompt) {
-                    var defer = $q.defer();
-
-                    var modalScope = $rootScope.$new(true);
-                    modalScope.$on('$destroy', function () {
-                    });
-                    open(modalScope, {
-                        templateUrl: "/Areas/Management/app/spa/course_edit/information/ajax/popup-text.html",
-                        controller: function($scope, $modalInstance) {
-                            $scope.placeholder = prompt;
-                            $scope.pop = {
-                                text: null
-                            };
-                            $scope.close = $modalInstance.close;
-                            $scope.save = function() {
-                                defer.resolve($scope.pop.text);
-                                $modalInstance.close();
-                            };
-                        }
-                    })
-                        .onClose(function() {
-                            modalScope.$destroy();
-                        });
-                    return defer.promise;
-                }
-            };
-        })
     ;
 
 })();

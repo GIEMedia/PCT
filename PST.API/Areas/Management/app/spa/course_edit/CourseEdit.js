@@ -27,13 +27,13 @@
                 templateUrl: "/Areas/Management/app/spa/course_edit/CourseEditFooter.html"
             });
 
-            $scope.$watch("course", function(course) {
-                if (course) {
-                    LayoutService.setBreadCrumbs($scope, {
-                        sub: course.id == null ? "New" : course.title,
-                        rootState: "courses"
-                    });
-                }
+            var breadcrumbs = {
+                sub: "New",
+                rootState: "courses"
+            };
+            LayoutService.setBreadCrumbs($scope, breadcrumbs);
+            $scope.$watch("course.title || 'New'", function(title) {
+                breadcrumbs.sub = title;
             });
 
             // Confirm leave if has unsaved changes
