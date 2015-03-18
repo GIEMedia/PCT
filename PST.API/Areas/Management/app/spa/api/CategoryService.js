@@ -16,10 +16,12 @@
                 "title":"Main Cat"
             };
 
-
             return {
                 getList: function() {
                     return Api.get("api/manage/course/categories");
+                },
+                addCategory: function(catName) {
+                    return Api.put("api/manage/course/category", JSON.stringify(catName));
                 }
             };
         })

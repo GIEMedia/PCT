@@ -58,7 +58,6 @@
                 $scope.courses = list;
             });
 
-            ///Areas/Management/app/spa/course_edit/information/ajax/popup-new-category.html
         })
     ;
 
