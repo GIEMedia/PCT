@@ -38,12 +38,16 @@
             var sendHttp = function(method, url, data) {
                 return handleError($http({
                     method: method,
-                    url: url,
+                    url: (_host==null? "" : "http://" + _host + "/") + url,
                     headers: {'Authorization': "Bearer " + sessionStorage.access_token},
                     data: data
                 }));
             };
+            var _host = null;
             return {
+                setHost: function(host) {
+                    _host = host;
+                },
                 get: function(url) {
                     return sendHttp("GET", url);
                 },
@@ -59,7 +63,7 @@
                 postForm: function(url, data) {
                     return handleError($http({
                         method: 'POST',
-                        url: url,
+                        url: (_host==null? "" : "http://" + _host + "/") + url,
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                         transformRequest: function(obj) {
                             var str = [];

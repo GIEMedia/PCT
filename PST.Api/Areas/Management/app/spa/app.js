@@ -18,25 +18,11 @@
         'pct.management.api.category',
         'pct.management.api.state',
 
-            //'angularMoment',
-            //'ngResource'
     ])
 
-        .run(function ($rootScope, $state, $stateParams) {
-            $rootScope.$state = $state;
-            $rootScope.$stateParams = $stateParams;
-        })
-
-        .config(function ($compileProvider) {
-            if ($compileProvider.debugInfoEnabled) {
-                $compileProvider.debugInfoEnabled(false);
-            }
-        })
-
-        .config(function ($stateProvider, $urlRouterProvider) {
-            $urlRouterProvider
-                // If the url is ever invalid, e.g. '/asdf', then redirect to '/' aka the home state
-                .otherwise("/login");
+        .run(function (Api) {
+            // For development
+            Api.setHost("localhost:53130");
         })
 
     ;

@@ -17,7 +17,7 @@
 
         .controller("courseEdit.sections.Ctrl", function ($scope, LayoutService) {
             LayoutService.setBreadCrumbs($scope, {
-                sub: "Bayer: MaxForce Impact Roach Gel Bait",
+                sub: $scope.course.title,
                 rootState: "courses"
             });
 

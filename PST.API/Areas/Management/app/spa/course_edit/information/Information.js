@@ -17,11 +17,17 @@
             ;
         })
 
-        .controller("courseEdit.information.Ctrl", function ($scope, $stateParams, $parse, $q, LayoutService, CourseService) {
+        .controller("courseEdit.information.Ctrl", function ($scope, $state, $stateParams, $parse, $q, LayoutService, CourseService) {
             // Layout
-            LayoutService.setBreadCrumbs($scope, {
-                sub: "New",
-                rootState: "courses"
+
+            $scope.$watch("course", function(course) {
+                $scope.cei.course = ObjectUtil.clone(course);
+                if (course) {
+                    LayoutService.setBreadCrumbs($scope, {
+                        sub: course.id == null ? "New" : course.title,
+                        rootState: "courses"
+                    });
+                }
             });
 
             $scope.setCel({
@@ -30,7 +36,11 @@
                     return CourseService.upsert($scope.cei.course).success(function(course) {
                         ObjectUtil.clear($scope.course);
                         ObjectUtil.copy(course, $scope.course);
-                        $scope.cei.course = course;
+                        if ($scope.cei.course.id==null) {
+                            $state.go("courseEdit.information", {courseId: course.id});
+                        } else {
+                            $scope.cei.course = course;
+                        }
                     });
                 },
                 needSaving: function() {
@@ -44,9 +54,6 @@
             $scope.cei = {
                 course: null
             };
-            $scope.$watch("course", function(value) {
-                $scope.cei.course = ObjectUtil.clone(value);
-            });
 
             // States
             $scope.addState = function(state) {

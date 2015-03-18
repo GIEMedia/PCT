@@ -3,7 +3,6 @@
 (function () {
 
     angular.module('pct.management.login', [
-            'ui.router'
     ])
     
         .config(function ($stateProvider) {

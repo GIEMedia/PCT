@@ -35,7 +35,7 @@
                     $scope.addNewSubCategory = function() {
                         var cat = $scope.getCat($scope.cei.course.category);
                         addSubCategoryModal(cat.id).then(function(newSubCat) {
-                            var newSubCats = ObjectUtil.clone(cat.sub_categories);
+                            var newSubCats = ObjectUtil.clone(cat.sub_categories) || [];
                             newSubCats.push(newSubCat);
                             cat.sub_categories = newSubCats;
 
