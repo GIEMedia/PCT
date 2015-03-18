@@ -15,7 +15,7 @@
             ;
         })
 
-        .controller("courseEdit.publish.Ctrl", function ($scope, LayoutService) {
+        .controller("courseEdit.publish.Ctrl", function ($scope) {
             $scope.setCel({
                 step: 4,
                 save: null

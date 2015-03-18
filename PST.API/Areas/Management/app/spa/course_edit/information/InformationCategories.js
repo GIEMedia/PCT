@@ -13,11 +13,13 @@
                         $scope.categories = categories;
                     });
 
-                    $scope.$watch("cei.course != null && categories != null", function(value) {
-                        if (value) {
+                    $scope.$watch("cei.course != null && categories != null", function(v) {
+                        if (v) {
                             setTimeout(function () {
-                                $scope.$watch("cei.course.category", function(value) {
-                                    $scope.cei.course.sub_category = null;
+                                $scope.$watch("cei.course.category", function(n, o) {
+                                    if (n != o) {
+                                        $scope.cei.course.sub_category = null;
+                                    }
                                 });
                             }, 0);
                         }

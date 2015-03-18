@@ -38,6 +38,9 @@
                     });
                 },
                 needSaving: function() {
+                    //console.log("=========");
+                    //console.log($scope.course);
+                    //console.log($scope.cei.course);
                     return !ObjectUtil.equals($scope.cei.course, $scope.course);
                 }
             });

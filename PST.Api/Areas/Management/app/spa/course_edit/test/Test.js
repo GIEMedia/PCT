@@ -15,7 +15,7 @@
             ;
         })
 
-        .controller("courseEdit.test.Ctrl", function ($scope, LayoutService) {
+        .controller("courseEdit.test.Ctrl", function ($scope) {
             $scope.setCel({
                 step: 2,
                 save: null

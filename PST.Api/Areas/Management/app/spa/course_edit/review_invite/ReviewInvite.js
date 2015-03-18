@@ -15,7 +15,7 @@
             ;
         })
 
-        .controller("courseEdit.reviewInvite.Ctrl", function ($scope, LayoutService) {
+        .controller("courseEdit.reviewInvite.Ctrl", function ($scope) {
             $scope.setCel({
                 step: 3,
                 save: null

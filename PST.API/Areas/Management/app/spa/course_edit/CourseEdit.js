@@ -36,6 +36,11 @@
                 }
             });
 
+            //$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+            //    if (fromState.name == "login" && sessionStorage.access_token == null) {
+            //        event.preventDefault();
+            //    }
+            //});
 
             if ($stateParams.courseId == "new") {
                 $scope.course = {

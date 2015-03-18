@@ -29,23 +29,23 @@
                     $scope.states = StateService.getStates();
 
                     $scope.$watch("states == null ? -1 : cei.course.state_ceus.length", function(v) {
-                        console.log(v);
+                        //console.log(v);
                         if (v == -1) {return;}
 
                         var ids = {};
                         if ($scope.cei.course) {
-                            console.log($scope.cei.course.state_ceus);
+                            //console.log($scope.cei.course.state_ceus);
                             Cols.each($scope.cei.course.state_ceus, function(s) {
                                 ids[s.state] = true;
                             });
                         }
 
-                        console.log($scope.states);
-                        console.log(ids);
+                        //console.log($scope.states);
+                        //console.log(ids);
                         $scope.filteredStates = Cols.filter($scope.states, function(s) {
                             return !ids[s.code];
                         });
-                        console.log($scope.filteredStates.length);
+                        //console.log($scope.filteredStates.length);
                     });
 
                     $scope.stateByCode = function(code) {
