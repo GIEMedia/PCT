@@ -41,18 +41,27 @@
             };
         })
 
-        //.directive("select", function() {
-        //    return {
-        //        restrict: "E",
-        //        link: function($scope, elem, attrs, ngModelCtrl) {
-        //            elem.selectBoxIt({
-        //                autoWidth: false,
-        //                defaultText: "Select"
-        //            });
-        //
-        //        }
-        //    };
-        //})
+        .directive("iconRename", function() {
+            return {
+                restrict: "C",
+                link: function($scope, elem, attrs) {
+                    elem.on('click', function (e) {
+                        var tr = elem.closest('tr');
+                        tr.addClass('editing');
+                        tr.find('.section-name .field').focus();
+
+                        tr.find('.name-edit .fa').on('click', function (e) {
+                            tr.removeClass('editing');
+                            e.preventDefault();
+                        });
+
+                        e.preventDefault();
+                    });
+                }
+            };
+        })
+
+
         .directive("pctOptions", function($parse) {
             var parse = function(exp) {
                 var getter;
@@ -197,22 +206,6 @@
             };
         })
 
-        //.directive("popupOpen", function() {
-        //    return {
-        //        restrict: "C",
-        //        link: function($scope, elem, attrs) {
-        //            // Popup
-        //            elem.fancybox({
-        //                maxWidth	: 750,
-        //                width		: 'auto',
-        //                height		: 'auto',
-        //                fitToView	: false,
-        //                autoSize	: false,
-        //                closeClick	: false
-        //            });
-        //        }
-        //    };
-        //})
     ;
 
 })();

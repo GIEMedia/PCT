@@ -2,178 +2,48 @@
     <table>
         <tr>
             <th width="8%">Section</th>
-
             <th width="44%">&nbsp;</th>
-
             <th width="25%">&nbsp;</th>
-
             <th width="14%" class="text-center">Document</th>
-
             <th width="9%"># Questions</th>
         </tr>
 
-        <tr>
-            <td>1</td>
+        <tr ng-repeat="section in sections">
+            <td>{{$index + 1}}</td>
 
             <td class="section-name">
-                <span class="name">Trade Name/Ingredients/First Aid</span>
-                                            <span class="name-edit">
-                                                <input type="text" class="field" value="Trade Name/Ingredients/First Aid" placeholder="Section name" />
-                                                <a href="#" class="fa fa-save"></a>
-                                                <a href="#" class="fa fa-close"></a>
-                                            </span>
+                <span class="name">{{section.title}}</span>
+                <span class="name-edit">
+                    <input type="text" class="field" value="Trade Name/Ingredients/First Aid" placeholder="Section name" />
+                    <a href="#" class="fa fa-save"></a>
+                    <a href="#" class="fa fa-close"></a>
+                </span>
             </td>
 
             <td>
                 <div class="icons">
                     <a href="#" class="fa fa-arrows"></a>
-
                     <a href="#" class="icon icon-rename"></a>
-
                     <a href="4.PCT.Section.Edit.html" class="fa fa-pencil"></a>
-
                     <a href="#" class="fa fa-trash-o"></a>
                 </div><!-- /.icons -->
             </td>
 
-            <td class="text-center padding-vert-0 view-document">
-                <div class="view-document-info"><i class="fa fa-file-pdf-o"></i> <span>2 page(s)</span></div>
+            <td class="text-center padding-vert-0 view-document" ng-if="section.document.pages.length">
+                <div class="view-document-info"><i class="fa fa-file-pdf-o"></i> <span>{{section.document.pages.length}} page(s)</span></div>
                 <div class="view-document-link"><a href="#"><i class="fa fa-search"></i></a><a href="#"><i class="fa fa-upload"></i></a><a href="#"><i class="fa fa-trash"></i></a></div>
             </td>
-
-            <td>2</td>
-        </tr>
-
-        <tr>
-            <td>2</td>
-
-            <td class="section-name">
-                <span class="name">Precautionary Statements</span>
-                                            <span class="name-edit">
-                                                <input type="text" class="field" value="Precautionary Statements" placeholder="Section name" />
-                                                <a href="#" class="fa fa-save"></a>
-                                                <a href="#" class="fa fa-close"></a>
-                                            </span>
-            </td>
-
-            <td>
-                <div class="icons">
-                    <a href="#" class="fa fa-arrows"></a>
-
-                    <a href="#" class="icon icon-rename"></a>
-
-                    <a href="4.PCT.Section.Edit.html" class="fa fa-pencil"></a>
-
-                    <a href="#" class="fa fa-trash-o"></a>
-                </div><!-- /.icons -->
-            </td>
-
-            <td class="text-center padding-vert-0 view-document">
-                <div class="view-document-info"><i class="fa fa-file-pdf-o"></i> <span>1 page(s)</span></div>
-                <div class="view-document-link"><a href="#"><i class="fa fa-search"></i></a><a href="#"><i class="fa fa-upload"></i></a><a href="#"><i class="fa fa-trash"></i></a></div>
-            </td>
-
-            <td>3</td>
-        </tr>
-
-        <tr>
-            <td>3</td>
-
-            <td class="section-name">
-                <span class="name">Directions for Use − Directions for Application</span>
-                                            <span class="name-edit">
-                                                <input type="text" class="field" value="Directions for Use − Directions for Application" placeholder="Section name" />
-                                                <a href="#" class="fa fa-save"></a>
-                                                <a href="#" class="fa fa-close"></a>
-                                            </span>
-            </td>
-
-            <td>
-                <div class="icons">
-                    <a href="#" class="fa fa-arrows"></a>
-
-                    <a href="#" class="icon icon-rename"></a>
-
-                    <a href="4.PCT.Section.Edit.html" class="fa fa-pencil"></a>
-
-                    <a href="#" class="fa fa-trash-o"></a>
-                </div><!-- /.icons -->
-            </td>
-
-            <td class="text-center padding-vert-0 view-document">
+            
+            <td class="text-center padding-vert-0 view-document" ng-if="!section.document.pages.length">
                 <div class="view-document-info"><i class="fa fa-minus-circle"></i></div>
                 <a href="#" class="view-document-link"><i class="fa fa-upload"></i></a>
             </td>
 
-            <td>2</td>
+            <td>{{section.num_questions}}</td>
         </tr>
 
         <tr>
-            <td>4</td>
-
-            <td class="section-name">
-                <span class="name">Directions for Use − Ants Cockroaches</span>
-                                            <span class="name-edit">
-                                                <input type="text" class="field" value="Directions for Use − Ants Cockroaches" placeholder="Section name" />
-                                                <a href="#" class="fa fa-save"></a>
-                                                <a href="#" class="fa fa-close"></a>
-                                            </span>
-            </td>
-
-            <td>
-                <div class="icons">
-                    <a href="#" class="fa fa-arrows"></a>
-
-                    <a href="#" class="icon icon-rename"></a>
-
-                    <a href="4.PCT.Section.Edit.html" class="fa fa-pencil"></a>
-
-                    <a href="#" class="fa fa-trash-o"></a>
-                </div><!-- /.icons -->
-            </td>
-
-            <td class="text-center padding-vert-0 view-document">
-                <div class="view-document-info"><i class="fa fa-file-pdf-o"></i> <span>1 page(s)</span></div>
-                <div class="view-document-link"><a href="#"><i class="fa fa-search"></i></a><a href="#"><i class="fa fa-upload"></i></a><a href="#"><i class="fa fa-trash"></i></a></div>
-            </td>
-
-            <td>5</td>
-        </tr>
-
-        <tr>
-            <td>5</td>
-
-            <td class="section-name">
-                <span class="name">Directions for Use − Crawling Pests/Stored Food Beetles</span>
-                                            <span class="name-edit">
-                                                <input type="text" class="field" value="Directions for Use − Crawling Pests/Stored Food Beetles" placeholder="Section name" />
-                                                <a href="#" class="fa fa-save"></a>
-                                                <a href="#" class="fa fa-close"></a>
-                                            </span>
-            </td>
-
-            <td>
-                <div class="icons">
-                    <a href="#" class="fa fa-arrows"></a>
-
-                    <a href="#" class="icon icon-rename"></a>
-
-                    <a href="4.PCT.Section.Edit.html" class="fa fa-pencil"></a>
-
-                    <a href="#" class="fa fa-trash-o"></a>
-                </div><!-- /.icons -->
-            </td>
-
-            <td class="text-center padding-vert-0 view-document">
-                <div class="view-document-info"><i class="fa fa-file-pdf-o"></i> <span>12 page(s)</span></div>
-                <div class="view-document-link"><a href="#"><i class="fa fa-search"></i></a><a href="#"><i class="fa fa-upload"></i></a><a href="#"><i class="fa fa-trash"></i></a></div>
-            </td>
-
-            <td>2</td>
-        </tr>
-
-        <tr>
-            <td>6</td>
+            <td>{{sections.length + 1}}</td>
 
             <td><input type="text" class="field" placeholder="Add new section" /></td>
 

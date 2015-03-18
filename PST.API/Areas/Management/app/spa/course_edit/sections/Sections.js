@@ -15,9 +15,17 @@
             ;
         })
 
-        .controller("courseEdit.sections.Ctrl", function ($scope) {
+        .controller("courseEdit.sections.Ctrl", function ($scope, SectionService) {
             $scope.setCel({
                 step: 1
+            });
+
+            $scope.$watch("course", function(course) {
+                if (course) {
+                    SectionService.getList(course.id).success(function(sections) {
+                        $scope.sections = sections;
+                    });
+                }
             });
         })
     ;

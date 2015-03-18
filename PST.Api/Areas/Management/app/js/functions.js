@@ -33,21 +33,6 @@
 			e.preventDefault();
 		});
 
-
-		$('.icon-rename').on('click', function (e) {
-		    $(this).parents('tr').addClass('editing');
-		    $(this).closest('tr').find('.section-name .field').focus();
-
-		    $('.editing .name-edit .fa').on('click', function (e) {
-		        console.log($(this).closest('tr'));
-		        $(this).closest('tr').removeClass('editing');
-
-		        e.preventDefault();
-		    });
-
-	        e.preventDefault();
-		});
-
 		// Table questions
 		$('.custom-table-questions .table-row').on('mouseenter', function() {
 			if (!$(this).hasClass('expanded')) {

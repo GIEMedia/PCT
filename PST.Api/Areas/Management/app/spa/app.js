@@ -15,9 +15,9 @@
         'pct.management.users',
 
         'pct.management.api.course',
+        'pct.management.api.section',
         'pct.management.api.category',
-        'pct.management.api.state',
-
+        'pct.management.api.state'
     ])
 
         .run(function (Api) {
