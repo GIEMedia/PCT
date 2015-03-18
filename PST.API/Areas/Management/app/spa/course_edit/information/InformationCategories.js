@@ -16,12 +16,13 @@
 
                     $scope.$watch("cei.course != null && categories != null", function(v) {
                         if (v) {
-                            setTimeout(function () {
+                            setTimeout(function () { // This is to escape current digest cycle
                                 $scope.$watch("cei.course.category", function(n, o) {
                                     if (n != o) {
                                         $scope.cei.course.sub_category = null;
                                     }
                                 });
+                                if (!$scope.$$phase) $scope.$digest();
                             }, 0);
                         }
                     });

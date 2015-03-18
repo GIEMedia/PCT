@@ -27,15 +27,25 @@
             $scope.setCel({
                 step: 0,
                 save: function() {
-                    return CourseService.upsert($scope.cei.course).success(function(course) {
-                        ObjectUtil.clear($scope.course);
-                        ObjectUtil.copy(course, $scope.course);
-                        if ($scope.cei.course.id==null) {
-                            $state.go("courseEdit.information", {courseId: course.id});
-                        } else {
-                            $scope.cei.course = course;
-                        }
-                    });
+                    var defer = $q.defer();
+                    if (StringUtil.isEmpty($scope.cei.course.title)) {
+                        defer.reject("Please provide course's title");
+                    } else if (StringUtil.isEmpty($scope.cei.course.sub_category)) {
+                        defer.reject("Please provide course's sub category");
+                    } else {
+                        CourseService.upsert($scope.cei.course).success(function(course) {
+                            ObjectUtil.clear($scope.course);
+                            ObjectUtil.copy(course, $scope.course);
+                            if ($scope.cei.course.id==null) {
+                                $state.go("courseEdit.information", {courseId: course.id});
+                            } else {
+                                $scope.cei.course = course;
+                            }
+                            defer.resolve();
+                        });
+                    }
+                    return defer.promise;
+
                 },
                 needSaving: function() {
                     //console.log("=========");

@@ -109,10 +109,15 @@
             $scope.saveCourse = function(then) {
                 var defer = $q.defer();
                 $scope.ce.saving = true;
-                $scope.cel.save().then(function() {
-                    $scope.ce.saving = false;
-                    defer.resolve();
-                });
+                $scope.cel.save()
+                    .catch(function(reason) {
+                        alert(reason);
+                    })
+                    .then(function() {
+                        $scope.ce.saving = false;
+                        defer.resolve();
+                    })
+                ;
                 return defer.promise;
             };
 
