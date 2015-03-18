@@ -750,7 +750,7 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 }
 .footer + .footer-nav { bottom: 30px; }
 .footer-secondary { background: #4d4d4d; }
-/*.footer-finished { background: lightgray; }*/
+.footer-finished { background: #4d4d4d; }
 .footer-inner { padding: 11px 25px 10px 20px; }
 
 .footer-nav .fa-trash-o { margin-left: 30px; font-size: 18px; line-height: 18px; color: #b0b0b0; margin-top: 9px; }

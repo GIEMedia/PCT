@@ -43,6 +43,7 @@
             };
             $scope.$watch("course", function(value) {
                 $scope.cei.course = ObjectUtil.clone(value);
+                //console.log("Cloned");
             });
 
             CategoryService.getList().success(function(categories) {
@@ -65,10 +66,10 @@
                 return Cols.find($scope.categories, function(cat) { return cat.id == catId;});
             };
 
-
             CourseService.getList().success(function(list) {
                 $scope.courses = list;
             });
+
         })
     ;
 

@@ -84,13 +84,16 @@
                     var textM = parse(match[2]);
                     var listExp = match[4];
 
+                    var updatingView = false;
                     var updateV = function (value) {
                         var control = elem.data("selectBox-selectBoxIt");
 
                         var index = Cols.indexOf(value, list, valueM);
                         //console.log("Index: " + index + ", currentFocus: " + control.currentFocus);
                         if (index != -1 && (neverSelected || index != control.currentFocus)) { // Force change when neverSelected because it maybe the defaultText (==0)
+                            updatingView = true;
                             control.selectOption(index);
+                            updatingView = false;
                             //console.log("Go to index: " + index);
                             neverSelected = false;
                         }
@@ -98,27 +101,40 @@
 
 
                     $scope.$watch(listExp, function(listVal) {
+                        //console.log("Changed " + listVal + " list=" + list);
+                        if (listVal == list) {
+                            return;
+                        }
                         var control = elem.data("selectBox-selectBoxIt");
-                        list = listVal;
 
-                        control.remove();
+                        if (Cols.isNotEmpty(list)) {
+                            control.remove();
+                            //console.log("Removed all elements");
+                        }
+
+                        list = listVal;
                         neverSelected = true;
                         if (listVal == null) {
                             return;
                         }
-                        Cols.each(listVal, function(e) {
+
+                        control.add(Cols.yield(listVal, function(e) {
                             var value = valueM(e);
                             var text = textM(e);
-                            control.add({value: value, text: text});
-                        });
+                            return {value: value, text: text};
+                        }));
 
                         // Populate current value
                         var value = model($scope);
                         updateV(value);
+
                     });
 
                     elem.bind({
                         "change": function(ev, obj) {
+                            if (updatingView) {
+                                return;
+                            }
                             var control = elem.data("selectBox-selectBoxIt");
                             var vValue = valueM(list[control.currentFocus]);
                             $scope.$applyAsync(function() {
@@ -128,7 +144,9 @@
                         }
                     });
 
+                    //console.log("Watch registered");
                     $scope.$watch(attrs.pctModel, updateV);
+                    //if (!$scope.$$phase) $scope.$digest();
                 }
             };
         })

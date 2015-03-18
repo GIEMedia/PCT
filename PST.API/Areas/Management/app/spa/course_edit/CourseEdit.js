@@ -38,7 +38,7 @@
                 });
             }
 
-            $scope.$watch("{2: 'footer-secondary'}[course.status]", function(styleClass) {
+            $scope.$watch("{2: 'footer-secondary', 1: 'footer-finished'}[course.status]", function(styleClass) {
                 footerControl.setClass(styleClass);
             });
 
