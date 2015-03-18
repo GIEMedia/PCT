@@ -21,7 +21,7 @@
                 <!--<td class="no-record" colspan="5">No section(s) available</td>-->
             <!--</tr>-->
 
-            <tr ng-repeat="section in sections" edit-name ng-class="{editing: editName.editing}">
+            <tr ng-repeat="section in sections" section-row ng-class="{editing: editName.editing}">
                 <td>{{$index + 1}}</td>
 
                 <td class="section-name">
@@ -38,7 +38,7 @@
                         <a href="" class="fa fa-arrows"></a>
                         <a href="" class="icon icon-rename" ng-click="editName.editing = true"></a>
                         <a href="4.PCT.Section.Edit.html" class="fa fa-pencil"></a>
-                        <a href="" class="fa fa-trash-o"></a>
+                        <a href="" class="fa fa-trash-o" ng-click="deleteSection(section)"></a>
                     </div><!-- /.icons -->
                 </td>
 
@@ -58,11 +58,11 @@
             <tr>
                 <td>{{sections.length + 1}}</td>
 
-                <td><input type="text" class="field" placeholder="Add new section" /></td>
+                <td><input type="text" class="field" placeholder="Add new section" ng-model="inserting.title"/></td>
 
                 <td colspan="3">
                     <div class="btns">
-                        <a href="#" class="btn btn-grey">Add</a>
+                        <a href="" class="btn btn-grey" ng-click="addSection()">Add</a>
 
                         <a href="4.PCT.Section.Edit.html" class="btn btn-green">Add &amp; Build</a>
                     </div><!-- /.btns -->
