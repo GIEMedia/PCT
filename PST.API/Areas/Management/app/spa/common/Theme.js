@@ -199,6 +199,33 @@
                 }
             };
         })
+
+        .directive("expandAll", function() {
+            return {
+                restrict: "C",
+                link: function($scope, elem, attrs) {
+                    elem.on('click', function(e) {
+                        $(this).parents('.custom-table-questions, .custom-table-tests').find('.table-row').addClass('expanded');
+                        $(this).parents('.custom-table-questions, .custom-table-tests').find('.table-row').find('.table-row-expand').slideDown(200);
+
+                        e.preventDefault();
+                    });
+                }
+            };
+        })
+        .directive("collapseAll", function() {
+            return {
+                restrict: "C",
+                link: function($scope, elem, attrs) {
+                    elem.on('click', function(e) {
+                        $(this).parents('.custom-table-questions, .custom-table-tests').find('.table-row').removeClass('expanded');
+                        $(this).parents('.custom-table-questions, .custom-table-tests').find('.table-row').find('.table-row-expand').slideUp(200);
+
+                        e.preventDefault();
+                    });
+                }
+            };
+        })
     ;
 
 })();
