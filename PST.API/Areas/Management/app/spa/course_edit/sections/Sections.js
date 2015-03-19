@@ -17,9 +17,13 @@
             ;
         })
 
-        .controller("courseEdit.sections.Ctrl", function ($scope, SectionService) {
+        .controller("courseEdit.sections.Ctrl", function ($scope, $state, SectionService) {
+            var _backButton;
             $scope.setCel({
-                step: 1
+                step: 1,
+                backButton: function() {
+                    return _backButton;
+                }
             });
 
 
@@ -30,6 +34,15 @@
                     });
                 }
             });
+
+            $scope.sectionLayout = function(options) {
+                _backButton = options.backButton == null ? null : {
+                    title: options.backButton.title,
+                    action: function() {
+                        $state.go(options.backButton.state);
+                    }
+                };
+            };
 
         })
 

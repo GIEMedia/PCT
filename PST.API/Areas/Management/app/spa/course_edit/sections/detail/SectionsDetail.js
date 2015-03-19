@@ -16,6 +16,13 @@
         })
 
         .controller("courseEdit.sections.detail.Ctrl", function ($scope, $state, $stateParams, QuestionService) {
+            $scope.sectionLayout({
+                backButton: {
+                    title: "Sections",
+                    state: "^.list"
+                }
+            });
+
             QuestionService.getList($stateParams.courseId, $stateParams.sectionId).success(function(questions) {
                 $scope.questions = questions;
             });
