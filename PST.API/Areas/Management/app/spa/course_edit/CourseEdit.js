@@ -71,7 +71,7 @@
                     title: 'Information'
                 },
                 {
-                    state: "sections",
+                    state: "sections.list",
                     title: 'Sections'
                 },
                 {

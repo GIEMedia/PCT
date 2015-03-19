@@ -185,6 +185,20 @@
             };
         })
 
+        .directive("pctFocus", function() {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+                    $scope.$watch(attrs.pctFocus, function(value) {
+                        if (value) {
+                            setTimeout(function(){
+                                elem.focus();
+                            }, 0);
+                        }
+                    });
+                }
+            };
+        })
     ;
 
 })();
