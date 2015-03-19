@@ -15,10 +15,20 @@
             ;
         })
 
-        .controller("courseEdit.publish.Ctrl", function ($scope) {
+        .controller("courseEdit.publish.Ctrl", function ($scope, $q) {
             $scope.setCel({
                 step: 4,
-                save: null
+                save: function() {
+                    var defer = $q.defer();
+
+                    defer.resolve();
+
+                    return defer.promise;
+
+                },
+                needSaving: function() {
+                    return true;
+                }
             });
         })
     ;

@@ -10,11 +10,8 @@
                         <h3>Course Status</h3>
                     </div><!-- /.table-col -->
 
-                    <div class="table-col col-size-4">
-                        <select name="field-select" id="field-select" class="select">
-                            <option>Inactive</option>
-                            <option>Inactive</option>
-                            <option>Active</option>
+                    <div class="table-col col-size-4" ng-init="status = ['Inactive', 'Active']">
+                        <select name="field-select" id="field-select" class="select" pct-model="'Inactive'" pct-options="s as s for s in status">
                         </select>
                     </div><!-- /.table-col -->
                 </div><!-- /.table-row -->

@@ -15,11 +15,12 @@
             ;
         })
 
-        .controller("courseEdit.reviewInvite.Ctrl", function ($scope) {
+        .controller("courseEdit.reviewInvite.Ctrl", function ($scope, StateService) {
             $scope.setCel({
-                step: 3,
-                save: null
+                step: 3
             });
+
+            $scope.states = StateService.getStates();
         })
     ;
 

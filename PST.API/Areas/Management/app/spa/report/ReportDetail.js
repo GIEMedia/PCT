@@ -39,6 +39,10 @@
                     elem.find('.table-row .inner').on('click', function () {
                         $(this).parent('.table-row').toggleClass('expanded').find('.table-row-expand').slideToggle(200);
                     });
+
+                    elem.find('.table-row .inner').on('click', function () {
+                        $(this).parent('.table-row').toggleClass('expanded').find('.table-row-expand').slideToggle(200);
+                    });
                 }
             };
         })

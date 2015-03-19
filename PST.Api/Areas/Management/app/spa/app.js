@@ -12,7 +12,7 @@
         'pct.management.courses',
         'pct.management.courseEdit',
         'pct.management.report',
-        'pct.management.users',
+        'pct.management.user',
 
         'pct.management.api.course',
         'pct.management.api.question',

@@ -46,8 +46,11 @@
                             title: "Test Results"
                         },
                         {
-                            state: "users",
+                            state: "user.list",
                             icon: "users",
+                            highlightOn: function(stateName) {
+                                return stateName.indexOf("user.") == 0;
+                            },
                             title: "Users"
                         }
                     ];
