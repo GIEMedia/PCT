@@ -15,24 +15,6 @@
             ;
         })
 
-        .directive("sectionRow", function(SectionService) {
-            return {
-                restrict: "A",
-                link: function($scope, elem, attrs) {
-                    $scope.editName = {
-                        editing: false,
-                        title: $scope.section.title
-                    };
-                    $scope.saveTitle = function() {
-                        SectionService.setTitle($scope.editName.title, $scope.course.id, $scope.section.id).success(function() {
-                            $scope.section.title = $scope.editName.title;
-                            $scope.editName.editing = false;
-                        });
-                    }
-                }
-            };
-        })
-
         .controller("courseEdit.sections.list.Ctrl", function ($scope, SectionService) {
 
             $scope.inserting = {
@@ -54,6 +36,25 @@
                 });
             }
         })
+
+        .directive("sectionRow", function(SectionService) {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+                    $scope.editName = {
+                        editing: false,
+                        title: $scope.section.title
+                    };
+                    $scope.saveTitle = function() {
+                        SectionService.setTitle($scope.editName.title, $scope.course.id, $scope.section.id).success(function() {
+                            $scope.section.title = $scope.editName.title;
+                            $scope.editName.editing = false;
+                        });
+                    }
+                }
+            };
+        })
+
     ;
 
 })();

@@ -3,7 +3,8 @@
 (function () {
 
     angular.module('pct.management.courseEdit.sections', [
-        'pct.management.courseEdit.sections.list'
+        'pct.management.courseEdit.sections.list',
+        'pct.management.courseEdit.sections.detail'
     ])
 
         .config(function ($stateProvider) {
