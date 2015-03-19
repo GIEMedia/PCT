@@ -15,7 +15,7 @@
             ;
         })
 
-        .controller("courseEdit.sections.list.Ctrl", function ($scope, SectionService) {
+        .controller("courseEdit.sections.list.Ctrl", function ($scope, $state, SectionService) {
 
             $scope.inserting = {
                 title: null
@@ -24,6 +24,13 @@
                 SectionService.upsert($scope.inserting, $scope.course.id).success(function(section) {
                     $scope.sections.push(section);
                     $scope.inserting = {};
+                });
+            };
+            $scope.addSectionAndView = function() {
+                SectionService.upsert($scope.inserting, $scope.course.id).success(function(section) {
+                    $scope.sections.push(section);
+
+                    $state.go("^.detail", {sectionId: section.id});
                 });
             };
 

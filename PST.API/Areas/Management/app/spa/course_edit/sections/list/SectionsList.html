@@ -42,7 +42,7 @@
                                 <div class="icons">
                                     <a href="" class="fa fa-arrows"></a>
                                     <a href="" class="icon icon-rename" ng-click="editName.editing = true"></a>
-                                    <a href="4.PCT.Section.Edit.html" class="fa fa-pencil"></a>
+                                    <a ui-sref="^.detail({sectionId: section.id})" class="fa fa-pencil"></a>
                                     <a href="" class="fa fa-trash-o" ng-click="deleteSection(section)"></a>
                                 </div><!-- /.icons -->
                             </td>
@@ -69,7 +69,7 @@
                                 <div class="btns">
                                     <a href="" class="btn btn-grey" ng-click="addSection()">Add</a>
 
-                                    <a href="4.PCT.Section.Edit.html" class="btn btn-green">Add &amp; Build</a>
+                                    <a href="" class="btn btn-green" ng-click="addSectionAndView()">Add &amp; Build</a>
                                 </div><!-- /.btns -->
                             </td>
                         </tr>

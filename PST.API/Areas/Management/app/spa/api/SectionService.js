@@ -5,6 +5,15 @@
     angular.module('pct.management.api.section', [
     ])
         .factory("SectionService", function(Api) {
+            var sample = {
+                "id": "97901e52-eaab-49ac-ba04-a460010621f5",
+                "title": "Section 2",
+                "num_questions": 2,
+                "document": {
+                    "pdf_url": "app/temp/sample.pdf",
+                    "pages": ["app/css/images/temp/pdf-placeholder1.jpg", "app/css/images/temp/pdf-placeholder2.jpg"]
+                }
+            };
 
             return {
                 getList: function(courseId) {

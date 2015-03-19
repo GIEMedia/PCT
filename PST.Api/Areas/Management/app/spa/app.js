@@ -15,6 +15,7 @@
         'pct.management.users',
 
         'pct.management.api.course',
+        'pct.management.api.question',
         'pct.management.api.section',
         'pct.management.api.category',
         'pct.management.api.state'
