@@ -1,63 +1,72 @@
-<!--{{ cei.course==null ? "Loading..." : "" }}-->
 
-<div class="custom-table">
-    <div class="table-row">
-        <div class="table-col col-size-1">
-            <h3>Course Title</h3>
-        </div><!-- /.table-col -->
-
-        <div class="table-col col-size-2">
-            <input type="text" class="field" placeholder="Course Title" ng-model="cei.course.title">
-        </div><!-- /.table-col -->
-
-        <div class="table-col col-size-3"></div><!-- /.table-col -->
-    </div><!-- /.table-row -->
-
-    <div course-information-categories>
-        <div class="table-row">
-            <div class="table-col col-size-1">
-                <h3>Category</h3>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-2">
-                <select name="field-select" class="select" pct-model="cei.course.category" pct-options="category.id as category.title for category in categories">
-                </select>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-3">
-                <a href="" ng-click="addNewCategory()" class="btn btn-grey">ADD NEW</a>
-            </div><!-- /.table-col -->
-        </div><!-- /.table-row -->
-        <div class="table-row">
-            <div class="table-col col-size-1">
-                <h3>Sub Category</h3>
-            </div><!-- /.table-col -->
-            <div class="table-col col-size-2">
-                <select name="field-select" class="select" pct-model="cei.course.sub_category" pct-options="subcat.id as subcat.title for subcat in getCat(cei.course.category).sub_categories">
-                </select>
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-3">
-                <a href="" ng-click="addNewSubCategory()" class="btn btn-grey fancybox.ajax popup-open">ADD NEW</a>
-            </div><!-- /.table-col -->
-        </div><!-- /.table-row -->
-    </div>
-</div><!-- /.custom-table -->
+<div class="section-body">
+    <div class="shell">
+        <div class="section-body-inner" >
 
 
 
-<div class="custom-table-secondary table-states" course-information-states></div><!-- /.custom-table-secondary -->
+            <div class="custom-table">
+                <div class="table-row">
+                    <div class="table-col col-size-1">
+                        <h3>Course Title</h3>
+                    </div><!-- /.table-col -->
+
+                    <div class="table-col col-size-2">
+                        <input type="text" class="field" placeholder="Course Title" ng-model="cei.course.title">
+                    </div><!-- /.table-col -->
+
+                    <div class="table-col col-size-3"></div><!-- /.table-col -->
+                </div><!-- /.table-row -->
+
+                <div course-information-categories>
+                    <div class="table-row">
+                        <div class="table-col col-size-1">
+                            <h3>Category</h3>
+                        </div><!-- /.table-col -->
+
+                        <div class="table-col col-size-2">
+                            <select name="field-select" class="select" pct-model="cei.course.category" pct-options="category.id as category.title for category in categories">
+                            </select>
+                        </div><!-- /.table-col -->
+
+                        <div class="table-col col-size-3">
+                            <a href="" ng-click="addNewCategory()" class="btn btn-grey">ADD NEW</a>
+                        </div><!-- /.table-col -->
+                    </div><!-- /.table-row -->
+                    <div class="table-row">
+                        <div class="table-col col-size-1">
+                            <h3>Sub Category</h3>
+                        </div><!-- /.table-col -->
+                        <div class="table-col col-size-2">
+                            <select name="field-select" class="select" pct-model="cei.course.sub_category" pct-options="subcat.id as subcat.title for subcat in getCat(cei.course.category).sub_categories">
+                            </select>
+                        </div><!-- /.table-col -->
+
+                        <div class="table-col col-size-3">
+                            <a href="" ng-click="addNewSubCategory()" class="btn btn-grey fancybox.ajax popup-open">ADD NEW</a>
+                        </div><!-- /.table-col -->
+                    </div><!-- /.table-row -->
+                </div>
+            </div><!-- /.custom-table -->
 
 
-<div class="custom-table table-prerequisites">
-    <div class="table-row">
-        <div class="table-col col-size-1">
-            <h3>Prerequisites</h3>
-        </div><!-- /.table-col -->
 
-        <div class="table-col col-size-4">
-            <select name="field-select" id="field-select" class="select" pct-model="cei.course.prerequisite_course" null-option="Not available" pct-options="pc.id as pc.title for pc in prerequisites">
-            </select>
-        </div><!-- /.table-col -->
-    </div><!-- /.table-row -->
-</div><!-- /.custom-table -->
+            <div class="custom-table-secondary table-states" course-information-states></div><!-- /.custom-table-secondary -->
+
+
+            <div class="custom-table table-prerequisites">
+                <div class="table-row">
+                    <div class="table-col col-size-1">
+                        <h3>Prerequisites</h3>
+                    </div><!-- /.table-col -->
+
+                    <div class="table-col col-size-4">
+                        <select name="field-select" id="field-select" class="select" pct-model="cei.course.prerequisite_course" null-option="Not available" pct-options="pc.id as pc.title for pc in prerequisites">
+                        </select>
+                    </div><!-- /.table-col -->
+                </div><!-- /.table-row -->
+            </div><!-- /.custom-table -->
+
+        </div><!-- /.section-body-inner -->
+    </div><!-- /.shell -->
+</div><!-- /.section-body -->
