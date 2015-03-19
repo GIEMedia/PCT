@@ -11,7 +11,7 @@
         'pct.management.login',
         'pct.management.courses',
         'pct.management.courseEdit',
-        'pct.management.testResults',
+        'pct.management.report',
         'pct.management.users',
 
         'pct.management.api.course',

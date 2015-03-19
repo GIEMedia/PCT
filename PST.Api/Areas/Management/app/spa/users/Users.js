@@ -20,7 +20,7 @@
 
         .controller("users.Ctrl", function ($scope, LayoutService) {
             LayoutService.supportSearch($scope, {
-                placeholder: "Search user"
+                placeholder: "Search"
             });
         })
     ;

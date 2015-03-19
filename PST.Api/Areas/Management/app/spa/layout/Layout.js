@@ -38,8 +38,11 @@
                             title: "Courses"
                         },
                         {
-                            state: "testResults",
+                            state: "report.list",
                             icon: "test-o",
+                            highlightOn: function(stateName) {
+                                return stateName.indexOf("report.") == 0;
+                            },
                             title: "Test Results"
                         },
                         {

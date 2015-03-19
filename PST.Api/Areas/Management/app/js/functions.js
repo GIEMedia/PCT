@@ -26,13 +26,13 @@
 		});
 
 		// Table tests
-		$('.custom-table-tests .table-row').on('mouseenter', function() {
-			if (!$(this).hasClass('expanded')) {
-				$(this).addClass('hovered');
-			};
-		}).on('mouseleave', function() {
-			$(this).removeClass('hovered');
-		});
+		//$('.custom-table-tests .table-row').on('mouseenter', function() {
+		//	if (!$(this).hasClass('expanded')) {
+		//		$(this).addClass('hovered');
+		//	};
+		//}).on('mouseleave', function() {
+		//	$(this).removeClass('hovered');
+		//});
 
 		$('.custom-table-tests .table-row .inner').on('click', function () {
 		    $(this).parent('.table-row').toggleClass('expanded').find('.table-row-expand').slideToggle(200);

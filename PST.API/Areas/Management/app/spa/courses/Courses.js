@@ -25,7 +25,7 @@
             };
 
             LayoutService.supportSearch($scope, {
-                placeholder: "Search course",
+                placeholder: "Search",
                 model: "view.search"
             });
 
