@@ -38,6 +38,9 @@
                 },
                 uploadDocument: function(courseID, sectionID, file) {
                     return Api.upload("api/manage/course/section/document/" + courseID + "/" + sectionID, file);
+                },
+                deleteDocument: function(courseID, sectionID) {
+                    return Api.delete("api/manage/course/section/document/" + courseID + "/" + sectionID);
                 }
             };
         })

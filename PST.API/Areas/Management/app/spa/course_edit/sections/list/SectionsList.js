@@ -72,6 +72,13 @@
                             })
                         ;
                     }
+                    $scope.deleteDocument = function() {
+                        SectionService.deleteDocument($scope.course.id, $scope.section.id)
+                            .success(function() {
+                                $scope.section.document = null;
+                            })
+                        ;
+                    }
                 }
             };
         })
