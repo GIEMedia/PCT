@@ -358,10 +358,13 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .table-section-list table tr td.view-document .view-document-link { display: none; }
 .table-section-list table tr td.view-document .view-document-link .fa { font-size: 20px; }
 .table-section-list table tr td.view-document .view-document-link a { color: #808080; }
+.table-section-list table tr td.view-document .view-document-link span { display: inline-block; }
 .table-section-list table tr td.view-document .view-document-link a:hover { color: #00aded; }
 .table-section-list table tr td.view-document:hover > .view-document-info { display: none; }
 .table-section-list table tr td.view-document:hover > .view-document-link { display: block; }
 .table-section-list table tr td.view-document .view-document-link a + a { margin-left: 20px; }
+.table-section-list table tr td.view-document .view-document-link a + span { margin-left: 15px; }
+.table-section-list table tr td.view-document .view-document-link span + a { margin-left: 15px; }
 
 .table-section-list .section-name { padding: 9px 10px; }
 .table-section-list .editing .icons { display: none; }

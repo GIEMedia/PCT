@@ -3,6 +3,7 @@
 (function () {
 
     angular.module('pct.management.courseEdit.sections.list', [
+            'angularFileUpload'
     ])
 
         .config(function ($stateProvider) {
@@ -59,6 +60,17 @@
                             $scope.section.title = $scope.editName.title;
                             $scope.editName.editing = false;
                         });
+                    };
+                    
+                    $scope.uploadDocument = function(files) {
+                        SectionService.uploadDocument($scope.course.id, $scope.section.id, files[0])
+                            .progress(function(ev) {
+                                console.log(ev);
+                            })
+                            .success(function(data) {
+                                console.log(data);
+                            })
+                        ;
                     }
                 }
             };

@@ -11,7 +11,7 @@
             };
         })
 
-        .factory("Api", function($http) {
+        .factory("Api", function($http, $upload) {
 
             var handleError = function(httpPromise) {
 
@@ -72,6 +72,14 @@
                             return str.join("&");
                         },
                         data: data
+                    }));
+                },
+                upload: function(url, file) {
+                    return handleError($upload.upload({
+                        method: 'POST',
+                        url: (_host==null? "" : "http://" + _host + "/") + url,
+                        headers: {'Authorization': "Bearer " + sessionStorage.access_token},
+                        file: file
                     }));
                 },
                 handleError: handleError
