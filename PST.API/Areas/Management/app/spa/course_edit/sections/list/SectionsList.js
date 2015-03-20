@@ -15,6 +15,8 @@
                 })
             ;
         })
+        
+        
 
         .controller("courseEdit.sections.list.Ctrl", function ($scope, $state, SectionService) {
             $scope.sectionLayout({
@@ -44,7 +46,24 @@
                 SectionService.delete($scope.course.id, section.id).success(function() {
                     Cols.remove(section, $scope.sections);
                 });
-            }
+            };
+            
+            $scope.updateOrder = function(indice) {
+                var ids = [];
+                for (var i = 0; i < indice.length; i++) {
+                    var index = indice[i];
+                    ids.push($scope.sections[index].id);
+                }
+                SectionService.setOrder(ids, $scope.course.id).success(function() {
+                    
+                    var newSections = [];
+                    for (var i = 0; i < indice.length; i++) {
+                        var index = indice[i];
+                        newSections.push($scope.sections[index]);
+                    }
+                    $scope.sections = newSections;
+                });
+            };
         })
 
         .directive("sectionRow", function(SectionService) {
@@ -71,7 +90,7 @@
                                 console.log(data);
                             })
                         ;
-                    }
+                    };
                     $scope.deleteDocument = function() {
                         SectionService.deleteDocument($scope.course.id, $scope.section.id)
                             .success(function() {
@@ -83,6 +102,26 @@
             };
         })
 
+        .directive("sortable", function() {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+                    elem.sortable({
+                        handle: ".sortable-handle",
+                        items: "[sortable-row]",
+                        update: function() {
+                            var indice = [];
+                            elem.find("tr[sortable-row]").each(function() {
+                                indice.push($(this).attr("sortable-row") * 1);
+                            });
+                            $scope.$applyAsync(function() {
+                                $scope.$eval(attrs.sortable, {"$indice": indice});
+                            });
+                        }
+                    });
+                }
+            };
+        })
     ;
 
 })();
