@@ -20,11 +20,11 @@
         </ul><!-- /.pagination -->
     </div><!-- /.shell -->
 </div><!-- /.section-paging -->
-
+        
 <div class="section-body">
     <div class="shell">
         <div class="section-body-inner">
-            <div class="custom-table-questions">
+            <div class="custom-table-questions" sortable="updateOrder($indice)">
                 <div class="table-row-head">
                     <div class="table-col col-size-1">
                         <h3>Questions    <a href="#" class="expand-all">Expand all</a> <span>/</span> <a href="#" class="collapse-all">Collapse all</a></h3>
@@ -35,7 +35,83 @@
                     </div><!-- /.table-col -->
                 </div><!-- /.table-row-head -->
 
-                <div class="table-row">
+                <div class="table-row" ng-if="questions.length == 0" >
+                    <div class="table-col col-size-1">
+                    </div><!-- /.table-col -->
+                    <div class="table-col col-size-2 no-record">
+                        No question(s) available
+                    </div><!-- /.table-col -->
+                </div>
+                <div class="table-row" ng-repeat="question in questions" sortable-row-index="{{$index}}" question-row>
+                    <div class="inner">
+                        <div class="table-col col-size-1">
+                            <div class="number">{{$index + 1}}</div><!-- /.number -->
+
+                            <h2 class="question">{{question.question_text}}</h2><!-- /.question -->
+                            <input type="text" class="field" ng-model="question.question_text" placeholder="Question" />
+
+                            <div class="question-icons">
+                                <a href="" class="icon icon-chevron-up"></a>
+
+                                <a href="" class="fa fa-trash-o" ng-click="deleteQuestion()"></a>
+                            </div><!-- /.question-icons -->
+                        </div><!-- /.table-col -->
+
+                        <div class="table-col col-size-2">
+                            <div class="answer">
+                                <p><strong>{{question.response_heading}}</strong> {{question.response_message}}</p>
+
+                                <div class="answer-icons">
+                                    <a href="" class="fa fa-arrows sortable-handle"></a>
+
+                                    <a href="" class="icon icon-chevron-down"></a>
+
+                                    <a href="" class="fa fa-trash-o" ng-click="deleteQuestion()"></a>
+                                </div><!-- /.answer-icons -->
+                            </div><!-- /.answer -->
+                        </div><!-- /.table-col -->
+                    </div><!-- /.inner -->
+                                        
+
+                    <div class="table-row-expand text">
+                        <div class="inner">
+                            <i class="icon icon-text grey"></i>
+
+                            <div class="col col-1">
+                                <div class="inner">
+                                    <ul class="list-checkboxes">
+                                        <li ng-repeat="option in question.options">
+                                            <div class="checkbox">
+                                                <input type="checkbox" name="field-2-weeks" id="field-2-weeks">
+
+                                                <label class="form-label" for="field-2-weeks">{{option.text}}</label>
+                                            </div><!-- /.checkbox -->
+                                        </li>
+                                    </ul><!-- /.list-checkboxes -->
+
+                                    <div class="overlay">
+                                        <a class="btn btn-blue" href="" ng-click="openAnswersModel()">Add/Edit Answers</a>
+                                    </div><!-- /.overlay -->
+                                </div><!-- /.inner -->
+                            </div><!-- /.col col-1 -->
+
+                            <div class="col col-2">
+                                <div class="inner">
+                                    <input type="text" placeholder="Response heading" ng-model="question.response_heading" class="field" />
+                                    <textarea class="textarea" placeholder="Response message" ng-model="question.response_message"></textarea>
+                                </div><!-- /.inner -->
+                            </div><!-- /.col col-2 -->
+                        </div><!-- /.inner -->
+
+                        <div class="foot">
+                            <i class="fa fa-lightbulb-o"></i>
+
+                            <input type="text" placeholder="No tip provided." ng-model="question.tip" class="field" />
+                        </div><!-- /.foot -->
+                    </div><!-- /.table-row-expand -->
+                </div><!-- /.table-row -->
+
+                <div class="table-row" ng-if="false">
                     <div class="inner">
                         <div class="table-col col-size-1">
                             <div class="number">1</div><!-- /.number -->
@@ -131,7 +207,7 @@
                     </div><!-- /.table-row-expand -->
                 </div><!-- /.table-row -->
 
-                <div class="table-row">
+                <div class="table-row" ng-if="false">
                     <div class="inner">
                         <div class="table-col col-size-1">
                             <div class="number">2</div><!-- /.number -->
@@ -191,99 +267,7 @@
                     </div><!-- /.table-row-expand -->
                 </div><!-- /.table-row -->
 
-                <div class="table-row">
-                    <div class="inner">
-                        <div class="table-col col-size-1">
-                            <div class="number">3</div><!-- /.number -->
-
-                            <h2 class="question">Which of the following pests can be treated using PCT Pest Insecticide? (check all that ...</h2><!-- /.question -->
-                            <input type="text" class="field" value="Which of the following pests can be treated using PCT Pest Insecticide? (check all that apply)" placeholder="Question" />
-
-                            <div class="question-icons">
-                                <a href="#" class="icon icon-chevron-up"></a>
-
-                                <a href="#" class="fa fa-trash-o"></a>
-                            </div><!-- /.question-icons -->
-                        </div><!-- /.table-col -->
-
-                        <div class="table-col col-size-2">
-                            <div class="answer">
-                                <p><strong>You’re right!</strong> This product is labeled to treat carpetner ants, German cockroaches and silverfish, but it is ...</p>
-
-                                <div class="answer-icons">
-                                    <a href="#" class="fa fa-arrows"></a>
-
-                                    <a href="#" class="icon icon-chevron-down"></a>
-
-                                    <a href="#" class="fa fa-trash-o"></a>
-                                </div><!-- /.answer-icons -->
-                            </div><!-- /.answer -->
-                        </div><!-- /.table-col -->
-                    </div><!-- /.inner -->
-
-                    <div class="table-row-expand text">
-                        <div class="inner">
-                            <i class="icon icon-text grey"></i>
-
-                            <div class="col col-1">
-                                <div class="inner">
-                                    <ul class="list-checkboxes">
-                                        <li>
-                                            <div class="checkbox">
-                                                <input type="checkbox" name="field-2-weeks" id="field-2-weeks">
-
-                                                <label class="form-label" for="field-2-weeks">2 Weeks</label>
-                                            </div><!-- /.checkbox -->
-                                        </li>
-
-                                        <li>
-                                            <div class="checkbox">
-                                                <input type="checkbox" name="field-12-weeks" id="field-12-weeks">
-
-                                                <label class="form-label" for="field-12-weeks">12 Weeks</label>
-                                            </div><!-- /.checkbox -->
-                                        </li>
-
-                                        <li>
-                                            <div class="checkbox">
-                                                <input type="checkbox" name="field-2-months" id="field-2-months">
-
-                                                <label class="form-label" for="field-2-months">2 Months</label>
-                                            </div><!-- /.checkbox -->
-                                        </li>
-
-                                        <li>
-                                            <div class="checkbox">
-                                                <input type="checkbox" name="field-none-above" id="field-none-above">
-
-                                                <label class="form-label" for="field-none-above">None of the above</label>
-                                            </div><!-- /.checkbox -->
-                                        </li>
-                                    </ul><!-- /.list-checkboxes -->
-
-                                    <div class="overlay">
-                                        <a href="ajax/popup-edit-text.html" class="btn btn-blue popup-open fancybox.ajax">Add/Edit Answers</a>
-                                    </div><!-- /.overlay -->
-                                </div><!-- /.inner -->
-                            </div><!-- /.col col-1 -->
-
-                            <div class="col col-2">
-                                <div class="inner">
-                                    <input type="text" placeholder="Response heading" value="You’re right!" class="field" />
-                                    <textarea class="textarea" placeholder="Response message">This product is labeled to treat carpetner ants, German cockroaches and silverfish, but it is NOT labeled for treating bed bugs.</textarea>
-                                </div><!-- /.inner -->
-                            </div><!-- /.col col-2 -->
-                        </div><!-- /.inner -->
-
-                        <div class="foot">
-                            <i class="fa fa-lightbulb-o"></i>
-
-                            <input type="text" placeholder="No tip provided." value="" class="field" />
-                        </div><!-- /.foot -->
-                    </div><!-- /.table-row-expand -->
-                </div><!-- /.table-row -->
-
-                <div class="table-row">
+                <div class="table-row" ng-if="false">
                     <div class="inner">
                         <div class="table-col col-size-1">
                             <div class="number">4</div><!-- /.number -->
@@ -348,7 +332,7 @@
                     </div><!-- /.table-row-expand -->
                 </div><!-- /.table-row -->
 
-                <div class="table-row expanded new-question">
+                <div class="table-row expanded new-question" ng-if="false">
                     <div class="inner">
                         <div class="table-col col-size-1">
                             <div class="number">5</div><!-- /.number -->

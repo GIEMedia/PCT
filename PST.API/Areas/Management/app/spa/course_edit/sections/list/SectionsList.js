@@ -101,27 +101,6 @@
                 }
             };
         })
-
-        .directive("sortable", function() {
-            return {
-                restrict: "A",
-                link: function($scope, elem, attrs) {
-                    elem.sortable({
-                        handle: ".sortable-handle",
-                        items: "[sortable-row]",
-                        update: function() {
-                            var indice = [];
-                            elem.find("tr[sortable-row]").each(function() {
-                                indice.push($(this).attr("sortable-row") * 1);
-                            });
-                            $scope.$applyAsync(function() {
-                                $scope.$eval(attrs.sortable, {"$indice": indice});
-                            });
-                        }
-                    });
-                }
-            };
-        })
     ;
 
 })();

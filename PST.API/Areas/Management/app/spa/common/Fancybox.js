@@ -23,13 +23,15 @@
                     var close = function () {
                         $.fancybox.close();
                     };
-                    $controller(options.controller, {'$scope': $scope, "$modalInstance": { close: close, dismiss: close }});
+                    if (options.controller) {
+                        $controller(options.controller, {'$scope': $scope, "$modalInstance": { close: close, dismiss: close }});
+                    }
                     var contentEl = $compile(angular.element(content))($scope);
 
                     var fancybox = $.fancybox({
                         content: contentEl,
                         maxWidth: 750,
-                        width: 'auto',
+                        width: options.width? options.width : "auto",
                         height: 'auto',
                         fitToView: false,
                         autoSize: false,
@@ -58,7 +60,7 @@
                     modalScope.$on('$destroy', function () {
                     });
                     open(modalScope, {
-                        templateUrl: "/Areas/Management/app/spa/course_edit/information/ajax/popup-text.html",
+                        templateUrl: "/Areas/Management/app/spa/common/popup-text.html",
                         controller: function($scope, $modalInstance) {
                             $scope.placeholder = prompt;
                             $scope.pop = {

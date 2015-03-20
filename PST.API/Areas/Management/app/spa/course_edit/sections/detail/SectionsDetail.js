@@ -42,31 +42,32 @@
                 if (sectionIndex==$scope.sections.length - 1) return;
                 $state.go("^.detail", {sectionId: $scope.sections[sectionIndex + 1].id });
             };
+            
+            $scope.updateOrder = function(indice) {
+                var newQuestions = [];
+                for (var i = 0; i < indice.length; i++) {
+                    var index = indice[i];
+                    newQuestions.push($scope.questions[index]);
+                }
+                $scope.questions = newQuestions;
+            }
         })
-
-        .directive("customTableQuestions", function() {
+        
+        .directive("questionRow", function(Fancybox) {
             return {
-                restrict: "C",
+                restrict: "A",
                 link: function($scope, elem, attrs) {
-
-                    elem.find('.table-row').on('mouseenter', function() {
+                    elem.on('mouseenter', function() {
                         if (!$(this).hasClass('expanded')) {
                             $(this).addClass('hovered');
                         }
                     }).on('mouseleave', function() {
                         $(this).removeClass('hovered');
                     });
-
-
-                    elem.find('.table-row .table-col.col-size-1, .table-row .foot').on('mouseenter', function () {
-                        $(this).addClass('hovered');
-                    }).on('mouseleave', function () {
-                        $(this).removeClass('hovered');
-                    });
-
-
+                    
+                    
                     var sliding = false;
-                    elem.find('.table-row .col-size-1, .icon-chevron-down, .icon-chevron-up').on('click', function (e) {
+                    elem.find('.col-size-1, .icon-chevron-down, .icon-chevron-up').on('click', function (e) {
                         if (sliding) return;
                         if ($(this).hasClass('table-col') && $(this).closest('.table-row').hasClass('expanded')) return;
                         sliding = true;
@@ -77,6 +78,41 @@
                             $(this).parents('.table-row').find('.table-row-expand').slideUp(200, function () { sliding = false; });
                         }
                         e.preventDefault();
+                    });
+                    
+                    
+                    $scope.deleteQuestion = function() {
+                        Cols.remove($scope.question, $scope.questions);
+                    };
+                    
+//                    href="ajax/popup-edit-text.html" 
+                    $scope.openAnswersModel = function() {
+                        var scope = $scope.$new(true);
+                        scope.question = $scope.question;
+                        scope.index = $scope.$index;
+                        Fancybox.open(scope, {
+                            templateUrl: "/Areas/Management/app/spa/course_edit/sections/detail/popup-edit-text.html",
+                            width: 647,
+                            controller: function($scope, $modalInstance) {
+                                $scope.close = $modalInstance.close;
+                                $scope.cancel = $modalInstance.close;
+                            }
+                        });
+                    };
+                }
+            };
+        })
+        
+
+        .directive("customTableQuestions", function() {
+            return {
+                restrict: "C",
+                link: function($scope, elem, attrs) {
+
+                    elem.find('.table-row .table-col.col-size-1, .table-row .foot').on('mouseenter', function () {
+                        $(this).addClass('hovered');
+                    }).on('mouseleave', function () {
+                        $(this).removeClass('hovered');
                     });
 
                     elem.find('.answer-icons .fa-arrows').on('mousedown', function (e) {

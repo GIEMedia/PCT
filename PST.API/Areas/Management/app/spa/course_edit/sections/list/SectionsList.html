@@ -26,7 +26,7 @@
                             <!--<td class="no-record" colspan="5">No section(s) available</td>-->
                         <!--</tr>-->
 
-                        <tr ng-repeat="section in sections" section-row ng-class="{editing: editName.editing}" sortable-row="{{$index}}">
+                        <tr ng-repeat="section in sections" section-row ng-class="{editing: editName.editing}" sortable-row-index="{{$index}}">
                             <td>{{$index + 1}}</td>
 
                             <td class="section-name">

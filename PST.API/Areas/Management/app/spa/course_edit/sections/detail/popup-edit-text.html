@@ -1,0 +1,36 @@
+<div class="popup popup-edit popup-edit-text">
+	<div class="popup-inner">
+		<div class="popup-head">
+			<h2 class="popup-title"><span>{{index + 1}}</span> {{question.question_text}}</h2><!-- /.popup-title -->
+		</div><!-- /.popup-head -->
+
+		<div class="popup-body clearfix">
+			<div class="col col-2">
+                <a href="#" class="alignleft btn-circle btn-grey">
+                    <i class="icon icon-text-plus white"></i>
+                </a>
+
+                <ul class="list-checkboxes">
+                    <li ng-repeat="option in question.options">
+                        <div class="checkbox">
+                            <input type="checkbox" id="field1">
+
+                            <label class="form-label" for="field1"></label>
+
+                            <input class="form-field" ng-model="option.text" placeholder="Answer" />
+
+                            <a href="" class="fa fa-trash-o"></a>
+                        </div><!-- /.checkbox -->
+                    </li>
+
+                </ul><!-- /.list-checkboxes -->
+			</div><!-- /.col col-1of2 -->
+		</div><!-- /.popup-body -->
+
+		<div class="popup-actions">
+			<a href="" class="btn btn-grey" ng-click="cancel()">Cancel</a>
+			
+			<a href="" class="btn btn-green">Save</a>
+		</div><!-- /.popup-actions -->
+	</div><!-- /.popup-inner -->
+</div><!-- /.popup popup-new-category -->

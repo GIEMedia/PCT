@@ -226,6 +226,28 @@
                 }
             };
         })
+    
+
+        .directive("sortable", function() {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+                    elem.sortable({
+                        handle: ".sortable-handle",
+                        items: "[sortable-row-index]",
+                        update: function() {
+                            var indice = [];
+                            elem.find("[sortable-row-index]").each(function() {
+                                indice.push($(this).attr("sortable-row-index") * 1);
+                            });
+                            $scope.$applyAsync(function() {
+                                $scope.$eval(attrs.sortable, {"$indice": indice});
+                            });
+                        }
+                    });
+                }
+            };
+        })
     ;
 
 })();
