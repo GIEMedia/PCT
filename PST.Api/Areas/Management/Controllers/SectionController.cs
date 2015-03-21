@@ -147,10 +147,10 @@ namespace PST.Api.Areas.Management.Controllers
         /// <param name="courseID">ID of course</param>
         /// <param name="sectionID">ID of section</param>
         /// <param name="cascade">Indicates if other sections that share this same document should also be updated (optional: default = false).</param>
-        /// <returns>The "returnData" property of the response will contain the url of the uploaded pdf</returns>
+        /// <returns>A document object containing info about new document.</returns>
         [HttpPost]
         [Route("document/{courseID}/{sectionID}/{cascade?}")]
-        public async Task<HttpResponseMessage> UploadDocument(Guid courseID, Guid sectionID, bool? cascade = false)
+        public async Task<document> UploadDocument(Guid courseID, Guid sectionID, bool? cascade = false)
         {
             if (!Request.Content.IsMimeMultipartContent())
                 Request.CreateResponse(HttpStatusCode.UnsupportedMediaType);
@@ -185,7 +185,7 @@ namespace PST.Api.Areas.Management.Controllers
                 _entityRepository.Save(s);
             });
 
-            return Request.CreateResponse(HttpStatusCode.OK, new {returnData = baseDocUrl + ".pdf"});
+            return section.Document;
         }
 
         /// <summary>
@@ -195,9 +195,10 @@ namespace PST.Api.Areas.Management.Controllers
         /// <param name="sectionID">ID of section to update the document of</param>
         /// <param name="useDocFromSectionID">ID of section that the document will be taken from</param>
         /// <param name="cascade">Indicates if other sections that share the same document as the section specified by sectionID should also be updated (optional: default = false).</param>
+        /// <returns>A document object containing info about new document.</returns>
         [HttpPut]
         [Route("document/{courseID}/{sectionID}/{useDocFromSectionID}/{cascade?}")]
-        public void SetDocumentFromExistingSection(Guid courseID, Guid sectionID, Guid useDocFromSectionID, bool? cascade = false)
+        public document SetDocumentFromExistingSection(Guid courseID, Guid sectionID, Guid useDocFromSectionID, bool? cascade = false)
         {
             Course course;
             Section sectionTo, sectionFrom;
@@ -208,7 +209,7 @@ namespace PST.Api.Areas.Management.Controllers
                 throw new Exception("Section does not have document");
 
             if (sectionFrom.Document.ID == sectionTo.Document.ID)
-                return;
+                return sectionFrom.Document;
 
             var origDocID = sectionTo.Document.ID;
 
@@ -227,6 +228,8 @@ namespace PST.Api.Areas.Management.Controllers
                 sectionTo.Document = sectionFrom.Document;
                 _entityRepository.Save(sectionTo);
             }
+
+            return sectionFrom.Document;
         }
 
         /// <summary>

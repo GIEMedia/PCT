@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Prototype1.Foundation;
@@ -136,16 +137,15 @@ namespace PST.Api.Areas.Management.Controllers
         /// <param name="width">Optionally specifies the resize width of the image</param>
         /// <param name="height">Optionally specifies the resize height of the image</param>
         /// <param name="forceCanvas">Optionally indicates if the canvas should be resized to the width/height specified regardless of proportinal resizing (default = false)</param>
-        /// <returns>The "returnData" property of the response will contain the url of the uploaded image</returns>
+        /// <returns>Returns a string containing the url of the uploaded image</returns>
         [HttpPost]
         [Route("image")]
-        public async Task<HttpResponseMessage> UploadImage(int? width = null, int? height = null, bool forceCanvas = false)
+        public async Task<string> UploadImage(int? width = null, int? height = null, bool forceCanvas = false)
         {
             if (!Request.Content.IsMimeMultipartContent())
-                Request.CreateResponse(HttpStatusCode.UnsupportedMediaType);
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
 
-            var url = await _uploadService.Value.UploadImage(Request.Content, width, height, forceCanvas);
-            return Request.CreateResponse(HttpStatusCode.OK, new { returnData = url });
+            return await _uploadService.Value.UploadImage(Request.Content, width, height, forceCanvas);
         }
 
         private Questioned GetQuestioned(Guid courseID, Guid? sectionID, out Course course)
