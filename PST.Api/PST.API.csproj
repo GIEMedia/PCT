@@ -548,11 +548,21 @@
     <Content Include="Areas\Management\app\spa\course_edit\CourseEditFooter.html" />
     <Content Include="Areas\Management\app\spa\course_edit\information\Information.html" />
     <Content Include="Areas\Management\app\spa\course_edit\information\Information.js" />
+    <Content Include="Areas\Management\app\spa\course_edit\information\InformationCategories.js" />
+    <Content Include="Areas\Management\app\spa\course_edit\information\InformationStates.html" />
+    <Content Include="Areas\Management\app\spa\course_edit\information\InformationStates.js" />
+    <Content Include="Areas\Management\app\spa\course_edit\information\StateAdder.html" />
     <Content Include="Areas\Management\app\spa\course_edit\publish\Publish.html" />
     <Content Include="Areas\Management\app\spa\course_edit\publish\Publish.js" />
     <Content Include="Areas\Management\app\spa\course_edit\review_invite\ReviewInvite.html" />
     <Content Include="Areas\Management\app\spa\course_edit\review_invite\ReviewInvite.js" />
-    <Content Include="Areas\Management\app\spa\course_edit\sections\Sections.html" />
+    <Content Include="Areas\Management\app\spa\course_edit\sections\detail\popup-edit-multi-images.html" />
+    <Content Include="Areas\Management\app\spa\course_edit\sections\detail\popup-edit-single-image.html" />
+    <Content Include="Areas\Management\app\spa\course_edit\sections\detail\popup-edit-text.html" />
+    <Content Include="Areas\Management\app\spa\course_edit\sections\detail\SectionsDetail.html" />
+    <Content Include="Areas\Management\app\spa\course_edit\sections\detail\SectionsDetail.js" />
+    <Content Include="Areas\Management\app\spa\course_edit\sections\list\SectionsList.html" />
+    <Content Include="Areas\Management\app\spa\course_edit\sections\list\SectionsList.js" />
     <Content Include="Areas\Management\app\spa\course_edit\sections\Sections.js" />
     <Content Include="Areas\Management\app\spa\course_edit\test\Test.html" />
     <Content Include="Areas\Management\app\spa\course_edit\test\Test.js" />
@@ -562,12 +572,17 @@
     <Content Include="Areas\Management\app\spa\layout\LayoutHeader.html" />
     <Content Include="Areas\Management\app\spa\login\Login.html" />
     <Content Include="Areas\Management\app\spa\login\Login.js" />
+    <Content Include="Areas\Management\app\spa\report\Report.js" />
+    <Content Include="Areas\Management\app\spa\report\ReportDetail.html" />
+    <Content Include="Areas\Management\app\spa\report\ReportDetail.js" />
+    <Content Include="Areas\Management\app\spa\report\ReportList.html" />
+    <Content Include="Areas\Management\app\spa\report\ReportList.js" />
     <Content Include="Areas\Management\app\spa\security\SecurityService.js" />
-    <Content Include="Areas\Management\app\spa\test_results\TestResults.html" />
-    <Content Include="Areas\Management\app\spa\test_results\TestResults.js" />
-    <Content Include="Areas\Management\app\spa\users\User.html" />
-    <Content Include="Areas\Management\app\spa\users\Users.html" />
-    <Content Include="Areas\Management\app\spa\users\Users.js" />
+    <Content Include="Areas\Management\app\spa\user\User.js" />
+    <Content Include="Areas\Management\app\spa\user\UserDetail.html" />
+    <Content Include="Areas\Management\app\spa\user\UserDetail.js" />
+    <Content Include="Areas\Management\app\spa\user\UserList.html" />
+    <Content Include="Areas\Management\app\spa\user\UserList.js" />
     <Content Include="Areas\Management\Views\web.config" />
     <Content Include="Areas\Management\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Management\Views\Home\Index.cshtml" />
@@ -662,6 +677,8 @@
   <ItemGroup>
     <Folder Include="Areas\Help\images\ClassDiagrams\" />
     <Folder Include="Areas\Help\images\SequenceDiagrams\" />
+    <Folder Include="Areas\Management\app\spa\test_results\" />
+    <Folder Include="Areas\Management\app\spa\users\" />
     <Folder Include="Areas\Management\Models\" />
   </ItemGroup>
   <PropertyGroup>
