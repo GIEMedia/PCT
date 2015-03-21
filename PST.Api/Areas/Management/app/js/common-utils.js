@@ -242,8 +242,7 @@ ObjectUtil.copy = function(fromO, toO) {
 
 ObjectUtil.clone = function(obj) {
     if (obj == null
-        || typeof obj == "string"
-        || typeof obj == "number"
+        || typeof obj != "object"
     ) {
         return obj;
     } else if (obj.length == null) {
@@ -257,7 +256,7 @@ ObjectUtil.clone = function(obj) {
     } else {
         var ret = [];
         for (var i = 0; i < obj.length; i++) {
-            ret[i] = obj[i];
+            ret[i] = ObjectUtil.clone(obj[i]);
         }
         return ret;
     }

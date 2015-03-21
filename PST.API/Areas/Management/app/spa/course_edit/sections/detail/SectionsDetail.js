@@ -50,7 +50,14 @@
                     newQuestions.push($scope.questions[index]);
                 }
                 $scope.questions = newQuestions;
-            }
+            };
+            
+            $scope.addTextQuestion = function() {
+                console.log(11);
+                $scope.questions.push({
+                    question_type: 0
+                });
+            };
         })
         
         .directive("questionRow", function(Fancybox) {
@@ -85,24 +92,47 @@
                         Cols.remove($scope.question, $scope.questions);
                     };
                     
-//                    href="ajax/popup-edit-text.html" 
                     $scope.openAnswersModel = function() {
                         var scope = $scope.$new(true);
-                        scope.question = $scope.question;
+                        scope.question_text = $scope.question.question_text;
+                        scope.options = ObjectUtil.clone($scope.question.options || []);
                         scope.index = $scope.$index;
+                        scope.saveAction = function() {
+                            $scope.question.options = ObjectUtil.clone(scope.options);
+                        };
                         Fancybox.open(scope, {
                             templateUrl: "/Areas/Management/app/spa/course_edit/sections/detail/popup-edit-text.html",
                             width: 647,
-                            controller: function($scope, $modalInstance) {
-                                $scope.close = $modalInstance.close;
-                                $scope.cancel = $modalInstance.close;
-                            }
+                            controller: "courseEdit.sections.detail.TextQuestionModalCtrl"
                         });
                     };
+                    
+                    $scope.isEmpty = function(question) {
+                        return StringUtil.isBlank(question.question_text) 
+                            && StringUtil.isBlank(question.response_heading) 
+                            && StringUtil.isBlank(question.response_message) 
+                            && StringUtil.isBlank(question.tip) 
+                            && Cols.isEmpty(question.options) 
+                    }
                 }
             };
         })
         
+        .controller("courseEdit.sections.detail.TextQuestionModalCtrl", function($scope, $modalInstance) {
+            $scope.cancel = $modalInstance.close;
+            
+            $scope.addOption = function() {
+                $scope.options.push({});
+            };
+            $scope.deleteOption = function(o) {
+                Cols.remove(o, $scope.options);
+            };
+            
+            $scope.save = function() {
+                $scope.saveAction();
+                $modalInstance.close();
+            }
+        })
 
         .directive("customTableQuestions", function() {
             return {
@@ -157,7 +187,7 @@
                 link: function($scope, elem, attrs) {
 
                     elem.on('click', function () {
-                        $(this).children('.btn-plus-main');
+//                        $(this).children('.btn-plus-main');
                         $(this).toggleClass('clicked');
                     });
 

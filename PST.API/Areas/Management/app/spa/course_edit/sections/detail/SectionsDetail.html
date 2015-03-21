@@ -47,7 +47,7 @@
                         <div class="table-col col-size-1">
                             <div class="number">{{$index + 1}}</div><!-- /.number -->
 
-                            <h2 class="question">{{question.question_text}}</h2><!-- /.question -->
+                            <h2 class="question">{{isEmpty(question) ? "(Empty - Question will be removed on saved)" : (question.question_text || "(Empty)")}}</h2><!-- /.question -->
                             <input type="text" class="field" ng-model="question.question_text" placeholder="Question" />
 
                             <div class="question-icons">
@@ -59,7 +59,7 @@
 
                         <div class="table-col col-size-2">
                             <div class="answer">
-                                <p><strong>{{question.response_heading}}</strong> {{question.response_message}}</p>
+                                <p><strong>{{question.response_heading || "(Empty)"}}</strong> {{question.response_message || "(Empty)"}}</p>
 
                                 <div class="answer-icons">
                                     <a href="" class="fa fa-arrows sortable-handle"></a>
@@ -72,7 +72,6 @@
                         </div><!-- /.table-col -->
                     </div><!-- /.inner -->
                                         
-
                     <div class="table-row-expand text">
                         <div class="inner">
                             <i class="icon icon-text grey"></i>
@@ -82,9 +81,9 @@
                                     <ul class="list-checkboxes">
                                         <li ng-repeat="option in question.options">
                                             <div class="checkbox">
-                                                <input type="checkbox" name="field-2-weeks" id="field-2-weeks">
+                                                <input type="checkbox" ng-checked="option.correct" id="o{{$index}}">
 
-                                                <label class="form-label" for="field-2-weeks">{{option.text}}</label>
+                                                <label class="form-label" for="o{{$index}}">{{option.text}}</label>
                                             </div><!-- /.checkbox -->
                                         </li>
                                     </ul><!-- /.list-checkboxes -->
@@ -401,7 +400,7 @@
                     <span class="tooltip">Add Question</span><!-- /.tooltip -->
                 </div>
 
-                <div class="btn-plus-inner btn-darkgrey">
+                <div class="btn-plus-inner btn-darkgrey" ng-click="addTextQuestion()">
                     <i class="icon icon-text"></i>
 
                     <span class="tooltip">Text Based Question</span>
