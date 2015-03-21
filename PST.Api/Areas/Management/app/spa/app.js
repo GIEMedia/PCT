@@ -23,8 +23,8 @@
 
         .run(function (Api) {
             // For development
-            Api.setHost("localhost:53130");
-            //Api.setHost("gie-test.prototype1.io");
+//            Api.setHost("localhost:53130");
+            Api.setHost("gie-test.prototype1.io");
         })
 
     ;
