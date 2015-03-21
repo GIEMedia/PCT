@@ -19,10 +19,18 @@
 
         .controller("courseEdit.sections.Ctrl", function ($scope, $state, SectionService) {
             var _backButton;
+            var _needSaving;
+            var _save;
             $scope.setCel({
                 step: 1,
                 backButton: function() {
                     return _backButton;
+                },
+                needSaving: function() {
+                    return _needSaving != null && _needSaving();
+                },
+                save: function() {
+                    return _save();
                 }
             });
 
@@ -42,6 +50,8 @@
                         $state.go(options.backButton.state);
                     }
                 };
+                _needSaving = options.saving ? options.saving.needSaving : null;
+                _save = options.saving ? options.saving.save : null;
             };
 
         })

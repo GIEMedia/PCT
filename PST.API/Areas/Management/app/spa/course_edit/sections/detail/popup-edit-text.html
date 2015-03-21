@@ -11,6 +11,11 @@
                 </a>
 
                 <ul class="list-checkboxes">
+                    <li ng-if="options.length == 0">
+                        <div>
+                            No answer(s) available.
+                        </div><!-- /.checkbox -->
+                    </li>
                     <li ng-repeat="option in options">
                         <div class="checkbox">
                             <input type="checkbox" ng-model="option.correct" id="mo{{$index}}">

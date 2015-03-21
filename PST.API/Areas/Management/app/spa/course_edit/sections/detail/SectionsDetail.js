@@ -20,11 +20,23 @@
                 backButton: {
                     title: "Sections",
                     state: "^.list"
+                },
+                saving: {
+                    needSaving: function() {
+                        return !ObjectUtil.equals($scope.questions, $scope.questionsMaster);
+                    },
+                    save: function() {
+                        return QuestionService.upsert($stateParams.courseId, $stateParams.sectionId, $scope.questions).success(function(questions) {
+                            $scope.questions = questions;
+                            $scope.questionsMaster = ObjectUtil.clone(questions);
+                        });
+                    }
                 }
             });
 
             QuestionService.getList($stateParams.courseId, $stateParams.sectionId).success(function(questions) {
                 $scope.questions = questions;
+                $scope.questionsMaster = ObjectUtil.clone(questions);
             });
 
             $scope.sectionIndex = function() {
@@ -152,20 +164,6 @@
                         e.preventDefault();
                     });
                 }
-            };
-        })
-
-        .factory("Hover", function() {
-            return {
-                link: function($scope, elem, attrs) {
-
-                    elem.on('mouseenter', function () {
-                        $(this).addClass('hovered');
-                    }).on('mouseleave', function() {
-                        $(this).removeClass('hovered');
-                    });
-                }
-
             };
         })
 
