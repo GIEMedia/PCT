@@ -10,7 +10,7 @@ namespace PST.Declarations.Entities
     [Serializable]
     public class Section : Questioned, ISorted
     {
-        [Ownership(Ownership.Exclusive)]
+        [Ownership(Ownership.Shared)]
         public virtual Document Document { get; set; }
 
         public virtual int SortOrder { get; set; }

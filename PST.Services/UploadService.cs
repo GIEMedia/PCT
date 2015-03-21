@@ -14,17 +14,20 @@ using System.Web.Hosting;
 using GhostscriptSharp;
 using Prototype1.Foundation;
 using PST.Declarations.Interfaces;
+using iTextSharp.text.pdf;
 
 namespace PST.Services
 {
     public class UploadService : IUploadService
     {
         private static readonly string UploadFolderBase = HostingEnvironment.MapPath("~/Content/");
-        private static readonly string BaseUrl = ConfigurationManager.AppSettings["BaseUrl"].Replace("http://", "//").Replace("https://", "//");
+
+        private static readonly string BaseUrl =
+            ConfigurationManager.AppSettings["BaseUrl"].Replace("http://", "//").Replace("https://", "//") + "Content/";
 
         public async Task<string> UploadImage(HttpContent requestContent, int? width = null, int? height = null, bool forceCanvas = false)
         {
-            var file = await UploadFile(requestContent, "Images/");
+            var file = await UploadFile(requestContent, "Images\\");
 
             var fileName = file.Name;
 
@@ -35,13 +38,13 @@ namespace PST.Services
                 catch { }
             }
 
-            var url = string.Concat(BaseUrl, UploadFolderBase, "Images/", fileName);
+            var url = string.Concat(BaseUrl, UploadFolderBase, "Images\\", fileName);
             return url;
         }
 
         public async Task<Tuple<Guid, int>> UploadDocument(HttpContent requestContent)
         {
-            var file = await UploadFile(requestContent, "Documents/");
+            var file = await UploadFile(requestContent, "Documents\\");
 
             int pageCount;
             var docGuid = ProcessPDF(file.FullName, out pageCount);
@@ -51,14 +54,14 @@ namespace PST.Services
 
         private async Task<FileInfo> UploadFile(HttpContent requestContent, string uploadTypePath)
         {
-            var provider = GetMultipartProvider("Images/");
+            var provider = GetMultipartProvider("Images\\");
             var result = await requestContent.ReadAsMultipartAsync(provider);
             return new FileInfo(result.FileData.First().LocalFileName);
         }
 
         private static MultipartFormDataStreamProvider GetMultipartProvider(string uploadTypePath)
         {
-            var root = HostingEnvironment.MapPath("~" + UploadFolderBase + uploadTypePath);
+            var root = UploadFolderBase + uploadTypePath;
             return new CustomMultipartFormDataStreamProvider(root);
         }
 
@@ -177,11 +180,17 @@ namespace PST.Services
 
         public static Guid ProcessPDF(string pdfFilePath, out int pageCount)
         {
+            var pdfFile = new FileInfo(pdfFilePath);
+            if (!pdfFile.Extension.Equals(".pdf", StringComparison.CurrentCultureIgnoreCase))
+            {
+                pageCount = 0;
+                return Guid.Empty;
+            }
+
             var g = Guid.NewGuid();
-            var path = UploadFolderBase + "Documents/";
+            var path = UploadFolderBase + "Documents\\";
 
             // Rename the pdf file to the GUID that will match the images
-            var pdfFile = new FileInfo(pdfFilePath);
             pdfFilePath = path + g + ".pdf";
             pdfFile.MoveTo(pdfFilePath);
 
@@ -190,18 +199,18 @@ namespace PST.Services
             try
             {
                 GhostscriptWrapper.GeneratePageThumbs(pdfFilePath, outputFileName, 1, pageCount, 300, 300);
-                var fileGuidList = Directory.GetFiles(path, "*" + g + "*").Select(Path.GetFileName);
+                var fileGuidList = Directory.GetFiles(path, "*" + g + "*.jpg").Select(Path.GetFileName);
                 foreach (var item in fileGuidList)
                     try
                     {
-                        var image = Image.FromFile(path + item);
-                        if (image.Width > 1300)
-                        {
-                            var newImage = ScaleImage(image, 1300, image.Height);
-                            image.Dispose();
-                            File.Delete(path + item);
-                            newImage.Save(path + item, ImageFormat.Jpeg);
-                        }
+                        using (var image = Image.FromFile(path + item))
+                            if (image.Width > 1300)
+                            {
+                                var newImage = ScaleImage(image, 1300, image.Height);
+                                image.Dispose();
+                                File.Delete(path + item);
+                                newImage.Save(path + item, ImageFormat.Jpeg);
+                            }
                     }
                     catch
                     {
@@ -216,22 +225,8 @@ namespace PST.Services
 
         public static int CountPDFPages(string pdfFileNamePath)
         {
-            if (new FileInfo(pdfFileNamePath).Extension.Equals(".pdf", StringComparison.CurrentCultureIgnoreCase))
-                try
-                {
-                    using (var fs = new FileStream(pdfFileNamePath, FileMode.Open, FileAccess.Read))
-                    using (var sr = new StreamReader(fs))
-                    {
-                        var pdf = sr.ReadToEnd();
-                        var match = new Regex(@"/Type/Page").Matches(pdf);
-                        return match.Count - 1;
-                    }
-                }
-                catch
-                {
-                }
-
-            return 0;
+            using (var reader = new PdfReader(pdfFileNamePath))
+                return reader.NumberOfPages;
         }
 
         public static Image ScaleImage(Image image, int maxWidth, int maxHeight)

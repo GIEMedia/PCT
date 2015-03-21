@@ -601,6 +601,8 @@
     <None Include="packages.config" />
     <Content Include="App_Data\PST.Api.XML" />
     <Content Include="Content\Certificates\Template\certificate_template.jpg" />
+    <Content Include="Content\Documents\_placeholder.txt" />
+    <Content Include="Content\Images\_placeholder.txt" />
     <Content Include="web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -661,8 +663,6 @@
     <Folder Include="Areas\Help\images\ClassDiagrams\" />
     <Folder Include="Areas\Help\images\SequenceDiagrams\" />
     <Folder Include="Areas\Management\Models\" />
-    <Folder Include="Content\Documents\" />
-    <Folder Include="Content\Images\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
