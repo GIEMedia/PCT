@@ -42,11 +42,17 @@
             });
 
             $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-                if (toState.name.indexOf("courseEdit.") != 0
-                    && $scope.needSaving()
-                    && !confirm("Course changes hasn't been saved." + "\n\nAre you sure want to leave this page?")
-                ) {
-                    event.preventDefault();
+                if ($scope.needSaving()) {
+                    if (toState.name.indexOf("courseEdit.") != 0) {
+                        if (!confirm("Course changes hasn't been saved." + "\n\nAre you sure want to leave this page?")) {
+                            event.preventDefault();
+                        }
+                    } else {
+                        event.preventDefault();
+                        $scope.saveCourse().then(function() {
+                            $state.go(toState.name, toParams);
+                        });
+                    }
                 }
             });
 
@@ -106,7 +112,7 @@
                 return $scope.cel.save && $scope.cel.needSaving != null && $scope.cel.needSaving();
             };
 
-            $scope.saveCourse = function(then) {
+            $scope.saveCourse = function() {
                 var defer = $q.defer();
                 $scope.ce.saving = true;
                 $scope.cel.save()
@@ -121,28 +127,14 @@
                 return defer.promise;
             };
 
-            function nav(go) {
-                if (!$scope.needSaving()) {
-                    go();
-                } else {
-                    $scope.saveCourse().then(go);
-                }
-            }
-
             $scope.prevPage = function() {
-                nav(function() {
-                    $state.go('courseEdit.' + $scope.steps[$scope.cel.step - 1].state, {courseId: $scope.course.id});
-                });
+                $state.go('courseEdit.' + $scope.steps[$scope.cel.step - 1].state, {courseId: $scope.course.id});
             };
             $scope.nextPage = function() {
-                nav(function() {
-                    $state.go('courseEdit.' + $scope.steps[$scope.cel.step + 1].state, {courseId: $scope.course.id});
-                });
+                $state.go('courseEdit.' + $scope.steps[$scope.cel.step + 1].state, {courseId: $scope.course.id});
             };
             $scope.toPage = function(page) {
-                nav(function() {
-                    $state.go('courseEdit.' + $scope.steps[page].state, {courseId: $scope.course.id});
-                });
+                $state.go('courseEdit.' + $scope.steps[page].state, {courseId: $scope.course.id});
             };
         })
 
