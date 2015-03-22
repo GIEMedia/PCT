@@ -49,10 +49,9 @@
         <div class="table-row-expand" ng-class="{3: 'text', 1: 'multiple-images'}[question.question_type]">
             <div class="inner">
                 <i class="icon" ng-class="{3: 'icon-text grey', 1: 'icon-multiphoto red'}[question.question_type]"></i>
-
                 <div class="col col-1">
                     <div class="inner">
-                        <ul class="" ng-class="{3: 'list-checkboxes', 1: 'list-images'}[question.question_type]">
+                        <ul ng-class="{3: 'list-checkboxes', 1: 'list-images'}[question.question_type]">
                             <li ng-repeat="option in question.options">
                                 <div class="checkbox">
                                     <input type="checkbox" ng-checked="option.correct" id="o{{$index}}">

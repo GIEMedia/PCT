@@ -14,7 +14,7 @@
                 link: function($scope, elem, attrs) {
                     $scope.addTextQuestion = function() {
                         $scope.questions.push({
-                            question_type: 0
+                            question_type: 3
                         });
                     };
                     $scope.addMultiImagesQuestion = function() {
