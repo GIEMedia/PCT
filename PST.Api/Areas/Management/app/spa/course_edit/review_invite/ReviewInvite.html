@@ -27,7 +27,7 @@
                     </div><!-- /.table-col -->
 
                     <div class="table-col col-size-4">
-                        <input type="text" class="field" value="" placeholder="Reviewer's Name">
+                        <input type="text" class="field" ng-model="reviewer.name" placeholder="Reviewer's Name">
                     </div><!-- /.table-col -->
                 </div><!-- /.table-row -->
 
@@ -37,7 +37,7 @@
                     </div><!-- /.table-col -->
 
                     <div class="table-col col-size-4">
-                        <select name="field-select" id="field-select" class="select" pct-options="state.code as state.name for state in states">
+                        <select name="field-select" class="select" pct-model="reviewer.state" pct-options="state.code as state.name for state in states">
                         </select>
                     </div><!-- /.table-col -->
                 </div><!-- /.table-row -->
@@ -48,11 +48,11 @@
                     </div><!-- /.table-col -->
 
                     <div class="table-col col-size-2">
-                        <input type="text" class="field" value="" placeholder="Reviewer's Email">
+                        <input type="text" class="field" ng-model="reviewer.email" placeholder="Reviewer's Email">
                     </div><!-- /.table-col -->
 
                     <div class="table-col col-size-3">
-                        <a href="4.PCT.Publish.html" class="btn btn-green btn-icon-right">
+                        <a href="" ng-click="send()" class="btn btn-green btn-icon-right">
                             Send
                         </a>
                     </div><!-- /.table-col -->

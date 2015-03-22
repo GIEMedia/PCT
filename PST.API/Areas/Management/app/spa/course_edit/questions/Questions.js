@@ -111,9 +111,9 @@
             $scope.addImageOptions = function(images) {
                 QuestionService.uploadImage(images[0]).success(function(resp) {
 //                    
-                    var url = resp.returnData;
+                    var url = resp;
                     
-                    url = url.replace(/C:\\inetpub\\wwwroot\\gie-test.prototype1.io\\Content\\Images\\/, "Images/")
+                    url = url.replace(/C:\\inetpub\\wwwroot\\gie-test.prototype1.io\\Content\\Images\\/, "Images/");
                     $scope.options.push({
                         image: url
                     });
