@@ -103,10 +103,22 @@
                         var questionType = $scope.question.question_type;
                         scope.question_type = questionType;
                         scope.index = $scope.$index;
-                        
+
+                        scope.question_image = $scope.question.image;
+                        scope.question_video = $scope.question.video;
+
                         scope.options = ObjectUtil.clone($scope.question.options || []);
                         scope.saveAction = function() {
                             $scope.question.options = ObjectUtil.clone(scope.options);
+
+                            $scope.question.image = scope.question_image;
+                            $scope.question.video = scope.question_video;
+
+                            if (scope.question_image != null) {
+                                $scope.question.question_type = 0;
+                            } else if (scope.question_video != null) {
+                                $scope.question.question_type = 2;
+                            }
                         };
                         Fancybox.open(scope, {
                             templateUrl: "/Areas/Management/app/spa/course_edit/questions/popup-edit-answers.html",
@@ -149,6 +161,15 @@
                             image: url
                         });
                     }
+                });
+            };
+            $scope.addQuestionImage = function(image) {
+                QuestionService.uploadQuestionImage(image).success(function(resp) {
+                    var url = resp;
+
+                    url = url.replace(/C:\\inetpub\\wwwroot\\gie-test.prototype1.io\\Content\\Images\\/, "Images/");
+                    $scope.question_image = url;
+                    $scope.question_video = null;
                 });
             };
             $scope.deleteOption = function(o) {

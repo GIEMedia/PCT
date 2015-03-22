@@ -1,10 +1,24 @@
-<div class="popup popup-edit" ng-class="{3: 'popup-edit-text', 1: 'popup-edit-multi-images'}[question_type]">
+<div class="popup popup-edit" ng-class="{3: 'popup-edit-text', 1: 'popup-edit-multi-images', 0: 'popup-edit-single-image', 2: 'popup-edit-single-image'}[question_type]">
 	<div class="popup-inner">
 		<div class="popup-head">
 			<h2 class="popup-title"><span>{{index + 1}}</span> {{question_text || "(Empty)"}}</h2><!-- /.popup-title -->
 		</div><!-- /.popup-head -->
 
 		<div class="popup-body clearfix">
+
+            <div class="col col-1" ng-if="question_type == 0 || question_type == 2">
+                <div class="btns alignleft">
+                    <span ng-file-select="addQuestionImage($files[0])" class="alignleft btn-circle btn-orange">
+                        <i class="icon icon-photo-plus white"></i>
+                    </span>
+                    <a href="" class="alignleft btn-circle btn-orange">
+                        <i class="icon icon-video-plus white"></i>
+                    </a>
+                </div><!-- /.alignleft -->
+
+                <img ng-src="{{question_image || 'Areas/Management/app/css/images/video-image-img.png'}}" alt="" width="261" height="147">
+            </div><!-- /.col col-1of2 -->
+
 			<div class="col col-2" ng-if="question_type != 1">
                 <a href="" ng-click="addOption()" class="alignleft btn-circle btn-grey">
                     <i class="icon white icon-text-plus"></i>
