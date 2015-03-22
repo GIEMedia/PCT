@@ -1,4 +1,4 @@
-<div class="popup popup-edit popup-edit-text">
+<div class="popup popup-edit" ng-class="{3: 'popup-edit-text', 1: 'popup-edit-multi-images'}[question_type]">
 	<div class="popup-inner">
 		<div class="popup-head">
 			<h2 class="popup-title"><span>{{index + 1}}</span> {{question_text || "(Empty)"}}</h2><!-- /.popup-title -->
@@ -6,24 +6,38 @@
 
 		<div class="popup-body clearfix">
 			<div class="col col-2">
-                <a href="" ng-click="addOption()" class="alignleft btn-circle btn-grey">
-                    <i class="icon icon-text-plus white"></i>
+                <a href="" ng-click="addOption()" ng-if="question_type==3" class="alignleft btn-circle btn-grey">
+                    <i class="icon white icon-text-plus"></i>
                 </a>
+                <span ng-file-select="addImageOptions($files)" ng-if="question_type==1" class="alignleft btn-circle btn-grey">
+                    <i class="icon white icon-multiphoto-plus"></i>
+                </span>
 
-                <ul class="list-checkboxes">
+                <ul class="list-checkboxes" ng-class="{3: 'list-checkboxes', 1: 'list-images'}[question_type]">
                     <li ng-if="options.length == 0">
                         <div>
                             No answer(s) available.
                         </div><!-- /.checkbox -->
                     </li>
                     <li ng-repeat="option in options">
-                        <div class="checkbox">
+                        <div class="checkbox" ng-if="question_type == 3">
                             <input type="checkbox" ng-model="option.correct" id="mo{{$index}}">
 
                             <label class="form-label" for="mo{{$index}}"></label>
 
                             <input class="form-field" ng-model="option.text" placeholder="Answer" />
 
+                            <a href="" class="fa fa-trash-o" ng-click="deleteOption(option)"></a>
+                        </div><!-- /.checkbox -->
+                        <div ng-if="question_type == 1">
+                            <div class="checkbox">
+                                <input type="checkbox" ng-model="option.correct" id="mo{{$index}}">
+                                
+                                <label class="form-label" for="mo{{$index}}"></label>
+                            </div><!-- /.checkbox -->
+    
+                            <img ng-src="{{option.image}}" alt="">
+    
                             <a href="" class="fa fa-trash-o" ng-click="deleteOption(option)"></a>
                         </div><!-- /.checkbox -->
                     </li>

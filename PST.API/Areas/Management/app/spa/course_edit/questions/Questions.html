@@ -52,12 +52,16 @@
                 <div class="col col-1">
                     <div class="inner">
                         <ul ng-class="{3: 'list-checkboxes', 1: 'list-images'}[question.question_type]">
-                            <li ng-repeat="option in question.options">
-                                <div class="checkbox">
+                            <li ng-repeat="option in question.options" ng-class="{checked: question.question_type == 1 && option.correct}">
+                                <div class="checkbox" ng-if="question.question_type == 3">
                                     <input type="checkbox" ng-checked="option.correct" id="o{{$index}}">
 
                                     <label class="form-label" for="o{{$index}}">{{option.text}}</label>
                                 </div><!-- /.checkbox -->
+                                
+                                <a href="" ng-if="question.question_type == 1">
+                                    <img ng-src="{{option.image}}" alt="">
+                                </a>
                             </li>
                         </ul><!-- /.list-checkboxes -->
 

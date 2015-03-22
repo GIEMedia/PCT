@@ -61,15 +61,17 @@
                     $scope.openAnswersModel = function() {
                         var scope = $scope.$new(true);
                         scope.question_text = $scope.question.question_text;
-                        scope.options = ObjectUtil.clone($scope.question.options || []);
+                        scope.question_type = $scope.question.question_type;
                         scope.index = $scope.$index;
+                        
+                        scope.options = ObjectUtil.clone($scope.question.options || []);
                         scope.saveAction = function() {
                             $scope.question.options = ObjectUtil.clone(scope.options);
                         };
                         Fancybox.open(scope, {
-                            templateUrl: "/Areas/Management/app/spa/course_edit/questions/popup-edit-text.html",
-                            width: 647,
-                            controller: "courseEdit.sections.detail.TextQuestionModalCtrl"
+                            templateUrl: "/Areas/Management/app/spa/course_edit/questions/popup-edit-answers.html",
+                            width: 647, // 720
+                            controller: "courseEdit.questions.AnswersModalCtrl"
                         });
                     };
                     
@@ -84,11 +86,22 @@
             };
         })
         
-        .controller("courseEdit.sections.detail.TextQuestionModalCtrl", function($scope, $modalInstance) {
+        .controller("courseEdit.questions.AnswersModalCtrl", function($scope, $modalInstance, QuestionService) {
             $scope.cancel = $modalInstance.close;
             
             $scope.addOption = function() {
                 $scope.options.push({});
+            };
+            $scope.addImageOptions = function(images) {
+                QuestionService.uploadImage(images[0]).success(function(resp) {
+//                    
+                    var url = resp.returnData;
+                    
+                    url = url.replace(/C:\\inetpub\\wwwroot\\gie-test.prototype1.io\\Content\\Images\\/, "Images/")
+                    $scope.options.push({
+                        image: url
+                    });
+                })
             };
             $scope.deleteOption = function(o) {
                 Cols.remove(o, $scope.options);
