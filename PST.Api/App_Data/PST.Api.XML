@@ -430,7 +430,7 @@
             <param name="sectionID">ID of section (null if test)</param>
             <returns></returns>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.UpsertQuestions(System.Guid,System.Nullable{System.Guid},PST.Declarations.Models.Management.m_question[])">
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.UpsertQuestions(System.Guid,PST.Declarations.Models.Management.m_question[],System.Nullable{System.Guid})">
             <summary>
             Upsert questions for a section or test
             </summary>
