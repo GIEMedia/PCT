@@ -27,6 +27,17 @@
                             question_type: 0
                         });
                     };
+                    
+                    
+                    $scope.updateOrder = function(indice) {
+                        var newQuestions = [];
+                        for (var i = 0; i < indice.length; i++) {
+                            var index = indice[i];
+                            newQuestions.push($scope.questions[index]);
+                        }
+                        $scope.questions = newQuestions;
+                    };
+                    
                 }
             };
         })

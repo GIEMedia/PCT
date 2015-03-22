@@ -35,24 +35,6 @@
                 }
             });
 
-//            $scope.sectionLayout({
-//                backButton: {
-//                    title: "Sections",
-//                    state: "^.list"
-//                },
-//                saving: {
-//                    needSaving: function() {
-//                        return !ObjectUtil.equals($scope.questions, $scope.questionsMaster);
-//                    },
-//                    save: function() {
-//                        return QuestionService.upsert($stateParams.courseId, $stateParams.sectionId, $scope.questions).success(function(questions) {
-//                            $scope.questionsMaster = questions;
-//                            $scope.questions = ObjectUtil.clone(questions);
-//                        });
-//                    }
-//                }
-//            });
-
             QuestionService.getList($stateParams.courseId, $stateParams.sectionId).success(function(questions) {
                 $scope.questionsMaster = questions;
                 $scope.questions = ObjectUtil.clone(questions);
@@ -72,15 +54,6 @@
                 var sectionIndex = $scope.sectionIndex();
                 if (sectionIndex==$scope.sections.length - 1) return;
                 $state.go("^.detail", {sectionId: $scope.sections[sectionIndex + 1].id });
-            };
-            
-            $scope.updateOrder = function(indice) {
-                var newQuestions = [];
-                for (var i = 0; i < indice.length; i++) {
-                    var index = indice[i];
-                    newQuestions.push($scope.questions[index]);
-                }
-                $scope.questions = newQuestions;
             };
             
         })
