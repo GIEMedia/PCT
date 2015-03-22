@@ -128,7 +128,7 @@ namespace PST.Api.Areas.Management.Controllers
 
             _entityRepository.Save(course);
 
-            return questioned.Questions.Select(q => q.ToManagementModel()).ToArray();
+            return questioned.Questions.OrderBy(q => q.SortOrder).Select(q => q.ToManagementModel()).ToArray();
         }
 
         /// <summary>

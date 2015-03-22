@@ -53,7 +53,7 @@
 
             return {
                 open: open,
-                promptText: function (prompt) {
+                promptText: function (title, prompt) {
                     var defer = $q.defer();
 
                     var modalScope = $rootScope.$new(true);
@@ -62,6 +62,7 @@
                     open(modalScope, {
                         templateUrl: "/Areas/Management/app/spa/common/popup-text.html",
                         controller: function($scope, $modalInstance) {
+                            $scope.title = title;
                             $scope.placeholder = prompt;
                             $scope.pop = {
                                 text: null

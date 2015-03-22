@@ -145,14 +145,16 @@ namespace PST.Tests.ManagementTests
             Assert.IsNotNull(newQuestions);
             Assert.IsTrue(newQuestions.Any());
             Assert.IsFalse(newQuestions.Any(q => q.id.IsNullOrEmpty()));
-            Assert.AreEqual(questions.First().question_text, newQuestions.First().question_text);
+            Assert.AreEqual(questions[0].question_text, newQuestions[0].question_text);
 
-            newQuestions.First().question_text = "Updated Question Text";
+            newQuestions[0].question_text = "Updated Question Text";
 
-            var updatedQuestion = UpsertQuestions(course.id, section.id, newQuestions);
+            var resortedQuestions = newQuestions.Reverse().ToArray();
+
+            var updatedQuestion = UpsertQuestions(course.id, section.id, resortedQuestions);
             Assert.IsNotNull(updatedQuestion);
-            Assert.AreEqual(newQuestions.First().id, updatedQuestion.First().id);
-            Assert.AreEqual(newQuestions.First().question_text, updatedQuestion.First().question_text);
+            Assert.AreEqual(newQuestions[0].id, updatedQuestion[1].id);
+            Assert.AreEqual(newQuestions[0].question_text, updatedQuestion[1].question_text);
 
             var questions2 = GetQuestions(course.id, section.id);
             Assert.IsNotNull(questions2);

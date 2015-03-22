@@ -37,7 +37,8 @@ namespace PST.Declarations.Entities
             var option = new m_option
             {
                 id = ID,
-                text = Text
+                text = Text,
+                correct = Correct
             };
 
             SetCustomManagementModelProperties(option);

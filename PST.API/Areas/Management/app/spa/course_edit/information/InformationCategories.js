@@ -49,7 +49,7 @@
 
                     function addCategoryModal() {
                         var defer = $q.defer();
-                        Fancybox.promptText("New category name").then(function(newName) {
+                        Fancybox.promptText("Add New Category", "Category name").then(function(newName) {
                             CategoryService.addCategory(newName).success(function(cat) {
                                 defer.resolve(cat);
                             });
@@ -58,7 +58,7 @@
                     }
                     function addSubCategoryModal(parentId) {
                         var defer = $q.defer();
-                        Fancybox.promptText("New sub category name").then(function(newName) {
+                        Fancybox.promptText("Add New Sub Category", "Sub category name").then(function (newName) {
 
                             CategoryService.addSubCategory(parentId, newName).success(function(subCat) {
                                 defer.resolve(subCat);

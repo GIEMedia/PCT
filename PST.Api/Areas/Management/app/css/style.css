@@ -696,14 +696,14 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 	-webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 		-moz-box-shadow:0 2px 2px rgba(0, 0, 0, 0.2);
 			box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); }
-.popup-title { color: #b3b3b3; font-weight: normal; text-transform: capitalize; font-size: 14px; line-height: 16px; }
+.popup-title { color: #444444; font-weight: normal; text-transform: capitalize; font-size: 14px; line-height: 16px; }
 .popup-actions { font-size: 0; line-height: 0; text-align: right; padding: 15px; }
 .popup-actions .btn { margin-left: 5px; }
 .popup-actions .btn:first-child { margin-left: 0; }
 
 .popup-edit { }
 .popup-edit .popup-head { background: transparent; }
-.popup-edit .popup-title { color: #808080; text-transform: none; }
+.popup-edit .popup-title { color: #444444; text-transform: none; }
 .popup-edit .popup-title span { margin-right: 10px; }
 .popup-edit .popup-body { background-color: #fff; padding: 15px; border-radius: 3px 3px 0 0; 
 	-webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
@@ -741,6 +741,15 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .popup-edit-text .popup-body .col-2 .list-checkboxes li .checkbox:hover { border: 2px solid #47ceff; }
 .popup-edit-text .popup-body .col-2 .list-checkboxes li .checkbox .fa-trash-o { display: none; position: absolute; top: -2px; right: -42px; height: 50px; width: 40px; background-color: #e5f7fd; font-size: 17px; line-height: 50px; color: #808080; text-align: center; }
 .popup-edit-text .popup-body .col-2 .list-checkboxes li .checkbox:hover .fa-trash-o { display: block; }
+
+.popup-single-input { padding: 20px 15px 10px; }
+.popup-single-input .field { padding: 4px 8px; background-color: #f2f4f5; border: solid 1px #afafaf; }
+
+.popup-add-video { position: absolute; height: 56px; top: 136px; left: 85px; background: white; border: solid 2px #444; width: 322px; padding: 10px; }
+.popup-add-video .field { padding: 4px 8px; border: solid 1px #afafaf; width: 209px; }
+.popup-add-video:before { position: absolute; width: 0; height: 0; border-style: solid; content: ''; top: 18px; left: -8px; border-width: 8px 8px 8px 0; border-color: transparent #444 transparent transparent; }
+.popup-add-video .btn { line-height: 29px; margin-left: 5px; padding: 0; width: 35px; }
+.popup-add-video .btn .fa { font-size: 16px; }
 
 /* footer */
 .footer-nav {

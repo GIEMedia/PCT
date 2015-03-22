@@ -38,7 +38,7 @@ namespace PST.Services
                 catch { }
             }
 
-            var url = string.Concat(BaseUrl, UploadFolderBase, "Images\\", fileName);
+            var url = string.Concat(BaseUrl, "Images/", fileName);
             return url;
         }
 
