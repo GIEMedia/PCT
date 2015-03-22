@@ -16,6 +16,7 @@
                     data: {
                         name: "Courses"
                     },
+                    abstract: true,
                     templateUrl: "/Areas/Management/app/spa/course_edit/CourseEdit.html",
                     controller: "courseEdit.Ctrl"
                 })
@@ -116,12 +117,13 @@
                 var defer = $q.defer();
                 $scope.ce.saving = true;
                 $scope.cel.save()
-                    .catch(function(reason) {
-                        alert(reason);
-                    })
                     .then(function() {
                         $scope.ce.saving = false;
                         defer.resolve();
+                    }, function(reason) {
+                        $scope.ce.saving = false;
+                        alert(reason);
+                        defer.reject();
                     })
                 ;
                 return defer.promise;

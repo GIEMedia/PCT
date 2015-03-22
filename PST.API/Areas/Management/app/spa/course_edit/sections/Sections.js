@@ -12,6 +12,7 @@
                 .state('courseEdit.sections', {
                     url: '/sections',
                     template: "<ui-view></ui-view>",
+                    abstract: true,
                     controller: "courseEdit.sections.Ctrl"
                 })
             ;
