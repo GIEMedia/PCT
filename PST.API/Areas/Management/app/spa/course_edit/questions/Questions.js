@@ -12,23 +12,23 @@
                     questions: "="
                 },
                 link: function($scope, elem, attrs) {
-                    $scope.addTextQuestion = function() {
+                    function addQuestion(questionType) {
                         $scope.questions.push({
-                            question_type: 3
+                            question_type: questionType
                         });
+                        $scope.questionsView.expandeds[$scope.questions.length - 1] = true;
+                    }
+
+                    $scope.addTextQuestion = function() {
+                        addQuestion(3);
                     };
                     $scope.addMultiImagesQuestion = function() {
-                        $scope.questions.push({
-                            question_type: 1
-                        });
+                        addQuestion(1);
                     };
                     $scope.addImageQuestion = function() {
-                        $scope.questions.push({
-                            question_type: 0
-                        });
+                        addQuestion(0);
                     };
-                    
-                    
+
                     $scope.updateOrder = function(indice) {
                         var newQuestions = [];
                         for (var i = 0; i < indice.length; i++) {
@@ -37,12 +37,24 @@
                         }
                         $scope.questions = newQuestions;
                     };
-                    
+
+                    $scope.questionsView = {
+                        expandeds: {}
+                    };
+
+                    $scope.expandAll = function() {
+                        for (var i in $scope.questions) {
+                            $scope.questionsView.expandeds[i] = true;
+                        }
+                    };
+                    $scope.collapseAll = function() {
+                        ObjectUtil.clear($scope.questionsView.expandeds);
+                    }
                 }
             };
         })
     
-        .directive("questionRow", function(Fancybox) {
+        .directive("questionRow", function(Fancybox, $parse) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -53,23 +65,34 @@
                     }).on('mouseleave', function() {
                         $(this).removeClass('hovered');
                     });
-                    
-                    
-                    var sliding = false;
-                    elem.find('.col-size-1, .icon-chevron-down, .icon-chevron-up').on('click', function (e) {
-                        if (sliding) return;
-                        if ($(this).hasClass('table-col') && $(this).closest('.table-row').hasClass('expanded')) return;
-                        sliding = true;
-                        $(this).parents('.table-row').toggleClass('expanded').toggleClass('hovered');
-                        if ($(this).parents('.table-row').hasClass('expanded')) {
-                            $(this).parents('.table-row').find('.table-row-expand').slideDown(200, function () { sliding = false; });
+
+                    $scope.$watch(attrs.expanded, function(value) {
+                        if (value) {
+                            elem.addClass("expanded");
+                            elem.removeClass("hovered");
+                            elem.find('.table-row-expand').slideDown(200);
                         } else {
-                            $(this).parents('.table-row').find('.table-row-expand').slideUp(200, function () { sliding = false; });
+                            elem.removeClass("expanded");
+                            //elem.addClass("hovered");
+                            elem.find('.table-row-expand').slideUp(200);
                         }
-                        e.preventDefault();
                     });
-                    
-                    
+
+                    var expandedModel = $parse(attrs.expanded);
+                    //var sliding = false;
+                    elem.find('.col-size-1, .icon-chevron-down, .icon-chevron-up').on('click', function (e) {
+                        var currentExpanded = expandedModel($scope);
+                        if ($(this).hasClass("table-col") && currentExpanded) {
+                            return;
+                        }
+                        if (currentExpanded) {
+                            elem.addClass("hovered");
+                        }
+                        $scope.$applyAsync(function() {
+                            expandedModel.assign($scope, !currentExpanded && true);
+                        });
+                    });
+
                     $scope.deleteQuestion = function() {
                         Cols.remove($scope.question, $scope.questions);
                     };
@@ -77,7 +100,8 @@
                     $scope.openAnswersModel = function() {
                         var scope = $scope.$new(true);
                         scope.question_text = $scope.question.question_text;
-                        scope.question_type = $scope.question.question_type;
+                        var questionType = $scope.question.question_type;
+                        scope.question_type = questionType;
                         scope.index = $scope.$index;
                         
                         scope.options = ObjectUtil.clone($scope.question.options || []);
@@ -86,7 +110,7 @@
                         };
                         Fancybox.open(scope, {
                             templateUrl: "/Areas/Management/app/spa/course_edit/questions/popup-edit-answers.html",
-                            width: 647, // 720
+                            width: (questionType==1 || questionType==3) ? 647 : 720,
                             controller: "courseEdit.questions.AnswersModalCtrl"
                         });
                     };
@@ -102,22 +126,30 @@
             };
         })
         
-        .controller("courseEdit.questions.AnswersModalCtrl", function($scope, $modalInstance, QuestionService) {
+        .controller("courseEdit.questions.AnswersModalCtrl", function($scope, $q, $modalInstance, QuestionService) {
             $scope.cancel = $modalInstance.close;
             
             $scope.addOption = function() {
                 $scope.options.push({});
             };
             $scope.addImageOptions = function(images) {
-                QuestionService.uploadImage(images[0]).success(function(resp) {
-//                    
-                    var url = resp;
-                    
-                    url = url.replace(/C:\\inetpub\\wwwroot\\gie-test.prototype1.io\\Content\\Images\\/, "Images/");
-                    $scope.options.push({
-                        image: url
-                    });
-                })
+                var promises = [];
+                for (var i = 0; i < images.length; i++) {
+                    var image = images[i];
+                    promises.push(QuestionService.uploadImage(image));
+                }
+                $q.all(promises).then(function(resps) {
+                    for (var i = 0; i < resps.length; i++) {
+                        var resp = resps[i];
+
+                        var url = resp.data;
+
+                        url = url.replace(/C:\\inetpub\\wwwroot\\gie-test.prototype1.io\\Content\\Images\\/, "Images/");
+                        $scope.options.push({
+                            image: url
+                        });
+                    }
+                });
             };
             $scope.deleteOption = function(o) {
                 Cols.remove(o, $scope.options);
