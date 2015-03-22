@@ -12,6 +12,7 @@
                 .state('report', {
                     url: '/report',
                     template: "<ui-view></ui-view>",
+                    abstract: true,
                     data: {
                         name: "Test Results"
                     }

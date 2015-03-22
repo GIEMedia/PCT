@@ -12,6 +12,7 @@
                 .state('user', {
                     url: '/user',
                     template: "<ui-view></ui-view>",
+                    abstract: true,
                     controller: "user.Ctrl"
                 })
             ;

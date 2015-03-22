@@ -248,6 +248,21 @@
                 }
             };
         })
+    
+
+        .factory("Hover", function() {
+            return {
+                link: function($scope, elem, attrs) {
+
+                    elem.on('mouseenter', function () {
+                        $(this).addClass('hovered');
+                    }).on('mouseleave', function() {
+                        $(this).removeClass('hovered');
+                    });
+                }
+
+            };
+        })
     ;
 
 })();
