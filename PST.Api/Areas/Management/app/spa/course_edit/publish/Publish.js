@@ -15,19 +15,43 @@
             ;
         })
 
-        .controller("courseEdit.publish.Ctrl", function ($scope, $q) {
+        .controller("courseEdit.publish.Ctrl", function ($scope, $state, CourseService) {
             $scope.setCel({
                 step: 4,
                 save: function() {
-                    var defer = $q.defer();
 
-                    defer.resolve();
+                    var sending = ObjectUtil.clone($scope.course);
 
-                    return defer.promise;
+                    sending.status = $scope.editing.published ? 1 : 0;
 
+                    return CourseService.upsert(sending);
                 },
                 needSaving: function() {
-                    return true;
+                    return $scope.published != $scope.editing.published;
+                }
+            });
+
+            $scope.publishing = [
+                {
+                    active: false,
+                    display: "Inactive"
+                },
+                {
+                    active: true,
+                    display: "Active"
+                }
+            ];
+            $scope.published = false;
+            $scope.editing = {
+                published: false
+            };
+
+            $scope.$watch("course", function(value) {
+                if (value) {
+                    if (value.status == 1) {
+                        $scope.published = true;
+                        $scope.editing.published = true;
+                    }
                 }
             });
         })

@@ -36,6 +36,14 @@
                 },
                 upsert: function(course) {
                     return Api.put("api/manage/course", course);
+                },
+                review: function(courseId, reviewer) {
+                    //{
+                    //    "name": "sample string 1",
+                    //    "state": "sample string 2",
+                    //    "email": "someone@somewhere.com"
+                    //}
+                    return Api.put("api/manage/course/review/" + courseId, reviewer);
                 }
             };
         })

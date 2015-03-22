@@ -22,6 +22,9 @@
                 },
                 uploadImage: function(file) {
                     return Api.upload("api/manage/course/question/image?width=73&height=73", file);
+                },
+                uploadQuestionImage: function(file) {
+                    return Api.upload("api/manage/course/question/image?width=261&height=147", file);
                 }
             };
         })

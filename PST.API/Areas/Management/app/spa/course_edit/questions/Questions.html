@@ -1,7 +1,7 @@
-<div class="custom-table-questions" sortable="updateOrder($indice)">
+<div class="custom-table-questions" sortable="updateOrder($indice)" before-sorting="collapseAll()">
     <div class="table-row-head">
         <div class="table-col col-size-1">
-            <h3>Questions    <a href="#" class="expand-all">Expand all</a> <span>/</span> <a href="#" class="collapse-all">Collapse all</a></h3>
+            <h3>Questions    <a href="" class="expand-all" ng-click="expandAll()">Expand all</a> <span>/</span> <a href="" class="collapse-all" ng-click="collapseAll()">Collapse all</a></h3>
         </div><!-- /.table-col -->
 
         <div class="table-col col-size-2">
@@ -17,7 +17,7 @@
         </div><!-- /.table-col -->
     </div>
     
-    <div class="table-row" ng-repeat="question in questions" sortable-row-index="{{$index}}" question-row>
+    <div class="table-row" ng-repeat="question in questions" expanded="questionsView.expandeds[$index]" sortable-row-index="{{$index}}" question-row>
         <div class="inner">
             <div class="table-col col-size-1">
                 <div class="number">{{$index + 1}}</div><!-- /.number -->
@@ -66,9 +66,9 @@
                             </li>
                         </ul><!-- /.list-checkboxes -->
 
-                        <img ng-src="{{question.image || 'Areas/Management/app/css/images/video-image-img.png'}}" alt="" height="147" ng-if="question.question_type == 0">
+                        <img ng-src="{{question.image || 'Areas/Management/app/css/images/video-image-img.png'}}" alt="" height="147" ng-if="question.question_type == 0 || (question.question_type == 2 && question.image == null)">
                         
-                        <div class="video-wrapper" ng-if="question.question_type == 2">
+                        <div class="video-wrapper" ng-if="question.question_type == 2 && question.image != null">
                             <video class="video-js vjs-default-skin" controls preload="auto" width="300" height="170">
                                 <source src="http://www.pctonline.com/FileUploads/media/PCT_Online_Training/PCT_Pest_Insecticide_WO.mp4" type='video/mp4'>
                                 <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
@@ -97,287 +97,6 @@
         </div><!-- /.table-row-expand -->
     </div><!-- /.table-row -->
 
-    <div class="table-row" ng-if="false">
-        <div class="inner">
-            <div class="table-col col-size-1">
-                <div class="number">1</div><!-- /.number -->
-
-                <h2 class="question">Which of the following pests can be treated using PCT Pest Insecticide? (check all that ...</h2><!-- /.question -->
-                <input type="text" class="field" value="Which of the following pests can be treated using PCT Pest Insecticide? (check all that apply)" placeholder="Question" />
-
-                <div class="question-icons">
-                    <a href="#" class="icon icon-chevron-up"></a>
-
-                    <a href="#" class="fa fa-trash-o"></a>
-                </div><!-- /.question-icons -->
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-2">
-                <div class="answer">
-                    <p><strong>You’re right!</strong> This product is labeled to treat carpetner ants, German cockroaches and silverfish, but it is ...</p>
-
-                    <div class="answer-icons">
-                        <a href="" class="fa fa-arrows"></a>
-
-                        <a href="" class="icon icon-chevron-down"></a>
-
-                        <a href="" class="fa fa-trash-o"></a>
-                    </div><!-- /.answer-icons -->
-                </div><!-- /.answer -->
-            </div><!-- /.table-col -->
-        </div><!-- /.inner -->
-
-        <div class="table-row-expand multiple-images">
-            <div class="inner">
-                <i class="icon icon-multiphoto red"></i>
-
-                <div class="col col-1">
-                    <div class="inner">
-                        <ul class="list-images">
-                            <li class="checked">
-                                <a href="#">
-
-                                    <img src="Areas/Management/app/css/images/insect-1.jpg" alt="">
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    <img src="Areas/Management/app/css/images/insect-2.jpg" alt="">
-                                </a>
-                            </li>
-
-                            <li>
-                                <a href="#">
-                                    <img src="Areas/Management/app/css/images/insect-3.jpg" alt="">
-                                </a>
-                            </li>
-
-                            <li class="checked">
-                                <a href="#">
-                                    <img src="Areas/Management/app/css/images/insect-4.jpg" alt="">
-                                </a>
-                            </li>
-
-                            <li class="checked">
-                                <a href="#">
-                                    <img src="Areas/Management/app/css/images/insect-5.jpg" alt="">
-                                </a>
-                            </li>
-
-                            <li class="checked">
-                                <a href="#">
-                                    <img src="Areas/Management/app/css/images/insect-6.jpg" alt="">
-                                </a>
-                            </li>
-                        </ul><!-- /.list-images -->
-
-                        <div class="overlay">
-                            <a href="ajax/popup-edit-multi-images.html" class="btn btn-blue popup-open fancybox.ajax">Add/Edit Answers</a>
-                        </div><!-- /.overlay -->
-                    </div><!-- /.inner -->
-                </div><!-- /.col col-1 -->
-
-                <div class="col col-2">
-                    <div class="inner">
-                        <input type="text" placeholder="Response heading" value="You’re right!" class="field" />
-                        <textarea class="textarea" placeholder="Response message">This product is labeled to treat carpetner ants, German cockroaches and silverfish, but it is NOT labeled for treating bed bugs.</textarea>
-                    </div><!-- /.inner -->
-                </div><!-- /.col col-2 -->
-            </div><!-- /.inner -->
-
-            <div class="foot">
-                <i class="fa fa-lightbulb-o"></i>
-                <input type="text" placeholder="No tip provided." value="" class="field" />
-            </div><!-- /.foot -->
-        </div><!-- /.table-row-expand -->
-    </div><!-- /.table-row -->
-
-    <div class="table-row" ng-if="false">
-        <div class="inner">
-            <div class="table-col col-size-1">
-                <div class="number">2</div><!-- /.number -->
-
-                <h2 class="question">Which of the following pests can be treated using PCT Pest Insecticide? (check all that ...</h2><!-- /.question -->
-                <input type="text" class="field" value="Which of the following pests can be treated using PCT Pest Insecticide? (check all that apply)" placeholder="Question" />
-
-                <div class="question-icons">
-                    <a href="#" class="icon icon-chevron-up"></a>
-
-                    <a href="#" class="fa fa-trash-o"></a>
-                </div><!-- /.question-icons -->
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-2">
-                <div class="answer">
-                    <p><strong>You’re right!</strong> This product is labeled to treat carpetner ants, German cockroaches and silverfish, but it is ...</p>
-
-                    <div class="answer-icons">
-                        <a href="#" class="fa fa-arrows"></a>
-
-                        <a href="#" class="icon icon-chevron-down"></a>
-
-                        <a href="#" class="fa fa-trash-o"></a>
-                    </div><!-- /.answer-icons -->
-                </div><!-- /.answer -->
-            </div><!-- /.table-col -->
-        </div><!-- /.inner -->
-
-        <div class="table-row-expand single-image">
-            <div class="inner">
-                <i class="icon icon-photo orange"></i>
-
-                <div class="col col-1">
-                    <div class="inner">
-                        <img src="Areas/Management/app/css/images/insect-large.jpg" alt="" width="170" height="170">
-
-                        <div class="overlay">
-                            <a href="ajax/popup-edit-single-image.html" class="btn btn-blue popup-open fancybox.ajax">Add/Edit Answers</a>
-                        </div><!-- /.overlay -->
-                    </div><!-- /.inner -->
-                </div><!-- /.col col-1 -->
-
-                <div class="col col-2">
-                    <div class="inner">
-                        <input type="text" placeholder="Response heading" value="You’re right!" class="field" />
-                        <textarea class="textarea" placeholder="Response message">This product is labeled to treat carpetner ants, German cockroaches and silverfish, but it is NOT labeled for treating bed bugs.</textarea>
-                    </div><!-- /.inner -->
-                </div><!-- /.col col-2 -->
-            </div><!-- /.inner -->
-
-            <div class="foot">
-                <i class="fa fa-lightbulb-o"></i>
-
-                <input type="text" placeholder="No tip provided." value="" class="field" />
-            </div><!-- /.foot -->
-        </div><!-- /.table-row-expand -->
-    </div><!-- /.table-row -->
-
-    <div class="table-row" ng-if="false">
-        <div class="inner">
-            <div class="table-col col-size-1">
-                <div class="number">4</div><!-- /.number -->
-
-                <h2 class="question">Which of the following pests can be treated using PCT Pest Insecticide? (check all that ...</h2><!-- /.question -->
-                <input type="text" class="field" value="Which of the following pests can be treated using PCT Pest Insecticide? (check all that apply)" placeholder="Question" />
-
-                <div class="question-icons">
-                    <a href="#" class="icon icon-chevron-up"></a>
-
-                    <a href="#" class="fa fa-trash-o"></a>
-                </div><!-- /.question-icons -->
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-2">
-                <div class="answer">
-                    <p><strong>You’re right!</strong> This product is labeled to treat carpetner ants, German cockroaches and silverfish, but it is ...</p>
-
-                    <div class="answer-icons">
-                        <a href="#" class="fa fa-arrows"></a>
-
-                        <a href="#" class="icon icon-chevron-down"></a>
-
-                        <a href="#" class="fa fa-trash-o"></a>
-                    </div><!-- /.answer-icons -->
-                </div><!-- /.answer -->
-            </div><!-- /.table-col -->
-        </div><!-- /.inner -->
-
-        <div class="table-row-expand single-image">
-            <div class="inner">
-                <i class="icon icon-video orange"></i>
-
-                <div class="col col-1">
-                    <div class="inner">
-                        <div class="video-wrapper">
-                            <video class="video-js vjs-default-skin" controls preload="auto" width="300" height="170">
-                                <source src="http://www.pctonline.com/FileUploads/media/PCT_Online_Training/PCT_Pest_Insecticide_WO.mp4" type='video/mp4'>
-                                <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-                            </video>
-                        </div>
-
-                        <div class="overlay">
-                            <a href="ajax/popup-edit-single-image.html" class="btn btn-blue popup-open fancybox.ajax">Add/Edit Answers</a>
-                        </div><!-- /.overlay -->
-                    </div><!-- /.inner -->
-                </div><!-- /.col col-1 -->
-
-                <div class="col col-2">
-                    <div class="inner">
-                        <input type="text" placeholder="Response heading" value="You’re right!" class="field" />
-                        <textarea class="textarea" placeholder="Response message">This product is labeled to treat carpetner ants, German cockroaches and silverfish, but it is NOT labeled for treating bed bugs.</textarea>
-                    </div><!-- /.inner -->
-                </div><!-- /.col col-2 -->
-            </div><!-- /.inner -->
-
-            <div class="foot">
-                <i class="fa fa-lightbulb-o"></i>
-
-                <input type="text" placeholder="No tip provided." value="" class="field" />
-            </div><!-- /.foot -->
-        </div><!-- /.table-row-expand -->
-    </div><!-- /.table-row -->
-
-    <div class="table-row expanded new-question" ng-if="false">
-        <div class="inner">
-            <div class="table-col col-size-1">
-                <div class="number">5</div><!-- /.number -->
-
-                <h2 class="question">(Empty - Question will be removed on save)</h2>
-                <input type="text" class="field" value="" placeholder="Question" />
-
-                <div class="question-icons">
-                    <a href="#" class="icon icon-chevron-up"></a>
-
-                    <a href="#" class="fa fa-trash-o"></a>
-                </div><!-- /.question-icons -->
-            </div><!-- /.table-col -->
-
-            <div class="table-col col-size-2">
-                <div class="answer">
-                    <p><strong>(Empty)</strong> (Empty)</p>
-
-                    <div class="answer-icons">
-                        <a href="#" class="fa fa-arrows"></a>
-
-                        <a href="#" class="icon icon-chevron-down"></a>
-
-                        <a href="#" class="fa fa-trash-o"></a>
-                    </div><!-- /.answer-icons -->
-                </div><!-- /.answer -->
-            </div><!-- /.table-col -->
-        </div><!-- /.inner -->
-
-        <div class="table-row-expand single-image">
-            <div class="inner">
-                <i class="icon icon-photo orange"></i>
-
-                <div class="col col-1">
-                    <div class="inner">
-                        <img src="Areas/Management/app/css/images/video-image-img.png" alt="" width="261" height="147">
-                        <div class="overlay">
-                            <a href="ajax/popup-edit-single-image.html" class="btn btn-blue popup-open fancybox.ajax">Add/Edit Answers</a>
-                        </div><!-- /.overlay -->
-                    </div><!-- /.inner -->
-                </div><!-- /.col col-1 -->
-
-                <div class="col col-2">
-                    <div class="inner">
-                        <div class="form-controls">
-                            <input type="text" placeholder="Response heading" value="" class="field" />
-                            <textarea class="textarea" placeholder="Response message"></textarea>
-                        </div><!-- /.form-controls -->
-                    </div><!-- /.inner -->
-                </div><!-- /.col col-2 -->
-            </div><!-- /.inner -->
-
-            <div class="foot">
-                <i class="fa fa-lightbulb-o"></i>
-
-                <input type="text" placeholder="No tip provided." value="" class="field" />
-            </div><!-- /.foot -->
-        </div><!-- /.table-row-expand -->
-    </div><!-- /.table-row -->
 </div><!-- /.custom-table-questions -->
 
 <div class="btn-plus">

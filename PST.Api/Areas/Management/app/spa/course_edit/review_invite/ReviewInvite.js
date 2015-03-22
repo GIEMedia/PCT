@@ -15,12 +15,22 @@
             ;
         })
 
-        .controller("courseEdit.reviewInvite.Ctrl", function ($scope, StateService) {
+        .controller("courseEdit.reviewInvite.Ctrl", function ($scope, $stateParams, StateService, CourseService) {
             $scope.setCel({
                 step: 3
             });
 
             $scope.states = StateService.getStates();
+
+            $scope.reviewer = {};
+
+            $scope.send = function() {
+                CourseService.review($stateParams.courseId, $scope.reviewer).success(function() {
+                    if ($scope.course.status == 0) {
+                        $scope.course.status = 2;
+                    }
+                });
+            }
         })
     ;
 
