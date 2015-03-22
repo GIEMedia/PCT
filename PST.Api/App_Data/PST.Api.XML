@@ -446,7 +446,7 @@
             <param name="width">Optionally specifies the resize width of the image</param>
             <param name="height">Optionally specifies the resize height of the image</param>
             <param name="forceCanvas">Optionally indicates if the canvas should be resized to the width/height specified regardless of proportinal resizing (default = false)</param>
-            <returns>The "returnData" property of the response will contain the url of the uploaded image</returns>
+            <returns>Returns a string containing the url of the uploaded image</returns>
         </member>
         <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.GetSections(System.Guid)">
             <summary>
@@ -485,20 +485,32 @@
             <param name="courseID">ID of course</param>
             <param name="sectionID">ID of section</param>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.UploadDocument(System.Guid,System.Guid)">
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.UploadDocument(System.Guid,System.Guid,System.Nullable{System.Boolean})">
             <summary>
             Upload document to section of a course
             </summary>
             <param name="courseID">ID of course</param>
             <param name="sectionID">ID of section</param>
-            <returns>The "returnData" property of the response will contain the url of the uploaded pdf</returns>
+            <param name="cascade">Indicates if other sections that share this same document should also be updated (optional: default = false).</param>
+            <returns>A document object containing info about new document.</returns>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.DeleteDocument(System.Guid,System.Guid)">
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.SetDocumentFromExistingSection(System.Guid,System.Guid,System.Guid,System.Nullable{System.Boolean})">
+            <summary>
+            Sets the document for the indicated section to the document of another section.
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="sectionID">ID of section to update the document of</param>
+            <param name="useDocFromSectionID">ID of section that the document will be taken from</param>
+            <param name="cascade">Indicates if other sections that share the same document as the section specified by sectionID should also be updated (optional: default = false).</param>
+            <returns>A document object containing info about new document.</returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageSectionController.DeleteDocument(System.Guid,System.Guid,System.Nullable{System.Boolean})">
             <summary>
             Delete document from a section of a course
             </summary>
             <param name="courseID">ID of course</param>
             <param name="sectionID">ID of section</param>
+            <param name="cascade">Indicates if other sections that share this same document should also be updated (optional: default = false).</param>
         </member>
         <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.GetCourses(System.Boolean)">
             <summary>
