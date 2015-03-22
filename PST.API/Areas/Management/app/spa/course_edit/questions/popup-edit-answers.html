@@ -6,7 +6,7 @@
 
 		<div class="popup-body clearfix">
 			<div class="col col-2">
-                <a href="" ng-click="addOption()" ng-if="question_type==3" class="alignleft btn-circle btn-grey">
+                <a href="" ng-click="addOption()" ng-if="question_type != 1" class="alignleft btn-circle btn-grey">
                     <i class="icon white icon-text-plus"></i>
                 </a>
                 <span ng-file-select="addImageOptions($files)" ng-if="question_type==1" class="alignleft btn-circle btn-grey">
@@ -20,7 +20,7 @@
                         </div><!-- /.checkbox -->
                     </li>
                     <li ng-repeat="option in options">
-                        <div class="checkbox" ng-if="question_type == 3">
+                        <div class="checkbox" ng-if="question_type != 1">
                             <input type="checkbox" ng-model="option.correct" id="mo{{$index}}">
 
                             <label class="form-label" for="mo{{$index}}"></label>

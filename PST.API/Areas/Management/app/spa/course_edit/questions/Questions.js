@@ -22,6 +22,11 @@
                             question_type: 1
                         });
                     };
+                    $scope.addImageQuestion = function() {
+                        $scope.questions.push({
+                            question_type: 0
+                        });
+                    };
                 }
             };
         })

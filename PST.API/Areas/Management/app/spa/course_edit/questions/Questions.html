@@ -46,12 +46,13 @@
                 </div><!-- /.answer -->
             </div><!-- /.table-col -->
         </div><!-- /.inner -->
-        <div class="table-row-expand" ng-class="{3: 'text', 1: 'multiple-images'}[question.question_type]">
+        <div class="table-row-expand" ng-class="{3: 'text', 1: 'multiple-images', 2: 'single-image', 0: 'single-image'}[question.question_type]">
             <div class="inner">
-                <i class="icon" ng-class="{3: 'icon-text grey', 1: 'icon-multiphoto red'}[question.question_type]"></i>
+                <i class="icon" 
+                   ng-class="{3: 'icon-text grey', 1: 'icon-multiphoto red', 0: 'icon-photo orange', 2: 'icon-video orange'}[question.question_type]"></i>
                 <div class="col col-1">
                     <div class="inner">
-                        <ul ng-class="{3: 'list-checkboxes', 1: 'list-images'}[question.question_type]">
+                        <ul ng-class="{3: 'list-checkboxes', 1: 'list-images'}[question.question_type]" ng-if="[1,3].indexOf(question.question_type) > -1">
                             <li ng-repeat="option in question.options" ng-class="{checked: question.question_type == 1 && option.correct}">
                                 <div class="checkbox" ng-if="question.question_type == 3">
                                     <input type="checkbox" ng-checked="option.correct" id="o{{$index}}">
@@ -65,6 +66,15 @@
                             </li>
                         </ul><!-- /.list-checkboxes -->
 
+                        <img ng-src="{{question.image || 'Areas/Management/app/css/images/video-image-img.png'}}" alt="" height="147" ng-if="question.question_type == 0">
+                        
+                        <div class="video-wrapper" ng-if="question.question_type == 2">
+                            <video class="video-js vjs-default-skin" controls preload="auto" width="300" height="170">
+                                <source src="http://www.pctonline.com/FileUploads/media/PCT_Online_Training/PCT_Pest_Insecticide_WO.mp4" type='video/mp4'>
+                                <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+                            </video>
+                        </div>
+                        
                         <div class="overlay">
                             <a class="btn btn-blue" href="" ng-click="openAnswersModel()">Add/Edit Answers</a>
                         </div><!-- /.overlay -->
@@ -383,7 +393,7 @@
         <span class="tooltip">Text Based Question</span>
     </div><!-- /.btn-darkgrey -->
 
-    <div class="btn-plus-inner btn-orange">
+    <div class="btn-plus-inner btn-orange" ng-click="addImageQuestion()">
         <i class="icon icon-photo"></i>
 
         <span class="tooltip">Single Image/Video Question</span>
