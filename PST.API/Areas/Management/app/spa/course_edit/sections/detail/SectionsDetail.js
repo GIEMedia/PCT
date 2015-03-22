@@ -17,23 +17,41 @@
         })
 
         .controller("courseEdit.sections.detail.Ctrl", function ($scope, $state, $stateParams, QuestionService) {
-            $scope.sectionLayout({
+            
+            $scope.setCel({
+                step: 1,
                 backButton: {
                     title: "Sections",
                     state: "^.list"
                 },
-                saving: {
-                    needSaving: function() {
-                        return !ObjectUtil.equals($scope.questions, $scope.questionsMaster);
-                    },
-                    save: function() {
-                        return QuestionService.upsert($stateParams.courseId, $stateParams.sectionId, $scope.questions).success(function(questions) {
-                            $scope.questionsMaster = questions;
-                            $scope.questions = ObjectUtil.clone(questions);
-                        });
-                    }
+                needSaving: function() {
+                    return $scope.questionsMaster == null ? false : !ObjectUtil.equals($scope.questions, $scope.questionsMaster);
+                },
+                save: function() {
+                    return QuestionService.upsert($stateParams.courseId, $stateParams.sectionId, $scope.questions).success(function(questions) {
+                        $scope.questionsMaster = questions;
+                        $scope.questions = ObjectUtil.clone(questions);
+                    });
                 }
             });
+
+//            $scope.sectionLayout({
+//                backButton: {
+//                    title: "Sections",
+//                    state: "^.list"
+//                },
+//                saving: {
+//                    needSaving: function() {
+//                        return !ObjectUtil.equals($scope.questions, $scope.questionsMaster);
+//                    },
+//                    save: function() {
+//                        return QuestionService.upsert($stateParams.courseId, $stateParams.sectionId, $scope.questions).success(function(questions) {
+//                            $scope.questionsMaster = questions;
+//                            $scope.questions = ObjectUtil.clone(questions);
+//                        });
+//                    }
+//                }
+//            });
 
             QuestionService.getList($stateParams.courseId, $stateParams.sectionId).success(function(questions) {
                 $scope.questionsMaster = questions;

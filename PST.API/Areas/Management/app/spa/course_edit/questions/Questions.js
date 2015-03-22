@@ -13,9 +13,13 @@
                 },
                 link: function($scope, elem, attrs) {
                     $scope.addTextQuestion = function() {
-                        console.log(11);
                         $scope.questions.push({
                             question_type: 0
+                        });
+                    };
+                    $scope.addMultiImagesQuestion = function() {
+                        $scope.questions.push({
+                            question_type: 1
                         });
                     };
                 }

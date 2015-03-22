@@ -15,11 +15,10 @@
                 })
             ;
         })
-        
-        
 
         .controller("courseEdit.sections.list.Ctrl", function ($scope, $state, SectionService) {
-            $scope.sectionLayout({
+            $scope.setCel({
+                step: 1
             });
 
             $scope.inserting = {

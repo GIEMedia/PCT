@@ -1,4 +1,3 @@
-
 <div class="custom-table-questions" sortable="updateOrder($indice)">
     <div class="table-row-head">
         <div class="table-col col-size-1">
@@ -17,6 +16,7 @@
             No question(s) available
         </div><!-- /.table-col -->
     </div>
+    
     <div class="table-row" ng-repeat="question in questions" sortable-row-index="{{$index}}" question-row>
         <div class="inner">
             <div class="table-col col-size-1">
@@ -46,14 +46,13 @@
                 </div><!-- /.answer -->
             </div><!-- /.table-col -->
         </div><!-- /.inner -->
-                            
-        <div class="table-row-expand text">
+        <div class="table-row-expand" ng-class="{3: 'text', 1: 'multiple-images'}[question.question_type]">
             <div class="inner">
-                <i class="icon icon-text grey"></i>
+                <i class="icon" ng-class="{3: 'icon-text grey', 1: 'icon-multiphoto red'}[question.question_type]"></i>
 
                 <div class="col col-1">
                     <div class="inner">
-                        <ul class="list-checkboxes">
+                        <ul class="" ng-class="{3: 'list-checkboxes', 1: 'list-images'}[question.question_type]">
                             <li ng-repeat="option in question.options">
                                 <div class="checkbox">
                                     <input type="checkbox" ng-checked="option.correct" id="o{{$index}}">
@@ -387,7 +386,7 @@
         <span class="tooltip">Single Image/Video Question</span>
     </div><!-- /.btn-orange -->
 
-    <div class="btn-plus-inner btn-red">
+    <div class="btn-plus-inner btn-red" ng-click="addMultiImagesQuestion()">
         <i class="icon icon-multiphoto"></i>
 
         <span class="tooltip">Multiple Images Question</span>
