@@ -103,6 +103,8 @@ namespace PST.Declarations.Entities
     {
         public override void SyncOptionsFromManagementModel(m_question model)
         {
+            if (model.options == null) return;
+
             // Remove any options that existed but no longer in the model
             this.Options.Where(o => !model.options.Select(x => x.id).Contains(o.ID))
                 .ToList()

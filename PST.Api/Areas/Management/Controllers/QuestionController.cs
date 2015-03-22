@@ -40,7 +40,7 @@ namespace PST.Api.Areas.Management.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("list/{courseID}/{sectionID?}")]
-        public m_question[] GetQuestions(Guid courseID, Guid? sectionID)
+        public m_question[] GetQuestions(Guid courseID, Guid? sectionID = null)
         {
             var course = _courseService.GetCourse(courseID, status: null);
             if(course == null)
@@ -95,7 +95,7 @@ namespace PST.Api.Areas.Management.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("{courseID}/{sectionID?}")]
-        public m_question[] UpsertQuestions(Guid courseID, Guid? sectionID, m_question[] questions)
+        public m_question[] UpsertQuestions(Guid courseID, m_question[] questions, Guid? sectionID = null)
         {
             Course course;
             var questioned = GetQuestioned(courseID, sectionID, out course);

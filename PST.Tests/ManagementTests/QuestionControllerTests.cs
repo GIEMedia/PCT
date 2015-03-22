@@ -24,7 +24,7 @@ namespace PST.Tests.ManagementTests
         }
 
         [TestMethod]
-        public void CanGetQuestions()
+        public void CanGetSectionQuestions()
         {
             var course = GetCourses().FirstOrDefault();
             Assert.IsNotNull(course);
@@ -36,6 +36,18 @@ namespace PST.Tests.ManagementTests
             Assert.IsNotNull(questions);
             Assert.IsTrue(questions.Any());
             Assert.IsFalse(questions.Any(q=>q.question_text.IsNullOrEmpty()));
+        }
+
+        [TestMethod]
+        public void CanGetTestQuestions()
+        {
+            var course = GetCourses().FirstOrDefault();
+            Assert.IsNotNull(course);
+
+            var questions = GetQuestions(course.id, null);
+            Assert.IsNotNull(questions);
+            Assert.IsTrue(questions.Any());
+            Assert.IsFalse(questions.Any(q => q.question_text.IsNullOrEmpty()));
         }
 
         public m_course_overview[] GetCourses()
