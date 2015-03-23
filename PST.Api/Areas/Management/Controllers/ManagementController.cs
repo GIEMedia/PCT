@@ -7,6 +7,7 @@ using Prototype1.Foundation.Data.NHibernate;
 using PST.Api.Controllers;
 using PST.Declarations;
 using PST.Declarations.Entities;
+using PST.Declarations.Interfaces;
 using PST.Declarations.Models;
 using PST.Declarations.Models.Management;
 
@@ -17,10 +18,12 @@ namespace PST.Api.Areas.Management.Controllers
     public class ManagementController : ApiControllerBase
     {
         private readonly IEntityRepository _entityRepository;
+        private readonly Lazy<ICourseService> _courseService;
 
-        public ManagementController(IEntityRepository entityRepository)
+        public ManagementController(IEntityRepository entityRepository, Lazy<ICourseService> courseService)
         {
             _entityRepository = entityRepository;
+            _courseService = courseService;
         }
 
         /// <summary>
@@ -32,7 +35,30 @@ namespace PST.Api.Areas.Management.Controllers
         [Route("results/{courseID}")]
         public m_question_stat[] GetResults(Guid courseID)
         {
-            return new m_question_stat[0];
+            var course = _courseService.Value.GetCourse(courseID);
+            if (course == null)
+                throw new NullReferenceException("Course not found");
+
+            if(course.Test == null)
+                return new m_question_stat[0];
+
+            return course.Test.Questions.Select(q =>
+                new m_question_stat
+                {
+                    first_attempt = 750,
+                    second_attempt = 250,
+                    third_attempt = 50,
+                    question = q.QuestionText,
+                    options = q.Options.Select(o =>
+                        new m_option_stat
+                        {
+                            first_attempt = 750,
+                            second_attempt = 250,
+                            third_attempt = 50,
+                            text = o.Text,
+                            image = q is MultiImageQuestion ? ((ImageOption) o).ImageUrl : null
+                        }).ToArray()
+                }).ToArray();
         }
 
         /// <summary>
@@ -44,7 +70,7 @@ namespace PST.Api.Areas.Management.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("user/list")]
-        public m_user_overview[] GetUsers(int? page = 1, int? qty = 20, string search = "")
+        public m_user_search_result GetUsers(int? page = 1, int? qty = 20, string search = "")
         {
             qty = qty ?? 20;
             page = page ?? 1;
@@ -59,13 +85,20 @@ namespace PST.Api.Areas.Management.Controllers
                         (current, s) =>
                             current.Where(a => a.FirstName.Contains(s) || a.LastName.Contains(s) || a.Email.Contains(s)));
 
-            return accounts
-                .OrderBy(a => a.LastName)
-                .Skip(qty.Value*(page.Value - 1))
-                .Take(qty.Value)
-                .ToList()
-                .Select(a => (m_user_overview) a)
-                .ToArray();
+            var totalUsers = accounts.Count();
+
+            return new m_user_search_result
+            {
+                pages = totalUsers/qty.Value,
+                results =
+                    accounts
+                        .OrderBy(a => a.LastName)
+                        .Skip(qty.Value*(page.Value - 1))
+                        .Take(qty.Value)
+                        .ToList()
+                        .Select(a => (m_user_overview) a)
+                        .ToArray()
+            };
         }
 
         /// <summary>
@@ -83,7 +116,7 @@ namespace PST.Api.Areas.Management.Controllers
 
             if (max > 100) max = 100;
 
-            return GetUsers(null, max, search);
+            return GetUsers(qty: max, search: search).results;
         }
 
         /// <summary>

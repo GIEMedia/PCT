@@ -377,6 +377,12 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .table-user-list .fa { font-size: 18px; }
 .table-user .certificate-failed { color: #ff1d25; font-weight: bold; }
 
+.table-buttons { text-align: right; width: 700px; float: right; }
+table + .table-buttons,
+.table-buttons + table { margin-top: 9px; }
+.table-buttons .btn { line-height: 23px; padding: 0; width: 30px; margin-top: 5px; }
+.table-buttons .btn + .btn { margin-left: 2px; }
+
 .review,
 .draft { text-align: center; text-transform: uppercase; font-size: 11px; line-height: 18px; padding: 2px 13px; font-weight: 600; }
 

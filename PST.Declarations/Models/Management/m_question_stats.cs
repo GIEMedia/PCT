@@ -3,6 +3,8 @@
     public class m_question_stat : stat
     {
         public string question { get; set; }
+
+        public m_option_stat[] options { get; set; }
     }
 
     public class m_option_stat : stat

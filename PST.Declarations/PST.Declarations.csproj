@@ -249,6 +249,7 @@
     <Compile Include="Models\Management\m_state_ceu.cs" />
     <Compile Include="Models\Management\m_user.cs" />
     <Compile Include="Models\Management\m_user_course_stat.cs" />
+    <Compile Include="Models\Management\m_user_search_result.cs" />
     <Compile Include="Models\Management\m_user_overview.cs" />
     <Compile Include="Models\manager.cs" />
     <Compile Include="Models\option.cs" />
