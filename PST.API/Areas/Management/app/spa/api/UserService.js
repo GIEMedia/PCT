@@ -15,6 +15,9 @@
                 },
                 search: function(text) {
                     return Api.get("api/manage/user/search?search=" + text);
+                },
+                setAdminAccess: function(userId, adminAccess) {
+                    return Api.put("api/manage/user/admin/" + userId + "?access=" + adminAccess);
                 }
             };
         })

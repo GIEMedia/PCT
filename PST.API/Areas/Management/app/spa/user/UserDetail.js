@@ -32,7 +32,20 @@
 
             $scope.percent = function(value) {
                 return Math.round(value * 100);
+            };
+
+            function setAdminAccess(value) {
+                UserService.setAdminAccess($stateParams.userId, value).success(function () {
+                    $scope.detail.admin_access = value;
+                });
             }
+
+            $scope.demote = function() {
+                setAdminAccess(0);
+            };
+            $scope.promote = function() {
+                setAdminAccess(1);
+            };
         })
 
         .directive("admin", function(Hover) {
