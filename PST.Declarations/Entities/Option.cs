@@ -52,6 +52,7 @@ namespace PST.Declarations.Entities
         {
             Text = model.text;
             SortOrder = sortOrder;
+            Correct = model.correct;
 
             SetCustomEntityProperties(model);
 
