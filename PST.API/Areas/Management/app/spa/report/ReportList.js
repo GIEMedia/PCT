@@ -17,13 +17,18 @@
 
         .controller("report.list.Ctrl", function ($scope, LayoutService) {
             LayoutService.supportSearch($scope, {
-                placeholder: "Search"
+                placeholder: "Search",
+                model: "r.search"
             });
         })
 
         .factory("pctMomentFilter",function() {
             return function(dateStr) {
-                return moment(new Date().getTime() - (Math.random() * 4 * DateUtil.DAY_LENGTH) ).fromNow()
+                if (dateStr == "0001-01-01T00:00:00") {
+                    return "Never";
+                }
+                //return moment(new Date().getTime() - (Math.random() * 4 * DateUtil.DAY_LENGTH) ).fromNow()
+                return moment( dateStr ).fromNow()
                     .replace("a year", "1 yr")
                     .replace("years", "yrs")
                     .replace("a month", "1 mo")

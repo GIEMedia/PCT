@@ -21,7 +21,13 @@
             ;
         })
 
-        .controller("report.Ctrl", function ($scope, LayoutService, CourseService) {
+        .controller("report.Ctrl", function ($scope, Sorters, LayoutService, CourseService) {
+            $scope.r = {
+                search: null
+            };
+
+            $scope.sorter = Sorters.create();
+
             CourseService.getList().success(function(list) {
                 $scope.courses = list;
             });

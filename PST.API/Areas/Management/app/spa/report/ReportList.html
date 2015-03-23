@@ -5,30 +5,45 @@
                 <div class="table table-report-course-list">
                     <table>
                         <tr>
-                            <th width="49%">
+                            <th width="49%" sort-by="title">
                                 Course Title
                             </th>
 
-                            <th width="11%">
+                            <th width="11%" sort-by="date_created">
                                 Created
                             </th>
 
-                            <th width="12%">
+                            <th width="12%" sort-by="last_activity">
                                 Last Taken
                             </th>
 
-                            <th width="11%" class="text-center">
+                            <th width="11%" class="text-center" sort-by="open">
                                 Open
                             </th>
 
-                            <th width="11%" class="text-center">
+                            <th width="11%" class="text-center" sort-by="complete">
                                 Complete
                             </th>
 
                             <th width="10%" class="text-center">View</th>
                         </tr>
 
-                        <tr ng-repeat="course in courses">
+                        <tr ng-if="r.filteredCourses.length == 0">
+                            <td colspan="6" class="text-center no-record" ng-if="r.search">
+                                No course(s) found matching "<b>{{r.search}}</b>"
+                            </td>
+                            <td colspan="6" class="text-center no-record" ng-if="!r.search && courses.length == 0">
+                                No course(s) available
+                            </td>
+                        </tr>
+
+                        <tr ng-if="courses == null">
+                            <td colspan="6" class="text-center no-record">
+                                Loading...
+                            </td>
+                        </tr>
+
+                        <tr ng-repeat="course in r.filteredCourses = (courses | filter:r.search | sorterFilter:sorter)">
                             <td>
                                 {{course.title}}
                             </td>
