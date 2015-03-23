@@ -66,13 +66,11 @@
                             </li>
                         </ul><!-- /.list-checkboxes -->
 
-                        <img ng-src="{{question.image || 'Areas/Management/app/css/images/video-image-img.png'}}" alt="" height="147" ng-if="question.question_type == 0 || (question.question_type == 2 && question.image == null)">
+                        <img ng-src="{{question.image || 'Areas/Management/app/css/images/video-image-img.png'}}" alt="" height="147" ng-if="question.question_type == 0 || (question.question_type == 2 && question.video == null)">
                         
-                        <div class="video-wrapper" ng-if="question.question_type == 2 && question.image != null">
-                            <video class="video-js vjs-default-skin" controls preload="auto" width="300" height="170">
-                                <source src="http://www.pctonline.com/FileUploads/media/PCT_Online_Training/PCT_Pest_Insecticide_WO.mp4" type='video/mp4'>
-                                <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
-                            </video>
+                        <div class="video-wrapper" ng-if="question.question_type == 2 && question.video != null">
+                            <pct-video src="question.video" width="261" height="147">
+                            </pct-video>
                         </div>
                         
                         <div class="overlay">

@@ -60,7 +60,7 @@
                     modalScope.$on('$destroy', function () {
                     });
                     open(modalScope, {
-                        templateUrl: "/Areas/Management/app/spa/common/popup-text.html",
+                        templateUrl: "Areas/Management/app/spa/common/popup-text.html",
                         controller: function($scope, $modalInstance) {
                             $scope.title = title;
                             $scope.placeholder = prompt;

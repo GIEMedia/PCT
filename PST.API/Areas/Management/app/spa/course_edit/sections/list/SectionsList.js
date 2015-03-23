@@ -10,7 +10,7 @@
             $stateProvider
                 .state('courseEdit.sections.list', {
                     url: '/list',
-                    templateUrl: "/Areas/Management/app/spa/course_edit/sections/list/SectionsList.html",
+                    templateUrl: "Areas/Management/app/spa/course_edit/sections/list/SectionsList.html",
                     controller: "courseEdit.sections.list.Ctrl"
                 })
             ;

@@ -11,7 +11,7 @@
             $stateProvider
                 .state('courseEdit.information', {
                     url: '/information',
-                    templateUrl: "/Areas/Management/app/spa/course_edit/information/Information.html",
+                    templateUrl: "Areas/Management/app/spa/course_edit/information/Information.html",
                     controller: "courseEdit.information.Ctrl"
                 })
             ;

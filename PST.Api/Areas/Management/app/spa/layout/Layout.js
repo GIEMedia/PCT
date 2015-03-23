@@ -26,7 +26,7 @@
         .directive("contentSideNav", function() {
             return {
                 restrict: "E",
-                templateUrl: "/Areas/Management/app/spa/layout/ContentSideNav.html",
+                templateUrl: "Areas/Management/app/spa/layout/ContentSideNav.html",
                 link: function($scope, elem, attrs) {
                     $scope.links = [
                         {
@@ -60,7 +60,7 @@
         .directive("contentHeaderSearch", function() {
             return {
                 restrict: "E",
-                templateUrl: "/Areas/Management/app/spa/layout/ContentHeaderSearch.html",
+                templateUrl: "Areas/Management/app/spa/layout/ContentHeaderSearch.html",
                 link: function($scope, elem, attrs) {
                 }
             };
@@ -68,7 +68,7 @@
         .directive("layoutHeader", function(LayoutService, SecurityService, User, $parse) {
             return {
                 restrict: "A",
-                templateUrl: "/Areas/Management/app/spa/layout/LayoutHeader.html",
+                templateUrl: "Areas/Management/app/spa/layout/LayoutHeader.html",
                 link: function($scope, elem, attrs) {
                     $scope.chs = {
                         search: null

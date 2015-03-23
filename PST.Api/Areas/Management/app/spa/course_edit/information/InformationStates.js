@@ -7,7 +7,7 @@
         .directive("stateAdder", function($rootScope) {
             return {
                 restrict: "A",
-                templateUrl: "/Areas/Management/app/spa/course_edit/information/StateAdder.html",
+                templateUrl: "Areas/Management/app/spa/course_edit/information/StateAdder.html",
                 link: function($scope, elem, attrs) {
                     $scope.stateAdder = {
                         model: {}
@@ -23,7 +23,7 @@
         .directive("courseInformationStates", function(StateService) {
             return {
                 restrict: "A",
-                templateUrl: "/Areas/Management/app/spa/course_edit/information/InformationStates.html",
+                templateUrl: "Areas/Management/app/spa/course_edit/information/InformationStates.html",
                 link: function($scope, elem, attrs) {
 
                     $scope.states = StateService.getStates();

@@ -10,7 +10,7 @@
             $stateProvider
                 .state('courses', {
                     url: '/courses',
-                    templateUrl: "/Areas/Management/app/spa/courses/Courses.html",
+                    templateUrl: "Areas/Management/app/spa/courses/Courses.html",
                     data: {
                         name: "Courses"
                     },

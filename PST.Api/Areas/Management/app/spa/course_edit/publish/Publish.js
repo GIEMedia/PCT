@@ -9,7 +9,7 @@
             $stateProvider
                 .state('courseEdit.publish', {
                     url: '/publish',
-                    templateUrl: "/Areas/Management/app/spa/course_edit/publish/Publish.html",
+                    templateUrl: "Areas/Management/app/spa/course_edit/publish/Publish.html",
                     controller: "courseEdit.publish.Ctrl"
                 })
             ;
@@ -24,7 +24,10 @@
 
                     sending.status = $scope.editing.published ? 1 : 0;
 
-                    return CourseService.upsert(sending);
+                    return CourseService.upsert(sending).success(function() {
+                        $scope.published = $scope.editing.published;
+                        $scope.course.status = sending.status;
+                    });
                 },
                 needSaving: function() {
                     return $scope.published != $scope.editing.published;

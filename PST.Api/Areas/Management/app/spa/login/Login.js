@@ -10,7 +10,7 @@
             $stateProvider
                 .state('login', {
                     url: '/login',
-                    templateUrl: "/Areas/Management/app/spa/login/Login.html",
+                    templateUrl: "Areas/Management/app/spa/login/Login.html",
                     data: {
                         name: "Login"
                     },

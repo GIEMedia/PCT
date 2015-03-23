@@ -21,10 +21,11 @@
                     return Api.put("api/manage/course/question/" + courseId + "/" + sectionId, questions);
                 },
                 uploadImage: function(file) {
-                    return Api.upload("api/manage/course/question/image?width=73&height=73", file);
+                    //return Api.upload("api/manage/course/question/image?width=73&height=73", file);
+                    return Api.upload("api/manage/course/question/image?width=800&height=700", file);
                 },
                 uploadQuestionImage: function(file) {
-                    return Api.upload("api/manage/course/question/image?width=261&height=147", file);
+                    return Api.upload("api/manage/course/question/image?width=800&height=700", file);
                 }
             };
         })

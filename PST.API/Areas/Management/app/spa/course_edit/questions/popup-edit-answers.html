@@ -11,12 +11,15 @@
                     <span ng-file-select="addQuestionImage($files[0])" class="alignleft btn-circle btn-orange">
                         <i class="icon icon-photo-plus white"></i>
                     </span>
-                    <a href="" class="alignleft btn-circle btn-orange">
+                    <a href="" ng-click="view.addVideo.show = true" class="alignleft btn-circle btn-orange">
                         <i class="icon icon-video-plus white"></i>
                     </a>
                 </div><!-- /.alignleft -->
 
-                <img ng-src="{{question_image || 'Areas/Management/app/css/images/video-image-img.png'}}" alt="" width="261" height="147">
+                <img ng-if="question_type == 0 || (question_type == 2 && question_video == null)" ng-src="{{question_image || 'Areas/Management/app/css/images/video-image-img.png'}}" alt="" width="261" height="147">
+
+                <pct-video ng-if="question_type == 2 && question_video != null" src="question_video" width="261" height="147">
+                </pct-video>
             </div><!-- /.col col-1of2 -->
 
 			<div class="col col-2" ng-if="question_type != 1">
@@ -78,5 +81,12 @@
 			
 			<a href="" class="btn btn-green" ng-click="save()">Save</a>
 		</div><!-- /.popup-actions -->
+
+
+        <div class="popup-add-video" ng-show="view.addVideo.show">
+            <input class="field" ng-model="view.addVideo.url" placeholder="Video URL" />
+            <a href="" ng-click="addVideo()" class="btn btn-green"><i class="fa fa-check"></i></a>
+            <a href="" ng-click="view.addVideo.show = false" class="btn btn-grey"><i class="fa fa-close"></i></a>
+        </div>
 	</div><!-- /.popup-inner -->
 </div><!-- /.popup popup-new-category -->

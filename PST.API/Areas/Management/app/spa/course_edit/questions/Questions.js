@@ -7,7 +7,7 @@
         .directive("pctQuestions", function() {
             return {
                 restrict: "E",
-                templateUrl: "/Areas/Management/app/spa/course_edit/questions/Questions.html",
+                templateUrl: "Areas/Management/app/spa/course_edit/questions/Questions.html",
                 scope: {
                     questions: "="
                 },
@@ -121,7 +121,7 @@
                             }
                         };
                         Fancybox.open(scope, {
-                            templateUrl: "/Areas/Management/app/spa/course_edit/questions/popup-edit-answers.html",
+                            templateUrl: "Areas/Management/app/spa/course_edit/questions/popup-edit-answers.html",
                             width: (questionType==1 || questionType==3) ? 647 : 720,
                             controller: "courseEdit.questions.AnswersModalCtrl"
                         });
@@ -139,6 +139,21 @@
         })
         
         .controller("courseEdit.questions.AnswersModalCtrl", function($scope, $q, $modalInstance, QuestionService) {
+            $scope.view = {
+                addVideo: {
+                    url: null,
+                    show: false
+                }
+            };
+
+            $scope.addVideo = function() {
+                $scope.question_video = $scope.view.addVideo.url;
+                if ($scope.question_video) {
+                    $scope.question_image = null;
+                    $scope.question_type = 2;
+                }
+                $scope.view.addVideo.show = false;
+            };
             $scope.cancel = $modalInstance.close;
             
             $scope.addOption = function() {
@@ -156,7 +171,7 @@
 
                         var url = resp.data;
 
-                        url = url.replace(/C:\\inetpub\\wwwroot\\gie-test.prototype1.io\\Content\\Images\\/, "Images/");
+                        //url = url.replace(/C:\\inetpub\\wwwroot\\gie-test.prototype1.io\\Content\\Images\\/, "Images/");
                         $scope.options.push({
                             image: url
                         });
@@ -167,9 +182,10 @@
                 QuestionService.uploadQuestionImage(image).success(function(resp) {
                     var url = resp;
 
-                    url = url.replace(/C:\\inetpub\\wwwroot\\gie-test.prototype1.io\\Content\\Images\\/, "Images/");
+                    //url = url.replace(/C:\\inetpub\\wwwroot\\gie-test.prototype1.io\\Content\\Images\\/, "Images/");
                     $scope.question_image = url;
                     $scope.question_video = null;
+                    $scope.question_type = 0;
                 });
             };
             $scope.deleteOption = function(o) {
@@ -230,6 +246,25 @@
                         if (container.has(e.target).length === 0) { container.find('.btn-plus-inner').parent().removeClass('clicked'); }
                     });
 
+                }
+            };
+        })
+
+        .directive("pctVideo", function() {
+            return {
+                restrict: "E",
+                link: function($scope, elem, attrs) {
+                    $scope.$watch(attrs.src, function(value) {
+                        if (value) {
+                            console.log(value);
+                            elem.html("<video class=\"video-js vjs-default-skin\" controls preload=\"auto\" width=\"" + attrs.width + "\" height=\"" + attrs.height + "\">" +
+                            "<source src=\"" + value + "\" type='video/mp4'>" +
+                            "<p class=\"vjs-no-js\">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href=\"http://videojs.com/html5-video-support/\" target=\"_blank\">supports HTML5 video</a></p>" +
+                            "</video>");
+                        } else {
+                            elem.html("");
+                        }
+                    });
                 }
             };
         })

@@ -9,7 +9,7 @@
             $stateProvider
                 .state('user.list', {
                     url: '/list',
-                    templateUrl: "/Areas/Management/app/spa/user/UserList.html",
+                    templateUrl: "Areas/Management/app/spa/user/UserList.html",
                     data: {
                         name: "Users"
                     },

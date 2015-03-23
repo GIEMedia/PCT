@@ -9,7 +9,7 @@
             $stateProvider
                 .state('report.list', {
                     url: '/list',
-                    templateUrl: "/Areas/Management/app/spa/report/ReportList.html",
+                    templateUrl: "Areas/Management/app/spa/report/ReportList.html",
                     controller: "report.list.Ctrl"
                 })
             ;

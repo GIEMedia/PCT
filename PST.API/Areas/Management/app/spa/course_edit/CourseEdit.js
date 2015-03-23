@@ -17,7 +17,7 @@
                         name: "Courses"
                     },
                     abstract: true,
-                    templateUrl: "/Areas/Management/app/spa/course_edit/CourseEdit.html",
+                    templateUrl: "Areas/Management/app/spa/course_edit/CourseEdit.html",
                     controller: "courseEdit.Ctrl"
                 })
             ;
@@ -25,7 +25,7 @@
 
         .controller("courseEdit.Ctrl", function ($scope, $state, $q, $stateParams, LayoutService, CourseService, WindowService) {
             var footerControl = LayoutService.setCustomFooter($scope, {
-                templateUrl: "/Areas/Management/app/spa/course_edit/CourseEditFooter.html"
+                templateUrl: "Areas/Management/app/spa/course_edit/CourseEditFooter.html"
             });
 
             var breadcrumbs = {

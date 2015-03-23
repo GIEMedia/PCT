@@ -9,7 +9,7 @@
             $stateProvider
                 .state('courseEdit.reviewInvite', {
                     url: '/reviewInvite',
-                    templateUrl: "/Areas/Management/app/spa/course_edit/review_invite/ReviewInvite.html",
+                    templateUrl: "Areas/Management/app/spa/course_edit/review_invite/ReviewInvite.html",
                     controller: "courseEdit.reviewInvite.Ctrl"
                 })
             ;
