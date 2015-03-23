@@ -246,6 +246,60 @@
 
             };
         })
+
+        .directive("pctNoRecord", function() {
+            return {
+                restrict: "A",
+                scope: true,
+                link: function($scope, elem, attrs) {
+                    $scope.$watch(function() {
+                        var map = $scope.$eval(attrs.pctNoRecord);
+                        if (map.list == null) {
+                            return 1;
+                        } else if (map.list.length == 0) {
+                            return "No " + map.name + " available";
+                        } else if (map.searchResult != null && map.searchResult.length == 0 ) {
+                            return "No " + map.name + " found matching \"<b>" + map.search + "</b>\"";
+                        } else if (map.searchResult == null && StringUtil.isNotEmpty(map.search) ) {
+                            return "Searching for \"<b>" + map.search + "</b>\"";
+                        } else {
+                            return 0;
+                        }
+                    }, function(value) {
+                        if (value == 0) {
+                            elem.hide();
+                        } else {
+                            elem.show();
+                            if (value == 1) {
+                                $scope.messageComponent.removeClass("no-record");
+                                $scope.messageComponent.addClass("loading");
+                                $scope.messageComponent.html("Loading...");
+                            } else {
+                                $scope.messageComponent.removeClass("loading");
+                                $scope.messageComponent.addClass("no-record");
+                                $scope.messageComponent.html(value);
+                            }
+                        }
+                    });
+
+                },
+                controller: function($scope) {
+                    this.setMessageComponent = function(comp) {
+                        $scope.messageComponent = comp;
+                    }
+                }
+            };
+        })
+
+        .directive("pctNoRecordMessage", function() {
+            return {
+                restrict: "A",
+                require: "^pctNoRecord",
+                link: function($scope, elem, attrs, upCtrl) {
+                    upCtrl.setMessageComponent(elem);
+                }
+            };
+        })
     ;
 
 })();

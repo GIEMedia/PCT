@@ -21,8 +21,8 @@
 
         .controller("login.Ctrl", function ($scope, $state, User, SecurityService) {
             $scope.login = {
-                email: "w@w",
-                password: "123123"
+                //email: "w@w",
+                //password: "123123"
             };
 
             $scope.view = {

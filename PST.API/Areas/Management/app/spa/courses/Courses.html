@@ -25,14 +25,8 @@
                             </th>
                         </tr>
 
-                        <tr ng-if="list == null">
-                            <td colspan="5" class="loading">Loading...</td>
-                        </tr>
-                        <tr ng-if="list.length == 0">
-                            <td colspan="5" class="no-record">No course(s) available</td>
-                        </tr>
-                        <tr ng-if="view.filteredList.length == 0 && view.search">
-                            <td colspan="5" class="no-record">No course(s) found matching "<b>{{view.search}}</b>"</td>
+                        <tr pct-no-record="{list: list, searchResult: view.filteredList, search: view.search, name: 'course(s)'}">
+                            <td colspan="5" pct-no-record-message></td>
                         </tr>
 
                         <tr ng-repeat="course in view.filteredList = ( list | filter:view.search | sorterFilter:sorter)" ng-class="{0: 'row-draft', 2: 'row-review'}[course.status]">

@@ -26,22 +26,10 @@
                             </th>
                         </tr>
 
-                        <tr ng-if="u.searching != null">
-                            <td colspan="5" class="no-record" ng-if="u.searching.result == null">
-                                Searching for "<b>{{u.search}}</b>"...
-                            </td>
-                            <td colspan="5" class="no-record" ng-if="u.searching.result != null && u.searching.result.length == 0">
-                                No user(s) matching "<b>{{u.search}}</b>"
-                            </td>
+                        <tr pct-no-record="{list: users, searchResult: u.searching.result, search: (u.search.length >= 2 ? u.search : null), name: 'user(s)'}">
+                            <td colspan="5" pct-no-record-message></td>
                         </tr>
-                        <tr ng-if="u.searching == null">
-                            <td colspan="5" class="no-record" ng-if="users == null">
-                                Loading...
-                            </td>
-                            <td colspan="5" class="no-record" ng-if="users != null && users.length == 0">
-                                No user(s) available
-                            </td>
-                        </tr>
+
                         <tr ng-repeat="user in (u.searching ? u.searching.result : users )">
                             <td>
                                 {{user.first_name}}

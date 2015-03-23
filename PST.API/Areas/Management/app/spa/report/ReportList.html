@@ -28,19 +28,8 @@
                             <th width="10%" class="text-center">View</th>
                         </tr>
 
-                        <tr ng-if="r.filteredCourses.length == 0">
-                            <td colspan="6" class="text-center no-record" ng-if="r.search">
-                                No course(s) found matching "<b>{{r.search}}</b>"
-                            </td>
-                            <td colspan="6" class="text-center no-record" ng-if="!r.search && courses.length == 0">
-                                No course(s) available
-                            </td>
-                        </tr>
-
-                        <tr ng-if="courses == null">
-                            <td colspan="6" class="text-center no-record">
-                                Loading...
-                            </td>
+                        <tr pct-no-record="{list: courses, searchResult: r.filteredCourses, search: r.search, name: 'course(s)'}">
+                            <td colspan="6" class="text-center" pct-no-record-message></td>
                         </tr>
 
                         <tr ng-repeat="course in r.filteredCourses = (courses | filter:r.search | sorterFilter:sorter)">
