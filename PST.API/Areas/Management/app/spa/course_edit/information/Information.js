@@ -37,6 +37,7 @@
                             ObjectUtil.clear($scope.course);
                             ObjectUtil.copy(course, $scope.course);
                             if ($scope.cei.course.id==null) {
+                                $scope.cei.course = course;
                                 $state.go("courseEdit.information", {courseId: course.id});
                             } else {
                                 $scope.cei.course = course;

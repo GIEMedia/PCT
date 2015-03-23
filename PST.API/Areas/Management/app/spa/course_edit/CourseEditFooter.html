@@ -18,7 +18,7 @@
         <div class="btns alignright">
             <button class="btn btn-grey" button-loading="ce.saving" ng-disabled="ce.saving" ng-if="needSaving()" ng-click="saveCourse()">Save</button>
 
-            <a href="" ng-click="nextPage()" class="btn btn-green btn-icon-right" ng-if="cel.step < steps.length - 1">
+            <a href="" ng-click="nextPage()" class="btn btn-green btn-icon-right" ng-if="cel.step < steps.length - 1 && ($stateParams.courseId != 'new' || needSaving())">
                 {{steps[cel.step + 1].title}}
                 <i class="fa fa-chevron-right"></i>
             </a>

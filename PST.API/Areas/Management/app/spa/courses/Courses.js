@@ -34,7 +34,6 @@
             });
 
             $scope.sorter = Sorters.create();
-
             $scope.remove = function(course) {
                 if (!confirm("Are you sure to remove this course?")) {
                     return;

@@ -51,6 +51,7 @@
                     } else {
                         event.preventDefault();
                         $scope.saveCourse().then(function() {
+                            toParams.courseId = $scope.course.id;
                             $state.go(toState.name, toParams);
                         });
                     }

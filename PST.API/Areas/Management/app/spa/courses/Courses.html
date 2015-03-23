@@ -43,7 +43,7 @@
                             <td>
                                 <div class="icons">
                                     <a ui-sref="courseEdit.information({courseId: course.id})" class="fa fa-pencil"></a>
-                                    <a href="6.PCT.Report.html" class="icon icon-test" ng-if="course.status == 1"></a>
+                                    <a ui-sref="report.detail({courseId: course.id})" class="icon icon-test" ng-if="course.status == 1"></a>
                                     <a href="" ng-click="remove(course)" class="fa fa-trash-o"></a>
                                 </div><!-- /.icons -->
                             </td>
