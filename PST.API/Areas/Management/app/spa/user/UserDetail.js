@@ -18,11 +18,21 @@
             ;
         })
 
-        .controller("user.detail.Ctrl", function ($scope, LayoutService) {
-            LayoutService.setBreadCrumbs($scope, {
-                sub: "Dave Hurt",
-                rootState: "user.list"
+        .controller("user.detail.Ctrl", function ($scope, $stateParams, LayoutService, UserService, StateService) {
+            UserService.getDetail($stateParams.userId).success(function( detail ) {
+                $scope.detail = detail;
+
+                LayoutService.setBreadCrumbs($scope, {
+                    sub: detail.first_name + " " + detail.last_name,
+                    rootState: "user.list"
+                });
             });
+
+            $scope.stateByCode = StateService.stateByCode;
+
+            $scope.percent = function(value) {
+                return Math.round(value * 100);
+            }
         })
 
         .directive("admin", function(Hover) {

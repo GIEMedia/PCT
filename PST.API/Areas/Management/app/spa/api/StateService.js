@@ -8,6 +8,11 @@
             return {
                 getStates: function() {
                     return StateData;
+                },
+                stateByCode: function(code) {
+                    return Cols.find(StateData, function (e) {
+                        return e.code == code;
+                    });
                 }
             };
         }])

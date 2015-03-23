@@ -7,29 +7,28 @@
 
                     <p>
                         <i class="icon icon-profile"></i>
-                        Dave Hurt<br />
-                        <a href="mailto:dave.r.hurt@gmail.com">dave.r.hurt@gmail.com</a>
+                        {{detail.first_name}} {{detail.last_name}}<br />
+                        <a href="mailto:{{detail.email}}">{{detail.email}}</a>
                     </p>
 
                     <div class="admin">
-                        Admin <i class="fa fa-angle-down"></i>
+                        {{detail.admin_access ? "Admin" : "Normal user"}} <i class="fa fa-angle-down"></i>
 
-                        <a href="#">Demote to normal user</a>
+                        <a href="" ng-if="detail.admin_access">Demote to normal user</a>
+                        <a href="" ng-if="!detail.admin_access">Promote to admin</a>
                     </div>
                 </li>
 
                 <li class="bg-grey-dark">
                     <h3>Licenses</h3>
 
-                    <p>
+                    <p ng-repeat="licensure in detail.licensures">
                         <i class="fa fa-check-circle-o"></i>
-                        Ohio 5A 7 #0938402
+                        {{stateByCode(licensure.state).name}}
+                        {{licensure.category}}
+                        #{{licensure.license_num}}
                     </p>
 
-                    <p>
-                        <i class="fa fa-check-circle-o"></i>
-                        Ohio 6C 7 #840922-B
-                    </p>
                 </li>
 
                 <li class="bg-grey-darker">
@@ -37,30 +36,27 @@
 
                     <p>
                         <i class="icon icon-building"></i>
-                        Prototype 1<br />
-                        8948 Chinaberry Cir N<br />
-                        Macedonia, Ohio 44056
+                        {{detail.company_name}}<br />
+                        {{detail.company_address.address1}}<br />
+                        {{detail.company_address.address2}}<br ng-if="detail.company_address.address2" />
+                        {{detail.company_address.city}}, {{stateByCode(detail.company_address.state).name}} {{detail.company_address.zip_code}}
                     </p>
                 </li>
 
                 <li class="bg-grey-darkest">
                     <h3>Active Managers</h3>
 
-                    <p>
+                    <p ng-repeat="manager in detail.managers">
                         <i class="icon icon-manager"></i>
-                        Oleg Fridman
-                        <a href="mailto:ofridman@prototype1.io">ofridman@prototype1.io</a>
+                        {{manager.name}}
+                        <a href="mailto:{{manager.email}}">{{manager.email}}</a>
                     </p>
 
-                    <p>
-                        <i class="icon icon-manager"></i>
-                        Craig Palenshus
-                        <a href="mailto:craig.palenshus@prototype1.io">craig.palenshus@prototype1.io</a>
-                    </p>
                 </li>
             </ul>
         </div><!-- /.shell -->
     </div><!-- /.section-nav-secondary -->
+    
     <div class="section-body">
         <div class="shell">
             <div class="section-body-inner">
@@ -78,193 +74,46 @@
                             <th width="13%" class="text-center">Certificate</th>
                         </tr>
 
-                        <tr>
-                            <td>
-                                Bayer: Max Force impact Roach Gel Bait
-                            </td>
-
-                            <td>
-                                <div class="progress progress-checked">
-                                    <i class="fa fa-check"></i>
-
-                                    <p class="progress-bar">
-                                        <span style="width:100%"></span>
-                                    </p><!-- /.progress-bar -->
-                                </div><!-- /.progress -->
-                            </td>
-
-                            <td>
-                                <div class="progress">
-                                    77%
-
-                                    <p class="progress-bar">
-                                        <span style="width:77%"></span>
-                                    </p><!-- /.progress-bar -->
-                                </div><!-- /.progress -->
-                            </td>
-
-                            <td>1/15/2014</td>
-
-                            <td class="text-center"></td>
+                        <tr ng-if="detail.courses.length == 0">
+                            <td colspan="5" class="no-record">No course(s) available</td>
                         </tr>
-
-                        <tr>
+                        <tr ng-repeat="course in detail.courses">
                             <td>
-                                Bayer: Wasp &amp; Hornet Control
+                                {{course.title}}
                             </td>
 
                             <td>
-                                <div class="progress progress-checked">
-                                    <i class="fa fa-check"></i>
-
+                                <div class="progress" ng-class="{'progress-checked': course.course_percent==1}">
+                                    <i class="fa fa-check" ng-if="course.course_percent==1"></i>
+                                    {{course.course_percent == 1 ? "" : percent(course.course_percent) + "%"}}
                                     <p class="progress-bar">
-                                        <span style="width:100%"></span>
+                                        <span style="width:{{percent(course.course_percent)}}%"></span>
                                     </p><!-- /.progress-bar -->
                                 </div><!-- /.progress -->
                             </td>
 
                             <td>
-                                <div class="progress progress-checked">
-                                    <i class="fa fa-check"></i>
-
+                                <div class="progress" ng-class="{'progress-checked': course.test_percent==1, 'progress-failed': course.test_failed}">
+                                    <i class="fa" ng-class="{'fa-check': course.test_percent==1, 'fa-close': course.test_failed}" ng-if="course.test_percent==1 || course.test_failed"></i>
+                                    {{(course.test_percent == 1 || course.test_failed) ? "" : percent(course.test_percent) + "%"}}
                                     <p class="progress-bar">
-                                        <span style="width:100%"></span>
+                                        <span style="width:{{percent(course.test_percent)}}%"></span>
                                     </p><!-- /.progress-bar -->
                                 </div><!-- /.progress -->
                             </td>
 
-                            <td>12/15/2013</td>
+                            <td>{{course.last_activity | date:"M/d/yyyy"}}</td>
 
-                            <td class="text-center">
-                                <a href="#">
+                            <td class="text-center certificate-failed" ng-if="course.test_failed">Failed</td>
+                            <td class="text-center" ng-if="!course.test_failed && course.certificate_url">
+                                <a href="{{course.certificate_url}}">
                                     <i class="icon icon-certificate"></i>
                                 </a>
                             </td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                Bayer: Max Force impact Roach Gel Bait
-                            </td>
-
-                            <td>
-                                <div class="progress">
-                                    23%
-
-                                    <p class="progress-bar">
-                                        <span style="width:23%"></span>
-                                    </p><!-- /.progress-bar -->
-                                </div><!-- /.progress -->
-                            </td>
-
-                            <td>
-                                <div class="progress">
-                                    0%
-
-                                    <p class="progress-bar">
-                                        <span style="width:0"></span>
-                                    </p><!-- /.progress-bar -->
-                                </div><!-- /.progress -->
-                            </td>
-
-                            <td>2/15/2012</td>
-
-                            <td class="text-center"></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                Bayer: Max Force impact Roach Gel Bait
-                            </td>
-
-                            <td>
-                                <div class="progress">
-                                    44%
-
-                                    <p class="progress-bar">
-                                        <span style="width:44%"></span>
-                                    </p><!-- /.progress-bar -->
-                                </div><!-- /.progress -->
-                            </td>
-
-                            <td>
-                                <div class="progress">
-                                    0%
-
-                                    <p class="progress-bar">
-                                        <span style="width:0%"></span>
-                                    </p><!-- /.progress-bar -->
-                                </div><!-- /.progress -->
-                            </td>
-
-                            <td>1/15/2014</td>
-
-                            <td class="text-center"></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                Bayer: Crawling Pests Elimination Spray
-                            </td>
-
-                            <td>
-                                <div class="progress progress-checked">
-                                    <i class="fa fa-check"></i>
-
-                                    <p class="progress-bar">
-                                        <span style="width:100%"></span>
-                                    </p><!-- /.progress-bar -->
-                                </div><!-- /.progress -->
-                            </td>
-
-                            <td>
-                                <div class="progress progress-failed">
-                                    <i class="fa fa-close"></i>
-
-                                    <p class="progress-bar">
-                                        <span style="width:22%"></span>
-                                    </p><!-- /.progress-bar -->
-                                </div><!-- /.progress -->
-                            </td>
-
-                            <td>10/15/2014</td>
-
-                            <td class="text-center certificate-failed">Failed</td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                Bayer: Flying Insects Elimination Spray
-                            </td>
-
-                            <td>
-                                <div class="progress progress-checked">
-                                    <i class="fa fa-check"></i>
-
-                                    <p class="progress-bar">
-                                        <span style="width:100%"></span>
-                                    </p><!-- /.progress-bar -->
-                                </div><!-- /.progress -->
-                            </td>
-
-                            <td>
-                                <div class="progress progress-checked">
-                                    <i class="fa fa-check"></i>
-
-                                    <p class="progress-bar">
-                                        <span style="width:100%"></span>
-                                    </p><!-- /.progress-bar -->
-                                </div><!-- /.progress -->
-                            </td>
-
-                            <td>12/15/2014</td>
-
-                            <td class="text-center">
-                                <a href="#">
-                                    <i class="icon icon-certificate"></i>
-                                </a>
+                            <td class="text-center" ng-if="!course.test_failed && !course.certificate_url">
                             </td>
                         </tr>
+
                     </table>
                 </div><!-- /.table -->
             </div><!-- /.section-body-inner -->

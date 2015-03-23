@@ -48,11 +48,7 @@
                         //console.log($scope.filteredStates.length);
                     });
 
-                    $scope.stateByCode = function(code) {
-                        return Cols.find($scope.states, function (e) {
-                            return e.code == code;
-                        });
-                    };
+                    $scope.stateByCode = StateService.stateByCode;
 
                     $scope.addState = function(state) {
                         $scope.cei.course.state_ceus.push(state);
