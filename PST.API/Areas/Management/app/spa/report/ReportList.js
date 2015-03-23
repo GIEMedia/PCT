@@ -15,10 +15,32 @@
             ;
         })
 
-        .controller("report.list.Ctrl", function ($scope, LayoutService) {
+        .controller("report.list.Ctrl", function ($scope, LayoutService, CourseService) {
             LayoutService.supportSearch($scope, {
                 placeholder: "Search"
             });
+
+            CourseService.getList().success(function(list) {
+                $scope.courses = list;
+            });
+        })
+
+        .factory("pctMomentFilter",function() {
+            return function(dateStr) {
+                return moment(new Date().getTime() - (Math.random() * 4 * DateUtil.DAY_LENGTH) ).fromNow()
+                    .replace("a year", "1 yr")
+                    .replace("years", "yrs")
+                    .replace("a month", "1 mo")
+                    .replace("months", "mo")
+                    .replace("a day", "1d")
+                    .replace(" days", "d")
+                    .replace("a minute", "1m")
+                    .replace(" minutes", "m")
+                    .replace("an hour", "1h")
+                    .replace(" hours", "h")
+                    .replace("a day ago", "yesterday")
+                    ;
+            }
         })
     ;
 

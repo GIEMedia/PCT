@@ -8,7 +8,7 @@
 
             $stateProvider
                 .state('report.detail', {
-                    url: '/detail',
+                    url: '/:courseId',
                     templateUrl: "Areas/Management/app/spa/report/ReportDetail.html",
                     controller: "report.detail.Ctrl"
                 })
