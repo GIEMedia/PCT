@@ -15,20 +15,26 @@
             ;
         })
 
-        .controller("report.detail.Ctrl", function ($scope, LayoutService) {
-            LayoutService.setBreadCrumbs($scope, {
-                sub: "Bayer: MaxForce Impact Roach Gel Bait",
-                rootState: "report.list"
+        .controller("report.detail.Ctrl", function ($scope, $stateParams, LayoutService, ReportService) {
+            $scope.$watch("courses", function(value) {
+                if (value) {
+                    LayoutService.setBreadCrumbs($scope, {
+                        sub: Cols.find(value, function(c) { return c.id== $stateParams.courseId;}).title,
+                        rootState: "report.list"
+                    });
+                }
+            });
+
+            ReportService.getResult($stateParams.courseId).success(function(questions) {
+                $scope.questions = questions;
             });
         })
 
-
-        .directive("customTableTests", function() {
+        .directive("reportRow", function() {
             return {
-                restrict: "C",
+                restrict: "A",
                 link: function($scope, elem, attrs) {
-
-                    elem.find('.table-row').on('mouseenter', function() {
+                    elem.on('mouseenter', function() {
                         if (!$(this).hasClass('expanded')) {
                             $(this).addClass('hovered');
                         }
@@ -36,13 +42,14 @@
                         $(this).removeClass('hovered');
                     });
 
-                    elem.find('.table-row .inner').on('click', function () {
+                    elem.find('.inner').on('click', function () {
                         $(this).parent('.table-row').toggleClass('expanded').find('.table-row-expand').slideToggle(200);
                     });
 
-                    elem.find('.table-row .inner').on('click', function () {
-                        $(this).parent('.table-row').toggleClass('expanded').find('.table-row-expand').slideToggle(200);
-                    });
+                    $scope.percent = function(value) {
+                        var total = $scope.question.first_attempt + $scope.question.second_attempt + $scope.question.third_attempt;
+                        return Math.round(value / total * 100);
+                    }
                 }
             };
         })

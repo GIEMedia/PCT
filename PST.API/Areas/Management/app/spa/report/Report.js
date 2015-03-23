@@ -15,9 +15,16 @@
                     abstract: true,
                     data: {
                         name: "Test Results"
-                    }
+                    },
+                    controller: "report.Ctrl"
                 })
             ;
+        })
+
+        .controller("report.Ctrl", function ($scope, LayoutService, CourseService) {
+            CourseService.getList().success(function(list) {
+                $scope.courses = list;
+            });
         })
     ;
 

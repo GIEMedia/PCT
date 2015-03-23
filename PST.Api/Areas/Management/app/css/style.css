@@ -714,7 +714,8 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 
 .popup-edit .list-images li { width: 77px; height: 77px; border: 2px solid #fff; }
 .popup-edit .list-images li:hover { display: block; border-color: #47ceff; }
-.popup-edit .list-images li a img { display: block; width: 100%; height: auto; }
+.popup-edit .list-images li a img { display: block;}
+img.option-image {  width: auto; height: 73px;  }
 .popup-edit .list-images li .checkbox { display: block; position: absolute; top: -9px; left: 50%; margin-left: -9px; width: 18px; height: 18px; }
 .popup-edit .list-images li .checkbox .form-label { width: 18px; height: 18px; padding-left: 0; cursor: pointer; }
 .popup-edit .list-images li .checkbox input:checked + .form-label { background: url(images/ico-checkbox-checked.png) no-repeat 0 0; }

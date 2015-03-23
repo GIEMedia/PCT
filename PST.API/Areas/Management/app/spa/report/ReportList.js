@@ -15,13 +15,9 @@
             ;
         })
 
-        .controller("report.list.Ctrl", function ($scope, LayoutService, CourseService) {
+        .controller("report.list.Ctrl", function ($scope, LayoutService) {
             LayoutService.supportSearch($scope, {
                 placeholder: "Search"
-            });
-
-            CourseService.getList().success(function(list) {
-                $scope.courses = list;
             });
         })
 
