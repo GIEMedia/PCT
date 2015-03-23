@@ -69,7 +69,7 @@
                         <img ng-src="{{question.image || 'Areas/Management/app/css/images/video-image-img.png'}}" alt="" height="147" ng-if="question.question_type == 0 || (question.question_type == 2 && question.video == null)">
                         
                         <div class="video-wrapper" ng-if="question.question_type == 2 && question.video != null">
-                            <pct-video src="question.video" width="261" height="147">
+                            <pct-video src="question.video.mp4" width="261" height="147">
                             </pct-video>
                         </div>
                         

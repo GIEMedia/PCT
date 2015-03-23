@@ -105,14 +105,14 @@
                         scope.index = $scope.$index;
 
                         scope.question_image = $scope.question.image;
-                        scope.question_video = $scope.question.video;
+                        scope.question_video = $scope.question.video ? $scope.question.video.mp4 : null;
 
                         scope.options = ObjectUtil.clone($scope.question.options || []);
                         scope.saveAction = function() {
                             $scope.question.options = ObjectUtil.clone(scope.options);
 
                             $scope.question.image = scope.question_image;
-                            $scope.question.video = scope.question_video;
+                            $scope.question.video = scope.question_video ? {mp4: scope.question_video} : null;
 
                             if (scope.question_image != null) {
                                 $scope.question.question_type = 0;
@@ -171,7 +171,6 @@
 
                         var url = resp.data;
 
-                        //url = url.replace(/C:\\inetpub\\wwwroot\\gie-test.prototype1.io\\Content\\Images\\/, "Images/");
                         $scope.options.push({
                             image: url
                         });
