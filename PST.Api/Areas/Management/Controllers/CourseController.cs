@@ -164,6 +164,8 @@ namespace PST.Api.Areas.Management.Controllers
                         Hours = s.hours
                     }));
 
+            c.Status = course.status;
+
             _entityRepository.Save(c);
 
             return c;
