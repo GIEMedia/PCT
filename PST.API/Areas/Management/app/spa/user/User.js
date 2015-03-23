@@ -18,10 +18,37 @@
             ;
         })
 
-        .controller("user.Ctrl", function($scope, LayoutService) {
+        .controller("user.Ctrl", function($scope, $state, $rootScope, LayoutService, UserService) {
+            $scope.u = {
+                search: null,
+                searching: null
+            };
             LayoutService.supportSearch($scope, {
-                placeholder: "Search"
+                placeholder: "Search",
+                model: "u.search"
             });
+
+            $scope.$watch("u.search", function(value) {
+                if (value == null || value.length < 2) {
+                    $scope.u.searching = null;
+                } else {
+                    var searching = {};
+                    $scope.u.searching = searching;
+                    UserService.search(value).success(function(list) {
+                        searching.result = list;
+                    });
+                    if ($state.current.name == "user.detail") {
+                        $state.go("^.list");
+                    }
+                }
+            });
+
+            $scope.toDetail = function(userId) {
+                $scope.u.search = null;
+                $scope.u.searching = null;
+                $state.go("user.detail", {userId: userId});
+            }
+
         })
 
 

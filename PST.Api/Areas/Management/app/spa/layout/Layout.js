@@ -93,6 +93,9 @@
                                     model.assign(value.scope, searchValue);
                                 });
                             };
+                            value.scope.$watch(value.options.model, function(value) {
+                                $scope.chs.search = value;
+                            });
                         } else {
                             applySearch = null;
                         }

@@ -18,7 +18,10 @@
             ;
         })
 
-        .controller("user.list.Ctrl", function ($scope, LayoutService) {
+        .controller("user.list.Ctrl", function ($scope, LayoutService, UserService) {
+            UserService.getList().success(function(list) {
+                $scope.users = list;
+            });
         })
     ;
 

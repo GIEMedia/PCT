@@ -17,6 +17,16 @@
                         </p>
                     </div><!-- /.table-row-head -->
 
+                    <div class="table-row" ng-if="questions.length == 0">
+                        <div class="no-record">
+                            <div class="table-col col-size-1">
+                                No question(s) available
+                            </div><!-- /.table-col-1 -->
+
+                        </div><!-- /.inner -->
+
+                    </div><!-- /.table-row -->
+
                     <div class="table-row" ng-repeat="question in questions" report-row>
                         <div class="inner">
                             <div class="table-col col-size-1">

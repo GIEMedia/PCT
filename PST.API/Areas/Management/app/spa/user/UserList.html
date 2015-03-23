@@ -26,77 +26,40 @@
                             </th>
                         </tr>
 
-                        <tr>
+                        <tr ng-if="u.searching != null">
+                            <td colspan="5" class="no-record" ng-if="u.searching.result == null">
+                                Searching for "<b>{{u.search}}</b>"...
+                            </td>
+                            <td colspan="5" class="no-record" ng-if="u.searching.result != null && u.searching.result.length == 0">
+                                No user(s) matching "<b>{{u.search}}</b>"
+                            </td>
+                        </tr>
+                        <tr ng-if="u.searching == null">
+                            <td colspan="5" class="no-record" ng-if="users == null">
+                                Loading...
+                            </td>
+                            <td colspan="5" class="no-record" ng-if="users != null && users.length == 0">
+                                No user(s) available
+                            </td>
+                        </tr>
+                        <tr ng-repeat="user in (u.searching ? u.searching.result : users )">
                             <td>
-                                Fridman
+                                {{user.first_name}}
                             </td>
 
                             <td>
-                                Oleg
+                                {{user.last_name}}
                             </td>
 
                             <td>
-                                oleg@somedomain.com
+                                {{user.email}}
                             </td>
 
-                            <td>1/15/2014</td>
+                            <td>{{user.last_sign_in | date:"M/d/yyyy"}}</td>
 
-                            <td class="text-center"><a ui-sref="^.detail"><i class="fa fa-user"></i></a></td>
+                            <td class="text-center"><a href="" ng-click="toDetail(user.id)"><i class="fa fa-user"></i></a></td>
                         </tr>
 
-                        <tr>
-                            <td>
-                                Hurt
-                            </td>
-
-                            <td>
-                                David
-                            </td>
-
-                            <td>
-                                david@somedomain.com
-                            </td>
-
-                            <td>1/1/2014</td>
-
-                            <td class="text-center"><a href="5.PCT.User.html"><i class="fa fa-user"></i></a></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                Jones
-                            </td>
-
-                            <td>
-                                Bob
-                            </td>
-
-                            <td>
-                                jones.bob@somedomain.com
-                            </td>
-
-                            <td>1/15/2014</td>
-
-                            <td class="text-center"><a href="5.PCT.User.html"><i class="fa fa-user"></i></a></td>
-                        </tr>
-
-                        <tr>
-                            <td>
-                                Weitz
-                            </td>
-
-                            <td>
-                                Sally
-                            </td>
-
-                            <td>
-                                w.sally@somedomain.com
-                            </td>
-
-                            <td>1/15/2014</td>
-
-                            <td class="text-center"><a href="5.PCT.User.html"><i class="fa fa-user"></i></a></td>
-                        </tr>
                     </table>
                 </div><!-- /.table -->
             </div><!-- /.section-body-inner -->

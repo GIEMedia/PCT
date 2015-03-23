@@ -8,7 +8,7 @@
 
             $stateProvider
                 .state('user.detail', {
-                    url: '/detail',
+                    url: '/:userId',
                     templateUrl: "Areas/Management/app/spa/user/UserDetail.html",
                     data: {
                         name: "User Information"
