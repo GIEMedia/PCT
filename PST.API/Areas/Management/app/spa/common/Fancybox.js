@@ -57,28 +57,30 @@
                     var defer = $q.defer();
 
                     var modalScope = $rootScope.$new(true);
+                    modalScope.title = title;
+                    modalScope.placeholder = prompt;
                     modalScope.$on('$destroy', function () {
                     });
                     open(modalScope, {
                         templateUrl: "Areas/Management/app/spa/common/popup-text.html",
-                        controller: function($scope, $modalInstance) {
-                            $scope.title = title;
-                            $scope.placeholder = prompt;
-                            $scope.pop = {
-                                text: null
-                            };
-                            $scope.close = $modalInstance.close;
-                            $scope.save = function() {
-                                defer.resolve($scope.pop.text);
-                                $modalInstance.close();
-                            };
-                        }
+                        controller: "pct.fancybox.PromptTextCtrl"
                     })
                         .onClose(function() {
                             modalScope.$destroy();
                         });
                     return defer.promise;
                 }
+            };
+        }])
+
+        .controller("pct.fancybox.PromptTextCtrl", ["$scope", "$modalInstance", function($scope, $modalInstance) {
+            $scope.pop = {
+                text: null
+            };
+            $scope.close = $modalInstance.close;
+            $scope.save = function() {
+                defer.resolve($scope.pop.text);
+                $modalInstance.close();
             };
         }])
     ;
