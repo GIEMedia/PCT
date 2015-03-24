@@ -19,11 +19,14 @@
         })
 
         .controller("courseEdit.sections.Ctrl", function ($scope, $state, SectionService) {
+            $scope.refreshList = function() {
+                SectionService.getList($scope.course.id).success(function(sections) {
+                    $scope.sections = sections;
+                });
+            };
             $scope.$watch("course", function(course) {
                 if (course) {
-                    SectionService.getList(course.id).success(function(sections) {
-                        $scope.sections = sections;
-                    });
+                    $scope.refreshList();
                 }
             });
 

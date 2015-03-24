@@ -35,6 +35,7 @@
                 return httpPromise;
             };
 
+            var _host = null;
             var sendHttp = function(method, url, data) {
                 return handleError($http({
                     method: method,
@@ -43,7 +44,6 @@
                     data: data
                 }));
             };
-            var _host = null;
             return {
                 setHost: function(host) {
                     _host = host;

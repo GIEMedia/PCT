@@ -50,7 +50,7 @@
                         }
                     } else {
                         event.preventDefault();
-                        $scope.saveCourse().then(function() {
+                        saveCourse().then(function() {
                             toParams.courseId = $scope.course.id;
                             $state.go(toState.name, toParams);
                         });
@@ -114,7 +114,7 @@
                 return $scope.cel.save && $scope.cel.needSaving != null && $scope.cel.needSaving();
             };
 
-            $scope.saveCourse = function() {
+            function saveCourse() {
                 var defer = $q.defer();
                 $scope.ce.saving = true;
                 $scope.cel.save()
@@ -128,15 +128,24 @@
                     })
                 ;
                 return defer.promise;
+            }
+
+            $scope.saveCourse = function() {
+                saveCourse().then(function() {
+                    if ($stateParams.courseId == "new") {
+                        $state.go($state.current.name, {courseId: $scope.course.id});
+                    }
+                });
             };
 
             $scope.prevPage = function() {
-                $state.go('courseEdit.' + $scope.steps[$scope.cel.step - 1].state, {courseId: $scope.course.id});
+                $scope.toPage($scope.cel.step - 1);
             };
             $scope.nextPage = function() {
-                $state.go('courseEdit.' + $scope.steps[$scope.cel.step + 1].state, {courseId: $scope.course.id});
+                $scope.toPage($scope.cel.step + 1);
             };
             $scope.toPage = function(page) {
+                if ($scope.course==null) { return; }
                 $state.go('courseEdit.' + $scope.steps[page].state, {courseId: $scope.course.id});
             };
         })

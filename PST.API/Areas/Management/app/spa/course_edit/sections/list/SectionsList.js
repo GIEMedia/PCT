@@ -83,14 +83,17 @@
                     $scope.uploadDocument = function(files) {
                         SectionService.uploadDocument($scope.course.id, $scope.section.id, files[0])
                             .progress(function(ev) {
-                                console.log(ev);
+                                //console.log(ev);
                             })
                             .success(function(data) {
-                                console.log(data);
+                                $scope.refreshList();
                             })
                         ;
                     };
                     $scope.deleteDocument = function() {
+                        if (!confirm("Are you sure to remove this section's document?")) {
+                            return;
+                        }
                         SectionService.deleteDocument($scope.course.id, $scope.section.id)
                             .success(function() {
                                 $scope.section.document = null;

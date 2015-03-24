@@ -36,12 +36,7 @@
                         CourseService.upsert($scope.cei.course).success(function(course) {
                             ObjectUtil.clear($scope.course);
                             ObjectUtil.copy(course, $scope.course);
-                            if ($scope.cei.course.id==null) {
-                                $scope.cei.course = course;
-                                $state.go("courseEdit.information", {courseId: course.id});
-                            } else {
-                                $scope.cei.course = course;
-                            }
+                            $scope.cei.course = course;
                             defer.resolve();
                         });
                     }
@@ -49,9 +44,6 @@
 
                 },
                 needSaving: function() {
-                    //console.log("=========");
-                    //console.log($scope.course);
-                    //console.log($scope.cei.course);
                     return !ObjectUtil.equals($scope.cei.course, $scope.course);
                 }
             });
@@ -67,6 +59,7 @@
             };
 
             CourseService.getList().success(function(list) {
+
                 $scope.prerequisites = Cols.filter(list, function(e) {
                     return e.id != $stateParams.courseId;
                 });
