@@ -54,7 +54,7 @@
             };
         })
     
-        .directive("questionRow", function(Fancybox, $parse) {
+        .directive("questionRow", function(Fancybox, $parse, QuestionService) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -127,13 +127,7 @@
                         });
                     };
                     
-                    $scope.isEmpty = function(question) {
-                        return StringUtil.isBlank(question.question_text) 
-                            && StringUtil.isBlank(question.response_heading) 
-                            && StringUtil.isBlank(question.response_message) 
-                            && StringUtil.isBlank(question.tip) 
-                            && Cols.isEmpty(question.options) 
-                    };
+                    $scope.isEmpty = QuestionService.isEmpty;
 
                     $scope.ellipsis = function(value, ellipsisMax) {
                         if (value == null) {
