@@ -133,7 +133,27 @@
                             && StringUtil.isBlank(question.response_message) 
                             && StringUtil.isBlank(question.tip) 
                             && Cols.isEmpty(question.options) 
-                    }
+                    };
+
+                    $scope.ellipsis = function(value, ellipsisMax) {
+                        if (value == null) {
+                            return null;
+                        }
+                        if (value.length > ellipsisMax) {
+                            return value.substring(0, ellipsisMax - 3) + "...";
+                        }
+                        return value;
+                    };
+
+                    $scope.isMultipleCorrect = function(question) {
+                        if (question.options==null) {
+                            return false;
+                        }
+
+                        return Cols.filter(question.options, function(o) {
+                            return o.correct;
+                        }).length >= 2;
+                    };
                 }
             };
         })
