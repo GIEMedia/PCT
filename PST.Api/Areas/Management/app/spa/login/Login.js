@@ -5,7 +5,7 @@
     angular.module('pct.management.login', [
     ])
     
-        .config(function ($stateProvider) {
+        .config(['$stateProvider', function ($stateProvider) {
 
             $stateProvider
                 .state('login', {
@@ -17,12 +17,10 @@
                     controller: "login.Ctrl"
                 })
             ;
-        })
+        }])
 
-        .controller("login.Ctrl", function ($scope, $state, User, SecurityService) {
+        .controller("login.Ctrl", ['$scope', '$state', 'User', 'SecurityService', function ($scope, $state, User, SecurityService) {
             $scope.login = {
-                //email: "w@w",
-                //password: "123123"
             };
 
             $scope.view = {
@@ -66,8 +64,7 @@
                     })
                 ;
             };
-        })
-
+        }])
     ;
 
 })();

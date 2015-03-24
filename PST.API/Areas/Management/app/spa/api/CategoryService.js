@@ -4,7 +4,7 @@
 
     angular.module('pct.management.api.category', [
     ])
-        .factory("CategoryService", function(Api) {
+        .factory("CategoryService", ['Api', function(Api) {
             var category = {
                 "sub_categories":[
                     {
@@ -27,7 +27,6 @@
                     return Api.put("api/manage/course/category?parentCategoryID=" + parentId, JSON.stringify(catName));
                 }
             };
-        })
+        }])
     ;
-
 })();

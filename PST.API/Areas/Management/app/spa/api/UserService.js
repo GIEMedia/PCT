@@ -4,7 +4,7 @@
 
     angular.module('pct.management.api.user', [
     ])
-        .factory("UserService", function(Api) {
+        .factory("UserService", ['Api', function(Api) {
 
             return {
                 getList: function(page) {
@@ -20,7 +20,6 @@
                     return Api.put("api/manage/user/admin/" + userId + "?access=" + adminAccess);
                 }
             };
-        })
+        }])
     ;
-
 })();

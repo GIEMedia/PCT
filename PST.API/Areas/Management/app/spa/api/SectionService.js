@@ -4,7 +4,7 @@
 
     angular.module('pct.management.api.section', [
     ])
-        .factory("SectionService", function(Api) {
+        .factory("SectionService", ['Api', function(Api) {
             var sample = {
                 "id": "97901e52-eaab-49ac-ba04-a460010621f5",
                 "title": "Section 2",
@@ -43,7 +43,6 @@
                     return Api.delete("api/manage/course/section/document/" + courseID + "/" + sectionID);
                 }
             };
-        })
+        }])
     ;
-
 })();

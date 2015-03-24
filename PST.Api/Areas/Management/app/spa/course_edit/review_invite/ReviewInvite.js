@@ -5,7 +5,7 @@
     angular.module('pct.management.courseEdit.reviewInvite', [
     ])
 
-        .config(function ($stateProvider) {
+        .config(['$stateProvider', function ($stateProvider) {
             $stateProvider
                 .state('courseEdit.reviewInvite', {
                     url: '/reviewInvite',
@@ -13,9 +13,9 @@
                     controller: "courseEdit.reviewInvite.Ctrl"
                 })
             ;
-        })
+        }])
 
-        .controller("courseEdit.reviewInvite.Ctrl", function ($scope, $stateParams, StateService, CourseService, ReviewService) {
+        .controller("courseEdit.reviewInvite.Ctrl", ['$scope', '$stateParams', 'StateService', 'CourseService', 'ReviewService', function ($scope, $stateParams, StateService, CourseService, ReviewService) {
             $scope.setCel({
                 step: 3
             });
@@ -38,7 +38,7 @@
             $scope.reviewTest = function() {
                 window.open(ReviewService.getReviewTestUrl($stateParams.courseId), "_blank");
             };
-        })
+        }])
 
         .factory("ReviewService", function() {
             var _courseReviewTmpl;

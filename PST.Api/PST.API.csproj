@@ -535,10 +535,11 @@
     <Content Include="Areas\Management\app\js\angular_1.3.1\angular.min.js" />
     <Content Include="Areas\Management\app\js\common-utils.js" />
     <Content Include="Areas\Management\app\js\functions.js" />
-    <Content Include="Areas\Management\app\js\jquery-1.11.0.min.js" />
+    <Content Include="Areas\Management\app\js\jquery-1.11.2.min.js" />
     <Content Include="Areas\Management\app\js\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="Areas\Management\app\js\jquery-ui-1.11.4.min.js" />
     <Content Include="Areas\Management\app\js\jquery.fancybox.pack.js" />
+    <Content Include="Areas\Management\app\js\moment.min.js" />
     <Content Include="Areas\Management\app\js\selectboxit.js" />
     <Content Include="Areas\Management\app\spa\api\CategoryService.js" />
     <Content Include="Areas\Management\app\spa\api\CourseService.js" />
@@ -688,9 +689,6 @@
   <ItemGroup>
     <Folder Include="Areas\Help\images\ClassDiagrams\" />
     <Folder Include="Areas\Help\images\SequenceDiagrams\" />
-    <Folder Include="Areas\Management\app\spa\test_results\" />
-    <Folder Include="Areas\Management\app\spa\users\" />
-    <Folder Include="Areas\Management\Models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

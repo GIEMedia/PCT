@@ -4,13 +4,12 @@
 
     angular.module('pct.management.api.report', [
     ])
-        .factory("ReportService", function(Api) {
+        .factory("ReportService", ['Api', function(Api) {
             return {
                 getResult: function(courseId) {
                     return Api.get("api/manage/results/" + courseId);
                 }
             };
-        })
+        }])
     ;
-
 })();

@@ -4,7 +4,7 @@
 
     angular.module('pct.management.user.list', [
     ])
-        .config(function ($stateProvider) {
+        .config(['$stateProvider', function ($stateProvider) {
 
             $stateProvider
                 .state('user.list', {
@@ -16,9 +16,9 @@
                     controller: "user.list.Ctrl"
                 })
             ;
-        })
+        }])
 
-        .controller("user.list.Ctrl", function ($scope, LayoutService, UserService) {
+        .controller("user.list.Ctrl", ['$scope', 'LayoutService', 'UserService', function ($scope, LayoutService, UserService) {
             $scope.ul = {
                 users: null,
                 pageCount: null,
@@ -40,8 +40,6 @@
                     $scope.ul.pageNumbers[i] = i + 1;
                 }
             });
-
-        })
+        }])
     ;
-
 })();

@@ -4,7 +4,7 @@
 
     angular.module('pct.management.api.course', [
     ])
-        .factory("CourseService", function(Api) {
+        .factory("CourseService", ['Api', function(Api) {
 
             // Sample data
             var course = {
@@ -46,7 +46,6 @@
                     return Api.put("api/manage/course/review/" + courseId, reviewer);
                 }
             };
-        })
+        }])
     ;
-
 })();

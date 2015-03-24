@@ -12,6 +12,8 @@
         public string text { get; set; }
 
         public string image { get; set; }
+
+        public bool correct { get; set; }
     }
 
     public abstract class stat

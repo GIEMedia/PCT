@@ -4,14 +4,14 @@
 
     angular.module('pct.management.api.question', [
     ])
-        .factory("QuestionService", function(Api) {
+        .factory("QuestionService", ['Api', function(Api) {
 
             var isEmpty = function(question) {
                 return StringUtil.isBlank(question.question_text)
                     && StringUtil.isBlank(question.response_heading)
                     && StringUtil.isBlank(question.response_message)
                     && StringUtil.isBlank(question.tip)
-                    && Cols.isEmpty(question.options)
+                    && Cols.isEmpty(question.options);
             };
 
             return {
@@ -37,7 +37,6 @@
                 },
                 isEmpty: isEmpty
             };
-        })
+        }])
     ;
-
 })();

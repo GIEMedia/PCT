@@ -56,7 +56,8 @@ namespace PST.Api.Areas.Management.Controllers
                             second_attempt = 250,
                             third_attempt = 50,
                             text = o.Text,
-                            image = q is MultiImageQuestion ? ((ImageOption) o).ImageUrl : null
+                            image = q is MultiImageQuestion ? ((ImageOption) o).ImageUrl : null,
+                            correct = o.Correct
                         }).ToArray()
                 }).ToArray();
         }

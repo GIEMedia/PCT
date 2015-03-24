@@ -9,7 +9,7 @@
         'pct.management.courseEdit.reviewInvite',
         'pct.management.courseEdit.publish'
     ])
-        .config(function ($stateProvider) {
+        .config(['$stateProvider', function ($stateProvider) {
             $stateProvider
                 .state('courseEdit', {
                     url: '/course/:courseId',
@@ -21,9 +21,9 @@
                     controller: "courseEdit.Ctrl"
                 })
             ;
-        })
+        }])
 
-        .controller("courseEdit.Ctrl", function ($scope, $state, $q, $stateParams, LayoutService, CourseService, WindowService) {
+        .controller("courseEdit.Ctrl", ['$scope', '$state', '$q', '$stateParams', 'LayoutService', 'CourseService', 'WindowService', function ($scope, $state, $q, $stateParams, LayoutService, CourseService, WindowService) {
             var footerControl = LayoutService.setCustomFooter($scope, {
                 templateUrl: "Areas/Management/app/spa/course_edit/CourseEditFooter.html"
             });
@@ -148,7 +148,6 @@
                 if ($scope.course==null) { return; }
                 $state.go('courseEdit.' + $scope.steps[page].state, {courseId: $scope.course.id});
             };
-        })
-
+        }])
     ;
 })();

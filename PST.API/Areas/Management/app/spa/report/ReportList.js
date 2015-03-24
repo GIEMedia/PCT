@@ -4,7 +4,7 @@
 
     angular.module('pct.management.report.list', [
     ])
-        .config(function ($stateProvider) {
+        .config(['$stateProvider', function ($stateProvider) {
 
             $stateProvider
                 .state('report.list', {
@@ -13,16 +13,16 @@
                     controller: "report.list.Ctrl"
                 })
             ;
-        })
+        }])
 
-        .controller("report.list.Ctrl", function ($scope, LayoutService) {
+        .controller("report.list.Ctrl", ['$scope', 'LayoutService', function ($scope, LayoutService) {
             LayoutService.supportSearch($scope, {
                 placeholder: "Search",
                 model: "r.search"
             });
-        })
+        }])
 
-        .factory("pctMomentFilter",function() {
+        .factory("pctMomentFilter", function() {
             return function(dateStr) {
                 if (dateStr == "0001-01-01T00:00:00") {
                     return "Never";
@@ -44,5 +44,4 @@
             }
         })
     ;
-
 })();

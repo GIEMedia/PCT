@@ -4,7 +4,7 @@
 
     angular.module('pct.management.courseEdit.information.states', [
     ])
-        .directive("stateAdder", function($rootScope) {
+        .directive("stateAdder", function() {
             return {
                 restrict: "A",
                 templateUrl: "Areas/Management/app/spa/course_edit/information/StateAdder.html",
@@ -20,7 +20,7 @@
                 }
             };
         })
-        .directive("courseInformationStates", function(StateService) {
+        .directive("courseInformationStates", ['StateService', function(StateService) {
             return {
                 restrict: "A",
                 templateUrl: "Areas/Management/app/spa/course_edit/information/InformationStates.html",
@@ -59,7 +59,6 @@
                     };
                 }
             };
-        })
+        }])
     ;
-
 })();

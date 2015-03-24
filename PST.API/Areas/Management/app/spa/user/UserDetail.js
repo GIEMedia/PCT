@@ -4,7 +4,7 @@
 
     angular.module('pct.management.user.detail', [
     ])
-        .config(function ($stateProvider) {
+        .config(['$stateProvider', function ($stateProvider) {
 
             $stateProvider
                 .state('user.detail', {
@@ -16,9 +16,9 @@
                     controller: "user.detail.Ctrl"
                 })
             ;
-        })
+        }])
 
-        .controller("user.detail.Ctrl", function ($scope, $stateParams, LayoutService, UserService, StateService) {
+        .controller("user.detail.Ctrl", ['$scope', '$stateParams', 'LayoutService', 'UserService', 'StateService', function ($scope, $stateParams, LayoutService, UserService, StateService) {
             UserService.getDetail($stateParams.userId).success(function( detail ) {
                 $scope.detail = detail;
 
@@ -46,15 +46,15 @@
             $scope.promote = function() {
                 setAdminAccess(1);
             };
-        })
+        }])
 
-        .directive("admin", function(Hover) {
+        .directive("admin", ['Hover', function(Hover) {
             return {
                 restrict: "C",
                 link: Hover.link
             };
-        })
-        .directive("tableRowExpand", function(Hover) {
+        }])
+        .directive("tableRowExpand", function() {
             return {
                 restrict: "C",
                 link: function($scope, elem, atrs) {
@@ -67,5 +67,4 @@
             };
         })
     ;
-
 })();

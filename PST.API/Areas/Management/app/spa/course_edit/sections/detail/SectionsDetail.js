@@ -6,7 +6,7 @@
             'pct.management.courseEdit.questions'
     ])
 
-        .config(function ($stateProvider) {
+        .config(['$stateProvider', function ($stateProvider) {
             $stateProvider
                 .state('courseEdit.sections.detail', {
                     url: '/:sectionId',
@@ -14,9 +14,9 @@
                     controller: "courseEdit.sections.detail.Ctrl"
                 })
             ;
-        })
+        }])
 
-        .controller("courseEdit.sections.detail.Ctrl", function ($scope, $state, $stateParams, QuestionService) {
+        .controller("courseEdit.sections.detail.Ctrl", ['$scope', '$state', '$stateParams', 'QuestionService', function ($scope, $state, $stateParams, QuestionService) {
             
             $scope.setCel({
                 step: 1,
@@ -55,9 +55,6 @@
                 if (sectionIndex==$scope.sections.length - 1) return;
                 $state.go("^.detail", {sectionId: $scope.sections[sectionIndex + 1].id });
             };
-            
-        })
-        
+        }])
     ;
-
 })();

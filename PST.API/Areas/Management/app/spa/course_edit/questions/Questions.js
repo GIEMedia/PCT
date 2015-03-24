@@ -54,7 +54,7 @@
             };
         })
     
-        .directive("questionRow", function(Fancybox, $parse, QuestionService) {
+        .directive("questionRow", ['Fancybox', '$parse', 'QuestionService', function(Fancybox, $parse, QuestionService) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -150,9 +150,9 @@
                     };
                 }
             };
-        })
+        }])
         
-        .controller("courseEdit.questions.AnswersModalCtrl", function($scope, $q, $modalInstance, QuestionService) {
+        .controller("courseEdit.questions.AnswersModalCtrl", ['$scope', '$q', '$modalInstance', 'QuestionService', function($scope, $q, $modalInstance, QuestionService) {
             $scope.view = {
                 addVideo: {
                     url: null,
@@ -209,7 +209,7 @@
                 $scope.saveAction();
                 $modalInstance.close();
             }
-        })
+        }])
 
         .directive("customTableQuestions", function() {
             return {
@@ -232,18 +232,20 @@
             };
         })
 
-        .directive("btnPlusMain", function(Hover) {
+        .directive("btnPlusMain", ['Hover', function(Hover) {
             return {
                 restrict: "C",
                 link: Hover.link
             };
-        })
-        .directive("btnPlusInner", function(Hover) {
+        }])
+
+        .directive("btnPlusInner", ['Hover', function(Hover) {
             return {
                 restrict: "C",
                 link: Hover.link
             };
-        })
+        }])
+
         .directive("btnPlus", function() {
             return {
                 restrict: "C",

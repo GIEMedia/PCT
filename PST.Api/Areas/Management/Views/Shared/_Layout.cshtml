@@ -1,78 +1,17 @@
 ﻿<!DOCTYPE html>
 <html lang="en" ng-app="pct.management">
 <head>
-
     <meta charset="UTF-8"/>
-
     <title>PCT Admin</title>
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
-    <link rel="shortcut icon" type="image/x-icon" href="Areas/Management/app/css/images/favicon.ico"/>
-
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
-          rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="Areas/Management/app/css/selectboxit.css"/>
-    <link rel="stylesheet" href="Areas/Management/app/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="Areas/Management/app/css/icomoon.css"/>
-    <link rel="stylesheet" href="Areas/Management/app/css/jquery.fancybox.css"/>
-    <link rel="stylesheet" href="Areas/Management/app/css/style.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="/Areas/Management/app/css/images/favicon.ico"/>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'rel='stylesheet' type='text/css'>
+    @Styles.Render("~/bundles/css/management.css")
     <link href="http://vjs.zencdn.net/4.11/video-js.css" rel="stylesheet"/>
-
-    <script type="text/javascript" src="Areas/Management/app/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="Areas/Management/app/js/jquery-ui-1.11.4.min.js"></script>
-    <script type="text/javascript" src="Areas/Management/app/js/selectboxit.js"></script>
-    <script type="text/javascript" src="Areas/Management/app/js/jquery.fancybox.pack.js"></script>
-    <script type="text/javascript" src="Areas/Management/app/js/moment.min.js"></script>
-    <script type="text/javascript" src="Areas/Management/app/js/functions.js"></script>
+    @Scripts.Render("~/bundles/js/lib.js")
+    @Scripts.Render("~/bundles/js/management.js")
     <script src="http://vjs.zencdn.net/4.11/video.js"></script>
-
-    <script src="Areas/Management/app/js/common-utils.js"></script>
-
-    <script src="Areas/Management/app/js/angular_1.3.1/angular.js"></script>
-    <script src="Areas/Management/app/js/angular_1.3.1/angular-sanitize.min.js"></script>
-
-    <script src="Areas/Management/app/js/angular-ui-router.min.js"></script>
-	
-    <script src="Areas/Management/app/js/angular-file-upload/angular-file-upload-shim.min.js"></script>
-    <script src="Areas/Management/app/js/angular-file-upload/angular-file-upload.min.js"></script>
-
-    <!-- spa-js start -->
-    <script src="Areas/Management/app/spa/api/CategoryService.js"></script>
-    <script src="Areas/Management/app/spa/api/CourseService.js"></script>
-    <script src="Areas/Management/app/spa/api/QuestionService.js"></script>
-    <script src="Areas/Management/app/spa/api/ReportService.js"></script>
-    <script src="Areas/Management/app/spa/api/SectionService.js"></script>
-    <script src="Areas/Management/app/spa/api/StateService.js"></script>
-    <script src="Areas/Management/app/spa/api/UserService.js"></script>
-    <script src="Areas/Management/app/spa//app.js"></script>
-    <script src="Areas/Management/app/spa/common/Fancybox.js"></script>
-    <script src="Areas/Management/app/spa/common/Sorter.js"></script>
-    <script src="Areas/Management/app/spa/common/Theme.js"></script>
-    <script src="Areas/Management/app/spa/courses/Courses.js"></script>
-    <script src="Areas/Management/app/spa/course_edit/CourseEdit.js"></script>
-    <script src="Areas/Management/app/spa/course_edit\information/Information.js"></script>
-    <script src="Areas/Management/app/spa/course_edit\information/InformationCategories.js"></script>
-    <script src="Areas/Management/app/spa/course_edit\information/InformationStates.js"></script>
-    <script src="Areas/Management/app/spa/course_edit\publish/Publish.js"></script>
-    <script src="Areas/Management/app/spa/course_edit\questions/Questions.js"></script>
-    <script src="Areas/Management/app/spa/course_edit\review_invite/ReviewInvite.js"></script>
-    <script src="Areas/Management/app/spa/course_edit\sections\detail/SectionsDetail.js"></script>
-    <script src="Areas/Management/app/spa/course_edit\sections\list/SectionsList.js"></script>
-    <script src="Areas/Management/app/spa/course_edit\sections/Sections.js"></script>
-    <script src="Areas/Management/app/spa/course_edit\test/Test.js"></script>
-    <script src="Areas/Management/app/spa/layout/Layout.js"></script>
-    <script src="Areas/Management/app/spa/login/Login.js"></script>
-    <script src="Areas/Management/app/spa/report/Report.js"></script>
-    <script src="Areas/Management/app/spa/report/ReportDetail.js"></script>
-    <script src="Areas/Management/app/spa/report/ReportList.js"></script>
-    <script src="Areas/Management/app/spa/security/SecurityService.js"></script>
-    <script src="Areas/Management/app/spa/user/User.js"></script>
-    <script src="Areas/Management/app/spa/user/UserDetail.js"></script>
-    <script src="Areas/Management/app/spa/user/UserList.js"></script>
-    <!-- spa-js end -->
-
 </head>
 <body onbeforeunload="return beforeUnload()">
 <div class="wrapper">
@@ -81,29 +20,22 @@
     <aside class="container-sidebar" ng-if="$state.current.name == 'login'">
         <a href="#" class="logo">PCT</a>
     </aside>
-    <!-- /.container-sidebar -->
 
     <section class="container">
-        <header class="header" layout-header>
-        </header>
-        <!-- /.header -->
+        <header class="header" layout-header></header>
 
-        <main class="main" ui-view>
-        </main>
-        <!-- /.main -->
+        <main class="main" ui-view></main>
 
         <footer class="footer">
             <div class="shell">
-                Copyright &copy; 2015 PCT. All rights reserved. |
+                © 1997-@DateTime.Now.Year GIE Media, Inc. All Right Reserved. |
                 <script type="text/javascript" src="//prototype1.io/developed.by.p1.js"></script>
             </div>
         </footer>
 
         <footer class="footer-nav" layout-custom-footer style="display: none"></footer>
     </section>
-    <!-- /.container -->
 </div>
-<!-- /.wrapper -->
 </body>
 </html>
 

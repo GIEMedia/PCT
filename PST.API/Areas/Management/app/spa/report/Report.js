@@ -6,7 +6,7 @@
         'pct.management.report.list',
         'pct.management.report.detail'
     ])
-        .config(function ($stateProvider) {
+        .config(['$stateProvider', function ($stateProvider) {
 
             $stateProvider
                 .state('report', {
@@ -19,9 +19,9 @@
                     controller: "report.Ctrl"
                 })
             ;
-        })
+        }])
 
-        .controller("report.Ctrl", function ($scope, Sorters, LayoutService, CourseService) {
+        .controller("report.Ctrl", ['$scope', 'Sorters', 'LayoutService', 'CourseService', function ($scope, Sorters, LayoutService, CourseService) {
             $scope.r = {
                 search: null
             };
@@ -31,7 +31,6 @@
             CourseService.getList().success(function(list) {
                 $scope.courses = list;
             });
-        })
+        }])
     ;
-
 })();

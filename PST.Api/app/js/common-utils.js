@@ -215,11 +215,17 @@ ObjectUtil.equals = function (o1, o2) {
     }
 
     for (var i in o1) {
+        if (typeof i == "string" && i[0] == "$") {
+            continue;
+        }
         if (!ObjectUtil.equals(o1[i], o2[i])) {
             return false;
         }
     }
     for (var i in o2) {
+        if (typeof i == "string" && i[0] == "$") {
+            continue;
+        }
         if (!ObjectUtil.equals(o1[i], o2[i])) {
             return false;
         }
@@ -233,12 +239,23 @@ ObjectUtil.copy = function(fromO, toO) {
         toO[name] = fromO[name];
     }
 };
+
 ObjectUtil.clone = function(obj) {
-    if (obj.length == null) {
-        return jQuery.extend(true, {}, obj);
+    if (obj == null
+        || typeof obj != "object"
+    ) {
+        return obj;
+    } else if (obj.length == null) {
+        var ret = {};
+        for ( var i in obj) {
+            if (obj.hasOwnProperty(i)) {
+                ret[i] = ObjectUtil.clone(obj[i]);
+            }
+        }
+        return ret;
     } else {
         var ret = [];
-        for ( var i in obj) {
+        for (var i = 0; i < obj.length; i++) {
             ret[i] = ObjectUtil.clone(obj[i]);
         }
         return ret;
@@ -516,7 +533,10 @@ Cols.eachPar1 = function(index, col, p2) {
 
 
 Cols.indexOf = function(ele, col, colExtract) {
-    for (var i in col) {
+    if (col==null) {
+        return -1;
+    }
+    for (var i = 0; i < col.length; i++) {
         if (colExtract(col[i]) == ele) {
             return i;
         }

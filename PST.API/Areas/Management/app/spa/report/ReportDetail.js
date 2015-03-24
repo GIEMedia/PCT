@@ -4,7 +4,7 @@
 
     angular.module('pct.management.report.detail', [
     ])
-        .config(function ($stateProvider) {
+        .config(['$stateProvider', function ($stateProvider) {
 
             $stateProvider
                 .state('report.detail', {
@@ -13,9 +13,9 @@
                     controller: "report.detail.Ctrl"
                 })
             ;
-        })
+        }])
 
-        .controller("report.detail.Ctrl", function ($scope, $stateParams, LayoutService, ReportService) {
+        .controller("report.detail.Ctrl", ['$scope', '$stateParams', 'LayoutService', 'ReportService', function ($scope, $stateParams, LayoutService, ReportService) {
             $scope.$watch("courses", function(value) {
                 if (value) {
                     LayoutService.setBreadCrumbs($scope, {
@@ -39,7 +39,7 @@
                         return o.correct;
                     }).length >= 2;
             };
-        })
+        }])
 
         .directive("reportRow", function() {
             return {
@@ -67,7 +67,5 @@
                 }
             };
         })
-
     ;
-
 })();

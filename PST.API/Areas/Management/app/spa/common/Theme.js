@@ -41,7 +41,7 @@
             };
         })
 
-        .directive("pctOptions", function($parse) {
+        .directive("pctOptions", ['$parse', function($parse) {
             var parse = function(exp) {
                 var getter;
                 if (exp.indexOf(".") == -1) {
@@ -160,7 +160,7 @@
                     //if (!$scope.$$phase) $scope.$digest();
                 }
             };
-        })
+        }])
 
         .directive("tableStates", function() {
             return {
@@ -283,11 +283,11 @@
                     });
 
                 },
-                controller: function($scope) {
+                controller: ['$scope', function($scope) {
                     this.setMessageComponent = function(comp) {
                         $scope.messageComponent = comp;
                     }
-                }
+                }]
             };
         })
 
