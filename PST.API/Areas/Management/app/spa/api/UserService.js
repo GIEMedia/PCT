@@ -7,8 +7,8 @@
         .factory("UserService", function(Api) {
 
             return {
-                getList: function() {
-                    return Api.get("api/manage/user/list"); // ?page=1&qty=20&search=a
+                getList: function(page) {
+                    return Api.get("api/manage/user/list?page=" + page + "&qty=20"); // ?page=1&qty=20&search=a
                 },
                 getDetail: function(userId) {
                     return Api.get("api/manage/user/" + userId);

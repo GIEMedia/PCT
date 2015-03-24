@@ -26,11 +26,11 @@
                             </th>
                         </tr>
 
-                        <tr pct-no-record="{list: users, searchResult: u.searching.result, search: (u.search.length >= 2 ? u.search : null), name: 'user(s)'}">
+                        <tr pct-no-record="{list: ul.users, searchResult: u.searching.result, search: (u.search.length >= 2 ? u.search : null), name: 'user(s)'}">
                             <td colspan="5" pct-no-record-message></td>
                         </tr>
 
-                        <tr ng-repeat="user in (u.searching ? u.searching.result : users )">
+                        <tr ng-repeat="user in (u.searching ? u.searching.result : ul.users )">
                             <td>
                                 {{user.first_name}}
                             </td>
@@ -49,6 +49,11 @@
                         </tr>
 
                     </table>
+
+                    <div class="table-buttons" ng-if="ul.pageCount > 1">
+                        <a href="" class="btn" ng-class="ul.pageNum==pageNum ? 'btn-green' : 'btn-grey'" ng-repeat="pageNum in ul.pageNumbers" ng-click="ul.pageNum = pageNum">{{pageNum}}</a>
+                    </div>
+
                 </div><!-- /.table -->
             </div><!-- /.section-body-inner -->
         </div><!-- /.shell -->
