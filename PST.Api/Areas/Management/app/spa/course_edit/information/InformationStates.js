@@ -20,7 +20,7 @@
                 }
             };
         })
-        .directive("courseInformationStates", ['StateService', function(StateService) {
+        .directive("courseInformationStates", ["StateService", function(StateService) {
             return {
                 restrict: "A",
                 templateUrl: "Areas/Management/app/spa/course_edit/information/InformationStates.html",

@@ -4,7 +4,7 @@
 
     angular.module('pct.management.report.list', [
     ])
-        .config(['$stateProvider', function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
 
             $stateProvider
                 .state('report.list', {
@@ -15,7 +15,7 @@
             ;
         }])
 
-        .controller("report.list.Ctrl", ['$scope', 'LayoutService', function ($scope, LayoutService) {
+        .controller("report.list.Ctrl", ["$scope", "LayoutService", function ($scope, LayoutService) {
             LayoutService.supportSearch($scope, {
                 placeholder: "Search",
                 model: "r.search"

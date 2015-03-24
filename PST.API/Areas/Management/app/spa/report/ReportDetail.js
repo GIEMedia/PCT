@@ -4,7 +4,7 @@
 
     angular.module('pct.management.report.detail', [
     ])
-        .config(['$stateProvider', function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
 
             $stateProvider
                 .state('report.detail', {
@@ -15,7 +15,7 @@
             ;
         }])
 
-        .controller("report.detail.Ctrl", ['$scope', '$stateParams', 'LayoutService', 'ReportService', function ($scope, $stateParams, LayoutService, ReportService) {
+        .controller("report.detail.Ctrl", ["$scope", "$stateParams", "LayoutService", "ReportService", function ($scope, $stateParams, LayoutService, ReportService) {
             $scope.$watch("courses", function(value) {
                 if (value) {
                     LayoutService.setBreadCrumbs($scope, {

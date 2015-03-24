@@ -4,7 +4,7 @@
 
     angular.module('pct.management.api.user', [
     ])
-        .factory("UserService", ['Api', function(Api) {
+        .factory("UserService", ["Api", function(Api) {
 
             return {
                 getList: function(page) {

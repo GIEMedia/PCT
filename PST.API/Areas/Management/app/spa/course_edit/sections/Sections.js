@@ -7,7 +7,7 @@
         'pct.management.courseEdit.sections.detail'
     ])
 
-        .config(['$stateProvider', function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
             $stateProvider
                 .state('courseEdit.sections', {
                     url: '/sections',
@@ -18,7 +18,7 @@
             ;
         }])
 
-        .controller("courseEdit.sections.Ctrl", ['$scope', '$state', 'SectionService', function ($scope, $state, SectionService) {
+        .controller("courseEdit.sections.Ctrl", ["$scope", "$state", "SectionService", function ($scope, $state, SectionService) {
             $scope.refreshList = function() {
                 SectionService.getList($scope.course.id).success(function(sections) {
                     $scope.sections = sections;

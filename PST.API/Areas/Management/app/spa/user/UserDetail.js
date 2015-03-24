@@ -4,7 +4,7 @@
 
     angular.module('pct.management.user.detail', [
     ])
-        .config(['$stateProvider', function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
 
             $stateProvider
                 .state('user.detail', {
@@ -18,7 +18,7 @@
             ;
         }])
 
-        .controller("user.detail.Ctrl", ['$scope', '$stateParams', 'LayoutService', 'UserService', 'StateService', function ($scope, $stateParams, LayoutService, UserService, StateService) {
+        .controller("user.detail.Ctrl", ["$scope", "$stateParams", "LayoutService", "UserService", "StateService", function ($scope, $stateParams, LayoutService, UserService, StateService) {
             UserService.getDetail($stateParams.userId).success(function( detail ) {
                 $scope.detail = detail;
 
@@ -48,7 +48,7 @@
             };
         }])
 
-        .directive("admin", ['Hover', function(Hover) {
+        .directive("admin", ["Hover", function(Hover) {
             return {
                 restrict: "C",
                 link: Hover.link

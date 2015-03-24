@@ -6,7 +6,7 @@
             'angularFileUpload'
     ])
 
-        .config(['$stateProvider', function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
             $stateProvider
                 .state('courseEdit.sections.list', {
                     url: '/list',
@@ -16,7 +16,7 @@
             ;
         }])
 
-        .controller("courseEdit.sections.list.Ctrl", ['$scope', '$state', 'SectionService', function ($scope, $state, SectionService) {
+        .controller("courseEdit.sections.list.Ctrl", ["$scope", "$state", "SectionService", function ($scope, $state, SectionService) {
             $scope.setCel({
                 step: 1
             });
@@ -65,7 +65,7 @@
             };
         }])
 
-        .directive("sectionRow", ['SectionService', function(SectionService) {
+        .directive("sectionRow", ["SectionService", function(SectionService) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {

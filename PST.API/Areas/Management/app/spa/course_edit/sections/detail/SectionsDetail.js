@@ -6,7 +6,7 @@
             'pct.management.courseEdit.questions'
     ])
 
-        .config(['$stateProvider', function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
             $stateProvider
                 .state('courseEdit.sections.detail', {
                     url: '/:sectionId',
@@ -16,7 +16,7 @@
             ;
         }])
 
-        .controller("courseEdit.sections.detail.Ctrl", ['$scope', '$state', '$stateParams', 'QuestionService', function ($scope, $state, $stateParams, QuestionService) {
+        .controller("courseEdit.sections.detail.Ctrl", ["$scope", "$state", "$stateParams", "QuestionService", function ($scope, $state, $stateParams, QuestionService) {
             
             $scope.setCel({
                 step: 1,

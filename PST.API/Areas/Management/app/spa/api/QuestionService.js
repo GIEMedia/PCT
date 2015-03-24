@@ -4,7 +4,7 @@
 
     angular.module('pct.management.api.question', [
     ])
-        .factory("QuestionService", ['Api', function(Api) {
+        .factory("QuestionService", ["Api", function(Api) {
 
             var isEmpty = function(question) {
                 return StringUtil.isBlank(question.question_text)

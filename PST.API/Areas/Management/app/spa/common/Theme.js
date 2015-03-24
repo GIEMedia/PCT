@@ -41,7 +41,7 @@
             };
         })
 
-        .directive("pctOptions", ['$parse', function($parse) {
+        .directive("pctOptions", ["$parse", function($parse) {
             var parse = function(exp) {
                 var getter;
                 if (exp.indexOf(".") == -1) {
@@ -283,7 +283,7 @@
                     });
 
                 },
-                controller: ['$scope', function($scope) {
+                controller: ["$scope", function($scope) {
                     this.setMessageComponent = function(comp) {
                         $scope.messageComponent = comp;
                     }

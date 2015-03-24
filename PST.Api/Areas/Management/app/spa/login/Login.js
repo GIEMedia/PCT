@@ -5,7 +5,7 @@
     angular.module('pct.management.login', [
     ])
     
-        .config(['$stateProvider', function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
 
             $stateProvider
                 .state('login', {
@@ -19,7 +19,7 @@
             ;
         }])
 
-        .controller("login.Ctrl", ['$scope', '$state', 'User', 'SecurityService', function ($scope, $state, User, SecurityService) {
+        .controller("login.Ctrl", ["$scope", "$state", "User", "SecurityService", function ($scope, $state, User, SecurityService) {
             $scope.login = {
             };
 

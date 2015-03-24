@@ -5,7 +5,7 @@
     angular.module('pct.management.courses', [
         'pct.common.sorter'
     ])
-        .config(['$stateProvider', function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
 
             $stateProvider
                 .state('courses', {
@@ -19,7 +19,7 @@
             ;
         }])
 
-        .controller("courses.Ctrl", ['$scope', 'LayoutService', 'CourseService', 'Sorters', function ($scope, LayoutService, CourseService, Sorters) {
+        .controller("courses.Ctrl", ["$scope", "LayoutService", "CourseService", "Sorters", function ($scope, LayoutService, CourseService, Sorters) {
             $scope.view = {
                 search: null
             };

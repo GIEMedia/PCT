@@ -5,7 +5,7 @@
     angular.module('pct.management.courseEdit.publish', [
     ])
 
-        .config(['$stateProvider', function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
             $stateProvider
                 .state('courseEdit.publish', {
                     url: '/publish',
@@ -15,7 +15,7 @@
             ;
         }])
 
-        .controller("courseEdit.publish.Ctrl", ['$scope', '$state', 'CourseService', function ($scope, $state, CourseService) {
+        .controller("courseEdit.publish.Ctrl", ["$scope", "$state", "CourseService", function ($scope, $state, CourseService) {
             $scope.setCel({
                 step: 4,
                 save: function() {

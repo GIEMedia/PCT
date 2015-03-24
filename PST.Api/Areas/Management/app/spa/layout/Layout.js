@@ -6,18 +6,18 @@
         'ui.router'
     ])
 
-        .run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
+        .run(["$rootScope", "$state", "$stateParams", function ($rootScope, $state, $stateParams) {
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
         }])
 
-        .config(['$compileProvider', function ($compileProvider) {
+        .config(["$compileProvider", function ($compileProvider) {
             if ($compileProvider.debugInfoEnabled) {
                 $compileProvider.debugInfoEnabled(false);
             }
         }])
 
-        .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
+        .config(["$stateProvider", "$urlRouterProvider", function ($stateProvider, $urlRouterProvider) {
             $urlRouterProvider
                 // If the url is ever invalid, e.g. '/asdf', then redirect to '/' aka the home state
                 .otherwise("/login");
@@ -65,7 +65,7 @@
                 }
             };
         })
-        .directive("layoutHeader", ['LayoutService', 'SecurityService', 'User', '$parse', function(LayoutService, SecurityService, User, $parse) {
+        .directive("layoutHeader", ["LayoutService", "SecurityService", "User", "$parse", function(LayoutService, SecurityService, User, $parse) {
             return {
                 restrict: "A",
                 templateUrl: "Areas/Management/app/spa/layout/LayoutHeader.html",
@@ -108,7 +108,7 @@
             };
         }])
 
-        .factory("LayoutService", ['$http', '$templateCache', '$compile', function($http, $templateCache, $compile) {
+        .factory("LayoutService", ["$http", "$templateCache", "$compile", function($http, $templateCache, $compile) {
             var layout = {};
             //var inform = function() {};
 
@@ -181,7 +181,7 @@
             };
         }])
 
-        .directive("layoutCustomFooter", ['LayoutService', function(LayoutService) {
+        .directive("layoutCustomFooter", ["LayoutService", function(LayoutService) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {

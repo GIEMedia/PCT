@@ -11,7 +11,7 @@
             };
         })
 
-        .factory("Api", ['$http', '$upload', function($http, $upload) {
+        .factory("Api", ["$http", "$upload", function($http, $upload) {
 
             var handleError = function(httpPromise) {
 
@@ -86,7 +86,7 @@
             };
         }])
 
-        .factory("SecurityService", ['$http', '$rootScope', '$timeout', 'Api', 'User', '$state', function($http, $rootScope, $timeout, Api, User, $state) {
+        .factory("SecurityService", ["$http", "$rootScope", "$timeout", "Api", "User", "$state", function($http, $rootScope, $timeout, Api, User, $state) {
             var fetchUser = function() {
                 return Api.get("api/account")
                     .success(function(account) {

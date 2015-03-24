@@ -6,7 +6,7 @@
         'pct.management.user.list',
         'pct.management.user.detail'
     ])
-        .config(['$stateProvider', function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
 
             $stateProvider
                 .state('user', {
@@ -18,7 +18,7 @@
             ;
         }])
 
-        .controller("user.Ctrl", ['$scope', '$state', '$rootScope', 'LayoutService', 'UserService', function($scope, $state, $rootScope, LayoutService, UserService) {
+        .controller("user.Ctrl", ["$scope", "$state", "$rootScope", "LayoutService", "UserService", function($scope, $state, $rootScope, LayoutService, UserService) {
             $scope.u = {
                 search: null,
                 searching: null

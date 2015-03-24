@@ -4,7 +4,7 @@
 
     angular.module('pct.management.api.course', [
     ])
-        .factory("CourseService", ['Api', function(Api) {
+        .factory("CourseService", ["Api", function(Api) {
 
             // Sample data
             var course = {

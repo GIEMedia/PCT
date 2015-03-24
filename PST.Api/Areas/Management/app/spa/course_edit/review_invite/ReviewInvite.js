@@ -5,7 +5,7 @@
     angular.module('pct.management.courseEdit.reviewInvite', [
     ])
 
-        .config(['$stateProvider', function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
             $stateProvider
                 .state('courseEdit.reviewInvite', {
                     url: '/reviewInvite',
@@ -15,7 +15,7 @@
             ;
         }])
 
-        .controller("courseEdit.reviewInvite.Ctrl", ['$scope', '$stateParams', 'StateService', 'CourseService', 'ReviewService', function ($scope, $stateParams, StateService, CourseService, ReviewService) {
+        .controller("courseEdit.reviewInvite.Ctrl", ["$scope", "$stateParams", "StateService", "CourseService", "ReviewService", function ($scope, $stateParams, StateService, CourseService, ReviewService) {
             $scope.setCel({
                 step: 3
             });

@@ -7,7 +7,7 @@
         'pct.management.courseEdit.information.categories'
     ])
 
-        .config(['$stateProvider', function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
             $stateProvider
                 .state('courseEdit.information', {
                     url: '/information',
@@ -17,7 +17,7 @@
             ;
         }])
 
-        .controller("courseEdit.information.Ctrl", ['$scope', '$state', '$stateParams', '$parse', '$q', 'LayoutService', 'CourseService', function ($scope, $state, $stateParams, $parse, $q, LayoutService, CourseService) {
+        .controller("courseEdit.information.Ctrl", ["$scope", "$state", "$stateParams", "$parse", "$q", "LayoutService", "CourseService", function ($scope, $state, $stateParams, $parse, $q, LayoutService, CourseService) {
             // Layout
 
             $scope.$watch("course", function(course) {

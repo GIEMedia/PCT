@@ -6,7 +6,7 @@
         'pct.management.report.list',
         'pct.management.report.detail'
     ])
-        .config(['$stateProvider', function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
 
             $stateProvider
                 .state('report', {
@@ -21,7 +21,7 @@
             ;
         }])
 
-        .controller("report.Ctrl", ['$scope', 'Sorters', 'LayoutService', 'CourseService', function ($scope, Sorters, LayoutService, CourseService) {
+        .controller("report.Ctrl", ["$scope", "Sorters", "LayoutService", "CourseService", function ($scope, Sorters, LayoutService, CourseService) {
             $scope.r = {
                 search: null
             };

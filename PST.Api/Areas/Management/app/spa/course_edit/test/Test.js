@@ -5,7 +5,7 @@
     angular.module('pct.management.courseEdit.test', [
     ])
 
-        .config(['$stateProvider', function ($stateProvider) {
+        .config(["$stateProvider", function ($stateProvider) {
             $stateProvider
                 .state('courseEdit.test', {
                     url: '/test',
@@ -15,7 +15,7 @@
             ;
         }])
 
-        .controller("courseEdit.test.Ctrl", ['$scope', '$stateParams', 'QuestionService', function ($scope, $stateParams, QuestionService) {
+        .controller("courseEdit.test.Ctrl", ["$scope", "$stateParams", "QuestionService", function ($scope, $stateParams, QuestionService) {
             $scope.setCel({
                 step: 2,
                 needSaving: function() {

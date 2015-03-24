@@ -5,7 +5,7 @@
     angular.module('pct.fancybox', [
     ])
 
-        .factory("Fancybox", ['$q', '$compile', '$templateCache', '$http', '$controller', '$rootScope', function($q, $compile, $templateCache, $http, $controller, $rootScope) {
+        .factory("Fancybox", ["$q", "$compile", "$templateCache", "$http", "$controller", "$rootScope", function($q, $compile, $templateCache, $http, $controller, $rootScope) {
             var open = function($scope, options) {
                 //options.templateUrl
                 var templatePromise = $http.get(options.templateUrl, {cache: $templateCache}).then(function (result) {

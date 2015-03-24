@@ -5,7 +5,7 @@
     angular.module('pct.management.courseEdit.information.categories', [
         'pct.fancybox'
     ])
-        .directive("courseInformationCategories", ['$q', 'CategoryService', 'Fancybox', function($q, CategoryService, Fancybox) {
+        .directive("courseInformationCategories", ["$q", "CategoryService", "Fancybox", function($q, CategoryService, Fancybox) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
