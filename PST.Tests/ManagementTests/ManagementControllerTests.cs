@@ -28,27 +28,37 @@ namespace PST.Tests.ManagementTests
         {
             var users = GetUsers(null, null, "");
             Assert.IsNotNull(users);
-            Assert.IsTrue(users.Any());
+            Assert.IsTrue(users.results.Any());
 
-            var user = users.First();
+            var user = users.results.First();
             var search = user.first_name + " " + user.last_name;
             var searchedUsers = GetUsers(null, null, search);
             Assert.IsNotNull(searchedUsers);
-            Assert.IsTrue(searchedUsers.Any(u => user.id == u.id));
+            Assert.IsTrue(searchedUsers.results.Any(u => user.id == u.id));
 
             search = "    " + user.first_name + "      " + user.last_name + "        ";
             searchedUsers = GetUsers(null, null, search);
             Assert.IsNotNull(searchedUsers);
-            Assert.IsTrue(searchedUsers.Any(u => user.id == u.id));
+            Assert.IsTrue(searchedUsers.results.Any(u => user.id == u.id));
 
             search = user.first_name + " " + user.last_name + " @*&@#&*H";
             searchedUsers = GetUsers(null, null, search);
             Assert.IsNotNull(searchedUsers);
-            Assert.IsFalse(searchedUsers.Any());
+            Assert.IsFalse(searchedUsers.results.Any());
+
+            users = GetUsers(null, 900000, "");
+            var totalUsers = users.results.Count();
+            Debug.WriteLine("Total users: " + totalUsers);
+            Assert.IsNotNull(users);
+            Assert.IsTrue(users.pages == 1);
 
             users = GetUsers(null, 2, "");
             Assert.IsNotNull(users);
-            Assert.IsTrue(users.Count() == 2);
+            Assert.IsTrue(users.results.Count() == 2);
+
+            users = GetUsers(null, 7, "");
+            Assert.IsNotNull(users);
+            Assert.IsTrue(users.results.Count() == 7);
         }
 
         [TestMethod]
@@ -56,9 +66,9 @@ namespace PST.Tests.ManagementTests
         {
             var users = GetUsers(null, null, "");
             Assert.IsNotNull(users);
-            Assert.IsTrue(users.Any(u => u.last_name.Length > 4));
+            Assert.IsTrue(users.results.Any(u => u.last_name.Length > 4));
 
-            var user = users.First(u => u.last_name.Length > 4);
+            var user = users.results.First(u => u.last_name.Length > 4);
             var search = user.last_name.Substring(0, 4);
             var searchedUsers = SearchUsers(search);
             Assert.IsNotNull(searchedUsers);
@@ -70,7 +80,7 @@ namespace PST.Tests.ManagementTests
             Assert.IsFalse(searchedUsers.Any());
         }
 
-        public m_user_overview[] GetUsers(int? page, int? qty, string search)
+        public m_user_search_result GetUsers(int? page, int? qty, string search)
         {
             var url = "user/list";
             if (page.HasValue)
@@ -79,7 +89,7 @@ namespace PST.Tests.ManagementTests
                 url += (url == "user/list" ? "?" : "&") + "qty=" + qty;
             if (!search.IsNullOrEmpty())
                 url += (url == "user/list" ? "?" : "&") + "search=" + search;
-            return ExecuteGetRequest<m_user_overview[]>(url);
+            return ExecuteGetRequest<m_user_search_result>(url);
         }
 
         public m_user_overview[] SearchUsers(string search)
@@ -92,9 +102,9 @@ namespace PST.Tests.ManagementTests
         {
             var users = GetUsers(null, null, "");
             Assert.IsNotNull(users);
-            Assert.IsTrue(users.Any(u => u.last_name.Length > 4));
+            Assert.IsTrue(users.results.Any(u => u.last_name.Length > 4));
 
-            var user = users.First(u => u.last_name.Length > 4);
+            var user = users.results.First(u => u.last_name.Length > 4);
             var foundUser = GetUser(user.id);
             Assert.IsNotNull(foundUser);
             Assert.AreEqual(user.id, foundUser.id);
@@ -113,9 +123,9 @@ namespace PST.Tests.ManagementTests
         {
             var users = GetUsers(null, null, "");
             Assert.IsNotNull(users);
-            Assert.IsTrue(users.Any());
+            Assert.IsTrue(users.results.Any());
 
-            var user = users.First();
+            var user = users.results.First();
             var foundUser = GetUser(user.id);
             Assert.IsNotNull(foundUser);
 
