@@ -29,15 +29,19 @@
                 return httpPromise;
             };
 
+            var _host = null;
             var sendHttp = function(method, url, data) {
                 return handleError($http({
                     method: method,
-                    url: url,
+                    url: (_host==null? "" : "http://" + _host + "/") + url,
                     headers: {'Authorization': "Bearer " + sessionStorage.access_token},
                     data: data
                 }));
             };
             return {
+                setHost: function(host) {
+                    _host = host;
+                },
                 get: function(url) {
                     return sendHttp("GET", url);
                 },
@@ -49,6 +53,20 @@
                 },
                 delete: function(url) {
                     return sendHttp("DELETE", url);
+                },
+                postForm: function(url, data) {
+                    return handleError($http({
+                        method: 'POST',
+                        url: (_host==null? "" : "http://" + _host + "/") + url,
+                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                        transformRequest: function(obj) {
+                            var str = [];
+                            for(var p in obj)
+                                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                            return str.join("&");
+                        },
+                        data: data
+                    }));
                 },
                 handleError: handleError
             };
@@ -79,37 +97,42 @@
                         $state.go("dashboard");
                     }
                 });
-            } else {
-                $timeout(function() {
-                    $state.go("landing");
-                }, 0);
             }
 
+            var desiredState = null;
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-                if (fromState.name == "landing" && sessionStorage.access_token == null) {
-                    event.preventDefault();
+                if (sessionStorage.access_token == null) {
+                    if (fromState.name == "landing") {
+                        event.preventDefault();
+                    } else {
+                        if (toState.name == "landing") {
+                            ;
+                        } else {
+                            event.preventDefault();
+                            desiredState = {
+                                state: toState,
+                                params: toParams
+                            };
+                            $state.go("landing");
+                        }
+                    }
                 }
             });
 
             return {
                 login: function(data) {
-                    return Api.handleError($http({
-                        method: 'POST',
-                        url: "/api/account/login",
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                        transformRequest: function(obj) {
-                            var str = [];
-                            for(var p in obj)
-                                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                            return str.join("&");
-                        },
-                        data: data
-                    })
-                        .success(function(resp) {
-                            sessionStorage.access_token = resp.access_token;
-                            fetchUser();
-                        })
-                    );
+                    return Api.postForm("api/account/login", data)
+                            .success(function(resp) {
+                                sessionStorage.access_token = resp.access_token;
+                                fetchUser();
+
+                                if (desiredState == null) {
+                                    $state.go("dashboard");
+                                } else {
+                                    $state.go(desiredState.state, desiredState.params);
+                                    desiredState = null;
+                                }
+                            });
                 },
                 logout: function() {
                     Api.delete("api/account/logout").then(function() {

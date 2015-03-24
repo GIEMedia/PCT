@@ -37,9 +37,6 @@
                         username: $scope.loginForm.email,
                         password: $scope.loginForm.password
                     })
-                        .success(function() {
-                            $state.go("dashboard");
-                        })
                         .onError(function(error, status) {
                             if (status == 400) {
                                 alert('Your login failed.');
