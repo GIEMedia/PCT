@@ -35,7 +35,7 @@ namespace PST.Api.Areas.Management.Controllers
         [Route("results/{courseID}")]
         public m_question_stat[] GetResults(Guid courseID)
         {
-            var course = _courseService.Value.GetCourse(courseID);
+            var course = _courseService.Value.GetCourse(courseID, status: null);
             if (course == null)
                 throw new NullReferenceException("Course not found");
 

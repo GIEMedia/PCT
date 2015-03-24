@@ -543,8 +543,10 @@
     <Content Include="Areas\Management\app\spa\api\CategoryService.js" />
     <Content Include="Areas\Management\app\spa\api\CourseService.js" />
     <Content Include="Areas\Management\app\spa\api\QuestionService.js" />
+    <Content Include="Areas\Management\app\spa\api\ReportService.js" />
     <Content Include="Areas\Management\app\spa\api\SectionService.js" />
     <Content Include="Areas\Management\app\spa\api\StateService.js" />
+    <Content Include="Areas\Management\app\spa\api\UserService.js" />
     <Content Include="Areas\Management\app\spa\app.js" />
     <Content Include="Areas\Management\app\spa\common\Fancybox.js" />
     <Content Include="Areas\Management\app\spa\common\popup-text.html" />
@@ -564,8 +566,6 @@
     <Content Include="Areas\Management\app\spa\course_edit\publish\Publish.html" />
     <Content Include="Areas\Management\app\spa\course_edit\publish\Publish.js" />
     <Content Include="Areas\Management\app\spa\course_edit\questions\popup-edit-answers.html" />
-    <Content Include="Areas\Management\app\spa\course_edit\questions\popup-edit-multi-images.html" />
-    <Content Include="Areas\Management\app\spa\course_edit\questions\popup-edit-single-image.html" />
     <Content Include="Areas\Management\app\spa\course_edit\questions\Questions.html" />
     <Content Include="Areas\Management\app\spa\course_edit\questions\Questions.js" />
     <Content Include="Areas\Management\app\spa\course_edit\review_invite\ReviewInvite.html" />
