@@ -680,3 +680,7 @@ button[disabled], button[disabled]:hover {
 label.correct {
 	color: limegreen;
 }
+
+.btn-login i.fa {
+	margin-left: 0px;
+}

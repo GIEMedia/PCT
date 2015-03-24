@@ -9,6 +9,10 @@
          */
         .factory("LoginFormLink", ["User", "SecurityService", "$state", function( User, SecurityService, $state ) {
             return function($scope, elem, attrs) {
+                $scope.ui = {
+                    loggingin: false
+                };
+
                 $scope.User = User;
                 $scope.error = null;
                 $scope.$watch(function() {return User.loggedIn;}, function(loggedIn) {
@@ -32,12 +36,14 @@
                         return;
                     }
 
+                    $scope.ui.loggingin = true;
                     SecurityService.login({
                         grant_type: "password",
                         username: $scope.loginForm.email,
                         password: $scope.loginForm.password
                     })
                         .onError(function(error, status) {
+                            $scope.ui.loggingin = false;
                             if (status == 400) {
                                 alert('Your login failed.');
                                 $scope.loginForm.password = null;

@@ -28,7 +28,7 @@
             'pct.elearning.profile',
             'pct.elearning.certificates',
             'ui.router',
-            'angularMoment',
+            //'angularMoment',
             'ngResource'
     ])
 
