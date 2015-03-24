@@ -1,4 +1,5 @@
 <div class="course-single-media-head" ng-if="question.image">
+
     <i>Use the following image to answer the question below.</i>
     <div class="course-single-media-wrapper">
         <img ng-src="{{question.image}}" width="360" />
@@ -16,7 +17,15 @@
 </div><!-- /.course-question-head -->
 
 
-<div class="course-question-head">
+<div class="course-question-head" ng-class="question.video || question.image ? 'has-media' : 'no-media'">
+
+    <i class="fa fa-lightbulb-o tip" ng-if="question.tip"></i>
+    <div class="popup popup-point-right-top" id="tip" ng-if="question.tip">
+        <span>
+            {{question.tip}}
+        </span>
+    </div>
+
     <h4 class="course-question-title">{{question.question_text}}</h4><!-- /.course-question-title -->
     <h5 ng-if="question.multi_select">(check all that apply)</h5>
 </div><!-- /.course-question-head -->

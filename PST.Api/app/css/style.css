@@ -361,7 +361,9 @@ a.form-label { color: #404040 !important; }
 .course-question-head .tip + .popup { display: none; }
 .course-question-head .tip + .popup span { padding: 20px; }
 .course-question-head .tip:hover { color: #00aded; }
-.course-question-head .tip:hover + .popup { display: block; visibility: visible; opacity: 1; top: 165px; left: auto; position: absolute; right: 50px; }
+.course-question-head .tip:hover + .popup { display: block; visibility: visible; opacity: 1; left: auto; position: absolute; right: 50px; }
+.course-question-head.no-media .tip:hover + .popup { top: 165px; }
+.course-question-head.has-media .tip:hover + .popup { top: 465px; }
 .course-question-title { color: #404040; }
 
 .course-question-options { background: #fff; border: 1px solid #d7e2e6; }
