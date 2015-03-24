@@ -4,26 +4,29 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Hosting;
-using GhostscriptSharp;
+using Ghostscript.NET.Rasterizer;
 using Prototype1.Foundation;
+using Prototype1.Foundation.Logging;
 using PST.Declarations.Interfaces;
-using iTextSharp.text.pdf;
 
 namespace PST.Services
 {
     public class UploadService : IUploadService
     {
+        private readonly IExceptionLogger _exceptionLogger;
         private static readonly string UploadFolderBase = HostingEnvironment.MapPath("~/Content/");
 
         private static readonly string BaseUrl =
             ConfigurationManager.AppSettings["BaseUrl"].Replace("http://", "//").Replace("https://", "//") + "Content/";
+
+        public UploadService(IExceptionLogger exceptionLogger)
+        {
+            _exceptionLogger = exceptionLogger;
+        }
 
         public async Task<string> UploadImage(HttpContent requestContent, int? width = null, int? height = null, bool forceCanvas = false)
         {
@@ -178,14 +181,14 @@ namespace PST.Services
 
         #region Document Processing
 
-        public static Guid ProcessPDF(string pdfFilePath, out int pageCount)
+        public Guid ProcessPDF(string pdfFilePath, out int pageCount)
         {
+            pageCount = 0;
+
             var pdfFile = new FileInfo(pdfFilePath);
+            
             if (!pdfFile.Extension.Equals(".pdf", StringComparison.CurrentCultureIgnoreCase))
-            {
-                pageCount = 0;
                 return Guid.Empty;
-            }
 
             var g = Guid.NewGuid();
             var path = UploadFolderBase + "Documents\\";
@@ -194,42 +197,46 @@ namespace PST.Services
             pdfFilePath = path + g + ".pdf";
             pdfFile.MoveTo(pdfFilePath);
 
-            pageCount = CountPDFPages(pdfFilePath);
-            var outputFileName = path + g + "_%d.jpg";
+            //pageCount = CountPDFPages(pdfFilePath);
+            var outputFileName = path + g + "_{0}.jpg";
             try
             {
-                GhostscriptWrapper.GeneratePageThumbs(pdfFilePath, outputFileName, 1, pageCount, 300, 300);
-                var fileGuidList = Directory.GetFiles(path, "*" + g + "*.jpg").Select(Path.GetFileName);
-                foreach (var item in fileGuidList)
+                using (var rasterizer = new GhostscriptRasterizer())
+                {
                     try
                     {
-                        using (var image = Image.FromFile(path + item))
-                            if (image.Width > 1300)
+                        rasterizer.Open(pdfFilePath);
+                        pageCount = rasterizer.PageCount;
+                        for (var page = 1; page <= pageCount; page++)
+                        {
+                            using (var image = rasterizer.GetPage(200, 200, page))
                             {
-                                var newImage = ScaleImage(image, 1300, image.Height);
-                                image.Dispose();
-                                File.Delete(path + item);
-                                newImage.Save(path + item, ImageFormat.Jpeg);
+                                var jpgPath = string.Format(outputFileName, page);
+                                if (image.Width > 1300)
+                                {
+                                    using (var newImage = ScaleImage(image, 1300, image.Height))
+                                        newImage.Save(jpgPath, ImageFormat.Jpeg);
+                                }
+                                else
+                                    image.Save(jpgPath, ImageFormat.Jpeg);
                             }
+                        }
                     }
-                    catch
+                    catch (Exception ex)
                     {
+                        _exceptionLogger.LogException(ex);
                     }
+                }
             }
-            catch
+            catch (Exception ex)
             {
+                _exceptionLogger.LogException(ex);
             }
 
             return g;
         }
 
-        public static int CountPDFPages(string pdfFileNamePath)
-        {
-            using (var reader = new PdfReader(pdfFileNamePath))
-                return reader.NumberOfPages;
-        }
-
-        public static Image ScaleImage(Image image, int maxWidth, int maxHeight)
+        public Image ScaleImage(Image image, int maxWidth, int maxHeight)
         {
             var ratioX = (double)maxWidth / image.Width;
             var ratioY = (double)maxHeight / image.Height;
@@ -241,8 +248,9 @@ namespace PST.Services
             {
                 Graphics.FromImage(newImage).DrawImage(image, 0, 0, newWidth, newHeight);
             }
-            catch
+            catch(Exception ex)
             {
+                _exceptionLogger.LogException(ex);
             }
             return newImage;
         }

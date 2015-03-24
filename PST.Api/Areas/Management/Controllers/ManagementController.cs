@@ -89,7 +89,7 @@ namespace PST.Api.Areas.Management.Controllers
 
             return new m_user_search_result
             {
-                pages = totalUsers/qty.Value,
+                pages = (int)Math.Ceiling(totalUsers/(decimal)qty.Value),
                 results =
                     accounts
                         .OrderBy(a => a.LastName)
