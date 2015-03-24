@@ -1,3 +1,4 @@
+{{questions[0]}}
 <section class="section section-report">
     <div class="section-body">
         <div class="shell">
@@ -36,22 +37,22 @@
                                     <a href="" class="icon icon-chevron-up"></a>
                                 </span>
 
-                                <h2 class="question">{{question.question}}</h2><!-- /.question -->
+                                <h2 class="question">{{question.question || "(Empty)"}} {{isMultipleCorrect(question) ? "(check all that apply)" : ""}}</h2><!-- /.question -->
                             </div><!-- /.table-col-1 -->
 
                             <div class="table-col col-size-2">
                                 <div class="attempt first">
-                                    <strong>{{percent(question.first_attempt)}}</strong><span>%</span><br />
+                                    <strong>{{percent(question.first_attempt, question)}}</strong><span>%</span><br />
                                     ({{question.first_attempt}})
                                 </div><!-- /.attempt -->
 
                                 <div class="attempt second">
-                                    <strong>{{percent(question.second_attempt)}}</strong><span>%</span><br />
+                                    <strong>{{percent(question.second_attempt, question)}}</strong><span>%</span><br />
                                     ({{question.second_attempt}})
                                 </div><!-- /.attempt -->
 
                                 <div class="attempt third">
-                                    <strong>{{percent(question.third_attempt)}}</strong><span>%</span><br />
+                                    <strong>{{percent(question.third_attempt, question)}}</strong><span>%</span><br />
                                     ({{question.third_attempt}})
                                 </div><!-- /.attempt -->
                             </div><!-- /.table-col-2 -->
@@ -74,81 +75,30 @@
                                         <th class="text-center" width="110">Third Attempt</th>
                                     </tr>
 
-                                    <tr>
+                                    <tr ng-if="(question.options.length || 0) == 0">
+                                        <td colspan="6" class="no-record">No option(s) available.</td>
+                                    </tr>
+
+                                    <tr ng-repeat="option in question.options" ng-class="{checked: option.correct}">
                                         <td></td>
 
                                         <td class="text-left">
                                             <h4>
                                                 <i class="fa fa-check-circle"></i>
-                                                Cyfluthrin
+                                                <img ng-src="{{option.image}}" alt="" width="60" height="60">
+                                                {{option.text}}
                                             </h4>
                                         </td>
 
                                         <td></td>
 
-                                        <td><strong>5</strong>% <small>(50)</small></td>
+                                        <td><strong>{{percent(option.first_attempt, option)}}</strong>% <small>({{option.first_attempt}})</small></td>
 
-                                        <td><strong>0</strong>% <small>(0)</small></td>
+                                        <td><strong>{{percent(option.second_attempt, option)}}</strong>% <small>({{option.second_attempt}})</small></td>
 
-                                        <td><strong>10</strong>% <small>(100)</small></td>
+                                        <td><strong>{{percent(option.third_attempt, option)}}</strong>% <small>({{option.third_attempt}})</small></td>
                                     </tr>
 
-                                    <tr>
-                                        <td></td>
-
-                                        <td class="text-left">
-                                            <h4>
-                                                <i class="fa fa-check-circle"></i>
-                                                Pentamyacin
-                                            </h4>
-                                        </td>
-
-                                        <td></td>
-
-                                        <td><strong>5</strong>% <small>(50)</small></td>
-
-                                        <td><strong>0</strong>% <small>(0)</small></td>
-
-                                        <td><strong>10</strong>% <small>(100)</small></td>
-                                    </tr>
-
-                                    <tr class="checked">
-                                        <td></td>
-
-                                        <td class="text-left">
-                                            <h4>
-                                                <i class="fa fa-check-circle"></i>
-                                                Pestothrin
-                                            </h4>
-                                        </td>
-
-                                        <td></td>
-
-                                        <td><strong>5</strong>% <small>(50)</small></td>
-
-                                        <td><strong>0</strong>% <small>(0)</small></td>
-
-                                        <td><strong>10</strong>% <small>(100)</small></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td></td>
-
-                                        <td class="text-left">
-                                            <h4>
-                                                <i class="fa fa-check-circle"></i>
-                                                None of the above
-                                            </h4>
-                                        </td>
-
-                                        <td></td>
-
-                                        <td><strong>5</strong>% <small>(50)</small></td>
-
-                                        <td><strong>0</strong>% <small>(0)</small></td>
-
-                                        <td><strong>10</strong>% <small>(100)</small></td>
-                                    </tr>
                                 </table>
                             </div><!-- /.table -->
                         </div><!-- /.table-row-expand -->

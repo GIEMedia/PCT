@@ -28,6 +28,17 @@
             ReportService.getResult($stateParams.courseId).success(function(questions) {
                 $scope.questions = questions;
             });
+
+
+            $scope.isMultipleCorrect = function(question) {
+                if (question.options==null) {
+                    return false;
+                }
+
+                return Cols.filter(question.options, function(o) {
+                        return o.correct;
+                    }).length >= 2;
+            };
         })
 
         .directive("reportRow", function() {
@@ -46,9 +57,12 @@
                         $(this).parent('.table-row').toggleClass('expanded').find('.table-row-expand').slideToggle(200);
                     });
 
-                    $scope.percent = function(value) {
-                        var total = $scope.question.first_attempt + $scope.question.second_attempt + $scope.question.third_attempt;
-                        return Math.round(value / total * 100);
+                    function total(a) {
+                        return a.first_attempt + a.second_attempt + a.third_attempt;
+                    }
+
+                    $scope.percent = function(value, a) {
+                        return Math.round(value / total(a) * 100);
                     }
                 }
             };

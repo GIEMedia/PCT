@@ -29,7 +29,7 @@
             $scope.$watch("ul.pageNum", function(value) {
                 $scope.ul.users = null;
                 UserService.getList(value).success(function(resp) {
-                    $scope.ul.pageCount = resp.pages + 1;
+                    $scope.ul.pageCount = resp.pages;
                     $scope.ul.users = resp.results;
                 });
             });
@@ -37,7 +37,7 @@
             $scope.$watch("ul.pageCount", function(pageCount) {
                 $scope.ul.pageNumbers = [];
                 for (var i = 0; i < pageCount; i++) {
-                    $scope.ul.pageNumbers[i] = i+1;
+                    $scope.ul.pageNumbers[i] = i + 1;
                 }
             });
 
