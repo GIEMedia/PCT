@@ -15,7 +15,7 @@
             ;
         })
 
-        .controller("courseEdit.reviewInvite.Ctrl", function ($scope, $stateParams, StateService, CourseService) {
+        .controller("courseEdit.reviewInvite.Ctrl", function ($scope, $stateParams, StateService, CourseService, ReviewService) {
             $scope.setCel({
                 step: 3
             });
@@ -30,7 +30,31 @@
                         $scope.course.status = 2;
                     }
                 });
-            }
+            };
+
+            $scope.reviewCourse = function() {
+                window.open(ReviewService.getReviewCourseUrl($stateParams.courseId), "_blank");
+            };
+            $scope.reviewTest = function() {
+                window.open(ReviewService.getReviewTestUrl($stateParams.courseId), "_blank");
+            };
+        })
+
+        .factory("ReviewService", function() {
+            var _courseReviewTmpl;
+            var _testReviewTmpl;
+            return {
+                getReviewCourseUrl: function(courseId) {
+                    return _courseReviewTmpl.replace("{courseId}", courseId);
+                },
+                getReviewTestUrl: function(courseId) {
+                    return _testReviewTmpl.replace("{courseId}", courseId);
+                },
+                setReviewUrl: function(courseReviewTmpl, testReviewTmpl) {
+                    _courseReviewTmpl = courseReviewTmpl
+                    _testReviewTmpl = testReviewTmpl;
+                }
+            };
         })
     ;
 
