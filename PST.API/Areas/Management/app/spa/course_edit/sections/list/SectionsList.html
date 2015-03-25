@@ -80,9 +80,9 @@
 
                             <td colspan="3">
                                 <div class="btns">
-                                    <button class="btn btn-grey" ng-click="addSection()" ng-disabled="inserting.submitting || sections == null" button-loading="inserting.submitting">Add</button>
+                                    <button class="btn btn-grey" ng-click="addSection()" ng-disabled="!inserting.title || inserting.submitting || sections == null" button-loading="inserting.submitting">Add</button>
 
-                                    <a href="" class="btn btn-green" ng-click="addSectionAndView()" ng-disabled="inserting.submitting || sections == null" button-loading="inserting.submitting">Add &amp; Build</a>
+                                    <a href="" class="btn btn-green" ng-click="addSectionAndView()" ng-disabled="!inserting.title || inserting.submitting || sections == null" button-loading="inserting.submitting">Add &amp; Build</a>
                                 </div><!-- /.btns -->
                             </td>
                         </tr>

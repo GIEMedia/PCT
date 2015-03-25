@@ -341,7 +341,9 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .table-section-list table tr:last-child:hover td:first-child { border: 0; border-left: 1px solid #d6e2e6; }
 .table-section-list table tr td .icons > span,
 .table-section-list table tr td .icons > .fa,
-.table-section-list table tr td .icons > .icon { font-size: 20px; line-height: 20px; color: #808080; margin-left: 20px; }
+.table-section-list table tr td .icons > .icon { line-height: 20px; margin-left: 20px; }
+.table-section-list table tr td .icons .fa,
+.table-section-list table tr td .icons .icon { font-size: 20px; color: #808080; }
 .table-section-list table tr td .icons .fa:hover,
 .table-section-list table tr td .icons .icon:hover { color: #00aded; }
 .table-section-list table tr td .icons i:first-child { margin-left: 0; }
