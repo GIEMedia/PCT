@@ -81,14 +81,20 @@
                             $scope.editName.editing = false;
                         });
                     };
-                    
+
+                    $scope.uploadingDocument = false;
                     $scope.uploadDocument = function(files) {
+                        $scope.uploadingDocument = true;
                         SectionService.uploadDocument($scope.course.id, $scope.section.id, files[0])
                             .progress(function(ev) {
                                 //console.log(ev);
                             })
                             .success(function(data) {
+                                $scope.uploadingDocument = false;
                                 $scope.refreshList();
+                            })
+                            .error(function() {
+                                $scope.uploadingDocument = false;
                             })
                         ;
                     };

@@ -55,18 +55,18 @@
                             </td>
 
                             <td class="text-center padding-vert-0 view-document" ng-if="section.document.pages.length">
-                                <div class="view-document-info"><i class="fa fa-file-pdf-o"></i> <span>{{section.document.pages.length}} page(s)</span></div>
+                                <div class="view-document-info" button-loading="uploadingDocument"><i class="fa fa-file-pdf-o"></i> <span>{{section.document.pages.length}} page(s)</span></div>
                                 <div class="view-document-link">
                                     <a href="{{section.document.pdf_url}}"><i class="fa fa-search"></i></a>
-                                    <span ng-file-select="uploadDocument($files)" accept=".pdf"><a href=""><i class="fa fa-upload"></i></a></span>
+                                    <span ng-file-select="uploadDocument($files)" accept=".pdf" button-loading="uploadingDocument"><a href=""><i class="fa fa-upload"></i></a></span>
                                     <a href="" ng-click="deleteDocument()"><i class="fa fa-trash"></i></a>
                                 </div>
                             </td>
 
                             <td class="text-center padding-vert-0 view-document" ng-if="!section.document.pages.length">
-                                <div class="view-document-info"><i class="fa fa-minus-circle"></i></div>
+                                <div class="view-document-info" button-loading="uploadingDocument"><i class="fa fa-minus-circle"></i></div>
                                 <div class="view-document-link">
-                                    <span ng-file-select="uploadDocument($files)" accept=".pdf"><a href=""><i class="fa fa-upload"></i></a></span>
+                                    <span ng-file-select="uploadDocument($files)" accept=".pdf" button-loading="uploadingDocument"><a href=""><i class="fa fa-upload"></i></a></span>
                                 </div>
                             </td>
 
