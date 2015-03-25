@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data;
+using Prototype1.Foundation.Interfaces;
 using PST.Declarations.Interfaces;
 using PST.Declarations.Models;
 using PST.Declarations.Models.Management;
@@ -10,7 +11,7 @@ using PST.Declarations.Models.Management;
 namespace PST.Declarations.Entities
 {
     [Serializable]
-    public abstract class Question : EntityBase, ISorted
+    public abstract class Question : EntityBase, ISorted, IPermanentRecord
     {
         public Question()
         {
@@ -95,6 +96,8 @@ namespace PST.Declarations.Entities
 
             SyncOptionsFromManagementModel(model);
         }
+
+        public virtual bool Deleted { get; set; }
     }
 
     [Serializable]

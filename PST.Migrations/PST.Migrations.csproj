@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201503251544_DeletedColumns.cs" />
     <Compile Include="Migrations\201503070141_CertificateCourse.cs" />
     <Compile Include="Migrations\201502251254_TriesLeft.cs" />
     <Compile Include="Migrations\201502171355_ParentProgressID.cs" />

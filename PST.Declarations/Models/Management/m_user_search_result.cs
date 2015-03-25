@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace PST.Declarations.Models.Management
+﻿namespace PST.Declarations.Models.Management
 {
     public class m_user_search_result
     {

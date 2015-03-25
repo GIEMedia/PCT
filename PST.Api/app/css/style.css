@@ -201,7 +201,32 @@ h6 { font-size: 12px; text-transform: uppercase; line-height: 1.2; }
 .text-danger { color: red; }
 .text-success { color: green; }
 
-form.ng-dirty .ng-invalid { border-color: red; }
+@-moz-keyframes border-pulsate {
+    0%   { border-color: #bbbbbb; }
+    50%  { border-color: #B38484; }
+    100% { border-color: #bbbbbb; }
+}
+
+@-webkit-keyframes border-pulsate {
+    0%   { border-color: #bbbbbb; }
+    50%  { border-color: #B38484; }
+    100% { border-color: #bbbbbb; }
+}
+
+@keyframes border-pulsate {
+    0%   { border-color: #bbbbbb; }
+    50%  { border-color: #B38484; }
+    100% { border-color: #bbbbbb; }
+}
+
+form.ng-dirty .ng-invalid {
+    border-color: #B38484;
+    -webkit-animation: border-pulsate 2s infinite;
+    -moz-animation: border-pulsate 2s infinite;
+    -ms-animation: border-pulsate 2s infinite;
+    -o-animation: border-pulsate 2s infinite;
+    animation: border-pulsate 2s infinite;
+}
 
 .form-label { text-transform: uppercase; font-size: 13px; font-weight: bold; padding-bottom: 15px; display: block; }
 a.form-label { color: #404040 !important; }

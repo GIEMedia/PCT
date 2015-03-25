@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Collections.Generic;
 using Prototype1.Foundation.Data;
-using PST.Declarations.Models;
 using PST.Declarations.Models.Management;
 
 namespace PST.Declarations.Entities

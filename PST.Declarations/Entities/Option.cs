@@ -1,5 +1,6 @@
 ﻿using System;
 using Prototype1.Foundation.Data;
+using Prototype1.Foundation.Interfaces;
 using PST.Declarations.Interfaces;
 using PST.Declarations.Models;
 using PST.Declarations.Models.Management;
@@ -7,7 +8,7 @@ using PST.Declarations.Models.Management;
 namespace PST.Declarations.Entities
 {
     [Serializable]
-    public abstract class Option : EntityBase, ISorted
+    public abstract class Option : EntityBase, ISorted, IPermanentRecord
     {
         public virtual string Text { get; set; }
 
@@ -58,6 +59,8 @@ namespace PST.Declarations.Entities
 
             return this;
         }
+
+        public virtual bool Deleted { get; set; }
     }
 
     [Serializable]
