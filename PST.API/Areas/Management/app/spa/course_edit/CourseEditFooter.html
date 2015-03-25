@@ -16,7 +16,8 @@
         <!--<a href="1.PCT.Courses.List.html" class="fa fa-trash-o alignleft"></a>-->
 
         <div class="btns alignright">
-            <button class="btn btn-grey" button-loading="ce.saving" ng-disabled="ce.saving" ng-if="needSaving()" ng-click="saveCourse()">Save</button>
+            <button class="btn btn-grey" ng-if="!ce.saving && needSaving() && cel.reset" ng-click="reset()">Reset</button>
+            <button class="btn btn-grey" button-loading="ce.saving" ng-disabled="ce.saving" ng-if="needSaving()" ng-click="save()">Save</button>
 
             <a href="" ng-click="nextPage()" class="btn btn-green btn-icon-right" ng-if="cel.step < steps.length - 1 && ($stateParams.courseId != 'new' || needSaving())">
                 {{steps[cel.step + 1].title}}

@@ -14,12 +14,21 @@
                         $scope.categories = categories;
                     });
 
+                    //Cols.find($scope.cei.course.category
+                    $scope.getCat = function(catId) {
+                        return Cols.find($scope.categories, function(cat) { return cat.id == catId;});
+                    };
+
                     $scope.$watch("cei.course != null && categories != null", function(v) {
                         if (v) {
                             setTimeout(function () { // This is to escape current digest cycle
                                 $scope.$watch("cei.course.category", function(n, o) {
                                     if (n != o) {
-                                        $scope.cei.course.sub_category = null;
+                                        if (n == null) {
+                                            $scope.cei.course.sub_category = null;
+                                        } else if (Cols.find($scope.getCat($scope.cei.course.category).sub_categories, function(s) { return s.id == $scope.cei.course.sub_category;}) == null) {
+                                            $scope.cei.course.sub_category = null;
+                                        }
                                     }
                                 });
                                 if (!$scope.$$phase) $scope.$digest();

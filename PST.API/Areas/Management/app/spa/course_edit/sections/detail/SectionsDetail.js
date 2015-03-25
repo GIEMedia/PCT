@@ -32,6 +32,9 @@
                         $scope.questionsMaster = questions;
                         $scope.questions = ObjectUtil.clone(questions);
                     });
+                },
+                reset: function() {
+                    $scope.questions = ObjectUtil.clone($scope.questionsMaster);
                 }
             });
 

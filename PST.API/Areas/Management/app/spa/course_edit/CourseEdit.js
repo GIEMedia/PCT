@@ -50,7 +50,7 @@
                         }
                     } else {
                         event.preventDefault();
-                        saveCourse().then(function() {
+                        save().then(function() {
                             toParams.courseId = $scope.course.id;
                             $state.go(toState.name, toParams);
                         });
@@ -114,7 +114,7 @@
                 return $scope.cel.save && $scope.cel.needSaving != null && $scope.cel.needSaving();
             };
 
-            function saveCourse() {
+            function save() {
                 var defer = $q.defer();
                 $scope.ce.saving = true;
                 $scope.cel.save()
@@ -130,12 +130,18 @@
                 return defer.promise;
             }
 
-            $scope.saveCourse = function() {
-                saveCourse().then(function() {
+            $scope.save = function() {
+                save().then(function() {
                     if ($stateParams.courseId == "new") {
                         $state.go($state.current.name, {courseId: $scope.course.id});
                     }
                 });
+            };
+            $scope.reset = function() {
+                if (!confirm("Are you sure to reset your changes")) {
+                    return;
+                }
+                $scope.cel.reset();
             };
 
             $scope.prevPage = function() {

@@ -45,6 +45,9 @@
                 },
                 needSaving: function() {
                     return !ObjectUtil.equals($scope.cei.course, $scope.course);
+                },
+                reset: function() {
+                    $scope.cei.course = ObjectUtil.clone($scope.course);
                 }
             });
 
@@ -53,10 +56,6 @@
             };
 
             // States
-
-            $scope.getCat = function(catId) {
-                return Cols.find($scope.categories, function(cat) { return cat.id == catId;});
-            };
 
             CourseService.getList().success(function(list) {
 
