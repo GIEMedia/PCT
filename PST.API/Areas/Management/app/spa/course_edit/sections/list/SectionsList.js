@@ -22,12 +22,17 @@
             });
 
             $scope.inserting = {
-                title: null
+                title: null,
+                submitting: false
             };
             $scope.addSection = function() {
-                SectionService.upsert($scope.inserting, $scope.course.id).success(function(section) {
+                $scope.inserting.submitting = true;
+                SectionService.upsert({title: $scope.inserting.title}, $scope.course.id).success(function(section) {
                     $scope.sections.push(section);
                     $scope.inserting = {};
+                    $scope.inserting.submitting = false;
+                }).error(function() {
+                    $scope.inserting.submitting = false;
                 });
             };
             $scope.addSectionAndView = function() {
@@ -38,21 +43,14 @@
                 });
             };
 
-            $scope.deleteSection = function(section) {
-                if (!confirm("Are you sure to delete this section?")) {
-                    return;
-                }
-                SectionService.delete($scope.course.id, section.id).success(function() {
-                    Cols.remove(section, $scope.sections);
-                });
-            };
-            
+            $scope.updatingOrder = false;
             $scope.updateOrder = function(indice) {
                 var ids = [];
                 for (var i = 0; i < indice.length; i++) {
                     var index = indice[i];
                     ids.push($scope.sections[index].id);
                 }
+                $scope.updatingOrder = true;
                 SectionService.setOrder(ids, $scope.course.id).success(function() {
                     
                     var newSections = [];
@@ -61,6 +59,10 @@
                         newSections.push($scope.sections[index]);
                     }
                     $scope.sections = newSections;
+
+                    $scope.updatingOrder = false;
+                }).error(function() {
+                    $scope.updatingOrder = false;
                 });
             };
         }])
@@ -90,10 +92,27 @@
                             })
                         ;
                     };
+
+                    $scope.deleting = false;
+                    $scope.deleteSection = function() {
+                        if (!confirm("Are you sure to delete this section?")) {
+                            return;
+                        }
+
+                        $scope.deleting = true;
+                        SectionService.delete($scope.course.id, $scope.section.id).success(function() {
+                            $scope.deleting = false;
+                            Cols.remove($scope.section, $scope.sections);
+                        }).error(function() {
+                            $scope.deleting = false;
+                        });
+                    };
+
                     $scope.deleteDocument = function() {
                         if (!confirm("Are you sure to remove this section's document?")) {
                             return;
                         }
+
                         SectionService.deleteDocument($scope.course.id, $scope.section.id)
                             .success(function() {
                                 $scope.section.document = null;

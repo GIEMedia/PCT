@@ -36,6 +36,7 @@
                     } else {
                         watch = attrs.buttonLoading;
                     }
+
                     $scope.$watch(watch, function(value) {
                         if (value) {
                             changed = true;

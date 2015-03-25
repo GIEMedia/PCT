@@ -339,8 +339,9 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .table-section-list table tr:last-child td { color: #b3b3b3; }
 .table-section-list table tr:last-child:hover { background: #fff; }
 .table-section-list table tr:last-child:hover td:first-child { border: 0; border-left: 1px solid #d6e2e6; }
-.table-section-list table tr td .icons .fa,
-.table-section-list table tr td .icons .icon { font-size: 20px; line-height: 20px; color: #808080; margin-left: 20px; }
+.table-section-list table tr td .icons > span,
+.table-section-list table tr td .icons > .fa,
+.table-section-list table tr td .icons > .icon { font-size: 20px; line-height: 20px; color: #808080; margin-left: 20px; }
 .table-section-list table tr td .icons .fa:hover,
 .table-section-list table tr td .icons .icon:hover { color: #00aded; }
 .table-section-list table tr td .icons i:first-child { margin-left: 0; }
@@ -354,7 +355,8 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .table-section-list table tr td .btns .btn:first-child { margin-left: 0; }
 .table-section-list table tr td .fa-file-pdf-o { color: #4fcf6e; font-size: 18px; }
 .table-section-list table tr td .fa-minus-circle { color: rgba(255, 147, 30, .5); font-size: 20px; }
-.table-section-list table tr td span { display: block; font-size: 11px; }
+.table-section-list table tr td .view-document-info span { display: block; font-size: 11px; }
+.table-section-list table tr td .icons span { display: inline; }
 .table-section-list table tr td.view-document { min-height: 51px; }
 .table-section-list table tr td.view-document .view-document-link { display: none; }
 .table-section-list table tr td.view-document .view-document-link .fa { font-size: 20px; }

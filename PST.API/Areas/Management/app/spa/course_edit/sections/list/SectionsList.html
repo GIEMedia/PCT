@@ -18,6 +18,9 @@
                                 <i style="text-transform: none" ng-if="sections.length == 0">
                                     : No section(s) available
                                 </i>
+                                <i style="text-transform: none" ng-if="sections == null">
+                                    : Loading...
+                                </i>
                             </th>
                             <th class="text-center">Document</th>
                             <th># Questions</th>
@@ -40,10 +43,14 @@
 
                             <td>
                                 <div class="icons">
-                                    <a href="" class="fa fa-arrows sortable-handle"></a>
+                                    <span ng-class="{'sortable-handle': !updatingOrder}" button-loading="updatingOrder:small">
+                                        <i class="fa fa-arrows"></i>
+                                    </span>
                                     <a href="" class="icon icon-rename" ng-click="editName.editing = true"></a>
                                     <a ui-sref="^.detail({sectionId: section.id})" class="fa fa-pencil"></a>
-                                    <a href="" class="fa fa-trash-o" ng-click="deleteSection(section)"></a>
+                                    <span button-loading="deleting:small">
+                                        <a href="" class="fa fa-trash-o" ng-disabled="deleting" ng-click="deleteSection(section)"></a>
+                                    </span>
                                 </div><!-- /.icons -->
                             </td>
 
@@ -73,9 +80,9 @@
 
                             <td colspan="3">
                                 <div class="btns">
-                                    <a href="" class="btn btn-grey" ng-click="addSection()">Add</a>
+                                    <button class="btn btn-grey" ng-click="addSection()" ng-disabled="inserting.submitting || sections == null" button-loading="inserting.submitting">Add</button>
 
-                                    <a href="" class="btn btn-green" ng-click="addSectionAndView()">Add &amp; Build</a>
+                                    <a href="" class="btn btn-green" ng-click="addSectionAndView()" ng-disabled="inserting.submitting || sections == null" button-loading="inserting.submitting">Add &amp; Build</a>
                                 </div><!-- /.btns -->
                             </td>
                         </tr>
