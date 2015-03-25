@@ -118,7 +118,7 @@ button.mfp-close {
   width: 36px;
   height: 36px;
   line-height: 44px;
-  background: #9faeb5 url(images/ico-close.png) no-repeat center center;
+  background: #9faeb5 url(/app/css/images/ico-close.png) no-repeat center center;
   border-radius: 50%;
   position: absolute;
   right: -10px;

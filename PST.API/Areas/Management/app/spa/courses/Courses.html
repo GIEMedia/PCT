@@ -6,11 +6,11 @@
                 <div class="table table-courses-list">
                     <table>
                         <tr>
-                            <th width="54%" sort-by="title">
+                            <th width="51%" sort-by="title">
                                 Course Title
                             </th>
 
-                            <th width="12%">&nbsp;</th>
+                            <th width="15%">&nbsp;</th>
 
                             <th width="12%" sort-by="date_created">
                                 Created
@@ -55,7 +55,7 @@
                                 <span class="draft">Draft</span>
                             </td>
 
-                            <td class="text-center" ng-if="course.status == 1">{{:course.complete}}</td>
+                            <td class="text-center" ng-if="course.status == 1">{{::course.complete}}</td>
                         </tr>
 
                     </table>

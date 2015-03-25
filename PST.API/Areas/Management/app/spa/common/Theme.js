@@ -241,7 +241,7 @@
                 }
             };
         })
-    
+
 
         .factory("Hover", function() {
             return {
@@ -311,5 +311,4 @@
             };
         })
     ;
-
 })();
