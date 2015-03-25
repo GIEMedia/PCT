@@ -24,11 +24,19 @@
 
             $scope.reviewer = {};
 
+            $scope.ri = {
+                sending: false
+            };
+
+
             $scope.send = function() {
+                $scope.ri.sending = true;
                 CourseService.review($stateParams.courseId, $scope.reviewer).success(function() {
                     if ($scope.course.status == 0) {
                         $scope.course.status = 2;
                     }
+                }).then(function() {
+                    $scope.ri.sending = false;
                 });
             };
 
@@ -43,6 +51,7 @@
         .factory("ReviewService", function() {
             var _courseReviewTmpl;
             var _testReviewTmpl;
+
             return {
                 getReviewCourseUrl: function(courseId) {
                     return _courseReviewTmpl.replace("{courseId}", courseId);
@@ -51,7 +60,7 @@
                     return _testReviewTmpl.replace("{courseId}", courseId);
                 },
                 setReviewUrl: function(courseReviewTmpl, testReviewTmpl) {
-                    _courseReviewTmpl = courseReviewTmpl
+                    _courseReviewTmpl = courseReviewTmpl;
                     _testReviewTmpl = testReviewTmpl;
                 }
             };

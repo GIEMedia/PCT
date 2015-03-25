@@ -29,7 +29,7 @@
                             <td colspan="5" pct-no-record-message></td>
                         </tr>
 
-                        <tr ng-repeat="course in view.filteredList = ( list | filter:view.search | sorterFilter:sorter)" ng-class="{0: 'row-draft', 2: 'row-review'}[course.status]">
+                        <tr ng-repeat="course in view.filteredList = ( list | filter:view.search | sorterFilter:sorter)" course-row ng-class="{0: 'row-draft', 2: 'row-review'}[course.status]">
                             <td>
                                 {{course.title}}
                             </td>
@@ -38,7 +38,9 @@
                                 <div class="icons">
                                     <a ui-sref="courseEdit.information({courseId: course.id})" class="fa fa-pencil"></a>
                                     <a ui-sref="report.detail({courseId: course.id})" class="icon icon-test" ng-if="course.status == 1"></a>
-                                    <a href="" ng-click="remove(course)" class="fa fa-trash-o"></a>
+                                    <a href="" ng-click="remove()" button-loading="removing:small">
+                                        <i class="fa fa-trash-o"></i>
+                                    </a>
                                 </div><!-- /.icons -->
                             </td>
 

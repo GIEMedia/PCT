@@ -19,46 +19,47 @@
                 </div>
             </div>
 
-            <div class="custom-table">
+            <form name="form">
+                <div class="custom-table">
 
-                <div class="table-row">
-                    <div class="table-col col-size-1">
-                        <h3>Reviewer's Name</h3>
-                    </div><!-- /.table-col -->
+                    <div class="table-row">
+                        <div class="table-col col-size-1">
+                            <h3>Reviewer's Name</h3>
+                        </div><!-- /.table-col -->
 
-                    <div class="table-col col-size-4">
-                        <input type="text" class="field" ng-model="reviewer.name" placeholder="Reviewer's Name">
-                    </div><!-- /.table-col -->
-                </div><!-- /.table-row -->
+                        <div class="table-col col-size-4">
+                            <input type="text" class="field" ng-model="reviewer.name" required placeholder="Reviewer's Name">
+                        </div><!-- /.table-col -->
+                    </div><!-- /.table-row -->
 
-                <div class="table-row">
-                    <div class="table-col col-size-1">
-                        <h3>Reviewer's State</h3>
-                    </div><!-- /.table-col -->
+                    <div class="table-row">
+                        <div class="table-col col-size-1">
+                            <h3>Reviewer's State</h3>
+                        </div><!-- /.table-col -->
 
-                    <div class="table-col col-size-4">
-                        <select name="field-select" class="select" pct-model="reviewer.state" pct-options="state.code as state.name for state in states">
-                        </select>
-                    </div><!-- /.table-col -->
-                </div><!-- /.table-row -->
+                        <div class="table-col col-size-4">
+                            <select name="field-select" class="select" pct-model="reviewer.state" pct-options="state.code as state.name for state in states">
+                            </select>
+                        </div><!-- /.table-col -->
+                    </div><!-- /.table-row -->
 
-                <div class="table-row">
-                    <div class="table-col col-size-1">
-                        <h3>Reviewer's Email</h3>
-                    </div><!-- /.table-col -->
+                    <div class="table-row">
+                        <div class="table-col col-size-1">
+                            <h3>Reviewer's Email</h3>
+                        </div><!-- /.table-col -->
 
-                    <div class="table-col col-size-2">
-                        <input type="text" class="field" ng-model="reviewer.email" placeholder="Reviewer's Email">
-                    </div><!-- /.table-col -->
+                        <div class="table-col col-size-2">
+                            <input type="email" class="field" ng-model="reviewer.email" required placeholder="Reviewer's Email">
+                        </div><!-- /.table-col -->
 
-                    <div class="table-col col-size-3">
-                        <a href="" ng-click="send()" class="btn btn-green btn-icon-right">
-                            Send
-                        </a>
-                    </div><!-- /.table-col -->
-                </div><!-- /.table-row -->
-            </div><!-- /.custom-table -->
-
+                        <div class="table-col col-size-3">
+                            <button ng-click="send()" class="btn btn-green btn-icon-right" button-loading="ri.sending" ng-disabled="form.$invalid || ri.sending" style="padding-left: 13px; padding-right: 13px">
+                                Send
+                            </button>
+                        </div><!-- /.table-col -->
+                    </div><!-- /.table-row -->
+                </div><!-- /.custom-table -->
+            </form>
         </div><!-- /.section-body-inner -->
     </div><!-- /.shell -->
 </div><!-- /.section-body -->
