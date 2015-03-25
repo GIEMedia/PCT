@@ -51,6 +51,7 @@
         .factory("ReviewService", function() {
             var _courseReviewTmpl;
             var _testReviewTmpl;
+
             return {
                 getReviewCourseUrl: function(courseId) {
                     return _courseReviewTmpl.replace("{courseId}", courseId);
@@ -59,7 +60,7 @@
                     return _testReviewTmpl.replace("{courseId}", courseId);
                 },
                 setReviewUrl: function(courseReviewTmpl, testReviewTmpl) {
-                    _courseReviewTmpl = courseReviewTmpl
+                    _courseReviewTmpl = courseReviewTmpl;
                     _testReviewTmpl = testReviewTmpl;
                 }
             };

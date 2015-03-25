@@ -24,6 +24,9 @@ StringUtil.isNotBlank = function(val) {
 StringUtil.getLastWord = function(str) {
     return /\b\w+$/.exec(str)[0];
 };
+StringUtil.getFirstWord = function(str) {
+    return /^\w+\b/.exec(str)[0];
+};
 
 StringUtil.trim = function(val) {
     if (!val) {

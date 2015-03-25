@@ -34,13 +34,25 @@
             });
 
             $scope.sorter = Sorters.create();
-            $scope.remove = function(course) {
-                if (!confirm("Are you sure to remove this course?")) {
-                    return;
+        }])
+
+        .directive("courseRow", ["CourseService", function(CourseService) {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+
+                    $scope.remove = function() {
+                        if (!confirm("Are you sure to remove this course?")) {
+                            return;
+                        }
+                        $scope.removing = true;
+                        CourseService.delete($scope.course).success(function() {
+                            Cols.remove($scope.course, $scope.list);
+                        }).error(function() {
+                            $scope.removing = false;
+                        });
+                    };
                 }
-                CourseService.delete(course).success(function() {
-                    Cols.remove(course, $scope.list);
-                });
             };
         }])
     ;
