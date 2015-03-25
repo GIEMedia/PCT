@@ -31,7 +31,7 @@
 
                         <tr ng-repeat="course in view.filteredList = ( list | filter:view.search | sorterFilter:sorter)" course-row ng-class="{0: 'row-draft', 2: 'row-review'}[course.status]">
                             <td>
-                                {{course.title}}
+                                {{::course.title}}
                             </td>
 
                             <td>
@@ -44,18 +44,18 @@
                                 </div><!-- /.icons -->
                             </td>
 
-                            <td>{{course.date_created | date:'M/d/yyyy'}}</td>
+                            <td>{{::course.date_created | date:'M/d/yyyy'}}</td>
 
-                            <td class="text-center" ng-if="course.status == 1">{{course.open}}</td>
+                            <td class="text-center" ng-if="course.status == 1">{{::course.open}}</td>
 
-                            <td ng-if="course.status == 2" class="text-center" colspan="2">
+                            <td ng-if="::course.status == 2" class="text-center" colspan="2">
                                 <span class="review">In Review</span>
                             </td>
-                            <td ng-if="course.status == 0" class="text-center" colspan="2">
+                            <td ng-if="::course.status == 0" class="text-center" colspan="2">
                                 <span class="draft">Draft</span>
                             </td>
 
-                            <td class="text-center" ng-if="course.status == 1">{{course.complete}}</td>
+                            <td class="text-center" ng-if="course.status == 1">{{:course.complete}}</td>
                         </tr>
 
                     </table>
