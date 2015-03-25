@@ -814,3 +814,7 @@ button {
 a[disabled], button[disabled] {
 	cursor: not-allowed;
 }
+
+.btn.btn-green[disabled] {
+    background-color: #B9F0C6 !important;
+}

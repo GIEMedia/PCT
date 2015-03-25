@@ -24,11 +24,19 @@
 
             $scope.reviewer = {};
 
+            $scope.ri = {
+                sending: false
+            };
+
+
             $scope.send = function() {
+                $scope.ri.sending = true;
                 CourseService.review($stateParams.courseId, $scope.reviewer).success(function() {
                     if ($scope.course.status == 0) {
                         $scope.course.status = 2;
                     }
+                }).then(function() {
+                    $scope.ri.sending = false;
                 });
             };
 
