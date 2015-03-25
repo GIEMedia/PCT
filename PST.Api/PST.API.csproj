@@ -433,10 +433,8 @@
     <Content Include="Areas\Management\app\css\fancybox_overlay.png" />
     <Content Include="Areas\Management\app\css\fancybox_sprite%402x.png" />
     <Content Include="Areas\Management\app\css\fancybox_sprite.png" />
-    <Content Include="Areas\Management\app\css\font-awesome.min.css" />
-    <Content Include="Areas\Management\app\css\fonts\fontawesome-webfont.svg" />
     <Content Include="Areas\Management\app\css\fonts\icomoon.svg" />
-    <Content Include="Areas\Management\app\css\icomoon.css" />
+    <Content Include="Areas\Management\app\css\fonts\icomoon.css" />
     <Content Include="Areas\Management\app\css\images\arrow-circle-down-blue.png" />
     <Content Include="Areas\Management\app\css\images\arrow-circle-down.png" />
     <Content Include="Areas\Management\app\css\images\arrow-circle-up.png" />
@@ -615,22 +613,20 @@
     <Content Include="Areas\Help\Views\Help\DisplayTemplates\Type.cshtml" />
     <Content Include="Areas\Help\Views\Help\Login.cshtml" />
     <Content Include="Areas\Help\AuthorizedUsers.json.protected" />
-    <Content Include="Areas\Management\app\css\fonts\fontawesome-webfont.eot" />
-    <Content Include="Areas\Management\app\css\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Areas\Management\app\css\fonts\fontawesome-webfont.woff" />
-    <Content Include="Areas\Management\app\css\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Areas\Management\app\css\fonts\FontAwesome.otf" />
     <Content Include="Areas\Management\app\css\fonts\icomoon.eot" />
     <Content Include="Areas\Management\app\css\fonts\icomoon.ttf" />
     <Content Include="Areas\Management\app\css\fonts\icomoon.woff" />
     <Content Include="Areas\Management\app\css\images\icons\icons.ai" />
     <Content Include="Areas\Management\Views\_ViewStart.cshtml" />
+    <Content Include="app\css\fonts\fontawesome-webfont.woff2" />
     <None Include="packages.config" />
     <Content Include="App_Data\PST.Api.XML" />
     <Content Include="Content\Certificates\Template\certificate_template.jpg" />
     <Content Include="Content\Documents\_placeholder.txt" />
     <Content Include="Content\Images\_placeholder.txt" />
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />

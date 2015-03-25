@@ -216,7 +216,7 @@
 }
 
 .selectboxit-default-arrow {
-  background: url(images/select-arrows.png) no-repeat 0 0;
+  background: url(/Areas/Management/app/css/images/select-arrows.png) no-repeat 0 0;
   width: 6px;
   height: 18px; 
 }

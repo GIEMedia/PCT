@@ -26,9 +26,9 @@ namespace PST.Api
 
             var cssManagement = new StyleBundle("~/bundles/css/management.css");
             cssManagement.Include(
+                "~/app/css/fonts/font-awesome.min.css",
+                "~/Areas/Management/app/css/fonts/icomoon.css",
                 "~/Areas/Management/app/css/selectboxit.css",
-                "~/Areas/Management/app/css/font-awesome.min.css",
-                "~/Areas/Management/app/css/icomoon.css",
                 "~/Areas/Management/app/css/jquery.fancybox.css",
                 "~/Areas/Management/app/css/style.css"
                 );

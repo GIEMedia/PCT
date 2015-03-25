@@ -66,8 +66,8 @@
 	\* ================================================================ */
 	
 	.ico-profile { width: 20px; height: 22px; background-size: cover; }
-	.ico-new-courses { background-image: url(images/ico-new-courses-mobile.png); width: 18px; height: 24px; }
-	.ico-open-courses { background-image: url(images/ico-open-courses-mobile.png); width: 23px; height: 22px; }
+	.ico-new-courses { background-image: url(/app/css/images/ico-new-courses-mobile.png); width: 18px; height: 24px; }
+	.ico-open-courses { background-image: url(/app/css/images/ico-open-courses-mobile.png); width: 23px; height: 22px; }
 
 	/* ================================================================ *\
 		#Buttons
@@ -95,11 +95,11 @@
 	\* ================================================================ */
 	
 	.header { position: relative; border: 0; background: #404040; height: 57px; box-shadow: 0 1px 10px rgba(0,0,0, 0.75); }
-	.logo { background-image: url(images/logo-mobile.png); width: 36px; height: 19px; margin: 19px 0 0 56px; }
+	.logo { background-image: url(/app/css/images/logo-mobile.png); width: 36px; height: 19px; margin: 19px 0 0 56px; }
 
     .login-container { display: none; }
 	.nav-container { position: absolute; top: 19px; left: 17px; margin: 0; }
-	.nav-toggle { white-space: nowrap; text-indent: 150%; overflow: hidden; background: url(images/ico-hamburger.png) no-repeat 0 0; width: 22px; height: 19px; opacity: 0.5; padding: 0; }
+	.nav-toggle { white-space: nowrap; text-indent: 150%; overflow: hidden; background: url(/app/css/images/ico-hamburger.png) no-repeat 0 0; width: 22px; height: 19px; opacity: 0.5; padding: 0; }
 
 	.nav { right: auto; left: -8px; }
 	.nav:before { left: 11px !important; right: auto !important; }
@@ -191,9 +191,9 @@
 	.course-switch { display: block; float: right; padding: 9px 12px 0 0; }
 	.course-switch [class^="course-switch"] { float: left; background-repeat: no-repeat; text-indent: 100%; overflow: hidden; white-space: nowrap; }
 	
-	.course-switch-questions { width: 18px; height: 18px; background-image: url(images/ico-questions.png); background-position: 0 -19px; }
-	.course-switch-arrows { width: 26px; height: 18px; background-image: url(images/ico-switch.png); margin: 0 5px; background-position: 0 0; }
-	.course-switch-document { width: 17px; height: 20px; background-image: url(images/ico-viewer.png); background-position: 0 0; }
+	.course-switch-questions { width: 18px; height: 18px; background-image: url(/app/css/images/ico-questions.png); background-position: 0 -19px; }
+	.course-switch-arrows { width: 26px; height: 18px; background-image: url(/app/css/images/ico-switch.png); margin: 0 5px; background-position: 0 0; }
+	.course-switch-document { width: 17px; height: 20px; background-image: url(/app/css/images/ico-viewer.png); background-position: 0 0; }
 
 	.course-switch-questions,
 	.course-switch-arrows { margin-top: 1px; }
@@ -280,7 +280,7 @@
 	.search { max-width: none; padding: 20px 0 10px; margin: 0 25px; }
 	.search-field { height: 37px; font-size: 14px; line-height: 38px; padding-left: 36px; }
     .search-field input { font-size: 14px; border: none; width: 90%; }
-	.search-field:before { top: 11px; left: 11px; background-image: url(images/ico-search-field-mobile.png); width: 14px; height: 15px; }
+	.search-field:before { top: 11px; left: 11px; background-image: url(/app/css/images/ico-search-field-mobile.png); width: 14px; height: 15px; }
 	.search-field:after { top: 15px; right: 11px; border-width: 11px 9px 0; }
     .search-expanded .search-field:after { border-width: 0 9px 11px; top: 13px; }
 
@@ -294,7 +294,7 @@
 	.search-section h5 { padding-bottom: 5px; }
 	.search-section li a { padding: 4px 7px 5px; }
 
-	.search-ico-rats { background-image: url(images/ico-rats-mobile.png); width: 23px; height: 23px; margin-right: 10px; top: 0; }
+	.search-ico-rats { background-image: url(/app/css/images/ico-rats-mobile.png); width: 23px; height: 23px; margin-right: 10px; top: 0; }
 
 	.search-expanded .search-field { border-radius: 5px 5px 0 0; }
 

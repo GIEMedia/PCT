@@ -1,10 +1,10 @@
 @font-face {
 	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot?-ef658l');
-	src:url('fonts/icomoon.eot?#iefix-ef658l') format('embedded-opentype'),
-		url('fonts/icomoon.woff?-ef658l') format('woff'),
-		url('fonts/icomoon.ttf?-ef658l') format('truetype'),
-		url('fonts/icomoon.svg?-ef658l#icomoon') format('svg');
+	src:url('/Areas/Management/app/css/fonts/icomoon.eot?-ef658l');
+	src:url('/Areas/Management/app/css/fonts/icomoon.eot?#iefix-ef658l') format('embedded-opentype'),
+		url('/Areas/Management/app/css/fonts/icomoon.woff?-ef658l') format('woff'),
+		url('/Areas/Management/app/css/fonts/icomoon.ttf?-ef658l') format('truetype'),
+		url('/Areas/Management/app/css/fonts/icomoon.svg?-ef658l#icomoon') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
