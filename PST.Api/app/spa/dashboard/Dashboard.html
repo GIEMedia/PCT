@@ -1,7 +1,7 @@
 
 <div class="container is-scrollable">
     <div class="intro intro-logged">
-        <h3 class="intro-title">Welcome back, <strong>{{User.firstName}}</strong>!</h3><!-- /.intro-title -->
+        <h3 class="intro-title">Welcome back, <strong ng-bind="User.firstName"></strong>!</h3><!-- /.intro-title -->
         <div class="search">
             <div class="search-field" allow-search="courseStructure!=null">
                 <input placeholder="{{courseStructure!=null ? 'Find a course': 'Loading courses…'}}" ng-model="view.search" search-input />
@@ -109,7 +109,7 @@
 
                         <small class="bull">&bull;</small>
 
-                        <small class="count">{{openCourses.length}}</small>
+                        <small class="count" ng-bind="openCourses.length"></small>
                     </h3><!-- /.section-title -->
                 </div><!-- /.section-head -->
 
