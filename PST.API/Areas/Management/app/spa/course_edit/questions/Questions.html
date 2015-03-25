@@ -9,11 +9,11 @@
         </div><!-- /.table-col -->
     </div><!-- /.table-row-head -->
 
-    <div class="table-row" ng-if="questions.length == 0" >
+    <div class="table-row" pct-no-record="{list: questions, name: 'question(s)'}">
         <div class="table-col col-size-1">
         </div><!-- /.table-col -->
-        <div class="table-col col-size-2 no-record">
-            No question(s) available
+        <div class="table-col col-size-2" >
+            <h2 class="question" pct-no-record-message></h2>
         </div><!-- /.table-col -->
     </div>
     

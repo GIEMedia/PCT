@@ -125,6 +125,7 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .btn:hover { text-decoration: none; color: #222; }
 
 .btn-grey { background-color: #9dafb5 !important; }
+.btn.btn-grey[disabled] { background-color: #C1C7C9 !important; }
 .btn-grey.hovered { background-color: #bccfd6 !important; }
 .btn-green { background-color: #4fcf6e !important; }
 .btn-green.hovered { background-color: #7af097 !important; }
@@ -817,4 +818,9 @@ a[disabled], button[disabled] {
 
 .btn.btn-green[disabled] {
     background-color: #B9F0C6 !important;
+}
+
+form.ng-dirty input.ng-invalid {
+    /*display: none;*/
+    border-bottom: 1px dashed red;
 }
