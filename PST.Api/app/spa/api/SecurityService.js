@@ -121,7 +121,19 @@
             });
 
             return {
-                login: function(data) {
+                login: function(username, password, remember) {
+                    var data = {
+                        grant_type: "password",
+                        username: username,
+                        password: password
+                    };
+
+                    if (remember) {
+                        localStorage.remembered_login = username;
+                    } else {
+                        localStorage.removeItem("remembered_login");
+                    }
+
                     return Api.postForm("api/account/login", data)
                             .success(function(resp) {
                                 sessionStorage.access_token = resp.access_token;

@@ -694,9 +694,12 @@ a.form-label { color: #404040 !important; }
 .fa.fa-download { color: #e97c00; }
 .fa.fa-expand { color: #5fd771; }
 
-input.btn[disabled] {
+.btn[disabled] {
 	background: #88DDFC;
 	cursor: not-allowed;
+}
+.btn.btn-green[disabled] {
+	background: #99CCA1;
 }
 button[disabled], button[disabled]:hover {
 	background: #88DDFC;
