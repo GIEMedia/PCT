@@ -15,6 +15,7 @@ namespace PST.Services.ContainerProviders
         {
             container
                 .RegisterType<IAutoMaps, AutoMaps>(new ContainerControlledLifetimeManager())
+                .RegisterType<IEmailGenerationService, EmailGenerationService>()
                 .RegisterType<UserManager<ApplicationUser>>(new PerRequestLifetimeManager(),
                     new InjectionFactory(c => new UserManager<ApplicationUser>(c.Resolve<ApplicationUserStore>())
                     {

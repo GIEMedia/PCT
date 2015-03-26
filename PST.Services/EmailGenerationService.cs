@@ -45,7 +45,8 @@ namespace PST.Services
                 HttpUtility.UrlEncode(user.UserName), HttpUtility.UrlEncode(this.GeneratePasswordResetToken(user)));
             forgot.Name = user.FirstName;
 
-            return EmailTemplateProvider.Apply(forgot, "ForgotPassword" + (textOnly ? ".TextOnly" : ""));
+            //return EmailTemplateProvider.Apply(forgot, "ForgotPassword" + (textOnly ? ".TextOnly" : ""));
+            return forgot.NewPasswordUrl;
         }
 
         protected override IdentityResult SendForgotPasswordEmail(ApplicationUser user, bool management)

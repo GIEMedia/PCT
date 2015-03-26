@@ -234,6 +234,7 @@ a.form-label { color: #404040 !important; }
 .form-cols { margin: 0 -8px; }
 .form-col { float: left; box-sizing: border-box; padding: 0 8px 8px; }
 .form-col-1of2 { width: 50%; }
+.form-col-full { width: 100%; }
 
 .form-controls-actions { float: right; }
 .form-controls-actions ~ .form-cols-outer { padding-right: 70px; }

@@ -35,9 +35,9 @@
                         })
                         .error(function() {
                             $scope.sending = false;
+                            $scope.sent = true;
                         })
                     ;
-
                 };
             } else {
                 $scope.sent = false;
@@ -56,9 +56,11 @@
                         .success(function() {
                             $scope.sending = false;
                             $scope.sent = true;
+                            $state.go('landing');
                         })
                         .error(function() {
                             $scope.sending = false;
+                            $scope.error = true;
                         })
                     ;
                 };

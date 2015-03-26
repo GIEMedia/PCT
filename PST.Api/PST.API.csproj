@@ -358,7 +358,6 @@
     <Content Include="app\js\angular_1.3.1\angular.js" />
     <Content Include="app\js\angular_1.3.1\angular.min.js" />
     <Content Include="app\js\common-utils.js" />
-    <Content Include="app\js\functions.js" />
     <Content Include="app\js\jquery-1.11.2.min.js" />
     <Content Include="app\js\jquery.fs.selecter.min.js" />
     <Content Include="app\js\jquery.magnific-popup.min.js" />
@@ -372,6 +371,7 @@
     <Content Include="app\spa\api\CertificateData.js" />
     <Content Include="app\spa\api\CertificateService.js" />
     <Content Include="app\spa\api\CourseService.js" />
+    <Content Include="app\spa\api\ForgotpasswordService.js" />
     <Content Include="app\spa\api\ManagerService.js" />
     <Content Include="app\spa\api\SecurityService.js" />
     <Content Include="app\spa\api\StateLicensureService.js" />
@@ -396,6 +396,8 @@
     <Content Include="app\spa\course\eOptions.html" />
     <Content Include="app\spa\dashboard\Dashboard.html" />
     <Content Include="app\spa\dashboard\Dashboard.js" />
+    <Content Include="app\spa\forgotpassword\Forgotpassword.html" />
+    <Content Include="app\spa\forgotpassword\Forgotpassword.js" />
     <Content Include="app\spa\landing\eIntroduction.html" />
     <Content Include="app\spa\landing\Landing.html" />
     <Content Include="app\spa\landing\Landing.js" />
@@ -632,6 +634,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
+    <None Include="Properties\PublishProfiles\Staging - Live.pubxml" />
     <None Include="Properties\PublishProfiles\Staging.pubxml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>

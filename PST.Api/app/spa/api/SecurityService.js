@@ -23,7 +23,7 @@
                             return;
                         }
                     }
-                    alert("Unhandled api error:\nUrl: " + config.url + "\nResponse: " + status + "\n" + JSON.stringify(data));
+                    //alert("Unhandled api error:\nUrl: " + config.url + "\nResponse: " + status + "\n" + JSON.stringify(data));
                 });
 
                 return httpPromise;

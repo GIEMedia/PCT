@@ -30,16 +30,12 @@
             'pct.elearning.profile',
             'pct.elearning.certificates',
             'ui.router',
-            //'angularMoment',
             'ngResource'
     ])
 
         .run(["Api", function (Api) {
-            // For development
-//            Api.setHost("localhost:53130");
-            Api.setHost("gie-test.prototype1.io");
+            Api.setHost(appHost); // set in _layout.cshtml
         }])
-
 
         .run(["$rootScope", "$state", "$stateParams", function ($rootScope, $state, $stateParams) {
             $rootScope.$state = $state;

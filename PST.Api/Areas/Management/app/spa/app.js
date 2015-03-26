@@ -24,13 +24,11 @@
     ])
 
         .run(["Api", "ReviewService", function (Api, ReviewService) {
-            // For development
-//            Api.setHost("localhost:53130");
-            Api.setHost("gie-test.prototype1.io");
+            Api.setHost(appHost); // set in _layout.cshtml
 
             ReviewService.setReviewUrl(
-                "http://localhost:1001/#/course/{courseId}/preview",
-                "http://localhost:1001/#/test/{courseId}/preview"
+                "//" + appHost + "/#/course/{courseId}/preview",
+                "//" + appHost + "/#/test/{courseId}/preview"
             );
         }])
     ;

@@ -16,6 +16,21 @@ namespace PST.Api
 {
     public class MvcApplication : System.Web.HttpApplication
     {
+        private static string _websiteHost;
+
+        public static string WebsiteHost
+        {
+            get
+            {
+                if (_websiteHost == null)
+                {
+                    var baseUrl = new Uri(ConfigurationManager.AppSettings["BaseUrl"]);
+                    _websiteHost = baseUrl.Host + (!baseUrl.Port.In(80, 443) ? ":" + baseUrl.Port : "");
+                }
+                return _websiteHost;
+            }
+        }
+
         protected string ControllerNamespace;
 
         private readonly string _connectionString = ConfigurationManager.ConnectionStrings["PST"].ConnectionString;
