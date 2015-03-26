@@ -13,6 +13,7 @@
             'pct.elearning.api.Security',
 
             'pct.elearning.api.Certificate',
+            'pct.elearning.api.ForgotpasswordService',
             'pct.elearning.api.Course',
             'pct.elearning.api.Test',
             'pct.elearning.api.State',
@@ -25,6 +26,7 @@
             'pct.elearning.signup',
             'pct.elearning.userInfo',
             'pct.elearning.dashboard',
+            'pct.elearning.forgotpassword',
             'pct.elearning.profile',
             'pct.elearning.certificates',
             'ui.router',

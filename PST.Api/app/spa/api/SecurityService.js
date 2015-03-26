@@ -73,6 +73,11 @@
         }])
 
         .factory("SecurityService", ["$http", "$rootScope", "$timeout", "Api", "User", "$state", function($http, $rootScope, $timeout, Api, User, $state) {
+            var loginState = "landing";
+            function allowUnauthen(state) {
+                return state.name == "landing" || state.name == "forgotpassword";
+            }
+
             var fetchUser = function() {
                 return Api.get("api/account")
                     .success(function(account) {
@@ -83,7 +88,7 @@
                     .onError(function(error, status) {
                         if (status == 401) {
                             sessionStorage.access_token = null;
-                            $state.go("landing");
+                            $state.go(loginState);
                             return true;
                         } else {
                             return false;
@@ -93,7 +98,7 @@
 
             if (sessionStorage.access_token != null && sessionStorage.access_token != "null") {
                 fetchUser().success(function() {
-                    if ($state.current.name == "landing") {
+                    if ($state.current.name == loginState) {
                         $state.go("dashboard");
                     }
                 });
@@ -102,19 +107,15 @@
             var desiredState = null;
             $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
                 if (sessionStorage.access_token == null) {
-                    if (fromState.name == "landing") {
-                        event.preventDefault();
+                    if (allowUnauthen(toState)) {
+                        ;
                     } else {
-                        if (toState.name == "landing") {
-                            ;
-                        } else {
-                            event.preventDefault();
-                            desiredState = {
-                                state: toState,
-                                params: toParams
-                            };
-                            $state.go("landing");
-                        }
+                        event.preventDefault();
+                        desiredState = {
+                            state: toState,
+                            params: toParams
+                        };
+                        $state.go(loginState);
                     }
                 }
             });
@@ -140,7 +141,7 @@
                         User.loggedIn = false;
                         User.firstName = null;
                         User.fullName = null;
-                        $state.go("landing");
+                        $state.go(loginState);
                     });
                 }
             };

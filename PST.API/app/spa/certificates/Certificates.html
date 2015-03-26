@@ -7,7 +7,7 @@
     <div class="cols">
         <div class="col col-full">
             <div class="form-certificates user-forms">
-                <form action="/index-logged-no-open.html" method="post">
+                <form>
                     <div class="form-head">
                         <h3 class="title-underlined">
                             <i class="fa fa-certificate"></i>
@@ -27,7 +27,7 @@
                                 </a><!-- /.courses-item-image -->
                                 <div class="courses-item-content">
                                     <h4 class="courses-item-title">
-                                        <a href="#">{{cert.course_name}}</a>
+                                        <a href="">{{cert.course_name}}</a>
                                     </h4>
                                     <p class="courses-item-meta">Passed: {{cert.earned | date:'MM/dd/yy'}}</p><!-- /.courses-item-meta -->
                                     <ul class="courses-item-bars">
@@ -49,8 +49,8 @@
                                 <span class="courses-item-action-send">
                                     <span>
                                         <a href="{{cert.pdf_url}}" target="_blank"><i class="fa fa-download"></i></a>
-                                        <a href="#s">Email<br />State</a>
-                                        <a href="#m">Email<br />Manager</a>
+                                        <a href="">Email<br />State</a>
+                                        <a href="">Email<br />Manager</a>
                                     </span>
                                 </span><!-- /.courses-item-action-send -->
 
