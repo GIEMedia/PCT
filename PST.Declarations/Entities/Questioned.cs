@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using Prototype1.Foundation.Data;
+using Prototype1.Foundation.Interfaces;
 
 namespace PST.Declarations.Entities
 {
     [Serializable]
-    public abstract class Questioned : EntityBase
+    public abstract class Questioned : EntityBase, IPermanentRecord
     {
         public Questioned()
         {
@@ -20,5 +21,6 @@ namespace PST.Declarations.Entities
         public abstract QuestionedProgress CreateAndAddProgress(CourseProgress courseProgress);
 
         public abstract QuestionedProgress GetProgress(CourseProgress courseProgress);
+        public virtual bool Deleted { get; set; }
     }
 }

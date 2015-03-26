@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Prototype1.Foundation;
 using Prototype1.Foundation.Data;
+using Prototype1.Foundation.Interfaces;
 using PST.Declarations.Models;
 using PST.Declarations.Models.Management;
 
 namespace PST.Declarations.Entities
 {
     [Serializable]
-    public class Course : EntityBase
+    public class Course : EntityBase, IPermanentRecord
     {
         public Course()
         {
@@ -121,5 +121,7 @@ namespace PST.Declarations.Entities
                 state_ceus = course.StateCEUs.Select(s => (m_state_ceu) s).ToArray()
             };
         }
+
+        public virtual bool Deleted { get; set; }
     }
 }

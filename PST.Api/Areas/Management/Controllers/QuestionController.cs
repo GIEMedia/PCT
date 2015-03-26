@@ -162,13 +162,8 @@ namespace PST.Api.Areas.Management.Controllers
 
                 return section;
             }
-            else
-            {
-                if (course.Test == null)
-                    throw new NullReferenceException("Course does not contain test");
-                return course.Test;
-            }
 
+            return course.Test ?? (course.Test = new Test());
         }
     }
 }
