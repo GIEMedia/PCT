@@ -59,6 +59,9 @@
                     var modalScope = $rootScope.$new(true);
                     modalScope.title = title;
                     modalScope.placeholder = prompt;
+                    modalScope.action = function(text) {
+                        defer.resolve(text);
+                    };
                     modalScope.$on('$destroy', function () {
                     });
                     open(modalScope, {
@@ -79,7 +82,7 @@
             };
             $scope.close = $modalInstance.close;
             $scope.save = function() {
-                defer.resolve($scope.pop.text);
+                $scope.action($scope.pop.text);
                 $modalInstance.close();
             };
         }])
