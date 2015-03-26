@@ -36,7 +36,7 @@
 
                                 <ul ng-repeat-end>
                                     <li ng-repeat="course in courseCat.courses">
-                                        <a href="" ng-click="loadCourse(course)">{{course.title}}</a>
+                                        <a href="" ng-click="loadCourse(course)" ng-bind="course.title"></a>
                                     </li>
                                 </ul>
                             </div><!-- /.section-body -->
@@ -80,7 +80,7 @@
 
                             <div class="courses-item-content">
                                 <h4 class="courses-item-title">
-                                    <a href="#">{{course.title}}</a>
+                                    <a href="#" ng-bind="course.title"></a>
                                 </h4>
 
                                 <p class="courses-item-meta">{{course.description}}</p><!-- /.courses-item-meta -->
@@ -122,7 +122,7 @@
 
                             <div class="courses-item-content">
                                 <h4 class="courses-item-title">
-                                    <a href="#">{{course.title}}</a>
+                                    <a href="#" ng-bind="course.title"></a>
                                 </h4>
 
                                 <p class="courses-item-meta">Last Activity: <span am-time-ago="course.last_activity"></span></p><!-- /.courses-item-meta -->
