@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Prototype1.Foundation;
 using Prototype1.Foundation.Data;
 using Prototype1.Foundation.Interfaces;
 using PST.Declarations.Models;
@@ -124,9 +125,56 @@ namespace PST.Declarations.Entities
 
         public virtual bool Deleted { get; set; }
 
-        public bool Validate()
+        public virtual IEnumerable<m_validation_error> Validate()
         {
-            
+            if(Sections.Count == 0)
+                yield return new m_validation_error(m_validation_error.Severity.Error, null, null, null, "This course contains no sections.");
+
+            if (Test == null)
+                yield return new m_validation_error(m_validation_error.Severity.Error, null, null, null, "This course does not have a test.");
+
+            foreach (var s in Sections.Where(s => s.Document == null || s.Document.PDFUrl.IsNullOrEmpty()))
+                yield return new m_validation_error(m_validation_error.Severity.Warning, s.ID, null, null, "The section '{0}' has no document.", s.Title);
+
+            foreach (var s in Sections.Where(s => s.Questions == null || s.Questions.Count == 0))
+                yield return new m_validation_error(m_validation_error.Severity.Error, s.ID, null, true, "The section '{0}' has no questions.", s.Title);
+            if (Test != null && (Test.Questions == null || Test.Questions.Count == 0))
+                yield return new m_validation_error(m_validation_error.Severity.Error, null, null, true, "The test has no questions.");
+
+            foreach (var s in Sections.Where(s => s.Questions != null))
+                foreach (var q in s.Questions.Where(q => q.Options == null || q.Options.Count == 0))
+                    yield return new m_validation_error(m_validation_error.Severity.Error, s.ID, q.ID, null, "The question '{0}' of section '{1}' has no answers.", q.QuestionText, s.Title);
+            if (Test != null && Test.Questions != null)
+                foreach (var q in Test.Questions.Where(q => q.Options == null || q.Options.Count == 0))
+                    yield return new m_validation_error(m_validation_error.Severity.Error, null, q.ID, null, "The question '{0}' of the test has no answers.", q.QuestionText);
+
+            foreach (var s in Sections.Where(s => s.Questions != null))
+                foreach (var q in s.Questions.Where(q => q.Options != null && q.Options.All(o => !o.Correct)))
+                    yield return new m_validation_error(m_validation_error.Severity.Error, s.ID, q.ID, null, "The question '{0}' of section '{1}' has no answers marked as correct.", q.QuestionText, s.Title);
+            if (Test != null && Test.Questions != null)
+                foreach (var q in Test.Questions.Where(q => q.Options != null && q.Options.All(o => !o.Correct)))
+                    yield return new m_validation_error(m_validation_error.Severity.Error, null, q.ID, null, "The question '{0}' of the test has no answers marked as correct.", q.QuestionText);
+
+            foreach (var s in Sections.Where(s => s.Questions != null))
+                foreach (var q in s.Questions.Where(q => q.CorrectResponseHeading.IsNullOrEmpty() || q.CorrectResponseText.IsNullOrEmpty()))
+                    yield return new m_validation_error(m_validation_error.Severity.Warning, s.ID, q.ID, null, "The question '{0}' of section '{1}' has correct response heading and/or text.", q.QuestionText, s.Title);
+            if (Test != null && Test.Questions != null)
+                foreach (var q in Test.Questions.Where(q => q.CorrectResponseHeading.IsNullOrEmpty() || q.CorrectResponseText.IsNullOrEmpty()))
+                    yield return new m_validation_error(m_validation_error.Severity.Warning, null, q.ID, null, "The question '{0}' of the test has correct response heading and/or text.", q.QuestionText);
+
+            foreach (var s in Sections.Where(s => s.Questions != null))
+                foreach (var q in s.Questions.OfType<SingleImageQuestion>().Where(q => q.ImageUrl.IsNullOrEmpty()))
+                    yield return new m_validation_error(m_validation_error.Severity.Error, s.ID, q.ID, null, "The single image question '{0}' of section '{1}' has no image.", q.QuestionText, s.Title);
+            if (Test != null && Test.Questions != null)
+                foreach (var q in Test.Questions.OfType<SingleImageQuestion>().Where(q => q.ImageUrl.IsNullOrEmpty()))
+                    yield return new m_validation_error(m_validation_error.Severity.Error, null, q.ID, null, "The single image question '{0}' of the test has no image.", q.QuestionText);
+
+            foreach (var s in Sections.Where(s => s.Questions != null))
+                foreach (var q in s.Questions.OfType<VideoQuestion>().Where(q => q.Mp4Url.IsNullOrEmpty()))
+                    yield return new m_validation_error(m_validation_error.Severity.Error, s.ID, q.ID, null, "The video question '{0}' of section '{1}' has no video.", q.QuestionText, s.Title);
+            if (Test != null && Test.Questions != null)
+                foreach (var q in Test.Questions.OfType<VideoQuestion>().Where(q => q.Mp4Url.IsNullOrEmpty()))
+                    yield return new m_validation_error(m_validation_error.Severity.Error, null, q.ID, null, "The video question '{0}' of the test has no video.", q.QuestionText);
         }
     }
 }

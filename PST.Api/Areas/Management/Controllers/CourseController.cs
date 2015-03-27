@@ -125,7 +125,7 @@ namespace PST.Api.Areas.Management.Controllers
         /// <summary>
         /// Upsert course
         /// </summary>
-        /// <param name="course">Course to be upserted. If new, leave ID blank. If existing, properties will be merged into existing entity.</param>
+        /// <param name="course">Course to be upserted. Status cannot be updated using this call. If new, leave ID blank. If existing, properties will be merged into existing entity.</param>
         /// <returns></returns>
         [HttpPut]
         [Route]
@@ -164,11 +164,50 @@ namespace PST.Api.Areas.Management.Controllers
                         Hours = s.hours
                     }));
 
-            c.Status = course.status;
-
             _entityRepository.Save(c);
 
             return c;
+        }
+
+        /// <summary>
+        /// Validate course, sections, and test
+        /// </summary>
+        /// <param name="courseID"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("validate/{courseID}")]
+        public m_validation_error[] Validate(Guid courseID)
+        {
+            var course = _courseService.GetCourse(courseID, status: null);
+            if (course == null)
+                throw new NullReferenceException("Course not found to validate.");
+
+            return course.Validate().ToArray();
+        }
+
+        /// <summary>
+        /// Update the status of a course.
+        /// </summary>
+        /// <param name="courseID">ID of course</param>
+        /// <param name="courseStatus">Status to change course to. If setting it to Active, validation will run. If any errors found, the save will not happen. If only warnings found, save will happen but warnings will still return.</param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("status/{courseID}/{courseStatus}")]
+        public m_validation_error[] ValidateAndUpdateStatus(Guid courseID, CourseStatus courseStatus)
+        {
+            var course = _courseService.GetCourse(courseID, status: null);
+            if (course == null)
+                throw new NullReferenceException("Course not found to update.");
+
+            m_validation_error[] errors = null;
+            if (courseStatus == CourseStatus.Active &&
+                (errors = course.Validate().ToArray()).Any(e => e.severity == m_validation_error.Severity.Error))
+                return errors;
+
+            course.Status = courseStatus;
+            _entityRepository.Save(course);
+
+            return errors ?? new m_validation_error[0];
         }
 
         /// <summary>
