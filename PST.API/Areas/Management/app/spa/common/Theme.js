@@ -310,5 +310,14 @@
                 }
             };
         })
+
+        .directive("numberOnly", function() {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+                    elem.numeric(attrs.numberOnly == null ? null : $scope.$eval(attrs.numberOnly));
+                }
+            };
+        })
     ;
 })();
