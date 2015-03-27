@@ -67,6 +67,37 @@
                 <div class="section-body">
                     <div class="shell">
                         <div class="section-body-inner">
+                            <div class="notifications">
+                                <div class="notification dismissable information">
+                                    This is what a dismissable information notification should look like.
+                                </div>
+                                <div class="notification dismissable warning">
+                                    This is what a dismissable warning should look like.
+                                    <a href="#">Resolve this issue.</a>
+                                </div>
+                                <div class="notification error">
+                                    This is what a non-dismissable error should look like.
+                                    <a href="#">Resolve this issue.</a>
+                                </div>
+                            </div>    
+
+                            <script>
+                                $(document).ready(function () {
+                                    $('.notifications .notification.dismissable').append('<i class="fa fa-close"></i>');
+                                    $('.notifications .notification.dismissable .fa-close').click(function () {
+                                        $(this).closest('.notifications .notification.dismissable').addClass('closed');
+                                        var $that = $(this);
+                                        if (!$that.hasClass('.closed'))
+                                            $that = $that.closest('.closed');
+                                        setTimeout(function() {
+                                            $that.remove();
+                                            console.log($that);
+                                            console.log($('.notifications').children().length);
+                                        }, 500);
+                                    });
+                                });
+                            </script>
+
                             <div class="review-table">
                                 <div>
                                     <i class="icon icon-course"></i>

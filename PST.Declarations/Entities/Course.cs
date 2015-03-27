@@ -123,5 +123,10 @@ namespace PST.Declarations.Entities
         }
 
         public virtual bool Deleted { get; set; }
+
+        public bool Validate()
+        {
+            
+        }
     }
 }
