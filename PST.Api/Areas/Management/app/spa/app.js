@@ -23,10 +23,12 @@
         'pct.management.api.state'
     ])
 
-        .run(["Api", "ReviewService", function (Api, ReviewService) {
-            Api.setHost(appHost); // set in _layout.cshtml
+        .config(["ApiProvider", "LayoutServiceProvider", "ReviewServiceProvider", function (ApiProvider, LayoutServiceProvider, ReviewServiceProvider) {
+            ApiProvider.setHost(appHost); // set in _layout.cshtml
 
-            ReviewService.setReviewUrl(
+            LayoutServiceProvider.setProfileLink("//" + appHost + "/#/profile");
+
+            ReviewServiceProvider.setReviewUrl(
                 "//" + appHost + "/#/course/{courseId}/preview",
                 "//" + appHost + "/#/test/{courseId}/preview"
             );

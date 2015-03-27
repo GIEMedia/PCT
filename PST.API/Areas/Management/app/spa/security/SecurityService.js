@@ -11,80 +11,85 @@
             };
         })
 
-        .factory("Api", ["$http", "$upload", function($http, $upload) {
+        .provider("Api", function() {
+            var _host = null;
 
-            var handleError = function(httpPromise) {
+            this.setHost = function(host) {
+                _host = host;
+            };
 
-                var _handler = null;
+            this.$get = ["$http", "$upload", function($http, $upload) {
 
-                httpPromise.onError = function(handler) {
-                    _handler = handler;
+                var handleError = function(httpPromise) {
+
+                    var _handler = null;
+
+                    httpPromise.onError = function(handler) {
+                        _handler = handler;
+                        return httpPromise;
+                    };
+
+                    httpPromise.error(function(data, status, headers, config) {
+                        if (_handler != null) {
+                            var handleResult = _handler(data, status, headers, config);
+                            if (handleResult) {
+                                return;
+                            }
+                        }
+                        //alert("Unhandled api error:\nUrl: " + config.url + "\nResponse: " + status + "\n" + JSON.stringify(data));
+                    });
+
                     return httpPromise;
                 };
 
-                httpPromise.error(function(data, status, headers, config) {
-                    if (_handler != null) {
-                        var handleResult = _handler(data, status, headers, config);
-                        if (handleResult) {
-                            return;
-                        }
-                    }
-                    //alert("Unhandled api error:\nUrl: " + config.url + "\nResponse: " + status + "\n" + JSON.stringify(data));
-                });
-
-                return httpPromise;
-            };
-
-            var _host = null;
-            var sendHttp = function(method, url, data) {
-                return handleError($http({
-                    method: method,
-                    url: (_host==null? "" : "http://" + _host + "/") + url,
-                    headers: {'Authorization': "Bearer " + sessionStorage.access_token},
-                    data: data
-                }));
-            };
-            return {
-                setHost: function(host) {
-                    _host = host;
-                },
-                get: function(url) {
-                    return sendHttp("GET", url);
-                },
-                post: function(url, data) {
-                    return sendHttp("POST", url, data);
-                },
-                put: function(url, data) {
-                    return sendHttp("PUT", url, data);
-                },
-                delete: function(url) {
-                    return sendHttp("DELETE", url);
-                },
-                postForm: function(url, data) {
+                var sendHttp = function(method, url, data) {
                     return handleError($http({
-                        method: 'POST',
-                        url: (_host==null? "" : "http://" + _host + "/") + url,
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                        transformRequest: function(obj) {
-                            var str = [];
-                            for(var p in obj)
-                                str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-                            return str.join("&");
-                        },
-                        data: data
-                    }));
-                },
-                upload: function(url, file) {
-                    return handleError($upload.upload({
-                        method: 'POST',
+                        method: method,
                         url: (_host==null? "" : "http://" + _host + "/") + url,
                         headers: {'Authorization': "Bearer " + sessionStorage.access_token},
-                        file: file
+                        data: data
                     }));
-                },
-                handleError: handleError
-            };
-        }])
+                };
+                return {
+
+                    get: function(url) {
+                        return sendHttp("GET", url);
+                    },
+                    post: function(url, data) {
+                        return sendHttp("POST", url, data);
+                    },
+                    put: function(url, data) {
+                        return sendHttp("PUT", url, data);
+                    },
+                    delete: function(url) {
+                        return sendHttp("DELETE", url);
+                    },
+                    postForm: function(url, data) {
+                        return handleError($http({
+                            method: 'POST',
+                            url: (_host==null? "" : "http://" + _host + "/") + url,
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                            transformRequest: function(obj) {
+                                var str = [];
+                                for(var p in obj)
+                                    str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                                return str.join("&");
+                            },
+                            data: data
+                        }));
+                    },
+                    upload: function(url, file) {
+                        return handleError($upload.upload({
+                            method: 'POST',
+                            url: (_host==null? "" : "http://" + _host + "/") + url,
+                            headers: {'Authorization': "Bearer " + sessionStorage.access_token},
+                            file: file
+                        }));
+                    },
+                    handleError: handleError
+                };
+            }];
+        })
 
         .factory("SecurityService", ["$http", "$rootScope", "$timeout", "Api", "User", "$state", function($http, $rootScope, $timeout, Api, User, $state) {
             var fetchUser = function() {

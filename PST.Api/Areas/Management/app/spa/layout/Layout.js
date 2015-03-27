@@ -23,7 +23,7 @@
                 .otherwise("/login");
         }])
 
-        .directive("contentSideNav", function() {
+        .directive("contentSideNav", ["LayoutService", function(LayoutService) {
             return {
                 restrict: "E",
                 templateUrl: "Areas/Management/app/spa/layout/ContentSideNav.html",
@@ -54,9 +54,11 @@
                             title: "Users"
                         }
                     ];
+
+                    $scope.profileLink = LayoutService.profileLink;
                 }
             };
-        })
+        }])
         .directive("contentHeaderSearch", function() {
             return {
                 restrict: "E",
@@ -108,78 +110,79 @@
             };
         }])
 
-        .factory("LayoutService", ["$http", "$templateCache", "$compile", function($http, $templateCache, $compile) {
-            var layout = {};
-            //var inform = function() {};
-
-            var customFooterElem;
-            var customFooterElemOriClass;
-
-            return {
-                layout: layout,
-                supportSearch: function($scope, options) {
-                    layout.search = {
-                        scope: $scope,
-                        options: options
-                    };
-                    $scope.$on("$destroy", function() {
-                        layout.search = null;
-                    });
-                },
-                setBreadCrumbs: function($scope, breadcrumbs) {
-                    layout.breadcrumbs = breadcrumbs;
-                    $scope.$on("$destroy", function() {
-                        layout.breadcrumbs = null;
-                    });
-                },
-                registerCustomFooter: function(elem) {
-                    customFooterElem = elem;
-                    customFooterElemOriClass = elem.attr("class");
-                },
-                setCustomFooter: function($scope, options) {
-
-                    var templatePromise = $http.get(options.templateUrl, {cache: $templateCache}).then(function (result) {
-                        return result.data;
-                    });
-
-                    var remove;
-                    templatePromise.then(function(content) {
-                        //var modalScope = $scope.$new();
-
-                        var contentEl = $compile(angular.element(content))($scope);
-                        customFooterElem.html(contentEl);
-                        customFooterElem.show();
-
-                        remove = function () {
-                            //modalScope.$destroy();
-                            customFooterElem.hide();
-                            contentEl.remove();
-                        };
-                    });
-
-                    $scope.$on("$destroy", function() {
-                        if (remove) {
-                            remove();
-                            remove = null;
-                        }
-                    });
-
-                    return {
-                        setClass: function(styleClass) {
-                            customFooterElem.attr("class", customFooterElemOriClass + (styleClass ? " " + styleClass : ""));
-                        }
-                    };
-                }
-
-
-                //hook : function($scope) {
-                //    inform = function () {
-                //        if (!$scope.$$phase) $scope.$digest();
-                //        console.log("digest");
-                //    };
-                //}
+        .provider("LayoutService", function() {
+            var _profileLink;
+            this.setProfileLink = function(profileLink) {
+                _profileLink = profileLink;
             };
-        }])
+
+            this.$get = ["$http", "$templateCache", "$compile", function($http, $templateCache, $compile) {
+                var layout = {};
+                //var inform = function() {};
+
+                var customFooterElem;
+                var customFooterElemOriClass;
+
+                return {
+                    layout: layout,
+                    profileLink: _profileLink,
+                    supportSearch: function($scope, options) {
+                        layout.search = {
+                            scope: $scope,
+                            options: options
+                        };
+                        $scope.$on("$destroy", function() {
+                            layout.search = null;
+                        });
+                    },
+                    setBreadCrumbs: function($scope, breadcrumbs) {
+                        layout.breadcrumbs = breadcrumbs;
+                        $scope.$on("$destroy", function() {
+                            layout.breadcrumbs = null;
+                        });
+                    },
+                    registerCustomFooter: function(elem) {
+                        customFooterElem = elem;
+                        customFooterElemOriClass = elem.attr("class");
+                    },
+                    setCustomFooter: function($scope, options) {
+
+                        var templatePromise = $http.get(options.templateUrl, {cache: $templateCache}).then(function (result) {
+                            return result.data;
+                        });
+
+                        var remove;
+                        templatePromise.then(function(content) {
+                            //var modalScope = $scope.$new();
+
+                            var contentEl = $compile(angular.element(content))($scope);
+                            customFooterElem.html(contentEl);
+                            customFooterElem.show();
+
+                            remove = function () {
+                                //modalScope.$destroy();
+                                customFooterElem.hide();
+                                contentEl.remove();
+                            };
+                        });
+
+                        $scope.$on("$destroy", function() {
+                            if (remove) {
+                                remove();
+                                remove = null;
+                            }
+                        });
+
+                        return {
+                            setClass: function(styleClass) {
+                                customFooterElem.attr("class", customFooterElemOriClass + (styleClass ? " " + styleClass : ""));
+                            }
+                        };
+                    }
+
+                };
+            }];
+        })
 
         .directive("layoutCustomFooter", ["LayoutService", function(LayoutService) {
             return {
