@@ -8,7 +8,7 @@
         .config(["$stateProvider", function ($stateProvider) {
             $stateProvider
                 .state('courseEdit.test', {
-                    url: '/test',
+                    url: '/test?focusQuestion',
                     templateUrl: "Areas/Management/app/spa/course_edit/test/Test.html",
                     controller: "courseEdit.test.Ctrl"
                 })
@@ -31,7 +31,10 @@
                     $scope.questions = ObjectUtil.clone($scope.questionsMaster);
                 }
             });
-            
+
+            $scope.t = {
+                focusQuestions: $stateParams.focusQuestion == null ? null : [$stateParams.focusQuestion]
+            };
             
             QuestionService.getList($stateParams.courseId).success(function(questions) {
                 $scope.questionsMaster = questions;

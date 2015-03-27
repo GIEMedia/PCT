@@ -807,6 +807,92 @@ img.option-image {  width: auto; height: 73px;  }
 }
 
 
+/* ================================================================ *\
+    Notifications
+\* ================================================================ */
+.notifications .notification {
+    position: relative;
+    background-color: #fff;
+    border-bottom: 1px solid #d6e2e6;
+    padding: 10px 10px 10px 40px;
+    font-size: 14px;
+    overflow: hidden;
+    height: 54px;
+    color: black;
+    -webkit-transition: .5s height, .5s padding-top, .5s padding-bottom;
+    -moz-transition: .5s height, .5s padding-top, .5s padding-bottom;
+    -ms-transition: .5s height, .5s padding-top, .5s padding-bottom;
+    -o-transition: .5s height, .5s padding-top, .5s padding-bottom;
+    transition: .5s height, .5s padding-top, .5s padding-bottom;
+    -webkit-box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2);
+}
+
+.notifications .notification a {
+    display: table;
+    margin-top: 5px;
+    font-size: 12px;
+    color: #4d4d4d;
+}
+
+.notifications .notification.dismissable .fa-close {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: #4d4d4d;
+    cursor: pointer;
+}
+
+.notifications .notification.dismissable.closed {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-bottom: none;
+}
+
+.notifications .notification:after {
+    font:normal normal normal 18px/1 FontAwesome;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.notifications .notification.error {
+    background-color: rgb(250, 201, 194);
+}
+
+.notifications .notification.error:after {
+    content: "\f057";
+    color: rgb(211, 68, 68);
+}
+
+.notifications .notification.warning {
+    background-color: rgb(253, 233, 171);
+}
+
+.notifications .notification.warning:after {
+    content: "\f071";
+    color: rgb(247, 179, 51);
+}
+
+.notifications .notification.information {
+    background-color: rgb(209, 226, 242);
+}
+
+.notifications .notification.information:after {
+    content: "\f05a";
+    color: rgb(67, 135, 210);
+}
+
+.notifications .notification:first-of-type {
+    margin-top: 25px;
+}
+
+.notifications .notification:last-of-type {
+    margin-bottom: 35px;
+}
 
 /* ================================================================ *\
     Buttons
@@ -828,3 +914,5 @@ form.ng-dirty input.ng-invalid {
     /*display: none;*/
     border-bottom: 1px dashed red;
 }
+
+

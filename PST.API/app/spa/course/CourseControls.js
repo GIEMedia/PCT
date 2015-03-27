@@ -24,7 +24,7 @@
                 scope: true,
                 link: function($scope, elem, attrs) {
                     $scope.currentPage = function() {
-                        if ($scope.section==null) {
+                        if ($scope.section==null || $scope.section.document.pages == null) {
                             return 1;
                         }
                         return $scope.section.document.pages.indexOf($scope.page) + 1;
@@ -42,7 +42,7 @@
                 link: function($scope, elem, attrs) {
                     $scope.page = null;
                     $scope.$watch("section", function(value) {
-                        if (value) {
+                        if (value && $scope.section.document.pages) {
                             $scope.page = $scope.section.document.pages[0];
                         }
                     });

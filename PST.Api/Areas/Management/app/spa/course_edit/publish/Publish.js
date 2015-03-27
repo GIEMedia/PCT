@@ -19,20 +19,24 @@
             $scope.setCel({
                 step: 4,
                 save: function() {
+                    var status = $scope.editing.published ? 1 : 0;
 
-                    var sending = ObjectUtil.clone($scope.course);
-
-                    sending.status = $scope.editing.published ? 1 : 0;
-
-                    return CourseService.upsert(sending).success(function() {
+                    return CourseService.setStatus($scope.course.id, status).success(function() {
                         $scope.published = $scope.editing.published;
-                        $scope.course.status = sending.status;
+                        $scope.course.status = status;
                     });
+                },
+                canSave: function() {
+                    return !$scope.editing.published || $scope.p.valid;
                 },
                 needSaving: function() {
                     return $scope.published != $scope.editing.published;
                 }
             });
+
+            $scope.p = {
+                valid: false
+            };
 
             $scope.publishing = [
                 {

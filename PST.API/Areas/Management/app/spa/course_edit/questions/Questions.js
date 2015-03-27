@@ -9,14 +9,31 @@
                 restrict: "E",
                 templateUrl: "Areas/Management/app/spa/course_edit/questions/Questions.html",
                 scope: {
-                    questions: "="
+                    questions: "=",
+                    focus: "="
                 },
                 link: function($scope, elem, attrs) {
+                    $scope.expandeds = {};
+
+                    if (Cols.isNotEmpty($scope.focus)) {
+                        $scope.$watch("questions", function(value) {
+                            if (value) {
+                                for (var i = 0; i < $scope.questions.length; i++) {
+                                    var question = $scope.questions[i];
+                                    if ($scope.focus.indexOf(question.id) > -1) {
+                                        $scope.expandeds[i] = true;
+                                    }
+                                }
+                            }
+                        });
+                    }
+
+
                     function addQuestion(questionType) {
                         $scope.questions.push({
                             question_type: questionType
                         });
-                        $scope.questionsView.expandeds[$scope.questions.length - 1] = true;
+                        $scope.expandeds[$scope.questions.length - 1] = true;
                     }
 
                     $scope.addTextQuestion = function() {
@@ -39,16 +56,15 @@
                     };
 
                     $scope.questionsView = {
-                        expandeds: {}
                     };
 
                     $scope.expandAll = function() {
                         for (var i in $scope.questions) {
-                            $scope.questionsView.expandeds[i] = true;
+                            $scope.expandeds[i] = true;
                         }
                     };
                     $scope.collapseAll = function() {
-                        ObjectUtil.clear($scope.questionsView.expandeds);
+                        ObjectUtil.clear($scope.expandeds);
                     }
                 }
             };

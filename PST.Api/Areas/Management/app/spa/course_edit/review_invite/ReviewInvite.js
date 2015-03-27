@@ -17,7 +17,10 @@
 
         .controller("courseEdit.reviewInvite.Ctrl", ["$scope", "$stateParams", "StateService", "CourseService", "ReviewService", function ($scope, $stateParams, StateService, CourseService, ReviewService) {
             $scope.setCel({
-                step: 3
+                step: 3,
+                canGoForward: function() {
+                    return ($scope.course!=null && $scope.course.status == 1) || $scope.ri.valid;
+                }
             });
 
             $scope.states = StateService.getStates();
@@ -25,9 +28,9 @@
             $scope.reviewer = {};
 
             $scope.ri = {
-                sending: false
+                sending: false,
+                valid: false
             };
-
 
             $scope.send = function() {
                 $scope.ri.sending = true;
@@ -45,6 +48,58 @@
             };
             $scope.reviewTest = function() {
                 window.open(ReviewService.getReviewTestUrl($stateParams.courseId), "_blank");
+            };
+
+        }])
+
+        .directive("courseValidation", ["$state", "CourseService", function($state, CourseService) {
+            return {
+                restrict: "E",
+                replace: true,
+                scope: {
+                    course: "=",
+                    valid: "="
+                },
+                templateUrl: "Areas/Management/app/spa/course_edit/review_invite/CourseValidation.html",
+                link: function($scope, elem, attrs) {
+
+                    $scope.$watch("course", function(course) {
+                        if (course) {
+                            CourseService.validate(course.id).success(function(validation) {
+                                $scope.validation = validation;
+                                $scope.valid = Cols.isEmpty(validation);
+                            });
+                        }
+                    });
+
+                    $scope.toProblem = function(problem) {
+                        if (!problem.question_id) {
+                            if (!problem.no_questions) {
+                                $state.go("courseEdit.sections.list");
+                            } else {
+                                if (!problem.section_id) {
+                                    $state.go("courseEdit.test");
+                                } else {
+                                    $state.go("courseEdit.sections.detail", {
+                                        sectionId: problem.section_id
+                                    });
+                                }
+                            }
+                        } else {
+                            if (!problem.section_id) {
+                                $state.go("courseEdit.test", {
+                                    focusQuestion: problem.question_id
+                                });
+                            } else {
+                                $state.go("courseEdit.sections.detail", {
+                                    sectionId: problem.section_id,
+                                    focusQuestion: problem.question_id
+                                });
+                            }
+                        }
+                    }
+
+                }
             };
         }])
 

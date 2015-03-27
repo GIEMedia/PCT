@@ -282,7 +282,7 @@ ObjectUtil.hasValue = function(o) {
         }
     }
     return false;
-}
+};
 
 var Http = Http || {};
 Http.afterSharp = function() {

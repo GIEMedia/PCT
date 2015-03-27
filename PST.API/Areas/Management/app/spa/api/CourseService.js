@@ -7,7 +7,7 @@
         .factory("CourseService", ["Api", function(Api) {
 
             // Sample data
-            var course = {
+            var courseSample = {
                 "id":"9c1b5762-e5a4-485b-8e89-a4470133c024",
                 "title":"Test Course 1",
                 "date_created":"2015-02-22T23:40:29Z",
@@ -23,7 +23,8 @@
                     }
                 ]
             };
-
+            //GET /api/course/validate/{courseID}
+            //PUT /api/course/status/{courseID}/{courseStatus}
             return {
                 getList: function() {
                     return Api.get("api/manage/course/list");
@@ -37,12 +38,13 @@
                 upsert: function(course) {
                     return Api.put("api/manage/course", course);
                 },
+                setStatus: function(courseId, status) {
+                    return Api.put("api/manage/course/status/" + courseId + "/" + status);
+                },
+                validate: function(courseId) {
+                    return Api.get("api/manage/course/validate/" + courseId);
+                },
                 review: function(courseId, reviewer) {
-                    //{
-                    //    "name": "sample string 1",
-                    //    "state": "sample string 2",
-                    //    "email": "someone@somewhere.com"
-                    //}
                     return Api.put("api/manage/course/review/" + courseId, reviewer);
                 }
             };

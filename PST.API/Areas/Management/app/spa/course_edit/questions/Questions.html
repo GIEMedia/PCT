@@ -17,7 +17,7 @@
         </div><!-- /.table-col -->
     </div>
     
-    <div class="table-row" ng-repeat="question in questions" expanded="questionsView.expandeds[$index]" sortable-row-index="{{$index}}" question-row>
+    <div class="table-row" ng-repeat="question in questions" expanded="expandeds[$index]" sortable-row-index="{{$index}}" question-row>
         <div class="inner">
             <div class="table-col col-size-1">
                 <div class="number">{{$index + 1}}</div><!-- /.number -->

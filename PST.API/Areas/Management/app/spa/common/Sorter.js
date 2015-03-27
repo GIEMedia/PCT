@@ -106,6 +106,7 @@
                         return sorter.sortAsc ? 1 : -1;
                     }, function(code) {
                         icon.attr("class", code == 0 ? "" : code == 1 ? "fa fa-caret-up" : "fa fa-caret-down");
+                        //icon.attr("class", code == 0 ? "" : code == 1 ? "fa fa-sort-asc" : "fa fa-sort-desc");
                     });
 
                     a.click(function() {
