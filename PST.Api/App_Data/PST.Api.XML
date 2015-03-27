@@ -554,6 +554,21 @@
             <param name="course">Course to be upserted. Status cannot be updated using this call. If new, leave ID blank. If existing, properties will be merged into existing entity.</param>
             <returns></returns>
         </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.Validate(System.Guid)">
+            <summary>
+            Validate course, sections, and test
+            </summary>
+            <param name="courseID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.ValidateAndUpdateStatus(System.Guid,PST.Declarations.CourseStatus)">
+            <summary>
+            Update the status of a course.
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="courseStatus">Status to change course to. If setting it to Active, validation will run. If any errors found, the save will not happen. If only warnings found, save will happen but warnings will still return.</param>
+            <returns></returns>
+        </member>
         <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.SendCourseToReviewer(System.Guid,PST.Declarations.Models.Management.m_course_reviewer)">
             <summary>
             Send course to reviewer

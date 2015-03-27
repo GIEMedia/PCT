@@ -169,6 +169,11 @@ namespace PST.Api.Areas.Management.Controllers
             return c;
         }
 
+        /// <summary>
+        /// Validate course, sections, and test
+        /// </summary>
+        /// <param name="courseID"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("validate/{courseID}")]
         public m_validation_error[] Validate(Guid courseID)
@@ -181,10 +186,10 @@ namespace PST.Api.Areas.Management.Controllers
         }
 
         /// <summary>
-        /// Update the status of a course. If setting it to Active, validation will run. If any errors found, the save will not happen. If only warnings found, save will happen but warnings will still return.
+        /// Update the status of a course.
         /// </summary>
         /// <param name="courseID">ID of course</param>
-        /// <param name="courseStatus">Status to change course to</param>
+        /// <param name="courseStatus">Status to change course to. If setting it to Active, validation will run. If any errors found, the save will not happen. If only warnings found, save will happen but warnings will still return.</param>
         /// <returns></returns>
         [HttpPut]
         [Route("status/{courseID}/{courseStatus}")]
@@ -196,7 +201,7 @@ namespace PST.Api.Areas.Management.Controllers
 
             m_validation_error[] errors = null;
             if (courseStatus == CourseStatus.Active &&
-                (errors = course.Validate().ToArray()).Any(e => e.severity == Severity.Error))
+                (errors = course.Validate().ToArray()).Any(e => e.severity == m_validation_error.Severity.Error))
                 return errors;
 
             course.Status = courseStatus;
