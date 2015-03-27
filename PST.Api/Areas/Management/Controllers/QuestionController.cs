@@ -100,6 +100,8 @@ namespace PST.Api.Areas.Management.Controllers
             Course course;
             var questioned = GetQuestioned(courseID, sectionID, out course);
 
+            questions = questions.Where(q => !(q.question_text ?? "").Trim().IsNullOrEmpty()).ToArray();
+
             // Remove any options that existed but no longer in the model
             questioned.Questions.Where(o => !questions.Select(x => x.id).Contains(o.ID))
                 .ToList()

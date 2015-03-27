@@ -551,7 +551,7 @@
             <summary>
             Upsert course
             </summary>
-            <param name="course">Course to be upserted. If new, leave ID blank. If existing, properties will be merged into existing entity.</param>
+            <param name="course">Course to be upserted. Status cannot be updated using this call. If new, leave ID blank. If existing, properties will be merged into existing entity.</param>
             <returns></returns>
         </member>
         <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.SendCourseToReviewer(System.Guid,PST.Declarations.Models.Management.m_course_reviewer)">
