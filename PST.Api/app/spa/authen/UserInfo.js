@@ -19,8 +19,9 @@
                     $scope.pristine = true;
                     if (!loggedIn) {
                         $scope.loginForm = {
-                            email: null,
-                            password: null
+                            email: localStorage.remembered_login,
+                            password: null,
+                            remember: localStorage.remembered_login != null
                         };
                     }
                 });
@@ -37,11 +38,10 @@
                     }
 
                     $scope.ui.loggingin = true;
-                    SecurityService.login({
-                        grant_type: "password",
-                        username: $scope.loginForm.email,
-                        password: $scope.loginForm.password
-                    })
+                    SecurityService.login($scope.loginForm.email, $scope.loginForm.password, $scope.loginForm.remember)
+                        .success(function() {
+                            $scope.ui.loggingin = false;
+                        })
                         .onError(function(error, status) {
                             $scope.ui.loggingin = false;
                             if (status == 400) {

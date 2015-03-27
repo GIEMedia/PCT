@@ -16,6 +16,7 @@
                     $scope.add = function() {
                         $scope.$eval(attrs.stateAdder, {"$state": $scope.stateAdder.model});
                         $scope.stateAdder.model = {};
+                        $scope.addStateForm.$setPristine(true);
                     };
                 }
             };
