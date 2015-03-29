@@ -8,7 +8,7 @@
         .factory("AccountService", ["$http", "Api", function($http, Api) {
             return {
                 createAccount: function(data) {
-                    return $http.post("api/account/register", data);
+                    return Api.post("api/account/register", data);
                 },
                 getAccount: function() {
                     return Api.get("api/account");

@@ -20,15 +20,7 @@
                         $scope.signup.loading = true;
                         AccountService.createAccount($scope.signup)
                             .success(function() {
-                                SecurityService.login({
-                                    grant_type: "password",
-                                    username: $scope.signup.email,
-                                    password: $scope.signup.password
-                                })
-                                    .success(function() {
-                                        $state.go("dashboard");
-                                    })
-                                ;
+                                SecurityService.login($scope.signup.email, $scope.signup.password, true);
                             })
                             .onError(function(data) {
                                 //{"Message":"The request is invalid.","ModelState":{"":["Account with this UserName already exists"]}}
