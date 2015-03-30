@@ -147,14 +147,11 @@ namespace PST.Services
             return courses;
         }
 
-        public Test GetTest(Guid courseID, Guid? accountID = null)
+        public Test GetTest(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active)
         {
-            var course = GetCourse(courseID, accountID);
+            var course = GetCourse(courseID, accountID, status);
 
-            if (course == null || course.Status != CourseStatus.Active)
-                return null;
-
-            return course.Test;
+            return course == null ? null : course.Test;
         }
 
         public test_progress GetTestProgress(Guid accountID, Guid courseID)

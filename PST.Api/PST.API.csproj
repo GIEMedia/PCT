@@ -534,11 +534,11 @@
     <Content Include="Areas\Management\app\js\angular_1.3.1\angular.js" />
     <Content Include="Areas\Management\app\js\angular_1.3.1\angular.min.js" />
     <Content Include="Areas\Management\app\js\common-utils.js" />
-    <Content Include="Areas\Management\app\js\functions.js" />
     <Content Include="Areas\Management\app\js\jquery-1.11.2.min.js" />
     <Content Include="Areas\Management\app\js\jquery-ui-1.10.4.custom.min.js" />
     <Content Include="Areas\Management\app\js\jquery-ui-1.11.4.min.js" />
     <Content Include="Areas\Management\app\js\jquery.fancybox.pack.js" />
+    <Content Include="Areas\Management\app\js\jquery.numeric.js" />
     <Content Include="Areas\Management\app\js\moment.min.js" />
     <Content Include="Areas\Management\app\js\selectboxit.js" />
     <Content Include="Areas\Management\app\spa\api\CategoryService.js" />
@@ -569,6 +569,7 @@
     <Content Include="Areas\Management\app\spa\course_edit\questions\popup-edit-answers.html" />
     <Content Include="Areas\Management\app\spa\course_edit\questions\Questions.html" />
     <Content Include="Areas\Management\app\spa\course_edit\questions\Questions.js" />
+    <Content Include="Areas\Management\app\spa\course_edit\review_invite\CourseValidation.html" />
     <Content Include="Areas\Management\app\spa\course_edit\review_invite\ReviewInvite.html" />
     <Content Include="Areas\Management\app\spa\course_edit\review_invite\ReviewInvite.js" />
     <Content Include="Areas\Management\app\spa\course_edit\sections\detail\SectionsDetail.html" />

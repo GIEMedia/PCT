@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PST.Api", "PST.API\PST.Api.csproj", "{994F126E-1871-41AE-8C29-4F9498C0C563}"
 EndProject
@@ -20,6 +20,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PST.Tests", "PST.Tests\PST.Tests.csproj", "{5E0C32AA-A3EF-4713-9977-7E56055CAFEB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "_Prototype-Management", "_Prototype-Management\_Prototype-Management.csproj", "{CFB565A9-54EC-4515-B4CB-ED1F00DA3F29}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{61F5FF83-FFBF-4385-8DDE-B0F7D1423BFB}"
+	ProjectSection(SolutionItems) = preProject
+		IdentifyExcludedFiles.bat = IdentifyExcludedFiles.bat
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

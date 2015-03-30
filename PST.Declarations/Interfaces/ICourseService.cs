@@ -49,14 +49,15 @@ namespace PST.Declarations.Interfaces
         /// <param name="status">Only return a crouse if it's status matches supplied value, otherwise all statuses allowed.</param>
         /// <returns>All courses</returns>
         IEnumerable<Course> GetCourses(CourseStatus? status);
-            
+
         /// <summary>
         /// Gets a specified test by its course's ID
         /// </summary>
         /// <param name="courseID">ID of course that the test belongs to</param>
         /// <param name="accountID">Account to ensure prereqs met.</param>
+        /// <param name="status">Only return a crouse if it's status matches supplied value. (default: Active)</param>
         /// <returns>Test belonging to the course with specified ID. Returns null if test not found or account doesn't meet prereqs.</returns>
-        Test GetTest(Guid courseID, Guid? accountID = null);
+        Test GetTest(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active);
 
         test_progress GetTestProgress(Guid accountID, Guid courseID);
 
