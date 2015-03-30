@@ -7,6 +7,7 @@ using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Prototype1.Foundation.Data.NHibernate;
 using PST.Api.Core.OAuth;
+using PST.Declarations;
 using PST.Declarations.Entities;
 using PST.Declarations.Interfaces;
 using PST.Declarations.Models;
@@ -49,13 +50,13 @@ namespace PST.Api.Controllers
         [Route("{courseID}/preview")]
         public test<question_with_answers> GetTestPreview(Guid courseID)
         {
-            return GetTest<question_with_answers>(courseID);
+            return GetTest<question_with_answers>(courseID, null);
         }
 
-        private test<TQuestion> GetTest<TQuestion>(Guid courseID)
+        private test<TQuestion> GetTest<TQuestion>(Guid courseID, CourseStatus? status = CourseStatus.Active)
             where TQuestion : question_base, new()
         {
-            var test = _courseService.GetTest(courseID, CurrentUserID);
+            var test = _courseService.GetTest(courseID, CurrentUserID, status);
             if (test == null)
                 throw new HttpResponseException(HttpStatusCode.Forbidden);
             return test.ToModel<TQuestion>();
