@@ -61,6 +61,15 @@
                         answer : []
                     };
 
+                    // This is to workaround IE bug not selecting
+                    $scope.choose = function(index) {
+                        if ($scope.question.multi_select) {
+                            // Leave the default function of ng-model, IE is working fine here
+                        } else {
+                            $scope.view.answer[0] = $scope.question.options[index].option_id;
+                        }
+                    };
+
                     var extractAnswer = function() {
                         if ($scope.question==null) {
                             return "[]";

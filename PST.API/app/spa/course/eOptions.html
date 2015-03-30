@@ -1,3 +1,5 @@
+
+
 <div class="course-question-options-pictures" ng-if="question.option_type==1">
 
     <div class="course-question-option course-question-option-header" ng-if="retry">
@@ -12,21 +14,19 @@
         <input type="checkbox" id="option{{$index}}" value="{{option.option_id}}" ng-model="view.answer[$index]" ng-if="question.multi_select" ng-disabled="disabled">
         <input type="radio"    id="option{{$index}}" value="{{option.option_id}}" ng-model="view.answer[0]" ng-if="!question.multi_select"     ng-disabled="disabled" >
 
-        <label for="option{{$index}}" ng-class="{correct: isHighlightCorrect(option)}">Select</label>
+        <label for="option{{$index}}" ng-class="{correct: isHighlightCorrect(option)}" ng-click="choose($index)">Select</label>
     </div><!-- /.course-question-option-picture -->
 </div><!-- /.course-questions-options-pictures -->
 
 <div class="course-question-options" ng-if="question.option_type==0">
-
     <div class="course-question-option course-question-option-header" ng-if="question.correct != null">
         Retry
     </div>
-
     <div class="course-question-option" ng-repeat="option in question.options">
         <input type="checkbox" id="option{{$index}}" value="{{option.option_id}}" ng-model="view.answer[$index]" ng-if="question.multi_select"  ng-disabled="disabled">
         <input type="radio"    id="option{{$index}}" value="{{option.option_id}}" ng-model="view.answer[0]"      ng-if="!question.multi_select" ng-disabled="disabled">
 
-        <label for="option{{$index}}" ng-class="{correct: isHighlightCorrect(option)}">{{option.text}}</label>
+        <label for="option{{$index}}" ng-class="{correct: isHighlightCorrect(option)}" ng-click="choose($index)">{{option.text}}</label>
     </div><!-- /.course-question-option -->
 
 </div><!-- /.course-questions-options -->
