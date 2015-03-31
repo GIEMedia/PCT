@@ -28,7 +28,6 @@
                         });
                     }
 
-
                     function addQuestion(questionType) {
                         $scope.questions.push({
                             question_type: questionType
@@ -187,9 +186,19 @@
             $scope.cancel = $modalInstance.close;
             
             $scope.addOption = function() {
+                if ($scope.options == null || $scope.options.length >= 6) {
+                    return;
+                }
                 $scope.options.push({});
             };
             $scope.addImageOptions = function(images) {
+                if (images == null || $scope.options == null) {
+                    return;
+                }
+                if (images.length + $scope.options.length > 6) {
+                    alert("We don't support more than 6 options");
+                    return;
+                }
                 var promises = [];
                 for (var i = 0; i < images.length; i++) {
                     var image = images[i];
