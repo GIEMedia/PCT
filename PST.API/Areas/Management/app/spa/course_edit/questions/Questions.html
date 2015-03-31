@@ -1,7 +1,12 @@
 <div class="custom-table-questions" sortable="updateOrder($indice)" before-sorting="collapseAll()">
     <div class="table-row-head">
         <div class="table-col col-size-1">
-            <h3>Questions    <a href="" class="expand-all" ng-click="expandAll()">Expand all</a> <span>/</span> <a href="" class="collapse-all" ng-click="collapseAll()">Collapse all</a></h3>
+            <h3>Questions
+                <span ng-if="questions.length">
+                    <a href="" class="expand-all" ng-click="expandAll()">Expand all</a>
+                    <span>/</span>
+                    <a href="" class="collapse-all" ng-click="collapseAll()">Collapse all</a></h3>
+                </span>
         </div><!-- /.table-col -->
 
         <div class="table-col col-size-2">
