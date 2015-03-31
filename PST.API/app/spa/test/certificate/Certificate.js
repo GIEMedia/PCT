@@ -12,13 +12,18 @@
                 .state('certificate', {
                     url: '/certificate/:courseId',
                     templateUrl: "/app/spa/test/certificate/Certificate.html",
-                    controller: "certificate.Ctrl"
+                    controller: "certificate.Ctrl",
+                    resolve: {
+                        certificate: ["CertificateService", "$stateParams", function(CertificateService, $stateParams) {
+                            return CertificateService.getCertificate($stateParams.courseId);
+                        }]
+                    }
                 })
             ;
         }])
 
-        .controller("certificate.Ctrl", ["$scope", "$state", "$stateParams", "CertificateService", "ManagerService", function ($scope, $state, $stateParams, CertificateService, ManagerService) {
-            $scope.certificate = CertificateService.getCertificate($stateParams.courseId);
+        .controller("certificate.Ctrl", ["$scope", "$state", "$stateParams", "CertificateService", "ManagerService", "certificate", function ($scope, $state, $stateParams, CertificateService, ManagerService, certificate) {
+            $scope.certificate = certificate.data;
 
             $scope.managers = [
                 {}
