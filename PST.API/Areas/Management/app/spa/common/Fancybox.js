@@ -28,7 +28,7 @@
                     }
                     var contentEl = $compile(angular.element(content))($scope);
 
-                    var fancybox = $.fancybox({
+                    $.fancybox({
                         content: contentEl,
                         maxWidth: 750,
                         width: options.width? options.width : "auto",
@@ -36,7 +36,12 @@
                         fitToView: false,
                         autoSize: false,
                         afterClose: invokeCloseListeners,
-                        closeClick: false
+                        closeClick: false,
+                        helpers: {
+                            overlay: {
+                                locked: false
+                            }
+                        }
                     });
 
                     $scope.$on("$destroy", close);
