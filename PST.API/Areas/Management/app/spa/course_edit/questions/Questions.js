@@ -10,7 +10,8 @@
                 templateUrl: "Areas/Management/app/spa/course_edit/questions/Questions.html",
                 scope: {
                     questions: "=",
-                    focus: "="
+                    focus: "=",
+                    readonly: "="
                 },
                 link: function($scope, elem, attrs) {
                     $scope.expandeds = {};
@@ -117,6 +118,8 @@
                     
                     $scope.openAnswersModel = function() {
                         var scope = $scope.$new(true);
+                        scope.readonly = $scope.readonly;
+
                         scope.question_text = $scope.question.question_text;
                         var questionType = $scope.question.question_type;
                         scope.question_type = questionType;

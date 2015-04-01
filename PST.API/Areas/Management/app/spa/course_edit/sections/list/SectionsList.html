@@ -3,6 +3,8 @@
     <div class="shell">
         <div class="section-body-inner" >
 
+            <check-published-course></check-published-course>
+
             <div class="table table-section-list">
                 <table>
                     <colgroup>
@@ -46,9 +48,9 @@
                                     <span ng-class="{'sortable-handle': !updatingOrder}" button-loading="updatingOrder:small">
                                         <i class="fa fa-arrows"></i>
                                     </span>
-                                    <a href="" class="icon icon-rename" ng-click="editName.editing = true"></a>
+                                    <a href="" class="icon icon-rename" ng-hide="course.status == 1" ng-click="editName.editing = true"></a>
                                     <a ui-sref="^.detail({sectionId: section.id})" class="fa fa-pencil"></a>
-                                    <span button-loading="deleting:small">
+                                    <span button-loading="deleting:small" ng-hide="course.status == 1">
                                         <a href="" class="fa fa-trash-o" ng-disabled="deleting" ng-click="deleteSection(section)"></a>
                                     </span>
                                 </div><!-- /.icons -->
@@ -59,7 +61,7 @@
                                 <div class="view-document-link">
                                     <a href="{{section.document.pdf_url}}"><i class="fa fa-search"></i></a>
                                     <span ng-file-select="uploadDocument($files)" accept=".pdf" button-loading="uploadingDocument"><a href=""><i class="fa fa-upload"></i></a></span>
-                                    <a href="" ng-click="deleteDocument()"><i class="fa fa-trash"></i></a>
+                                    <a href="" ng-click="deleteDocument()" ng-hide="course.status == 1"><i class="fa fa-trash"></i></a>
                                 </div>
                             </td>
 
@@ -73,7 +75,7 @@
                             <td>{{section.num_questions}}</td>
                         </tr>
 
-                        <tr>
+                        <tr ng-hide="course.status == 1">
                             <td>{{sections.length + 1}}</td>
 
                             <td><input type="text" class="field" placeholder="Add new section" ng-model="inserting.title"/></td>

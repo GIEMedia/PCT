@@ -2,8 +2,10 @@
 <div class="section-body">
     <div class="shell">
         <div class="section-body-inner" >
+
+            <check-published-course></check-published-course>
             
-            <pct-questions questions="questions" focus="t.focusQuestions"></pct-questions>
+            <pct-questions questions="questions" focus="t.focusQuestions" readonly="course.status == 1"></pct-questions>
             
         </div><!-- /.section-body-inner -->
     </div><!-- /.shell -->

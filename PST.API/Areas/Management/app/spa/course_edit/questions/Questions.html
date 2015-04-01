@@ -1,3 +1,4 @@
+
 <div class="custom-table-questions" sortable="updateOrder($indice)" before-sorting="collapseAll()">
     <div class="table-row-head">
         <div class="table-col col-size-1">
@@ -28,12 +29,12 @@
                 <div class="number">{{$index + 1}}</div><!-- /.number -->
 
                 <h2 class="question">{{isEmpty(question) ? "(Empty - Question will be removed on saved)" : ellipsis((question.question_text || "(Empty)") + (isMultipleCorrect(question) ? " (check all that apply)" : ""), 90)}}</h2><!-- /.question -->
-                <input type="text" class="field" ng-model="question.question_text" placeholder="Question" />
+                <input type="text" class="field" ng-model="question.question_text" placeholder="Question" ng-readonly="readonly" />
 
                 <div class="question-icons">
                     <a href="" class="icon icon-chevron-up"></a>
 
-                    <a href="" class="fa fa-trash-o" ng-click="deleteQuestion()"></a>
+                    <a href="" class="fa fa-trash-o" ng-click="deleteQuestion()" ng-if="!readonly"></a>
                 </div><!-- /.question-icons -->
             </div><!-- /.table-col -->
 
@@ -42,11 +43,11 @@
                     <p><strong>{{question.response_heading || "(Empty)"}}</strong> {{ellipsis(question.response_message, 99) || "(Empty)"}}</p>
 
                     <div class="answer-icons">
-                        <a href="" class="fa fa-arrows sortable-handle"></a>
+                        <a href="" class="fa fa-arrows sortable-handle" ng-if="!readonly"></a>
 
                         <a href="" class="icon icon-chevron-down"></a>
 
-                        <a href="" class="fa fa-trash-o" ng-click="deleteQuestion()"></a>
+                        <a href="" class="fa fa-trash-o" ng-click="deleteQuestion()" ng-if="!readonly"></a>
                     </div><!-- /.answer-icons -->
                 </div><!-- /.answer -->
             </div><!-- /.table-col -->
@@ -79,15 +80,15 @@
                         </div>
                         
                         <div class="overlay">
-                            <a class="btn btn-blue" href="" ng-click="openAnswersModel()">Add/Edit Answers</a>
+                            <a class="btn btn-blue" href="" ng-click="openAnswersModel()" ng-bind="readonly ? 'View Answers' : 'Add/Edit Answers'"></a>
                         </div><!-- /.overlay -->
                     </div><!-- /.inner -->
                 </div><!-- /.col col-1 -->
 
                 <div class="col col-2">
                     <div class="inner">
-                        <input type="text" placeholder="Response heading" ng-model="question.response_heading" class="field" />
-                        <textarea class="textarea" placeholder="Response message" ng-model="question.response_message"></textarea>
+                        <input type="text" placeholder="Response heading" ng-model="question.response_heading" class="field" ng-readonly="readonly" />
+                        <textarea class="textarea" placeholder="Response message" ng-model="question.response_message" ng-readonly="readonly"></textarea>
                     </div><!-- /.inner -->
                 </div><!-- /.col col-2 -->
             </div><!-- /.inner -->
@@ -95,14 +96,14 @@
             <div class="foot">
                 <i class="fa fa-lightbulb-o"></i>
 
-                <input type="text" placeholder="No tip provided." ng-model="question.tip" class="field" />
+                <input type="text" placeholder="No tip provided." ng-model="question.tip" class="field" ng-readonly="readonly" />
             </div><!-- /.foot -->
         </div><!-- /.table-row-expand -->
     </div><!-- /.table-row -->
 
 </div><!-- /.custom-table-questions -->
 
-<div class="btn-plus">
+<div class="btn-plus" ng-if="!readonly">
     <div class="btn-circle">
         <i class="fa fa-plus"></i>
 

@@ -8,10 +8,13 @@
 
             <div class="col col-1" ng-if="question_type == 0 || question_type == 2">
                 <div class="btns alignleft">
-                    <span ng-file-select="addQuestionImage($files[0])" class="alignleft btn-circle btn-orange">
+                    <span ng-if="readonly" disabled="disabled" class="alignleft btn-circle btn-orange">
                         <i class="icon icon-photo-plus white"></i>
                     </span>
-                    <a href="" ng-click="view.addVideo.show = true" class="alignleft btn-circle btn-orange">
+                    <span ng-file-select="addQuestionImage($files[0])" ng-if="!readonly" class="alignleft btn-circle btn-orange">
+                        <i class="icon icon-photo-plus white"></i>
+                    </span>
+                    <a href="" ng-click="readonly || (view.addVideo.show = true)" ng-disabled="readonly" class="alignleft btn-circle btn-orange">
                         <i class="icon icon-video-plus white"></i>
                     </a>
                 </div><!-- /.alignleft -->
@@ -23,7 +26,7 @@
             </div><!-- /.col col-1of2 -->
 
 			<div class="col col-2" ng-if="question_type != 1">
-                <a href="" ng-click="addOption()" ng-disabled="!(options.length < 6)" class="alignleft btn-circle btn-grey">
+                <a href="" ng-click="readonly || addOption()" ng-disabled="options.length >= 6 || readonly" class="alignleft btn-circle btn-grey">
                     <i class="icon white icon-text-plus"></i>
                 </a>
 
@@ -35,13 +38,13 @@
                     </li>
                     <li ng-repeat="option in options">
                         <div class="checkbox">
-                            <input type="checkbox" ng-model="option.correct" id="mo{{$index}}">
+                            <input type="checkbox" ng-model="option.correct" id="mo{{$index}}" ng-disabled="readonly">
 
                             <label class="form-label" for="mo{{$index}}"></label>
 
-                            <input class="form-field" ng-model="option.text" placeholder="Answer" />
+                            <input class="form-field" ng-model="option.text" placeholder="Answer" ng-readonly="readonly" />
 
-                            <a href="" class="fa fa-trash-o" ng-click="deleteOption(option)"></a>
+                            <a href="" class="fa fa-trash-o" ng-click="deleteOption(option)" ng-hide="readonly"></a>
                         </div><!-- /.checkbox -->
                     </li>
 
@@ -77,9 +80,9 @@
 		</div><!-- /.popup-body -->
 
 		<div class="popup-actions">
-			<a href="" class="btn btn-grey" ng-click="cancel()">Cancel</a>
+			<a href="" class="btn btn-grey" ng-click="cancel()" ng-bind="readonly ? 'Done' : 'Cancel'"></a>
 			
-			<a href="" class="btn btn-green" ng-click="save()">Save</a>
+			<a href="" class="btn btn-green" ng-click="save()" ng-if="!readonly">Save</a>
 		</div><!-- /.popup-actions -->
 
 

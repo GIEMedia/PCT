@@ -917,4 +917,14 @@ form.ng-dirty input.ng-invalid {
     border-bottom: 1px dashed red;
 }
 
+.sortable-handle {
+    cursor: pointer;
+}
 
+span[ng-file-select] {
+    cursor: pointer;
+}
+
+span[disabled] {
+    cursor: not-allowed;
+}
