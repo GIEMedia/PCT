@@ -1,11 +1,12 @@
 <div class="notifications">
     <!-- information warning error -->
-    <div class="notification" ng-class="{1: 'information', 2: 'warning', 3: 'error'}[problem.severity]" ng-repeat="problem in validation">
+    <div class="notification" ng-class="{1: 'information dismissable', 2: 'warning dismissable', 3: 'error'}[problem.severity]" ng-repeat="problem in validation">
         <span ng-bind="problem.message"></span>
         <a href="" ng-click="toProblem(problem)">
             <i class="fa fa-hand-o-right"></i>
             Resolve this issue.
         </a>
+        <i class="fa fa-close" ng-if="problem.severity != 3" ng-click="dismiss(problem)"></i>
     </div>
 
     <div class="notification loading" ng-if="validation == null">

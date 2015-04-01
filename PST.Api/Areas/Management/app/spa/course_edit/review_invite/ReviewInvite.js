@@ -97,7 +97,11 @@
                                 });
                             }
                         }
-                    }
+                    };
+
+                    $scope.dismiss = function(problem) {
+                        Cols.remove(problem, $scope.validation);
+                    };
 
                 }
             };
