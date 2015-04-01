@@ -2,7 +2,7 @@
     <div class="shell">
         <div class="section-body-inner" >
 
-
+            <check-published-course></check-published-course>
 
             <div class="custom-table">
                 <div class="table-row">
@@ -11,7 +11,7 @@
                     </div><!-- /.table-col -->
 
                     <div class="table-col col-size-2">
-                        <input type="text" class="field" placeholder="Course Title" ng-model="cei.course.title">
+                        <input type="text" class="field" placeholder="Course Title" ng-model="cei.course.title" ng-readonly="course.status == 1">
                     </div><!-- /.table-col -->
 
                     <div class="table-col col-size-3"></div><!-- /.table-col -->
@@ -24,12 +24,12 @@
                         </div><!-- /.table-col -->
 
                         <div class="table-col col-size-2">
-                            <select name="field-select" class="select" pct-model="cei.course.category" pct-options="category.id as category.title for category in categories">
-                            </select>
+                            <span name="field-select" class="select" pct-model="cei.course.category" pct-disabled="course.status == 1" pct-options="category.id as category.title for category in categories">
+                            </span>
                         </div><!-- /.table-col -->
 
                         <div class="table-col col-size-3">
-                            <a href="" ng-click="addNewCategory()" class="btn btn-grey">ADD NEW</a>
+                            <button ng-click="addNewCategory()" class="btn btn-grey" ng-disabled="course.status == 1">ADD NEW</button>
                         </div><!-- /.table-col -->
                     </div><!-- /.table-row -->
                     <div class="table-row">
@@ -37,12 +37,12 @@
                             <h3>Sub Category</h3>
                         </div><!-- /.table-col -->
                         <div class="table-col col-size-2">
-                            <select name="field-select" class="select" pct-model="cei.course.sub_category" pct-options="subcat.id as subcat.title for subcat in getCat(cei.course.category).sub_categories">
-                            </select>
+                            <span name="field-select" class="select" pct-model="cei.course.sub_category" pct-disabled="course.status == 1" pct-options="subcat.id as subcat.title for subcat in getCat(cei.course.category).sub_categories">
+                            </span>
                         </div><!-- /.table-col -->
 
                         <div class="table-col col-size-3">
-                            <a href="" ng-click="addNewSubCategory()" class="btn btn-grey fancybox.ajax popup-open">ADD NEW</a>
+                            <button ng-click="addNewSubCategory()" class="btn btn-grey fancybox.ajax popup-open" ng-disabled="course.status == 1">ADD NEW</button>
                         </div><!-- /.table-col -->
                     </div><!-- /.table-row -->
                 </div>
@@ -57,8 +57,8 @@
                     </div><!-- /.table-col -->
 
                     <div class="table-col col-size-4">
-                        <select name="field-select" id="field-select" class="select" pct-model="cei.course.prerequisite_course" null-option="Not available" pct-options="pc.id as pc.title for pc in prerequisites">
-                        </select>
+                        <span name="field-select" id="field-select" class="select" pct-model="cei.course.prerequisite_course" pct-disabled="course.status == 1" null-option="Not available" pct-options="pc.id as pc.title for pc in prerequisites">
+                        </span>
                     </div><!-- /.table-col -->
                 </div><!-- /.table-row -->
             </div><!-- /.custom-table -->

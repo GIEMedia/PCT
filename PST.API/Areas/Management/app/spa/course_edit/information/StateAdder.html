@@ -1,14 +1,14 @@
 <div class="table-col col-size-2">
-    <select name="field-add-new-state" id="field-add-new-state" class="select" pct-model="stateAdder.model.state" pct-options="state.code as state.name for state in filteredStates">
-    </select>
+    <span name="field-add-new-state" id="field-add-new-state" class="select" pct-model="stateAdder.model.state" pct-disabled="course.status == 1" pct-options="state.code as state.name for state in filteredStates">
+    </span>
 </div><!-- /.table-col -->
 
 <div class="table-col col-size-3">
-    <input type="text" placeholder="Code" ng-model="stateAdder.model.category_code" required />
+    <input type="text" placeholder="Code" ng-model="stateAdder.model.category_code" ng-readonly="course.status == 1" required />
 </div><!-- /.table-col -->
 
 <div class="table-col col-size-4">
-    <input type="text" placeholder="Hours" ng-model="stateAdder.model.hours" number-only="{decimalPlaces: 2, negative: false}" required/>
+    <input type="text" placeholder="Hours" ng-model="stateAdder.model.hours" ng-readonly="course.status == 1" number-only="{decimalPlaces: 2, negative: false}" required/>
 </div><!-- /.table-col -->
 
 <div class="table-col col-size-5">

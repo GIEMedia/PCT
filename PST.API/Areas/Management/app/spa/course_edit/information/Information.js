@@ -46,6 +46,10 @@
 
                 },
                 needSaving: function() {
+                    if ($scope.cei.course==null || $scope.course == null) {
+                        return false;
+                    }
+                    $scope.cei.course.status = $scope.course.status;
                     return !ObjectUtil.equals($scope.cei.course, $scope.course);
                 },
                 reset: function() {

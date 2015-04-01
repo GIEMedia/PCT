@@ -155,5 +155,33 @@
                 $state.go('courseEdit.' + $scope.steps[page].state, {courseId: $scope.course.id});
             };
         }])
+
+        .directive("checkPublishedCourse", ["CourseService", function(CourseService) {
+            return {
+                restrict: "E",
+                templateUrl: "Areas/Management/app/spa/course_edit/CheckPublishedCourse.html",
+                link: function($scope, elem, attrs) {
+                    $scope.$watch("course.status == 1", function(value) {
+                        if (!value) {
+                            elem.hide();
+                        } else {
+                            elem.show();
+                        }
+                    });
+
+                    $scope.changeToDraft = function() {
+                        $scope.course.status = status;
+                        //return CourseService.setStatus($scope.course.id, 0).success(function() {
+                        //    $scope.course.status = 0;
+                        //});
+                    };
+
+                    $scope.dismiss = function() {
+                        elem.hide();
+                    }
+
+                }
+            };
+        }])
     ;
 })();

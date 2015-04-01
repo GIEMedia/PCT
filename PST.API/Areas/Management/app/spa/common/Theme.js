@@ -66,7 +66,27 @@
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
-                    elem.selectBoxIt({
+                    var selectBoxContainer = $("<span></span>");
+                    var label = $("<input class='field' readonly='readonly' placeholder='Select...' style='display: none'>");
+                    var selectBox = $("<select></select>");
+                    selectBoxContainer.append(selectBox);
+                    elem.append(selectBoxContainer);
+                    elem.append(label);
+
+                    if (attrs.pctDisabled) {
+                        $scope.$watch(attrs.pctDisabled, function(disabled) {
+                            if (disabled) {
+                                label.show();
+                                selectBoxContainer.hide();
+                            } else {
+                                label.hide();
+                                selectBoxContainer.show();
+                            }
+                        });
+
+                    }
+
+                    selectBox.selectBoxIt({
                         autoWidth: false,
                         defaultText: "Select..."
                     });
@@ -84,7 +104,7 @@
 
                     var updatingView = false;
                     var updateV = function (value) {
-                        var control = elem.data("selectBox-selectBoxIt");
+                        var control = selectBox.data("selectBox-selectBoxIt");
 
                         var index = (value == null && attrs.nullOption) ? -1 : Cols.indexOf(value, list, valueM);
                         //console.log("Index: " + index + ", currentFocus: " + control.currentFocus);
@@ -96,7 +116,9 @@
 
                             if (neverSelected || index != control.currentFocus) { // Force change when neverSelected because it maybe the defaultText (==0)
                                 updatingView = true;
+
                                 control.selectOption(index);
+                                label.val(list == null ? "" : textM(list[index]));
                                 updatingView = false;
                                 //console.log("Go to index: " + index);
                                 neverSelected = false;
@@ -104,13 +126,12 @@
                         }
                     };
 
-
                     $scope.$watch(listExp, function(listVal) {
                         //console.log("Changed " + listVal + " list=" + list);
                         if (listVal == list) {
                             return;
                         }
-                        var control = elem.data("selectBox-selectBoxIt");
+                        var control = selectBox.data("selectBox-selectBoxIt");
 
                         if (Cols.isNotEmpty(list)) {
                             control.remove();
@@ -139,7 +160,7 @@
                     });
 
                     var currentValue = function() {
-                        var control = elem.data("selectBox-selectBoxIt");
+                        var control = selectBox.data("selectBox-selectBoxIt");
                         var index = control.currentFocus;
 
                         if (attrs.nullOption) {
@@ -152,7 +173,7 @@
                         return valueM(list[index]);
                     };
 
-                    elem.bind({
+                    selectBox.bind({
                         "change": function(ev, obj) {
                             if (updatingView) {
                                 return;
@@ -168,6 +189,7 @@
                     //console.log("Watch registered");
                     $scope.$watch(attrs.pctModel, updateV);
                     //if (!$scope.$$phase) $scope.$digest();
+
                 }
             };
         }])
