@@ -33,6 +33,9 @@
                             question_type: questionType
                         });
                         $scope.expandeds[$scope.questions.length - 1] = true;
+                        setTimeout(function() {
+                            window.scrollTo(0,document.body.scrollHeight);
+                        }, 200); // 200 for animations to finish
                     }
 
                     $scope.addTextQuestion = function() {
