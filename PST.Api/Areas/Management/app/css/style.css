@@ -817,13 +817,14 @@ img.option-image {  width: auto; height: 73px;  }
     padding: 10px 10px 10px 40px;
     font-size: 14px;
     overflow: hidden;
-    height: 54px;
+    min-height: 54px;
+    height: auto;
     color: black;
-    -webkit-transition: .5s height, .5s padding-top, .5s padding-bottom;
-    -moz-transition: .5s height, .5s padding-top, .5s padding-bottom;
-    -ms-transition: .5s height, .5s padding-top, .5s padding-bottom;
-    -o-transition: .5s height, .5s padding-top, .5s padding-bottom;
-    transition: .5s height, .5s padding-top, .5s padding-bottom;
+    -webkit-transition: .5s height, .5s padding-top, .5s padding-bottom, .5s min-height;
+    -moz-transition: .5s height, .5s padding-top, .5s padding-bottom, .5s min-height;
+    -ms-transition: .5s height, .5s padding-top, .5s padding-bottom, .5s min-height;
+    -o-transition: .5s height, .5s padding-top, .5s padding-bottom, .5s min-height;
+    transition: .5s height, .5s padding-top, .5s padding-bottom, .5s min-height;
     -webkit-box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2);
     box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2);
 }
@@ -847,6 +848,7 @@ img.option-image {  width: auto; height: 73px;  }
     padding-top: 0;
     padding-bottom: 0;
     height: 0;
+    min-height: 0;
     -webkit-box-shadow: none;
     box-shadow: none;
     border-bottom: none;
