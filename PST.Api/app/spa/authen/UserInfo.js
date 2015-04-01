@@ -45,7 +45,7 @@
                         .onError(function(error, status) {
                             $scope.ui.loggingin = false;
                             if (status == 400) {
-                                alert('Your login failed.');
+                                alert('Incorrect Username or Password.');
                                 $scope.loginForm.password = null;
                                 return true;
                             } else {
