@@ -170,10 +170,10 @@
                     });
 
                     $scope.changeToDraft = function() {
-                        $scope.course.status = status;
-                        //return CourseService.setStatus($scope.course.id, 0).success(function() {
-                        //    $scope.course.status = 0;
-                        //});
+                        //$scope.course.status = status;
+                        return CourseService.setStatus($scope.course.id, 0).success(function() {
+                            $scope.course.status = 0;
+                        });
                     };
 
                     $scope.dismiss = function() {

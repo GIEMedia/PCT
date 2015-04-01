@@ -67,7 +67,7 @@
                         if (course) {
                             CourseService.validate(course.id).success(function(validation) {
                                 $scope.validation = validation;
-                                $scope.valid = Cols.isEmpty(validation);
+                                $scope.valid = Cols.isEmpty(Cols.filter(validation, function(p) { return p.severity == 3; }));
                             });
                         }
                     });
