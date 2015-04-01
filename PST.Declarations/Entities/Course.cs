@@ -157,10 +157,10 @@ namespace PST.Declarations.Entities
 
             foreach (var s in Sections.Where(s => s.Questions != null))
                 foreach (var q in s.Questions.Where(q => q.CorrectResponseHeading.IsNullOrEmpty() || q.CorrectResponseText.IsNullOrEmpty()))
-                    yield return new m_validation_error(m_validation_error.Severity.Warning, s.ID, q.ID, null, "The question '{0}' of section '{1}' has correct response heading and/or text.", q.QuestionText, s.Title);
+                    yield return new m_validation_error(m_validation_error.Severity.Warning, s.ID, q.ID, null, "The question '{0}' of section '{1}' is missing the correct response heading and/or text.", q.QuestionText, s.Title);
             if (Test != null && Test.Questions != null)
                 foreach (var q in Test.Questions.Where(q => q.CorrectResponseHeading.IsNullOrEmpty() || q.CorrectResponseText.IsNullOrEmpty()))
-                    yield return new m_validation_error(m_validation_error.Severity.Warning, null, q.ID, null, "The question '{0}' of the test has correct response heading and/or text.", q.QuestionText);
+                    yield return new m_validation_error(m_validation_error.Severity.Warning, null, q.ID, null, "The question '{0}' of the test is missing the correct response heading and/or text.", q.QuestionText);
 
             foreach (var s in Sections.Where(s => s.Questions != null))
                 foreach (var q in s.Questions.OfType<SingleImageQuestion>().Where(q => q.ImageUrl.IsNullOrEmpty()))
