@@ -763,7 +763,9 @@ img.option-image {  width: auto; height: 73px;  }
 .popup-add-video .btn { line-height: 29px; margin-left: 5px; padding: 0; width: 35px; }
 .popup-add-video .btn .fa { font-size: 16px; }
 
-.popup-text-style { display: none; position: absolute; height: 56px; top: 136px; left: 85px; background: white; border: solid 2px #E5E5E5; width: auto; white-space: nowrap; padding: 10px; }
+.popup-text-style {
+    z-index: 8050;
+    display: none; position: absolute; height: 56px; top: 136px; left: 85px; background: white; border: solid 2px #E5E5E5; width: auto; white-space: nowrap; padding: 10px; }
 .popup-text-style:before { position: absolute; width: 0; height: 0; border-style: solid; content: ''; bottom: -8px; border-width: 8px 8px 0 8px; border-color: #E5E5E5 transparent transparent; left: 50%; left: calc(50% - 8px); }
 .popup-text-style .btn { line-height: 29px; margin-left: 5px; padding: 0; width: 35px; }
 .popup-text-style .btn .fa { font-size: 16px; }

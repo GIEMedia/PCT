@@ -52,7 +52,7 @@
                             selected.$element = elem;
                             selected.$ctrl = ngModelCtrl;
                         }
-                        if (selected.text) {
+                        if (selected.text && !elem.attr("readonly")) {
                             $popup.show();
                             var offset = $(this).offset();
                             $popup.css('top', offset.top - $('.popup-text-style').outerHeight() - 8);

@@ -104,7 +104,7 @@ namespace PST.Api
                 "~/Areas/Management/app/spa/api/SectionService.js",
                 "~/Areas/Management/app/spa/api/StateService.js",
                 "~/Areas/Management/app/spa/api/UserService.js",
-                "~/Areas/Management/app/spa//app.js",
+                "~/Areas/Management/app/spa/app.js",
                 "~/Areas/Management/app/spa/common/Fancybox.js",
                 "~/Areas/Management/app/spa/common/Markup.js",
                 "~/Areas/Management/app/spa/common/Sorter.js",

@@ -44,6 +44,9 @@
             });
             CourseService.getProgress($stateParams.id, function(progress) {
                 $scope.progress = progress;
+
+                //ObjectUtil.clear(progress);
+                //console.log(progress);
             });
 
             $scope.courseHelp = PreferenceService.isHelpEnabled();
