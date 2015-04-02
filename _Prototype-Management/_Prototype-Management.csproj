@@ -172,6 +172,7 @@
     <Content Include="css\jquery.fancybox.css" />
     <Content Include="css\selectboxit.css" />
     <Content Include="css\style.css" />
+    <Content Include="js\jquery-textrange.js" />
     <Content Include="js\functions.js" />
     <Content Include="js\jquery-1.11.0.min.js" />
     <Content Include="js\jquery-ui-1.10.4.custom.min.js" />

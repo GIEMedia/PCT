@@ -442,14 +442,51 @@
                                         </div><!-- /.foot -->
                                     </div><!-- /.table-row-expand -->
                                 </div><!-- /.table-row -->
+                            
+							    <script>
+                                    $(document).ready(function () {
+                                        var selected;
+                                        var $popup = $('.popup-text-style');
+                                        $('.field, textarea').on('updateInfo keyup mousedown mouseup', function () {
+    							            var range = $(this).textrange();
+    							            if (!selected || range.text != selected.text) {
+    							                selected = range;
+							                    selected.$element = $(this);
+							                    console.log(selected);
+    							            }
+    							            if (selected.text) {
+    							                $popup.show();
+    							                var offset = $(this).offset();
+    							                $popup.css('top', offset.top - $('.popup-text-style').outerHeight() - 8);
+    							                $popup.css('left', offset.left);
+    							            } else
+    							                $popup.hide();
+                                        });
 
-                                <div class="table-row expanded new-question">
+                                        var modText = function(letter) {
+                                            if (selected && selected.$element && selected.$element.length > 0) {
+                                                var text = selected.$element.val();
+                                                text = text.substring(0, selected.end) + '[/' + letter + ']' + text.substring(selected.end);
+                                                text = text.substring(0, selected.start) + '[' + letter + ']' + text.substring(selected.start);
+                                                selected.$element.val(text);
+                                                selected = null;
+                                                $popup.hide();
+                                            }
+                                        };
+
+                                        $popup.find('.fa-bold').on('click', function () { modText('b'); });
+                                        $popup.find('.fa-italic').on('click', function () { modText('i'); });
+                                        $popup.find('.fa-underline').on('click', function () { modText('u'); });
+                                    });
+    							</script>
+                            
+							    <div class="table-row expanded new-question">
                                     <div class="inner">
                                         <div class="table-col col-size-1">
                                             <div class="number">5</div><!-- /.number -->
                                         
                                             <h2 class="question">(Empty - Question will be removed on save)</h2>
-                                            <input type="text" class="field" value="" placeholder="Question" />
+                                            <input id="testthis" type="text" class="field" value="" placeholder="Question" />
 
                                             <div class="question-icons">
                                                 <a href="#" class="icon icon-chevron-up"></a>
@@ -562,5 +599,12 @@
         </footer><!-- /.footer -->
 	</section><!-- /.container -->
 </div><!-- /.wrapper -->
+    
+    <div class="popup-text-style">
+        <i class="btn btn-grey fa fa-bold"></i>
+        <i class="btn btn-grey fa fa-italic"></i>
+        <i class="btn btn-grey fa fa-underline"></i>
+    </div>
+
 </body>
 </html>
