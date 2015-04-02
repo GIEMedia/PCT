@@ -45,7 +45,7 @@
                 var sendHttp = function(method, url, data) {
                     return handleError($http({
                         method: method,
-                        url: (_host==null? "" : "http://" + _host + "/") + url,
+                        url: (_host? "http://" + _host + "/" : "") + url,
                         headers: {'Authorization': "Bearer " + sessionStorage.access_token},
                         data: data
                     }));
@@ -67,7 +67,7 @@
                     postForm: function(url, data) {
                         return handleError($http({
                             method: 'POST',
-                            url: (_host==null? "" : "http://" + _host + "/") + url,
+                            url: (_host? "http://" + _host + "/" : "") + url,
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                             transformRequest: function(obj) {
                                 var str = [];
@@ -81,7 +81,7 @@
                     upload: function(url, file) {
                         return handleError($upload.upload({
                             method: 'POST',
-                            url: (_host==null? "" : "http://" + _host + "/") + url,
+                            url: (_host? "http://" + _host + "/" : "") + url,
                             headers: {'Authorization': "Bearer " + sessionStorage.access_token},
                             file: file
                         }));

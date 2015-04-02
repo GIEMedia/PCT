@@ -5,6 +5,8 @@
     angular.module("pct.management", [
         'pct.Security',
 
+        'pct.markup',
+
         'pct.management.layout',
         'pct.management.theme',
 

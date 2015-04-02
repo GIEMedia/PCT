@@ -20,7 +20,7 @@
                 </div>
             </div><!-- /.course-question-head -->
 
-            <h3 class="test-question-title">{{question.question_text}}</h3><!-- /.test-question-title -->
+            <h3 class="test-question-title" markup="question.question_text"></h3><!-- /.test-question-title -->
             <h5 ng-if="question.multi_select">(check all that apply)</h5>
         </div><!-- /.test-question -->
     </div><!-- /.col col-1of2 -->
@@ -40,9 +40,7 @@
                         ></e-options>
 
                 <div class="course-question-options correct" ng-if="correctAnswer(question)">
-                    <div class="course-question-option course-question-option-header">
-                        {{correctAnswer(question).correct_response_heading}}
-                    </div>
+                    <div class="course-question-option course-question-option-header" markup="correctAnswer(question).correct_response_heading"></div>
 
                     <div class="course-question-options-pictures" ng-if="question.option_type==1">
 
@@ -62,13 +60,11 @@
 
                             <input type="radio" ng-checked="hasIdIn(correctAnswer(question).correct_options)(option)">
 
-                            <label>{{option.text}}</label>
+                            <label markup="option.text"></label>
                         </div><!-- /.course-question-option -->
                     </div>
 
-                    <div class="course-question-option-description">
-                        {{ correctAnswer(question).correct_response_text }}
-                    </div><!-- /.course-question-option -->
+                    <div class="course-question-option-description" markup="correctAnswer(question).correct_response_text"></div><!-- /.course-question-option -->
                 </div><!-- /.course-questions-options -->
             </div><!-- /.form-body -->
 

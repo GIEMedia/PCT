@@ -29,7 +29,7 @@
                 <div class="number">{{$index + 1}}</div><!-- /.number -->
 
                 <h2 class="question">{{isEmpty(question) ? "(Empty - Question will be removed on saved)" : ellipsis((question.question_text || "(Empty)") + (isMultipleCorrect(question) ? " (check all that apply)" : ""), 90)}}</h2><!-- /.question -->
-                <input type="text" class="field" ng-model="question.question_text" placeholder="Question" ng-readonly="readonly" />
+                <input type="text" class="field" markup-editor ng-model="question.question_text" placeholder="Question" ng-readonly="readonly" />
 
                 <div class="question-icons">
                     <a href="" class="icon icon-chevron-up"></a>
@@ -87,8 +87,8 @@
 
                 <div class="col col-2">
                     <div class="inner">
-                        <input type="text" placeholder="Response heading" ng-model="question.response_heading" class="field" ng-readonly="readonly" />
-                        <textarea class="textarea" placeholder="Response message" ng-model="question.response_message" ng-readonly="readonly"></textarea>
+                        <input type="text" markup-editor placeholder="Response heading" ng-model="question.response_heading" class="field" ng-readonly="readonly" />
+                        <textarea class="textarea" markup-editor placeholder="Response message" ng-model="question.response_message" ng-readonly="readonly"></textarea>
                     </div><!-- /.inner -->
                 </div><!-- /.col col-2 -->
             </div><!-- /.inner -->

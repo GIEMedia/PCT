@@ -21,12 +21,10 @@
 
     <i class="fa fa-lightbulb-o tip" ng-if="question.tip"></i>
     <div class="popup popup-point-right-top" id="tip" ng-if="question.tip">
-        <span>
-            {{question.tip}}
-        </span>
+        <span markup="question.tip"></span>
     </div>
 
-    <h4 class="course-question-title">{{question.question_text}}</h4><!-- /.course-question-title -->
+    <h4 class="course-question-title" markup="::question.question_text"></h4><!-- /.course-question-title -->
     <h5 ng-if="question.multi_select">(check all that apply)</h5>
 </div><!-- /.course-question-head -->
 <div class="course-question-body">

@@ -3,6 +3,8 @@
 (function () {
     /* App Module */
     angular.module("pct.elearning", [
+            'pct.markup',
+
             'pct.elearning.theme',
             'pct.elearning.authen',
             'pct.elearning.course',
