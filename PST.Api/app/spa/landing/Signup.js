@@ -23,8 +23,11 @@
                                 SecurityService.login($scope.signup.email, $scope.signup.password, true);
                             })
                             .onError(function(data) {
-                                //{"Message":"The request is invalid.","ModelState":{"":["Account with this UserName already exists"]}}
-                                alert(JSON.stringify(data));
+                                if (data.ModelState != null && data.ModelState[""] != null && data.ModelState[""].length == 1) {
+                                    alert(data.ModelState[""][0]);
+                                } else {
+                                    alert(JSON.stringify(data));
+                                }
                                 $scope.signup.loading = false;
                                 return true;
                             })
