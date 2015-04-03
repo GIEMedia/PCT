@@ -10,10 +10,10 @@
                 restrict: "C",
                 scope: true,
                 link: function($scope, elem, attrs) {
-                    $scope.print = function() {
+                    elem.find(".course-control-print").click(function() {
                         var newWindow = window.open($scope.section.document.pdf_url, "_blank");
                         newWindow.print();
-                    };
+                    });
                 }
             };
         })
@@ -158,16 +158,23 @@
                 templateUrl: "/app/spa/course/CourseHelp.html",
                 link: function($scope, elem, attrs) {
                     elem.find('.popup[step] button').click(function () {
-                        var step = parseInt($(this).closest('.popup[step]').attr('step'));
-                        elem.find('.popup[step="' + step + '"]:visible').removeClass('open');
-                        elem.find('.popup[step="' + (step + 1) + '"]:visible').addClass('open');
+                        var thisStep = $(this).closest('.popup[step]');
+                        var stepNum = parseInt(thisStep.attr('step'));
+                        thisStep.removeClass('open');
+                        var nextStep = elem.find('.popup[step="' + (stepNum + 1) + '"]:visible');
+                        if (nextStep.length == 1) {
+                            nextStep.addClass('open');
+                        } else {
+                            elem.remove();
+                        }
                     });
 
                     elem.find('.help-wrapper button').click(function() {
                         elem.find('#helpClose').toggleClass('open');
                     });
                     elem.find('#helpClose button').click(function () {
-                        elem.find('.open').removeClass('open');
+                        //elem.find('.open').removeClass('open');
+                        elem.remove();
                     });
                     elem.find('#helpClose button.no').click(function () {
                         PreferenceService.setHelpEnabled(false);
