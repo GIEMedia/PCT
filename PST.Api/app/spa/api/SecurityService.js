@@ -87,7 +87,7 @@
                     })
                     .onError(function(error, status) {
                         if (status == 401) {
-                            sessionStorage.access_token = null;
+                            delete sessionStorage.access_token;
                             $state.go(loginState);
                             return true;
                         } else {
@@ -149,7 +149,7 @@
                 },
                 logout: function() {
                     Api.delete("api/account/logout").then(function() {
-                        sessionStorage.access_token = null;
+                        delete sessionStorage.access_token;
                         User.loggedIn = false;
                         User.firstName = null;
                         User.fullName = null;
