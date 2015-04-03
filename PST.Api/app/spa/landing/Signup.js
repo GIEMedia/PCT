@@ -20,7 +20,7 @@
                         $scope.signup.loading = true;
                         AccountService.createAccount($scope.signup)
                             .success(function() {
-                                SecurityService.login($scope.signup.email, $scope.signup.password, true);
+                                SecurityService.login($scope.signup.email, $scope.signup.password, true, true);
                             })
                             .onError(function(data) {
                                 if (data.ModelState != null && data.ModelState[""] != null && data.ModelState[""].length == 1) {

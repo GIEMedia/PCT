@@ -121,7 +121,7 @@
             });
 
             return {
-                login: function(username, password, remember) {
+                login: function(username, password, remember, firstLogin) {
                     var data = {
                         grant_type: "password",
                         username: username,
@@ -140,7 +140,7 @@
                                 fetchUser();
 
                                 if (desiredState == null) {
-                                    $state.go("dashboard");
+                                    $state.go("dashboard", {firstLogin: firstLogin});
                                 } else {
                                     $state.go(desiredState.state, desiredState.params);
                                     desiredState = null;

@@ -10,15 +10,16 @@
 
             $stateProvider
                 .state('dashboard', {
-                    url: '/dashboard',
+                    url: '/dashboard?firstLogin',
                     templateUrl: "/app/spa/dashboard/Dashboard.html",
                     controller: "dashboard.Ctrl"
                 })
             ;
         }])
 
-        .controller("dashboard.Ctrl", ["$scope", "$state", "User", "CourseService", "DashboardHelper", function ($scope, $state, User, CourseService, DashboardHelper) {
+        .controller("dashboard.Ctrl", ["$scope", "$state", "$stateParams", "User", "CourseService", "DashboardHelper", function ($scope, $state, $stateParams, User, CourseService, DashboardHelper) {
             $scope.User = User;
+            $scope.firstLogin = $stateParams.firstLogin;
 
             CourseService.getNewCourses().success(function(courses) {
                 $scope.newCourses = courses;
