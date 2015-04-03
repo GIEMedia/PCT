@@ -67,11 +67,26 @@
                     modalScope.action = function(text) {
                         defer.resolve(text);
                     };
-                    modalScope.$on('$destroy', function () {
-                    });
                     open(modalScope, {
                         templateUrl: "Areas/Management/app/spa/common/popup-text.html",
                         controller: "pct.fancybox.PromptTextCtrl"
+                    })
+                        .onClose(function() {
+                            modalScope.$destroy();
+                        });
+                    return defer.promise;
+                },
+                confirm: function (title, text, onConfirm) {
+                    var defer = $q.defer();
+
+                    var modalScope = $rootScope.$new(true);
+                    modalScope.title = title;
+                    modalScope.text = text;
+                    modalScope.action = defer.resolve;
+                    open(modalScope, {
+                        templateUrl: "Areas/Management/app/spa/common/popup-confirm.html",
+                        controller: "pct.fancybox.ConfirmCtrl",
+                        width: 550
                     })
                         .onClose(function() {
                             modalScope.$destroy();
@@ -88,6 +103,14 @@
             $scope.close = $modalInstance.close;
             $scope.save = function() {
                 $scope.action($scope.pop.text);
+                $modalInstance.close();
+            };
+        }])
+
+        .controller("pct.fancybox.ConfirmCtrl", ["$scope", "$modalInstance", function($scope, $modalInstance) {
+            $scope.close = $modalInstance.close;
+            $scope.save = function() {
+                $scope.action();
                 $modalInstance.close();
             };
         }])

@@ -156,7 +156,7 @@
             };
         }])
 
-        .directive("checkPublishedCourse", ["CourseService", function(CourseService) {
+        .directive("checkPublishedCourse", ["CourseService", "Fancybox", function(CourseService, Fancybox) {
             return {
                 restrict: "E",
                 templateUrl: "Areas/Management/app/spa/course_edit/CheckPublishedCourse.html",
@@ -170,9 +170,10 @@
                     });
 
                     $scope.changeToDraft = function() {
-                        //$scope.course.status = status;
-                        return CourseService.setStatus($scope.course.id, 0).success(function() {
-                            $scope.course.status = 0;
+                        Fancybox.confirm("Unpublishing course","Are you sure to unpublish this course?\n\nCustomers will not be able to access this course.").then(function() {
+                            CourseService.setStatus($scope.course.id, 0).success(function() {
+                                $scope.course.status = 0;
+                            });
                         });
                     };
 
