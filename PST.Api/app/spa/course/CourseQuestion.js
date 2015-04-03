@@ -46,6 +46,11 @@
          * Display 1 question's options. Used in both course page and test page.
          */
         .directive("eOptions", function() {
+            function isIE() {
+                var ua = window.navigator.userAgent;
+                return ua.indexOf("MSIE ") > -1 || ua.indexOf("Trident/") > -1;
+            }
+
             return {
                 restrict: "E",
                 scope: {
@@ -62,9 +67,11 @@
                     };
 
                     // This is to workaround IE bug not selecting
-                    $scope.choose = function(index) {
+                    $scope.choose = function(index, $event) {
                         if ($scope.question.multi_select) {
-                            // Leave the default function of ng-model, IE is working fine here
+                            $scope.view.answer[index] = !$scope.view.answer[index];
+                            $event.preventDefault();
+                            return false;
                         } else {
                             $scope.view.answer[0] = $scope.question.options[index].option_id;
                         }
