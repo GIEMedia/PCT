@@ -17,9 +17,9 @@
         <label for="option{{$index}}" ng-class="{correct: isHighlightCorrect(option)}" ng-click="choose($index)">Select</label>
     </div><!-- /.course-question-option-picture -->
 </div><!-- /.course-questions-options-pictures -->
-{{view.answer}}
+
 <div class="course-question-options" ng-if="question.option_type==0">
-    <div class="course-question-option course-question-option-header" ng-if="question.correct != null">
+    <div class="course-question-option course-question-option-header" ng-if="retry">
         Retry
     </div>
     <div class="course-question-option" ng-repeat="option in question.options">
