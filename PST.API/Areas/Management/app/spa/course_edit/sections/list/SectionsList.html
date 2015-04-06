@@ -37,7 +37,7 @@
                             <td class="section-name">
                                 <span class="name">{{section.title}}</span>
                                 <span class="name-edit">
-                                    <input type="text" class="field" tabindex="1" ng-model="editName.title" placeholder="Section name" pct-focus="editName.editing"/>
+                                    <input type="text" class="field" tabindex="1" ng-model="editName.title" placeholder="Section name" ng-maxlength="200" pct-focus="editName.editing"/>
                                     <a href="" class="fa fa-save" tabindex="1" ng-click="saveTitle()"></a>
                                     <a href="" class="fa fa-close" ng-click="editName.editing = false"></a>
                                 </span>
@@ -78,7 +78,7 @@
                         <tr ng-hide="course.status == 1">
                             <td>{{sections.length + 1}}</td>
 
-                            <td><input type="text" class="field" placeholder="Add new section" ng-model="inserting.title"/></td>
+                            <td><input type="text" class="field" placeholder="Add new section" ng-maxlength="200" ng-model="inserting.title"/></td>
 
                             <td colspan="3">
                                 <div class="btns">

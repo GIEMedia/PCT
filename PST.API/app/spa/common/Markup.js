@@ -1,7 +1,7 @@
 "use strict";
 
 (function () {
-    
+
     angular.module('pct.markup', [
         "ngSanitize"
     ])
