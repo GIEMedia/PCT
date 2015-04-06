@@ -1,7 +1,7 @@
 "use strict";
 
 (function () {
-
+    
     angular.module('pct.markup', [
         "ngSanitize"
     ])
@@ -12,8 +12,12 @@
                     $scope.$watch(attrs.markup, function(markup) {
                         if (markup) {
                             elem.html($sanitize(
-                                markup.replace(/\[/g, "<")
-                                .replace(/\]/g, ">")
+                                markup
+                                    .replace(/&/g, "&amp;")
+                                    .replace(/</g, "&lt;")
+                                    .replace(/ /g, "&nbsp;")
+                                    .replace(/>/g, "&lt;")
+                                    .replace(new RegExp("\\[(\\/?[ibuIBU])\\]","g"), "<$1>")
                             ));
                         } else {
                             elem.html("");
