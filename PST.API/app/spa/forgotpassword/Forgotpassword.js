@@ -58,9 +58,10 @@
                             $scope.sent = true;
                             $state.go('landing');
                         })
-                        .error(function() {
+                        .onError(function() {
                             $scope.sending = false;
                             $scope.error = true;
+                            return true;
                         })
                     ;
                 };

@@ -42,7 +42,7 @@
 
                             <label class="form-label" for="mo{{$index}}"></label>
 
-                            <input class="form-field" markup-editor ng-model="option.text" placeholder="Answer" ng-readonly="readonly" />
+                            <input class="form-field" markup-editor ng-model="option.text" placeholder="Answer" ng-maxlength="200" ng-readonly="readonly" />
 
                             <a href="" class="fa fa-trash-o" ng-click="deleteOption(option)" ng-hide="readonly"></a>
                         </div><!-- /.checkbox -->
@@ -87,7 +87,7 @@
 
 
         <div class="popup-add-video" ng-show="view.addVideo.show">
-            <input class="field" ng-model="view.addVideo.url" placeholder="Video URL" />
+            <input class="field" ng-model="view.addVideo.url" placeholder="Video URL" ng-maxlength="200" >
             <a href="" ng-click="addVideo()" class="btn btn-green"><i class="fa fa-check"></i></a>
             <a href="" ng-click="view.addVideo.show = false" class="btn btn-grey"><i class="fa fa-close"></i></a>
         </div>

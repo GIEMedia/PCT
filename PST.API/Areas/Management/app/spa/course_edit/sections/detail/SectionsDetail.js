@@ -31,6 +31,9 @@
                     return QuestionService.upsert($stateParams.courseId, $stateParams.sectionId, $scope.questions).success(function(questions) {
                         $scope.questionsMaster = questions;
                         $scope.questions = ObjectUtil.clone(questions);
+
+                        // Update questions count
+                        $scope.sections[$scope.sectionIndex()].num_questions = questions.length;
                     });
                 },
                 reset: function() {

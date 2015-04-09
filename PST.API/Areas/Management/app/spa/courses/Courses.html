@@ -29,7 +29,7 @@
                             <td colspan="5" pct-no-record-message></td>
                         </tr>
 
-                        <tr ng-repeat="course in view.filteredList = ( list | filter:view.search | sorterFilter:sorter)" course-row ng-class="{0: 'row-draft', 2: 'row-review'}[course.status]">
+                        <tr ng-repeat="course in view.filteredList = ( list | filter:view.search | sorterFilter:sorter)" course-row ng-class="{0: 'row-draft', 2: 'row-review'}[course.status]" course-id="{{course.id}}">
                             <td>
                                 {{::course.title}}
                             </td>
