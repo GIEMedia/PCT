@@ -223,6 +223,9 @@
                 });
             };
             $scope.addQuestionImage = function(image) {
+                if (!image) {
+                    return;
+                }
                 QuestionService.uploadQuestionImage(image).success(function(resp) {
                     var url = resp;
 
