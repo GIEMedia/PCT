@@ -17,8 +17,8 @@
             ;
         }])
 
-        .controller("settings.Ctrl", ["$scope", "Sorters", "LayoutService", "CategoryService", function ($scope, Sorters, LayoutService, CategoryService) {
-            CategoryService.getList().success(function(list) {
+        .controller("settings.Ctrl", ["$scope", "CategoryService", function ($scope, CategoryService) {
+            CategoryService.getList(true).success(function(list) {
                 $scope.list = list;
             });
 
@@ -38,7 +38,79 @@
                 });
 
                 return catCount + " Categories, " + subCatCount + " Sub Categories";
-            }
+            };
+
+        }])
+
+
+        .directive("settingsCatRow", ["CategoryService", function(CategoryService) {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+
+                    $scope.catRow = {
+                        editName : {
+                            editing: false,
+                            title: $scope.cat.title
+                        }
+                    };
+                    $scope.saveTitle = function() {
+                        CategoryService.setCatTitle($scope.catRow.editName.title, $scope.cat.id).success(function() {
+                            $scope.cat.title = $scope.catRow.editName.title;
+                            $scope.catRow.editName.editing = false;
+                        });
+                    };
+
+                    $scope.removeCat = function(cat) {
+                        if (!confirm("Remove category \"" + cat.title + "\"?")) {
+                            return;
+                        }
+                        $scope.removingCat = true;
+                        CategoryService.deleteCategory(cat.id).success(function() {
+                            Cols.remove(cat, $scope.list);
+                        });
+                    };
+
+                    $scope.hasCourseCat = function(cat) {
+                        return Cols.find(cat.sub_categories, function(sub) {
+                                return sub.course_count == null || sub.course_count > 0;
+                            }) != null;
+                    };
+
+                }
+            };
+        }])
+
+        .directive("settingsSubCatRow", ["CategoryService", function(CategoryService) {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+
+                    $scope.subRow = {
+                        editName : {
+                            editing: false,
+                            title: $scope.sub.title
+                        }
+                    };
+                    $scope.saveTitle = function() {
+                        CategoryService.setSubCatTitle($scope.subRow.editName.title, $scope.sub.id, $scope.cat.id).success(function() {
+                            $scope.sub.title = $scope.subRow.editName.title;
+                            $scope.subRow.editName.editing = false;
+                        });
+                    };
+
+                    $scope.removeSub = function(sub, cat) {
+                        if (!confirm("Remove sub category \"" + sub.title + "\"?")) {
+                            return;
+                        }
+
+                        $scope.removingSub = true;
+                        CategoryService.deleteSubCategory(sub.id, cat.id).success(function() {
+                            Cols.remove(sub, cat.sub_categories);
+                        });
+                    };
+                }
+            };
         }])
     ;
 })();

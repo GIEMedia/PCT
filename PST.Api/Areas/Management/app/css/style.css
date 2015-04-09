@@ -334,6 +334,21 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .table-courses-list table tr td .icon-certificate:hover,
 .custom-table-secondary.table-categories .table-col .fa:hover,
 .custom-table-secondary.table-categories .table-col .icon:hover { color: #00aded; }
+
+.custom-table-secondary.table-categories .editing-cat { background-color: #e5f7fd; }
+.custom-table-secondary.table-categories .editing-cat .fa-save { color: #4fcf6e; font-size: 17px; }
+.custom-table-secondary.table-categories .editing-cat .fa-close { color: #ff1d25; font-size: 20px; }
+.custom-table-secondary.table-categories .editing-cat .field { width: 595px; padding: 7px; }
+@media(max-width: 1290px) { .custom-table-secondary.table-categories .editing-cat .field { width: 215px; } }
+.custom-table-secondary.table-categories .category-name .name-edit .fa { margin-left: 5px; }
+
+.custom-table-secondary.table-categories .editing-sub { background-color: #e5f7fd; }
+.custom-table-secondary.table-categories .editing-sub .fa-save { color: #4fcf6e; font-size: 17px; }
+.custom-table-secondary.table-categories .editing-sub .fa-close { color: #ff1d25; font-size: 20px; }
+.custom-table-secondary.table-categories .editing-sub .field { width: 545px; padding: 7px; }
+@media(max-width: 1290px) { .custom-table-secondary.table-categories .editing-sub .field { width: 215px; } }
+.custom-table-secondary.table-categories .sub-category-name .name-edit .fa { margin-left: 5px; }
+
 .table-courses-list table tr td .icon-certificate { margin: 0 5px; font-size: 25px; color: #808080; }
 .table-report-course-list .fa { font-size: 18px; }
 

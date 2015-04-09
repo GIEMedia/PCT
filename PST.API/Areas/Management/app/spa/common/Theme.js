@@ -220,11 +220,11 @@
                         e.preventDefault();
                     });
                 },
-                controller: function($scope) {
+                controller: ["$scope", function($scope) {
                     this.close = function() {
                         $scope.close();
                     }
-                }
+                }]
             };
         })
 
