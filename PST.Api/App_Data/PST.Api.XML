@@ -547,6 +547,13 @@
             <param name="title">Title of category to add</param>
             <returns></returns>
         </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.DeleteCategory(System.Guid,System.Nullable{System.Guid})">
+            <summary>
+            Delete a category or sub category. The category must not be in use.
+            </summary>
+            <param name="categoryID">ID of category to delete</param>
+            <param name="parentCategoryID">ID of parent category (if sub-category).</param>
+        </member>
         <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.UpsertCourse(PST.Declarations.Models.Management.m_course)">
             <summary>
             Upsert course

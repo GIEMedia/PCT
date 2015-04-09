@@ -11,6 +11,7 @@ using System.Web.Hosting;
 using Ghostscript.NET.Rasterizer;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Logging;
+using PST.Declarations;
 using PST.Declarations.Interfaces;
 
 namespace PST.Services
@@ -20,8 +21,7 @@ namespace PST.Services
         private readonly IExceptionLogger _exceptionLogger;
         private static readonly string UploadFolderBase = HostingEnvironment.MapPath("~/Content/");
 
-        private static readonly string BaseUrl =
-            ConfigurationManager.AppSettings["BaseUrl"].Replace("http://", "//").Replace("https://", "//") + "Content/";
+        private static readonly string BaseUrl = MvcApplicationBase.BaseUrl + "/Content/";
 
         public UploadService(IExceptionLogger exceptionLogger)
         {

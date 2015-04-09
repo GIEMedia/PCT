@@ -16,11 +16,7 @@ namespace PST.Tests.ManagementTests
     {
         protected override string UrlBase
         {
-            get
-            {
-                return ConfigurationManager.AppSettings["BaseUrl"]
-                       + "api/manage/";
-            }
+            get { return MvcApplicationBase.BaseUrl + "/api/manage/"; }
         }
 
         [TestMethod]

@@ -301,11 +301,11 @@ namespace PST.Api.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("forgot_password")]
-        public async Task<IHttpActionResult> ForgotPassword(string username, bool management = false)
+        public async Task<IHttpActionResult> ForgotPassword(string username)
         {
             try
             {
-                var result = _resetPasswordProvider.ForgotPassword(username, management);
+                var result = _resetPasswordProvider.ForgotPassword(username, false);
                 return GetErrorResult(result) ?? StatusCode(HttpStatusCode.NoContent);
             }
             catch (ArgumentException ex)

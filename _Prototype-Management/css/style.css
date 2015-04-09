@@ -300,7 +300,9 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .table table tr.row-draft { background: url(images/diagonal-light-gray-stripped.png); }
 .table table tr td { padding: 15px 10px; }
 .table table tr td.text-center,
-.table table tr th.text-center { text-align: center; }
+.table table tr th.text-center { text-align: center !important; }
+.table table tr td.text-right,
+.table table tr th.text-right { text-align: right !important; }
 .table table tr td:first-child { border-left: 1px solid #d6e2e6; }
 .table table tr td:last-child { border-right: 1px solid #d6e2e6; }
 .table table tr td.padding-vert-0 { padding-top: 0; padding-bottom: 0; }
@@ -310,17 +312,26 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .table-user-list { padding-top: 25px; }
 .table-courses-list table tr td:first-child,
 .table-report-course-list table tr td:first-child  { color: #00aded; font-size: 14px; line-height: 16px; text-align: left; font-weight: 600; }
-.table-courses-list table tr td .icons { width: 100%; text-align: center; opacity: 0; -moz-opacity: 0;
+.table-courses-list table tr td .icons,
+.custom-table-secondary.table-categories .icons
+ { width: 100%; text-align: center; opacity: 0; -moz-opacity: 0;
 	-webkit-transition: 200ms; 
 	     -o-transition: 200ms; 
 	        transition: 200ms; }
-.table-courses-list table tr:hover td .icons { opacity: 1; -moz-opacity: 1; }
+.table-courses-list table tr:hover td .icons,
+.custom-table-secondary.table-categories .table-row:hover .icons { opacity: 1; -moz-opacity: 1; }
 .table-courses-list table tr td .icons .fa,
-.table-courses-list table tr td .icons .icon { font-size: 20px; line-height: 20px; color: #808080; margin-right: 10px; }
-.table-courses-list table tr td .icons a:last-child { margin-right: 0; }
+.table-courses-list table tr td .icons .icon,
+.custom-table-secondary.table-categories .table-col .icons .fa,
+.custom-table-secondary.table-categories .table-col .icons .icon
+ { font-size: 20px; line-height: 20px; color: #808080; margin-right: 10px; }
+.table-courses-list table tr td .icons a:last-child,
+.custom-table-secondary.table-categories .table-col a:last-child { margin-right: 0; }
 .table-courses-list table tr td .icons .fa:hover,
 .table-courses-list table tr td .icons .icon:hover,
-.table-courses-list table tr td .icon-certificate:hover { color: #00aded; }
+.table-courses-list table tr td .icon-certificate:hover,
+.custom-table-secondary.table-categories .table-col .fa:hover,
+.custom-table-secondary.table-categories .table-col .icon:hover { color: #00aded; }
 .table-courses-list table tr td .icon-certificate { margin: 0 5px; font-size: 25px; color: #808080; }
 .table-report-course-list .fa { font-size: 18px; }
 
@@ -395,6 +406,7 @@ table + .table-buttons,
 			box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2); }
 .custom-table .table-row-head .table-col { padding: 7px 10px; }
 .custom-table .table-row { background-color: #fff; border-bottom: 1px solid #d6e2e6; }
+.custom-table .table-row:hover { background-color: #e5f7fd; }
 .custom-table .table-col { float: left; padding: 15px 15px; position: relative; }
 .custom-table .table-col.col-size-3 { padding: 7px 5px; text-align: center; }
 .custom-table .table-col h3 { font-size: 14px; font-weight: 600; color: #666; line-height: 20px; }
@@ -460,20 +472,32 @@ table + .table-buttons,
 .custom-table-secondary .col-size-4 { width: 100px; }
 .custom-table-secondary .col-size-5 { width: 85px; }
 
+
+.custom-table-secondary.table-categories .col-size-2 { width: 665px; }
+@media(max-width: 1290px) { .custom-table-secondary.table-categories .col-size-2 { width: 365px; } }
+.custom-table-secondary.table-categories .col-size-3 { width: 150px; }
+.custom-table-secondary.table-categories .col-size-4 { width: 150px; text-align: center; }
+.custom-table-secondary.table-categories .col-size-7 { width: 50px; text-align: right; }
+.custom-table-secondary.table-categories .col-size-8 { width: 615px; }
+@media(max-width: 1290px) { .custom-table-secondary.table-categories .col-size-8 { width: 315px; } }
+
 .table-expand { top: 34px; left: 0; width: 100%; z-index: 10; display: none; }
 .table-expand .table-row { background-color: #fff; border-bottom: 1px solid #d6e2e6;  
 	-webkit-box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2);
 			box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2); }
+.table-expand .table-row:hover { background-color: #e5f7fd; }
 .table-expand .table-row .table-col.col-size-5 { padding: 7px 5px; }
 .table-expand .table-col h4 { color: #b3b3b3; font-weight: normal; }
 .table-expand .table-col h3 { color: #333; }
 .table-expand .table-col .btn { padding: 0; width: 100%; }
-.table-expand .table-col .fa-trash-o { color: #b3b3b3; font-size: 20px; text-align: center; display: block; margin-top: 8px; }
-.table-expand .table-col .fa-trash-o:hover { color: #00aded; }
+.custom-table-secondary:not(.table-categories) .table-expand .table-col .fa-trash-o { color: #b3b3b3; font-size: 20px; text-align: center; display: block; margin-top: 8px; }
+.custom-table-secondary:not(.table-categories) .table-expand .table-col .fa-trash-o:hover { color: #00aded; }
 
-.table-states { position: relative; }
-.table-states .icon { color: #b3b3b3; font-size: 20px; }
-.table-states .icon:hover { color: #00aded; }
+.table-states, .table-categories { position: relative; }
+.table-states .icon,
+.table-categories .icon { color: #b3b3b3; font-size: 20px; }
+.table-states .icon:hover,
+.table-categories .icon:hover { color: #00aded; }
 
 /* custom-table-questions */
 .custom-table-questions { }
@@ -618,6 +642,7 @@ table + .table-buttons,
 .custom-table-tests .table-row-expand { height: auto; }
 .custom-table-tests .table-row-expand .table table tr th { font-size: 10px; line-height: 16px; color: #666; font-weight: 600; }
 .custom-table-tests .table-row-expand .table table tr th.text-center { text-align: center; }
+.custom-table-tests .table-row-expand .table table tr th.text-right { text-align: right; }
 .custom-table-tests .table-row-expand .table table tr td h4 { font-size: 14px; line-height: 16px; color: #333; font-weight: normal; text-align: left;  }
 .custom-table-tests .table-row-expand .table table tr td h4 .fa { margin-right: 5px; display: none; }
 .custom-table-tests .table-row-expand .table table tr.checked { background-color: #edfaf0; }
