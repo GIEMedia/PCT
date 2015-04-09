@@ -7,6 +7,7 @@ using Microsoft.AspNet.Identity;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Interfaces;
 using Prototype1.Foundation.Providers;
+using Prototype1.Security;
 using PST.Api.Core.OAuth;
 using PST.Declarations;
 using PST.Declarations.Interfaces;
@@ -61,6 +62,8 @@ namespace PST.Services
 
         public string ReviewCourse(string name, string email, Guid courseID, string courseTitle)
         {
+            var token = ReversableToken.Tokenize(courseID.ToString());
+
             dynamic review = new ExpandoObject();
             review.BaseUrl = BaseUrl;
             review.BrowserUrl = string.Format("{0}/EmailTemplate/ReviewCourse/{4}?name={1}&email={2}&title={3}",
@@ -68,8 +71,8 @@ namespace PST.Services
                 courseID);
             review.ReviewerName = name;
             review.CourseTitle = courseTitle;
-            review.CourseReviewUrl = string.Format("{0}/#/course/{1}/preview", BaseUrl, courseID);
-            review.TestReviewUrl = string.Format("{0}/#/test/{1}/preview", BaseUrl, courseID);
+            review.CourseReviewUrl = string.Format("{0}/#/course/{1}/preview?token={2}", BaseUrl, courseID, token);
+            review.TestReviewUrl = string.Format("{0}/#/test/{1}/preview?token={2}", BaseUrl, courseID, token);
 
             return RazorTemplateProvider.Apply(review, "ReviewCourse");
         }
