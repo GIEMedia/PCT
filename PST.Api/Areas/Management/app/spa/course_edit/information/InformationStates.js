@@ -26,7 +26,6 @@
                 restrict: "A",
                 templateUrl: "Areas/Management/app/spa/course_edit/information/InformationStates.html",
                 link: function($scope, elem, attrs) {
-
                     $scope.states = StateService.getStates();
 
                     $scope.$watch("states == null ? -1 : cei.course.state_ceus.length", function(v) {

@@ -194,9 +194,10 @@
             };
         }])
 
-        .directive("tableStates", function() {
+        .directive("expandingTable", function() {
             return {
-                restrict: "C",
+                restrict: "A",
+                scope: true,
                 link: function($scope, elem, attrs) {
 
                     // Table states dropdown
@@ -207,10 +208,34 @@
                         e.preventDefault();
                     });
 
-                    elem.find('.icon-chevron-up').on('click', function (e) {
-                        setTimeout(function () { elem.find('.table-row-1').show(); }, 200);
+                    var close = function () {
+                        setTimeout(function () {
+                            elem.find('.table-row-1').show();
+                        }, 200);
                         elem.find('.table-expand').stop(true, true).slideUp(200);
+                    };
+                    $scope.close = close;
+                    elem.find('.icon-chevron-up').on('click', function(e) {
+                        close();
+                        e.preventDefault();
+                    });
+                },
+                controller: function($scope) {
+                    this.close = function() {
+                        $scope.close();
+                    }
+                }
+            };
+        })
 
+        .directive("expandingTableClose", function() {
+            return {
+                restrict: "A",
+                require: "^expandingTable",
+                link: function($scope, elem, attrs, expandingTableCtrl) {
+
+                    elem.on('click', function(e) {
+                        expandingTableCtrl.close();
                         e.preventDefault();
                     });
                 }
