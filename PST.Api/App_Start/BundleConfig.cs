@@ -127,6 +127,7 @@ namespace PST.Api
                 "~/Areas/Management/app/spa/report/ReportDetail.js",
                 "~/Areas/Management/app/spa/report/ReportList.js",
                 "~/Areas/Management/app/spa/security/SecurityService.js",
+                "~/Areas/Management/app/spa/settings/Settings.js",
                 "~/Areas/Management/app/spa/user/User.js",
                 "~/Areas/Management/app/spa/user/UserDetail.js",
                 "~/Areas/Management/app/spa/user/UserList.js"

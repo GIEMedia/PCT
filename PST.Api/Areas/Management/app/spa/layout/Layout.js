@@ -46,6 +46,11 @@
                             title: "Test Results"
                         },
                         {
+                            state: "settings",
+                            icon: "settings",
+                            title: "Settings"
+                        },
+                        {
                             state: "user.list",
                             icon: "users",
                             highlightOn: function(stateName) {

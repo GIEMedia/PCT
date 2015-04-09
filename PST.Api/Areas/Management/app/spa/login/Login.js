@@ -55,7 +55,7 @@
                     .onError(function(error, status) {
                         $scope.view.submitting = false;
                         if (status == 400) {
-                            alert('Your login failed.');
+                            alert('Incorrect Username or Password.');
                             $scope.login.password = null;
                             return true;
                         } else {
