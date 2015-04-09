@@ -14,6 +14,7 @@
         'pct.management.courses',
         'pct.management.courseEdit',
         'pct.management.report',
+        'pct.management.settings',
         'pct.management.user',
 
         'pct.management.api.course',
