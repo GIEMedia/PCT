@@ -17,14 +17,26 @@
             };
 
             return {
-                getList: function() {
-                    return Api.get("api/manage/course/categories");
+                getList: function(courseCount) {
+                    return Api.get("api/manage/course/categories" + (courseCount ? "?courseCount=" + courseCount : ""));
                 },
                 addCategory: function(catName) {
                     return Api.put("api/manage/course/category", JSON.stringify(catName));
                 },
                 addSubCategory: function(parentId, catName) {
                     return Api.put("api/manage/course/category?parentCategoryID=" + parentId, JSON.stringify(catName));
+                },
+                setCatTitle: function(catName, catId) {
+                    return Api.put("api/manage/course/category?categoryID=" + catId, JSON.stringify(catName));
+                },
+                setSubCatTitle: function(catName, catId, parentId) {
+                    return Api.put("api/manage/course/category?categoryID=" + catId + "&parentCategoryID=" + parentId, JSON.stringify(catName));
+                },
+                deleteCategory: function(catId) {
+                    return Api.delete("api/manage/course/category?categoryID=" + catId);
+                },
+                deleteSubCategory: function(catId, parentId) {
+                    return Api.delete("api/manage/course/category?categoryID=" + catId + "&parentCategoryID=" + parentId);
                 }
             };
         }])
