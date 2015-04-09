@@ -13,7 +13,7 @@ namespace PST.Declarations.Entities
         [Ownership(Ownership.None)]
         public virtual Course Course { get; set; }
 
-        private static readonly string BaseUrl = ConfigurationManager.AppSettings["BaseUrl"].Replace("http://", "//").Replace("https://", "//");
+        private static readonly string BaseUrl = MvcApplicationBase.BaseUrl;
         public static implicit operator certificate(Certificate certificate)
         {
             if(certificate == null)

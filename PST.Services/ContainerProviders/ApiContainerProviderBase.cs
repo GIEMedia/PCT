@@ -1,8 +1,8 @@
-﻿using PST.Api.Core.OAuth;
+﻿using Prototype1.Foundation.Data.AutomaticMapper;
+using PST.Api.Core.OAuth;
 using PST.Data;
 using Microsoft.AspNet.Identity;
 using Microsoft.Practices.Unity;
-using Prototype1.Foundation.Data.MagicMapper;
 using Prototype1.Foundation.Data.NHibernate;
 using PST.Declarations.Interfaces;
 using PasswordHasher = Microsoft.AspNet.Identity.PasswordHasher;

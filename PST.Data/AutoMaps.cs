@@ -1,6 +1,6 @@
 ﻿using FluentNHibernate.Cfg;
 using NHibernate.Type;
-using Prototype1.Foundation.Data.MagicMapper;
+using Prototype1.Foundation.Data.AutomaticMapper;
 using PST.Declarations.Entities;
 
 namespace PST.Data
@@ -11,13 +11,13 @@ namespace PST.Data
 
         public void Map(MappingConfiguration m)
         {
-            var mapper = new MagicMapper(m);
+            var mapper = new AutomaticMapper(m);
             mapper.LoadInterfaceMappingsFromAssemblyOf<AutoMaps>();
             MapRootEntities(mapper);
             m.HbmMappings.AddFromAssemblyOf<AutoMaps>();
         }
 
-        private static void MapRootEntities(MagicMapper mapper)
+        private static void MapRootEntities(AutomaticMapper mapper)
         {
             mapper.Add().TableFor<Account>(a =>
             {
@@ -114,7 +114,7 @@ namespace PST.Data
                 q.Map(x => x.QuestionText).Length(Max);
                 q.Map(x => x.CorrectResponseHeading).Length(Max);
                 q.Map(x => x.CorrectResponseText).Length(Max);
-                q.HasMany(x => x.Options).Not.LazyLoad().Cascade.AllDeleteOrphan();
+                q.HasMany(x => x.Options).OrderBy("SortOrder").Not.LazyLoad().Cascade.AllDeleteOrphan();
                 q.AddSubclass().OfType<SingleImageQuestion>();
                 q.AddSubclass().OfType<VideoQuestion>();
                 q.AddSubclass().OfType<MultiImageQuestion>();

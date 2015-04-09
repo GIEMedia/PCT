@@ -26,7 +26,6 @@ namespace PST.Api.Controllers
 {
     public class ApiControllerBase : ApiController
     {
-        protected static readonly string BaseUrl = ConfigurationManager.AppSettings["BaseUrl"].Replace("http://", "//").Replace("https://", "//");
         private readonly Lazy<UserManager<ApplicationUser>> _userManager;
 
         protected ApiControllerBase()

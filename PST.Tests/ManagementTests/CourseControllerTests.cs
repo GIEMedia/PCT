@@ -3,6 +3,7 @@ using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using PST.Declarations;
 using PST.Declarations.Models.Management;
 using Prototype1.Foundation;
 
@@ -13,11 +14,7 @@ namespace PST.Tests.ManagementTests
     {
         protected override string UrlBase
         {
-            get
-            {
-                return ConfigurationManager.AppSettings["BaseUrl"]
-                       + "api/manage/course/";
-            }
+            get { return MvcApplicationBase.BaseUrl + "/api/manage/course/"; }
         }
 
         [TestMethod]

@@ -165,7 +165,7 @@ namespace PST.Api.Areas.Management.Controllers
                 return section;
             }
 
-            return course.Test ?? (course.Test = new Test());
+            return course.Test ?? (course.Test = new Test(course));
         }
     }
 }

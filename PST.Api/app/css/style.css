@@ -409,9 +409,9 @@ a.form-label { color: #404040 !important; }
 .correct .course-question-option.previous-answer input:checked + label:after { background-image: url(/app/css/images/ico-check-green.png); }
 
 .course-question-options-pictures { border: 1px solid #d7e2e6; overflow: hidden; }
-.course-question-option-picture { float: left; position: relative; width: 119px; box-sizing: border-box; box-shadow: -1px 0 0 #d7e2e6; }
+.course-question-option-picture { float: left; position: relative; width: 119px; box-sizing: border-box; box-shadow: -1px 0 0 #d7e2e6; height: 100px; background-color: #d7e2e6; }
 .course-question-option-picture:nth-child(n+4) { box-shadow: -1px 0 0 #d7e2e6, 0 -1px 0 #d7e2e6; }
-.course-question-option-picture img { display: block; min-width: 100%; max-width: 100%; height: auto; }
+.course-question-option-picture img { display: block; min-width: 100%; max-width: 100%; height: auto; max-height: 100px; }
 .course-single-media-wrapper .js-magnify, .test-single-media-wrapper .js-magnify,
 .course-question-option-picture .js-magnify { position: absolute; top: 0; right: 0; width: 31px; height: 30px; background: rgba(255, 255, 255, 0.6) url(/app/css/images/ico-magnify.png) no-repeat center center; }
 .course-question-option-picture a:hover { opacity: 0.7; }

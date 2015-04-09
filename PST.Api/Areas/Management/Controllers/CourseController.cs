@@ -123,6 +123,49 @@ namespace PST.Api.Areas.Management.Controllers
         }
 
         /// <summary>
+        /// Delete a category or sub category. The category must not be in use.
+        /// </summary>
+        /// <param name="categoryID">ID of category to delete</param>
+        /// <param name="parentCategoryID">ID of parent category (if sub-category).</param>
+        [HttpDelete]
+        [Route("category")]
+        public void DeleteCategory([FromUri]Guid categoryID, [FromUri]Guid? parentCategoryID = null)
+        {
+            if (parentCategoryID.HasValue)
+            {
+                var parentCategory = _entityRepository.GetByID<MainCategory>(parentCategoryID.Value);
+                if (parentCategory == null)
+                    throw new NullReferenceException("Specified parent category not found.");
+
+                var subCategory = parentCategory.SubCategories.FindById(categoryID);
+
+                if (subCategory == null)
+                    throw new NullReferenceException("Specified category not found.");
+
+                if(_entityRepository.Queryable<Course>().Any(c=>c.Category != null && c.Category.ID == subCategory.ID))
+                    throw new ArgumentException("There are still courses that use this category. Delete failed.");
+
+                parentCategory.SubCategories.Remove(subCategory);
+
+                _entityRepository.Delete(subCategory);
+                _entityRepository.Save(parentCategory);
+            }
+            else
+            {
+                var category = _entityRepository.GetByID<MainCategory>(categoryID);
+
+                if (category == null)
+                    throw new NullReferenceException("Specified category not found.");
+
+                var subCategories = category.SubCategories.Select(c => c.ID).ToArray();
+                if (_entityRepository.Queryable<Course>().Any(c => c.Category != null && subCategories.Contains(c.Category.ID)))
+                    throw new ArgumentException("There are still courses that use this category. Delete failed.");
+
+                _entityRepository.Delete(category);
+            }
+        }
+
+        /// <summary>
         /// Upsert course
         /// </summary>
         /// <param name="course">Course to be upserted. Status cannot be updated using this call. If new, leave ID blank. If existing, properties will be merged into existing entity.</param>
