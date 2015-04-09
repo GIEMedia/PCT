@@ -114,7 +114,7 @@ namespace PST.Data
                 q.Map(x => x.QuestionText).Length(Max);
                 q.Map(x => x.CorrectResponseHeading).Length(Max);
                 q.Map(x => x.CorrectResponseText).Length(Max);
-                q.HasMany(x => x.Options).Not.LazyLoad().Cascade.AllDeleteOrphan();
+                q.HasMany(x => x.Options).OrderBy("SortOrder").Not.LazyLoad().Cascade.AllDeleteOrphan();
                 q.AddSubclass().OfType<SingleImageQuestion>();
                 q.AddSubclass().OfType<VideoQuestion>();
                 q.AddSubclass().OfType<MultiImageQuestion>();

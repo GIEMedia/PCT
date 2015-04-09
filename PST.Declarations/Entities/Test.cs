@@ -8,6 +8,15 @@ namespace PST.Declarations.Entities
     [Serializable]
     public class Test : Questioned
     {
+        public Test()
+        {
+        }
+
+        public Test(Course course)
+        {
+            this.Title = course.Title;
+        }
+
         [Transient]
         public virtual decimal PassingPercentage { get { return .8M; } }
 

@@ -359,6 +359,7 @@
     <Content Include="app\js\angular_1.3.1\angular.min.js" />
     <Content Include="app\js\common-utils.js" />
     <Content Include="app\js\jquery-1.11.2.min.js" />
+    <Content Include="app\js\jquery-textrange.js" />
     <Content Include="app\js\jquery.fs.selecter.min.js" />
     <Content Include="app\js\jquery.magnific-popup.min.js" />
     <Content Include="app\js\jquery.mousewheel.js" />
@@ -383,6 +384,7 @@
     <Content Include="app\spa\authen\UserInfo.js" />
     <Content Include="app\spa\certificates\Certificates.html" />
     <Content Include="app\spa\certificates\Certificates.js" />
+    <Content Include="app\spa\common\Markup.js" />
     <Content Include="app\spa\course\Course.html" />
     <Content Include="app\spa\course\Course.js" />
     <Content Include="app\spa\course\CourseControls.js" />
@@ -550,11 +552,14 @@
     <Content Include="Areas\Management\app\spa\api\UserService.js" />
     <Content Include="Areas\Management\app\spa\app.js" />
     <Content Include="Areas\Management\app\spa\common\Fancybox.js" />
+    <Content Include="Areas\Management\app\spa\common\Markup.js" />
+    <Content Include="Areas\Management\app\spa\common\popup-confirm.html" />
     <Content Include="Areas\Management\app\spa\common\popup-text.html" />
     <Content Include="Areas\Management\app\spa\common\Sorter.js" />
     <Content Include="Areas\Management\app\spa\common\Theme.js" />
     <Content Include="Areas\Management\app\spa\courses\Courses.html" />
     <Content Include="Areas\Management\app\spa\courses\Courses.js" />
+    <Content Include="Areas\Management\app\spa\course_edit\CheckPublishedCourse.html" />
     <Content Include="Areas\Management\app\spa\course_edit\CourseEdit.html" />
     <Content Include="Areas\Management\app\spa\course_edit\CourseEdit.js" />
     <Content Include="Areas\Management\app\spa\course_edit\CourseEditFooter.html" />
