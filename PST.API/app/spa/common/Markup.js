@@ -15,8 +15,7 @@
                                 markup
                                     .replace(/&/g, "&amp;")
                                     .replace(/</g, "&lt;")
-                                    .replace(/ /g, "&nbsp;")
-                                    .replace(/>/g, "&lt;")
+                                    .replace(/>/g, "&gt;")
                                     .replace(new RegExp("\\[(\\/?[ibuIBU])\\]","g"), "<$1>")
                             ));
                         } else {
