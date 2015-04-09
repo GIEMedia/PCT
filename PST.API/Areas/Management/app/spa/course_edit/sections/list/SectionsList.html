@@ -38,20 +38,20 @@
                                 <span class="name">{{section.title}}</span>
                                 <span class="name-edit">
                                     <input type="text" class="field" tabindex="1" ng-model="editName.title" placeholder="Section name" ng-maxlength="200" pct-focus="editName.editing"/>
-                                    <a href="" class="fa fa-save" tabindex="1" ng-click="saveTitle()"></a>
-                                    <a href="" class="fa fa-close" ng-click="editName.editing = false"></a>
+                                    <a href="" class="fa fa-save tooltip-wrapper" tabindex="1" ng-click="saveTitle()"><div class="tooltip">Save</div></a>
+                                    <a href="" class="fa fa-close tooltip-wrapper" ng-click="editName.editing = false"><div class="tooltip">Close</div></a>
                                 </span>
                             </td>
 
                             <td>
                                 <div class="icons">
                                     <span ng-class="{'sortable-handle': !updatingOrder}" ng-hide="course.status == 1" button-loading="updatingOrder:small">
-                                        <i class="fa fa-arrows"></i>
+                                        <i class="fa fa-arrows tooltip-wrapper"><div class="tooltip">Reorder</div></i>
                                     </span>
-                                    <a href="" class="icon icon-rename" ng-hide="course.status == 1" ng-click="editName.editing = true"></a>
-                                    <a ui-sref="^.detail({sectionId: section.id})" class="fa fa-pencil"></a>
+                                    <a href="" class="icon icon-rename tooltip-wrapper" ng-hide="course.status == 1" ng-click="editName.editing = true"><div class="tooltip">Rename</div></a>
+                                    <a ui-sref="^.detail({sectionId: section.id})" class="fa fa-pencil tooltip-wrapper"><div class="tooltip">Edit</div></a>
                                     <span button-loading="deleting:small" ng-hide="course.status == 1">
-                                        <a href="" class="fa fa-trash-o" ng-disabled="deleting" ng-click="deleteSection(section)"></a>
+                                        <a href="" class="fa fa-trash-o tooltip-wrapper" ng-disabled="deleting" ng-click="deleteSection(section)"><div class="tooltip">Remove</div></a>
                                     </span>
                                 </div><!-- /.icons -->
                             </td>
@@ -59,16 +59,16 @@
                             <td class="text-center padding-vert-0 view-document" ng-if="section.document.pages.length">
                                 <div class="view-document-info" button-loading="uploadingDocument"><i class="fa fa-file-pdf-o"></i> <span>{{section.document.pages.length}} page(s)</span></div>
                                 <div class="view-document-link">
-                                    <a href="{{section.document.pdf_url}}"><i class="fa fa-search"></i></a>
-                                    <span ng-file-select="uploadDocument($files)" accept=".pdf" button-loading="uploadingDocument"><a href=""><i class="fa fa-upload"></i></a></span>
-                                    <a href="" ng-click="deleteDocument()" ng-hide="course.status == 1"><i class="fa fa-trash"></i></a>
+                                    <a href="{{section.document.pdf_url}}"><i class="fa fa-search tooltip-wrapper"><div class="tooltip">View document</div></i></a>
+                                    <span ng-file-select="uploadDocument($files)" accept=".pdf" button-loading="uploadingDocument"><a href=""><i class="fa fa-upload tooltip-wrapper"><div class="tooltip">Upload another document</div></i></a></span>
+                                    <a href="" ng-click="deleteDocument()" ng-hide="course.status == 1"><i class="fa fa-trash tooltip-wrapper"><div class="tooltip">Delete document</div></i></a>
                                 </div>
                             </td>
 
                             <td class="text-center padding-vert-0 view-document" ng-if="!section.document.pages.length">
                                 <div class="view-document-info" button-loading="uploadingDocument"><i class="fa fa-minus-circle"></i></div>
                                 <div class="view-document-link">
-                                    <span ng-file-select="uploadDocument($files)" accept=".pdf" button-loading="uploadingDocument"><a href=""><i class="fa fa-upload"></i></a></span>
+                                    <span ng-file-select="uploadDocument($files)" accept=".pdf" button-loading="uploadingDocument"><a href="" class="tooltip-wrapper"><i class="fa fa-upload"><div class="tooltip">Upload document</div></i></a></span>
                                 </div>
                             </td>
 

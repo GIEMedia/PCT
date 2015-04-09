@@ -19,7 +19,7 @@
 
                     <div class="table-row table-row-1">
                         <div class="table-col col-size-1">
-                            <a href="" class="icon icon-chevron-down"></a>
+                            <a href="" class="icon icon-chevron-down tooltip-wrapper"><div class="tooltip">Expand</div></a>
                         </div><!-- /.table-col -->
                         <div class="table-col col-size-2">
                             <h4>{{summary()}}</h4>
@@ -35,7 +35,7 @@
                         <div class="table-expand">
                             <div class="table-row" ng-class="{'editing-cat': catRow.editName.editing}">
                                 <div class="table-col col-size-1">
-                                    <a href="" ng-if="$index == 0" class="icon icon-chevron-up" expanding-table-close></a>
+                                    <a href="" ng-if="$index == 0" class="icon icon-chevron-up tooltip-wrapper" expanding-table-close><div class="tooltip">Collapse</div></a>
                                 </div><!-- /.table-col -->
 
                                 <div class="table-col col-size-2 category-name">
@@ -48,7 +48,7 @@
                                 </div><!-- /.table-col -->
                                 <div class="table-col col-size-3">
                                     <div class="icons">
-                                        <a href="" class="icon icon-rename" ng-click="catRow.editName.editing = true" ng-show="!catRow.editName.editing"></a>
+                                        <a href="" class="icon icon-rename tooltip-wrapper" ng-click="catRow.editName.editing = true" ng-show="!catRow.editName.editing"><div class="tooltip">Rename</div></a>
                                         <span button-loading="removingCat"><a href="" class="fa fa-trash-o" ng-if="!hasCourseCat(cat)" ng-click="removeCat(cat)"></a></span>
                                     </div><!-- /.icons -->
                                 </div><!-- /.table-col -->

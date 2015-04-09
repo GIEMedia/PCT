@@ -377,5 +377,37 @@
                 }
             };
         })
+        .directive("tooltipWrapper", function() {
+            return {
+                restrict: "C",
+                link: function($scope, elem, attrs) {
+                    // Tooltip now has style {display: block}, this makes line focus flickering to previous line -> has to hide
+                    elem.find(".tooltip").hide();
+                    var scheduled = null;
+                    elem.hover(
+                        function() {
+                            var scheduled1 = {};
+                            scheduled = scheduled1;
+                            elem.find(".tooltip").show();
+                            setTimeout(function() {
+                                if (scheduled != scheduled1) {
+                                    return;
+                                }
+                                scheduled = null;
+                                elem.addClass("showing-tooltip");
+                            }, 1000);
+                        },
+                        function() {
+                            if (scheduled==null) {
+                                elem.removeClass("showing-tooltip");
+                                elem.find(".tooltip").hide();
+                            } else {
+                                scheduled = null;
+                            }
+                        }
+                    );
+                }
+            };
+        })
     ;
 })();

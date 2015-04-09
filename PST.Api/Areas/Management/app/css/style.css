@@ -1049,9 +1049,10 @@ span[disabled] {
             z-index: 1000;
         }
 
-    .tooltip-wrapper:hover .tooltip {
+    .tooltip-wrapper.showing-tooltip .tooltip {
         -ms-opacity: 1;
         opacity: 1;
+		display: block;
         pointer-events: auto;
         -webkit-transform: translateY(0);
         -moz-transform: translateY(0);

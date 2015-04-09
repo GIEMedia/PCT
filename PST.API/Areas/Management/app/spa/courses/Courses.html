@@ -36,10 +36,10 @@
 
                             <td>
                                 <div class="icons">
-                                    <a ui-sref="courseEdit.information({courseId: course.id})" class="fa fa-pencil"></a>
-                                    <a ui-sref="report.detail({courseId: course.id})" class="icon icon-test" ng-if="course.status == 1"></a>
+                                    <a ui-sref="courseEdit.information({courseId: course.id})" class="fa fa-pencil tooltip-wrapper"><div class="tooltip">Edit</div></a>
+                                    <a ui-sref="report.detail({courseId: course.id})" class="icon icon-test tooltip-wrapper" ng-if="course.status == 1"><div class="tooltip">Test Results</div></a>
                                     <a href="" ng-click="remove()" button-loading="removing:small">
-                                        <i class="fa fa-trash-o"></i>
+                                        <i class="fa fa-trash-o tooltip-wrapper"><div class="tooltip">Delete</div></i>
                                     </a>
                                 </div><!-- /.icons -->
                             </td>

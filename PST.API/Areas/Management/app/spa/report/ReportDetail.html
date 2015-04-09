@@ -38,8 +38,8 @@
                             <div class="table-col col-size-1">
                                 <span class="number">
                                     <span>{{$index+1}}</span>
-                                    <a href="" class="icon icon-chevron-down"></a>
-                                    <a href="" class="icon icon-chevron-up"></a>
+                                    <a href="" class="icon icon-chevron-down tooltip-wrapper"><div class="tooltip">Expand</div></a>
+                                    <a href="" class="icon icon-chevron-up tooltip-wrapper"><div class="tooltip">Collapse</div></a>
                                 </span>
 
                                 <h2 class="question">{{question.question || "(Empty)"}} {{isMultipleCorrect(question) ? "(check all that apply)" : ""}}</h2><!-- /.question -->
