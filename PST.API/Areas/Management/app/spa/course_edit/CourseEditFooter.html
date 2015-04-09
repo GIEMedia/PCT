@@ -17,7 +17,7 @@
 
         <div class="btns alignright">
             <button class="btn btn-grey" ng-if="!ce.saving && needSaving() && cel.reset" ng-click="reset()">Reset</button>
-            <button class="btn btn-grey" button-loading="ce.saving" ng-disabled="ce.saving || (cel.canSave && !cel.canSave())" ng-if="needSaving()" ng-click="save()">Save</button>
+            <button class="btn btn-green" button-loading="ce.saving" ng-disabled="ce.saving || (cel.canSave && !cel.canSave())" ng-if="needSaving()" ng-click="save()">Save</button>
 
             <button ng-click="nextPage()" class="btn btn-green btn-icon-right" ng-if="cel.step < steps.length - 1 && ($stateParams.courseId != 'new' || needSaving())"
                     ng-disabled="cel.canGoForward != null && !cel.canGoForward()">

@@ -75,7 +75,7 @@ namespace PST.Tests.ManagementTests
 
         public m_main_category[] GetCategories()
         {
-            return new CourseControllerTests().GetCategories();
+            return new CourseControllerTests().GetCategories(false);
         }
 
         public m_section_overview UpsertSection(Guid courseID, m_section_overview section)

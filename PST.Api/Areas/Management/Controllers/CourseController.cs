@@ -77,15 +77,23 @@ namespace PST.Api.Areas.Management.Controllers
         /// <summary>
         /// Get available categories
         /// </summary>
+        /// <param name="courseCount">Indicates if course counts should be added the resulting category list.</param>
         /// <returns></returns>
         [HttpGet]
         [Route("categories")]
-        public m_main_category[] GetCategories()
+        public m_main_category[] GetCategories(bool courseCount = false)
         {
-            return _entityRepository.Queryable<MainCategory>()
+            var cats = _entityRepository.Queryable<MainCategory>()
                 .ToList()
                 .Select(c => (m_main_category) c)
                 .ToArray();
+
+            if(!courseCount) return cats;
+
+            var courses = _courseService.GetCourses(null);
+            cats.ForEach(c => c.sub_categories.ForEach(s => s.course_count = courses.Count(x => x.Category.ID == s.id)));
+
+            return cats.ToArray();
         }
 
         /// <summary>
@@ -145,7 +153,7 @@ namespace PST.Api.Areas.Management.Controllers
                 if (parentCategory == null)
                     throw new NullReferenceException("Specified parent category not found.");
 
-                var subCategory = parentCategory.SubCategories.FindById(categoryID);
+                var subCategory = parentCategory.SubCategories.FirstOrDefault(s => s.ID == categoryID);
 
                 if (subCategory == null)
                     throw new NullReferenceException("Specified category not found.");

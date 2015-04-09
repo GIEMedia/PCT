@@ -59,20 +59,20 @@ namespace PST.Tests.ManagementTests
         [TestMethod]
         public void CanGetCategories()
         {
-            var categories = GetCategories();
+            var categories = GetCategories(true);
 
             Assert.IsNotNull(categories);
             Assert.IsTrue(categories.Any());
             Assert.IsTrue(categories.All(c => c.title.Length > 0));
-            Assert.IsTrue(categories.All(c => c.sub_categories.Any()));
-            Assert.IsTrue(categories.All(c => c.sub_categories.All(s => s.title.Length > 0)));
+            Assert.IsTrue(categories.Any(c => c.sub_categories.Any()));
+            Assert.IsTrue(categories.Any(c => c.sub_categories.All(s => s.title.Length > 0)));
 
-            Debug.WriteLine(string.Format("{0} categories found", categories.Length));
+            Debug.WriteLine("{0} categories found", categories.Length);
         }
 
-        public m_main_category[] GetCategories()
+        public m_main_category[] GetCategories(bool courseCount)
         {
-            return ExecuteGetRequest<m_main_category[]>("categories");
+            return ExecuteGetRequest<m_main_category[]>("categories?courseCount=" + courseCount);
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace PST.Tests.ManagementTests
             Assert.IsNotNull(subCat1);
             Assert.IsFalse(subCat1.id.IsNullOrEmpty());
 
-            var mainCat = GetCategories().FirstOrDefault(c => c.id == topCat.id);
+            var mainCat = GetCategories(false).FirstOrDefault(c => c.id == topCat.id);
             Assert.IsNotNull(mainCat);
             Assert.IsTrue(mainCat.sub_categories.Length == 2);
             Assert.IsTrue(mainCat.sub_categories.Count(c => c.id == subCat1.id) == 1);
@@ -127,7 +127,7 @@ namespace PST.Tests.ManagementTests
         [TestMethod]
         public void CanUpsertAndDeleteCourse()
         {
-            var category = GetCategories().FirstOrDefault(c => c.sub_categories.Any());
+            var category = GetCategories(false).FirstOrDefault(c => c.sub_categories.Any());
             Assert.IsNotNull(category);
 
             var newCourse = new m_course

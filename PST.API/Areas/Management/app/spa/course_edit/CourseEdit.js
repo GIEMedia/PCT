@@ -92,7 +92,7 @@
                 },
                 {
                     state: "publish",
-                    title: 'Publish'
+                    title: 'Status'
                 }
             ];
 

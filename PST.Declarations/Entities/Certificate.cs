@@ -22,6 +22,7 @@ namespace PST.Declarations.Entities
             var urlBase = string.Concat(BaseUrl, "/Content/Certificates/", certificate.ID);
             return new certificate
             {
+                course_id = certificate.Course.ID,
                 course_name = certificate.Course.Title,
                 earned = certificate.EarnedUtc,
                 image_url = urlBase + ".jpg",

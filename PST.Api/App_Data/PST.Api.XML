@@ -532,10 +532,11 @@
             <param name="courseID">ID of course</param>
             <returns></returns>
         </member>
-        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.GetCategories">
+        <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.GetCategories(System.Boolean)">
             <summary>
             Get available categories
             </summary>
+            <param name="courseCount">Indicates if course counts should be added the resulting category list.</param>
             <returns></returns>
         </member>
         <member name="M:PST.Api.Areas.Management.Controllers.ManageCourseController.UpsertCategory(System.String,System.Nullable{System.Guid},System.Nullable{System.Guid})">

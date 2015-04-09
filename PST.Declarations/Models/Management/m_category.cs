@@ -7,6 +7,8 @@ namespace PST.Declarations.Models.Management
         public Guid id { get; set; }
 
         public string title { get; set; }
+
+        public int? course_count { get; set; }
     }
 
     public class m_main_category : m_category

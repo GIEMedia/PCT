@@ -42,8 +42,6 @@ namespace PST.Api.Core.App_Start
 
             app.UseOAuthBearerTokens(OAuthOptions);
 
-
-
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
             //    clientId: "",

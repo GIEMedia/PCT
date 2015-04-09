@@ -208,6 +208,10 @@ a.form-label { color: #404040 !important; }
 .form-controls-actions ~ .form-cols-outer { padding-right: 70px; }
 
 .form-actions { text-align: right; font-size: 0; }
+.form-actions label { font-size: 11px; float: left; }
+.form-actions label + label { clear: both; margin-top: 5px; }
+.form-actions label input { position: relative; top: 3px; }
+.form-actions label a { color: #404040; }
 
 /* ================================================================ *\
 	#Popup
