@@ -415,7 +415,6 @@ table + .table-buttons,
 			box-shadow: 0 3px 3px 0 rgba(0,0,0,0.2); }
 .custom-table .table-row-head .table-col { padding: 7px 10px; }
 .custom-table .table-row { background-color: #fff; border-bottom: 1px solid #d6e2e6; }
-.custom-table .table-row:hover { background-color: #e5f7fd; }
 .custom-table .table-col { float: left; padding: 15px 15px; position: relative; }
 .custom-table .table-col.col-size-3 { padding: 7px 5px; text-align: center; }
 .custom-table .table-col h3 { font-size: 14px; font-weight: 600; color: #666; line-height: 20px; }
