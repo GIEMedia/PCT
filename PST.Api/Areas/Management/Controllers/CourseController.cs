@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Configuration;
 using System.Linq;
 using System.Web.Http;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
+using Prototype1.Foundation.Interfaces;
 using PST.Api.Controllers;
 using PST.Declarations;
 using PST.Declarations.Entities;
@@ -18,11 +20,17 @@ namespace PST.Api.Areas.Management.Controllers
     {
         private readonly ICourseService _courseService;
         private readonly IEntityRepository _entityRepository;
+        private readonly IEmailGenerationService _emailGenerationService;
+        private readonly IMailService _mailService;
 
-        public ManageCourseController(ICourseService courseService, IEntityRepository entityRepository)
+        private static readonly string CourseReviewEmailFrom = ConfigurationManager.AppSettings["CourseReviewEmailFrom"];
+
+        public ManageCourseController(ICourseService courseService, IEntityRepository entityRepository, IEmailGenerationService emailGenerationService, IMailService mailService)
         {
             _courseService = courseService;
             _entityRepository = entityRepository;
+            _emailGenerationService = emailGenerationService;
+            _mailService = mailService;
         }
 
         /// <summary>
@@ -268,7 +276,9 @@ namespace PST.Api.Areas.Management.Controllers
                 _entityRepository.Save(course);
             }
 
-            //TODO: Send email
+            var htmlBody = _emailGenerationService.ReviewCourse(reviewer.name, reviewer.email, courseID, course.Title);
+            _mailService.SendEmail(reviewer.email, CourseReviewEmailFrom, "PCT Course Review: " + course.Title,
+                htmlBody: htmlBody);
         }
     }
 }

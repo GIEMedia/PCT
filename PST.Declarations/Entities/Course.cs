@@ -4,6 +4,7 @@ using System.Linq;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data;
 using Prototype1.Foundation.Interfaces;
+using Prototype1.Security;
 using PST.Declarations.Models;
 using PST.Declarations.Models.Management;
 

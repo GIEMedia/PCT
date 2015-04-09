@@ -116,21 +116,21 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Prototype1.FluentNHibernate, Version=1.0.0.31, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Prototype1.FluentNHibernate, Version=1.0.0.32, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prototype1.FluentNHibernate.1.0.0.31\lib\net40\Prototype1.FluentNHibernate.dll</HintPath>
+      <HintPath>..\packages\Prototype1.FluentNHibernate.1.0.0.32\lib\net40\Prototype1.FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="Prototype1.Foundation, Version=1.0.0.31, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Prototype1.Foundation, Version=1.0.0.32, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prototype1.Foundation.1.0.0.31\lib\net451\Prototype1.Foundation.dll</HintPath>
+      <HintPath>..\packages\Prototype1.Foundation.1.0.0.32\lib\net451\Prototype1.Foundation.dll</HintPath>
     </Reference>
-    <Reference Include="Prototype1.Security, Version=1.0.0.31, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Prototype1.Security, Version=1.0.0.32, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prototype1.Security.1.0.0.31\lib\net451\Prototype1.Security.dll</HintPath>
+      <HintPath>..\packages\Prototype1.Security.1.0.0.32\lib\net451\Prototype1.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Prototype1.Services, Version=1.0.0.31, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Prototype1.Services, Version=1.0.0.32, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prototype1.Services.1.0.0.31\lib\net451\Prototype1.Services.dll</HintPath>
+      <HintPath>..\packages\Prototype1.Services.1.0.0.32\lib\net451\Prototype1.Services.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />

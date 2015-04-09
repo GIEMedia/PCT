@@ -75,7 +75,7 @@
         .factory("SecurityService", ["$http", "$rootScope", "$timeout", "Api", "User", "$state", function($http, $rootScope, $timeout, Api, User, $state) {
             var loginState = "landing";
             function allowUnauthen(state) {
-                return state.name == "landing" || state.name == "forgotpassword";
+                return state.name == "landing" || state.name == "forgotpassword" || state.name == "coursePreview" || state.name == "testPreview";
             }
 
             var fetchUser = function() {

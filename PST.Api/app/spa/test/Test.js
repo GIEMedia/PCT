@@ -12,7 +12,7 @@
 
             $stateProvider
                 .state('testPreview', {
-                    url: '/test/:courseId/preview',
+                    url: '/test/:courseId/preview?token',
                     templateUrl: "/app/spa/test/TestPage.html",
                     controller: "test.Ctrl"
                 })
@@ -50,7 +50,7 @@
             $scope.previewMode = $state.current.name.indexOf('Preview') > -1;
 
             var getTest = $scope.previewMode ? TestService.getPreview : TestService.get;
-            getTest($stateParams.courseId).success(function(test) {
+            getTest($stateParams.courseId, $stateParams.token).success(function (test) {
                 $scope.test = test;
 
 

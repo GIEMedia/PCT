@@ -13,7 +13,7 @@
 
             $stateProvider
                 .state('coursePreview', {
-                    url: '/course/:id/preview',
+                    url: '/course/:id/preview?token',
                     templateUrl: "/app/spa/course/CoursePage.html",
                     controller: "course.PreviewCtrl"
                 })
@@ -52,7 +52,7 @@
             $scope.courseHelp = PreferenceService.isHelpEnabled();
         }])
         .controller("course.PreviewCtrl", ["$scope", "CourseService", "$stateParams", "PreferenceService", function ($scope, CourseService, $stateParams, PreferenceService) {
-            CourseService.getPreview($stateParams.id).success(function(course) {
+            CourseService.getPreview($stateParams.id, $stateParams.token).success(function (course) {
                 $scope.course = course;
 
                 // To test option type image

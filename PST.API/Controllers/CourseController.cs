@@ -8,6 +8,8 @@ using Antlr.Runtime.Misc;
 using Microsoft.AspNet.Identity;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
+using Prototype1.Security;
+using PST.Api.Core;
 using PST.Api.Core.OAuth;
 using PST.Declarations;
 using PST.Declarations.Entities;
@@ -16,7 +18,6 @@ using PST.Declarations.Models;
 
 namespace PST.Api.Controllers
 {
-    [Authorize]
     [RoutePrefix("api/course")]
     public class CourseController : ApiControllerBase
     {
@@ -37,6 +38,7 @@ namespace PST.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{courseID}")]
+        [Authorize]
         public course<question> GetCourse(Guid courseID)
         {
             List<Course> prereqCourses;
@@ -55,6 +57,7 @@ namespace PST.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{courseID}/preview")]
+        [AdminOrTokenAuthorization]
         public course<question_with_answers> GetCoursePreview(Guid courseID)
         {
             List<Course> prereqCourses;
@@ -68,6 +71,7 @@ namespace PST.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("list")]
+        [Authorize]
         public main_category[] GetCourses()
         {
             var courses = _courseService.GetCourses(CourseStatus.Active);
@@ -90,6 +94,7 @@ namespace PST.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("new")]
+        [Authorize]
         public course_overview[] NewCourses()
         {
             return (from c in _courseService.NewCourses(accountID: CurrentUserID)
@@ -104,6 +109,7 @@ namespace PST.Api.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("answer/{courseID}")]
+        [Authorize]
         public answer_result AnswerQuestion(Guid courseID, answer answer)
         {
             string correctResponseHeading, correctResponseText;

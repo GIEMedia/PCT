@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Microsoft.AspNet.Identity;
 using Prototype1.Foundation.Data.NHibernate;
+using PST.Api.Core;
 using PST.Api.Core.OAuth;
 using PST.Declarations;
 using PST.Declarations.Entities;
@@ -15,7 +16,6 @@ using WebGrease.Css.Extensions;
 
 namespace PST.Api.Controllers
 {
-    [Authorize]
     [RoutePrefix("api/test")]
     public class TestController : ApiControllerBase
     {
@@ -36,6 +36,7 @@ namespace PST.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{courseID}")]
+        [Authorize]
         public test<question> GetTest(Guid courseID)
         {
             return GetTest<question>(courseID);
@@ -48,6 +49,7 @@ namespace PST.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{courseID}/preview")]
+        [AdminOrTokenAuthorization]
         public test<question_with_answers> GetTestPreview(Guid courseID)
         {
             return GetTest<question_with_answers>(courseID, null);
@@ -70,6 +72,7 @@ namespace PST.Api.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("answer/{courseID}")]
+        [Authorize]
         public answer_result[] AnswerQuestions(Guid courseID, answer[] answers)
         {
             var results = _courseService.AnswerTestQuestion(CurrentUserID, courseID, answers);
@@ -86,6 +89,7 @@ namespace PST.Api.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("send/licensure/{courseID}")]
+        [Authorize]
         public bool SendLicensure(Guid courseID, state_licensure[] licensures)
         {
             //TODO: Verify that they have passed this course
@@ -110,6 +114,7 @@ namespace PST.Api.Controllers
         /// <returns></returns>
         [HttpPut]
         [Route("send/certificate/{courseID}")]
+        [Authorize]
         public bool SendCertificate(Guid courseID, manager[] managers)
         {
             //TODO: Verify that they have passed this course

@@ -15,8 +15,8 @@
                 get : function(id) {
                     return Api.get("api/course/" + id);
                 },
-                getPreview : function(id) {
-                    return Api.get("api/course/" + id + "/preview");
+                getPreview : function(id, token) {
+                    return Api.get("api/course/" + id + "/preview" + (token ? "?token=" + token : ""));
                 },
                 getProgress : function(id, callback) {
                     return Api.get("api/account/progress/course/" + id).success(function(resp) {

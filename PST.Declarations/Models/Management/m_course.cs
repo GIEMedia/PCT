@@ -1,10 +1,10 @@
 ﻿using System;
+using Prototype1.Security;
 
 namespace PST.Declarations.Models.Management
 {
     public class m_course
     {
-
         public Guid id { get; set; }
 
         public string title { get; set; }
