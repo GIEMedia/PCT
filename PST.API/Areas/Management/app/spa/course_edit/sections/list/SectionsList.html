@@ -45,7 +45,7 @@
 
                             <td>
                                 <div class="icons">
-                                    <span ng-class="{'sortable-handle': !updatingOrder}" button-loading="updatingOrder:small">
+                                    <span ng-class="{'sortable-handle': !updatingOrder}" ng-hide="course.status == 1" button-loading="updatingOrder:small">
                                         <i class="fa fa-arrows"></i>
                                     </span>
                                     <a href="" class="icon icon-rename" ng-hide="course.status == 1" ng-click="editName.editing = true"></a>
