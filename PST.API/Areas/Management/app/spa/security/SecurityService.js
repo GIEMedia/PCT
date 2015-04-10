@@ -20,6 +20,9 @@
                     defaultUserState: function() {
                         return options.defaultUserState;
                     },
+                    loginApi: function() {
+                        return options.loginApi;
+                    },
                     allowUnauthen: function(state) {
                         return options.allowUnauthen(state);
                     }
@@ -37,6 +40,9 @@
         .run(["Api", "$state", "Security", function(Api, $state, Security) {
             Api.onError(function(data, status) {
                 if (status == 401) {
+                    if (sessionStorage.access_token != null) {
+                        delete sessionStorage.access_token;
+                    }
                     if ($state.current.name != Security.loginState()) {
                         $state.go(Security.loginState());
                     }
@@ -194,7 +200,7 @@
                         localStorage.removeItem("remembered_login");
                     }
 
-                    return Api.postForm("api/account/login", data)
+                    return Api.postForm(Security.loginApi(), data)
                         .success(function(resp) {
                             sessionStorage.access_token = resp.access_token;
                             fetchUser();

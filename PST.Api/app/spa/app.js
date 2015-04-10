@@ -43,6 +43,7 @@
             SecurityProvider.set({
                 loginState : "landing",
                 defaultUserState : "dashboard",
+                loginApi: "api/account/login",
                 allowUnauthen : function(state) {
                     return state.name == "landing" || state.name == "forgotpassword" || state.name == "coursePreview" || state.name == "testPreview";
                 }

@@ -41,6 +41,7 @@
             SecurityProvider.set({
                 loginState : "login",
                 defaultUserState : "courses",
+                loginApi: "api/account/login",
                 allowUnauthen : function(state) {
                     return state.name == "login";
                 }
