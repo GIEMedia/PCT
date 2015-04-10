@@ -36,6 +36,7 @@ namespace PST.Api.Controllers
         private readonly Func<UserManager<ApplicationUser>> _userManagerFactory;
         private readonly EmailGenerationService _resetPasswordProvider;
         private readonly IEntityRepository _entityRepository;
+        private readonly Lazy<UserManager<ApplicationUser>> _userManager;
         private readonly Lazy<ICourseService> _courseService;
         private readonly Lazy<ICertificateService> _cetificateService;
 
@@ -48,6 +49,7 @@ namespace PST.Api.Controllers
             _userManagerFactory = userManagerFactory;
             _resetPasswordProvider = resetPasswordProvider;
             _entityRepository = entityRepository;
+            _userManager = userManager;
             _courseService = courseService;
             _cetificateService = cetificateService;
         }
@@ -333,35 +335,32 @@ namespace PST.Api.Controllers
 
         [HttpDelete]
         [Route("{account_id}")]
-        public void ToggleAccountStatus(string account_id)
+        public async void ToggleAccountStatus(string account_id)
         {
             Guid accountID;
             
             if (!Guid.TryParse(account_id, out accountID)) return;
-            
-            var account = _entityRepository.GetByID<Account>(accountID);
+
+            var account = await _userManager.Value.FindByIdAsync(account_id);
             if (account == null) return;
 
             account.Status = account.Status == AccountStatus.Closed
                 ? AccountStatus.None
                 : AccountStatus.Closed;
 
-            _entityRepository.Save(account);
+            await _userManager.Value.UpdateAsync(account);
         }
 
         [HttpGet]
         [Route("{account_id}")]
-        public account_detailed GetAccountByID(string account_id)
+        public async Task<account_detailed> GetAccountByID(string account_id)
         {
             Guid accountID;
 
             if (!Guid.TryParse(account_id, out accountID)) return null;
 
-            var account = _entityRepository.GetByID<Account>(accountID);
-            var accountDetailed = new account_detailed
-            {
-                account = account
-            };
+            var account = await _userManager.Value.FindByIdAsync(account_id);
+            var accountDetailed = new account_detailed {account = account};
 
             return accountDetailed;
         }

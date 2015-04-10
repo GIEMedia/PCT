@@ -6,6 +6,7 @@ using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
 using Prototype1.Foundation.Interfaces;
 using PST.Api.Controllers;
+using PST.Api.Core;
 using PST.Declarations;
 using PST.Declarations.Entities;
 using PST.Declarations.Interfaces;
@@ -14,7 +15,7 @@ using WebGrease.Css.Extensions;
 
 namespace PST.Api.Areas.Management.Controllers
 {
-    //[Authorize]
+    [AdminAuthorize]
     [RoutePrefix("api/manage/course")]
     public class ManageCourseController : ApiControllerBase
     {

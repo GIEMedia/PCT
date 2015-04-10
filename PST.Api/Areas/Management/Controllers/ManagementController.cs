@@ -1,27 +1,33 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Ajax.Utilities;
+using Microsoft.AspNet.Identity;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
 using PST.Api.Controllers;
+using PST.Api.Core;
+using PST.Api.Core.OAuth;
 using PST.Declarations;
 using PST.Declarations.Entities;
 using PST.Declarations.Interfaces;
-using PST.Declarations.Models;
 using PST.Declarations.Models.Management;
 
 namespace PST.Api.Areas.Management.Controllers
 {
-    //[Authorize]
+    [AdminAuthorize]
     [RoutePrefix("api/manage")]
     public class ManagementController : ApiControllerBase
     {
+        private readonly Lazy<UserManager<ApplicationUser>> _userManager;
         private readonly IEntityRepository _entityRepository;
         private readonly Lazy<ICourseService> _courseService;
 
-        public ManagementController(IEntityRepository entityRepository, Lazy<ICourseService> courseService)
+        public ManagementController(Lazy<UserManager<ApplicationUser>> userManager, IEntityRepository entityRepository, Lazy<ICourseService> courseService)
+            : base(userManager)
         {
+            _userManager = userManager;
             _entityRepository = entityRepository;
             _courseService = courseService;
         }
@@ -143,15 +149,15 @@ namespace PST.Api.Areas.Management.Controllers
         /// <param name="access"></param>
         [HttpPut]
         [Route("user/admin/{userID}")]
-        public void UpdateUserAdminAccess(Guid userID, AdminAccess access)
+        public async Task UpdateUserAdminAccess(Guid userID, AdminAccess access)
         {
-            var account = _entityRepository.GetByID<Account>(userID);
-            if(account == null)
+            var account = await _userManager.Value.FindByIdAsync(userID.ToString());
+
+            if (account == null)
                 throw new NullReferenceException("User not found.");
 
             account.AdminAccess = access;
-
-            _entityRepository.Save(account);
+            await _userManager.Value.UpdateAsync(account);
         }
     }
 }

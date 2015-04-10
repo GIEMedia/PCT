@@ -49,7 +49,7 @@ namespace PST.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{courseID}/preview")]
-        [AdminOrTokenAuthorization]
+        [AdminOrTokenAuthorize]
         public test<question_with_answers> GetTestPreview(Guid courseID)
         {
             return GetTest<question_with_answers>(courseID, null);

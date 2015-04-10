@@ -188,7 +188,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminOrTokenAuthorizationAttribute.cs" />
+    <Compile Include="AdminAuthorizeAttribute.cs" />
+    <Compile Include="AdminOrTokenAuthorizeAttribute.cs" />
     <Compile Include="App_Start\CacheConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
