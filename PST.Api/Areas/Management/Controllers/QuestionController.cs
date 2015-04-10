@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
 using PST.Api.Controllers;
+using PST.Api.Core;
 using PST.Declarations;
 using PST.Declarations.Entities;
 using PST.Declarations.Interfaces;
@@ -17,7 +16,7 @@ using PST.Services;
 
 namespace PST.Api.Areas.Management.Controllers
 {
-    //[Authorize]
+    [AdminAuthorize]
     [RoutePrefix("api/manage/course/question")]
     public class ManageQuestionController : ApiControllerBase
     {

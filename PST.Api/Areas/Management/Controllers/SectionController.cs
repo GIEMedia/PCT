@@ -9,6 +9,7 @@ using System.Web.Http;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
 using PST.Api.Controllers;
+using PST.Api.Core;
 using PST.Declarations.Entities;
 using PST.Declarations.Interfaces;
 using PST.Declarations.Models;
@@ -16,7 +17,7 @@ using PST.Declarations.Models.Management;
 
 namespace PST.Api.Areas.Management.Controllers
 {
-    //[Authorize]
+    [AdminAuthorize]
     [RoutePrefix("api/manage/course/section")]
     public class ManageSectionController : ApiControllerBase
     {

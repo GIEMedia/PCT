@@ -57,7 +57,7 @@ namespace PST.Api.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("{courseID}/preview")]
-        [AdminOrTokenAuthorization]
+        [AdminOrTokenAuthorize]
         public course<question_with_answers> GetCoursePreview(Guid courseID)
         {
             List<Course> prereqCourses;
