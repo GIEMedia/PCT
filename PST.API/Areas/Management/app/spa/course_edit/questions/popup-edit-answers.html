@@ -51,7 +51,6 @@
                 </ul><!-- /.list-checkboxes -->
 			</div><!-- /.col col-1of2 -->
 
-
 			<div class="col col-2" ng-if="question_type == 1">
                 <span ng-file-select="addImageOptions($files)" accept="image/*" ng-if="options.length < 6" data-multiple="true" class="alignleft btn-circle btn-grey">
                     <i class="icon white icon-multiphoto-plus"></i>
@@ -77,6 +76,8 @@
 
                 </ul><!-- /.list-checkboxes -->
 			</div><!-- /.col col-1of2 -->
+
+            <div class="loading" ng-show="view.loading"></div>
 		</div><!-- /.popup-body -->
 
 		<div class="popup-actions">

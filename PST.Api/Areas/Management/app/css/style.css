@@ -755,13 +755,37 @@ table + .table-buttons,
 .popup-edit .popup-head { background: transparent; }
 .popup-edit .popup-title { color: #444444; text-transform: none; }
 .popup-edit .popup-title span { margin-right: 10px; }
-.popup-edit .popup-body { background-color: #fff; padding: 15px; border-radius: 3px 3px 0 0; 
+.popup-edit .popup-body { background-color: #fff; padding: 15px; border-radius: 3px 3px 0 0; position: relative;
 	-webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 		-moz-box-shadow:0 2px 2px rgba(0, 0, 0, 0.2);
 			box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2); }
 .popup-edit .list-checkboxes li { padding-bottom: 0; }
 .popup-edit .popup-body .btn-circle { text-align: center; padding-top: 9px; margin: 9px 20px 0 0; font-size: 34px; }
 
+.popup-edit .popup-body .loading {
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color: white;
+	z-index: 10;
+	opacity: .9;
+	font: normal normal normal 14px/1 FontAwesome;
+	font-size: 50px;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	transform: translate(0, 0);
+	text-align: center;
+	padding-top: 30px;
+}
+
+.popup-edit .popup-body .loading:before {
+	content: "\f110";
+	-webkit-animation: fa-spin 1s infinite steps(8);
+	animation: fa-spin 1s infinite steps(8);
+}
 .popup-edit .list-images li { width: 77px; height: 77px; border: 2px solid #fff; }
 .popup-edit .list-images li:hover { display: block; border-color: #47ceff; }
 .popup-edit .list-images li a img { display: block;}

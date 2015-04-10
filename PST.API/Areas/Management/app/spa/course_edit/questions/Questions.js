@@ -178,7 +178,8 @@
                 addVideo: {
                     url: null,
                     show: false
-                }
+                },
+                loading: false
             };
 
             $scope.addVideo = function() {
@@ -205,12 +206,14 @@
                     alert("We don't support more than 6 options");
                     return;
                 }
+                $scope.view.loading = true;
                 var promises = [];
                 for (var i = 0; i < images.length; i++) {
                     var image = images[i];
                     promises.push(QuestionService.uploadImage(image));
                 }
                 $q.all(promises).then(function(resps) {
+                    $scope.view.loading = false;
                     for (var i = 0; i < resps.length; i++) {
                         var resp = resps[i];
 
@@ -226,7 +229,10 @@
                 if (!image) {
                     return;
                 }
+                $scope.view.loading = true;
+
                 QuestionService.uploadQuestionImage(image).success(function(resp) {
+                    $scope.view.loading = false;
                     var url = resp;
 
                     //url = url.replace(/C:\\inetpub\\wwwroot\\gie-test.prototype1.io\\Content\\Images\\/, "Images/");
