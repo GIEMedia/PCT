@@ -596,6 +596,8 @@
     <Content Include="Areas\Management\app\spa\report\ReportList.html" />
     <Content Include="Areas\Management\app\spa\report\ReportList.js" />
     <Content Include="Areas\Management\app\spa\security\SecurityService.js" />
+    <Content Include="Areas\Management\app\spa\settings\Settings.html" />
+    <Content Include="Areas\Management\app\spa\settings\Settings.js" />
     <Content Include="Areas\Management\app\spa\user\User.js" />
     <Content Include="Areas\Management\app\spa\user\UserDetail.html" />
     <Content Include="Areas\Management\app\spa\user\UserDetail.js" />
