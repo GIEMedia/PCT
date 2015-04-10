@@ -76,12 +76,14 @@
                         });
                     return defer.promise;
                 },
-                confirm: function (title, text, onConfirm) {
+                confirm: function (title, text, yes, no, onConfirm) {
                     var defer = $q.defer();
 
                     var modalScope = $rootScope.$new(true);
                     modalScope.title = title;
                     modalScope.text = text;
+                    modalScope.yes = yes;
+                    modalScope.no = no;
                     modalScope.action = defer.resolve;
                     open(modalScope, {
                         templateUrl: "Areas/Management/app/spa/common/popup-confirm.html",

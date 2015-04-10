@@ -203,6 +203,7 @@
     <Compile Include="Entities\Certificate.cs" />
     <Compile Include="Entities\Components\Address.cs" />
     <Compile Include="Entities\Course.cs" />
+    <Compile Include="Entities\CourseProgressStat.cs" />
     <Compile Include="Entities\Manager.cs" />
     <Compile Include="Entities\Progress.cs" />
     <Compile Include="Entities\Document.cs" />

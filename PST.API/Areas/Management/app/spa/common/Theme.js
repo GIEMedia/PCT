@@ -381,31 +381,30 @@
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
-                    var tooltip = $("<div class=\"tooltip\"></div>").text(attrs.pctTooltip);
-                    // Tooltip now has style {display: block, opacity: 0}, it doesn't show, but makes line focus flickering to previous line -> has to hide
-                    tooltip.hide();
-                    elem.append(tooltip);
+                    var tooltip = $("<div class=\"pcttooltip\"></div>").text(attrs.pctTooltip);
                     var scheduled = null;
                     elem.hover(
-                        function() {
-                            var scheduled1 = {};
-                            scheduled = scheduled1;
-                            tooltip.show();
-                            setTimeout(function() {
-                                if (scheduled != scheduled1) {
-                                    return;
-                                }
+                        function () {
+                            if (scheduled) return;
+                            scheduled = setTimeout(function () {
                                 scheduled = null;
-                                elem.addClass("showing-tooltip");
-                            }, 1000);
+                                tooltip.css('top', elem.offset().top + elem.outerHeight() + 30);
+                                $('.section-body').append(tooltip);
+                                var left = elem.offset().left + (elem.outerWidth() / 2) - (tooltip.outerWidth() / 2);
+                                tooltip
+                                    .css('left', left)
+                                    .css('top', elem.offset().top + elem.outerHeight() + 20)
+                                    .css('-ms-opacity', 1)
+                                    .css('opacity', 1);
+                            }, 250);
                         },
-                        function() {
-                            if (scheduled==null) {
-                                elem.removeClass("showing-tooltip");
-                                setTimeout(function() {tooltip.hide();}, 250);
-                            } else {
+                        function () {
+                            if (scheduled) {
+                                clearTimeout(scheduled);
                                 scheduled = null;
+                                return;
                             }
+                            setTimeout(function() { tooltip.remove(); }, 250);
                         }
                     );
                 }

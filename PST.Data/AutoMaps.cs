@@ -54,6 +54,8 @@ namespace PST.Data
                 c.HasMany(x => x.Sections).KeyColumn("CourseID").OrderBy("SortOrder").LazyLoad().Cascade.AllDeleteOrphan();
             });
 
+            mapper.Add().TableFor<CourseProgressStat>();
+
             mapper.Add().TableForHierarchy<Category>(c =>
             {
                 c.AddSubclass().OfType<MainCategory>(x =>
@@ -83,7 +85,7 @@ namespace PST.Data
                     .OfType<CourseProgress>(x =>
                     {
                         x.HasMany(y => y.Sections).KeyColumn("ParentProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan();
-                        x.References(y => y.TestProgress).Not.LazyLoad().Cascade.All();
+                        x.References(y => y.TestProgress).Column("ParentProgressID").Not.LazyLoad().Cascade.All();
                         x.References(y => y.Certificate).Not.LazyLoad().Cascade.All();
                         x.References(y => y.Course).Column("ItemID").LazyLoad().Cascade.None();
                         x.Map(y => y.TotalSections).Column("Total");

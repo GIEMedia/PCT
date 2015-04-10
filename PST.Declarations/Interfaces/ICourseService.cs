@@ -43,6 +43,8 @@ namespace PST.Declarations.Interfaces
 
         course_progress GetCourseProgress(Guid accountID, Guid courseID);
 
+        IList<CourseProgressStat> GetCourseProgressStats();
+
         /// <summary>
         /// Get all courses
         /// </summary>

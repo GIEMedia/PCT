@@ -1,17 +1,17 @@
-<div class="popup popup-new-category">
+<div class="popup">
     <div class="popup-inner">
         <div class="popup-head">
             <h2 class="popup-title">{{title}}</h2><!-- /.popup-title -->
         </div><!-- /.popup-head -->
 
         <div class="popup-body clearfix">
-            <pre class="field" ng-bind="text" ></pre>
+            <div class="content" ng-bind="text"></div>
         </div><!-- /.popup-body -->
 
         <div class="popup-actions">
-            <a href="" ng-click="close()" class="btn btn-grey">Cancel</a>
+            <a href="" ng-click="close()" class="btn btn-grey">{{no}}</a>
 
-            <button ng-click="save()" ng-disabled="popupText.$invalid" class="btn btn-green">Ok</button>
+            <button ng-click="save()" ng-disabled="popupText.$invalid" class="btn btn-green">{{yes}}</button>
         </div><!-- /.popup-actions -->
     </div><!-- /.popup-inner -->
 </div><!-- /.popup popup-new-category -->

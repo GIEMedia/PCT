@@ -169,11 +169,17 @@
                         }
                     });
 
-                    elem.find('.help-wrapper button').click(function() {
+                    var $alreadyOpen = null;
+                    elem.find('.help-wrapper button').click(function () {
+                        if (!$alreadyOpen || $alreadyOpen.length > 0) {
+                            if (!elem.find('#helpClose').hasClass('open')) {
+                                $alreadyOpen = elem.find('.popup.open');
+                            }
+                            $alreadyOpen.toggle();
+                        }
                         elem.find('#helpClose').toggleClass('open');
                     });
                     elem.find('#helpClose button').click(function () {
-                        //elem.find('.open').removeClass('open');
                         elem.remove();
                     });
                     elem.find('#helpClose button.no').click(function () {

@@ -221,6 +221,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="SqlServerTypes\readme.htm" />
+    <EmbeddedResource Include="StoredProcedures.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PST.Declarations\PST.Declarations.csproj">

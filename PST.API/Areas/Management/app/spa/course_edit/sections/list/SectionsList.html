@@ -59,7 +59,7 @@
                             <td class="text-center padding-vert-0 view-document" ng-if="section.document.pages.length">
                                 <div class="view-document-info" button-loading="uploadingDocument"><i class="fa fa-file-pdf-o"></i> <span>{{section.document.pages.length}} page(s)</span></div>
                                 <div class="view-document-link">
-                                    <a href="{{section.document.pdf_url}}"><i class="fa fa-search" pct-tooltip="View document"></i></a>
+                                    <a href="{{section.document.pdf_url}}" target="_blank"><i class="fa fa-search" pct-tooltip="View document"></i></a>
                                     <span ng-file-select="uploadDocument($files)" accept=".pdf" button-loading="uploadingDocument"><a href=""><i class="fa fa-upload" pct-tooltip="Upload another document"></i></a></span>
                                     <a href="" ng-click="deleteDocument()" ng-hide="course.status == 1"><i class="fa fa-trash" pct-tooltip="Delete document"></i></a>
                                 </div>

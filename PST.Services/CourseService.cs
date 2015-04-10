@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
+using Prototype1.Foundation.Logging;
 using PST.Declarations;
 using PST.Declarations.Entities;
 using PST.Declarations.Interfaces;
@@ -19,11 +20,13 @@ namespace PST.Services
     {
         private readonly IEntityRepository _entityRepository;
         private readonly ICertificateService _certificateService;
+        private readonly IExceptionLogger _exceptionLogger;
 
-        public CourseService(IEntityRepository entityRepository, ICertificateService certificateService)
+        public CourseService(IEntityRepository entityRepository, ICertificateService certificateService, IExceptionLogger exceptionLogger)
         {
             _entityRepository = entityRepository;
             _certificateService = certificateService;
+            _exceptionLogger = exceptionLogger;
         }
 
         public IEnumerable<CourseProgress> OpenCourses(Guid accountID)
@@ -137,6 +140,21 @@ namespace PST.Services
                         };
                     }).ToArray()
             };
+        }
+
+        public IList<CourseProgressStat> GetCourseProgressStats()
+        {
+            try
+            {
+                return NHibernateSessionManager.Instance.GetSession()
+                    .GetNamedQuery("AggregateCourseProgresses")
+                    .List<CourseProgressStat>();
+            }
+            catch(Exception ex)
+            {
+                _exceptionLogger.LogException(ex);
+                return new List<CourseProgressStat>();
+            }
         }
 
         public IEnumerable<Course> GetCourses(CourseStatus? status)

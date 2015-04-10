@@ -170,7 +170,7 @@
                     });
 
                     $scope.changeToDraft = function() {
-                        Fancybox.confirm("Unpublishing course","Are you sure to unpublish this course?\n\nCustomers will not be able to access this course.").then(function() {
+                        Fancybox.confirm("Change Course Status To 'Draft'?", "Are you sure to unpublish this course? Users will not be able to access this course.", "Yes", "Cancel").then(function() {
                             CourseService.setStatus($scope.course.id, 0).success(function() {
                                 $scope.course.status = 0;
                             });
@@ -180,7 +180,6 @@
                     $scope.dismiss = function() {
                         elem.hide();
                     }
-
                 }
             };
         }])

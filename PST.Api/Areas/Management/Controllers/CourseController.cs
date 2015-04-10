@@ -43,9 +43,12 @@ namespace PST.Api.Areas.Management.Controllers
         [Route("list")]
         public m_course_overview[] GetCourses(bool activeOnly = false)
         {
+            var progresses = _courseService.GetCourseProgressStats();
+
             return
                 _courseService.GetCourses(activeOnly ? CourseStatus.Active : (CourseStatus?) null)
                     .Select(c => (m_course_overview) c)
+                    .ApplyCourseProgressStats(progresses)
                     .ToArray();
         }
 

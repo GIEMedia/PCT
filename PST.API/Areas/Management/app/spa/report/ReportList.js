@@ -24,7 +24,7 @@
 
         .factory("pctMomentFilter", function() {
             return function(dateStr) {
-                if (dateStr == "0001-01-01T00:00:00") {
+                if (!dateStr || dateStr == "0001-01-01T00:00:00") {
                     return "Never";
                 }
                 //return moment(new Date().getTime() - (Math.random() * 4 * DateUtil.DAY_LENGTH) ).fromNow()
@@ -34,11 +34,11 @@
                     .replace("a month", "1 mo")
                     .replace("months", "mo")
                     .replace("a day", "1d")
-                    .replace(" days", "d")
+                    .replace("days", "d")
                     .replace("a minute", "1m")
-                    .replace(" minutes", "m")
+                    .replace("minutes", "m")
                     .replace("an hour", "1h")
-                    .replace(" hours", "h")
+                    .replace("hours", "h")
                     .replace("a day ago", "yesterday")
                     ;
             }
