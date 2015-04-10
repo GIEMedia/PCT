@@ -44,11 +44,7 @@
                 }
 
                 $scope.view.submitting = true;
-                SecurityService.login({
-                    grant_type: "password",
-                    username: $scope.login.email,
-                    password: $scope.login.password
-                })
+                SecurityService.login($scope.login.email, $scope.login.password, false)
                     .success(function() {
                         $state.go("courses");
                     })

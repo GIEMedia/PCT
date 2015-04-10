@@ -42,7 +42,8 @@ namespace PST.Api
                 "~/app/js/angular_1.3.1/angular-sanitize.min.js",
                 "~/app/js/angular_1.3.1/angular-animate.min.js",
                 "~/app/js/angular-ui-router.min.js",
-                "~/app/js/common-utils.js"
+                "~/app/js/common-utils.js",
+                "~/Areas/Management/app/spa/security/SecurityService.js"
                 );
             bundles.Add(jsLib);
 
@@ -59,7 +60,6 @@ namespace PST.Api
                 "~/app/spa/api/CourseService.js",
                 "~/app/spa/api/ForgotpasswordService.js",
                 "~/app/spa/api/ManagerService.js",
-                "~/app/spa/api/SecurityService.js",
                 "~/app/spa/api/StateLicensureService.js",
                 "~/app/spa/api/StateService.js",
                 "~/app/spa/api/TestService.js",
@@ -126,7 +126,6 @@ namespace PST.Api
                 "~/Areas/Management/app/spa/report/Report.js",
                 "~/Areas/Management/app/spa/report/ReportDetail.js",
                 "~/Areas/Management/app/spa/report/ReportList.js",
-                "~/Areas/Management/app/spa/security/SecurityService.js",
                 "~/Areas/Management/app/spa/settings/Settings.js",
                 "~/Areas/Management/app/spa/user/User.js",
                 "~/Areas/Management/app/spa/user/UserDetail.js",

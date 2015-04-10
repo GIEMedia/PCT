@@ -36,5 +36,26 @@
                 "//" + appHost + "/#/test/{courseId}/preview"
             );
         }])
+
+        .config(["SecurityProvider", function(SecurityProvider) {
+            SecurityProvider.set({
+                loginState : "login",
+                defaultUserState : "courses",
+                allowUnauthen : function(state) {
+                    return state.name == "login";
+                }
+            });
+        }])
+
+        .run(["Api", "$upload", function(Api, $upload) {
+            Api.upload = function(url, file) {
+                return Api.handleError($upload.upload({
+                    method: 'POST',
+                    url: (Api.getHost() ? "http://" + Api.getHost() + "/" : "") + url,
+                    headers: {'Authorization': "Bearer " + sessionStorage.access_token},
+                    file: file
+                }));
+            }
+        }])
     ;
 })();
