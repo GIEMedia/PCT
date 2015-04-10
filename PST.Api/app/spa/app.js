@@ -12,7 +12,7 @@
             'pct.elearning.certificate',
 
             'pct.elearning.api.Account',
-            'pct.elearning.api.Security',
+            'pct.Security',
 
             'pct.elearning.api.Certificate',
             'pct.elearning.api.ForgotpasswordService',
@@ -35,8 +35,18 @@
             'ngResource'
     ])
 
-        .run(["Api", function (Api) {
-            Api.setHost(appHost); // set in _layout.cshtml
+        .config(["ApiProvider", function (ApiProvider) {
+            ApiProvider.setHost(appHost); // set in _layout.cshtml
+        }])
+
+        .config(["SecurityProvider", function(SecurityProvider) {
+            SecurityProvider.set({
+                loginState : "landing",
+                defaultUserState : "dashboard",
+                allowUnauthen : function(state) {
+                    return state.name == "landing" || state.name == "forgotpassword" || state.name == "coursePreview" || state.name == "testPreview";
+                }
+            });
         }])
 
         .run(["$rootScope", "$state", "$stateParams", function ($rootScope, $state, $stateParams) {

@@ -4,12 +4,63 @@
 
     angular.module('pct.Security', [
     ])
+
+        .provider("Security", function() {
+            var options = null;
+
+            this.set = function(o) {
+                options = o;
+            };
+
+            this.$get = function() {
+                return {
+                    loginState: function() {
+                        return options.loginState;
+                    },
+                    defaultUserState: function() {
+                        return options.defaultUserState;
+                    },
+                    allowUnauthen: function(state) {
+                        return options.allowUnauthen(state);
+                    }
+                };
+            };
+        })
+
         .factory("User", function() {
             return {
                 loggedIn: false,
                 fullName: null
             };
         })
+
+        .run(["Api", "$state", "Security", function(Api, $state, Security) {
+            Api.onError(function(data, status) {
+                if (status == 401) {
+                    if ($state.current.name != Security.loginState()) {
+                        $state.go(Security.loginState());
+                    }
+                    return true;
+                }
+            });
+        }])
+
+        .run(["Security", "$rootScope", "$state", function(Security, $rootScope, $state) {
+            $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+                if (sessionStorage.access_token == null) {
+                    if (Security.allowUnauthen(toState)) {
+                        ;
+                    } else {
+                        event.preventDefault();
+                        Security.desiredState = {
+                            state: toState,
+                            params: toParams
+                        };
+                        $state.go(Security.loginState());
+                    }
+                }
+            });
+        }])
 
         .provider("Api", function() {
             var _host = null;
@@ -18,7 +69,8 @@
                 _host = host;
             };
 
-            this.$get = ["$http", "$upload", function($http, $upload) {
+            this.$get = ["$http", function($http) {
+                var defaultErrorHandlers = [];
 
                 var handleError = function(httpPromise) {
 
@@ -36,6 +88,14 @@
                                 return;
                             }
                         }
+
+                        for (var i = 0; i < defaultErrorHandlers.length; i++) {
+                            var eh = defaultErrorHandlers[i];
+                            if (eh(data, status, headers, config)) {
+                                return;
+                            }
+                        }
+
                         alert("Unhandled api error:\nUrl: " + config.url + "\nResponse: " + status + "\n" + JSON.stringify(data));
                     });
 
@@ -45,7 +105,7 @@
                 var sendHttp = function(method, url, data) {
                     return handleError($http({
                         method: method,
-                        url: (_host? "http://" + _host + "/" : "") + url,
+                        url: (_host ? "http://" + _host + "/" : "") + url,
                         headers: {'Authorization': "Bearer " + sessionStorage.access_token},
                         data: data
                     }));
@@ -78,20 +138,18 @@
                             data: data
                         }));
                     },
-                    upload: function(url, file) {
-                        return handleError($upload.upload({
-                            method: 'POST',
-                            url: (_host? "http://" + _host + "/" : "") + url,
-                            headers: {'Authorization': "Bearer " + sessionStorage.access_token},
-                            file: file
-                        }));
+                    onError: function(handler) {
+                        defaultErrorHandlers.push(handler);
+                    },
+                    getHost: function() {
+                        return _host;
                     },
                     handleError: handleError
                 };
             }];
         })
 
-        .factory("SecurityService", ["$http", "$rootScope", "$timeout", "Api", "User", "$state", function($http, $rootScope, $timeout, Api, User, $state) {
+        .factory("SecurityService", ["$http", "$rootScope", "$timeout", "Security", "Api", "User", "$state", function($http, $rootScope, $timeout, Security, Api, User, $state) {
             var fetchUser = function() {
                 return Api.get("api/account")
                     .success(function(account) {
@@ -102,7 +160,7 @@
                     .onError(function(error, status) {
                         if (status == 401) {
                             sessionStorage.access_token = null;
-                            $state.go("login");
+                            $state.go(Security.loginState());
                             return true;
                         } else {
                             return false;
@@ -112,29 +170,42 @@
 
             if (sessionStorage.access_token != null && sessionStorage.access_token != "null") {
                 fetchUser().success(function() {
-                    if ($state.current.name == "login") {
-                        $state.go("courses");
+                    if ($state.current.name == Security.loginState()) {
+                        $state.go(Security.defaultUserState());
                     }
                 });
             } else {
                 $timeout(function() {
-                    $state.go("login");
+                    $state.go(Security.loginState());
                 }, 0);
             }
 
-            $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-                if (fromState.name == "login" && sessionStorage.access_token == null) {
-                    event.preventDefault();
-                }
-            });
-
             return {
-                login: function(data) {
+                login: function(username, password, remember, firstLogin) {
+                    var data = {
+                        grant_type: "password",
+                        username: username,
+                        password: password
+                    };
+
+                    if (remember) {
+                        localStorage.remembered_login = username;
+                    } else {
+                        localStorage.removeItem("remembered_login");
+                    }
+
                     return Api.postForm("api/account/login", data)
-                            .success(function(resp) {
-                                sessionStorage.access_token = resp.access_token;
-                                fetchUser();
-                            });
+                        .success(function(resp) {
+                            sessionStorage.access_token = resp.access_token;
+                            fetchUser();
+
+                            if (Security.desiredState == null) {
+                                $state.go(Security.defaultUserState(), {firstLogin: firstLogin});
+                            } else {
+                                $state.go(Security.desiredState.state, Security.desiredState.params);
+                                Security.desiredState = null;
+                            }
+                        });
                 },
                 logout: function() {
                     Api.delete("api/account/logout");
@@ -142,7 +213,7 @@
                     User.loggedIn = false;
                     User.firstName = null;
                     User.fullName = null;
-                    $state.go("login");
+                    $state.go(Security.loginState());
                 }
             };
         }])
