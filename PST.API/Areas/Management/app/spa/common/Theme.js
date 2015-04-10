@@ -377,18 +377,20 @@
                 }
             };
         })
-        .directive("tooltipWrapper", function() {
+        .directive("pctTooltip", function() {
             return {
-                restrict: "C",
+                restrict: "A",
                 link: function($scope, elem, attrs) {
-                    // Tooltip now has style {display: block}, this makes line focus flickering to previous line -> has to hide
-                    elem.find(".tooltip").hide();
+                    var tooltip = $("<div class=\"tooltip\"></div>").text(attrs.pctTooltip);
+                    // Tooltip now has style {display: block, opacity: 0}, it doesn't show, but makes line focus flickering to previous line -> has to hide
+                    tooltip.hide();
+                    elem.append(tooltip);
                     var scheduled = null;
                     elem.hover(
                         function() {
                             var scheduled1 = {};
                             scheduled = scheduled1;
-                            elem.find(".tooltip").show();
+                            tooltip.show();
                             setTimeout(function() {
                                 if (scheduled != scheduled1) {
                                     return;
@@ -400,7 +402,7 @@
                         function() {
                             if (scheduled==null) {
                                 elem.removeClass("showing-tooltip");
-                                elem.find(".tooltip").hide();
+                                setTimeout(function() {tooltip.hide();}, 250);
                             } else {
                                 scheduled = null;
                             }

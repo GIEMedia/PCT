@@ -32,9 +32,9 @@
                 <input type="text" class="field" markup-editor ng-model="question.question_text" ng-maxlength="200" placeholder="Question" ng-readonly="readonly" />
 
                 <div class="question-icons">
-                    <a href="" class="icon icon-chevron-up tooltip-wrapper"><div class="tooltip">Collapse</div></a>
+                    <a href=""><i class="icon icon-chevron-up" pct-tooltip="Collapse"></i></a>
 
-                    <a href="" class="fa fa-trash-o" ng-click="deleteQuestion()" ng-if="!readonly"></a>
+                    <a href="" class="fa fa-trash-o" ng-click="deleteQuestion()" ng-if="!readonly" pct-tooltip="Remove"></a>
                 </div><!-- /.question-icons -->
             </div><!-- /.table-col -->
 
@@ -43,11 +43,11 @@
                     <p><strong>{{question.response_heading || "(Empty)"}}</strong> {{ellipsis(question.response_message, 99) || "(Empty)"}}</p>
 
                     <div class="answer-icons">
-                        <a href="" class="fa fa-arrows sortable-handle" ng-if="!readonly"></a>
+                        <a href="" class="fa fa-arrows sortable-handle" ng-if="!readonly" pct-tooltip="Reorder"></a>
 
-                        <a href="" class="icon icon-chevron-down tooltip-wrapper"><div class="tooltip">Expand</div></a>
+                        <a href="" class="icon icon-chevron-down" pct-tooltip="Expand"></a>
 
-                        <a href="" class="fa fa-trash-o" ng-click="deleteQuestion()" ng-if="!readonly"></a>
+                        <a href="" class="fa fa-trash-o" ng-click="deleteQuestion()" ng-if="!readonly" pct-tooltip="Remove"></a>
                     </div><!-- /.answer-icons -->
                 </div><!-- /.answer -->
             </div><!-- /.table-col -->
