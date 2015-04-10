@@ -394,7 +394,8 @@ a.form-label { color: #404040 !important; }
 .course-question-head .tip:hover + .popup { display: block; visibility: visible; opacity: 1; left: auto; position: absolute; right: 50px; }
 .course-question-head.no-media .tip:hover + .popup { top: 165px; }
 .course-question-head.has-media .tip:hover + .popup { top: 465px; }
-.course-question-title { color: #404040; }
+.course-question-title { color: #404040; font-weight: 300; }
+.course-question-title b { font-weight: 900; }
 
 .course-question-options { background: #fff; border: 1px solid #d7e2e6; }
 .course-question-option ~ .course-question-option { border-top: 1px solid #d7e2e6; }

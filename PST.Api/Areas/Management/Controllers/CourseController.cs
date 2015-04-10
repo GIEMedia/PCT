@@ -153,7 +153,7 @@ namespace PST.Api.Areas.Management.Controllers
                 if (parentCategory == null)
                     throw new NullReferenceException("Specified parent category not found.");
 
-                var subCategory = parentCategory.SubCategories.FirstOrDefault(s => s.ID == categoryID);
+                var subCategory = parentCategory.SubCategories.FindById(categoryID);
 
                 if (subCategory == null)
                     throw new NullReferenceException("Specified category not found.");
