@@ -374,7 +374,6 @@
     <Content Include="app\spa\api\CourseService.js" />
     <Content Include="app\spa\api\ForgotpasswordService.js" />
     <Content Include="app\spa\api\ManagerService.js" />
-    <Content Include="app\spa\api\SecurityService.js" />
     <Content Include="app\spa\api\StateLicensureService.js" />
     <Content Include="app\spa\api\StateService.js" />
     <Content Include="app\spa\api\TestService.js" />
