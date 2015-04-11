@@ -18,9 +18,18 @@ namespace PST.Declarations.Entities
         [Ownership(Ownership.Exclusive)]
         public virtual IList<Question> Questions { get; set; }
 
-        public abstract QuestionedProgress CreateAndAddProgress(CourseProgress courseProgress);
+        //public abstract QuestionedProgress<QuestionProgress> CreateAndAddProgress(CourseProgress courseProgress);
 
-        public abstract QuestionedProgress GetProgress(CourseProgress courseProgress);
+        //public abstract QuestionedProgress<QuestionProgress> GetProgress(CourseProgress courseProgress);
+        
         public virtual bool Deleted { get; set; }
+    }
+
+    public abstract class Questioned<TQuestionProgress> : Questioned
+        where TQuestionProgress : QuestionProgressBase
+    {
+        public abstract QuestionedProgress<TQuestionProgress> CreateAndAddProgress(CourseProgress courseProgress);
+
+        public abstract QuestionedProgress<TQuestionProgress> GetProgress(CourseProgress courseProgress);
     }
 }

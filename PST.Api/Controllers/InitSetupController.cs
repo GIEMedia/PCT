@@ -199,33 +199,35 @@ namespace PST.Api.Controllers
             {
                 Course = course,
                 LastActivityUtc = DateTime.UtcNow,
-                TestProgress =
+                TestProgress = 
+                    //new List<TestProgress>{
                     new TestProgress
                     {
-                        Test = course.Test,
+                        TestID = course.Test.ID,
                         TotalQuestions = 2,
                         TriesLeft = 3,
                         LastActivityUtc = DateTime.UtcNow
+                    //}
                     },
                 Sections = new List<SectionProgress>
                 {
                     new SectionProgress
                     {
-                        Section = course.Sections[0],
+                        SectionID = course.Sections[0].ID,
                         TotalQuestions = 2,
                         LastActivityUtc = DateTime.UtcNow,
                         CompletedQuestions = new List<QuestionProgress>
                         {
                             new QuestionProgress
                             {
-                                Question = course.Sections[0].Questions[0],
+                                QuestionID = course.Sections[0].Questions[0].ID,
                                 LastActivityUtc = DateTime.UtcNow
                             }
                         }
                     },
                     new SectionProgress
                     {
-                        Section = course.Sections[1],
+                        SectionID = course.Sections[1].ID,
                         TotalQuestions = 2,
                         LastActivityUtc = DateTime.UtcNow
                     }

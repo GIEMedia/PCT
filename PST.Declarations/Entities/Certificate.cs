@@ -19,15 +19,24 @@ namespace PST.Declarations.Entities
             if(certificate == null)
                 return new certificate();
 
-            var urlBase = string.Concat(BaseUrl, "/Content/Certificates/", certificate.ID);
             return new certificate
             {
                 course_id = certificate.Course.ID,
                 course_name = certificate.Course.Title,
                 earned = certificate.EarnedUtc,
-                image_url = urlBase + ".jpg",
-                pdf_url = urlBase + ".pdf"
+                image_url = GetImageUrl(certificate.ID),
+                pdf_url = GetPdfUrl(certificate.ID)
             };
+        }
+
+        public static string GetImageUrl(Guid certificateID)
+        {
+            return string.Concat(BaseUrl, "/Content/Certificates/", certificateID, ".jpg");
+        }
+
+        public static string GetPdfUrl(Guid certificateID)
+        {
+            return string.Concat(BaseUrl, "/Content/Certificates/", certificateID, ".pdf");
         }
     }
 }

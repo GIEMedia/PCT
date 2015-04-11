@@ -36,9 +36,14 @@ namespace PST.Services
                     .Where(c => c.Course.Status == CourseStatus.Active &&
                                 (c.Sections.Count(s => s.Passed) != c.TotalSections ||
                                  // havent completed all of the questions
+                                 
+                                 //(c.TestProgress == null || !c.TestProgress.Any()) || // havent started the test
+                                 //(c.TestProgress.First().CompletedQuestions.Count() != c.TestProgress.First().TotalQuestions &&
                                  c.TestProgress == null || // havent started the test
                                  (c.TestProgress.CompletedQuestions.Count() != c.TestProgress.TotalQuestions &&
+
                                   // havent completed test
+                                  //c.TestProgress.First().TriesLeft > 0))); // havent failed test
                                   c.TestProgress.TriesLeft > 0))); // havent failed test
         }
 
@@ -81,6 +86,7 @@ namespace PST.Services
 
             var passedCourses =
                 (from c in courseProgress
+                 //where c.TestProgress != null && c.TestProgress.Any() && c.TestProgress.First().Passed
                  where c.TestProgress != null && c.TestProgress.Passed
                  select c.Course.ID).ToArray();
 
@@ -114,7 +120,7 @@ namespace PST.Services
                 from q in s.CompletedQuestions
                 group q by s
                 into g
-                select g).ToDictionary(g => g.Key.Section.ID, g => g.ToList());
+                select g).ToDictionary(g => g.Key.SectionID, g => g.ToList());
 
             return new course_progress
             {
@@ -123,7 +129,7 @@ namespace PST.Services
                 sections =
                     course.Sections.Where(s => completedSections.ContainsKey(s.ID)).Select(s =>
                     {
-                        var completedQuestions = completedSections[s.ID].Select(q => q.Question.ID).ToArray();
+                        var completedQuestions = completedSections[s.ID].Select(q => q.QuestionID).ToArray();
                         return new section_progress
                         {
                             section_id = s.ID,
@@ -189,11 +195,12 @@ namespace PST.Services
                 courseProgress.Sections.Count != courseProgress.TotalSections)
                 return null;
 
+            //var testProgress = courseProgress.TestProgress.FirstOrDefault() ??
             var testProgress = courseProgress.TestProgress ??
                                (TestProgress) test.CreateAndAddProgress(courseProgress);
 
 
-            var completedQuestions = testProgress.CompletedQuestions.Select(q => q.Question.ID).ToArray();
+            var completedQuestions = testProgress.CompletedQuestions.Select(q => q.QuestionID).ToArray();
             return new test_progress
             {
                 test_id = test.ID,
@@ -231,17 +238,20 @@ namespace PST.Services
             return courseProgress;
         }
 
-        private bool IsCorrectAnswer(Guid accountID, Course course, Question question, Questioned questioned,
+        private bool IsCorrectAnswer<TQuestionProgress>(Guid accountID, Course course, Question question, Questioned<TQuestionProgress> questioned,
             IList<Guid> selectedOptionIDs, out string correctResponseHeading, out string correctResponseText)
+            where TQuestionProgress : QuestionProgressBase, new()
         {
             Guid[] correctOptions;
             return IsCorrectAnswer(accountID, course, question, questioned, selectedOptionIDs,
                 out correctResponseHeading, out correctResponseText, out correctOptions);
         }
 
-        private bool IsCorrectAnswer(Guid accountID, Course course, Question question, Questioned questioned,
+        private bool IsCorrectAnswer<TQuestionProgress>(Guid accountID, Course course, Question question,
+            Questioned<TQuestionProgress> questioned,
             IList<Guid> selectedOptionIDs, out string correctResponseHeading, out string correctResponseText,
             out Guid[] correctOptions)
+            where TQuestionProgress : QuestionProgressBase, new()
         {
             correctOptions =
                 question.Options.Where(o => o.Correct).Select(o => o.ID).ToArray();
@@ -249,30 +259,41 @@ namespace PST.Services
             var correct = correctOptions.Count() == selectedOptionIDs.Count() &&
                           new HashSet<Guid>(correctOptions).SetEquals(selectedOptionIDs);
 
-            if (correct)
+            var courseProgress = GetCourseProgress(accountID, course);
+
+            var questionedProgress = questioned.GetProgress(courseProgress) ??
+                                     questioned.CreateAndAddProgress(courseProgress);
+
+            var questionProgress =
+                questionedProgress.CompletedQuestions.FirstOrDefault(q => q.QuestionID == question.ID);
+
+            if (questionProgress == null)
             {
-                var courseProgress = GetCourseProgress(accountID, course);
-
-                var questionedProgress = questioned.GetProgress(courseProgress) ??
-                                         questioned.CreateAndAddProgress(courseProgress);
-
-                var questionProgress =
-                    questionedProgress.CompletedQuestions.FirstOrDefault(q => q.Question.ID == question.ID);
-
-                if (questionProgress == null)
-                {
-                    questionProgress = new QuestionProgress {Question = question};
-                    questionedProgress.CompletedQuestions.Add(questionProgress);
-                }
-
-                courseProgress.LastActivityUtc =
-                    questionedProgress.LastActivityUtc =
-                        questionProgress.LastActivityUtc = DateTime.UtcNow;
-
-                questionedProgress.TotalQuestions = questioned.Questions.Count;
-
-                _entityRepository.Save(courseProgress);
+                questionProgress = new TQuestionProgress {QuestionID = question.ID};
+                questionedProgress.CompletedQuestions.Add(questionProgress);
             }
+
+            courseProgress.LastActivityUtc =
+                questionedProgress.LastActivityUtc =
+                    questionProgress.LastActivityUtc = DateTime.UtcNow;
+
+            questionedProgress.TotalQuestions = questioned.Questions.Count;
+
+            TestProgress testProgress;
+            if ((testProgress = questionedProgress as TestProgress) != null)
+            {
+                var attempt = Math.Max(1, TestProgress.MaxTries - testProgress.TriesLeft + 1);
+                TestQuestionProgress testQuestionProgress;
+                if ((testQuestionProgress = questionProgress as TestQuestionProgress) != null)
+                {
+                    selectedOptionIDs.Select(o => new OptionProgress {OptionID = o, SelectedOnAttempt = attempt})
+                        .Apply(o => testQuestionProgress.OptionProgress.Add(o));
+                    if (correct)
+                        testQuestionProgress.CorrectOnAttempt = attempt;
+                }
+            }
+
+            _entityRepository.Save(courseProgress);
 
             correctResponseHeading = question.CorrectResponseHeading;
             correctResponseText = question.CorrectResponseText;

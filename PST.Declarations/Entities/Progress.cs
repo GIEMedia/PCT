@@ -33,7 +33,19 @@ namespace PST.Declarations.Entities
 
         public virtual int TotalSections { get; set; }
 
-        public virtual TestProgress TestProgress { get; set; }
+        //public virtual TestProgress TestProgress { get; set; }
+        //public virtual IList<TestProgress> TestProgress { get; set; }
+        private TestProgress _testProgress;
+        public virtual TestProgress TestProgress
+        {
+            get { return _testProgress; }
+            set
+            {
+                _testProgress = value;
+                if (_testProgress != null)
+                    _testProgress.CourseProgressID = ID;
+            }
+        }
 
         private Certificate certificate;
 
@@ -56,13 +68,18 @@ namespace PST.Declarations.Entities
                 title = courseProgress.Course.Title,
                 last_activity = courseProgress.LastActivityUtc,
                 certificate_url =
-                    courseProgress.Certificate == null ? string.Empty : courseProgress.Certificate.ID.ToString(),
+                    courseProgress.Certificate == null ? string.Empty : Certificate.GetPdfUrl(courseProgress.Certificate.ID),
                 course_percent = courseProgress.Sections.Count(s => s.Passed)/(decimal) courseProgress.TotalSections,
+                //test_percent = courseProgress.TestProgress == null || !courseProgress.TestProgress.Any()
+                //    ? 0
+                //    : courseProgress.TestProgress.First().CompletedQuestions.Count()/
+                //      (decimal)courseProgress.TestProgress.First().TotalQuestions,
+                //test_failed = courseProgress.TestProgress != null && courseProgress.TestProgress.Any() && courseProgress.TestProgress.First().TriesLeft == 0
                 test_percent = courseProgress.TestProgress == null
                     ? 0
-                    : courseProgress.TestProgress.CompletedQuestions.Count()/
-                      (decimal) courseProgress.TestProgress.TotalQuestions,
-                test_failed = courseProgress.TestProgress != null && courseProgress.TestProgress.TriesLeft > 0
+                    : courseProgress.TestProgress.CompletedQuestions.Count() /
+                      (decimal)courseProgress.TestProgress.TotalQuestions,
+                test_failed = courseProgress.TestProgress != null && courseProgress.TestProgress.TriesLeft == 0
             };
 
             return stat;
@@ -70,15 +87,16 @@ namespace PST.Declarations.Entities
     }
 
     [Serializable]
-    public abstract class QuestionedProgress : Progress
+    public abstract class QuestionedProgress<TQuestionProgress> : Progress
+        where TQuestionProgress : QuestionProgressBase
     {
         public QuestionedProgress()
         {
-            this.CompletedQuestions = new List<QuestionProgress>();
+            this.CompletedQuestions = new List<TQuestionProgress>();
         }
 
         [Ownership(Ownership.Exclusive)]
-        public virtual IList<QuestionProgress> CompletedQuestions { get; set; }
+        public virtual IList<TQuestionProgress> CompletedQuestions { get; set; }
 
         public virtual int TotalQuestions { get; set; }
 
@@ -87,30 +105,65 @@ namespace PST.Declarations.Entities
     }
 
     [Serializable]
-    public class SectionProgress : QuestionedProgress
+    public class SectionProgress : QuestionedProgress<QuestionProgress>
     {
-        [Ownership(Ownership.None)]
-        public virtual Section Section { get; set; }
+        public virtual Guid SectionID { get; set; }
     }
 
     [Serializable]
-    public class TestProgress : QuestionedProgress
+    public class TestProgress : QuestionedProgress<TestQuestionProgress>
     {
+        public static readonly int MaxTries = 3;
+
         public TestProgress()
         {
-            this.TriesLeft = 3;
+            this.TriesLeft = MaxTries;
+        }
+
+        public virtual Guid TestID { get; set; }
+
+        public virtual int TriesLeft { get; set; }
+
+        /// <summary>
+        /// Set by CourseProgress.TestProgress setter - used for ParentProgressID mapping
+        /// </summary>
+        public virtual Guid CourseProgressID { get; set; }
+    }
+
+    [Serializable]
+    public abstract class QuestionProgressBase : Progress
+    {
+        public virtual Guid QuestionID { get; set; }
+
+        public abstract int? CorrectOnAttempt { get; set; }
+    }
+
+    [Serializable]
+    public class QuestionProgress : QuestionProgressBase
+    {
+        [Transient]
+        public override int? CorrectOnAttempt { get { return 1; } set { /* no-op */} }
+    }
+
+    [Serializable]
+    public class TestQuestionProgress : QuestionProgressBase
+    {
+        public TestQuestionProgress()
+        {
+            this.OptionProgress = new List<OptionProgress>();
         }
 
         [Ownership(Ownership.None)]
-        public virtual Test Test { get; set; }
+        public virtual IList<OptionProgress> OptionProgress { get; set; }
 
-        public virtual int TriesLeft { get; set; }
+        public override int? CorrectOnAttempt { get; set; }
     }
 
     [Serializable]
-    public class QuestionProgress : Progress
+    public class OptionProgress : Progress
     {
-        [Ownership(Ownership.None)]
-        public virtual Question Question { get; set; }
+        public virtual Guid OptionID { get; set; }
+
+        public virtual int SelectedOnAttempt { get; set; }
     }
 }

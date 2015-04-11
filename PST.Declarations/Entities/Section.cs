@@ -8,18 +8,18 @@ using PST.Declarations.Models.Management;
 namespace PST.Declarations.Entities
 {
     [Serializable]
-    public class Section : Questioned, ISorted
+    public class Section : Questioned<QuestionProgress>, ISorted
     {
         [Ownership(Ownership.Shared)]
         public virtual Document Document { get; set; }
 
         public virtual int SortOrder { get; set; }
 
-        public override QuestionedProgress CreateAndAddProgress(CourseProgress courseProgress)
+        public override QuestionedProgress<QuestionProgress> CreateAndAddProgress(CourseProgress courseProgress)
         {
             var questionedProgress = new SectionProgress
             {
-                Section = this,
+                SectionID = this.ID,
                 TotalQuestions = Questions.Count
             };
             courseProgress.Sections.Add(questionedProgress);
@@ -27,9 +27,9 @@ namespace PST.Declarations.Entities
             return questionedProgress;
         }
 
-        public override QuestionedProgress GetProgress(CourseProgress courseProgress)
+        public override QuestionedProgress<QuestionProgress> GetProgress(CourseProgress courseProgress)
         {
-            return courseProgress.Sections.FirstOrDefault(s => s.Section.ID == ID);
+            return courseProgress.Sections.FirstOrDefault(s => s.SectionID == ID);
         }
 
         public virtual section<TQuestion> ToModel<TQuestion>()

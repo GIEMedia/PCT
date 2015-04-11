@@ -4,10 +4,12 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Hosting;
 using iTextSharp.text;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
+using PST.Declarations;
 using PST.Declarations.Entities;
 using PST.Declarations.Interfaces;
 using Font = iTextSharp.text.Font;
@@ -116,6 +118,18 @@ namespace PST.Services
                 }
                 document.Close();
             }
+        }
+
+        private static readonly string BaseUrl = MvcApplicationBase.BaseUrl;
+
+        public static string GetCertificateImageUrl(Guid certificateID)
+        {
+            return string.Concat(BaseUrl, "/Content/Certificates/", certificateID, ".jpg");
+        }
+
+        public static string GetCertificatePdfUrl(Guid certificateID)
+        {
+            return string.Concat(BaseUrl, "/Content/Certificates/", certificateID, ".jpg");
         }
     }
 }

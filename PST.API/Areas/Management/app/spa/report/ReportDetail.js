@@ -61,7 +61,8 @@
                         return a.first_attempt + a.second_attempt + a.third_attempt;
                     }
 
-                    $scope.percent = function(value, a) {
+                    $scope.percent = function (value, a) {
+                        if (a === 0 || value === 0) return 0;
                         return Math.round(value / total(a) * 100);
                     }
                 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
@@ -48,24 +49,40 @@ namespace PST.Api.Areas.Management.Controllers
             if(course.Test == null)
                 return new m_question_stat[0];
 
+            var results = (from cp in _entityRepository.Queryable<CourseProgress>()
+                where cp.Course.ID == courseID && cp.TestProgress != null
+                from qp in cp.TestProgress.CompletedQuestions
+                from op in qp.OptionProgress
+                select new {qp.QuestionID, qp.CorrectOnAttempt, op.OptionID, op.SelectedOnAttempt}).ToList();
+
             return course.Test.Questions.Select(q =>
-                new m_question_stat
+            {
+                var questionResults =
+                    results.Where(r => r.QuestionID == q.ID)
+                        .GroupBy(r => r.QuestionID, r => new {r.SelectedOnAttempt})
+                        .ToList();
+                return new m_question_stat
                 {
-                    first_attempt = 750,
-                    second_attempt = 250,
-                    third_attempt = 50,
+                    first_attempt = questionResults.Count(r => r.Max(a => a.SelectedOnAttempt) == 1),
+                    second_attempt = questionResults.Count(r => r.Max(a => a.SelectedOnAttempt) == 2),
+                    third_attempt = questionResults.Count(r => r.Max(a => a.SelectedOnAttempt) > 2),
                     question = q.QuestionText,
                     options = q.Options.Select(o =>
-                        new m_option_stat
+                    {
+                        var optionResults = results.Where(r => r.OptionID == o.ID).ToList();
+                        return new m_option_stat
                         {
-                            first_attempt = 750,
-                            second_attempt = 250,
-                            third_attempt = 50,
+                            first_attempt = optionResults.Count(r => r.CorrectOnAttempt == 1),
+                            second_attempt = optionResults.Count(r => r.CorrectOnAttempt == 2),
+                            third_attempt = optionResults.Count(r => r.CorrectOnAttempt > 2),
                             text = o.Text,
                             image = q is MultiImageQuestion ? ((ImageOption) o).ImageUrl : null,
                             correct = o.Correct
-                        }).ToArray()
-                }).ToArray();
+                        };
+                    }).ToArray()
+                };
+            }).ToArray();
+
         }
 
         /// <summary>

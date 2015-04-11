@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Prototype1.Foundation.Data;
 using PST.Declarations.Models;
@@ -6,7 +7,7 @@ using PST.Declarations.Models;
 namespace PST.Declarations.Entities
 {
     [Serializable]
-    public class Test : Questioned
+    public class Test : Questioned<TestQuestionProgress>
     {
         public Test()
         {
@@ -33,20 +34,22 @@ namespace PST.Declarations.Entities
             return test.ToModel<question_with_answers>();
         }
 
-        public override QuestionedProgress CreateAndAddProgress(CourseProgress courseProgress)
+        public override QuestionedProgress<TestQuestionProgress> CreateAndAddProgress(CourseProgress courseProgress)
         {
             var questionedProgress = new TestProgress
             {
-                Test = this,
+                TestID = this.ID,
                 TotalQuestions = this.Questions.Count,
             };
+            //courseProgress.TestProgress = new List<TestProgress> {questionedProgress};
             courseProgress.TestProgress = questionedProgress;
 
             return questionedProgress;
         }
 
-        public override QuestionedProgress GetProgress(CourseProgress courseProgress)
+        public override QuestionedProgress<TestQuestionProgress> GetProgress(CourseProgress courseProgress)
         {
+            //return courseProgress.TestProgress.FirstOrDefault();
             return courseProgress.TestProgress;
         }
 

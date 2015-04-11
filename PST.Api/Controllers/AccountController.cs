@@ -8,6 +8,7 @@ using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using PST.Api.Core;
 using PST.Api.Core.App_Start;
 using PST.Api.Core.OAuth;
 using PST.Declarations.Entities;
@@ -365,6 +366,14 @@ namespace PST.Api.Controllers
             return accountDetailed;
         }
 
+        [HttpGet]
+        [Route("verify")]
+        [AdminAuthorize]
+        public void VerifyIsAdmin()
+        {
+            // No op - handled by attribute
+        }
+
         #endregion
 
         #region Courses, Certificates, Managers & Licensure
@@ -379,9 +388,13 @@ namespace PST.Api.Controllers
             {
                 var co = (course_overview) cp.Course;
                 co.course_progress = cp.Sections.Count(s => s.Passed)/(decimal) cp.TotalSections;
+                //co.test_progress =
+                //    cp.TestProgress != null && cp.TestProgress.Any()
+                //        ? cp.TestProgress.First().CompletedQuestions.Count / (decimal)cp.TestProgress.First().TotalQuestions
+                //        : 0;
                 co.test_progress =
                     cp.TestProgress != null
-                        ? cp.TestProgress.CompletedQuestions.Count/(decimal) cp.TestProgress.TotalQuestions
+                        ? cp.TestProgress.CompletedQuestions.Count / (decimal)cp.TestProgress.TotalQuestions
                         : 0;
                 co.last_activity = cp.LastActivityUtc.ToTimeZone(CurretUserTimeZoneInfo);
 
