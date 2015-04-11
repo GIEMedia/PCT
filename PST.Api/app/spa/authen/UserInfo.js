@@ -38,21 +38,16 @@
                     }
 
                     $scope.ui.loggingin = true;
-                    SecurityService.login($scope.loginForm.email, $scope.loginForm.password, $scope.loginForm.remember)
-                        .success(function() {
+                    SecurityService.login($scope.loginForm.email, $scope.loginForm.password, $scope.loginForm.remember).then(
+                        function() {
                             $scope.ui.loggingin = false;
-                        })
-                        .onError(function(error, status) {
+                        },
+                        function(reason) {
                             $scope.ui.loggingin = false;
-                            if (status == 400) {
-                                alert('Incorrect Username or Password.');
-                                $scope.loginForm.password = null;
-                                return true;
-                            } else {
-                                return false;
-                            }
-                        })
-                    ;
+                            alert(reason);
+                            $scope.loginForm.password = null;
+                        }
+                    );
                 };
                 $scope.logout = function() {
                     SecurityService.logout();

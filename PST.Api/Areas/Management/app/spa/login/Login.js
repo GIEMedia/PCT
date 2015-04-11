@@ -44,21 +44,16 @@
                 }
 
                 $scope.view.submitting = true;
-                SecurityService.login($scope.login.email, $scope.login.password, false)
-                    .success(function() {
+                SecurityService.login($scope.login.email, $scope.login.password, false).then(
+                    function() {
                         $state.go("courses");
-                    })
-                    .onError(function(error, status) {
+                    },
+                    function(reason) {
                         $scope.view.submitting = false;
-                        if (status == 400) {
-                            alert('Incorrect Username or Password.');
-                            $scope.login.password = null;
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    })
-                ;
+                        alert(reason);
+                        $scope.login.password = null;
+                    }
+                );
             };
         }])
     ;

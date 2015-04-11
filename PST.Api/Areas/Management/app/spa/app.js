@@ -41,9 +41,40 @@
             SecurityProvider.set({
                 loginState : "login",
                 defaultUserState : "courses",
-                loginApi: "api/account/login",
                 allowUnauthen : function(state) {
                     return state.name == "login";
+                }
+            });
+        }])
+        .run(["Security", "Api", "$q", "$http", function(Security, Api, $q, $http) {
+            Security.setApi({
+                login: function(data) {
+                    var defer = $q.defer();
+
+                    Api.postForm("api/account/login", data).onError(function() {return true;}).then(
+                        function(resp) {
+                            $http({
+                                method: "GET",
+                                url: (Api.getHost() ? "http://" + Api.getHost() + "/" : "") + "api/account/verify",
+                                headers: {'Authorization': "Bearer " + resp.data.access_token}
+                            }).then(
+                                function() {
+                                    defer.resolve(resp);
+                                },
+                                function() {
+                                    defer.reject("You don't have enough privilege");
+                                }
+                            );
+                        },
+                        function(resp) {
+                            if (resp.status == 400) {
+                                defer.reject('Incorrect Username or Password.');
+                            } else {
+                                defer.reject("Error: Unknown");
+                            }
+                        }
+                    );
+                    return defer.promise;
                 }
             });
         }])

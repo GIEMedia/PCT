@@ -13,6 +13,7 @@
             };
 
             this.$get = function() {
+                var apiOptions;
                 return {
                     loginState: function() {
                         return options.loginState;
@@ -20,11 +21,14 @@
                     defaultUserState: function() {
                         return options.defaultUserState;
                     },
-                    loginApi: function() {
-                        return options.loginApi;
+                    loginApi: function(data) {
+                        return apiOptions.login(data);
                     },
                     allowUnauthen: function(state) {
                         return options.allowUnauthen(state);
+                    },
+                    setApi: function(_apiOptions) {
+                        apiOptions = _apiOptions;
                     }
                 };
             };
@@ -200,18 +204,17 @@
                         localStorage.removeItem("remembered_login");
                     }
 
-                    return Api.postForm(Security.loginApi(), data)
-                        .success(function(resp) {
-                            sessionStorage.access_token = resp.access_token;
-                            fetchUser();
+                    return Security.loginApi(data).then(function(resp) {
+                        sessionStorage.access_token = resp.data.access_token;
+                        fetchUser();
 
-                            if (Security.desiredState == null) {
-                                $state.go(Security.defaultUserState(), {firstLogin: firstLogin});
-                            } else {
-                                $state.go(Security.desiredState.state, Security.desiredState.params);
-                                Security.desiredState = null;
-                            }
-                        });
+                        if (Security.desiredState == null) {
+                            $state.go(Security.defaultUserState(), {firstLogin: firstLogin});
+                        } else {
+                            $state.go(Security.desiredState.state, Security.desiredState.params);
+                            Security.desiredState = null;
+                        }
+                    });
                 },
                 logout: function() {
                     Api.delete("api/account/logout");

@@ -43,12 +43,32 @@
             SecurityProvider.set({
                 loginState : "landing",
                 defaultUserState : "dashboard",
-                loginApi: "api/account/login",
                 allowUnauthen : function(state) {
                     return state.name == "landing" || state.name == "forgotpassword" || state.name == "coursePreview" || state.name == "testPreview";
                 }
             });
         }])
+
+        .run(["Security", "Api", "$q", function(Security, Api, $q) {
+            Security.setApi({
+                login: function(data) {
+                    var defer = $q.defer();
+
+                    Api.postForm("api/account/login", data).onError(function() {return true;}).then(
+                        defer.resolve,
+                        function(resp) {
+                            if (resp.status == 400) {
+                                defer.reject('Incorrect Username or Password.');
+                            } else {
+                                defer.reject("Error: Unknown");
+                            }
+                        }
+                    );
+                    return defer.promise;
+                }
+            });
+        }])
+
 
         .run(["$rootScope", "$state", "$stateParams", function ($rootScope, $state, $stateParams) {
             $rootScope.$state = $state;
