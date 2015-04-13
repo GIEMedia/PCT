@@ -9,6 +9,7 @@ namespace PST.Migrations.Migrations
         {
             this.Execute.Sql(@"
 /****** Object:  StoredProcedure [dbo].[AggregateCourseProgresses]    Script Date: 4/10/2015 12:29:49 PM ******/
+IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'AggregateCourseProgresses')
 DROP PROCEDURE [dbo].[AggregateCourseProgresses]
 GO
 

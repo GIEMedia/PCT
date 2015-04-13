@@ -168,7 +168,7 @@ namespace PST.Services
             var courses = _entityRepository.Queryable<Course>();
             if (status.HasValue)
                 courses = courses.Where(c => c.Status == status);
-            return courses;
+            return courses.OrderBy(c => c.Title);
         }
 
         public Test GetTest(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active)

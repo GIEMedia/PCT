@@ -29,11 +29,11 @@
                 save: function() {
                     var defer = $q.defer();
                     if (StringUtil.isEmpty($scope.cei.course.title)) {
-                        defer.reject("Please provide course's title");
+                        defer.reject("Please provide course's title.");
                     } else if (StringUtil.isEmpty($scope.cei.course.category)) {
-                        defer.reject("Please provide course's category");
+                        defer.reject("Please provide course's category.");
                     } else if (StringUtil.isEmpty($scope.cei.course.sub_category)) {
-                        defer.reject("Please provide course's sub category");
+                        defer.reject("Please provide course's sub category.");
                     } else {
                         CourseService.upsert($scope.cei.course).success(function(course) {
                             ObjectUtil.clear($scope.course);

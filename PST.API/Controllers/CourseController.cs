@@ -75,15 +75,19 @@ namespace PST.Api.Controllers
         public main_category[] GetCourses()
         {
             var courses = _courseService.GetCourses(CourseStatus.Active);
-            var categories = _entityRepository.Queryable<MainCategory>().ToList();
+            var categories = _entityRepository.Queryable<MainCategory>().OrderBy(c => c.Title).ToList();
 
             return categories.Select(mainCategory => new main_category
             {
                 title = mainCategory.Title,
-                categories = mainCategory.SubCategories.Select(s => new sub_category
+                categories = mainCategory.SubCategories.OrderBy(c => c.Title).Select(s => new sub_category
                 {
                     title = s.Title,
-                    courses = courses.Where(c => c.Category.ID == s.ID).Select(c => (course_overview) c).ToArray()
+                    courses =
+                        courses.Where(c => c.Category.ID == s.ID)
+                            .Select(c => (course_overview) c)
+                            .OrderBy(c => c.title)
+                            .ToArray()
                 }).Where(c => c.courses.Any()).ToArray()
             }).Where(c => c.categories.Any(s => s.courses.Any())).ToArray();
         }

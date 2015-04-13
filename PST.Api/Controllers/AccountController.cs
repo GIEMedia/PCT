@@ -399,7 +399,7 @@ namespace PST.Api.Controllers
                 co.last_activity = cp.LastActivityUtc.ToTimeZone(CurretUserTimeZoneInfo);
 
                 return co;
-            }).ToArray()
+            }).ToArray().OrderByDescending(c=>c.last_activity)
                 //TODO: Remove this hack - multiple results being returned for same course
                 .GroupBy(g => g.course_id).Select(g => g.First()).ToArray();
         }

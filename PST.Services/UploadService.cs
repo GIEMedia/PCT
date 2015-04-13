@@ -13,6 +13,7 @@ using Prototype1.Foundation;
 using Prototype1.Foundation.Logging;
 using PST.Declarations;
 using PST.Declarations.Interfaces;
+using Remotion.Linq.Utilities;
 
 namespace PST.Services
 {
@@ -32,6 +33,9 @@ namespace PST.Services
         {
             var file = await UploadFile(requestContent, "Images\\");
 
+            if (!file.Extension.ToLower().In(".jpg", ".png", ".gif", ".bmp"))
+                throw new FileLoadException("The uploaded file is not a valid image.");
+
             var fileName = file.Name;
 
             if ((width.HasValue || height.HasValue))
@@ -48,6 +52,9 @@ namespace PST.Services
         public async Task<Tuple<Guid, int>> UploadDocument(HttpContent requestContent)
         {
             var file = await UploadFile(requestContent, "Documents\\");
+
+            if (!file.Extension.Equals(".pdf", StringComparison.CurrentCultureIgnoreCase))
+                throw new FileLoadException("The uploaded file is not a valid PDF file.");
 
             int pageCount;
             var docGuid = ProcessPDF(file.FullName, out pageCount);

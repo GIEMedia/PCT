@@ -78,13 +78,13 @@ namespace PST.Declarations.Entities
             {
                 course_id = course.ID,
                 title = course.Title,
-                description =
-                    course.StateCEUs.Any()
-                        ? "CEUs Available: " +
-                          course.StateCEUs.OrderBy(x => x.StateAbbr)
-                              .Select(x => string.Format("{0} ({1:#.0} hrs)", x.StateAbbr, x.Hours))
-                              .Aggregate((i, j) => i + "," + j)
-                        : ""
+                description = course.StateCEUs.Any()
+                    ? "CEUs Available: " +
+                      course.StateCEUs.OrderBy(x => x.StateAbbr)
+                          .Select(x => string.Format("{0} ({1:#.0} hrs)", x.StateAbbr, x.Hours))
+                          .Aggregate((i, j) => i + "," + j)
+                    : "",
+                prereq_courses = course.PrerequisiteCourses.Select(c => c.Title).ToArray()
             };
         }
 
