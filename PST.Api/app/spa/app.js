@@ -31,6 +31,9 @@
             'pct.elearning.forgotpassword',
             'pct.elearning.profile',
             'pct.elearning.certificates',
+
+            'pct.elearning.layout',
+
             'ui.router',
             'ngResource'
     ])
@@ -69,6 +72,14 @@
             });
         }])
 
+        .run(["Api", "LayoutService", function(Api, LayoutService) {
+            Api.onError(function(data, status) {
+                if (status == 500) {
+                    LayoutService.showError(10000);
+                    return true;
+                }
+            });
+        }])
 
         .run(["$rootScope", "$state", "$stateParams", function ($rootScope, $state, $stateParams) {
             $rootScope.$state = $state;

@@ -83,7 +83,9 @@ namespace PST.Api
                 "~/app/spa/test/licensures/SubmitCEU.js",
                 "~/app/spa/test/Test.js",
                 "~/app/spa/test/TestQuestionsContainer.js",
-                "~/app/spa/theme.js"
+                "~/app/spa/theme.js",
+                "~/app/spa/layout/ErrorContainer.js",
+                "~/app/spa/layout/Layout.js"
                 );
             bundles.Add(jsFrontEnd);
 
