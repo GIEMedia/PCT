@@ -383,6 +383,7 @@
                 link: function($scope, elem, attrs) {
                     var tooltip = $("<div class=\"pcttooltip\"></div>").text(attrs.pctTooltip);
                     var scheduled = null;
+                    var appended = false;
                     elem.hover(
                         function () {
                             if (scheduled) return;
@@ -390,6 +391,7 @@
                                 scheduled = null;
                                 tooltip.css('top', elem.offset().top + elem.outerHeight() + 30);
                                 $('.section-body').append(tooltip);
+                                appended = true;
                                 var left = elem.offset().left + (elem.outerWidth() / 2) - (tooltip.outerWidth() / 2);
                                 tooltip
                                     .css('left', left)
@@ -404,9 +406,20 @@
                                 scheduled = null;
                                 return;
                             }
-                            setTimeout(function() { tooltip.remove(); }, 250);
+
+                            if (appended) {
+                                tooltip.remove();
+                                appended = false;
+                            }
                         }
                     );
+
+                    $scope.$on("$destroy", function() {
+                        if (appended) {
+                            tooltip.remove();
+                            appended = false;
+                        }
+                    });
                 }
             };
         })
