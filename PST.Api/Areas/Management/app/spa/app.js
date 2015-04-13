@@ -79,6 +79,25 @@
             });
         }])
 
+        /**
+         * This config show Fancybox alerts whenver receiving API error 500
+         */
+        .run(["Api", "Fancybox", function(Api, Fancybox) {
+            var showingError = false;
+            Api.onError(function(data, status) {
+                if (status == 500) {
+                    // This is to avoid multiple errors to launch many alert boxes
+                    if (!showingError) {
+                        showingError = true;
+                        Fancybox.alert("Internal server error", "An error occurred attempting to process your request. We apologize for the inconvenience. Please try again.").then(function() {
+                            showingError = false;
+                        });
+                    }
+                    return true;
+                }
+            });
+        }])
+
         .run(["Api", "$upload", function(Api, $upload) {
             Api.upload = function(url, file) {
                 return Api.handleError($upload.upload({
