@@ -76,14 +76,31 @@
                         });
                     return defer.promise;
                 },
-                confirm: function (title, text, yes, no, onConfirm) {
+                alert: function (title, text) {
                     var defer = $q.defer();
 
                     var modalScope = $rootScope.$new(true);
                     modalScope.title = title;
                     modalScope.text = text;
-                    modalScope.yes = yes;
-                    modalScope.no = no;
+                    modalScope.action = defer.resolve;
+                    open(modalScope, {
+                        templateUrl: "Areas/Management/app/spa/common/popup-alert.html",
+                        controller: "pct.fancybox.AlertCtrl",
+                        width: 550
+                    })
+                        .onClose(function() {
+                            modalScope.$destroy();
+                        });
+                    return defer.promise;
+                },
+                confirm: function (title, text, yes, no) {
+                    var defer = $q.defer();
+
+                    var modalScope = $rootScope.$new(true);
+                    modalScope.title = title;
+                    modalScope.text = text;
+                    modalScope.yes = yes || "Yes";
+                    modalScope.no = no || "Cancel";
                     modalScope.action = defer.resolve;
                     open(modalScope, {
                         templateUrl: "Areas/Management/app/spa/common/popup-confirm.html",
@@ -112,6 +129,13 @@
         .controller("pct.fancybox.ConfirmCtrl", ["$scope", "$modalInstance", function($scope, $modalInstance) {
             $scope.close = $modalInstance.close;
             $scope.save = function() {
+                $scope.action();
+                $modalInstance.close();
+            };
+        }])
+
+        .controller("pct.fancybox.AlertCtrl", ["$scope", "$modalInstance", function($scope, $modalInstance) {
+            $scope.close = function() {
                 $scope.action();
                 $modalInstance.close();
             };

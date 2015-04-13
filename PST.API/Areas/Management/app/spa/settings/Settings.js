@@ -43,7 +43,7 @@
         }])
 
 
-        .directive("settingsCatRow", ["CategoryService", function(CategoryService) {
+        .directive("settingsCatRow", ["CategoryService", "Fancybox", function(CategoryService, Fancybox) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -62,12 +62,12 @@
                     };
 
                     $scope.removeCat = function(cat) {
-                        if (!confirm("Remove category \"" + cat.title + "\"?")) {
-                            return;
-                        }
-                        $scope.removingCat = true;
-                        CategoryService.deleteCategory(cat.id).success(function() {
-                            Cols.remove(cat, $scope.list);
+                        Fancybox.confirm("Confirm removing category","Remove category \"" + cat.title + "\"?").then(function() {
+                            $scope.removingCat = true;
+                            CategoryService.deleteCategory(cat.id).success(function() {
+                                Cols.remove(cat, $scope.list);
+                            });
+
                         });
                     };
 
@@ -81,7 +81,7 @@
             };
         }])
 
-        .directive("settingsSubCatRow", ["CategoryService", function(CategoryService) {
+        .directive("settingsSubCatRow", ["CategoryService", "Fancybox", function(CategoryService, Fancybox) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -100,13 +100,13 @@
                     };
 
                     $scope.removeSub = function(sub, cat) {
-                        if (!confirm("Remove sub category \"" + sub.title + "\"?")) {
-                            return;
-                        }
+                        Fancybox.confirm("Confirm removing sub category", "Remove sub category \"" + sub.title + "\"?").then(function() {
 
-                        $scope.removingSub = true;
-                        CategoryService.deleteSubCategory(sub.id, cat.id).success(function() {
-                            Cols.remove(sub, cat.sub_categories);
+                            $scope.removingSub = true;
+                            CategoryService.deleteSubCategory(sub.id, cat.id).success(function() {
+                                Cols.remove(sub, cat.sub_categories);
+                            });
+
                         });
                     };
                 }

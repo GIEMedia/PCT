@@ -36,20 +36,20 @@
             $scope.sorter = Sorters.create();
         }])
 
-        .directive("courseRow", ["CourseService", function(CourseService) {
+        .directive("courseRow", ["CourseService", "Fancybox", function(CourseService, Fancybox) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
 
                     $scope.remove = function() {
-                        if (!confirm("Are you sure to remove this course?")) {
-                            return;
-                        }
-                        $scope.removing = true;
-                        CourseService.delete($scope.course).success(function() {
-                            Cols.remove($scope.course, $scope.list);
-                        }).error(function() {
-                            $scope.removing = false;
+                        Fancybox.confirm("Confirm deleting course", "Are you sure to remove this course?").then(function() {
+                            $scope.removing = true;
+                            CourseService.delete($scope.course).success(function() {
+                                Cols.remove($scope.course, $scope.list);
+                            }).error(function() {
+                                $scope.removing = false;
+                            });
+
                         });
                     };
                 }

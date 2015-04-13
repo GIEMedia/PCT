@@ -19,7 +19,7 @@
             ;
         }])
 
-        .controller("login.Ctrl", ["$scope", "$state", "User", "SecurityService", function ($scope, $state, User, SecurityService) {
+        .controller("login.Ctrl", ["$scope", "$state", "User", "SecurityService", "Fancybox", function ($scope, $state, User, SecurityService, Fancybox) {
             $scope.login = {
             };
 
@@ -35,11 +35,11 @@
                 $scope.pristine = false;
 
                 if (StringUtil.isBlank($scope.login.email)) {
-                    alert("Email is required");
+                    Fancybox.alert("Email is required", "Please input your email to login");
                     return;
                 }
                 if (StringUtil.isBlank($scope.login.password)) {
-                    alert("Password is required");
+                    Fancybox.alert("Password is required", "Please input your password to login");
                     return;
                 }
 
@@ -50,7 +50,7 @@
                     },
                     function(reason) {
                         $scope.view.submitting = false;
-                        alert(reason);
+                        Fancybox.alert(reason, reason);
                         $scope.login.password = null;
                     }
                 );
