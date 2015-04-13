@@ -173,7 +173,7 @@
             };
         }])
         
-        .controller("courseEdit.questions.AnswersModalCtrl", ["$scope", "$q", "$modalInstance", "QuestionService", function($scope, $q, $modalInstance, QuestionService) {
+        .controller("courseEdit.questions.AnswersModalCtrl", ["$scope", "$q", "$modalInstance", "QuestionService", "Fancybox", function($scope, $q, $modalInstance, QuestionService, Fancybox) {
             $scope.view = {
                 addVideo: {
                     url: null,
@@ -203,7 +203,7 @@
                     return;
                 }
                 if (images.length + $scope.options.length > 6) {
-                    alert("We don't support more than 6 options");
+                    Fancybox.alert("Maximum options exceeded", "We don't support more than 6 options");
                     return;
                 }
                 $scope.view.loading = true;

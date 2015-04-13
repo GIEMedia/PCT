@@ -23,7 +23,7 @@
             ;
         }])
 
-        .controller("courseEdit.Ctrl", ["$scope", "$state", "$q", "$stateParams", "LayoutService", "CourseService", "WindowService", function ($scope, $state, $q, $stateParams, LayoutService, CourseService, WindowService) {
+        .controller("courseEdit.Ctrl", ["$scope", "$state", "$q", "$stateParams", "LayoutService", "CourseService", "WindowService", "Fancybox", function ($scope, $state, $q, $stateParams, LayoutService, CourseService, WindowService, Fancybox) {
             var footerControl = LayoutService.setCustomFooter($scope, {
                 templateUrl: "Areas/Management/app/spa/course_edit/CourseEditFooter.html"
             });
@@ -44,12 +44,13 @@
 
             $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
                 if ($scope.needSaving()) {
+                    event.preventDefault();
                     if (toState.name.indexOf("courseEdit.") != 0) {
-                        if (!confirm("Course changes hasn't been saved." + "\n\nAre you sure want to leave this page?")) {
-                            event.preventDefault();
-                        }
+                        Fancybox.confirm("Confirm leaving course editor", "Course changes hasn't been saved." + "\n\nAre you sure want to leave this page?").then(function() {
+                            $scope.cel.reset();
+                            $state.go(toState.name, toParams);
+                        });
                     } else {
-                        event.preventDefault();
                         save().then(function() {
                             toParams.courseId = $scope.course.id;
                             $state.go(toState.name, toParams);
@@ -123,7 +124,7 @@
                         defer.resolve();
                     }, function(reason) {
                         $scope.ce.saving = false;
-                        alert(reason);
+                        Fancybox.alert(reason, reason);
                         defer.reject();
                     })
                 ;
@@ -138,10 +139,9 @@
                 });
             };
             $scope.reset = function() {
-                if (!confirm("Are you sure to reset your changes")) {
-                    return;
-                }
-                $scope.cel.reset();
+                Fancybox.confirm("Confirm resetting changes", "Are you sure to reset your changes").then(function() {
+                    $scope.cel.reset();
+                });
             };
 
             $scope.prevPage = function() {

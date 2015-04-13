@@ -67,7 +67,7 @@
             };
         }])
 
-        .directive("sectionRow", ["SectionService", function(SectionService) {
+        .directive("sectionRow", ["SectionService", "Fancybox", function(SectionService, Fancybox) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -101,29 +101,26 @@
 
                     $scope.deleting = false;
                     $scope.deleteSection = function() {
-                        if (!confirm("Are you sure to delete this section?")) {
-                            return;
-                        }
-
-                        $scope.deleting = true;
-                        SectionService.delete($scope.course.id, $scope.section.id).success(function() {
-                            $scope.deleting = false;
-                            Cols.remove($scope.section, $scope.sections);
-                        }).error(function() {
-                            $scope.deleting = false;
+                        Fancybox.confirm("Confirm deleting section", "Are you sure to delete this section?").then(function() {
+                            $scope.deleting = true;
+                            SectionService.delete($scope.course.id, $scope.section.id).success(function() {
+                                $scope.deleting = false;
+                                Cols.remove($scope.section, $scope.sections);
+                            }).error(function() {
+                                $scope.deleting = false;
+                            });
                         });
                     };
 
                     $scope.deleteDocument = function() {
-                        if (!confirm("Are you sure to remove this section's document?")) {
-                            return;
-                        }
+                        Fancybox.confirm("Confirm removing section's document", "Are you sure to remove this section's document?").then(function() {
+                            SectionService.deleteDocument($scope.course.id, $scope.section.id)
+                                .success(function() {
+                                    $scope.section.document = null;
+                                })
+                            ;
+                        });
 
-                        SectionService.deleteDocument($scope.course.id, $scope.section.id)
-                            .success(function() {
-                                $scope.section.document = null;
-                            })
-                        ;
                     }
                 }
             };
