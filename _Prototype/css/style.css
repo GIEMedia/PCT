@@ -289,6 +289,22 @@ a.form-label { color: #404040 !important; }
 .logged-out .logged-in-only,
 .logged-in .logged-out-only { display: none; }
 
+.header .error-container {
+    position: relative;
+    top: 12px;
+    width: 100%;
+    background-color: orange;
+    font-size: 17px;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    overflow: hidden;
+}
+
+.header .error-container div {
+    padding: 25px;
+}
+
 /* ================================================================ *\
 	#Footer
 \* ================================================================ */

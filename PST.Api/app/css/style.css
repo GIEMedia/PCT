@@ -315,6 +315,22 @@ a.form-label { color: #404040 !important; }
 .nav .horizontal-line { border-top: solid 1px #747474; margin-top: 15px; }
 .nav li.horizontal-line + li { padding-top: 3px; }
 
+.header .error-container {
+    position: relative;
+    top: 12px;
+    width: 100%;
+    background-color: orange;
+    font-size: 17px;
+    padding: 0;
+    margin: 0;
+    height: auto;
+    overflow: hidden;
+}
+
+.header .error-container div {
+    padding: 25px;
+}
+
 /* ================================================================ *\
 	#Footer
 \* ================================================================ */
