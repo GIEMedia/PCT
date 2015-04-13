@@ -106,7 +106,11 @@
                             }
                         }
 
-                        alert("Unhandled api error:\nUrl: " + config.url + "\nResponse: " + status + "\n" + JSON.stringify(data));
+                        //alert("Unhandled api error:\nUrl: " + config.url + "\nResponse status: " + status + "\n" + JSON.stringify(data));
+                        //console.log("Unhandled api error:\n    Url: " + config.url + "\n    Response status: " + status);
+                        //console.log(data);
+
+                        console.log("An error occured");
                     });
 
                     return httpPromise;
