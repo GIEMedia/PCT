@@ -206,8 +206,9 @@ namespace PST.Api.Areas.Management.Controllers
 
             c.Title = course.title;
 
-            if (course.sub_category.HasValue)
-                c.Category = _entityRepository.GetByID<SubCategory>(course.sub_category.Value);
+            c.Category = course.sub_category.HasValue ? _entityRepository.GetByID<SubCategory>(course.sub_category.Value) : null;
+            
+            c.Manufacturer = course.manufacturer.HasValue ? _entityRepository.GetByID<Manufacturer>(course.manufacturer.Value) : null;
 
             c.PrerequisiteCourses.Clear();
             if (course.prerequisite_course.HasValue)
@@ -288,8 +289,8 @@ namespace PST.Api.Areas.Management.Controllers
                 _entityRepository.Save(course);
             }
 
-            var htmlBody = _emailGenerationService.ReviewCourse(reviewer.name, reviewer.email, courseID, course.Title);
-            _mailService.SendEmail(reviewer.email, CourseReviewEmailFrom, "PCT Course Review: " + course.Title,
+            var htmlBody = _emailGenerationService.ReviewCourse(reviewer.name, reviewer.email, courseID, course.DisplayTitle);
+            _mailService.SendEmail(reviewer.email, CourseReviewEmailFrom, "PCT Course Review: " + course.DisplayTitle,
                 htmlBody: htmlBody);
         }
     }

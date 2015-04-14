@@ -168,7 +168,7 @@ namespace PST.Services
             var courses = _entityRepository.Queryable<Course>();
             if (status.HasValue)
                 courses = courses.Where(c => c.Status == status);
-            return courses.OrderBy(c => c.Title);
+            return courses.OrderBy(c => c.DisplayTitle);
         }
 
         public Test GetTest(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active)
@@ -322,7 +322,7 @@ namespace PST.Services
 
             if (question == null || question.Question == null)
                 throw new ArgumentOutOfRangeException("questionID",
-                    "Question not found in course (" + course.Title + ")");
+                    "Question not found in course (" + course.DisplayTitle + ")");
 
             return IsCorrectAnswer(accountID, course, question.Question, question.Section, selectedOptionIDs,
                 out correctResponseHeading, out correctResponseText);

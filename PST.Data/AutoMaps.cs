@@ -52,6 +52,7 @@ namespace PST.Data
                     .LazyLoad()
                     .Cascade.None();
                 c.HasMany(x => x.Sections).KeyColumn("CourseID").OrderBy("SortOrder").LazyLoad().Cascade.AllDeleteOrphan();
+                c.References(x => x.Manufacturer).Not.LazyLoad().Cascade.None();
             });
 
             mapper.Add().TableFor<CourseProgressStat>();
@@ -125,6 +126,8 @@ namespace PST.Data
 
                 p.Map(x => x.LastActivityUtc).CustomType<UtcDateTimeType>();
             });
+
+            mapper.Add().TableFor<Manufacturer>();
 
             mapper.Add().TableForHierarchy<Question>(q =>
             {

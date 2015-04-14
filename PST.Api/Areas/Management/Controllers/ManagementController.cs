@@ -1,6 +1,8 @@
 ﻿using System;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using Microsoft.Ajax.Utilities;
@@ -13,6 +15,7 @@ using PST.Api.Core.OAuth;
 using PST.Declarations;
 using PST.Declarations.Entities;
 using PST.Declarations.Interfaces;
+using PST.Declarations.Models;
 using PST.Declarations.Models.Management;
 
 namespace PST.Api.Areas.Management.Controllers
@@ -24,13 +27,15 @@ namespace PST.Api.Areas.Management.Controllers
         private readonly Lazy<UserManager<ApplicationUser>> _userManager;
         private readonly IEntityRepository _entityRepository;
         private readonly Lazy<ICourseService> _courseService;
+        private readonly Lazy<IUploadService> _uploadService;
 
-        public ManagementController(Lazy<UserManager<ApplicationUser>> userManager, IEntityRepository entityRepository, Lazy<ICourseService> courseService)
+        public ManagementController(Lazy<UserManager<ApplicationUser>> userManager, IEntityRepository entityRepository, Lazy<ICourseService> courseService, Lazy<IUploadService> uploadService)
             : base(userManager)
         {
             _userManager = userManager;
             _entityRepository = entityRepository;
             _courseService = courseService;
+            _uploadService = uploadService;
         }
 
         /// <summary>
@@ -175,6 +180,57 @@ namespace PST.Api.Areas.Management.Controllers
 
             account.AdminAccess = access;
             await _userManager.Value.UpdateAsync(account);
+        }
+
+        [HttpGet]
+        [Route("manufacturer")]
+        public manufacturer[] GetManufacturers()
+        {
+            return _entityRepository.Queryable<Manufacturer>().OrderBy(m => m.Name).ToList()
+                .Select(m => (manufacturer) m).ToArray();
+        }
+
+        [HttpPut]
+        [Route("manufacturer/{manufacturer_id}")]
+        public manufacturer UpsertManufacturer(string name, Guid? manufacturer_id = null)
+        {
+            Manufacturer man;
+            if (manufacturer_id.HasValue && !manufacturer_id.Value.IsNullOrEmpty())
+            {
+                man = _entityRepository.GetByID<Manufacturer>(manufacturer_id.Value);
+                if (man == null)
+                    throw new NullReferenceException("Specified manufacturer not found.");
+            }
+            else
+                man = new Manufacturer();
+
+            man.Name = name;
+
+            _entityRepository.Save(man);
+
+            return man;
+        }
+
+        /// <summary>
+        /// Uploads an image and assigns it to an existing manufacturer
+        /// </summary>
+        /// <returns>Returns an updated manufacturer with the image url set</returns>
+        [HttpPost]
+        [Route("manufacturer/image/{manufacturer_id}")]
+        public async Task<manufacturer> UploadManufacturerImage(Guid manufacturer_id)
+        {
+            var manufacturer = _entityRepository.GetByID<Manufacturer>(manufacturer_id);
+            if (manufacturer == null)
+                throw new NullReferenceException("Specified manufacturer not found.");
+
+            if (!Request.Content.IsMimeMultipartContent())
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+
+            manufacturer.ImageUrl = await _uploadService.Value.UploadImage(Request.Content, 98, 98, true);
+
+            _entityRepository.Save(manufacturer);
+
+            return manufacturer;
         }
     }
 }

@@ -65,7 +65,7 @@ namespace PST.Declarations.Entities
         {
             var stat = new m_user_course_stat
             {
-                title = courseProgress.Course.Title,
+                title = courseProgress.Course.DisplayTitle,
                 last_activity = courseProgress.LastActivityUtc,
                 certificate_url =
                     courseProgress.Certificate == null ? string.Empty : Certificate.GetPdfUrl(courseProgress.Certificate.ID),

@@ -17,6 +17,8 @@ namespace PST.Declarations.Models.Management
 
         public Guid? sub_category { get; set; }
 
+        public Guid? manufacturer { get; set; }
+
         public m_state_ceu[] state_ceus { get; set; }
 
         public Guid? prerequisite_course { get; set; }

@@ -23,8 +23,17 @@ namespace PST.Declarations.Entities
 
         public virtual string Title { get; set; }
 
+        public virtual string DisplayTitle
+        {
+            get { return (Manufacturer != null ? Manufacturer.Name + ": " : "") + Title; }
+            set { /*no-op*/ }
+        }
+
         [Ownership(Ownership.None)]
         public virtual SubCategory Category { get; set; }
+
+        [Ownership(Ownership.None)]
+        public virtual Manufacturer Manufacturer { get; set; }
 
         [Ownership(Ownership.Exclusive)]
         public virtual IList<StateCEU> StateCEUs { get; set; }
@@ -61,7 +70,7 @@ namespace PST.Declarations.Entities
             return new course<TQuestion>
             {
                 course_id = course.ID,
-                title = course.Title,
+                title = course.DisplayTitle,
                 sections =
                     course.Sections != null
                         ? course.Sections.Select(s => s.ToModel<TQuestion>()).ToArray()
@@ -77,14 +86,15 @@ namespace PST.Declarations.Entities
             return new course_overview
             {
                 course_id = course.ID,
-                title = course.Title,
+                title = course.DisplayTitle,
+                image_url = course.Manufacturer != null ? course.Manufacturer.ImageUrl : "",
                 description = course.StateCEUs.Any()
                     ? "CEUs Available: " +
                       course.StateCEUs.OrderBy(x => x.StateAbbr)
                           .Select(x => string.Format("{0} ({1:#.0} hrs)", x.StateAbbr, x.Hours))
                           .Aggregate((i, j) => i + "," + j)
                     : "",
-                prereq_courses = course.PrerequisiteCourses.Select(c => c.Title).ToArray()
+                prereq_courses = course.PrerequisiteCourses.Select(c => c.DisplayTitle).ToArray()
             };
         }
 
@@ -98,7 +108,7 @@ namespace PST.Declarations.Entities
                 id = course.ID,
                 date_created = course.DateCreatedUtc,
                 status = course.Status,
-                title = course.Title
+                title = course.DisplayTitle
             };
         }
 
@@ -114,6 +124,7 @@ namespace PST.Declarations.Entities
                 date_created = course.DateCreatedUtc,
                 status = course.Status,
                 title = course.Title,
+                manufacturer = course.Manufacturer != null ? course.Manufacturer.ID : (Guid?) null,
                 sub_category = course.Category != null ? course.Category.ID : (Guid?) null,
                 category =
                     course.Category != null && course.Category.ParentCategory != null
