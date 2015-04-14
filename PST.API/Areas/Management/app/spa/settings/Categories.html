@@ -1,0 +1,86 @@
+
+<div class="custom-table-secondary table-categories" expanding-table>
+    <div class="table-row-head">
+        <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
+        <div class="table-col col-size-2">
+            <h3>Category</h3>
+        </div><!-- /.table-col -->
+        <div class="table-col col-size-3">
+
+        </div><!-- /.table-col -->
+        <div class="table-col col-size-4">
+            <h3>Courses</h3>
+        </div><!-- /.table-col -->
+    </div><!-- /.table-row-head -->
+
+    <div class="table-row table-row-1">
+        <div class="table-col col-size-1">
+            <a href="" class="icon icon-chevron-down" pct-tooltip="Expand"></a>
+        </div><!-- /.table-col -->
+        <div class="table-col col-size-2">
+            <h4>{{summary()}}</h4>
+        </div><!-- /.table-col -->
+        <div class="table-col col-size-3">
+            <h3>&nbsp;</h3>
+        </div><!-- /.table-col -->
+        <div class="table-col col-size-4">
+            <h3>&nbsp;</h3>
+        </div><!-- /.table-col -->
+    </div><!-- /.table-row -->
+    <div ng-repeat="cat in list" settings-cat-row >
+        <div class="table-expand">
+            <div class="table-row" ng-class="{'editing-cat': catRow.editName.editing}">
+                <div class="table-col col-size-1">
+                    <a href="" ng-if="$index == 0" class="icon icon-chevron-up" pct-tooltip="Collapse" expanding-table-close></a>
+                </div><!-- /.table-col -->
+
+                <div class="table-col col-size-2 category-name">
+                    <span class="name" ng-bind="cat.title" ng-show="!catRow.editName.editing"></span>
+                                    <span class="name-edit" ng-show="catRow.editName.editing">
+                                        <input type="text" class="field" tabindex="1" ng-model="catRow.editName.title" placeholder="Category name" ng-maxlength="200" pct-focus="catRow.editName.editing"/>
+                                        <a href="" class="fa fa-save" tabindex="1" ng-click="saveTitle()"></a>
+                                        <a href="" class="fa fa-close" ng-click="catRow.editName.editing = false"></a>
+                                    </span>
+                </div><!-- /.table-col -->
+                <div class="table-col col-size-3">
+                    <div class="icons">
+                        <a href="" class="icon icon-rename" ng-click="catRow.editName.editing = true" ng-show="!catRow.editName.editing" pct-tooltip="Rename"></a>
+                        <span button-loading="removingCat"><a href="" class="fa fa-trash-o" ng-if="!hasCourseCat(cat)" ng-click="removeCat(cat)"></a></span>
+                    </div><!-- /.icons -->
+                </div><!-- /.table-col -->
+                <div class="table-col col-size-4">
+                </div><!-- /.table-col -->
+            </div><!-- /.table-row -->
+        </div><!-- /.table-row-expand -->
+
+        <div class="table-expand" ng-repeat="sub in cat.sub_categories" settings-sub-cat-row>
+            <div class="table-row" ng-class="{'editing-sub': subRow.editName.editing}">
+                <div class="table-col col-size-1">
+                </div><!-- /.table-col -->
+
+                <div class="table-col col-size-7">
+                    <i class="fa fa-angle-double-right"></i>
+                </div><!-- /.table-col -->
+
+                <div class="table-col col-size-8 sub-category-name">
+                    <span class="name" ng-bind="sub.title" ng-show="!subRow.editName.editing"></span>
+                                    <span class="name-edit" ng-show="subRow.editName.editing">
+                                        <input type="text" class="field" tabindex="1" ng-model="subRow.editName.title" placeholder="Sub category name" ng-maxlength="200" pct-focus="subRow.editName.editing"/>
+                                        <a href="" class="fa fa-save" tabindex="1" ng-click="saveTitle()"></a>
+                                        <a href="" class="fa fa-close" ng-click="subRow.editName.editing = false"></a>
+                                    </span>
+                </div><!-- /.table-col -->
+
+                <div class="table-col col-size-3">
+                    <div class="icons">
+                        <a href="" class="icon icon-rename" ng-click="subRow.editName.editing = true" ng-show="!subRow.editName.editing" pct-tooltip="Rename"></a>
+                        <span button-loading="removingSub"><a href="" class="fa fa-trash-o" ng-if="sub.course_count != null && sub.course_count == 0" ng-click="removeSub(sub, cat)"></a></span>
+                    </div><!-- /.icons -->
+                </div><!-- /.table-col -->
+                <div class="table-col col-size-4">
+                    {{sub.course_count}}
+                </div><!-- /.table-col -->
+            </div><!-- /.table-row -->
+        </div><!-- /.table-row-expand -->
+    </div>
+</div><!-- /.custom-table-secondary -->

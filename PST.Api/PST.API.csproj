@@ -600,6 +600,10 @@
     <Content Include="Areas\Management\app\spa\security\SecurityService.js" />
     <Content Include="Areas\Management\app\spa\settings\Settings.html" />
     <Content Include="Areas\Management\app\spa\settings\Settings.js" />
+    <Content Include="Areas\Management\app\spa\settings\Manufaturers.html" />
+    <Content Include="Areas\Management\app\spa\settings\Manufaturers.js" />
+    <Content Include="Areas\Management\app\spa\settings\Categories.html" />
+    <Content Include="Areas\Management\app\spa\settings\Categories.js" />
     <Content Include="Areas\Management\app\spa\user\User.js" />
     <Content Include="Areas\Management\app\spa\user\UserDetail.html" />
     <Content Include="Areas\Management\app\spa\user\UserDetail.js" />
