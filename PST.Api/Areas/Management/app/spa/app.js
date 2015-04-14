@@ -22,6 +22,7 @@
         'pct.management.api.section',
         'pct.management.api.user',
         'pct.management.api.category',
+        'pct.management.api.manufacturer',
         'pct.management.api.report',
         'pct.management.api.state'
     ])

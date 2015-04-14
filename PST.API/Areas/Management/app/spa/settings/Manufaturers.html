@@ -13,10 +13,10 @@
 
     <div class="table-row table-row-1">
         <div class="table-col col-size-1">
-            <a href="#" class="icon icon-chevron-down"></a>
+            <a href="" class="icon icon-chevron-down"></a>
         </div><!-- /.table-col -->
         <div class="table-col col-size-6">
-            <h4>4 Manufacturers</h4>
+            <h4 ng-bind="list == null ? 'Loading...' : list.length + ' Manufacturers'"></h4>
         </div><!-- /.table-col -->
         <div class="table-col col-size-5">
             <h3>&nbsp;</h3>
@@ -25,39 +25,62 @@
     <div class="table-expand">
         <div class="table-row">
             <div class="table-col col-size-1">
-                <a href="#" class="icon icon-chevron-up"></a>
+                <a href="" class="icon icon-chevron-up"></a>
             </div><!-- /.table-col -->
             <div class="table-col col-size-6">
-                <input class="field" placeholder="Manufacturer Name" />
+                <input class="field" placeholder="Manufacturer Name" ng-model="adding.name" ng-disabled="adding.submitting" />
             </div><!-- /.table-col -->
             <div class="table-col col-size-5">
-                <a href="#" class="btn btn-grey"><i class="fa fa-image"></i> + ADD</a>
-                <a href="#" class="btn btn-grey">ADD</a>
+                <button class="btn btn-grey" pct-tooltip="Add And Upload Image" ng-file-select="addWithImage($files[0])" accept="image/*" ng-disabled="!adding.name || !list || adding.submitting"><i class="fa fa-image"></i> + ADD</button>
+                <button class="btn btn-grey" pct-tooltip="Add without Image" ng-click="add()" ng-disabled="!adding.name || !list || adding.submitting">ADD</button>
             </div><!-- /.table-col -->
         </div><!-- /.table-row -->
     </div><!-- /.table-row-expand -->
+
     <div class="table-expand">
-        <div class="table-row">
+
+        <div class="table-row" pct-no-record="{list: list, name: 'manufacturer(s)'}">
             <div class="table-col col-size-1">
                 &nbsp;
             </div><!-- /.table-col -->
             <div class="table-col col-size-2">
-                <img src="http://placehold.it/96x96" />
+            </div><!-- /.table-col -->
+            <div class="table-col col-size-3" pct-no-record-message>
+            </div><!-- /.table-col -->
+            <div class="table-col col-size-4">
+            </div><!-- /.table-col -->
+            <div class="table-col col-size-5">
+            </div><!-- /.table-col -->
+        </div><!-- /.table-row -->
+
+        <div class="table-row" ng-repeat="man in list" settings-manufacturer-row ng-class="{'editing-man': manRow.editName.editing}">
+            <div class="table-col col-size-1">
+                &nbsp;
+            </div><!-- /.table-col -->
+            <div class="table-col col-size-2">
+                <img ng-src="{{man.image_url || 'http://placehold.it/96x96'}}" />
                 <div class="overlay">
-                    <a href="#"><i class="fa fa-upload"></i></a>
+                    <span ng-file-select="upload($files[0], man)" accept="image/*"><i class="fa fa-upload"></i></span>
                 </div><!-- /.overlay -->
             </div><!-- /.table-col -->
-            <div class="table-col col-size-3">
-                Manufacturer 1
+            <div class="table-col col-size-3 manufacturer-name">
+
+                <span class="name" ng-bind="man.name" ng-show="!manRow.editName.editing"></span>
+                <span class="name-edit" ng-show="manRow.editName.editing">
+                    <input type="text" class="field" tabindex="1" ng-model="manRow.editName.title" placeholder="Manufacturer name" ng-maxlength="200" pct-focus="manRow.editName.editing"/>
+                    <a href="" class="fa fa-save" tabindex="1" ng-click="saveTitle()"></a>
+                    <a href="" class="fa fa-close" ng-click="manRow.editName.editing = false"></a>
+                </span>
+
             </div><!-- /.table-col -->
             <div class="table-col col-size-4">
                 <div class="icons">
-                    <a href="#" class="icon icon-rename"></a>
-                    <a href="#" class="fa fa-trash-o"></a>
+                    <a href="" class="icon icon-rename" ng-click="manRow.editName.editing = true" ng-show="!manRow.editName.editing" pct-tooltip="Rename"></a>
+                    <span button-loading="removingMan"><a href="" class="fa fa-trash-o" pct-tooltip="Remove" ng-if="!man.course_count" ng-click="remove(man)"></a></span>
                 </div><!-- /.icons -->
             </div><!-- /.table-col -->
             <div class="table-col col-size-5">
-                5
+                {{man.course_count}}
             </div><!-- /.table-col -->
         </div><!-- /.table-row -->
     </div><!-- /.table-row-expand -->

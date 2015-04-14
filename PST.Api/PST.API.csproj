@@ -604,6 +604,7 @@
     <Content Include="Areas\Management\app\spa\settings\Manufaturers.js" />
     <Content Include="Areas\Management\app\spa\settings\Categories.html" />
     <Content Include="Areas\Management\app\spa\settings\Categories.js" />
+    <Content Include="Areas\Management\app\spa\api\ManufacturerService.js" />
     <Content Include="Areas\Management\app\spa\user\User.js" />
     <Content Include="Areas\Management\app\spa\user\UserDetail.html" />
     <Content Include="Areas\Management\app\spa\user\UserDetail.js" />

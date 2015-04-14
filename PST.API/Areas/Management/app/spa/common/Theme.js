@@ -327,6 +327,8 @@
                             elem.hide();
                         } else {
                             elem.show();
+                            //elem.removeAttr("style");
+                            //elem.attr("style", "");
                             if (value == 1) {
                                 $scope.messageComponent.removeClass("no-record");
                                 $scope.messageComponent.addClass("loading");
@@ -384,6 +386,19 @@
                     var tooltip = $("<div class=\"pcttooltip\"></div>").text(attrs.pctTooltip);
                     var scheduled = null;
                     var appended = false;
+                    var hideTooltip = function () {
+                        if (scheduled) {
+                            clearTimeout(scheduled);
+                            scheduled = null;
+                            return;
+                        }
+
+                        if (appended) {
+                            tooltip.remove();
+                            appended = false;
+                        }
+                    };
+
                     elem.hover(
                         function () {
                             if (scheduled) return;
@@ -400,26 +415,11 @@
                                     .css('opacity', 1);
                             }, 250);
                         },
-                        function () {
-                            if (scheduled) {
-                                clearTimeout(scheduled);
-                                scheduled = null;
-                                return;
-                            }
-
-                            if (appended) {
-                                tooltip.remove();
-                                appended = false;
-                            }
-                        }
+                        hideTooltip
                     );
+                    elem.click(hideTooltip);
 
-                    $scope.$on("$destroy", function() {
-                        if (appended) {
-                            tooltip.remove();
-                            appended = false;
-                        }
-                    });
+                    $scope.$on("$destroy", hideTooltip);
                 }
             };
         })

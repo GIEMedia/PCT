@@ -7,6 +7,7 @@
         .directive("settingsCategories", ["CategoryService", function(CategoryService) {
             return {
                 restrict: "E",
+                scope: true,
                 templateUrl: "Areas/Management/app/spa/settings/Categories.html",
                 link: function($scope, elem, attrs) {
                     CategoryService.getList(true).success(function(list) {

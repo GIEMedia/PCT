@@ -36,11 +36,11 @@
 
                 <div class="table-col col-size-2 category-name">
                     <span class="name" ng-bind="cat.title" ng-show="!catRow.editName.editing"></span>
-                                    <span class="name-edit" ng-show="catRow.editName.editing">
-                                        <input type="text" class="field" tabindex="1" ng-model="catRow.editName.title" placeholder="Category name" ng-maxlength="200" pct-focus="catRow.editName.editing"/>
-                                        <a href="" class="fa fa-save" tabindex="1" ng-click="saveTitle()"></a>
-                                        <a href="" class="fa fa-close" ng-click="catRow.editName.editing = false"></a>
-                                    </span>
+                    <span class="name-edit" ng-show="catRow.editName.editing">
+                        <input type="text" class="field" tabindex="1" ng-model="catRow.editName.title" placeholder="Category name" ng-maxlength="200" pct-focus="catRow.editName.editing"/>
+                        <a href="" class="fa fa-save" tabindex="1" ng-click="saveTitle()"></a>
+                        <a href="" class="fa fa-close" ng-click="catRow.editName.editing = false"></a>
+                    </span>
                 </div><!-- /.table-col -->
                 <div class="table-col col-size-3">
                     <div class="icons">

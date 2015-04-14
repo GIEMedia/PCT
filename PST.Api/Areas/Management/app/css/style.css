@@ -346,15 +346,22 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .custom-table-secondary.table-categories .editing-cat .fa-save { color: #4fcf6e; font-size: 17px; }
 .custom-table-secondary.table-categories .editing-cat .fa-close { color: #ff1d25; font-size: 20px; }
 .custom-table-secondary.table-categories .editing-cat .field { width: 595px; padding: 7px; }
-@media(max-width: 1290px) { .custom-table-secondary.table-categories .editing-cat .field { width: 215px; } }
+@media(max-width: 1290px) { .custom-table-secondary.table-categories .editing-cat .field { width: 295px; } }
 .custom-table-secondary.table-categories .category-name .name-edit .fa { margin-left: 5px; }
 
 .custom-table-secondary.table-categories .editing-sub { background-color: #e5f7fd; }
 .custom-table-secondary.table-categories .editing-sub .fa-save { color: #4fcf6e; font-size: 17px; }
 .custom-table-secondary.table-categories .editing-sub .fa-close { color: #ff1d25; font-size: 20px; }
 .custom-table-secondary.table-categories .editing-sub .field { width: 545px; padding: 7px; }
-@media(max-width: 1290px) { .custom-table-secondary.table-categories .editing-sub .field { width: 215px; } }
+@media(max-width: 1290px) { .custom-table-secondary.table-categories .editing-sub .field { width: 245px; } }
 .custom-table-secondary.table-categories .sub-category-name .name-edit .fa { margin-left: 5px; }
+
+.custom-table-secondary.table-manufacturers .editing-man { background-color: #e5f7fd; }
+.custom-table-secondary.table-manufacturers .editing-man .fa-save { color: #4fcf6e; font-size: 17px; }
+.custom-table-secondary.table-manufacturers .editing-man .fa-close { color: #ff1d25; font-size: 20px; }
+.custom-table-secondary.table-manufacturers .editing-man .field { width: 475px; padding: 7px; }
+@media(max-width: 1290px) { .custom-table-secondary.table-manufacturers .editing-man .field { width: 175px; } }
+.custom-table-secondary.table-manufacturers .manufacturer-name .name-edit .fa { margin-left: 5px; }
 
 .table-courses-list table tr td .icon-certificate { margin: 0 5px; font-size: 25px; color: #808080; }
 .table-report-course-list .fa { font-size: 18px; }
@@ -469,6 +476,10 @@ table + .table-buttons,
 .overlay .icons .fa:hover { color: #00aded; }
 .custom-table .table-col .file-trigger-new { display: block; position: absolute; top: 50%; left: 50%; margin: -20px 0 0 -80px; border: 1px solid #fff; background: url(/Areas/Management/app/css/images/blue-50.png); border-radius: 4px; }
 
+.custom-table-secondary .overlay span { display: table; height: 100%; width: 100%; cursor: pointer; }
+.custom-table-secondary .overlay span i.fa { display: table-cell; vertical-align: middle; text-align: center; color: rgb(255, 147, 30); font-size: 20px; }
+
+
 .field-file { display: none; }
 
 .table-prerequisites { margin-bottom: 60px; }
@@ -487,6 +498,7 @@ table + .table-buttons,
 
 /* cutsom-table-secondary */
 .custom-table-secondary { }
+.custom-table-secondary + .custom-table-secondary { margin-top: 40px; }
 .custom-table-secondary .table-row-head {  }
 .custom-table-secondary .table-row-head .table-col { padding: 7px 10px; }
 .custom-table-secondary .table-row { background-color: #e6e8eb; 
@@ -512,6 +524,7 @@ table + .table-buttons,
 .custom-table-secondary.table-categories .col-size-8 { width: 615px; }
 @media(max-width: 1290px) { .custom-table-secondary.table-categories .col-size-8 { width: 315px; } }
 
+.custom-table-secondary.table-manufacturers { margin-top: 40px; }
 .custom-table-secondary.table-manufacturers .col-size-2 { width: 120px; position: relative; }
 .custom-table-secondary.table-manufacturers .col-size-2:hover .overlay { opacity: 1; }
 .custom-table-secondary.table-manufacturers .col-size-2 .overlay a i:hover { color: rgb(255, 147, 30) !important; }

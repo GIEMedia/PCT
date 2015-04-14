@@ -133,7 +133,8 @@ namespace PST.Api
                 "~/Areas/Management/app/spa/settings/Categories.js"
                 "~/Areas/Management/app/spa/user/User.js",
                 "~/Areas/Management/app/spa/user/UserDetail.js",
-                "~/Areas/Management/app/spa/user/UserList.js"
+                "~/Areas/Management/app/spa/user/UserList.js",
+                "~/Areas/Management/app/spa/api/ManufacturerService.js"
                 );
             bundles.Add(jsManagement);
         }
