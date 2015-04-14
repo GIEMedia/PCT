@@ -553,6 +553,7 @@
     <Content Include="Areas\Management\app\spa\common\Fancybox.js" />
     <Content Include="Areas\Management\app\spa\common\Markup.js" />
     <Content Include="Areas\Management\app\spa\common\popup-confirm.html" />
+    <Content Include="Areas/Management/app/spa/common/popup-alert.html" />
     <Content Include="Areas\Management\app\spa\common\popup-text.html" />
     <Content Include="Areas\Management\app\spa\common\Sorter.js" />
     <Content Include="Areas\Management\app\spa\common\Theme.js" />
