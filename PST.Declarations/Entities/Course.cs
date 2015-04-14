@@ -23,10 +23,10 @@ namespace PST.Declarations.Entities
 
         public virtual string Title { get; set; }
 
-        [Transient]
         public virtual string DisplayTitle
         {
             get { return (Manufacturer != null ? Manufacturer.Name + ": " : "") + Title; }
+            set { /*no-op*/ }
         }
 
         [Ownership(Ownership.None)]
