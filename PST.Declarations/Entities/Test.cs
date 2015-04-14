@@ -15,7 +15,7 @@ namespace PST.Declarations.Entities
 
         public Test(Course course)
         {
-            this.Title = course.Title;
+            this.Title = course.DisplayTitle;
         }
 
         [Transient]

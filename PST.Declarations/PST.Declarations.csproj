@@ -205,6 +205,7 @@
     <Compile Include="Entities\Course.cs" />
     <Compile Include="Entities\CourseProgressStat.cs" />
     <Compile Include="Entities\Manager.cs" />
+    <Compile Include="Entities\Manufacturer.cs" />
     <Compile Include="Entities\Progress.cs" />
     <Compile Include="Entities\Document.cs" />
     <Compile Include="Entities\Option.cs" />
@@ -248,6 +249,7 @@
     <Compile Include="Models\Management\m_user_overview.cs" />
     <Compile Include="Models\Management\m_validation_error.cs" />
     <Compile Include="Models\manager.cs" />
+    <Compile Include="Models\manufacturer.cs" />
     <Compile Include="Models\option.cs" />
     <Compile Include="Models\question.cs" />
     <Compile Include="Models\questioned.cs" />

@@ -422,6 +422,12 @@
             <param name="userID"></param>
             <param name="access"></param>
         </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.UploadManufacturerImage(System.Guid)">
+            <summary>
+            Uploads an image and assigns it to an existing manufacturer
+            </summary>
+            <returns>Returns an updated manufacturer with the image url set</returns>
+        </member>
         <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.GetQuestions(System.Guid,System.Nullable{System.Guid})">
             <summary>
             Get list of questions for section or test

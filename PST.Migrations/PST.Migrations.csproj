@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201504140359_Manufacturer.cs" />
     <Compile Include="Migrations\201504111149_OptionProgress.cs" />
     <Compile Include="Migrations\201504110545_TestProgress.cs" />
     <Compile Include="Migrations\201504100630_CourseProgressStatSP.cs" />

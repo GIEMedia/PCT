@@ -404,6 +404,8 @@
     <Content Include="app\spa\landing\Landing.js" />
     <Content Include="app\spa\landing\Signup.html" />
     <Content Include="app\spa\landing\Signup.js" />
+    <Content Include="app\spa\layout\ErrorContainer.js" />
+    <Content Include="app\spa\layout\Layout.js" />
     <Content Include="app\spa\local\PreferenceService.js" />
     <Content Include="app\spa\profile\AccountForm.html" />
     <Content Include="app\spa\profile\ManagersForm.html" />

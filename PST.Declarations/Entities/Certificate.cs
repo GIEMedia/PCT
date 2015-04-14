@@ -22,7 +22,7 @@ namespace PST.Declarations.Entities
             return new certificate
             {
                 course_id = certificate.Course.ID,
-                course_name = certificate.Course.Title,
+                course_name = certificate.Course.DisplayTitle,
                 earned = certificate.EarnedUtc,
                 image_url = GetImageUrl(certificate.ID),
                 pdf_url = GetPdfUrl(certificate.ID)

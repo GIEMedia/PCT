@@ -17,5 +17,7 @@ namespace PST.Declarations.Models
         public DateTime? last_activity { get; set; }
 
         public string[] prereq_courses { get; set; }
+
+        public string image_url { get; set; }
     }
 }

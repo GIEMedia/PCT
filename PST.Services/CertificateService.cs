@@ -60,7 +60,7 @@ namespace PST.Services
             g.DrawString(account.FirstName + " " + account.LastName,
                 new System.Drawing.Font("Javanese Text", 26), Brushes.Black, new RectangleF(0, 0, 1110, 797),
                 alignCenter);
-            g.DrawString(courseProgress.Course.Title,
+            g.DrawString(courseProgress.Course.DisplayTitle,
                 new System.Drawing.Font("Javanese Text", 26), Brushes.Black, new RectangleF(0, 0, 1110, 1000),
                 alignCenter);
             g.DrawString(dateEarnedUtc.ToLongDateString(),
