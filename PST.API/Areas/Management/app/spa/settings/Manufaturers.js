@@ -15,7 +15,7 @@
                         submitting: false
                     };
 
-                    ManufacturerService.getList().success(function(list) {
+                    ManufacturerService.getList(true).success(function(list) {
                         $scope.list = list;
                     });
 

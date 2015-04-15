@@ -6,8 +6,8 @@
     ])
         .factory("ManufacturerService", ["Api", function(Api) {
             return {
-                getList: function() {
-                    return Api.get("api/manage/manufacturer");
+                getList: function(courseCount) {
+                    return Api.get("api/manage/manufacturer" + (courseCount ? "?courseCount=" + courseCount : ""));
                 },
                 add: function(name) {
                     return Api.put("api/manage/manufacturer", JSON.stringify(name));
