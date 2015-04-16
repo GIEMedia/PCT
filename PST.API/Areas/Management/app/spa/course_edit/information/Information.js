@@ -17,7 +17,7 @@
             ;
         }])
 
-        .controller("courseEdit.information.Ctrl", ["$scope", "$state", "$stateParams", "$parse", "$q", "LayoutService", "CourseService", function ($scope, $state, $stateParams, $parse, $q, LayoutService, CourseService) {
+        .controller("courseEdit.information.Ctrl", ["$scope", "$state", "$stateParams", "$parse", "$q", "LayoutService", "CourseService", "ManufacturerService", function ($scope, $state, $stateParams, $parse, $q, LayoutService, CourseService, ManufacturerService) {
             // Layout
 
             $scope.$watch("course", function(course) {
@@ -61,13 +61,15 @@
                 course: null
             };
 
-            // States
-
             CourseService.getList().success(function(list) {
 
                 $scope.prerequisites = Cols.filter(list, function(e) {
                     return e.id != $stateParams.courseId;
                 });
+            });
+
+            ManufacturerService.getList().success(function(list) {
+                $scope.manufacturers = list;
             });
         }])
     ;

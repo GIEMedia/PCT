@@ -46,6 +46,16 @@
                         </div><!-- /.table-col -->
                     </div><!-- /.table-row -->
                 </div>
+
+                <div class="table-row">
+                    <div class="table-col col-size-1">
+                        <h3>Manufacturer</h3>
+                    </div><!-- /.table-col -->
+                    <div class="table-col col-size-2">
+                        <span name="field-select" class="select" pct-model="cei.course.manufacturer" pct-disabled="course.status == 1" pct-options="man.manufacturer_id as man.name for man in manufacturers">
+                        </span>
+                    </div><!-- /.table-col -->
+                </div><!-- /.table-row -->
             </div><!-- /.custom-table -->
 
             <div class="custom-table-secondary table-states" expanding-table course-information-states></div><!-- /.custom-table-secondary -->
