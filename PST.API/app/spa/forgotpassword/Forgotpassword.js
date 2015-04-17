@@ -15,7 +15,7 @@
             ;
         }])
 
-        .controller("forgotpassword.Ctrl", ["$scope", "$state", "$stateParams", "ForgotpasswordService", function ($scope, $state, $stateParams, ForgotpasswordService) {
+        .controller("forgotpassword.Ctrl", ["$scope", "$state", "$stateParams", "$timeout", "ForgotpasswordService", function ($scope, $state, $stateParams, $timeout, ForgotpasswordService) {
 
             if (!$stateParams.u || !$stateParams.t ) {
                 // Requesting reset password email form
@@ -56,7 +56,9 @@
                         .success(function() {
                             $scope.sending = false;
                             $scope.sent = true;
-                            $state.go('landing');
+                            $timeout(function() {
+                                $state.go('landing');
+                            }, 2000);
                         })
                         .onError(function() {
                             $scope.sending = false;

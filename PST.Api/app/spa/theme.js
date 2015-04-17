@@ -120,6 +120,41 @@
                 }
             };
         }])
+        
+        .directive("questionTooltip", function() {
+            return {
+                restrict: "A",
+                link: function($scope, elem, attrs) {
+                    if (!$.browser.mobile) {
+                        elem.hover(
+                            function() {
+                                elem.addClass("focus");
+                            },
+                            function() {
+                                elem.removeClass("focus");
+                            }
+                        );
+                        elem.click(function() {
+                            elem.toggleClass("focus");
+                        });
+                        
+                    } else {
+                        elem.click(function() {
+                            elem.toggleClass("focus");
+                        });
+                        
+                        setTimeout(function() {
+                            elem.next(".popup").click(function(ev) {
+                                ev.preventDefault();
+                                ev.stopPropagation();
+                                elem.removeClass("focus");
+                                return false;
+                            });
+                        }, 0);
+                    }
+                }
+            };
+        })
 
         .directive("numberOnly", function() {
             return {

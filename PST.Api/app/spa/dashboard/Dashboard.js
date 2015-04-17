@@ -75,14 +75,15 @@
                  * @returns {*}
                  */
                 filter: function(_headers, search) {
-                    if (StringUtil.isBlank(search)) {
+                    if (_headers == null) {
                         return _headers;
                     }
-                    var lowerSearch = search.toLowerCase();
+                    var lowerSearch = search == null ? null : search.toLowerCase();
 
                     var filterCat = function(cat) {
                         var courses = Cols.filter(cat.courses, function(course) {
-                            return course.title.toLowerCase().indexOf(lowerSearch) > -1;
+                            return (lowerSearch == null || course.title.toLowerCase().indexOf(lowerSearch) > -1)
+                                && !(course.course_progress == 1 && course.test_progress == 1);
                         });
                         if (Cols.isEmpty(courses)) {
                             return null;
