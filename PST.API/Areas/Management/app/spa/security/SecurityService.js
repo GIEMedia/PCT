@@ -163,7 +163,7 @@
             }];
         })
 
-        .factory("SecurityService", ["$http", "$rootScope", "$timeout", "Security", "Api", "User", "$state", function($http, $rootScope, $timeout, Security, Api, User, $state) {
+        .factory("SecurityService", ["Security", "Api", "User", "$state", function(Security, Api, User, $state) {
             var fetchUser = function() {
                 return Api.get("api/account")
                     .success(function(account) {
@@ -188,10 +188,6 @@
                         $state.go(Security.defaultUserState());
                     }
                 });
-            } else {
-                $timeout(function() {
-                    $state.go(Security.loginState());
-                }, 0);
             }
 
             return {
