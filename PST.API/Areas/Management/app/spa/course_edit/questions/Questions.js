@@ -182,6 +182,7 @@
                 },
                 loading: false
             };
+            $scope.error = null;
 
             $scope.addVideo = function() {
                 $scope.question_video = $scope.view.addVideo.url;
@@ -203,8 +204,9 @@
                 if (images == null || $scope.options == null) {
                     return;
                 }
+                $scope.error = null;
                 if (images.length + $scope.options.length > 6) {
-                    Fancybox.alert("Maximum options exceeded", "We don't support more than 6 options");
+                    $scope.error = "We don't support more than 6 options";
                     return;
                 }
                 $scope.view.loading = true;
