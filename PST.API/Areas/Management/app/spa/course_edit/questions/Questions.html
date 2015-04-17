@@ -28,7 +28,7 @@
             <div class="table-col col-size-1">
                 <div class="number">{{$index + 1}}</div><!-- /.number -->
                 <h2 class="question">{{isEmpty(question) ? "(Empty - Question will be removed on saved)" : ellipsis((question.question_text || "(Empty)") + (isMultipleCorrect(question) ? " (check all that apply)" : ""), 90)}}</h2><!-- /.question -->
-                <input type="text" class="field" markup-editor ng-model="question.question_text" ng-maxlength="200" placeholder="Question" ng-readonly="readonly" />
+                <input type="text" class="field" markup-editor ng-model="question.question_text" maxlength="500" placeholder="Question" ng-readonly="readonly" />
                 <div class="question-icons">
                     <a href=""><i class="icon icon-chevron-up" pct-tooltip="Collapse"></i></a>
                     <a href="" class="fa fa-trash-o" ng-click="deleteQuestion()" ng-if="!readonly" pct-tooltip="Remove"></a>
@@ -77,14 +77,14 @@
                 </div><!-- /.col col-1 -->
                 <div class="col col-2">
                     <div class="inner">
-                        <input type="text" markup-editor placeholder="Response heading" ng-model="question.response_heading" class="field" ng-maxlength="200" ng-readonly="readonly" />
-                        <textarea class="textarea" markup-editor placeholder="Response message" ng-model="question.response_message" ng-maxlength="200" ng-readonly="readonly"></textarea>
+                        <input type="text" markup-editor placeholder="Response heading" ng-model="question.response_heading" class="field" maxlength="500" ng-readonly="readonly" />
+                        <textarea class="textarea" markup-editor placeholder="Response message" ng-model="question.response_message" maxlength="500" ng-readonly="readonly"></textarea>
                     </div><!-- /.inner -->
                 </div><!-- /.col col-2 -->
             </div><!-- /.inner -->
             <div class="foot" ng-if="showTip">
                 <i class="fa fa-lightbulb-o"></i>
-                <input type="text" placeholder="No tip provided." ng-model="question.tip" class="field" ng-maxlength="200" ng-readonly="readonly" />
+                <input type="text" placeholder="No tip provided." ng-model="question.tip" class="field" maxlength="250" ng-readonly="readonly" />
             </div><!-- /.foot -->
         </div><!-- /.table-row-expand -->
     </div><!-- /.table-row -->
