@@ -54,6 +54,8 @@ namespace PST.Api
                 "~/app/js/jquery.nicescroll.min.js",
                 "~/app/js/jquery.tooltipster.min.js",
                 "~/app/js/jquery.panzoom.min.js",
+                "~/app/js/moment.min.js",
+                "~/app/js/angular-moment.min.js",
                 "~/app/spa/api/AccountService.js",
                 "~/app/spa/api/CertificateData.js",
                 "~/app/spa/api/CertificateService.js",

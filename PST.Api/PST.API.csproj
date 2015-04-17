@@ -351,6 +351,8 @@
     <Content Include="app\css\responsive.css" />
     <Content Include="app\css\style.css" />
     <Content Include="app\css\tooltipster.css" />
+    <Content Include="app\js\moment.min.js" />
+    <Content Include="app\js\angular-moment.min.js" />
     <Content Include="app\js\angular-ui-router.min.js" />
     <Content Include="app\js\angular_1.3.1\angular-animate.min.js" />
     <Content Include="app\js\angular_1.3.1\angular-resource.min.js" />
@@ -366,8 +368,6 @@
     <Content Include="app\js\jquery.nicescroll.min.js" />
     <Content Include="app\js\jquery.panzoom.min.js" />
     <Content Include="app\js\jquery.tooltipster.min.js" />
-    <Content Include="app\js\momentjs_2.8.3\angular-moment.min.js" />
-    <Content Include="app\js\momentjs_2.8.3\moment.min.js" />
     <Content Include="app\spa\api\AccountService.js" />
     <Content Include="app\spa\api\CertificateData.js" />
     <Content Include="app\spa\api\CertificateService.js" />

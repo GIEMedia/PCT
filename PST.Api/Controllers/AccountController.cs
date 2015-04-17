@@ -387,15 +387,16 @@ namespace PST.Api.Controllers
             return courseProgress.Select(cp =>
             {
                 var co = (course_overview) cp.Course;
-                co.course_progress = cp.Sections.Count(s => s.Passed)/(decimal) cp.TotalSections;
+                co.course_progress = Math.Max(.1M, cp.Sections.Count(s => s.Passed)/(decimal) cp.TotalSections);
                 co.test_progress =
                     cp.TestProgress != null
-                        ? cp.TestProgress.CompletedQuestions.Count(q=>q.CorrectOnAttempt != null) / (decimal)cp.TestProgress.TotalQuestions
+                        ? cp.TestProgress.CompletedQuestions.Count(q => q.CorrectOnAttempt != null)/
+                          (decimal) cp.TestProgress.TotalQuestions
                         : 0;
-                co.last_activity = cp.LastActivityUtc.ToTimeZone(CurretUserTimeZoneInfo);
+                co.last_activity = cp.LastActivityUtc;
 
                 return co;
-            }).ToArray().OrderByDescending(c=>c.last_activity)
+            }).ToArray().OrderByDescending(c => c.last_activity)
                 //TODO: Remove this hack - multiple results being returned for same course
                 .GroupBy(g => g.course_id).Select(g => g.First()).ToArray();
         }

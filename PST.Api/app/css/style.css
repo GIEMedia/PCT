@@ -403,7 +403,7 @@ a.form-label { color: #404040 !important; }
 .course-question-head { padding-bottom: 15px; }
 .course-question-head h5 { padding-top: 10px; font-size: 12px; }
 .course-question-head h4 + h4 { padding-top: 10px; }
-.course-question-head .tip { float: right; font-size: 28px; margin: 0 0 10px 10px; color: #404040; }
+.course-question-head .tip { float: right; font-size: 28px; margin: 0 0 10px 10px; color: #404040; cursor: help; }
 .course-question-head .tip + .popup { display: none; }
 .course-question-head .tip + .popup span { padding: 20px; }
 .course-question-head .tip.focus { color: #00aded; }
@@ -590,6 +590,9 @@ a.form-label { color: #404040 !important; }
 .search-section ul { list-style: none outside none; padding-bottom: 20px; }
 .search-section li a { display: inline-block; font-size: 16px; color: #202020; line-height: 1.2; padding: 8px 15px 10px; border-radius: 3px; }
 .search-section li a:hover { color: #00b2e6; text-decoration: none; background: #f0f2f2; }
+.search-section .courses-item-content { margin: 2px 0 0 8px; font-size: 12px; }
+.search-section .courses-item-meta { min-height: 0; }
+.search-section h6 { font-size: 12px; text-transform: none; line-height: 1; margin-top: 5px; color: #909090 }
 
 [class^="search-ico"] { position: relative; display: inline-block; vertical-align: middle; background-repeat: no-repeat; background-position: 0 0; }
 .search-ico-rats { background-image: url(/app/css/images/ico-rats.png); width: 38px; height: 33px; margin-right: 10px; top: -2px; }
@@ -660,9 +663,10 @@ a.form-label { color: #404040 !important; }
 .courses-item-content { overflow: hidden; }
 .courses-item-title { padding-bottom: 3px; }
 .courses-item-title a { color: #404040; }
-.courses-item-meta { color: #a0a0a0; min-height: 40px; }
+.courses-item-meta { color: #a0a0a0; font-size: 13px; line-height: 1.1; }
+.courses-item-content h5 { margin-top: 8px; font-size: 13px; }
 
-.courses-item-bars { list-style: none outside none; overflow: hidden; }
+.courses-item-bars { list-style: none outside none; overflow: hidden; margin-top: 19px; }
 .courses-item-bar { float: left; width: 50%; }
 .courses-item-bar-label { display: block; font-size: 13px; line-height: 1; color: #707070; text-transform: uppercase; font-weight: bold; padding-bottom: 9px; }
 .courses-item-bar-fill,
