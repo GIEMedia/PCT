@@ -406,10 +406,10 @@ a.form-label { color: #404040 !important; }
 .course-question-head .tip { float: right; font-size: 28px; margin: 0 0 10px 10px; color: #404040; }
 .course-question-head .tip + .popup { display: none; }
 .course-question-head .tip + .popup span { padding: 20px; }
-.course-question-head .tip:hover { color: #00aded; }
-.course-question-head .tip:hover + .popup { display: block; visibility: visible; opacity: 1; left: auto; position: absolute; right: 50px; }
-.course-question-head.no-media .tip:hover + .popup { top: 165px; }
-.course-question-head.has-media .tip:hover + .popup { top: 465px; }
+.course-question-head .tip.focus { color: #00aded; }
+.course-question-head .tip.focus + .popup { display: block; visibility: visible; opacity: 1; left: auto; position: absolute; right: 50px; }
+.course-question-head.no-media .tip.focus + .popup { top: 165px; }
+.course-question-head.has-media .tip.focus + .popup { top: 465px; }
 .course-question-title { color: #404040; font-weight: 300; }
 .course-question-title b { font-weight: 900; }
 
