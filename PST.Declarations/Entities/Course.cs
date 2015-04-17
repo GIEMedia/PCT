@@ -89,10 +89,9 @@ namespace PST.Declarations.Entities
                 title = course.DisplayTitle,
                 image_url = course.Manufacturer != null ? course.Manufacturer.ImageUrl : "",
                 description = course.StateCEUs.Any()
-                    ? "CEUs Available: " +
-                      course.StateCEUs.OrderBy(x => x.StateAbbr)
-                          .Select(x => string.Format("{0} ({1:#.0} hrs)", x.StateAbbr, x.Hours))
-                          .Aggregate((i, j) => i + ", " + j)
+                    ? course.StateCEUs.GroupBy(x => x.Hours, x => x.StateAbbr)
+                          .Select(x => string.Format("{1:#.0} hrs: {0}", x.OrderBy(y=>y).Aggregate((i, j) => i + ", " + j), x.Key))
+                          .Aggregate((i, j) => i + " | " + j)
                     : "",
                 prereq_courses = course.PrerequisiteCourses.Select(c => c.DisplayTitle).ToArray()
             };

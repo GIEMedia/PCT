@@ -38,10 +38,7 @@ namespace PST.Services
             forgot.BaseUrl = BaseUrl;
             forgot.BrowserUrl = string.Format("{0}/EmailTemplate/ForgotPassword?u={1}&management={2}", BaseUrl,
                 HttpUtility.UrlEncode(user.UserName.Base64StringEncode()), management);
-            var urlFormat = management
-                ? "{0}/Management#/app/accounts/forgotpassword?u={1}&t={2}"
-                : "{0}/#forgotpassword?u={1}&t={2}";
-            forgot.NewPasswordUrl = string.Format(urlFormat, BaseUrl,
+            forgot.NewPasswordUrl = string.Format("{0}/#/forgotpassword?u={1}&t={2}", BaseUrl,
                 HttpUtility.UrlEncode(user.UserName), HttpUtility.UrlEncode(GeneratePasswordResetToken(user)));
             forgot.Name = user.FirstName;
 

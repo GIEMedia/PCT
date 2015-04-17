@@ -35,7 +35,8 @@
             'pct.elearning.layout',
 
             'ui.router',
-            'ngResource'
+            'ngResource',
+            'angularMoment'
     ])
 
         .config(["ApiProvider", function (ApiProvider) {
