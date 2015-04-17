@@ -37,13 +37,10 @@ namespace PST.Services
                                 (c.Sections.Count(s => s.Passed) != c.TotalSections ||
                                  // havent completed all of the questions
                                  
-                                 //(c.TestProgress == null || !c.TestProgress.Any()) || // havent started the test
-                                 //(c.TestProgress.First().CompletedQuestions.Count() != c.TestProgress.First().TotalQuestions &&
                                  c.TestProgress == null || // havent started the test
-                                 (c.TestProgress.CompletedQuestions.Count() != c.TestProgress.TotalQuestions &&
+                                 (c.TestProgress.CompletedQuestions.Count(q=>q.CorrectOnAttempt != null) != c.TestProgress.TotalQuestions &&
 
                                   // havent completed test
-                                  //c.TestProgress.First().TriesLeft > 0))); // havent failed test
                                   c.TestProgress.TriesLeft > 0))); // havent failed test
         }
 
@@ -63,7 +60,7 @@ namespace PST.Services
                 select c).Take(count);
         }
 
-        public Course GetCourse(Guid courseID, Guid? accountID, out List<Course> prerequisiteCourses, CourseStatus? status = null)
+        public Course GetCourse(Guid courseID, Guid? accountID, out List<Course> prerequisiteCourses, CourseStatus? status = null, bool onlyPassed = false)
         {
             prerequisiteCourses = null;
 
@@ -86,9 +83,11 @@ namespace PST.Services
 
             var passedCourses =
                 (from c in courseProgress
-                 //where c.TestProgress != null && c.TestProgress.Any() && c.TestProgress.First().Passed
                  where c.TestProgress != null && c.TestProgress.Passed
                  select c.Course.ID).ToArray();
+
+            if (onlyPassed && !passedCourses.Contains(courseID))
+                return null;
 
             if (!course.PrerequisiteCourses.All(c => passedCourses.Contains(c.ID)))
             {
@@ -99,10 +98,10 @@ namespace PST.Services
             return course;
         }
 
-        public Course GetCourse(Guid courseID, Guid? accountID = null, CourseStatus? status = null)
+        public Course GetCourse(Guid courseID, Guid? accountID = null, CourseStatus? status = null, bool onlyPassed = false)
         {
             List<Course> preqCourses;
-            return GetCourse(courseID, accountID, out preqCourses, status);
+            return GetCourse(courseID, accountID, out preqCourses, status, onlyPassed);
         }
 
         public course_progress GetCourseProgress(Guid accountID, Guid courseID)
@@ -138,10 +137,7 @@ namespace PST.Services
                                 s.Questions.Where(q => completedQuestions.Contains(q.ID))
                                     .Select(q => new question_progress
                                     {
-                                        question_id = q.ID,
-                                        //correct_response_heading = q.CorrectResponseHeading,
-                                        //correct_response_text = q.CorrectResponseText,
-                                        //correct_options = q.Options.Where(o => o.Correct).Select(o => o.ID).ToArray()
+                                        question_id = q.ID
                                     }).ToArray()
                         };
                     }).ToArray()
@@ -173,7 +169,7 @@ namespace PST.Services
 
         public Test GetTest(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active)
         {
-            var course = GetCourse(courseID, accountID, status);
+            var course = GetCourse(courseID, accountID, status, true);
 
             return course == null ? null : course.Test;
         }
@@ -195,12 +191,11 @@ namespace PST.Services
                 courseProgress.Sections.Count != courseProgress.TotalSections)
                 return null;
 
-            //var testProgress = courseProgress.TestProgress.FirstOrDefault() ??
             var testProgress = courseProgress.TestProgress ??
                                (TestProgress) test.CreateAndAddProgress(courseProgress);
 
 
-            var completedQuestions = testProgress.CompletedQuestions.Select(q => q.QuestionID).ToArray();
+            var completedQuestions = testProgress.CompletedQuestions.Where(q => q.CorrectOnAttempt != null).Select(q => q.QuestionID).ToArray();
             return new test_progress
             {
                 test_id = test.ID,
@@ -374,7 +369,7 @@ namespace PST.Services
             testProgress = (TestProgress) (course.Test.GetProgress(courseProgress) ??
                                            course.Test.CreateAndAddProgress(courseProgress));
 
-            if (results.Count(r => r.correct)/(decimal) course.Test.Questions.Count < course.Test.PassingPercentage)
+            if (testProgress.CompletedQuestions.Count(r => r.CorrectOnAttempt != null) / (decimal)course.Test.Questions.Count < course.Test.PassingPercentage)
             {
                 testProgress.TriesLeft = Math.Max(0, testProgress.TriesLeft - 1);
                 _entityRepository.Save(testProgress);

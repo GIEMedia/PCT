@@ -87,10 +87,10 @@ namespace PST.Declarations.Entities
 
         public virtual void FromManagementModel(m_question model, int sortOrder)
         {
-            QuestionText = CleanMarkdown(model.question_text).Trim();
-            CorrectResponseHeading = CleanMarkdown(model.response_heading).Trim();
-            CorrectResponseText = CleanMarkdown(model.response_message).Trim();
-            Tip = CleanMarkdown(model.tip).Trim();
+            QuestionText = CleanMarkdown(model.question_text);
+            CorrectResponseHeading = CleanMarkdown(model.response_heading);
+            CorrectResponseText = CleanMarkdown(model.response_message);
+            Tip = CleanMarkdown(model.tip);
             SortOrder = sortOrder;
 
             SetCustomEntityProperties(model);
@@ -102,7 +102,8 @@ namespace PST.Declarations.Entities
 
         private static string CleanMarkdown(string str)
         {
-            return Regex.Replace(str, @"\[[u,i,b]\][ ]*\[/[u,i,b]\]", "").Replace("  ", " ");
+            if (str.IsNullOrEmpty()) return str;
+            return Regex.Replace(str, @"\[[u,i,b]\][ ]*\[/[u,i,b]\]", "").Replace("  ", " ").Trim();
         }
     }
 

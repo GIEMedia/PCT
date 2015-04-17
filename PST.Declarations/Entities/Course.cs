@@ -92,7 +92,7 @@ namespace PST.Declarations.Entities
                     ? "CEUs Available: " +
                       course.StateCEUs.OrderBy(x => x.StateAbbr)
                           .Select(x => string.Format("{0} ({1:#.0} hrs)", x.StateAbbr, x.Hours))
-                          .Aggregate((i, j) => i + "," + j)
+                          .Aggregate((i, j) => i + ", " + j)
                     : "",
                 prereq_courses = course.PrerequisiteCourses.Select(c => c.DisplayTitle).ToArray()
             };

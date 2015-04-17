@@ -29,8 +29,9 @@ namespace PST.Declarations.Interfaces
         /// <param name="accountID">Account to ensure prereqs met.</param>
         /// <param name="prerequisiteCourses">Prerequisite courses if prereqs not met.</param>
         /// <param name="status">Only return a crouse if it's status matches supplied value. (default: Active)</param>
+        /// <param name="onlyPassed">Only return the course if the user has passed it.</param>
         /// <returns>Course with specified ID. Returns null if course not found or account doesn't meet prereqs (out prerequisite courses set).</returns>
-        Course GetCourse(Guid courseID, Guid? accountID, out List<Course> prerequisiteCourses, CourseStatus? status = CourseStatus.Active);
+        Course GetCourse(Guid courseID, Guid? accountID, out List<Course> prerequisiteCourses, CourseStatus? status = CourseStatus.Active, bool onlyPassed = false);
 
         /// <summary>
         /// Gets a specific course by ID.
@@ -38,8 +39,9 @@ namespace PST.Declarations.Interfaces
         /// <param name="courseID">ID of course to get</param>
         /// <param name="accountID">Account to ensure prereqs met.</param>
         /// <param name="status">Only return a crouse if it's status matches supplied value. (default: Active)</param>
+        /// <param name="onlyPassed">Only return the course if the user has passed it.</param>
         /// <returns>Course with specified ID. Returns null if course not found or account doesn't meet prereqs.</returns>
-        Course GetCourse(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active);
+        Course GetCourse(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active, bool onlyPassed = false);
 
         course_progress GetCourseProgress(Guid accountID, Guid courseID);
 

@@ -77,9 +77,9 @@ namespace PST.Api.Areas.Management.Controllers
                         var optionResults = results.Where(r => r.OptionID == o.ID).ToList();
                         return new m_option_stat
                         {
-                            first_attempt = optionResults.Count(r => r.CorrectOnAttempt == 1),
-                            second_attempt = optionResults.Count(r => r.CorrectOnAttempt == 2),
-                            third_attempt = optionResults.Count(r => r.CorrectOnAttempt > 2),
+                            first_attempt = optionResults.Count(r => (r.CorrectOnAttempt ?? 0) == 1),
+                            second_attempt = optionResults.Count(r => (r.CorrectOnAttempt ?? 0) == 2),
+                            third_attempt = optionResults.Count(r => (r.CorrectOnAttempt ?? 0) > 2),
                             text = o.Text,
                             image = q is MultiImageQuestion ? ((ImageOption) o).ImageUrl : null,
                             correct = o.Correct

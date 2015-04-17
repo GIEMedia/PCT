@@ -70,14 +70,9 @@ namespace PST.Declarations.Entities
                 certificate_url =
                     courseProgress.Certificate == null ? string.Empty : Certificate.GetPdfUrl(courseProgress.Certificate.ID),
                 course_percent = courseProgress.Sections.Count(s => s.Passed)/(decimal) courseProgress.TotalSections,
-                //test_percent = courseProgress.TestProgress == null || !courseProgress.TestProgress.Any()
-                //    ? 0
-                //    : courseProgress.TestProgress.First().CompletedQuestions.Count()/
-                //      (decimal)courseProgress.TestProgress.First().TotalQuestions,
-                //test_failed = courseProgress.TestProgress != null && courseProgress.TestProgress.Any() && courseProgress.TestProgress.First().TriesLeft == 0
                 test_percent = courseProgress.TestProgress == null
                     ? 0
-                    : courseProgress.TestProgress.CompletedQuestions.Count() /
+                    : courseProgress.TestProgress.CompletedQuestions.Count(q => q.CorrectOnAttempt != null) /
                       (decimal)courseProgress.TestProgress.TotalQuestions,
                 test_failed = courseProgress.TestProgress != null && courseProgress.TestProgress.TriesLeft == 0
             };
@@ -101,7 +96,7 @@ namespace PST.Declarations.Entities
         public virtual int TotalQuestions { get; set; }
 
         [Transient]
-        public virtual bool Passed { get { return CompletedQuestions.Count == TotalQuestions; } }
+        public virtual bool Passed { get { return CompletedQuestions.Count(q => q.CorrectOnAttempt != null) == TotalQuestions; } }
     }
 
     [Serializable]

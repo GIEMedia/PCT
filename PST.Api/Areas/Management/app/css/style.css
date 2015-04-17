@@ -371,7 +371,7 @@ a:hover img { transition: color 200ms, background-color 200ms, opacity 200ms; -w
 .table-section-list table tr td,
 .table-section-list table tr td.section-name span,
 .table-section-list table tr td.section-name input { text-align: left; font-size: 14px; }
-.table-section-list table tr:not(.editing):hover td:first-child,
+.table-section-list table tr:not(.editing):hover td:first-child { border: 2px solid #47ceff; }
 .table-section-list table tr.editing td.section-name { border: 2px solid #47ceff; }
 .table-section-list table tr td:first-child { text-align: center; }
 .table-section-list table tr td:last-child { text-align: center; }
@@ -622,7 +622,7 @@ table + .table-buttons,
 .table-row-expand .col { float: left; min-height: 190px; }
 .table-row-expand .col-1 { width: 323px; margin-left: 50px; border-right: 1px solid #d6e2e6; }
 
-.table-row-expand .col-1 .inner { padding: 10px 0 0 0; position: relative; }
+.table-row-expand .col-1 .inner { padding: 10px 0 0 0; position: relative; height: 100%; min-height: 190px; }
 .table-row-expand .col-1 .inner img { display: block; margin: auto; }
 .table-row-expand .col-1 .inner .video-wrapper { width: 300px; margin: auto; }
 .table-row-expand .col-1 .inner .overlay { position: absolute; top: 0; left: 0; width: 323px; height: 100%; background: url(/Areas/Management/app/css/images/blue-45.png); text-align: center; }
@@ -648,7 +648,7 @@ table + .table-buttons,
 
 /* list-images */
 .list-images { list-style-type: none; margin-left: -2px; }
-.list-images li { float: left; margin-left: 2px; margin-bottom: 12px; position: relative; }
+.list-images li { float: left; margin-left: 2px; margin-bottom: 12px; position: relative; width: 105px; }
 .list-images li.checked:after { content: ''; display: block; position: absolute; top: -8px; left: 50%; margin-left: -8px; background: url(/Areas/Management/app/css/images/ico-circle-check.png) no-repeat 0 0; width: 16px; height: 16px; }
 
 /* custom-table-tests */
@@ -824,10 +824,10 @@ table + .table-buttons,
     animation: fa-spin 1s infinite steps(8);
 }
 
-.popup-edit .list-images li { width: 77px; height: 77px; border: 2px solid #fff; }
+.popup-edit .list-images li { height: 77px; border: 2px solid #d6e2e6; text-align: center; background-color: #d6e2e6; }
 .popup-edit .list-images li:hover { display: block; border-color: #47ceff; }
 .popup-edit .list-images li a img { display: block;}
-img.option-image {  width: auto; height: 73px;  }
+img.option-image {  width: auto; height: 73px; max-width: 101px; }
 .popup-edit .list-images li .checkbox { display: block; position: absolute; top: -9px; left: 50%; margin-left: -9px; width: 18px; height: 18px; }
 .popup-edit .list-images li .checkbox .form-label { width: 18px; height: 18px; padding-left: 0; cursor: pointer; }
 .popup-edit .list-images li .checkbox input:checked + .form-label { background: url(/Areas/Management/app/css/images/ico-checkbox-checked.png) no-repeat 0 0; }
@@ -1003,6 +1003,10 @@ img.option-image {  width: auto; height: 73px;  }
 .notifications .notification:last-of-type {
     margin-bottom: 35px;
 }
+
+.popup-body .notifications .notification:last-of-type { margin-bottom: 0; }
+.popup-body .notifications .notification:first-of-type { margin-top: 0; }
+.popup-body .notifications .notification { min-height: 36px; }
 
 /* ================================================================ *\
     Buttons
