@@ -14,7 +14,7 @@ namespace PST.Tests.ManagementTests
     {
         protected override string UrlBase
         {
-            get { return MvcApplicationBase.BaseUrl + "api/manage/course/section/"; }
+            get { return MvcApplicationBase.BaseUrl + "/api/manage/course/section/"; }
         }
 
         [TestMethod]

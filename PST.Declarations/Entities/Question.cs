@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data;
 using Prototype1.Foundation.Interfaces;
@@ -86,10 +87,10 @@ namespace PST.Declarations.Entities
 
         public virtual void FromManagementModel(m_question model, int sortOrder)
         {
-            QuestionText = model.question_text;
-            CorrectResponseHeading = model.response_heading;
-            CorrectResponseText = model.response_message;
-            Tip = model.tip;
+            QuestionText = CleanMarkdown(model.question_text).Trim();
+            CorrectResponseHeading = CleanMarkdown(model.response_heading).Trim();
+            CorrectResponseText = CleanMarkdown(model.response_message).Trim();
+            Tip = CleanMarkdown(model.tip).Trim();
             SortOrder = sortOrder;
 
             SetCustomEntityProperties(model);
@@ -98,6 +99,11 @@ namespace PST.Declarations.Entities
         }
 
         public virtual bool Deleted { get; set; }
+
+        private static string CleanMarkdown(string str)
+        {
+            return Regex.Replace(str, @"\[[u,i,b]\][ ]*\[/[u,i,b]\]", "").Replace("  ", " ");
+        }
     }
 
     [Serializable]
