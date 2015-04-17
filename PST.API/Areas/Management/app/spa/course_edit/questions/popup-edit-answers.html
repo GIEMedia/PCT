@@ -3,8 +3,14 @@
 		<div class="popup-head">
 			<h2 class="popup-title"><span>{{index + 1}}</span> {{question_text || "(Empty)"}}</h2><!-- /.popup-title -->
 		</div><!-- /.popup-head -->
+    
+	    <div class="popup-body clearfix">
+            <div class="notifications">
+                <div class="notification error">Error text here!</div>
+            </div>
+	    </div>
 
-		<div class="popup-body clearfix">
+	    <div class="popup-body clearfix">
 
             <div class="col col-1" ng-if="question_type == 0 || question_type == 2">
                 <div class="btns alignleft">

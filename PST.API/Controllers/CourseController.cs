@@ -23,12 +23,14 @@ namespace PST.Api.Controllers
     {
         private readonly IEntityRepository _entityRepository;
         private readonly ICourseService _courseService;
+        private readonly Lazy<ICertificateService> _certificateService;
 
-        public CourseController(Lazy<UserManager<ApplicationUser>> userManager, IEntityRepository entityRepository, ICourseService courseService)
+        public CourseController(Lazy<UserManager<ApplicationUser>> userManager, IEntityRepository entityRepository, ICourseService courseService, Lazy<ICertificateService> certificateService)
             : base(userManager)
         {
             _entityRepository = entityRepository;
             _courseService = courseService;
+            _certificateService = certificateService;
         }
 
         /// <summary>
@@ -77,6 +79,9 @@ namespace PST.Api.Controllers
             var courses = _courseService.GetCourses(CourseStatus.Active);
             var categories = _entityRepository.Queryable<MainCategory>().OrderBy(c => c.Title).ToList();
 
+            var passedCourses =
+                _certificateService.Value.GetCertificates(CurrentUserID).Select(c => c.Course.ID).ToArray();
+
             return categories.Select(mainCategory => new main_category
             {
                 title = mainCategory.Title,
@@ -85,6 +90,7 @@ namespace PST.Api.Controllers
                     title = s.Title,
                     courses =
                         courses.Where(c => c.Category.ID == s.ID)
+                            .Where(c => !passedCourses.Contains(c.ID))
                             .Select(c => (course_overview) c)
                             .OrderBy(c => c.title)
                             .ToArray()

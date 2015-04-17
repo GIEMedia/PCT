@@ -24,6 +24,8 @@
 
         .controller("certificate.Ctrl", ["$scope", "$state", "$stateParams", "CertificateService", "ManagerService", "certificate", function ($scope, $state, $stateParams, CertificateService, ManagerService, certificate) {
             $scope.certificate = certificate.data;
+            $scope.sent = false;
+            $scope.sending = false;
 
             $scope.managers = [
                 {}
@@ -35,13 +37,20 @@
                 }
             });
 
-
-
             $scope.send = function() {
+                $scope.sending = true;
 
-                ManagerService.send($stateParams.courseId, $scope.managers).success(function() {
-                    $state.go("dashboard");
-                });
+                ManagerService.send($stateParams.courseId, $scope.managers)
+                    .success(function() {
+                        $scope.sending = false;
+                        $scope.sent = true;
+                    })
+                    .onError(function() {
+                        $scope.sending = false;
+                        $scope.error = true;
+                        return true;
+                    })
+                ;
 
                 return false;
             };

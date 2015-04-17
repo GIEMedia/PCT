@@ -422,11 +422,31 @@
             <param name="userID"></param>
             <param name="access"></param>
         </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.GetManufacturers">
+            <summary>
+            Get all manufacturers
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.UpsertManufacturer(System.String,System.Nullable{System.Guid})">
+            <summary>
+            Upsert manufacturer
+            </summary>
+            <param name="name"></param>
+            <param name="manufacturer_id"></param>
+            <returns></returns>
+        </member>
         <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.UploadManufacturerImage(System.Guid)">
             <summary>
             Uploads an image and assigns it to an existing manufacturer
             </summary>
             <returns>Returns an updated manufacturer with the image url set</returns>
+        </member>
+        <member name="M:PST.Api.Areas.Management.Controllers.ManagementController.DeleteManufacturer(System.Guid)">
+            <summary>
+            Delete manufacturer
+            </summary>
+            <param name="manufacturer_id"></param>
         </member>
         <member name="M:PST.Api.Areas.Management.Controllers.ManageQuestionController.GetQuestions(System.Guid,System.Nullable{System.Guid})">
             <summary>

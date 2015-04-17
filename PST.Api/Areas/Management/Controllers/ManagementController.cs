@@ -77,9 +77,9 @@ namespace PST.Api.Areas.Management.Controllers
                         var optionResults = results.Where(r => r.OptionID == o.ID).ToList();
                         return new m_option_stat
                         {
-                            first_attempt = optionResults.Count(r => r.CorrectOnAttempt == 1),
-                            second_attempt = optionResults.Count(r => r.CorrectOnAttempt == 2),
-                            third_attempt = optionResults.Count(r => r.CorrectOnAttempt > 2),
+                            first_attempt = optionResults.Count(r => (r.CorrectOnAttempt ?? 0) == 1),
+                            second_attempt = optionResults.Count(r => (r.CorrectOnAttempt ?? 0) == 2),
+                            third_attempt = optionResults.Count(r => (r.CorrectOnAttempt ?? 0) > 2),
                             text = o.Text,
                             image = q is MultiImageQuestion ? ((ImageOption) o).ImageUrl : null,
                             correct = o.Correct
@@ -182,6 +182,10 @@ namespace PST.Api.Areas.Management.Controllers
             await _userManager.Value.UpdateAsync(account);
         }
 
+        /// <summary>
+        /// Get all manufacturers
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("manufacturer")]
         public manufacturer[] GetManufacturers()
@@ -190,9 +194,15 @@ namespace PST.Api.Areas.Management.Controllers
                 .Select(m => (manufacturer) m).ToArray();
         }
 
+        /// <summary>
+        /// Upsert manufacturer
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="manufacturer_id"></param>
+        /// <returns></returns>
         [HttpPut]
-        [Route("manufacturer/{manufacturer_id}")]
-        public manufacturer UpsertManufacturer(string name, Guid? manufacturer_id = null)
+        [Route("manufacturer/{manufacturer_id?}")]
+        public manufacturer UpsertManufacturer([FromBody] string name, Guid? manufacturer_id = null)
         {
             Manufacturer man;
             if (manufacturer_id.HasValue && !manufacturer_id.Value.IsNullOrEmpty())
@@ -231,6 +241,20 @@ namespace PST.Api.Areas.Management.Controllers
             _entityRepository.Save(manufacturer);
 
             return manufacturer;
+        }
+
+        /// <summary>
+        /// Delete manufacturer
+        /// </summary>
+        /// <param name="manufacturer_id"></param>
+        [HttpDelete]
+        [Route("manufacturer/{manufacturer_id}")]
+        public void DeleteManufacturer(Guid manufacturer_id)
+        {
+            var manufacturer = _entityRepository.GetByID<Manufacturer>(manufacturer_id);
+            if (manufacturer == null)
+                throw new NullReferenceException("Specified manufacturer not found.");
+            _entityRepository.Delete(manufacturer);
         }
     }
 }

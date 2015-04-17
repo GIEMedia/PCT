@@ -19,7 +19,7 @@
 
 <div class="course-question-head" ng-class="question.video || question.image ? 'has-media' : 'no-media'">
 
-    <i class="fa fa-lightbulb-o tip" ng-if="question.tip"></i>
+    <i class="fa fa-lightbulb-o tip" ng-if="question.tip" question-tooltip></i>
     <div class="popup popup-point-right-top" id="tip" ng-if="question.tip">
         <span markup="question.tip"></span>
     </div>

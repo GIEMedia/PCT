@@ -2,51 +2,44 @@
 <div class="custom-table-questions" sortable="updateOrder($indice)" before-sorting="collapseAll()">
     <div class="table-row-head">
         <div class="table-col col-size-1">
-            <h3>Questions
+            <h3>
+                Questions
                 <span ng-if="questions.length">
                     <a href="" class="expand-all" ng-click="expandAll()">Expand all</a>
                     <span>/</span>
-                    <a href="" class="collapse-all" ng-click="collapseAll()">Collapse all</a></h3>
+                    <a href="" class="collapse-all" ng-click="collapseAll()">Collapse all</a>
                 </span>
+            </h3>
         </div><!-- /.table-col -->
-
         <div class="table-col col-size-2">
             <h3>Responses</h3>
         </div><!-- /.table-col -->
     </div><!-- /.table-row-head -->
-
     <div class="table-row" pct-no-record="{list: questions, name: 'question(s)'}">
         <div class="table-col col-size-1">
         </div><!-- /.table-col -->
-        <div class="table-col col-size-2" >
+        <div class="table-col col-size-2">
             <h2 class="question" pct-no-record-message></h2>
         </div><!-- /.table-col -->
     </div>
-    
+
     <div class="table-row" ng-repeat="question in questions" expanded="expandeds[$index]" sortable-row-index="{{$index}}" question-row>
         <div class="inner">
             <div class="table-col col-size-1">
                 <div class="number">{{$index + 1}}</div><!-- /.number -->
-
                 <h2 class="question">{{isEmpty(question) ? "(Empty - Question will be removed on saved)" : ellipsis((question.question_text || "(Empty)") + (isMultipleCorrect(question) ? " (check all that apply)" : ""), 90)}}</h2><!-- /.question -->
                 <input type="text" class="field" markup-editor ng-model="question.question_text" ng-maxlength="200" placeholder="Question" ng-readonly="readonly" />
-
                 <div class="question-icons">
                     <a href=""><i class="icon icon-chevron-up" pct-tooltip="Collapse"></i></a>
-
                     <a href="" class="fa fa-trash-o" ng-click="deleteQuestion()" ng-if="!readonly" pct-tooltip="Remove"></a>
                 </div><!-- /.question-icons -->
             </div><!-- /.table-col -->
-
             <div class="table-col col-size-2">
                 <div class="answer">
                     <p><strong>{{question.response_heading || "(Empty)"}}</strong> {{ellipsis(question.response_message, 99) || "(Empty)"}}</p>
-
                     <div class="answer-icons">
                         <a href="" class="fa fa-arrows sortable-handle" ng-if="!readonly" pct-tooltip="Reorder"></a>
-
                         <a href="" class="icon icon-chevron-down" pct-tooltip="Expand"></a>
-
                         <a href="" class="fa fa-trash-o" ng-click="deleteQuestion()" ng-if="!readonly" pct-tooltip="Remove"></a>
                     </div><!-- /.answer-icons -->
                 </div><!-- /.answer -->
@@ -54,7 +47,7 @@
         </div><!-- /.inner -->
         <div class="table-row-expand" ng-class="{3: 'text', 1: 'multiple-images', 2: 'single-image', 0: 'single-image'}[question.question_type]">
             <div class="inner">
-                <i class="icon" 
+                <i class="icon"
                    ng-class="{3: 'icon-text grey', 1: 'icon-multiphoto red', 0: 'icon-photo orange', 2: 'icon-video orange'}[question.question_type]"></i>
                 <div class="col col-1">
                     <div class="inner">
@@ -62,29 +55,26 @@
                             <li ng-repeat="option in question.options" ng-class="{checked: question.question_type == 1 && option.correct}">
                                 <div class="checkbox" ng-if="question.question_type == 3">
                                     <input type="checkbox" ng-checked="option.correct" id="o{{$index}}">
-
                                     <label class="form-label" for="o{{$index}}">{{option.text}}</label>
                                 </div><!-- /.checkbox -->
-                                
+
                                 <a href="" ng-if="question.question_type == 1">
                                     <img ng-src="{{option.image}}" alt="" class="option-image">
                                 </a>
                             </li>
                         </ul><!-- /.list-checkboxes -->
-
                         <img ng-src="{{question.image || 'Areas/Management/app/css/images/video-image-img.png'}}" alt="" height="147" ng-if="question.question_type == 0 || (question.question_type == 2 && question.video == null)">
-                        
+
                         <div class="video-wrapper" ng-if="question.question_type == 2 && question.video != null">
                             <pct-video src="question.video.mp4" width="261" height="147">
                             </pct-video>
                         </div>
-                        
+
                         <div class="overlay">
                             <a class="btn btn-blue" href="" ng-click="openAnswersModel()" ng-bind="readonly ? 'View Answers' : 'Add/Edit Answers'"></a>
                         </div><!-- /.overlay -->
                     </div><!-- /.inner -->
                 </div><!-- /.col col-1 -->
-
                 <div class="col col-2">
                     <div class="inner">
                         <input type="text" markup-editor placeholder="Response heading" ng-model="question.response_heading" class="field" ng-maxlength="200" ng-readonly="readonly" />
@@ -92,40 +82,28 @@
                     </div><!-- /.inner -->
                 </div><!-- /.col col-2 -->
             </div><!-- /.inner -->
-
-            <div class="foot">
+            <div class="foot" ng-if="showTip">
                 <i class="fa fa-lightbulb-o"></i>
-
                 <input type="text" placeholder="No tip provided." ng-model="question.tip" class="field" ng-maxlength="200" ng-readonly="readonly" />
             </div><!-- /.foot -->
         </div><!-- /.table-row-expand -->
     </div><!-- /.table-row -->
-
 </div><!-- /.custom-table-questions -->
-
 <div class="btn-plus" ng-if="!readonly">
     <div class="btn-circle">
         <i class="fa fa-plus"></i>
-
         <span class="tooltip">Add Question</span><!-- /.tooltip -->
     </div>
-
     <div class="btn-plus-inner btn-darkgrey" ng-click="addTextQuestion()">
         <i class="icon icon-text"></i>
-
         <span class="tooltip">Text Based Question</span>
     </div><!-- /.btn-darkgrey -->
-
     <div class="btn-plus-inner btn-orange" ng-click="addImageQuestion()">
         <i class="icon icon-photo"></i>
-
         <span class="tooltip">Single Image/Video Question</span>
     </div><!-- /.btn-orange -->
-
     <div class="btn-plus-inner btn-red" ng-click="addMultiImagesQuestion()">
         <i class="icon icon-multiphoto"></i>
-
         <span class="tooltip">Multiple Images Question</span>
     </div><!-- /.btn-red -->
 </div><!-- /.btn-plus -->
-

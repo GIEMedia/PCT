@@ -11,7 +11,8 @@
                 scope: {
                     questions: "=",
                     focus: "=",
-                    readonly: "="
+                    readonly: "=",
+                    showTip: "="
                 },
                 link: function($scope, elem, attrs) {
                     $scope.expandeds = {};

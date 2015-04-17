@@ -157,7 +157,7 @@ namespace PST.Api.Areas.Management.Controllers
 
             var doc = await _uploadService.Value.UploadDocument(Request.Content);
 
-            var baseDocUrl = string.Concat(MvcApplication.BaseUrl, "Content/Documents/", doc.Item1);
+            var baseDocUrl = string.Concat(MvcApplication.BaseUrl, "/Content/Documents/", doc.Item1);
 
             Course course;
             Section section;
