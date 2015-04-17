@@ -67,7 +67,7 @@
 
                 <span class="name" ng-bind="man.name" ng-show="!manRow.editName.editing"></span>
                 <span class="name-edit" ng-show="manRow.editName.editing">
-                    <input type="text" class="field" tabindex="1" ng-model="manRow.editName.title" placeholder="Manufacturer name" ng-maxlength="200" pct-focus="manRow.editName.editing"/>
+                    <input type="text" class="field" tabindex="1" ng-model="manRow.editName.title" placeholder="Manufacturer name" maxlength="200" pct-focus="manRow.editName.editing"/>
                     <a href="" class="fa fa-save" tabindex="1" ng-click="saveTitle()"></a>
                     <a href="" class="fa fa-close" ng-click="manRow.editName.editing = false"></a>
                 </span>

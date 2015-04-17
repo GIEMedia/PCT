@@ -4,9 +4,9 @@
 			<h2 class="popup-title"><span>{{index + 1}}</span> {{question_text || "(Empty)"}}</h2><!-- /.popup-title -->
 		</div><!-- /.popup-head -->
     
-	    <div class="popup-body clearfix">
+	    <div class="popup-body clearfix" ng-if="error">
             <div class="notifications">
-                <div class="notification error">Error text here!</div>
+                <div class="notification error">{{error}}</div>
             </div>
 	    </div>
 
@@ -48,7 +48,7 @@
 
                             <label class="form-label" for="mo{{$index}}"></label>
 
-                            <input class="form-field" markup-editor ng-model="option.text" placeholder="Answer" ng-maxlength="200" ng-readonly="readonly" />
+                            <input class="form-field" markup-editor ng-model="option.text" placeholder="Answer" maxlength="250" ng-readonly="readonly" />
 
                             <a href="" class="fa fa-trash-o" ng-click="deleteOption(option)" ng-hide="readonly"></a>
                         </div><!-- /.checkbox -->
@@ -94,7 +94,7 @@
 
 
         <div class="popup-add-video" ng-show="view.addVideo.show">
-            <input class="field" ng-model="view.addVideo.url" placeholder="Video URL" ng-maxlength="200" >
+            <input class="field" ng-model="view.addVideo.url" placeholder="Video URL" maxlength="250" >
             <a href="" ng-click="addVideo()" class="btn btn-green"><i class="fa fa-check"></i></a>
             <a href="" ng-click="view.addVideo.show = false" class="btn btn-grey"><i class="fa fa-close"></i></a>
         </div>
