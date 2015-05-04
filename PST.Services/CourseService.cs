@@ -81,13 +81,13 @@ namespace PST.Services
                                   from c in a.CourseProgress
                                   select c).ToList();
 
+            if (onlyPassed && !courseProgress.Any(c => c.Course.ID == courseID && c.Sections.All(s => s.Passed)))
+                return null;
+
             var passedCourses =
                 (from c in courseProgress
                  where c.TestProgress != null && c.TestProgress.Passed
                  select c.Course.ID).ToArray();
-
-            if (onlyPassed && !passedCourses.Contains(courseID))
-                return null;
 
             if (!course.PrerequisiteCourses.All(c => passedCourses.Contains(c.ID)))
             {

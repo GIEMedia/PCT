@@ -36,6 +36,7 @@ namespace PST.Services
                 where a.ID == accountID
                 from cp in a.CourseProgress
                 where cp.Certificate != null
+                orderby cp.Course.DisplayTitle
                 select cp.Certificate);
             return courseID.HasValue ? certs.Where(c => c.Course.ID == courseID.Value) : certs;
         }
@@ -129,7 +130,7 @@ namespace PST.Services
 
         public static string GetCertificatePdfUrl(Guid certificateID)
         {
-            return string.Concat(BaseUrl, "/Content/Certificates/", certificateID, ".jpg");
+            return string.Concat(BaseUrl, "/Content/Certificates/", certificateID, ".pdf");
         }
     }
 }

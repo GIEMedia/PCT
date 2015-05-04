@@ -23,6 +23,14 @@ namespace PST.Api.Controllers
             return Content(_emailGenerationService.ReviewCourse(name, email, id, title));
         }
 
+        public ActionResult ManagerNotification(Guid id, string name, string email, string title)
+        {
+            if (id.IsNullOrEmpty())
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest, "A certificate id was not supplied.");
+
+            return Content(_emailGenerationService.ManagerNotification(name, title, id));
+        }
+
         public ActionResult ForgotPassword(string u, bool management = false, bool textOnly = false)
         {
             string username;

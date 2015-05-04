@@ -8,7 +8,7 @@
         <ul>
             <li><a ui-sref="profile">Profile</a></li>
             <li><a ui-sref="certificates">Certificates</a></li>
-            <li><a href="#">Help</a></li>
+            <!--<li><a href="#">Help</a></li>-->
             <li><a href="" ng-click="logout()">Sign out</a></li>
             <li class="mob-only horizontal-line"></li>
             <li class="mob-only"><a href="#">Contact Us</a></li>
@@ -19,7 +19,7 @@
         </ul>
     </nav><!-- /.nav -->
 </div><!-- /.nav-container -->
-<div class="login-container" ng-if="!User.loggedIn">
+<div class="login-container" ng-if="!User.loggedIn && !($state.current.name=='coursePreview' || $state.current.name=='testPreview')">
     <form novalidate name="signin">
         <label for="EmailAddress">Sign In</label>
         <div ng-if="error" style="color: red">{{error}}</div>

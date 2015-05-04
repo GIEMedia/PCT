@@ -190,8 +190,20 @@ namespace PST.Api.Areas.Management.Controllers
         [Route("manufacturer")]
         public manufacturer[] GetManufacturers()
         {
-            return _entityRepository.Queryable<Manufacturer>().OrderBy(m => m.Name).ToList()
-                .Select(m => (manufacturer) m).ToArray();
+            var manufacturers =
+                _entityRepository.Queryable<Manufacturer>()
+                    .OrderBy(m => m.Name)
+                    .ToList()
+                    .Select(m => (manufacturer) m)
+                    .ToArray();
+
+            manufacturers.ForEach(
+                m =>
+                    m.course_count =
+                        _entityRepository.Queryable<Course>()
+                            .Count(c => c.Manufacturer != null && c.Manufacturer.ID == m.manufacturer_id));
+
+            return manufacturers.ToArray();
         }
 
         /// <summary>

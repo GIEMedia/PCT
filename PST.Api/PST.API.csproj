@@ -270,6 +270,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\css\email.css" />
+    <Content Include="app\css\email.min.css">
+      <DependentUpon>email.css</DependentUpon>
+    </Content>
     <Content Include="app\css\fonts\font-awesome.min.css" />
     <Content Include="app\css\fonts\fontawesome-webfont.eot" />
     <Content Include="app\css\fonts\fontawesome-webfont.svg" />
@@ -642,6 +645,7 @@
     <Content Include="Content\Documents\_placeholder.txt" />
     <Content Include="Content\Images\_placeholder.txt" />
     <Content Include="Views\EmailTemplates\ForgotPassword.cshtml" />
+    <Content Include="Views\EmailTemplates\ManagerNotification.cshtml" />
     <None Include="Views\EmailTemplates\ReviewCourse.cshtml" />
     <Content Include="web.config">
       <SubType>Designer</SubType>

@@ -282,6 +282,8 @@ a.form-label { color: #404040 !important; }
 .popup.popup-point-right-middle:before { top: 50%; top: calc(50% - 8px); }
 .popup.popup-point-right-bottom:before { bottom: 18px; }
 
+.popup.popup-no-point:before { display: none; }
+
 .open .popup,
 .open.popup { visibility: visible; opacity: 1; }
 
@@ -290,7 +292,7 @@ a.form-label { color: #404040 !important; }
 \* ================================================================ */
 
 .header { position: fixed; top: 0; left: 0; width: 100%; height: 68px; border-bottom: 2px solid #d7e2e6; z-index: 1500; background-color: #fff; }
-.logo { float: left; background: url(/app/css/images/logo.png) no-repeat 0 0; width: 204px; height: 47px; white-space: nowrap; text-indent: 150%; overflow: hidden; margin: 11px 0 0 36px; }
+.logo { float: left; background: url(/app/css/images/logo.png) no-repeat 0 0; width: 211px; height: 47px; white-space: nowrap; text-indent: 150%; overflow: hidden; margin: 11px 0 0 36px; }
 
 .nav-container { position: relative; float: right; margin: 26px 36px 0 0; }
 .login-container { position: relative; float: right; margin: 9px 0 0 0; width: 500px; }
@@ -398,16 +400,18 @@ a.form-label { color: #404040 !important; }
 .test-single-media-wrapper > video,
 .test-single-media-wrapper > div { width: 360px; }
 
-.course-questions { background: #f7f9fa; padding: 21px 20px 16px 20px; max-height: calc(100% - 195px); overflow-y: auto; }
+.course-questions { background: #f7f9fa; padding: 21px 20px 16px 20px; /*max-height: calc(100% - 195px); overflow-y: auto;*/ }
 .course-questions .form-body { padding-bottom: 14px; }
+
+.course-question .tip { float: right; font-size: 28px; margin: 0 0 10px 10px; color: #404040; cursor: help; }
+.course-question .tip + .popup { display: none; }
+.course-question .tip + .popup span { padding: 20px; }
+.course-question .tip.focus { color: #00aded; }
+.course-question .tip.focus + .popup { display: block; visibility: visible; opacity: 1; left: auto; position: absolute; right: 50px; }
+
 .course-question-head { padding-bottom: 15px; }
-.course-question-head h5 { padding-top: 10px; font-size: 12px; }
+.course-question-head h5 { padding-top: 10px; font-size: 15px; }
 .course-question-head h4 + h4 { padding-top: 10px; }
-.course-question-head .tip { float: right; font-size: 28px; margin: 0 0 10px 10px; color: #404040; cursor: help; }
-.course-question-head .tip + .popup { display: none; }
-.course-question-head .tip + .popup span { padding: 20px; }
-.course-question-head .tip.focus { color: #00aded; }
-.course-question-head .tip.focus + .popup { display: block; visibility: visible; opacity: 1; left: auto; position: absolute; right: 50px; }
 .course-question-head.no-media .tip.focus + .popup { top: 165px; }
 .course-question-head.has-media .tip.focus + .popup { top: 465px; }
 .course-question-title { color: #404040; font-weight: 300; }
@@ -524,6 +528,7 @@ a.form-label { color: #404040 !important; }
 #helpSection { top: 105px; left: 54px; }
 #helpProgressBar { top: 230px; left: 125px; }
 #helpQuestions { top: 232px; left: 448px; }
+#helpTooltip { top: 232px; left: 139px; }
 #helpLabelTools { top: 113px; left: 50%; }
 #helpClose { bottom: 77px; right: 20px; z-index: 5; }
 
