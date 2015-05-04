@@ -3,6 +3,7 @@
 (function () {
 
     angular.module('pct.elearning.course.controls', [
+        'pct.help'
     ])
 
         .directive("courseControls", function() {
@@ -151,44 +152,6 @@
                 }
             };
         })
-
-        .directive("helpContainer", ["PreferenceService", function(PreferenceService) {
-            return {
-                restrict: "C",
-                templateUrl: "/app/spa/course/CourseHelp.html",
-                link: function($scope, elem, attrs) {
-                    elem.find('.popup[step] button').click(function () {
-                        var thisStep = $(this).closest('.popup[step]');
-                        var stepNum = parseInt(thisStep.attr('step'));
-                        thisStep.removeClass('open');
-                        var nextStep = elem.find('.popup[step="' + (stepNum + 1) + '"]:visible');
-                        if (nextStep.length == 1) {
-                            nextStep.addClass('open');
-                        } else {
-                            elem.remove();
-                        }
-                    });
-
-                    var $alreadyOpen = null;
-                    elem.find('.help-wrapper button').click(function () {
-                        if (!$alreadyOpen || $alreadyOpen.length > 0) {
-                            if (!elem.find('#helpClose').hasClass('open')) {
-                                $alreadyOpen = elem.find('.popup.open');
-                            }
-                            $alreadyOpen.toggle();
-                        }
-                        elem.find('#helpClose').toggleClass('open');
-                    });
-                    elem.find('#helpClose button').click(function () {
-                        elem.remove();
-                    });
-                    elem.find('#helpClose button.no').click(function () {
-                        PreferenceService.setHelpEnabled(false);
-                    });
-
-                }
-            };
-        }])
 
         /**
          * Provide parent controller for courseControlMaximize

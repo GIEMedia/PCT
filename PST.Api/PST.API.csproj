@@ -387,6 +387,7 @@
     <Content Include="app\spa\certificates\Certificates.html" />
     <Content Include="app\spa\certificates\Certificates.js" />
     <Content Include="app\spa\common\Markup.js" />
+    <Content Include="app\spa\common\Help.js" />
     <Content Include="app\spa\course\Course.html" />
     <Content Include="app\spa\course\Course.js" />
     <Content Include="app\spa\course\CourseControls.js" />
@@ -419,6 +420,7 @@
     <Content Include="app\spa\test\certificate\Certificate.html" />
     <Content Include="app\spa\test\certificate\Certificate.js" />
     <Content Include="app\spa\test\Test.js" />
+    <Content Include="app\spa\test\TestHelp.html" />
     <Content Include="app\spa\test\TestFailed.html" />
     <Content Include="app\spa\test\TestPage.html" />
     <Content Include="app\spa\test\TestQuestionsContainer.html" />

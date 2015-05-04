@@ -70,6 +70,7 @@ namespace PST.Api
                 "~/app/spa/authen/UserInfo.js",
                 "~/app/spa/certificates/Certificates.js",
                 "~/app/spa/common/Markup.js",
+                "~/app/spa/common/Help.js"
                 "~/app/spa/course/Course.js",
                 "~/app/spa/course/CourseControls.js",
                 "~/app/spa/course/CourseQuestion.js",

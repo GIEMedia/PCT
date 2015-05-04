@@ -3,8 +3,9 @@
 (function () {
 
     angular.module('pct.elearning.test', [
-            'pct.elearning.test.questions',
-            'ui.router'
+        'pct.elearning.test.questions',
+        'pct.help',
+        'ui.router'
     ])
     
         .config(["$stateProvider", function ($stateProvider) {
@@ -28,7 +29,7 @@
             ;
         }])
 
-        .controller("test.Ctrl", ["$scope", "TestService", "$stateParams", "$state", function ($scope, TestService, $stateParams, $state) {
+        .controller("test.Ctrl", ["$scope", "TestService", "$stateParams", "$state", "PreferenceService", function ($scope, TestService, $stateParams, $state, PreferenceService) {
             $scope.testView = {
                 questionProgress: "100%"
             };
@@ -112,6 +113,11 @@
                 $scope.showResult = false;
             };
 
+            $scope.helpEnabled = PreferenceService.isTestHelpEnabled();
+
+            $scope.disableHelp = function() {
+                PreferenceService.setTestHelpEnabled(false);
+            }
         }])
 
         .directive("testFailed", function() {

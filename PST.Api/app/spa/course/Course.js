@@ -49,7 +49,11 @@
                 //console.log(progress);
             });
 
-            $scope.courseHelp = PreferenceService.isHelpEnabled();
+            $scope.helpEnabled = PreferenceService.isCourseHelpEnabled();
+
+            $scope.disableHelp = function() {
+                PreferenceService.setCourseHelpEnabled(false);
+            }
         }])
         .controller("course.PreviewCtrl", ["$scope", "CourseService", "$stateParams", "PreferenceService", function ($scope, CourseService, $stateParams, PreferenceService) {
             CourseService.getPreview($stateParams.id, $stateParams.token).success(function (course) {

@@ -6,12 +6,20 @@
     ])
         .factory("PreferenceService", function() {
             return {
-                isHelpEnabled: function() {
-                    var enabled = localStorage.getItem("help.enabled");
+                isCourseHelpEnabled: function() {
+                    var enabled = localStorage.getItem("course.help.enabled");
                     return enabled == null || enabled == "true";
                 },
-                setHelpEnabled: function(enabled) {
-                    return localStorage.setItem("help.enabled", enabled);
+                setCourseHelpEnabled: function(enabled) {
+                    return localStorage.setItem("course.help.enabled", enabled);
+                },
+                isTestHelpEnabled: function() {
+                    var enabled = localStorage.getItem("test.help.enabled");
+                    return enabled == null || enabled == "true";
+                },
+                setTestHelpEnabled: function(enabled) {
+                    console.log(enabled);
+                    return localStorage.setItem("test.help.enabled", enabled);
                 }
             };
         })
