@@ -709,11 +709,10 @@ a.form-label { color: #404040 !important; }
 .courses-item-action-start { background: rgba(17, 172, 237, 0.75); }
 .courses-item-action-start span { background-image: url(/app/css/images/ico-start-course.png); }
 
-.courses-item-action-send { background: rgba(29, 170, 51, 0.75); font-size: 13px; }
-.courses-item-action-send span { background-image: url(/app/css/images/ico-send-certificate.png); }
-.courses-item-action-send span a { color: #fff; display: inline-block; vertical-align: middle; width: 47px; }
-.courses-item-action-send span a i.fa { color: #fff; font-size: 29px; }
-.courses-item-action-send span a + a { margin-left: 28px; }
+.courses-item-action-send { background: rgba(29, 170, 51, 0.75); font-size: 19px; padding-top: 23px; }
+.courses-item-action-send a { display: block; color: white; }
+.courses-item-action-send a i.fa { color: white; }
+.courses-item-action-send a + a { margin-top: 24px; }
 
 .courses-item:hover [class^="courses-item-action"] { display: block; }
 

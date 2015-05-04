@@ -314,11 +314,12 @@
 
 	.section-courses .section-head { min-height: 0; padding-bottom: 10px; }
 	
+    .certificates .courses-item { width: 100%; margin-bottom: 5px; }
+
 	.courses-item { padding: 10px; }
 	.courses-item-image { width: 60px; height: 60px; margin-right: 10px; }
-	.courses-item-meta { min-height: 0; }
+	.courses-item-meta { font-size: 9px; min-height: 0; }
 	.courses-item-title { font-size: 12px; }
-	.courses-item-meta { font-size: 9px; }
 
 	.courses-item-action-resume span, 
 	.courses-item-action-start span { white-space: nowrap; text-indent: 150%; overflow: hidden; padding: 0; height: 31px; }
@@ -327,6 +328,10 @@
 	.courses-item-bars { padding-top: 4px; }
 	.courses-item-bar-label { font-size: 10px; padding-bottom: 4px; }
 	.courses-item-bar-fill { max-width: 70%; }
+
+    .courses-items > li.mob-only { margin-bottom: 20px; }
+    .courses-items > li.mob-only a { float: left; margin-right: 15px; font-size: 10px; }
+    .courses-items > li.mob-only a i.fa { font-size: 15px; }
 
     /* ================================================================ *\
 	    #Course Help Popups

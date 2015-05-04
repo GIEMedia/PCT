@@ -139,7 +139,7 @@ namespace PST.Api.Controllers
                 || courseProgress.Certificate == null)
                 return false;
 
-            var name = string.Join(account.FirstName, " ", account.LastName);
+            var name = string.Join(" ", account.FirstName, account.LastName);
 
             var email = _emailGenerationService.Value.ManagerNotification(name, course.DisplayTitle,
                 courseProgress.Certificate.ID);
