@@ -418,12 +418,9 @@
     <Content Include="app\spa\profile\StateLicensuresForm.html" />
     <Content Include="app\spa\test\certificate\Certificate.html" />
     <Content Include="app\spa\test\certificate\Certificate.js" />
-    <Content Include="app\spa\test\licensures\SubmitCEU.html" />
-    <Content Include="app\spa\test\licensures\SubmitCEU.js" />
     <Content Include="app\spa\test\Test.js" />
     <Content Include="app\spa\test\TestFailed.html" />
     <Content Include="app\spa\test\TestPage.html" />
-    <Content Include="app\spa\test\TestPassed.html" />
     <Content Include="app\spa\test\TestQuestionsContainer.html" />
     <Content Include="app\spa\test\TestQuestionsContainer.js" />
     <Content Include="app\spa\theme.js" />

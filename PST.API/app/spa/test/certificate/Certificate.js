@@ -22,7 +22,7 @@
             ;
         }])
 
-        .controller("certificate.Ctrl", ["$scope", "$state", "$stateParams", "CertificateService", "ManagerService", "certificate", function ($scope, $state, $stateParams, CertificateService, ManagerService, certificate) {
+        .controller("certificate.Ctrl", ["$scope", "$state", "$stateParams", "ManagerService", "certificate", function ($scope, $state, $stateParams, ManagerService, certificate) {
             $scope.certificate = certificate.data;
             $scope.sent = false;
             $scope.sending = false;

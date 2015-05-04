@@ -82,7 +82,6 @@ namespace PST.Api
                 "~/app/spa/local/PreferenceService.js",
                 "~/app/spa/profile/Profile.js",
                 "~/app/spa/test/certificate/Certificate.js",
-                "~/app/spa/test/licensures/SubmitCEU.js",
                 "~/app/spa/test/Test.js",
                 "~/app/spa/test/TestQuestionsContainer.js",
                 "~/app/spa/theme.js",

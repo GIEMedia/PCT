@@ -31,11 +31,6 @@
 
             <div ng-if="showResult">
 
-                <!-- Test result passed -->
-                <div class="cols" ng-if="isPassed()">
-                    <test-passed></test-passed>
-                </div><!-- /.cols -->
-
                 <!-- Test result failed -->
                 <div class="cols" ng-if="!isPassed()">
                     <test-failed></test-failed>

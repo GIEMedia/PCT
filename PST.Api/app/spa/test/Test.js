@@ -3,7 +3,6 @@
 (function () {
 
     angular.module('pct.elearning.test', [
-            'pct.elearning.test.submit_ceu',
             'pct.elearning.test.questions',
             'ui.router'
     ])
@@ -68,11 +67,13 @@
                 });
 
                 /**
-                 * Check when both test and progress is available then decide to show result immediately
+                 * Check when both test and progress is available then decide to show result, or go to certificate page immediately
                  */
                 $scope.$watch("test != null && progress != null", function(ready) {
                     if (ready) {
-                        if ($scope.isPassed() || $scope.progress.tries_left == 0) {
+                        if ($scope.isPassed()) {
+                            $state.go("certificate", {courseId: $stateParams.courseId});
+                        } else if ($scope.progress.tries_left == 0) {
                             $scope.showResult = true;
                         }
                     }
@@ -93,9 +94,14 @@
              */
             $scope.sendResult = function(answers) {
                 return TestService.submit(answers, $stateParams.courseId, function (result) {
-                    $scope.showResult = true;
                     Cols.mapAddAll(result, $scope.progress.corrects);
                     $scope.progress.tries_left--;
+
+                    if ($scope.isPassed()) {
+                        $state.go("certificate", {courseId: $stateParams.courseId});
+                    } else {
+                        $scope.showResult = true;
+                    }
                 });
             };
 
@@ -108,12 +114,6 @@
 
         }])
 
-        .directive("testPassed", function() {
-            return {
-                restrict: "E",
-                templateUrl: "/app/spa/test/TestPassed.html"
-            };
-        })
         .directive("testFailed", function() {
             return {
                 restrict: "E",

@@ -16,6 +16,8 @@
                 },
                 getProgress: function(courseId, callback) {
                     return Api.get("api/account/progress/test/" + courseId).success(function(resp) {
+                        //resp.correctly_answered_questions = [];
+
                         var rawCaq = resp.correctly_answered_questions;
                         var corrects = {};
                         for (var i = 0; i < rawCaq.length; i++) {
