@@ -250,6 +250,8 @@ a.form-label { color: #404040 !important; }
 .popup.popup-point-right-middle:before { top: 50%; top: calc(50% - 8px); }
 .popup.popup-point-right-bottom:before { bottom: 18px; }
 
+.popup.popup-no-point:before { display: none; }
+
 .open .popup,
 .open.popup { visibility: visible; opacity: 1; }
 
@@ -493,6 +495,10 @@ a.form-label { color: #404040 !important; }
 #helpQuestions { top: 232px; left: 448px; }
 #helpLabelTools { top: 113px; left: 50%; }
 #helpClose { bottom: 77px; right: 20px; z-index: 5; }
+
+#helpTest1 { top: 0; left: 0; right: 0; bottom: 0; margin: auto; height: 205px; }
+#helpTest2 { top: 0; left: 0; right: 0; bottom: 0; margin: auto; height: 255px; }
+#helpTest3 { top: 0; left: 0; right: 0; bottom: 0; margin: auto; height: 180px; }
 
 /* ================================================================ *\
 	#Test
