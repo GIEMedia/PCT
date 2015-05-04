@@ -42,7 +42,8 @@ namespace PST.Services
                 HttpUtility.UrlEncode(user.UserName), HttpUtility.UrlEncode(GeneratePasswordResetToken(user)));
             forgot.Name = user.FirstName;
 
-            return RazorTemplateProvider.Apply(forgot, "ForgotPassword" + (textOnly ? ".TextOnly" : ""));
+            var html = RazorTemplateProvider.Apply(forgot, "ForgotPassword" + (textOnly ? ".TextOnly" : ""));
+            return PreMailer.Net.PreMailer.MoveCssInline(html).Html;
         }
 
         protected override IdentityResult SendForgotPasswordEmail(ApplicationUser user, bool management)
@@ -57,9 +58,24 @@ namespace PST.Services
             return IdentityResult.Success;
         }
 
+        public string ManagerNotification(string name, string courseTitle, Guid certificateID)
+        {
+            dynamic review = new ExpandoObject();
+            review.BaseUrl = BaseUrl;
+            review.BrowserUrl = string.Format("{0}/EmailTemplate/ManagerNotification/{3}?name={1}&title={2}",
+                BaseUrl, WebUtility.UrlEncode(name), WebUtility.UrlEncode(courseTitle), certificateID);
+            review.Name = name;
+            review.CourseTitle = courseTitle;
+            review.CertificateImage = CertificateService.GetCertificateImageUrl(certificateID);
+            review.CertificatePdf = CertificateService.GetCertificatePdfUrl(certificateID);
+
+            var html = RazorTemplateProvider.Apply(review, "ManagerNotification");
+            return PreMailer.Net.PreMailer.MoveCssInline(html).Html;
+        }
+
         public string ReviewCourse(string name, string email, Guid courseID, string courseTitle)
         {
-            var token = ReversableToken.Tokenize(courseID.ToString());
+            var token = WebUtility.UrlEncode(ReversableToken.Tokenize(courseID.ToString()));
 
             dynamic review = new ExpandoObject();
             review.BaseUrl = BaseUrl;
@@ -71,7 +87,8 @@ namespace PST.Services
             review.CourseReviewUrl = string.Format("{0}/#/course/{1}/preview?token={2}", BaseUrl, courseID, token);
             review.TestReviewUrl = string.Format("{0}/#/test/{1}/preview?token={2}", BaseUrl, courseID, token);
 
-            return RazorTemplateProvider.Apply(review, "ReviewCourse");
+            var html = RazorTemplateProvider.Apply(review, "ReviewCourse");
+            return PreMailer.Net.PreMailer.MoveCssInline(html).Html;
         }
     }
 }

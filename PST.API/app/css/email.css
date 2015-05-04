@@ -218,6 +218,7 @@ ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.s
 		For clients that support media queries.
 		Nothing fancy. 
 -------------------------------------------- */
+/*
 @media only screen and (max-width: 600px) {
 	
 	a[class="btn"] { display:block!important; margin-bottom:10px!important; background-image:none!important; margin-right:0!important;}
@@ -230,3 +231,4 @@ ul.sidebar li a h1,ul.sidebar li a h2,ul.sidebar li a h3,ul.sidebar li a h4,ul.s
 	}
 
 }
+*/

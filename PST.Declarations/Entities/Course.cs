@@ -144,6 +144,9 @@ namespace PST.Declarations.Entities
             if (Test == null)
                 yield return new m_validation_error(m_validation_error.Severity.Error, null, null, null, "This course does not have a test.");
 
+            foreach (var c in PrerequisiteCourses.Where(c => c.Status != CourseStatus.Active))
+                yield return new m_validation_error(m_validation_error.Severity.Error, null, null, null, "A prerequisite course, '{0}', is not active.", c.DisplayTitle);
+
             foreach (var s in Sections.Where(s => s.Document == null || s.Document.PDFUrl.IsNullOrEmpty()))
                 yield return new m_validation_error(m_validation_error.Severity.Warning, s.ID, null, null, "The section '{0}' has no document.", s.Title);
 

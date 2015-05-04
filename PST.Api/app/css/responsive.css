@@ -150,6 +150,7 @@
 	.course-questions { padding: 24px 25px 10px; }
 	.course-question-head { padding-bottom: 25px; }
     .course-question-head .tip:hover + .popup { top: 188px; right: 55px; }
+    .course-question-head h5 { font-size: 12px; }
 	.course-questions .form-body { padding-bottom: 10px; }
 
     .course-question-option.course-question-option-header,
@@ -338,6 +339,8 @@
 
     #helpQuestions { top: 53px; left: 15px; }
     #helpQuestions:before { top: auto; bottom: -8px; border-width: 8px 8px 0 8px; border-color: #000 transparent transparent; left: 18px; }
+
+    #helpTooltip { top: 113px; left: 15px; }
 
     #helpLabelToolsMobile { top: 189px; right: 100px; }
     #helpLabelToolsMobile:before { left: auto; right: -8px; border-width: 8px 0 8px 8px; border-color: transparent transparent transparent #000; top: 18px; }

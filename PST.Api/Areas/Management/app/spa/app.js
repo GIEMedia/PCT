@@ -56,7 +56,7 @@
                         function(resp) {
                             $http({
                                 method: "GET",
-                                url: (Api.getHost() ? "http://" + Api.getHost() + "/" : "") + "api/account/verify",
+                                url: (Api.getHost() ? "//" + Api.getHost() + "/" : "") + "api/account/verify",
                                 headers: {'Authorization': "Bearer " + resp.data.access_token}
                             }).then(
                                 function() {
@@ -103,7 +103,7 @@
             Api.upload = function(url, file) {
                 return Api.handleError($upload.upload({
                     method: 'POST',
-                    url: (Api.getHost() ? "http://" + Api.getHost() + "/" : "") + url,
+                    url: (Api.getHost() ? "//" + Api.getHost() + "/" : "") + url,
                     headers: {'Authorization': "Bearer " + sessionStorage.access_token},
                     file: file
                 }));
