@@ -385,6 +385,7 @@
     <Content Include="app\spa\authen\UserInfo.html" />
     <Content Include="app\spa\authen\UserInfo.js" />
     <Content Include="app\spa\certificates\Certificates.html" />
+	<Content Include="app\spa\certificates\CertificatesPage.html" />
     <Content Include="app\spa\certificates\Certificates.js" />
     <Content Include="app\spa\common\Markup.js" />
     <Content Include="app\spa\common\Help.js" />
