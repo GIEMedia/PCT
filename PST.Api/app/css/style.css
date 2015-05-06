@@ -641,7 +641,8 @@ a.form-label { color: #404040 !important; }
 .form-signup,
 .form-password,
 .form-licensure-managers,
-.form-certificates { padding: 65px 11% 35px 5%; }
+.form-certificates { padding: 65px 6% 35px 6%; }
+#dashboard-page .form-certificates { padding: 60px 12% 0 3%; }
 .user-forms .form-body { position: relative; padding: 36px 0 0; }
 .user-forms .form-body.split-form:before { position: absolute; top: 70px; bottom: 36px; left: 50%; margin-left: -1px; width: 2px; background: #ededed; content: ''; }
 
@@ -718,7 +719,13 @@ a.form-label { color: #404040 !important; }
 
 .certificates .courses-item { width: 44%; float: left; display: block; margin-bottom: 20px; }
 .certificates .courses-item + .courses-item { margin-top: 0;  }
-.certificates .courses-item:nth-of-type(even) { margin-left: 36px;  }
+.certificates .courses-item:nth-of-type(even) { margin-left: 36px; }
+
+#dashboard-page #intro { float: right; }
+
+#dashboard-page .certificates .courses-item { width: auto; float: none; }
+#dashboard-page .certificates .courses-item:nth-of-type(even) { margin-left: 0; }
+#dashboard-page .certificates .fa-certificate { font-size: 37px; }
 
 /* ================================================================ *\
 	#Icon Colors

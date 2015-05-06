@@ -1,5 +1,5 @@
 
-<div class="container is-scrollable">
+<div class="container is-scrollable" id="dashboard-page">
     <div class="intro intro-logged">
         <h3 class="intro-title">{{firstLogin ? 'Welcome':'Welcome back'}}, <strong ng-bind="User.firstName"></strong>!</h3><!-- /.intro-title -->
         <div class="search">
@@ -62,9 +62,70 @@
         </div><!-- /.search -->
     </div><!-- /.intro -->
 
-    <div class="cols" pct-certificates="{title: 'Recently Earned Certificates', limit: 2, hideOnEmpty: true}"></div><!-- /.cols -->
-
     <div class="cols">
+
+        <div class="col col-1of2" id="intro">
+
+            <e-introduction ng-if="(openCourses.length || 0)==0"></e-introduction>
+
+            <div class="section-courses" ng-if="openCourses.length">
+                <div class="section-head">
+                    <h3 class="section-title title-underlined">
+                        <i class="ico ico-open-courses"></i>
+
+                        <span>Open Courses</span>
+
+                        <small class="bull">&bull;</small>
+
+                        <small class="count" ng-bind="openCourses.length"></small>
+                    </h3><!-- /.section-title -->
+                </div><!-- /.section-head -->
+
+                <div class="section-body">
+                    <ul class="courses-items">
+                        <li class="courses-item" ng-repeat="course in openCourses">
+                            <a href="#" class="courses-item-image">
+
+                            </a><!-- /.courses-item-image -->
+
+                            <div class="courses-item-content">
+                                <h4 class="courses-item-title">
+                                    <a href="#" ng-bind="course.title"></a>
+                                </h4>
+
+                                <p class="courses-item-meta">Last Activity: <span am-time-ago="course.last_activity"></span></p><!-- /.courses-item-meta -->
+
+                                <ul class="courses-item-bars">
+                                    <li class="courses-item-bar courses-item-bar-purple">
+                                        <span class="courses-item-bar-label">Activities</span>
+
+                                        <span class="courses-item-bar-fill">
+                                            <span style="width: {{course.course_progress * 100}}%"></span>
+                                        </span>
+                                    </li><!-- /.courses-item-bar courses-item-bar-purple -->
+
+                                    <li class="courses-item-bar courses-item-bar-blue">
+                                        <span class="courses-item-bar-label">Tests</span>
+
+                                        <span class="courses-item-bar-fill">
+                                            <span style="width: {{course.test_progress * 100}}%"></span>
+                                        </span>
+                                    </li><!-- /.courses-item-bar courses-item-bar-blue -->
+                                </ul><!-- /.courses-item-bars -->
+                            </div><!-- /.courses-item-content -->
+
+                            <a ui-sref="course({id: course.course_id})" class="courses-item-action-resume">
+                                <span>Resume Course</span>
+                            </a><!-- /.courses-item-action-resume -->
+                        </li><!-- /.courses-item -->
+
+                    </ul><!-- /.courses-items -->
+                </div><!-- /.section-body -->
+            </div><!-- /.section-courses -->
+        </div><!-- /.col col-1of2 -->
+
+        <div class="col col-1of2" pct-certificates="{title: 'Recently Earned Certificates', limit: 2, hideOnEmpty: true, showLink: true}"></div>
+
         <div class="col col-1of2">
             <div class="section-courses">
                 <div class="section-head">
@@ -111,66 +172,6 @@
                             <a  href="" ng-click="loadCourse(course)" class="courses-item-action-start">
                                 <span>Start Course</span>
                             </a><!-- /.courses-item-action-start -->
-                        </li><!-- /.courses-item -->
-
-                    </ul><!-- /.courses-items -->
-                </div><!-- /.section-body -->
-            </div><!-- /.section-courses -->
-        </div><!-- /.col col-1of2 -->
-
-        <div class="col col-1of2">
-
-            <e-introduction ng-if="(openCourses.length || 0)==0"></e-introduction>
-
-            <div class="section-courses" ng-if="openCourses.length">
-                <div class="section-head">
-                    <h3 class="section-title title-underlined">
-                        <i class="ico ico-open-courses"></i>
-
-                        <span>Open Courses</span>
-
-                        <small class="bull">&bull;</small>
-
-                        <small class="count" ng-bind="openCourses.length"></small>
-                    </h3><!-- /.section-title -->
-                </div><!-- /.section-head -->
-
-                <div class="section-body">
-                    <ul class="courses-items">
-                        <li class="courses-item" ng-repeat="course in openCourses">
-                            <a href="#" class="courses-item-image">
-
-                            </a><!-- /.courses-item-image -->
-
-                            <div class="courses-item-content">
-                                <h4 class="courses-item-title">
-                                    <a href="#" ng-bind="course.title"></a>
-                                </h4>
-
-                                <p class="courses-item-meta">Last Activity: <span am-time-ago="course.last_activity"></span></p><!-- /.courses-item-meta -->
-
-                                <ul class="courses-item-bars">
-                                    <li class="courses-item-bar courses-item-bar-purple">
-                                        <span class="courses-item-bar-label">Activities</span>
-
-												<span class="courses-item-bar-fill">
-													<span style="width: {{course.course_progress * 100}}%"></span>
-												</span>
-                                    </li><!-- /.courses-item-bar courses-item-bar-purple -->
-
-                                    <li class="courses-item-bar courses-item-bar-blue">
-                                        <span class="courses-item-bar-label">Tests</span>
-
-												<span class="courses-item-bar-fill">
-													<span style="width: {{course.test_progress * 100}}%"></span>
-												</span>
-                                    </li><!-- /.courses-item-bar courses-item-bar-blue -->
-                                </ul><!-- /.courses-item-bars -->
-                            </div><!-- /.courses-item-content -->
-
-                            <a ui-sref="course({id: course.course_id})" class="courses-item-action-resume">
-                                <span>Resume Course</span>
-                            </a><!-- /.courses-item-action-resume -->
                         </li><!-- /.courses-item -->
 
                     </ul><!-- /.courses-items -->

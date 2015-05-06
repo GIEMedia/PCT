@@ -232,7 +232,7 @@
 	.test-head h2 { font-size: 15px; font-weight: 600; padding-bottom: 12px; }
 	.test-head h6 { font-weight: 600; color: #fff; text-transform: none; padding-bottom: 10px; }
 
-	.test-progress { max-width: auto; }
+	.test-progress { max-width: 0; }
 	.test-progress-label { font-size: 10px; padding-bottom: 9px; }
 
 	.test-question { padding: 22px 25px 15px; }
@@ -329,9 +329,19 @@
 	.courses-item-bar-label { font-size: 10px; padding-bottom: 4px; }
 	.courses-item-bar-fill { max-width: 70%; }
 
+    .courses-item-action-send { background: transparent; display: block; position: relative; padding-top: 0; font-size: 10px; margin-top: 23px; }
+    .courses-item-action-send a { color: #2cb142; display: inline; float: left; margin-right: 10px; }
+    .courses-item-action-send a + a { margin-top: 0; }
+    .courses-item-action-send a i.fa { color: #1daa33; font-size: 12px; }
+
     .courses-items > li.mob-only { margin-bottom: 20px; }
     .courses-items > li.mob-only a { float: left; margin-right: 15px; font-size: 10px; }
     .courses-items > li.mob-only a i.fa { font-size: 15px; }
+
+    #dashboard-page #intro { float: none; }
+    #dashboard-page .certificates .fa-certificate { font-size: 22px; }
+
+    #dashboard-page .form-certificates { padding: 22px 25px 0; }
 
     /* ================================================================ *\
 	    #Course Help Popups
