@@ -110,9 +110,9 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Prototype1.FluentNHibernate, Version=1.0.0.34, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prototype1.FluentNHibernate.1.0.0.34\lib\net40\Prototype1.FluentNHibernate.dll</HintPath>
+    <Reference Include="Prototype1.FluentNHibernate">
+      <HintPath>..\packages\Prototype1.FluentNHibernate.1.0.0.36\lib\net40\Prototype1.FluentNHibernate.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Prototype1.Foundation, Version=1.0.0.34, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
+using Prototype1.Services;
 using PST.Api.Controllers;
 using PST.Api.Core;
 using PST.Declarations;
