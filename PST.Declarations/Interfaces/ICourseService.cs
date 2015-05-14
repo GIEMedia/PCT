@@ -60,8 +60,9 @@ namespace PST.Declarations.Interfaces
         /// <param name="courseID">ID of course that the test belongs to</param>
         /// <param name="accountID">Account to ensure prereqs met.</param>
         /// <param name="status">Only return a crouse if it's status matches supplied value. (default: Active)</param>
+        /// <param name="onlyPassed">Only return the course if the user has passed it.</param>
         /// <returns>Test belonging to the course with specified ID. Returns null if test not found or account doesn't meet prereqs.</returns>
-        Test GetTest(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active);
+        Test GetTest(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active, bool onlyPassed = true);
 
         test_progress GetTestProgress(Guid accountID, Guid courseID);
 

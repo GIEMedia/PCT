@@ -58,13 +58,13 @@ namespace PST.Api.Controllers
         [AdminOrTokenAuthorize]
         public test<question_with_answers> GetTestPreview(Guid courseID)
         {
-            return GetTest<question_with_answers>(courseID, null);
+            return GetTest<question_with_answers>(courseID, null, false);
         }
 
-        private test<TQuestion> GetTest<TQuestion>(Guid courseID, CourseStatus? status = CourseStatus.Active)
+        private test<TQuestion> GetTest<TQuestion>(Guid courseID, CourseStatus? status = CourseStatus.Active, bool onlyPassed = true)
             where TQuestion : question_base, new()
         {
-            var test = _courseService.GetTest(courseID, CurrentUserID, status);
+            var test = _courseService.GetTest(courseID, CurrentUserID, status, onlyPassed);
             if (test == null)
                 throw new HttpResponseException(HttpStatusCode.Forbidden);
             return test.ToModel<TQuestion>();

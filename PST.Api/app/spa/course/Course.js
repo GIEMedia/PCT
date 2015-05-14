@@ -49,7 +49,7 @@
                 //console.log(progress);
             });
 
-            $scope.helpEnabled = PreferenceService.isCourseHelpEnabled();
+            $scope.helpEnabled = !$scope.previewMode && PreferenceService.isCourseHelpEnabled();
 
             $scope.disableHelp = function() {
                 PreferenceService.setCourseHelpEnabled(false);

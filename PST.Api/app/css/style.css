@@ -393,6 +393,7 @@ a.form-label { color: #404040 !important; }
 .course-single-media-head, .test-single-media-head { padding-bottom: 35px; }
 .course-single-media-head i, .test-single-media-head i { font-size: 12px; font-style: italic; font-weight: normal; }
 .course-single-media-wrapper, .test-single-media-wrapper { position: relative; width: 160px; margin: auto; }
+.course-single-media-wrapper.course-single-media-wrapper-video, .test-single-media-wrapper.test-single-media-wrapper-video { width: 360px; }
 .course-single-media-wrapper > img   { width: 160px; }
 .course-single-media-wrapper > video,
 .course-single-media-wrapper > div  { width: 360px; }

@@ -113,7 +113,7 @@
                 $scope.showResult = false;
             };
 
-            $scope.helpEnabled = PreferenceService.isTestHelpEnabled();
+            $scope.helpEnabled = !$scope.previewMode && PreferenceService.isTestHelpEnabled();
 
             $scope.disableHelp = function() {
                 PreferenceService.setTestHelpEnabled(false);

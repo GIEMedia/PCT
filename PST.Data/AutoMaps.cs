@@ -85,7 +85,7 @@ namespace PST.Data
                 p.AddSubclass()
                     .OfType<CourseProgress>(x =>
                     {
-                        x.HasMany(y => y.Sections).KeyColumn("ParentProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan().Where("Discriminator = 'SectionProgress'");
+                        x.HasMany(y => y.Sections).KeyColumn("ParentProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan().Where("Discriminator = 'SectionProgress' AND EXISTS (SELECT 1 FROM [Questioned] q WHERE q.QuestionedID=ItemID AND q.Deleted=0)");
                         x.References(y => y.TestProgress).Not.LazyLoad().Cascade.All();
                         x.References(y => y.Certificate).Not.LazyLoad().Cascade.All();
                         x.References(y => y.Course).Column("ItemID").LazyLoad().Cascade.None();
@@ -95,13 +95,13 @@ namespace PST.Data
                     .OfType<SectionProgress>(x =>
                     {
                         x.Map(y => y.SectionID).Column("ItemID");
-                        x.HasMany(y => y.CompletedQuestions).KeyColumn("ParentProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan();
+                        x.HasMany(y => y.CompletedQuestions).KeyColumn("ParentProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan().Where("EXISTS (SELECT 1 FROM [Question] q WHERE q.QuestionID=ItemID AND q.Deleted=0)");
                         x.Map(y => y.TotalQuestions).Column("Total");
                     });
                 p.AddSubclass()
                     .OfType<TestProgress>(x =>
                     {
-                        x.HasMany(y => y.CompletedQuestions).KeyColumn("ParentProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan();
+                        x.HasMany(y => y.CompletedQuestions).KeyColumn("ParentProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan().Where("EXISTS (SELECT 1 FROM [Question] q WHERE q.QuestionID=ItemID AND q.Deleted=0)");
                         x.Map(y => y.TestID).Column("ItemID");
                         x.Map(y => y.TotalQuestions).Column("Total");
                         x.Map(y => y.CourseProgressID).Column("ParentProgressID").LazyLoad();
@@ -115,7 +115,7 @@ namespace PST.Data
                     {
                         x.Map(y => y.QuestionID).Column("ItemID");
                         x.Map(y => y.CorrectOnAttempt).Column("Attempt");
-                        x.HasMany(y=>y.OptionProgress).KeyColumn("ParentProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan();
+                        x.HasMany(y => y.OptionProgress).KeyColumn("ParentProgressID").Not.LazyLoad().Cascade.AllDeleteOrphan().Where("EXISTS (SELECT 1 FROM [Option] q WHERE q.OptionID=ItemID AND q.Deleted=0)");
                     });
                 p.AddSubclass()
                     .OfType<OptionProgress>(x =>

@@ -46,7 +46,7 @@ namespace PST.Services
 
         public IEnumerable<Course> NewCourses(int count = 5, Guid? accountID = null)
         {
-            var openCourses = accountID.HasValue
+            var coursesWithProgress = accountID.HasValue
                 ? (from a in _entityRepository.Queryable<Account>()
                     where a.ID == accountID
                     from c in a.CourseProgress
@@ -55,7 +55,7 @@ namespace PST.Services
 
             //TODO: Replace with cache lookup
             return (from c in _entityRepository.Queryable<Course>()
-                where c.Status == CourseStatus.Active && !openCourses.Contains(c.ID)
+                where c.Status == CourseStatus.Active && !coursesWithProgress.Contains(c.ID)
                 orderby c.DateCreatedUtc descending
                 select c).Take(count);
         }
@@ -112,14 +112,14 @@ namespace PST.Services
                 return new course_progress();
 
             var completedSections = (from a in _entityRepository.Queryable<Account>()
-                where a.ID == accountID
-                from c in a.CourseProgress
-                where c.Course.ID == course.ID
-                from s in c.Sections
-                from q in s.CompletedQuestions
-                group q by s
-                into g
-                select g).ToDictionary(g => g.Key.SectionID, g => g.ToList());
+                                     where a.ID == accountID
+                                     from c in a.CourseProgress
+                                     where c.Course.ID == course.ID
+                                     from s in c.Sections
+                                     from q in s.CompletedQuestions
+                                     group q by s
+                                         into g
+                                         select g).ToDictionary(g => g.Key.SectionID, g => g.ToList());
 
             return new course_progress
             {
@@ -167,9 +167,9 @@ namespace PST.Services
             return courses.OrderBy(c => c.DisplayTitle);
         }
 
-        public Test GetTest(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active)
+        public Test GetTest(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active, bool onlyPassed = true)
         {
-            var course = GetCourse(courseID, accountID, status, true);
+            var course = GetCourse(courseID, accountID, status, onlyPassed);
 
             return course == null ? null : course.Test;
         }
