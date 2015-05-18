@@ -130,13 +130,24 @@
                             }
                         });
 
-                        $panZoom.parent().on('mousewheel.focal', function (e) {
+                        var scrollOnMousewheel = function(e) {
                             e.preventDefault();
                             var delta = e.delta || e.originalEvent.wheelDelta;
+                            if (typeof (delta) === "undefined") {
+                                delta = e.originalEvent.detail * -1;
+                            }
 
                             var down = delta ? delta < 0 : e.originalEvent.deltaY > 0;
                             $panZoom.panzoom('pan', 0, 15 * (down ? -1 : 1), { relative: true });
-                        });
+                        }
+
+                        $panZoom.parent()
+                            .on('mousewheel.focal', function(e) {
+                                scrollOnMousewheel(e);
+                            })
+                            .on('DOMMouseScroll', function (e) {
+                                scrollOnMousewheel(e);
+                            });
 
                         elem.find('.course-media-frame .loading').hide();
                     };
