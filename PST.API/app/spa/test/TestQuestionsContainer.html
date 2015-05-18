@@ -47,7 +47,7 @@
                         <div class="course-question-option-picture" ng-repeat="option in question.options" >
                             <img ng-src="{{option.image}}" alt="" width="145" height="145">
 
-                            <a href="app/css/images/temp/img-answer-large.jpg" class="js-magnify"></a>
+                            <a href="app/css/images/temp/img-answer-large.jpg" class="js-magnify" question-magnify="mfp-full" close-on="question"></a>
 
                             <input type="radio" ng-checked="hasIdIn(correctAnswer(question).correct_options)(option)">
 
