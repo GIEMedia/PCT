@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -101,36 +102,71 @@ namespace PST.Api.Areas.Management.Controllers
             var questioned = GetQuestioned(courseID, sectionID, out course);
 
             questions = questions.Where(q => !(q.question_text ?? "").Trim().IsNullOrEmpty()).ToArray();
+            
+            var enumFactory = new EnumAttributedFactoryFactory<Question, QuestionTypeAttribute, QuestionType>();
 
-            // Remove any options that existed but no longer in the model
-            questioned.Questions.Where(o => !questions.Select(x => x.id).Contains(o.ID))
+            // Update questions where the question type has changed & reset cache
+            var typesChanged = (from qE in questioned.Questions
+                join qM in questions on qE.ID equals qM.id
+                where qM.question_type != qE.QuestionType
+                select new {Question = qE, NewQuestionType = qM.question_type}).ToList();
+            if (typesChanged.Any())
+            {
+                foreach (var q in typesChanged)
+                    ChangeQuestionType(q.Question, enumFactory.GetType(q.NewQuestionType));
+                
+                NHibernateSessionManager.Instance.GetSession().Evict(questioned);
+                NHibernateSessionManager.Instance.GetSession().Evict(course);
+                questioned = GetQuestioned(courseID, sectionID, out course);
+            }
+
+            // Remove any questions that existed but no longer in the model
+            questioned.Questions.Where(q => !questions.Select(x => x.id).Contains(q.ID))
                 .ToList()
-                .Apply(o => questioned.Questions.Remove(o));
+                .Apply(q => questioned.Questions.Remove(q));
 
             for (var i = 0; i < questions.Length; i++)
             {
                 var q = questions[i];
-                var found = false;
                 Question question = null;
+
                 if (!q.id.IsNullOrEmpty())
-                {
                     question = questioned.Questions.FindById(q.id);
-                    found = true;
-                }
+
                 if (question == null)
-                    question =
-                        new EnumAttributedFactoryFactory<Question, QuestionTypeAttribute, QuestionType>().Create(
-                            q.question_type);
+                {
+                    question = enumFactory.Create(q.question_type);
+                    if (!q.id.IsNullOrEmpty())
+                        question.ID = q.id;
+                    questioned.Questions.Add(question);
+                }
 
                 question.FromManagementModel(q, i);
-
-                if (!found)
-                    questioned.Questions.Add(question);
             }
 
             _entityRepository.Save(course);
 
             return questioned.Questions.OrderBy(q => q.SortOrder).Select(q => q.ToManagementModel()).ToArray();
+        }
+
+        private void ChangeQuestionType<TOld>(TOld oldQuestion, Type newType)
+            where TOld : Question
+        {
+            var update = string.Format("UPDATE [Question] SET Discriminator='{1}' WHERE QuestionID='{0}'",
+                oldQuestion.ID, newType.Name);
+
+            // update the discriminator
+            using (var connection = new SqlConnection(MvcApplication.ConnectionString))
+            {
+                connection.Open();
+                using (var command = new SqlCommand(update, connection))
+                    command.ExecuteNonQuery();
+            }
+
+            NHibernateSessionManager.Instance.GetSession().Evict(oldQuestion);
+
+            // get the "new" question
+            _entityRepository.GetByID<Question>(oldQuestion.ID);
         }
 
         /// <summary>

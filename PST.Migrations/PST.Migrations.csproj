@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201505200555_Indexes.cs" />
     <Compile Include="Migrations\201504140409_CourseDisplayTitle.cs" />
     <Compile Include="Migrations\201504140359_Manufacturer.cs" />
     <Compile Include="Migrations\201504111149_OptionProgress.cs" />

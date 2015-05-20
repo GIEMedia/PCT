@@ -14,7 +14,7 @@ namespace PST.Api
 {
     public class MvcApplication : MvcApplicationBase
     {
-        private readonly string _connectionString = ConfigurationManager.ConnectionStrings["PST"].ConnectionString;
+        public static readonly string ConnectionString = ConfigurationManager.ConnectionStrings["PST"].ConnectionString;
         
         protected void Application_Start()
         {
@@ -27,11 +27,11 @@ namespace PST.Api
             RunDatabaseMigrations();
         }
 
-        private void RunDatabaseMigrations()
+        private static void RunDatabaseMigrations()
         {
             if (ConfigurationManager.AppSettings["EnableDBMigrations"].ToBool(true))
             {
-                MigrationManager.MigrateToLatest(_connectionString, "PST.Migrations");
+                MigrationManager.MigrateToLatest(ConnectionString, "PST.Migrations");
             }
         }
     }
