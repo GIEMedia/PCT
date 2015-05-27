@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using Prototype1.Foundation;
 using Prototype1.Foundation.Data;
 using PST.Declarations.Models;
 
@@ -9,6 +11,9 @@ namespace PST.Declarations.Entities
     [Serializable]
     public class Test : Questioned<TestQuestionProgress>
     {
+        private static readonly decimal _passingPercentage =
+            ConfigurationManager.AppSettings["PassingPercentage"].ToDecimal(.8M);
+
         public Test()
         {
         }
@@ -19,7 +24,7 @@ namespace PST.Declarations.Entities
         }
 
         [Transient]
-        public virtual decimal PassingPercentage { get { return .8M; } }
+        public virtual decimal PassingPercentage { get { return _passingPercentage; } }
 
         [Transient]
         public virtual int MaxTries { get { return 3; } }
