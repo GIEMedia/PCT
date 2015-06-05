@@ -30,8 +30,9 @@ namespace PST.Declarations.Interfaces
         /// <param name="prerequisiteCourses">Prerequisite courses if prereqs not met.</param>
         /// <param name="status">Only return a crouse if it's status matches supplied value. (default: Active)</param>
         /// <param name="onlyPassed">Only return the course if the user has passed it.</param>
+        /// <param name="isPreview">Indicates if the course is being used for preiew mode (preqs not calculated)</param>
         /// <returns>Course with specified ID. Returns null if course not found or account doesn't meet prereqs (out prerequisite courses set).</returns>
-        Course GetCourse(Guid courseID, Guid? accountID, out List<Course> prerequisiteCourses, CourseStatus? status = CourseStatus.Active, bool onlyPassed = false);
+        Course GetCourse(Guid courseID, Guid? accountID, out List<Course> prerequisiteCourses, CourseStatus? status = CourseStatus.Active, bool onlyPassed = false, bool isPreview = false);
 
         /// <summary>
         /// Gets a specific course by ID.
@@ -41,7 +42,7 @@ namespace PST.Declarations.Interfaces
         /// <param name="status">Only return a crouse if it's status matches supplied value. (default: Active)</param>
         /// <param name="onlyPassed">Only return the course if the user has passed it.</param>
         /// <returns>Course with specified ID. Returns null if course not found or account doesn't meet prereqs.</returns>
-        Course GetCourse(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active, bool onlyPassed = false);
+        Course GetCourse(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active, bool onlyPassed = false, bool isPreview = true);
 
         course_progress GetCourseProgress(Guid accountID, Guid courseID);
 
@@ -62,7 +63,7 @@ namespace PST.Declarations.Interfaces
         /// <param name="status">Only return a crouse if it's status matches supplied value. (default: Active)</param>
         /// <param name="onlyPassed">Only return the course if the user has passed it.</param>
         /// <returns>Test belonging to the course with specified ID. Returns null if test not found or account doesn't meet prereqs.</returns>
-        Test GetTest(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active, bool onlyPassed = true);
+        Test GetTest(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active, bool onlyPassed = true, bool isPreview = true);
 
         test_progress GetTestProgress(Guid accountID, Guid courseID);
 

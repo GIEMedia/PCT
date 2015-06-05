@@ -21,7 +21,18 @@ namespace PST.Declarations.Entities
             this.Status = CourseStatus.Draft;
         }
 
-        public virtual string Title { get; set; }
+        private string _title;
+
+        public virtual string Title
+        {
+            get { return _title; }
+            set
+            {
+                _title = value;
+                if (this.Test != null)
+                    this.Test.Title = DisplayTitle;
+            }
+        }
 
         public virtual string DisplayTitle
         {
@@ -32,8 +43,18 @@ namespace PST.Declarations.Entities
         [Ownership(Ownership.None)]
         public virtual SubCategory Category { get; set; }
 
+        private Manufacturer _manufacturer;
         [Ownership(Ownership.None)]
-        public virtual Manufacturer Manufacturer { get; set; }
+        public virtual Manufacturer Manufacturer
+        {
+            get { return _manufacturer; }
+            set
+            {
+                _manufacturer = value;
+                if (this.Test != null)
+                    this.Test.Title = DisplayTitle;
+            }
+        }
 
         [Ownership(Ownership.Exclusive)]
         public virtual IList<StateCEU> StateCEUs { get; set; }
@@ -145,7 +166,7 @@ namespace PST.Declarations.Entities
                 yield return new m_validation_error(m_validation_error.Severity.Error, null, null, null, "This course does not have a test.");
 
             foreach (var c in PrerequisiteCourses.Where(c => c.Status != CourseStatus.Active))
-                yield return new m_validation_error(m_validation_error.Severity.Error, null, null, null, "A prerequisite course, '{0}', is not active.", c.DisplayTitle);
+                yield return new m_validation_error(m_validation_error.Severity.Warning, null, null, null, "A prerequisite course, '{0}', is not active.", c.DisplayTitle);
 
             foreach (var s in Sections.Where(s => s.Document == null || s.Document.PDFUrl.IsNullOrEmpty()))
                 yield return new m_validation_error(m_validation_error.Severity.Warning, s.ID, null, null, "The section '{0}' has no document.", s.Title);

@@ -63,7 +63,7 @@ namespace PST.Api.Controllers
         public course<question_with_answers> GetCoursePreview(Guid courseID)
         {
             List<Course> prereqCourses;
-            var course = _courseService.GetCourse(courseID, CurrentUserID, out prereqCourses, null);
+            var course = _courseService.GetCourse(courseID, CurrentUserID, out prereqCourses, null, isPreview: true);
             return course;
         }
 

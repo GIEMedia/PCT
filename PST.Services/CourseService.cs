@@ -60,7 +60,7 @@ namespace PST.Services
                 select c).Take(count);
         }
 
-        public Course GetCourse(Guid courseID, Guid? accountID, out List<Course> prerequisiteCourses, CourseStatus? status = null, bool onlyPassed = false)
+        public Course GetCourse(Guid courseID, Guid? accountID, out List<Course> prerequisiteCourses, CourseStatus? status = null, bool onlyPassed = false, bool isPreview = false)
         {
             prerequisiteCourses = null;
 
@@ -89,7 +89,7 @@ namespace PST.Services
                  where c.TestProgress != null && c.TestProgress.Passed
                  select c.Course.ID).ToArray();
 
-            if (!course.PrerequisiteCourses.All(c => passedCourses.Contains(c.ID)))
+            if (!isPreview && !course.PrerequisiteCourses.All(c => passedCourses.Contains(c.ID)))
             {
                 prerequisiteCourses = course.PrerequisiteCourses.ToList();
                 return null;
@@ -98,10 +98,10 @@ namespace PST.Services
             return course;
         }
 
-        public Course GetCourse(Guid courseID, Guid? accountID = null, CourseStatus? status = null, bool onlyPassed = false)
+        public Course GetCourse(Guid courseID, Guid? accountID = null, CourseStatus? status = null, bool onlyPassed = false, bool isPreview = false)
         {
             List<Course> preqCourses;
-            return GetCourse(courseID, accountID, out preqCourses, status, onlyPassed);
+            return GetCourse(courseID, accountID, out preqCourses, status, onlyPassed, isPreview);
         }
 
         public course_progress GetCourseProgress(Guid accountID, Guid courseID)
@@ -167,9 +167,9 @@ namespace PST.Services
             return courses.OrderBy(c => c.DisplayTitle);
         }
 
-        public Test GetTest(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active, bool onlyPassed = true)
+        public Test GetTest(Guid courseID, Guid? accountID = null, CourseStatus? status = CourseStatus.Active, bool onlyPassed = true, bool isPreview = false)
         {
-            var course = GetCourse(courseID, accountID, status, onlyPassed);
+            var course = GetCourse(courseID, accountID, status, onlyPassed, isPreview);
 
             return course == null ? null : course.Test;
         }
