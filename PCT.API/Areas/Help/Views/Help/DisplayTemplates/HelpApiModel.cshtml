@@ -1,0 +1,121 @@
+@using System.Reflection
+@using PCT.Api.Areas.Help.Models
+@using Prototype1.Foundation
+@model HelpApiModel
+@{
+    var description = Model.ApiDescription;
+    bool hasParameters = description.ParameterDescriptions.Count > 0;
+    bool hasRequestSamples = Model.SampleRequests.Count > 0;
+    bool hasResponseSamples = Model.SampleResponses.Count > 0;
+}
+<div class="action-method area">
+    @if (!string.IsNullOrEmpty(description.Documentation))
+    {
+        @MvcHtmlString.Create(@description.Documentation)
+        <p class="uri"><code>@description.HttpMethod.Method @description.RelativePath</code></p>
+    }
+    else
+    {
+        <h4 class="summary">@description.HttpMethod.Method @description.RelativePath</h4>
+        <p class="uri"><code>@description.HttpMethod.Method @description.RelativePath</code></p>
+        <p class="documentation-unavailale">No documentation available.</p>
+    }
+    @if (description.ResponseDescription != null)
+    {
+        if (!description.ResponseDescription.Documentation.IsNullOrEmpty())
+        {
+            <p class="api-section-subheader">Returns</p>
+            @MvcHtmlString.Create(@description.ResponseDescription.Documentation)
+        }
+
+        var respType = description.ResponseDescription.ResponseType ?? description.ResponseDescription.DeclaredType;
+        if (respType != null)
+        {
+            var array = false;
+            if (respType.IsArray)
+            {
+                respType = respType.GetElementType();
+                array = true;
+            }
+
+            if (respType != null)
+            {
+                var x = respType;
+                var aName = (!x.IsPrimitive && ((x.IsClass && !x.Namespace.IfNullOrEmpty("").StartsWith("System")) || (x.IsGenericType && !x.GetGenericArguments()[0].Namespace.IfNullOrEmpty("").StartsWith("System"))))
+                    ? "type_" + x.Name.Replace(" ", "").Replace("[", "").Replace("]", "")
+                    : string.Empty;
+
+                //var aName = "type_" + respType.Name.Replace(" ", "").Replace("[", "").Replace("]", "");
+                <p class="api-section-subheader">Return Type</p>
+                if (!respType.IsAbstract && !respType.IsGenericType)
+                {
+                    if (aName.IsNullOrEmpty())
+                    {
+                        @respType.Name
+                    }
+                    else
+                    {
+                        @MvcHtmlString.Create("<a href='#" + aName + "'>" + respType.Name + (array ? "[]" : "") + "</a>")
+                    }
+                }
+                else if (respType.IsAbstract && respType.GetGenericArguments().Any())
+                {
+                    @MvcHtmlString.Create(respType.Name.Replace("`1", "") + "<<a href='#type_" + respType.GetGenericArguments()[0].Name.Replace(" ", "").Replace("[", "").Replace("]", "") + "'>" + respType.GetGenericArguments()[0].Name + "</a>>")
+                }
+                else if (respType.IsGenericType && respType.GetGenericArguments().Any())
+                {
+                    @MvcHtmlString.Create(
+                        "<a href='#type_"
+                        + respType.Name.Replace("`1", "").Replace(" ", "").Replace("[", "").Replace("]", "")
+                        + "<" + respType.GetGenericArguments()[0].Name.Replace(" ", "").Replace("[", "").Replace("]", "") + ">"
+                        + "'>"
+                        + respType.Name.Replace("`1", "") + "&lt;" + respType.GetGenericArguments()[0].Name + "&gt;"
+                        + "</a>")
+                }
+                else
+                {
+                    var types = Assembly.GetAssembly(respType).GetTypes().Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(respType));
+                    @(respType.Name + (array ? "[]" : ""))
+                    <i>(abstract)</i>
+                    foreach (var t in types)
+                    {
+                        var aName2 = "type_" + t.Name.Replace(" ", "").Replace("[", "").Replace("]", "");
+                        <br />
+                        <a href="#@aName2">@(t.Name + (array ? "[]" : ""))</a>
+                    }
+                }
+            }
+        }
+    }
+    else
+    {
+        <p class="api-section-subheader">Returns</p>
+        @MvcHtmlString.Create("Nothing is returned as a result of executing this method")
+        <p class="api-section-subheader">Return Type</p>
+        @MvcHtmlString.Create("void")
+    }
+    @if (hasParameters || hasRequestSamples)
+    {
+        if (hasParameters)
+        {
+            <div class="codeSample">
+                <p class="api-section-subheader">Request Parameters</p>
+                @Html.DisplayFor(apiModel => apiModel.ApiDescription.ParameterDescriptions, "Parameters")
+            </div>
+        }
+        if (hasRequestSamples)
+        {
+            <div class="codeSample">
+                <p class="api-section-subheader">Request Body</p>
+                @Html.DisplayFor(apiModel => apiModel.SampleRequests, "Samples")
+            </div>
+        }
+    }
+    @if (hasResponseSamples)
+    {
+        <div class="codeSample">
+            <p class="api-section-subheader">Response Body</p>
+            @Html.DisplayFor(apiModel => apiModel.SampleResponses, "Samples")
+        </div>
+    }
+</div>

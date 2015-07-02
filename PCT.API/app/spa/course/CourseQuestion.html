@@ -1,0 +1,38 @@
+<i class="fa fa-lightbulb-o tip" ng-if="question.tip" question-tooltip></i>
+<div class="popup popup-point-right-top" id="tip" ng-if="question.tip">
+    <span markup="question.tip"></span>
+</div>
+
+<div class="course-single-media-head" ng-if="question.image">
+
+    <i>Use the following image to answer the question below.</i>
+    <div class="course-single-media-wrapper">
+        <img ng-src="{{question.image}}" width="360" />
+        <a href="{{question.image}}" class="js-magnify" question-magnify="mfp-pdf" close-on="section,question"></a>
+    </div>
+</div><!-- /.course-question-head -->
+
+<div class="course-single-media-head" ng-if="question.video">
+    <i>Watch the following video to answer the question below.</i>
+    <div class="course-single-media-wrapper course-single-media-wrapper-video">
+        <video id="MY_VIDEO_1" class="video-js vjs-default-skin" controls preload="auto" source="question.video">
+            <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+        </video>
+    </div>
+</div><!-- /.course-question-head -->
+
+
+<div class="course-question-head" ng-class="question.video || question.image ? 'has-media' : 'no-media'">
+    <h4 class="course-question-title" markup="question.question_text"></h4><!-- /.course-question-title -->
+    <h5 ng-if="question.multi_select">(check all that apply)</h5>
+</div><!-- /.course-question-head -->
+<div class="course-question-body">
+    <div class="form-body">
+        <e-options question="question" answer="answer" disabled="result.passed" reset-on="section,question" magnify-class="mfp-pdf" highlight-correct="previewMode && question.answer.correct_options.indexOf( $option.option_id ) > -1"></e-options>
+    </div><!-- /.form-body -->
+
+    <div class="form-actions" ng-if="(result==null || !result.passed) && !previewMode">
+        <button class="btn" ng-disabled="answer.length == 0 || questionView.submitting" button-loading="questionView.submitting" ng-click="submitAnswer()">Answer</button>
+    </div><!-- /.form-actions -->
+
+</div><!-- /.course-question-body -->

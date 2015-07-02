@@ -1,0 +1,64 @@
+<div class="section-body">
+    <div class="shell">
+        <div class="section-body-inner" >
+            <course-validation course="course" valid="ri.valid"></course-validation>
+
+            <div class="review-table">
+                <div>
+                    <i class="icon icon-course"></i>
+                    <div class="overlay">
+                        <a href="" ng-click="reviewCourse()" class="btn btn-blue">Review Course</a>
+                    </div><!-- /.overlay -->
+                </div>
+                <div>
+                    <i class="icon icon-test"></i>
+                    <div class="overlay">
+                        <a href="" ng-click="reviewTest()" class="btn btn-blue">Review Test</a>
+                    </div><!-- /.overlay -->
+                </div>
+            </div>
+
+            <form novalidate name="form">
+                <div class="custom-table">
+
+                    <div class="table-row">
+                        <div class="table-col col-size-1">
+                            <h3>Reviewer's Name</h3>
+                        </div><!-- /.table-col -->
+
+                        <div class="table-col col-size-4">
+                            <input type="text" class="field" ng-model="reviewer.name" required ng-maxlength="200" placeholder="Reviewer's Name" autofocus>
+                        </div><!-- /.table-col -->
+                    </div><!-- /.table-row -->
+
+                    <div class="table-row">
+                        <div class="table-col col-size-1">
+                            <h3>Reviewer's State</h3>
+                        </div><!-- /.table-col -->
+
+                        <div class="table-col col-size-4">
+                            <span name="field-select" class="select" pct-model="reviewer.state" pct-options="state.code as state.name for state in states">
+                            </span>
+                        </div><!-- /.table-col -->
+                    </div><!-- /.table-row -->
+
+                    <div class="table-row">
+                        <div class="table-col col-size-1">
+                            <h3>Reviewer's Email</h3>
+                        </div><!-- /.table-col -->
+
+                        <div class="table-col col-size-2">
+                            <input type="email" class="field" ng-model="reviewer.email" required ng-maxlength="200" placeholder="Reviewer's Email">
+                        </div><!-- /.table-col -->
+
+                        <div class="table-col col-size-3">
+                            <button ng-click="send()" class="btn btn-green btn-icon-right" button-loading="ri.sending" ng-disabled="form.$invalid || ri.sending" style="padding-left: 13px; padding-right: 13px">
+                                Send
+                            </button>
+                        </div><!-- /.table-col -->
+                    </div><!-- /.table-row -->
+                </div><!-- /.custom-table -->
+            </form>
+        </div><!-- /.section-body-inner -->
+    </div><!-- /.shell -->
+</div><!-- /.section-body -->

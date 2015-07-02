@@ -1,0 +1,74 @@
+<div class="course-progress">
+    <h3>{{course.title}}</h3>
+
+    <h5>#{{sectionNum()}} - {{section.title}}</h5>
+
+    <div class="course-progress-bar" ng-if="question">
+        <p><span class="alignright">Question <span class="current-count">{{questionIndex()+1}}</span> of <span class="total-count">{{section.questions.length}}</span></span> Section Progress</p>
+
+        <div class="course-progress-bar-fill">
+            <div style="width: {{ (questionIndex()+1) / section.questions.length*100 }}%;"></div>
+        </div><!-- /.course-progress-bar-fill -->
+    </div><!-- /.course-progress-bar -->
+</div><!-- /.course-progress -->
+
+<div class="course-questions">
+
+    <div class="course-question" course-question="question" ng-if="question">
+    </div>
+
+    <!-- Completed section -->
+    <div class="course-question" ng-if="question == null && finishedThisSection() && !finishedAllSection()">
+        <div class="course-question-head">
+            <h4 class="course-question-title">You've completed this section.</h4><!-- /.course-question-title -->
+            <h4 class="course-question-title">Do you want to change to next section?</h4><!-- /.course-question-title -->
+        </div><!-- /.course-question-head -->
+
+        <div class="course-question-body">
+            <div class="form-actions">
+                <input type="button" class="btn" value="Next Section" ng-click="nextUnfinishedSection()">
+            </div><!-- /.form-actions -->
+        </div><!-- /.course-question-body -->
+    </div><!-- /.course-question -->
+
+
+    <div class="course-question" ng-if="question == null && finishedAllSection()">
+        <div class="course-question-head">
+            <h4 class="course-question-title"><strong>Congratulations!</strong></h4><!-- /.course-question-title -->
+            <h4 class="course-question-title">You've completed all of the sections.</h4><!-- /.course-question-title -->
+            <h4 class="course-question-title">Are you ready to proceed to the test?</h4><!-- /.course-question-title -->
+        </div><!-- /.course-question-head -->
+
+        <div class="course-question-body">
+            <div class="form-actions">
+                <input type="button" class="btn" value="Start Test" ng-click="$state.go('test',{courseId: course.course_id})">
+            </div><!-- /.form-actions -->
+        </div><!-- /.course-question-body -->
+    </div><!-- /.course-question -->
+
+</div><!-- /.course-questions -->
+
+<div class="course-question-answer correct" ng-if="(result != null && result.passed) || previewMode">
+    <!-- You're right -->
+    <h4 class="course-question-answer-title" markup="previewMode ? question.answer.correct_response_heading : result.correct_heading"></h4><!-- /.course-question-answer-title -->
+    <div class="course-question-answer-entry">
+        <p markup="previewMode ? question.answer.correct_response_text : result.correct_text"></p>
+    </div><!-- /.course-question-answer-entry -->
+</div><!-- /.course-question-answer -->
+
+<div class="course-question-answer retry" ng-if="result != null && !result.passed">
+    <h4 class="course-question-answer-title">Incorrect.</h4><!-- /.course-question-answer-title -->
+    <div class="course-question-answer-entry">
+        <p>Please review the question, consult the label/document and try again</p>
+    </div><!-- /.course-question-answer-entry -->
+</div><!-- /.course-question-answer -->
+
+<nav class="nav-questions" ng-if="result != null && result.passed">
+    <a href="" ng-click="nextQuestion()" class="link-next">Next</a>
+</nav><!-- /.nav-questions -->
+
+<nav class="nav-questions" ng-if="previewMode">
+    <a href="" ng-click="prevQuestion()" class="link-prev" ng-if="questionIndex() > 0">Prev</a>
+    <a href="" ng-click="nextQuestion()" class="link-next" ng-if="questionIndex() < section.questions.length - 1">Next</a>
+</nav><!-- /.nav-questions -->
+

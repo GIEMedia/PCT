@@ -1,0 +1,71 @@
+@using System.Collections.ObjectModel
+@using System.Web.Http.Description
+@using System.Threading
+@using Prototype1.Foundation
+@using Prototype1.Foundation.ActionFilters
+@model Collection<ApiParameterDescription>
+
+<table cellpadding="0" cellspacing="0">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Description</td><td>Additional information</td></tr>
+    </thead>
+    <tbody>
+    @foreach (var parameter in Model)
+    {
+        var parameterDocumentation = parameter.Documentation.IfNullOrEmpty("No documentation available.");
+
+        // Don't show CancellationToken because it's a special parameter
+        if (parameter.ParameterDescriptor != null && !typeof(CancellationToken).IsAssignableFrom(parameter.ParameterDescriptor.ParameterType))
+        {
+            var x = parameter.ParameterDescriptor.ParameterType;
+            var typeName = x.Name;
+            
+            if(x.IsGenericType)
+            {
+                x = x.GetGenericArguments()[0];
+                typeName = "Nullable<" + x.Name + ">";
+            }
+            
+            var aName = (x != null && !x.IsPrimitive && ((x.IsClass && !x.Namespace.IfNullOrEmpty("").StartsWith("System")) || (x.IsGenericType && !x.GetGenericArguments()[0].Namespace.IfNullOrEmpty("").StartsWith("System"))))
+                ? "type_" + x.Name.Replace(" ", "").Replace("[", "").Replace("]", "")
+                : string.Empty;
+            
+            <tr>
+                <td><b>@parameter.Name</b></td>
+                @if (aName.IsNullOrEmpty())
+                {
+                    <td>@typeName</td>
+                }
+                else
+                {
+                    <td><a href="#@aName">@typeName</a></td>
+                }
+                <td>@parameterDocumentation</td>
+                <td>
+                    @switch (parameter.Source)
+                    {
+                        case ApiParameterSource.FromBody:
+                            <p>Define this parameter in the request <b>body</b>.</p>
+                            break;
+                        case ApiParameterSource.FromUri:
+                            <p>Define this parameter in the request <b>URI</b>.</p>
+                            break;
+                        case ApiParameterSource.Unknown:
+                            var fromHeader = parameter.ParameterDescriptor.ParameterBinderAttribute as FromHeaderAttribute;
+                            if (fromHeader != null)
+                            {
+                                var type = parameter.ParameterDescriptor.ParameterType;
+                                var nullable = type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+                                <p>Define this parameter in the request <b>HEADER</b>. @(nullable ? "" : "(Required)")</p>
+                            }
+                            break;
+                        default:
+                            <p>None.</p>
+                            break;
+                    }
+                </td>
+            </tr>
+        }
+    }
+    </tbody>
+</table>
