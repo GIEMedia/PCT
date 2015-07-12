@@ -49,11 +49,14 @@ namespace PCT.Declarations
         {
             var ex = Server.GetLastError();
 
-            // Ignore missing files errors ("File dos not exist.")
-            if (ex == null || ex.Message.StartsWith("File") || ex.Message.StartsWith("A potentially dangerous")) return;
+            if (ex == null ||
+                ex.Message.StartsWith(StringComparison.CurrentCultureIgnoreCase,
+                    "File", "The file ", "A public action method", "A potentially dangerous", "The controller for path") ||
+                ex.StackTrace.Contains("CheckSuspiciousPhysicalPath") ||
+                ex.StackTrace.Contains("System.Web.CachedPathData.ValidatePath(String physicalPath)"))
+                return;
 
-            var logger = Container.Instance.Resolve<IExceptionLogger>();
-            logger.LogException(ex, "Unhandled Exception");
+            Container.Instance.Resolve<IExceptionLogger>().LogException(ex, "Unhandled Exception");
         }
     }
 }
