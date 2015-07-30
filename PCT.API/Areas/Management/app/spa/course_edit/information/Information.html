@@ -24,7 +24,7 @@
                         </div><!-- /.table-col -->
 
                         <div class="table-col col-size-2">
-                            <span name="field-select" class="select" pct-model="cei.course.category" pct-disabled="course.status == 1" pct-options="category.id as category.title for category in categories">
+                            <span name="field-select" class="select" pct-model="cei.course.category" pct-disabled="course.status == 1" null-option="None" pct-options="category.id as category.title for category in categories">
                             </span>
                         </div><!-- /.table-col -->
 
@@ -37,7 +37,7 @@
                             <h3>Sub Category</h3>
                         </div><!-- /.table-col -->
                         <div class="table-col col-size-2">
-                            <span name="field-select" class="select" pct-model="cei.course.sub_category" pct-disabled="course.status == 1" pct-options="subcat.id as subcat.title for subcat in getCat(cei.course.category).sub_categories">
+                            <span name="field-select" class="select" pct-model="cei.course.sub_category" pct-disabled="course.status == 1" null-option="None" pct-options="subcat.id as subcat.title for subcat in getCat(cei.course.category).sub_categories">
                             </span>
                         </div><!-- /.table-col -->
 
@@ -52,7 +52,7 @@
                         <h3>Manufacturer</h3>
                     </div><!-- /.table-col -->
                     <div class="table-col col-size-2">
-                        <span name="field-select" class="select" pct-model="cei.course.manufacturer" pct-disabled="course.status == 1" pct-options="man.manufacturer_id as man.name for man in manufacturers">
+                        <span name="field-select" class="select" pct-model="cei.course.manufacturer" pct-disabled="course.status == 1" null-option="None" pct-options="man.manufacturer_id as man.name for man in manufacturers">
                         </span>
                     </div><!-- /.table-col -->
                 </div><!-- /.table-row -->
