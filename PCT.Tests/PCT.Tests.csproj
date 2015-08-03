@@ -36,8 +36,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="FluentValidation">
-      <HintPath>..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    <Reference Include="FluentValidation, Version=5.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.4.0.1.4000\lib\net40\Iesi.Collections.dll</HintPath>
@@ -93,9 +94,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -107,21 +108,21 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Prototype1.FluentNHibernate, Version=1.0.0.41, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Prototype1.FluentNHibernate, Version=1.0.0.52, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prototype1.FluentNHibernate.1.0.0.41\lib\net40\Prototype1.FluentNHibernate.dll</HintPath>
+      <HintPath>..\packages\Prototype1.FluentNHibernate.1.0.0.52\lib\net40\Prototype1.FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="Prototype1.Foundation, Version=1.0.0.41, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Prototype1.Foundation, Version=1.0.0.52, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prototype1.Foundation.1.0.0.41\lib\net451\Prototype1.Foundation.dll</HintPath>
+      <HintPath>..\packages\Prototype1.Foundation.1.0.0.52\lib\net451\Prototype1.Foundation.dll</HintPath>
     </Reference>
-    <Reference Include="Prototype1.Security, Version=1.0.0.41, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Prototype1.Security, Version=1.0.0.52, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prototype1.Security.1.0.0.41\lib\net451\Prototype1.Security.dll</HintPath>
+      <HintPath>..\packages\Prototype1.Security.1.0.0.52\lib\net451\Prototype1.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Prototype1.Services, Version=1.0.0.41, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Prototype1.Services, Version=1.0.0.52, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prototype1.Services.1.0.0.41\lib\net451\Prototype1.Services.dll</HintPath>
+      <HintPath>..\packages\Prototype1.Services.1.0.0.52\lib\net451\Prototype1.Services.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
