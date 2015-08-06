@@ -107,18 +107,21 @@
                         var control = selectBox.data("selectBox-selectBoxIt");
 
                         var index = (value == null && attrs.nullOption) ? -1 : Cols.indexOf(value, list, valueM);
-                        //console.log("Index: " + index + ", currentFocus: " + control.currentFocus);
 
                         if (index != -1 || (value == null && attrs.nullOption)) {
+                            var selectIndex = index;
                             if (attrs.nullOption) {
-                                index += 1;
+                                selectIndex += 1;
                             }
+                            index = index < 0 ? 0 : index;
 
-                            if (neverSelected || index != control.currentFocus) { // Force change when neverSelected because it maybe the defaultText (==0)
+                            console.log("Index: " + index + ", currentFocus: " + control.currentFocus + ", selectIndex: " + selectIndex);
+
+                            if (neverSelected || selectIndex != control.currentFocus) { // Force change when neverSelected because it maybe the defaultText (==0)
                                 updatingView = true;
 
-                                control.selectOption(index);
-                                label.val(list == null ? "" : textM(list[index]));
+                                control.selectOption(selectIndex);
+                                label.val(list == null ? "" : (attrs.nullOption && selectIndex == 0) ? attrs.nullOption : textM(list[index]));
                                 updatingView = false;
                                 //console.log("Go to index: " + index);
                                 neverSelected = false;
