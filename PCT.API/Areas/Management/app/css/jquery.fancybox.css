@@ -49,7 +49,7 @@
 }
 
 .fancybox-inner {
-	overflow: hidden;
+	overflow: visible !important;
 }
 
 .fancybox-type-iframe .fancybox-inner {

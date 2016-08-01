@@ -32,9 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FluentMigrator, Version=1.6.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentMigrator.1.6.0\lib\40\FluentMigrator.dll</HintPath>
+    <Reference Include="FluentMigrator, Version=1.6.1.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentMigrator.1.6.1\lib\40\FluentMigrator.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,6 +45,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201607061506_RemoveFirstAttempt.cs" />
+    <Compile Include="Migrations\201605312035_StateCEUs.cs" />
+    <Compile Include="Migrations\201605310856_TestProgressFirstAttemptGrade.cs" />
+    <Compile Include="Migrations\201605210953_CourseProgressAttempt.cs" />
+    <Compile Include="Migrations\201605121445_CourseActiveTime.cs" />
+    <Compile Include="Migrations\201605121439_CourseVerification.cs" />
+    <Compile Include="Migrations\201605121221_CertificationCategory.cs" />
     <Compile Include="Migrations\201505200555_Indexes.cs" />
     <Compile Include="Migrations\201504140409_CourseDisplayTitle.cs" />
     <Compile Include="Migrations\201504140359_Manufacturer.cs" />

@@ -5,64 +5,64 @@
             <i class="fa fa-user"></i>
 
             <span>Profile Information</span>
-        </h3><!-- /.title-underlined -->
-    </div><!-- /.form-head -->
+        </h3>
+    </div>
 
     <div class="form-body split-form">
         <div class="form-cols">
             <div class="form-col form-col-1of2">
                 <div class="form-section">
                     <div class="form-section-head">
-                        <h4 class="form-section-title">About You</h4><!-- /.form-section-title -->
-                    </div><!-- /.form-section-head -->
+                        <h4 class="form-section-title">About You</h4>
+                    </div>
                     <div class="form-section-body">
                         <div class="form-row">
                             <div class="form-controls">
                                 <input type="text" class="field" placeholder="First Name" ng-model="userInfo.first_name" required ng-maxlength="200">
-                            </div><!-- /.form-controls -->
-                        </div><!-- /.form-row -->
+                            </div>
+                        </div>
 
                         <div class="form-row">
                             <div class="form-controls">
                                 <input type="text" class="field" placeholder="Last Name" ng-model="userInfo.last_name" required ng-maxlength="200">
-                            </div><!-- /.form-controls -->
-                        </div><!-- /.form-row -->
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="form-controls">
                                 <input type="text" class="field" placeholder="Email Address" ng-model="userInfo.email" required ng-maxlength="200">
-                            </div><!-- /.form-controls -->
-                        </div><!-- /.form-row -->
+                            </div>
+                        </div>
 
-                    </div><!-- /.form-section-body -->
-                </div><!-- /.form-section -->
-            </div><!-- /.form-col form-col-1of2 -->
+                    </div>
+                </div>
+            </div>
 
             <div class="form-col form-col-1of2">
                 <div class="form-section">
                     <div class="form-section-head">
-                        <h4 class="form-section-title">About Your Company</h4><!-- /.form-section-title -->
-                    </div><!-- /.form-section-head -->
+                        <h4 class="form-section-title">About Your Company</h4>
+                    </div>
                     <div class="form-section-body">
                         <div class="form-row">
                             <div class="form-controls">
                                 <input type="text" class="field" placeholder="Company Name" ng-model="userInfo.company_name" required ng-maxlength="200">
-                            </div><!-- /.form-controls -->
-                        </div><!-- /.form-row -->
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="form-controls">
                                 <input type="text" class="field" placeholder="Company Address" ng-model="userInfo.company_address.address1" required ng-maxlength="200">
-                            </div><!-- /.form-controls -->
-                        </div><!-- /.form-row -->
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="form-controls">
                                 <input type="text" class="field" placeholder="Suite #" ng-model="userInfo.company_address.address2" ng-maxlength="200">
-                            </div><!-- /.form-controls -->
-                        </div><!-- /.form-row -->
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="form-controls">
                                 <input type="text" class="field" placeholder="City" ng-model="userInfo.company_address.city" required ng-maxlength="200">
-                            </div><!-- /.form-controls -->
-                        </div><!-- /.form-row -->
+                            </div>
+                        </div>
                         <div class="form-row">
                             <div class="form-controls">
                                 <div class="form-cols">
@@ -71,21 +71,21 @@
                                         <select class="field" placeholder="State" ng-model="userInfo.company_address.state" required ng-options="state.code as state.code for state in states" >
                                             <option value="">State</option>
                                         </select>
-                                    </div><!-- /.form-col form-col-1of2 -->
+                                    </div>
 
                                     <div class="form-col form-col-1of2">
                                         <input type="text" class="field" placeholder="Zip Code" required ng-model="userInfo.company_address.zip_code" ng-minlength="3" ng-maxlength="32">
-                                    </div><!-- /.form-col form-col-1of2 -->
-                                </div><!-- /.form-cols -->
-                            </div><!-- /.form-controls -->
-                        </div><!-- /.form-row -->
-                    </div><!-- /.form-section-body -->
-                </div><!-- /.form-section -->
-            </div><!-- /.form-col form-col-1of2 -->
-        </div><!-- /.form-cols -->
-    </div><!-- /.form-body -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="form-actions">
         <input type="submit" class="btn" value="Save Info" ng-disabled="equals(userInfo, userInfoMaster) || form.$invalid || accountForm.loading" ng-click="updateAccount()">
-    </div><!-- /.form-actions -->
-</form><!-- /.form-signup -->
+    </div>
+</form>

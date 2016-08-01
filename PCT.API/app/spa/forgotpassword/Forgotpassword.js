@@ -9,7 +9,7 @@
             $stateProvider
                 .state('forgotpassword', {
                     url: '/forgotpassword?u&t',
-                    templateUrl: "/app/spa/forgotpassword/Forgotpassword.html",
+                    templateUrl: "/app/spa/forgotpassword/Forgotpassword.html?v=" + htmlVer,
                     controller: "forgotpassword.Ctrl"
                 })
             ;

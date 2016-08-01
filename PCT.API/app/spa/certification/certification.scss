@@ -1,0 +1,119 @@
+.ceu_certification {
+  padding: 30px;
+  font-size: 16px;
+
+  .certification-header {
+    .certification-contact {
+
+      .certification-logo {
+        height: 70px;
+        padding: 40px;
+        float: left;
+      }
+
+      .certification-address {
+        float: right;
+        padding: 10px;
+        line-height: 1.5;
+
+        .big-font {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .certification-title {
+      clear: both;
+      text-align: center;
+      font-size: 23px;
+      line-height: 1.4;
+      padding: 20px 0;
+    }
+  }
+
+  .certification-body {
+
+    .certification-detail {
+      box-sizing: border-box;
+      padding: 10px;
+      font-style: italic;
+      border: 1px solid #333;
+      float: left;
+      font-size: 15px;
+      box-sizing: border-box;
+      margin-top: 5px;
+
+      &.col-3 {
+        width: 25%;
+      }
+      &.col-4 {
+        width: 33.33333333%;
+      }
+      &.col-5 {
+        width: 41.66666667%;
+      }
+      &.col-6 {
+        width: 50%;
+      }
+      &.col-9 {
+        width: 75%;
+      }
+
+      span {
+        font-style: normal;
+        font-weight: 400;
+      }
+    }
+
+    .certification-content {
+      padding-top: 40px;
+      clear: both;
+      line-height: 1.6;
+
+      i {
+        font-size: 15px;
+        font-weight: 500;
+      }
+    }
+
+  }
+
+  .certification-footer {
+    padding-top: 35px;
+
+    .certification-licensee {
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .certification-sign {
+      float: right;
+
+      .certification-sign-detail {
+        display: inline-block;
+        font-weight: bold;
+        padding: 50px 0;
+        text-align: center;
+
+        i {
+          border-top: 1px solid #333;
+          padding: 5px 40px;
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .certification-footer-box {
+      padding-top: 10px;
+      clear: both;
+      font-weight: 500;
+
+      p {
+        margin-top: 10px;
+        padding: 10px;
+        border: 1px solid #333;
+      }
+    }
+  }
+
+}

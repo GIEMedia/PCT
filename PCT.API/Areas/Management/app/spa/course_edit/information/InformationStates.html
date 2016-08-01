@@ -5,8 +5,16 @@
         <h3>State</h3>
     </div><!-- /.table-col -->
 
+    <div class="table-col col-size-4">
+        <h3>Activity ID</h3>
+    </div><!-- /.table-col -->
+
+    <div class="table-col col-size-4">
+        <h3>Category Credit</h3>
+    </div><!-- /.table-col -->
+
     <div class="table-col col-size-3">
-        <h3>Category Code</h3>
+        <h3>Category</h3>
     </div><!-- /.table-col -->
 
     <div class="table-col col-size-4">
@@ -21,7 +29,7 @@
         <a href="" class="icon icon-chevron-down" pct-tooltip="Expand"></a>
     </div><!-- /.table-col -->
 
-    <div class="table-col col-size-2">
+    <div class="table-col">
         <h4>{{(cei.course.state_ceus.length || 0) == 0 ? "No state(s) selected" : cei.course.state_ceus.length + " States"}}</h4>
     </div><!-- /.table-col -->
 
@@ -49,7 +57,7 @@
     <div class="table-row no-record" ng-if="(cei.course.state_ceus.length || 0)==0">
         <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
 
-        <div class="table-col col-size-2">
+        <div class="table-col">
             <h3>No state(s) selected</h3>
         </div><!-- /.table-col -->
     </div><!-- /.table-row -->
@@ -61,8 +69,16 @@
             <h3>{{stateByCode(state_ceu.state).name}}</h3>
         </div><!-- /.table-col -->
 
+        <div class="table-col col-size-4">
+            <h3>{{state_ceu.activity_id}}</h3>
+        </div><!-- /.table-col -->
+
+        <div class="table-col col-size-4">
+            <h3>{{state_ceu.activity_type}}</h3>
+        </div><!-- /.table-col -->
+
         <div class="table-col col-size-3">
-            <h3>{{state_ceu.category_code}}</h3>
+            <h3>{{state_ceu.category_id |filterCategoryCode : certificationCategories}}</h3>
         </div><!-- /.table-col -->
 
         <div class="table-col col-size-4">

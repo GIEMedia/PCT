@@ -1,0 +1,85 @@
+
+<div class="cols clearfix" >
+    <div class="col col-1of2">
+        <div class="test-question">
+
+            <div class="test-single-media-head" ng-if="question.image">
+                <i>Use the following image to answer the question below.</i>
+                <div class="test-single-media-wrapper">
+                    <img ng-src="{{question.image}}" width="360" />
+                    <a href="{{question.image}}" class="js-magnify" question-magnify="mfp-full" close-on="question"></a>
+                </div>
+            </div>
+
+            <div class="test-single-media-head" ng-if="question.video">
+                <i>Watch the following video to answer the question below.</i>
+                <div class="test-single-media-wrapper test-single-media-wrapper-video">
+                    <video id="MY_VIDEO_1" class="video-js vjs-default-skin" controls preload="auto" source="question.video">
+                        <p class="vjs-no-js">To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a></p>
+                    </video>
+                </div>
+            </div>
+
+            <h3 class="test-question-title" markup="question.question_text"></h3>
+            <h5 ng-if="question.multi_select">(check all that apply)</h5>
+        </div>
+    </div>
+
+    <div class="col col-1of2">
+        <div class="test-question-answers">
+            <div class="form-body">
+
+                <e-options
+                        question="question"
+                        answer="tqc.answer"
+                        ng-if="!previewMode && progress.corrects[question.question_id] == null"
+                        ng-class="progress.tries_left == progress.max_tries ? '' : 'retry'"
+                        retry="progress.tries_left != progress.max_tries"
+                        reset-on="question"
+                        magnify-class="mfp-full"
+                        ></e-options>
+
+                <div class="course-question-options correct" ng-if="correctAnswer(question)">
+                    <div class="course-question-option course-question-option-header" markup="correctAnswer(question).correct_response_heading"></div>
+
+                    <div class="course-question-options-pictures" ng-if="question.option_type==1">
+
+                        <div class="course-question-option-picture" ng-repeat="option in question.options" >
+                            <img ng-src="{{option.image}}" alt="" width="145" height="145">
+
+                            <a href="{{option.image}}" class="js-magnify" question-magnify="mfp-full" close-on="question"></a>
+
+                            <input type="radio" ng-checked="hasIdIn(correctAnswer(question).correct_options)(option)">
+
+                            <label>Select</label>
+                        </div>
+                    </div>
+                    <div ng-if="question.option_type==0">
+
+                        <div class="course-question-option" ng-repeat="option in question.options" ng-if="previewMode || hasIdIn(correctAnswer(question).correct_options)(option)">
+
+                            <input type="radio" ng-checked="hasIdIn(correctAnswer(question).correct_options)(option)">
+
+                            <label markup="option.text"></label>
+                        </div>
+                    </div>
+
+                    <div class="course-question-option-description" markup="correctAnswer(question).correct_response_text"></div>
+                </div>
+            </div>
+
+            <div class="form-actions" ng-if="!previewMode">
+                <input type="button" class="btn" value="Continue"    ng-click="next()"                                               ng-if="!lastQuestion() && progress.corrects[question.question_id]">
+                <input type="button" class="btn" value="Answer"      ng-click="next()"   ng-disabled="(tqc.answer.length || 0) == 0" ng-if="!lastQuestion() && progress.corrects[question.question_id] == null">
+
+                <button class="btn" ng-click="submit()" ng-disabled="(tqc.answer.length || 0) == 0 && progress.corrects[question.question_id] == null || tqc.submitting" button-loading="tqc.submitting" ng-if="lastQuestion()">Grade Test!</button>
+            </div>
+
+            <nav class="nav-questions" ng-if="previewMode">
+                <a href="" ng-click="prevQuestion()" class="link-prev" ng-if="questionIndex() > 0">Prev</a>
+                <a href="" ng-click="nextQuestion()" class="link-next" ng-if="questionIndex() < questions.length - 1">Next</a>
+            </nav>
+
+        </div>
+    </div>
+</div>

@@ -9,13 +9,13 @@
 
 						<span class="test-progress-label">
 							Test Completed
-						</span><!-- /.test-progress-label -->
+						</span>
 
                 <div class="test-progress-bar">
-                    <div class="test-progress-bar-fill" style="width: 100%"></div><!-- /.test-progress-bar-fill -->
-                </div><!-- /.test-progress-bar -->
-            </div><!-- /.test-progress -->
-        </div><!-- /.test-head -->
+                    <div class="test-progress-bar-fill" style="width: 100%"></div>
+                </div>
+            </div>
+        </div>
 
         <div class="test-body">
             <div class="cols">
@@ -24,18 +24,18 @@
                         <div class="test-certificate-preview">
                             <img ng-src="{{certificate.image_url}}" />
                         </div>
-                    </div><!-- /.test-certificate -->
-                </div><!-- /.col col-1of2 -->
+                    </div>
+                </div>
 
                 <div class="col col-1of2">
 
                     <div class="test-certificate-form">
                         <h1 class="test-certificate-title">Congratulations!</h1>
-                        <h3 class="test-certificate-title">You've completed the "{{certificate.course_name}}" module.</h3><!-- /.test-certificate-title -->
+                        <h3 class="test-certificate-title">You've completed the "{{certificate.course_name}}" module.</h3>
 
                         <div class="form-head">
-                            <h4 class="form-title">What would you like to do with your certificate?</h4><!-- /.form-title -->
-                        </div><!-- /.form-head -->
+                            <h4 class="form-title">What would you like to do with your certificate?</h4>
+                        </div>
 
                         <a href="" class="form-label" ng-click="download()"><i class="fa fa-download"></i> Download It</a>
 
@@ -48,40 +48,40 @@
                                         <div class="form-controls-actions">
                                             <a href="" class="btn-add thin" ng-click="managers.push({})" ng-if="!sending && !sent" tabindex="2"></a>
                                             <a href="" class="btn-remove thin" ng-click="managers.splice($index, 1)" ng-if="!sending && !sent" tabindex="2"></a>
-                                        </div><!-- /.form-controls-actions -->
+                                        </div>
 
                                         <div class="form-cols-outer">
                                             <div class="form-cols">
                                                 <div class="form-col form-col-1of2">
                                                     <input type="text" class="field" placeholder="Name" ng-model="manager.name" ng-disabled="sending || sent" required>
-                                                </div><!-- /.form-col form-col-1of2 -->
+                                                </div>
 
                                                 <div class="form-col form-col-1of2">
                                                     <input type="email" class="field" placeholder="Email Manager" ng-disabled="sending || sent" ng-model="manager.email" required>
-                                                </div><!-- /.form-col form-col-1of2 -->
-                                            </div><!-- /.form-cols -->
-                                        </div><!-- /.form-cols-outer -->
-                                    </div><!-- /.form-controls -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </form>
-                            </div><!-- /.form-row -->
+                            </div>
                             
                             <div class="form-row" ng-if="error">
                                 <span class="lead text-danger">Server error: Unable to send. Please try again.</span>
-                            </div><!-- /.form-row -->
+                            </div>
                             <div class="form-row" ng-if="sent">
                                 <span class="lead text-success">Your Certificate has been successfully emailed to your manager(s).</span>
-                            </div><!-- /.form-row -->
-                        </div><!-- /.form-body -->
+                            </div>
+                        </div>
 
                         <div class="form-actions">
                             <input type="button" value="No Thanks!" class="btn btn-lightgray" ng-click="$state.go('dashboard')" ng-if="!sent">
                             <button class="btn btn-green" ng-click="send()" ng-disabled="form.$invalid || sending" ng-if="!sent" button-loading="sending">Send</button>
                             <input type="button" value="Go to Dashboard" class="btn btn-green" ng-click="$state.go('dashboard')" ng-if="sent">
-                        </div><!-- /.form-actions -->
-                    </div><!-- /.test-certificate-form -->
-                </div><!-- /.col col-1of2 -->
-            </div><!-- /.cols -->
-        </div><!-- /.test-body -->
-    </div><!-- /.test -->
-</div><!-- /.container -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 

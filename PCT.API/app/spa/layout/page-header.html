@@ -1,0 +1,45 @@
+<header class="header">
+    <a class="logo" href="" ng-click="$state.go(User.loggedIn ? 'dashboard' : 'landing')">PCT - Pest Control Technology</a>
+
+
+    <div class="nav-container" ng-if="User.loggedIn">
+        <a href="#" class="nav-toggle">
+            {{ User.fullName}}
+
+            <i class="ico-arrow"></i>
+        </a>
+        <nav class="nav popup popup-point-up-right">
+            <ul>
+                <li><a ui-sref="profile">Profile</a></li>
+                <li><a ui-sref="certificates">Certificates</a></li>
+                <!--<li><a href="#">Help</a></li>-->
+                <li><a href="" ng-click="logout()">Sign out</a></li>
+                <li class="mob-only horizontal-line"></li>
+                <li class="mob-only"><a href="#">Contact Us</a></li>
+                <li class="mob-only"><a href="#">Subscribe</a></li>
+                <li class="mob-only"><a href="#">RSS</a></li>
+                <li class="mob-only"><a href="#">Privacy Policy</a></li>
+                <li class="mob-only"><a href="#">Terms of Use</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <header-timer></header-timer>
+
+    <div class="login-container" ng-if="!User.loggedIn && !($state.current.name=='coursePreview' || $state.current.name=='testPreview')">
+        <form-signin-inline></form-signin-inline>
+    </div>
+
+    <error-container></error-container>
+
+    <div class="popup open"
+         ng-if="showLicensurePopup()"
+         ng-class="$ws.xs ? 'popup-point-up-left licensure-mobile' : 'popup-point-up-right licensure-desktop'">
+        <span>
+            Please ensure that your licensure is updated in your profile, so that we can indicate courses that are applicable to you.
+        </span>
+        <div class="popup-buttons">
+            <button class="btn btn-light-blue" ng-click="gotIt()">Got it!</button>
+        </div>
+    </div>
+</header>

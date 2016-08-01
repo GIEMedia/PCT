@@ -20,7 +20,7 @@ namespace PCT.Api.Core.OAuth
         public string HashedPassword { get; set; }
         public string PasswordResetToken { get; set; }
         public DateTime? PasswordResetTokenExpirationDate { get; set; }
-        public AccountStatus? Status { get; set; }
+        public AccountStatus Status { get; set; }
         public AdminAccess? AdminAccess { get; set; }
 
         public static implicit operator ApplicationUser(Account account)
@@ -62,7 +62,7 @@ namespace PCT.Api.Core.OAuth
                 HashedPassword = user.HashedPassword,
                 PasswordResetToken = user.PasswordResetToken,
                 PasswordResetTokenExpirationDate = user.PasswordResetTokenExpirationDate,
-                Status = user.Status.GetValueOrDefault(AccountStatus.None),
+                Status = user.Status,
                 AdminAccess = user.AdminAccess.GetValueOrDefault(Declarations.AdminAccess.None)
             };
         }

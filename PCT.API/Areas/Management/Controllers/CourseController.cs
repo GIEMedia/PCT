@@ -224,8 +224,13 @@ namespace PCT.Api.Areas.Management.Controllers
                     c.StateCEUs.Add(new StateCEU
                     {
                         StateAbbr = s.state,
-                        CategoryCode = s.category_code,
-                        Hours = s.hours
+                        Category =
+                            s.category_id.HasValue
+                                ? _entityRepository.GetByID<CertificationCategory>(s.category_id.Value)
+                                : null,
+                        Hours = s.hours,
+                        ActivityID = s.activity_id,
+                        ActivityType = s.activity_type
                     }));
 
             _entityRepository.Save(c);

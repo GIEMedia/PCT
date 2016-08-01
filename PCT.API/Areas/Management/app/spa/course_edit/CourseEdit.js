@@ -17,13 +17,13 @@
                         name: "Courses"
                     },
                     abstract: true,
-                    templateUrl: "Areas/Management/app/spa/course_edit/CourseEdit.html",
+                    templateUrl: "Areas/Management/app/spa/course_edit/CourseEdit.html?v=" + htmlVer,
                     controller: "courseEdit.Ctrl"
                 })
             ;
         }])
 
-        .controller("courseEdit.Ctrl", ["$scope", "$state", "$q", "$stateParams", "LayoutService", "CourseService", "WindowService", "Fancybox", function ($scope, $state, $q, $stateParams, LayoutService, CourseService, WindowService, Fancybox) {
+        .controller("courseEdit.Ctrl", ["$scope", "$state", "$q", "$stateParams", "LayoutService", "CourseService", "WindowService", "modalConfirm", "modalAlert", function ($scope, $state, $q, $stateParams, LayoutService, CourseService, WindowService, modalConfirm, modalAlert) {
             var footerControl = LayoutService.setCustomFooter($scope, {
                 templateUrl: "Areas/Management/app/spa/course_edit/CourseEditFooter.html"
             });
@@ -46,7 +46,7 @@
                 if ($scope.needSaving()) {
                     event.preventDefault();
                     if (toState.name.indexOf("courseEdit.") != 0) {
-                        Fancybox.confirm("Confirm leaving course editor", "Course changes hasn't been saved." + "\n\nAre you sure want to leave this page?").then(function() {
+                        modalConfirm.open("Confirm leaving course editor", "Course changes hasn't been saved." + "\n\nAre you sure want to leave this page?").result.then(function() {
                             $scope.cel.reset();
                             $state.go(toState.name, toParams);
                         });
@@ -108,6 +108,7 @@
 
             $scope.setCel = function(cel) {
                 ObjectUtil.clear($scope.cel);
+                console.log(cel);
                 ObjectUtil.copy(cel, $scope.cel);
             };
 
@@ -124,7 +125,7 @@
                         defer.resolve();
                     }, function(reason) {
                         $scope.ce.saving = false;
-                        Fancybox.alert(reason, reason);
+                        modalAlert.open(reason, reason);
                         defer.reject();
                     })
                 ;
@@ -139,7 +140,7 @@
                 });
             };
             $scope.reset = function() {
-                Fancybox.confirm("Confirm resetting changes", "Are you sure to reset your changes").then(function() {
+                modalConfirm.open("Confirm resetting changes", "Are you sure to reset your changes").result.then(function() {
                     $scope.cel.reset();
                 });
             };
@@ -156,10 +157,10 @@
             };
         }])
 
-        .directive("checkPublishedCourse", ["CourseService", "Fancybox", function(CourseService, Fancybox) {
+        .directive("checkPublishedCourse", ["CourseService", "modalConfirm", function(CourseService, modalConfirm) {
             return {
                 restrict: "E",
-                templateUrl: "Areas/Management/app/spa/course_edit/CheckPublishedCourse.html",
+                templateUrl: "Areas/Management/app/spa/course_edit/CheckPublishedCourse.html?v=" + htmlVer,
                 link: function($scope, elem, attrs) {
                     $scope.$watch("course.status == 1", function(value) {
                         if (!value) {
@@ -170,7 +171,7 @@
                     });
 
                     $scope.changeToDraft = function() {
-                        Fancybox.confirm("Change Course Status To 'Draft'?", "Are you sure to unpublish this course? Users will not be able to access this course.", "Yes", "Cancel").then(function() {
+                        modalConfirm.open("Change Course Status To 'Draft'?", "Are you sure to unpublish this course? Users will not be able to access this course.", "Yes", "Cancel").result.then(function() {
                             CourseService.setStatus($scope.course.id, 0).success(function() {
                                 $scope.course.status = 0;
                             });

@@ -1,0 +1,33 @@
+.idle-warning-modal .modal {
+  text-align: center;
+  .controls {
+    margin-top: 56px;
+
+    a {
+      display: block;
+      margin-top: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 24px;
+      text-decoration: underline;
+      color: #404040;
+
+      &:hover {
+        color: lighten($color-red, 10%);
+      }
+    }
+  }
+
+  @media (min-width: 1025px) {
+    padding-bottom: 40px;
+
+    // Desktop
+    .title {
+      margin-bottom: 30px;
+
+    }
+    .controls {
+      margin-top: 27px;
+    }
+  }
+}

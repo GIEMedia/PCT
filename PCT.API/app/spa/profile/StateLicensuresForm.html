@@ -8,7 +8,7 @@
             <div ng-if="(stateLicensures.length || 0 ) == 0" class="no-record">
                 <div class="form-controls-actions">
                     <a href="" class="btn-add" ng-click="stateLicensures.push({})"></a>
-                </div><!-- /.form-controls-actions -->
+                </div>
 
                 <div class="form-cols-outer">
 
@@ -20,11 +20,11 @@
                 </div>
             </div>
 
-            <div class="form-controls" ng-repeat="stateLicensure in stateLicensures">
+            <div class="form-controls" ng-repeat="stateLicensure in stateLicensures" state-licensure-row>
                 <div class="form-controls-actions">
                     <a href="" class="btn-add" ng-click="stateLicensures.push({})" tabindex="2"></a>
                     <a href="" class="btn-remove" ng-click="stateLicensures.splice($index, 1)" tabindex="2"></a>
-                </div><!-- /.form-controls-actions -->
+                </div>
 
                 <div class="form-cols-outer">
                     <div class="form-cols">
@@ -32,28 +32,38 @@
                             <select class="field" ng-options="state.code as state.name for state in states" ng-model="stateLicensure.state" required>
                                 <option value="">State</option>
                             </select>
-                        </div><!-- /.form-col form-col-1of2 -->
+                        </div>
 
                         <div class="form-col form-col-1of2">
-                            <!--<select class="field" ng-options="cat.code as cat.name for cat in certificateCategories" ng-model="stateLicensure.category" required>
-                                    <option value="">Certification Category</option>
-                                </select>-->
-                            <input type="text" class="field" placeholder="Certification Category" ng-model="stateLicensure.category" required ng-maxlength="200">
-                        </div><!-- /.form-col form-col-1of2 -->
+                           <select class="field" ng-options="cat.id as (cat.name + ' ' + cat.number) for cat in filteredCertification(stateLicensure.state)"
+                                   ng-model="stateLicensure.category" required>
+                                <option value="">Certification Category</option>
+                            </select>
+                            <!--<input type="text" class="field" placeholder="Certification Category" ng-model="stateLicensure.category" required ng-maxlength="200">-->
+                        </div>
 
                         <div class="form-col form-col-1of2">
                             <input type="text" class="field" placeholder="License #" ng-model="stateLicensure.license_num" required ng-maxlength="200">
-                        </div><!-- /.form-col form-col-1of2 -->
+                        </div>
 
                         <div class="form-col form-col-1of2">
                             <input type="text" class="field" placeholder="Confirm License #" ng-model="stateLicensure.confirmNum" equals="stateLicensure.license_num" >
-                        </div><!-- /.form-col form-col-1of2 -->
-                    </div><!-- /.form-cols -->
-                </div><!-- /.form-cols-outer -->
-            </div><!-- /.form-controls -->
-        </div><!-- /.form-row -->
-    </div><!-- /.form-body -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="form-actions">
-        <input type="button" class="btn" value="Update Licensure" ng-disabled="equals(stateLicensuresMaster, stateLicensures) || form.$invalid || stateLicensuresForm.loading" ng-click="update()">
-    </div><!-- /.form-actions -->
+        <div class="state-licensure-form">
+            <input type="checkbox" id="state-licensure-form-checkbox">
+            <label for="state-licensure-form-checkbox">
+                Only show me courses that pertain to my licensure
+            </label>
+        </div>
+
+        <input type="button" class="btn" value="Update Licensure"
+               ng-disabled="equals(stateLicensuresMaster, stateLicensures) || form.$invalid || stateLicensuresForm.loading"
+               ng-click="update()">
+    </div>
 </form>

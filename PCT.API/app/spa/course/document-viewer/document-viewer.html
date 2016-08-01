@@ -1,0 +1,32 @@
+<div class="course-media" course-page-controller course-media="page">
+
+    <div class="course-media-bar">
+        <div class="course-zoom">
+            <a href="" class="course-zoom-out">Zoom Out</a>
+            <span class="course-zoom-level">100%</span>
+            <a href="" class="course-zoom-in">Zoom In</a>
+        </div>
+        <div class="course-controls">
+            <a href="" class="course-control-print">Print</a>
+            <a ng-href="{{section.document.pdf_url}}" class="course-control-download" download>Download</a>
+            <a href="" class="course-control-maximize" ng-click="toggleMaximized()">Maximize</a>
+        </div>
+        <div class="course-switch">
+            <a href="" class="course-switch-questions">Questions</a>
+            <a href="" class="course-switch-arrows"></a>
+            <a href="" class="course-switch-document">Document</a>
+        </div>
+        <div class="course-paging">
+            <a href="" class="course-paging-prev" ng-disabled="currentPage()<=1" ng-click="prevPage()">Previous</a>
+            <span class="course-paging-label">Page {{currentPage()}} of {{section.document.pages.length}}</span>
+            <a href="" class="course-paging-next" ng-click="nextPage()" ng-disabled="currentPage()>=section.document.pages.length">Next</a>
+        </div>
+    </div>
+
+    <div class="course-media-frame">
+        <div class="course-media-frame-panzoom">
+            <div class="loading"><i class="fa fa-spinner fa-pulse"></i></div>
+            <img class="course-pdf-preview" width="100" alt="">
+        </div>
+    </div>
+</div>

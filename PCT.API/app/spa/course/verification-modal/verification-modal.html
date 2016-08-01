@@ -1,0 +1,48 @@
+<div>
+    <div ng-if="view.step == 1" class="step1">
+        <div class="title">Verification</div>
+        <div class="content">By typing my initials in the box below, I certify that I am the licensed/certified person registered
+            to complete this online training. I understand that only I can complete this course and any
+            quizzes or examinations. By allowing any persons other than myself to complete this course and/
+            or quizzes and examinations in my name may result in disciplinary action against my license/certification
+            and/or any other penalties as provided by the laws, regulations, and provisions of
+            each state in which I am seeking recertification accreditation.</div>
+
+        <div class="controls">
+            <input placeholder="Initials" ng-model="view.initials" maxlength="3">
+
+            <button class="btn" ng-disabled="!view.initials" ng-click="nextStep()">I agree</button>
+        </div>
+    </div>
+    <div ng-if="view.step == 2" class="step2">
+        <div class="title">This course is timed.</div>
+        <div class="content">
+            <p>If you are taking this course for Continuing Education credit (CEU) for recertification, you will need to meet the following requirements:</p>
+
+            <ul>
+                <li>A minimum of 60 minutes* to complete the Course &amp;  Test</li>
+                <li>A passing score of 70% or more on the Test (1st time through Test)</li>
+                <li class="helper">If your state requires a different total time to complete a course for CEU credit, please use that number as your requirement criteria.</li>
+            </ul>
+
+            <p style="color: #ff0000">If you fail to meet either of the above requirements, your state may not approve this course for your CEU credit.</p>
+
+            <p>The elapsed time to complete the Course &amp; Test and your Test score will print on the CEU Certificate you will use to submit to your state.</p>
+
+
+            <p><b>Check the Timer periodically to ensure your progress is on track</b>. Please note, the Timer will stop if you have not interacted with the program for several minutes and will resume with new activity.</p>
+
+            <p><b>If necessary, you can reset and retake this training course</b>. You will then complete it in it’s entirety in order to meet your state’s minimum requirements for an online Continuing Education course.</p>
+
+        </div>
+
+        <div class="controls">
+            <button class="btn" ng-click="close()">Start Course</button>
+        </div>
+    </div>
+
+    <div class="step-indicator">
+        <i class="fa" ng-class="view.step == 1 ? 'fa-circle' : 'fa-circle-o'"></i>
+        <i class="fa" ng-class="view.step == 2 ? 'fa-circle' : 'fa-circle-o'"></i>
+    </div>
+</div>

@@ -24,6 +24,7 @@
     <SccProvider>SAK</SccProvider>
     <RestorePackages>true</RestorePackages>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,17 +51,17 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="FluentMigrator, Version=1.6.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentMigrator.1.6.0\lib\40\FluentMigrator.dll</HintPath>
+    <Reference Include="FluentMigrator, Version=1.6.1.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentMigrator.1.6.1\lib\40\FluentMigrator.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="FluentMigrator.Runner, Version=1.6.0.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentMigrator.Runner.1.6.0\lib\40\FluentMigrator.Runner.dll</HintPath>
+    <Reference Include="FluentMigrator.Runner, Version=1.6.1.0, Culture=neutral, PublicKeyToken=aacfc7de5acabf05, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentMigrator.Runner.1.6.1\lib\40\FluentMigrator.Runner.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="FluentValidation, Version=5.6.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Iesi.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -102,17 +103,21 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity">
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Unity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration">
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Mvc">
-      <HintPath>..\packages\Unity.Mvc.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Mvc.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Unity.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.Mvc.4.0.1\lib\net45\Microsoft.Practices.Unity.Mvc.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
-      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=4.0.0.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -122,12 +127,13 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NHibernate">
-      <HintPath>..\packages\NHibernate.4.0.3.4000\lib\net40\NHibernate.dll</HintPath>
+    <Reference Include="NHibernate, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.4.0.4.4000\lib\net40\NHibernate.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="NHibernate.Caches.SysCache2">
       <HintPath>..\packages\NHibernate.Caches.SysCache2.4.0.0.4000\lib\net40\NHibernate.Caches.SysCache2.dll</HintPath>
@@ -135,25 +141,25 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Prototype1.FluentNHibernate, Version=1.0.0.52, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prototype1.FluentNHibernate.1.0.0.52\lib\net40\Prototype1.FluentNHibernate.dll</HintPath>
+    <Reference Include="Prototype1.FluentNHibernate, Version=1.0.0.75, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prototype1.FluentNHibernate.1.0.0.75\lib\net40\Prototype1.FluentNHibernate.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Prototype1.Foundation, Version=1.0.0.52, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prototype1.Foundation.1.0.0.52\lib\net451\Prototype1.Foundation.dll</HintPath>
+    <Reference Include="Prototype1.Foundation, Version=1.0.0.75, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prototype1.Foundation.1.0.0.75\lib\net451\Prototype1.Foundation.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Prototype1.Migration, Version=1.0.0.52, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prototype1.Migration.1.0.0.52\lib\net45\Prototype1.Migration.dll</HintPath>
+    <Reference Include="Prototype1.Migration, Version=1.0.0.75, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prototype1.Migration.1.0.0.75\lib\net45\Prototype1.Migration.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Prototype1.Security, Version=1.0.0.52, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prototype1.Security.1.0.0.52\lib\net451\Prototype1.Security.dll</HintPath>
+    <Reference Include="Prototype1.Security, Version=1.0.0.75, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prototype1.Security.1.0.0.75\lib\net451\Prototype1.Security.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Prototype1.Services, Version=1.0.0.52, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Prototype1.Services.1.0.0.52\lib\net451\Prototype1.Services.dll</HintPath>
+    <Reference Include="Prototype1.Services, Version=1.0.0.75, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prototype1.Services.1.0.0.75\lib\net451\Prototype1.Services.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -222,8 +228,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
+      <HintPath>..\packages\WebActivatorEx.2.1.0\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WebGrease">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -231,6 +237,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Help\ApiDescriptionExtensions.cs" />
     <Compile Include="Areas\Help\App_Start\HelpConfig.cs" />
     <Compile Include="Areas\Help\Controllers\HelpController.cs" />
@@ -248,11 +256,11 @@
     <Compile Include="Areas\Help\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\Help\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\Help\XmlDocumentationProvider.cs" />
+    <Compile Include="Areas\Management\Controllers\CourseController.cs" />
     <Compile Include="Areas\Management\Controllers\HomeController.cs" />
     <Compile Include="Areas\Management\Controllers\ManagementController.cs" />
     <Compile Include="Areas\Management\Controllers\QuestionController.cs" />
     <Compile Include="Areas\Management\Controllers\SectionController.cs" />
-    <Compile Include="Areas\Management\Controllers\CourseController.cs" />
     <Compile Include="Areas\Management\ManagementAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllerBase.cs" />
@@ -279,11 +287,16 @@
     <Content Include="app\css\fonts\fontawesome-webfont.svg" />
     <Content Include="app\css\fonts\fontawesome-webfont.ttf" />
     <Content Include="app\css\fonts\fontawesome-webfont.woff" />
+    <Content Include="app\css\fonts\fontawesome-webfont.woff2" />
     <Content Include="app\css\fonts\FontAwesome.otf" />
     <Content Include="app\css\images\arrow-down-search-mobile.png" />
     <Content Include="app\css\images\arrow-down-search.png" />
     <Content Include="app\css\images\arrow-down-select.png" />
+    <Content Include="app\css\images\arrow-down.png" />
     <Content Include="app\css\images\arrow-dropdown.png" />
+    <Content Include="app\css\images\arrow-left.png" />
+    <Content Include="app\css\images\arrow-right.png" />
+    <Content Include="app\css\images\arrow-up.png" />
     <Content Include="app\css\images\arrows-timeline.png" />
     <Content Include="app\css\images\bg-search.png" />
     <Content Include="app\css\images\bg-test.png" />
@@ -297,11 +310,14 @@
     <Content Include="app\css\images\ico-check-blue.png" />
     <Content Include="app\css\images\ico-check-gray.png" />
     <Content Include="app\css\images\ico-check-green.png" />
+    <Content Include="app\css\images\ico-check-white-2.png" />
+    <Content Include="app\css\images\ico-check-white-big.png" />
     <Content Include="app\css\images\ico-check-white.png" />
     <Content Include="app\css\images\ico-close.png" />
     <Content Include="app\css\images\ico-current-question.png" />
     <Content Include="app\css\images\ico-download-cerrtificate.png" />
     <Content Include="app\css\images\ico-download.png" />
+    <Content Include="app\css\images\ico-fill-big.png" />
     <Content Include="app\css\images\ico-hamburger.png" />
     <Content Include="app\css\images\ico-hat.png" />
     <Content Include="app\css\images\ico-magnify.png" />
@@ -324,6 +340,7 @@
     <Content Include="app\css\images\ico-rats-mobile.png" />
     <Content Include="app\css\images\ico-rats.png" />
     <Content Include="app\css\images\ico-reduce.png" />
+    <Content Include="app\css\images\ico-reset.png" />
     <Content Include="app\css\images\ico-resume-course.png" />
     <Content Include="app\css\images\ico-search-field-mobile.png" />
     <Content Include="app\css\images\ico-search-field.png" />
@@ -339,6 +356,7 @@
     <Content Include="app\css\images\intro-bg.jpg" />
     <Content Include="app\css\images\logo-mobile.png" />
     <Content Include="app\css\images\logo.png" />
+    <Content Include="app\css\images\select-arrows.png" />
     <Content Include="app\css\images\temp\img-answer-large.jpg" />
     <Content Include="app\css\images\temp\img-answer1.jpg" />
     <Content Include="app\css\images\temp\img-answer2.jpg" />
@@ -352,10 +370,11 @@
     <Content Include="app\css\images\test-head.jpg" />
     <Content Include="app\css\jquery.fs.selecter.css" />
     <Content Include="app\css\magnific-popup.css" />
-    <Content Include="app\css\responsive.css" />
     <Content Include="app\css\style.css" />
+    <Content Include="app\css\style.min.css">
+      <DependentUpon>style.css</DependentUpon>
+    </Content>
     <Content Include="app\css\tooltipster.css" />
-    <Content Include="app\js\moment.min.js" />
     <Content Include="app\js\angular-moment.min.js" />
     <Content Include="app\js\angular-ui-router.min.js" />
     <Content Include="app\js\angular_1.3.1\angular-animate.min.js" />
@@ -364,6 +383,7 @@
     <Content Include="app\js\angular_1.3.1\angular.js" />
     <Content Include="app\js\angular_1.3.1\angular.min.js" />
     <Content Include="app\js\common-utils.js" />
+    <Content Include="app\js\html2canvas.js" />
     <Content Include="app\js\jquery-1.11.2.min.js" />
     <Content Include="app\js\jquery-textrange.js" />
     <Content Include="app\js\jquery.fs.selecter.min.js" />
@@ -372,6 +392,16 @@
     <Content Include="app\js\jquery.nicescroll.min.js" />
     <Content Include="app\js\jquery.panzoom.min.js" />
     <Content Include="app\js\jquery.tooltipster.min.js" />
+    <Content Include="app\js\moment.min.js" />
+    <Content Include="app\scss\style.scss" />
+    <Content Include="app\scss\_base.scss" />
+    <Content Include="app\scss\_button.scss" />
+    <Content Include="app\scss\_common.scss" />
+    <Content Include="app\scss\_form.scss" />
+    <Content Include="app\scss\_helpers.scss" />
+    <Content Include="app\scss\_icons.scss" />
+    <Content Include="app\scss\_mixins.scss" />
+    <Content Include="app\scss\_variables.scss" />
     <Content Include="app\spa\api\AccountService.js" />
     <Content Include="app\spa\api\CertificateData.js" />
     <Content Include="app\spa\api\CertificateService.js" />
@@ -383,35 +413,69 @@
     <Content Include="app\spa\api\TestService.js" />
     <Content Include="app\spa\app.js" />
     <Content Include="app\spa\authen\authen.js" />
-    <Content Include="app\spa\authen\UserInfo.html" />
-    <Content Include="app\spa\authen\UserInfo.js" />
+    <Content Include="app\spa\authen\form-login.js" />
+    <Content Include="app\spa\authen\form-signin-inline.html" />
+    <Content Include="app\spa\authen\user-info.scss" />
     <Content Include="app\spa\certificates\Certificates.html" />
-    <Content Include="app\spa\certificates\CertificatesPage.html" />
     <Content Include="app\spa\certificates\Certificates.js" />
-    <Content Include="app\spa\common\Markup.js" />
+    <Content Include="app\spa\certificates\CertificatesPage.html" />
+    <Content Include="app\spa\certification\certification.html" />
+    <Content Include="app\spa\certification\certification.js" />
+    <Content Include="app\spa\certification\certification.scss" />
+    <Content Include="app\spa\certification\print-service.js" />
     <Content Include="app\spa\common\Help.js" />
+    <Content Include="app\spa\common\Markup.js" />
+    <Content Include="app\spa\common\modal\modal.js" />
+    <Content Include="app\spa\common\modal\modal.scss" />
+    <Content Include="app\spa\common\template-opener.js" />
+    <Content Include="app\spa\common\timer-service\idle-detector.js" />
+    <Content Include="app\spa\common\timer-service\idle-warning-modal.html" />
+    <Content Include="app\spa\common\timer-service\idle-warning-modal.scss" />
+    <Content Include="app\spa\common\timer-service\timer-service.js" />
+    <Content Include="app\spa\common\window-size.js" />
+    <Content Include="app\spa\common\window-size.scss" />
     <Content Include="app\spa\course\Course.html" />
     <Content Include="app\spa\course\Course.js" />
-    <Content Include="app\spa\course\CourseControls.js" />
-    <Content Include="app\spa\course\CourseHelp.html" />
-    <Content Include="app\spa\course\CoursePage.html" />
-    <Content Include="app\spa\course\CourseQuestion.html" />
-    <Content Include="app\spa\course\CourseQuestion.js" />
-    <Content Include="app\spa\course\CourseQuestionsContainer.html" />
-    <Content Include="app\spa\course\CourseQuestionsContainer.js" />
-    <Content Include="app\spa\course\CourseSectionSlider.js" />
-    <Content Include="app\spa\course\eOptions.html" />
+    <Content Include="app\spa\course\course.scss" />
+    <Content Include="app\spa\course\document-viewer\course-media-bar.html" />
+    <Content Include="app\spa\course\document-viewer\CourseControls.js" />
+    <Content Include="app\spa\course\document-viewer\document-viewer.html" />
+    <Content Include="app\spa\course\document-viewer\document-viewer.js" />
+    <Content Include="app\spa\course\help\CourseHelp.html" />
+    <Content Include="app\spa\course\questions-viewer\eOptions.html" />
+    <Content Include="app\spa\course\questions-viewer\question.html" />
+    <Content Include="app\spa\course\questions-viewer\question.js" />
+    <Content Include="app\spa\course\questions-viewer\questions-viewer.html" />
+    <Content Include="app\spa\course\questions-viewer\questions-viewer.js" />
+    <Content Include="app\spa\course\questions-viewer\questions-viewer.scss" />
+    <Content Include="app\spa\course\slider\slider.js" />
+    <Content Include="app\spa\course\slider\slider.scss" />
+    <Content Include="app\spa\course\slider\slides-steps.html" />
+    <Content Include="app\spa\course\verification-modal\verification-modal.html" />
+    <Content Include="app\spa\course\verification-modal\verification-modal.js" />
+    <Content Include="app\spa\course\verification-modal\verification-modal.scss" />
     <Content Include="app\spa\dashboard\Dashboard.html" />
     <Content Include="app\spa\dashboard\Dashboard.js" />
+    <Content Include="app\spa\dashboard\dashboard.scss" />
+    <Content Include="app\spa\dashboard\search-section.html" />
     <Content Include="app\spa\forgotpassword\Forgotpassword.html" />
     <Content Include="app\spa\forgotpassword\Forgotpassword.js" />
     <Content Include="app\spa\landing\eIntroduction.html" />
+    <Content Include="app\spa\landing\eIntroduction.scss" />
     <Content Include="app\spa\landing\Landing.html" />
     <Content Include="app\spa\landing\Landing.js" />
     <Content Include="app\spa\landing\Signup.html" />
     <Content Include="app\spa\landing\Signup.js" />
     <Content Include="app\spa\layout\ErrorContainer.js" />
+    <Content Include="app\spa\layout\header-timer.js" />
+    <Content Include="app\spa\layout\header-timer.scss" />
     <Content Include="app\spa\layout\Layout.js" />
+    <Content Include="app\spa\layout\licensure-information-modal\licensure-information-modal.html" />
+    <Content Include="app\spa\layout\licensure-information-modal\licensure-information-modal.js" />
+    <Content Include="app\spa\layout\licensure-information-modal\licensure-information-modal.scss" />
+    <Content Include="app\spa\layout\licensure-information-modal\state-licensures-form.html" />
+    <Content Include="app\spa\layout\page-header.html" />
+    <Content Include="app\spa\layout\page-header.js" />
     <Content Include="app\spa\local\PreferenceService.js" />
     <Content Include="app\spa\profile\AccountForm.html" />
     <Content Include="app\spa\profile\ManagersForm.html" />
@@ -421,12 +485,13 @@
     <Content Include="app\spa\profile\StateLicensuresForm.html" />
     <Content Include="app\spa\test\certificate\Certificate.html" />
     <Content Include="app\spa\test\certificate\Certificate.js" />
+    <Content Include="app\spa\test\help\test-help.html" />
+    <Content Include="app\spa\test\test-failed\test-failed.html" />
+    <Content Include="app\spa\test\test-page.html" />
+    <Content Include="app\spa\test\test-question-container\test-questions-container.html" />
+    <Content Include="app\spa\test\test-question-container\test-questions-container.js" />
     <Content Include="app\spa\test\Test.js" />
-    <Content Include="app\spa\test\TestHelp.html" />
-    <Content Include="app\spa\test\TestFailed.html" />
-    <Content Include="app\spa\test\TestPage.html" />
-    <Content Include="app\spa\test\TestQuestionsContainer.html" />
-    <Content Include="app\spa\test\TestQuestionsContainer.js" />
+    <Content Include="app\spa\test\test.scss" />
     <Content Include="app\spa\theme.js" />
     <Content Include="app\temp\sample.pdf" />
     <Content Include="Areas\Help\css\base.css" />
@@ -442,8 +507,11 @@
     <Content Include="Areas\Management\app\css\fancybox_overlay.png" />
     <Content Include="Areas\Management\app\css\fancybox_sprite%402x.png" />
     <Content Include="Areas\Management\app\css\fancybox_sprite.png" />
-    <Content Include="Areas\Management\app\css\fonts\icomoon.svg" />
     <Content Include="Areas\Management\app\css\fonts\icomoon.css" />
+    <Content Include="Areas\Management\app\css\fonts\icomoon.eot" />
+    <Content Include="Areas\Management\app\css\fonts\icomoon.svg" />
+    <Content Include="Areas\Management\app\css\fonts\icomoon.ttf" />
+    <Content Include="Areas\Management\app\css\fonts\icomoon.woff" />
     <Content Include="Areas\Management\app\css\images\arrow-circle-down-blue.png" />
     <Content Include="Areas\Management\app\css\images\arrow-circle-down.png" />
     <Content Include="Areas\Management\app\css\images\arrow-circle-up.png" />
@@ -500,6 +568,7 @@
     <Content Include="Areas\Management\app\css\images\icons\course-plus.svg" />
     <Content Include="Areas\Management\app\css\images\icons\course.svg" />
     <Content Include="Areas\Management\app\css\images\icons\exit.svg" />
+    <Content Include="Areas\Management\app\css\images\icons\icons.ai" />
     <Content Include="Areas\Management\app\css\images\icons\manager.svg" />
     <Content Include="Areas\Management\app\css\images\icons\multiphoto-plus.svg" />
     <Content Include="Areas\Management\app\css\images\icons\multiphoto.svg" />
@@ -532,6 +601,9 @@
     <Content Include="Areas\Management\app\css\jquery.fancybox.css" />
     <Content Include="Areas\Management\app\css\selectboxit.css" />
     <Content Include="Areas\Management\app\css\style.css" />
+    <Content Include="Areas\Management\app\css\style.min.css">
+      <DependentUpon>style.css</DependentUpon>
+    </Content>
     <Content Include="Areas\Management\app\js\angular-file-upload\angular-file-upload-shim.min.js" />
     <Content Include="Areas\Management\app\js\angular-file-upload\angular-file-upload.min.js" />
     <Content Include="Areas\Management\app\js\angular-ui-router.min.js" />
@@ -548,8 +620,12 @@
     <Content Include="Areas\Management\app\js\jquery.numeric.js" />
     <Content Include="Areas\Management\app\js\moment.min.js" />
     <Content Include="Areas\Management\app\js\selectboxit.js" />
+    <Content Include="Areas\Management\app\scss\old-style.scss" />
+    <Content Include="Areas\Management\app\scss\style.scss" />
+    <Content Include="Areas\Management\app\scss\_popup.scss" />
     <Content Include="Areas\Management\app\spa\api\CategoryService.js" />
     <Content Include="Areas\Management\app\spa\api\CourseService.js" />
+    <Content Include="Areas\Management\app\spa\api\ManufacturerService.js" />
     <Content Include="Areas\Management\app\spa\api\QuestionService.js" />
     <Content Include="Areas\Management\app\spa\api\ReportService.js" />
     <Content Include="Areas\Management\app\spa\api\SectionService.js" />
@@ -558,10 +634,16 @@
     <Content Include="Areas\Management\app\spa\app.js" />
     <Content Include="Areas\Management\app\spa\common\Fancybox.js" />
     <Content Include="Areas\Management\app\spa\common\Markup.js" />
+    <Content Include="Areas\Management\app\spa\common\modal\modal-alert.html" />
+    <Content Include="Areas\Management\app\spa\common\modal\modal-confirm.html" />
+    <Content Include="Areas\Management\app\spa\common\modal\modal-prompt-text.html" />
+    <Content Include="Areas\Management\app\spa\common\modal\modal.js" />
+    <Content Include="Areas\Management\app\spa\common\modal\_modal.scss" />
+    <Content Include="Areas\Management\app\spa\common\popup-alert.html" />
     <Content Include="Areas\Management\app\spa\common\popup-confirm.html" />
-    <Content Include="Areas/Management/app/spa/common/popup-alert.html" />
     <Content Include="Areas\Management\app\spa\common\popup-text.html" />
     <Content Include="Areas\Management\app\spa\common\Sorter.js" />
+    <Content Include="Areas\Management\app\spa\common\template-opener.js" />
     <Content Include="Areas\Management\app\spa\common\Theme.js" />
     <Content Include="Areas\Management\app\spa\courses\Courses.html" />
     <Content Include="Areas\Management\app\spa\courses\Courses.js" />
@@ -602,21 +684,25 @@
     <Content Include="Areas\Management\app\spa\report\ReportList.html" />
     <Content Include="Areas\Management\app\spa\report\ReportList.js" />
     <Content Include="Areas\Management\app\spa\security\SecurityService.js" />
-    <Content Include="Areas\Management\app\spa\settings\Settings.html" />
-    <Content Include="Areas\Management\app\spa\settings\Settings.js" />
-    <Content Include="Areas\Management\app\spa\settings\Manufaturers.html" />
-    <Content Include="Areas\Management\app\spa\settings\Manufaturers.js" />
     <Content Include="Areas\Management\app\spa\settings\Categories.html" />
     <Content Include="Areas\Management\app\spa\settings\Categories.js" />
-    <Content Include="Areas\Management\app\spa\api\ManufacturerService.js" />
+    <Content Include="Areas\Management\app\spa\settings\certification-categories\certification-categories.html" />
+    <Content Include="Areas\Management\app\spa\settings\certification-categories\certification-categories.js" />
+    <Content Include="Areas\Management\app\spa\settings\certification-categories\certification-modal.html" />
+    <Content Include="Areas\Management\app\spa\settings\Manufaturers.html" />
+    <Content Include="Areas\Management\app\spa\settings\Manufaturers.js" />
+    <Content Include="Areas\Management\app\spa\settings\Settings.html" />
+    <Content Include="Areas\Management\app\spa\settings\Settings.js" />
     <Content Include="Areas\Management\app\spa\user\User.js" />
     <Content Include="Areas\Management\app\spa\user\UserDetail.html" />
     <Content Include="Areas\Management\app\spa\user\UserDetail.js" />
     <Content Include="Areas\Management\app\spa\user\UserList.html" />
     <Content Include="Areas\Management\app\spa\user\UserList.js" />
-    <Content Include="Areas\Management\Views\web.config" />
-    <Content Include="Areas\Management\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Management\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Management\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Management\Views\web.config" />
+    <Content Include="Areas\Management\Views\_ViewStart.cshtml" />
+    <Content Include="Content\Certificates\Template\certificate_template_state.jpg" />
     <Content Include="Content\Certificates\Template\javatext.ttf" />
     <Content Include="Areas\Help\Views\web.config" />
     <Content Include="Areas\Help\Views\Help\Index.cshtml" />
@@ -634,19 +720,20 @@
     <Content Include="Areas\Help\Views\Help\DisplayTemplates\Type.cshtml" />
     <Content Include="Areas\Help\Views\Help\Login.cshtml" />
     <Content Include="Areas\Help\AuthorizedUsers.json.protected" />
-    <Content Include="Areas\Management\app\css\fonts\icomoon.eot" />
-    <Content Include="Areas\Management\app\css\fonts\icomoon.ttf" />
-    <Content Include="Areas\Management\app\css\fonts\icomoon.woff" />
-    <Content Include="Areas\Management\app\css\images\icons\icons.ai" />
-    <Content Include="Areas\Management\Views\_ViewStart.cshtml" />
-    <Content Include="app\css\fonts\fontawesome-webfont.woff2" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="Content\Certificates\Template\MinionPro-Bold.otf" />
+    <Content Include="package.json" />
     <None Include="packages.config" />
     <Content Include="App_Data\PCT.Api.XML" />
-    <Content Include="Content\Certificates\Template\certificate_template.jpg" />
+    <Content Include="Content\Certificates\Template\certificate_template_user.jpg" />
     <Content Include="Content\Documents\_placeholder.txt" />
     <Content Include="Content\Images\_placeholder.txt" />
     <Content Include="Views\EmailTemplates\ForgotPassword.cshtml" />
     <Content Include="Views\EmailTemplates\ManagerNotification.cshtml" />
+    <None Include="Properties\PublishProfiles\gie.prototype1.io-VN.pubxml" />
     <None Include="Views\EmailTemplates\ReviewCourse.cshtml" />
     <Content Include="web.config">
       <SubType>Designer</SubType>
@@ -656,10 +743,10 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <None Include="Properties\PublishProfiles\Staging - Live.pubxml" />
     <None Include="Properties\PublishProfiles\Staging.pubxml" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
     <None Include="web.Release.config">
       <DependentUpon>web.config</DependentUpon>
@@ -708,6 +795,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\spa\common\idle-logouter\" />
     <Folder Include="Areas\Help\images\ClassDiagrams\" />
     <Folder Include="Areas\Help\images\SequenceDiagrams\" />
   </ItemGroup>

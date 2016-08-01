@@ -13,7 +13,7 @@
             $stateProvider
                 .state('testPreview', {
                     url: '/test/:courseId/preview?token',
-                    templateUrl: "/app/spa/test/TestPage.html",
+                    templateUrl: "/app/spa/test/test-page.html?v=" + htmlVer,
                     controller: "test.Ctrl"
                 })
             ;
@@ -23,23 +23,29 @@
             $stateProvider
                 .state('test', {
                     url: '/test/:courseId',
-                    templateUrl: "/app/spa/test/TestPage.html",
+                    templateUrl: "/app/spa/test/test-page.html?v=" + htmlVer,
                     controller: "test.Ctrl"
                 })
             ;
         }])
 
-        .controller("test.Ctrl", ["$scope", "TestService", "$stateParams", "$state", "PreferenceService", function ($scope, TestService, $stateParams, $state, PreferenceService) {
+        .controller("test.Ctrl", ["$scope", "TestService", "$stateParams", "$state", "PreferenceService", "timerService", "CourseService", function ($scope, TestService, $stateParams, $state, PreferenceService, timerService, CourseService) {
             $scope.testView = {
                 questionProgress: "100%"
             };
 
+            timerService.start("Test");
             /**
              * Keeps the user progress for the whole test.
              * Will be updated to reflect the progress change in server (when user proceed)
              * @type {null}
              */
             $scope.progress = null;
+
+            // TODO  timerService.stop(); when finished
+            $scope.$on('$destroy', function() {
+                timerService.stop();
+            });
 
             /**
              * Show or not the current progress. This will be set after user submit answers, or when the whole test is passed for failed (with tries==0)
@@ -74,7 +80,7 @@
                     if (ready) {
                         if ($scope.isPassed()) {
                             $state.go("certificate", {courseId: $stateParams.courseId});
-                        } else if ($scope.progress.tries_left == 0) {
+                        } else if ($scope.progress.tries_left === 0) {
                             $scope.showResult = true;
                         }
                     }
@@ -86,7 +92,7 @@
                     return false;
                 }
                 var correctCount = Cols.length($scope.progress.corrects);
-                return correctCount == $scope.test.questions.length || (correctCount / $scope.test.questions.length >= $scope.test.passing_percentage && $scope.progress.tries_left == 0);
+                return correctCount === $scope.test.questions.length || (correctCount / $scope.test.questions.length >= $scope.test.passing_percentage && $scope.progress.tries_left === 0);
             };
 
             /**
@@ -115,20 +121,27 @@
 
             $scope.helpEnabled = !$scope.previewMode && PreferenceService.isTestHelpEnabled();
 
-            $scope.disableHelp = function() {
-                PreferenceService.setTestHelpEnabled(false);
+            $scope.disableHelp = function($value) {
+                PreferenceService.setTestHelpEnabled($value);
+            };
+
+            $scope.retakeCourse = function () {
+                CourseService.retakeCourse($stateParams.courseId).then(function () {
+                    $state.go('course', {id: $stateParams.courseId});
+                });
             }
         }])
 
-        .directive("testFailed", function() {
+        .directive("testFailed", ["$stateParams", function($stateParams) {
             return {
                 restrict: "E",
-                templateUrl: "/app/spa/test/TestFailed.html",
+                templateUrl: "/app/spa/test/test-failed/test-failed.html?v=" + htmlVer,
                 link: function($scope, elem, attrs) {
                     $scope.length = Cols.length;
+                    $scope.courseId = $stateParams.courseId;
                 }
             };
-        })
+        }])
     ;
 
 })();

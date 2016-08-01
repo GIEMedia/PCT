@@ -8,7 +8,11 @@ namespace PCT.Declarations.Models.Management
 
         public string state { get; set; }
 
-        public string category_code { get; set; }
+        public Guid? category_id { get; set; }
+
+        public string activity_id { get; set; }
+
+        public string activity_type { get; set; }
 
         public decimal hours { get; set; }
     }

@@ -8,7 +8,7 @@
             <div ng-if="(managers.length || 0 ) == 0" class="no-record">
                 <div class="form-controls-actions">
                     <a href="" class="btn-add thin" ng-click="managers.push({})"></a>
-                </div><!-- /.form-controls-actions -->
+                </div>
 
                 <div class="form-cols-outer">
 
@@ -24,22 +24,22 @@
                 <div class="form-controls-actions">
                     <a href="" class="btn-add thin" ng-click="managers.push({})" tabindex="2"></a>
                     <a href="" class="btn-remove thin" ng-click="managers.splice($index, 1)" tabindex="2"></a>
-                </div><!-- /.form-controls-actions -->
+                </div>
                 <div class="form-cols-outer">
                     <div class="form-cols">
                         <div class="form-col form-col-1of2">
                             <input type="text" class="field" placeholder="Name" ng-model="manager.name" required ng-maxlength="200">
-                        </div><!-- /.form-col form-col-1of2 -->
+                        </div>
 
                         <div class="form-col form-col-1of2">
                             <input type="email" class="field" placeholder="Email Address" ng-model="manager.email" required ng-maxlength="200">
-                        </div><!-- /.form-col form-col-1of2 -->
-                    </div><!-- /.form-cols -->
-                </div><!-- /.form-cols-outer -->
-            </div><!-- /.form-controls -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="form-actions">
         <input type="submit" class="btn" value="Update Managers" ng-disabled="equals(managersMaster, managers) || form.$invalid || managersForm.loading" ng-click="update()">
-    </div><!-- /.form-actions -->
+    </div>
 </form>

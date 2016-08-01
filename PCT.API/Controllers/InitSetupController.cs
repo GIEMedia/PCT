@@ -54,7 +54,7 @@ namespace PCT.Api.Controllers
                 DateCreatedUtc = DateTime.UtcNow,
                 StateCEUs = new List<StateCEU>
                 {
-                    new StateCEU {StateAbbr = "OH", CategoryCode = "a", Hours = 1}
+                    new StateCEU {StateAbbr = "OH", Category = new CertificationCategory { Name = "name", Number = "a", StateAbbr = "OH"}, Hours = 1}
                 },
                 Category = subcategory,
                 Status = CourseStatus.Active,

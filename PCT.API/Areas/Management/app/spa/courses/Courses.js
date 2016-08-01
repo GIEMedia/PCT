@@ -10,7 +10,7 @@
             $stateProvider
                 .state('courses', {
                     url: '/courses',
-                    templateUrl: "Areas/Management/app/spa/courses/Courses.html",
+                    templateUrl: "Areas/Management/app/spa/courses/Courses.html?v=" + htmlVer,
                     data: {
                         name: "Courses"
                     },
@@ -36,20 +36,19 @@
             $scope.sorter = Sorters.create();
         }])
 
-        .directive("courseRow", ["CourseService", "Fancybox", function(CourseService, Fancybox) {
+        .directive("courseRow", ["CourseService", "modalConfirm", function(CourseService, modalConfirm) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
 
                     $scope.remove = function() {
-                        Fancybox.confirm("Confirm deleting course", "Are you sure to remove this course?").then(function() {
+                        modalConfirm.open("Confirm deleting course", "Are you sure to remove this course?").result.then(function() {
                             $scope.removing = true;
                             CourseService.delete($scope.course).success(function() {
                                 Cols.remove($scope.course, $scope.list);
                             }).error(function() {
                                 $scope.removing = false;
                             });
-
                         });
                     };
                 }

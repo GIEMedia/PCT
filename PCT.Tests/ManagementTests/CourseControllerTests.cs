@@ -135,8 +135,8 @@ namespace PCT.Tests.ManagementTests
                 title = "New Course",
                 state_ceus = new[]
                 {
-                    new m_state_ceu {state = "OH", hours = 1, category_code = "abc123"},
-                    new m_state_ceu {state = "CA", hours = 1.25m, category_code = "xyz987"}
+                    new m_state_ceu {state = "OH", hours = 1, category_id = new Guid()},
+                    new m_state_ceu {state = "CA", hours = 1.25m, category_id = new Guid()}
                 },
                 category = category.id,
                 sub_category = category.sub_categories.First().id

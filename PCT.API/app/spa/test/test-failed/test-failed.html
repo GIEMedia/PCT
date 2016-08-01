@@ -1,0 +1,54 @@
+
+<div class="col col-1of2">
+    <div class="test-certificate">
+        <div class="test-certificate-title">
+            <div>
+                You answered {{ length(progress.corrects) }} out of {{test.questions.length}} questions correctly.
+            </div>
+            <!--<div ng-if="progress.tries_left > 0">-->
+                <!--You may review your answers and try again.-->
+            <!--</div>-->
+            <br/>
+            <div ng-if="progress.tries_left == 0">
+                If your state has approved this course for Continuing Education, you did not score high enough on this Test (70% or above) to qualify to submit this course to your state for CEU credit. You may retake this course to qualify for CEU credit by selecting the "Retake Course" button on this page or choosing to retake this course from the Home page at any time in the future.
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col col-1of2">
+
+    <!-- Try again -->
+    <div class="test-certificate-form" ng-if="progress.tries_left > 0">
+        <div class="form-head">
+            <h4 class="form-title">Would you like to try again?</h4>
+        </div>
+
+        <!-- TODO This is mock text -->
+        <div>
+            Please retake those questions you missed by selecting the "Retake Test" button.
+        </div>
+        <!--<br/>-->
+        <!--<div>-->
+            <!--If your state has approved this course for Continuing Education, your score on this test was not high enough (70% or above) to qualify to submit this course to your state for CEU credit. If you wish to obtain a CEU credit for his course, you will need to retake the course by selecting the Retake Course button. You may retake this course at any time.-->
+        <!--</div>-->
+
+        <div class="form-actions">
+            <button class="btn btn-lightgray" ng-click="$state.go('dashboard')" >No Thanks!</button>
+            <button class="btn btn-green" ng-click="nextRound()">Retake Test</button>
+            <!--<button class="btn btn-green"  ng-click="retakeCourse()">Retake Course</button>-->
+            <!--<input type="submit" value="Retry Missed Questions" class="btn btn-green">-->
+        </div>
+    </div>
+
+    <div class="test-certificate-form" ng-if="progress.tries_left == 0">
+        <div class="form-head">
+            <h4 class="form-title"></h4>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn btn-green" ui-sref="course({id: courseId})">Retake Course</button>
+            <button class="btn btn-lightgray" ui-sref="dashboard">Go back</button>
+        </div>
+    </div>
+</div>

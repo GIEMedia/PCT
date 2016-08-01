@@ -1,0 +1,37 @@
+
+/* ================================================================ *\
+	#Helpers
+\* ================================================================ */
+
+.alignleft { float: left; }
+.alignright { float: right; }
+.hidden { display: none; visibility: hidden; }
+
+.clearfix:before,
+.clearfix:after { display: table; content: ' '; }
+.clearfix:after { clear: both; }
+
+.text-right { text-align: right; }
+
+.cols:before,
+.cols:after,
+.form-actions:before,
+.form-actions:after,
+.form-cols:before,
+.form-cols:after,
+.form-controls:before,
+.form-controls:after { display: table; content: ' '; }
+
+.cols:after,
+.form-actions:after,
+.form-cols:after,
+.form-controls:after { clear: both; }
+
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

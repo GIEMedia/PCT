@@ -1,0 +1,590 @@
+/* ================================================================ *\
+	#Reset
+\* ================================================================ */
+
+* {
+  padding: 0;
+  margin: 0;
+  outline: 0;
+}
+
+/* ================================================================ *\
+	#Containers
+\* ================================================================ */
+
+.wrapper {
+  position: relative;
+  min-height: 100%;
+}
+
+.container {
+  position: relative;
+  top: auto;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  height: auto;
+  padding-bottom: 26px;
+  z-index: 0;
+}
+
+.wrapper .cols {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.loading {
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
+  opacity: .7;
+  text-align: center;
+  height: 100%;
+}
+
+.loading i {
+  position: absolute;
+  top: 50%;
+  font-size: 70px;
+}
+
+/* ================================================================ *\
+	#Icons
+\* ================================================================ */
+
+.ico {
+  display: inline-block;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+
+
+/* ================================================================ *\
+	#Popup
+\* ================================================================ */
+.popup {
+  position: absolute;
+  width: 226px;
+  min-height: 60px;
+  background: #000;
+  border-radius: 3px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, .25);
+  visibility: hidden;
+  opacity: 0;
+  z-index: 3;
+}
+
+.popup:before {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  content: '';
+}
+
+.popup span {
+  font-size: 13px;
+  color: #9eafb5;
+  display: block;
+  padding: 20px 20px 0 20px;
+}
+
+.popup .popup-buttons {
+  margin: 15px 20px 20px 0;
+  text-align: right;
+}
+
+.popup .popup-buttons .btn {
+  min-width: 0;
+  padding: 4px 12px;
+}
+
+.popup .popup-buttons .btn-light-blue {
+  border-radius: 4px;
+  width: 90%;
+  height: 34px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 19px;
+}
+
+.popup.popup-point-up-left:before,
+.popup.popup-point-up-middle:before,
+.popup.popup-point-up-right:before {
+  top: -8px;
+  border-width: 0 8px 8px;
+  border-color: #000 transparent;
+}
+
+.popup.popup-point-up-left:before {
+  left: 18px;
+}
+
+.popup.popup-point-up-middle:before {
+  left: 50%;
+  left: calc(50% - 8px);
+}
+
+.popup.popup-point-up-right:before {
+  right: 18px;
+}
+
+.popup.popup-point-left-top:before,
+.popup.popup-point-left-middle:before,
+.popup.popup-point-left-bottom:before {
+  left: -8px;
+  border-width: 8px 8px 8px 0;
+  border-color: transparent #000 transparent transparent;
+}
+
+.popup.popup-point-left-top:before {
+  top: 18px;
+}
+
+.popup.popup-point-left-middle:before {
+  top: 50%;
+  top: calc(50% - 8px);
+}
+
+.popup.popup-point-left-bottom:before {
+  bottom: 18px;
+}
+
+.popup.popup-point-bottom-left:before,
+.popup.popup-point-bottom-middle:before,
+.popup.popup-point-bottom-right:before {
+  bottom: -8px;
+  border-width: 8px 8px 0 8px;
+  border-color: #000 transparent transparent;
+}
+
+.popup.popup-point-bottom-left:before {
+  left: 18px;
+}
+
+.popup.popup-point-bottom-middle:before {
+  left: 50%;
+  left: calc(50% - 8px);
+}
+
+.popup.popup-point-bottom-right:before {
+  right: 18px;
+}
+
+.popup.popup-point-right-top:before,
+.popup.popup-point-right-middle:before,
+.popup.popup-point-right-bottom:before {
+  right: -8px;
+  border-width: 8px 0 8px 8px;
+  border-color: transparent transparent transparent #000;
+}
+
+.popup.popup-point-right-top:before {
+  top: 18px;
+}
+
+.popup.popup-point-right-middle:before {
+  top: 50%;
+  top: calc(50% - 8px);
+}
+
+.popup.popup-point-right-bottom:before {
+  bottom: 18px;
+}
+
+.popup.popup-no-point:before {
+  display: none;
+}
+
+.open .popup,
+.open.popup {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  &.licensure-mobile {
+    top: 60px;
+    left: 2px;
+  }
+
+  &.licensure-desktop {
+    top: 65px;
+    right: 17px;
+    font-size: 13px;
+    line-height: 19px;
+  }
+}
+
+/* ================================================================ *\
+	#Header
+\* ================================================================ */
+
+.header {
+  position: relative;
+  border: 0;
+  background-color: #404040;
+  height: 57px;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.75);
+
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1500;
+}
+
+.logo {
+  background: url(/app/css/images/logo-mobile.png) no-repeat 0 0;
+  width: 36px;
+  height: 19px;
+  margin: 19px 0 0 56px;
+
+  float: left;
+  white-space: nowrap;
+  text-indent: 150%;
+  overflow: hidden;
+}
+
+.nav-container {
+  position: absolute;
+  top: 19px;
+  left: 17px;
+  margin: 0;
+  float: right;
+}
+
+
+.nav-toggle {
+  overflow: hidden;
+  width: 22px;
+  height: 19px;
+  opacity: 0.5;
+  padding: 0;
+  background: url(/app/css/images/ico-hamburger.png) no-repeat 0 0;
+
+  display: block;
+  font-size: 16px;
+  line-height: 1;
+  color: #404040;
+}
+
+.open .nav-toggle,
+.nav-toggle:hover {
+  color: #e67c00;
+  text-decoration: none;
+}
+
+.nav {
+  top: 40px;
+  right: -18px;
+  width: 226px;
+  font-size: 16px;
+}
+
+.nav ul {
+  list-style: none outside none;
+  padding: 18px 18px;
+}
+
+.nav li ~ li {
+  padding-top: 10px;
+}
+
+.nav a {
+  display: block;
+  color: #747474;
+}
+
+.nav a:hover {
+  text-decoration: none;
+  color: #fff;
+}
+
+.nav .horizontal-line {
+  border-top: solid 1px #747474;
+  margin-top: 15px;
+}
+
+.nav li.horizontal-line + li {
+  padding-top: 3px;
+}
+
+.header .error-container {
+  position: relative;
+  top: 12px;
+  width: 100%;
+  background-color: orange;
+  font-size: 17px;
+  padding: 0;
+  margin: 0;
+  height: auto;
+  overflow: hidden;
+}
+
+.header .error-container div {
+  padding: 25px;
+}
+
+/* ================================================================ *\
+	#Footer
+\* ================================================================ */
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 25px;
+  padding: 5px 30px 0;
+  border-top: 2px solid #d7e2e6;
+  color: #707070;
+  z-index: 1;
+  font-size: 12px;
+  background-color: #fff;
+}
+
+.footer .copyright {
+  float: left;
+  font-size: 10px;
+}
+
+.footer .copyright a {
+  color: #707070;
+  text-decoration: none;
+}
+
+.footer .copyright a:hover {
+  text-decoration: none;
+  color: #2cb142;
+}
+
+.footer .nav-footer {
+  float: right;
+}
+
+.footer .nav-footer ul {
+  list-style: none outside none;
+}
+
+.footer .nav-footer li {
+  float: left;
+}
+
+.footer .nav-footer li ~ li {
+  margin-left: 30px;
+}
+
+.footer .nav-footer a {
+  color: #707070;
+}
+
+.footer .nav-footer a:hover {
+  text-decoration: none;
+  color: #2cb142;
+}
+
+/* ================================================================ *\
+	#Common
+\* ================================================================ */
+
+.link-download {
+  font-size: 14px;
+  padding-left: 16px;
+  display: inline-block;
+  vertical-align: middle;
+  background: url(/app/css/images/ico-download-cerrtificate.png) no-repeat 0 0;
+  line-height: 1.2;
+}
+
+.title-underlined {
+  color: #202020;
+
+  span {
+    border-bottom: 3px solid #ededed;
+    display: inline-block;
+    vertical-align: top;
+    padding-bottom: 4px;
+  }
+
+  small {
+    position: relative;
+    top: 3px;
+  }
+
+  .bull {
+    color: #e4e4e4;
+    padding-left: 8px;
+    padding-right: 6px;
+  }
+
+  .count {
+    font-size: 16px;
+    color: #404040;
+  }
+
+  .ico-profile {
+    margin-right: 10px;
+  }
+
+  .ico-new-courses,
+  .ico-open-courses {
+    margin-right: 12px;
+    position: relative;
+  }
+
+  .ico-new-courses {
+    top: 0;
+  }
+}
+
+/* ================================================================ *\
+	#Magnify Height Fix
+\* ================================================================ */
+.mfp-image-holder .mfp-content {
+  max-width: 100%;
+  max-height: 80%;
+}
+
+@media (min-width: 1025px) {
+  // Desktop
+
+  .container {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    right: 0;
+    bottom: 32px;
+    padding-bottom: 0;
+  }
+
+
+  .link-download {
+    font-size: 18px;
+    background-position: 0 4px;
+    padding-left: 26px;
+  }
+
+  .title-underlined {
+    .ico-profile {
+      margin-right: 20px;
+    }
+
+    .ico-new-courses {
+      top: -3px;
+    }
+  }
+
+
+  /* ================================================================ *\
+      #Grid
+  \* ================================================================ */
+  .col {
+    float: left;
+  }
+
+  .col-1of2 {
+    width: 50%;
+  }
+
+  .col-full {
+    width: 100%;
+  }
+
+
+  /* ================================================================ *\
+      #Header
+  \* ================================================================ */
+
+  .header {
+    position: fixed;
+    border-bottom: 2px solid #d7e2e6;
+    background-color: #ffffff;
+    height: 68px;
+    box-shadow: none;
+  }
+
+  .logo {
+
+    background-image: url(/app/css/images/logo.png);
+
+    width: 211px;
+    height: 47px;
+    margin: 11px 0 0 36px;
+  }
+  .nav-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 26px 36px 0 0;
+  }
+
+  .nav-toggle {
+    background: url(/app/css/images/arrow-dropdown.png) no-repeat right 4px;
+    padding-right: 37px;
+    width: auto;
+    height: auto;
+    opacity: 1;
+    overflow: visible;
+  }
+}
+
+@media (max-width: 1024px) {
+    // Mobile
+  .nav-toggle {
+    white-space: nowrap;
+    text-indent: 150%;
+  }
+
+  /* ================================================================ *\
+      #Header
+  \* ================================================================ */
+  .nav {
+    right: auto;
+    left: -8px;
+  }
+  .nav:before {
+    left: 11px !important;
+    right: auto !important;
+  }
+
+  .logged-out .nav-toggle {
+    display: block;
+  }
+
+  .header .error-container {
+    top: 19px;
+    font-size: 14px;
+  }
+
+  /* ================================================================ *\
+      #New User
+  \* ================================================================ */
+
+  .new-user .intro-title {
+    display: block;
+    font-size: 13px;
+  }
+  .new-user .intro-title strong {
+    display: block;
+    font-size: 15px;
+  }
+
+
+  /* ================================================================ *\
+      #Footer
+  \* ================================================================ */
+
+  .footer {
+    height: 25px;
+    text-align: center;
+    line-height: 1;
+  }
+  .footer .copyright {
+    float: none;
+  }
+  .footer .p1 {
+    display: block;
+    font-size: 9px;
+  }
+}

@@ -8,7 +8,7 @@
             return {
                 restrict: "E",
                 scope: true,
-                templateUrl: "Areas/Management/app/spa/settings/Categories.html",
+                templateUrl: "Areas/Management/app/spa/settings/Categories.html?v=" + htmlVer,
                 link: function($scope, elem, attrs) {
                     CategoryService.getList(true).success(function(list) {
                         $scope.list = list;
@@ -37,7 +37,7 @@
 
 
 
-        .directive("settingsCatRow", ["CategoryService", "Fancybox", function(CategoryService, Fancybox) {
+        .directive("settingsCatRow", ["CategoryService", "modalConfirm", function(CategoryService, modalConfirm) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -56,12 +56,12 @@
                     };
 
                     $scope.removeCat = function(cat) {
-                        Fancybox.confirm("Confirm removing category","Remove category \"" + cat.title + "\"?").then(function() {
+
+                        modalConfirm.open("Confirm removing category","Remove category \"" + cat.title + "\"?").result.then(function() {
                             $scope.removingCat = true;
                             CategoryService.deleteCategory(cat.id).success(function() {
                                 Cols.remove(cat, $scope.list);
                             });
-
                         });
                     };
 
@@ -75,7 +75,7 @@
             };
         }])
 
-        .directive("settingsSubCatRow", ["CategoryService", "Fancybox", function(CategoryService, Fancybox) {
+        .directive("settingsSubCatRow", ["CategoryService", "modalConfirm", function(CategoryService, modalConfirm) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -94,7 +94,7 @@
                     };
 
                     $scope.removeSub = function(sub, cat) {
-                        Fancybox.confirm("Confirm removing sub category", "Remove sub category \"" + sub.title + "\"?").then(function() {
+                        modalConfirm.open("Confirm removing sub category", "Remove sub category \"" + sub.title + "\"?").result.then(function() {
 
                             $scope.removingSub = true;
                             CategoryService.deleteSubCategory(sub.id, cat.id).success(function() {

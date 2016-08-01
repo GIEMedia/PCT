@@ -1,99 +1,41 @@
 
 <div class="container is-scrollable" id="dashboard-page">
+
     <div class="intro intro-logged">
-        <h3 class="intro-title">{{firstLogin ? 'Welcome':'Welcome back'}}, <strong ng-bind="User.firstName"></strong>!</h3><!-- /.intro-title -->
-        <div class="search">
-            <div class="search-field" allow-search="courseStructure!=null">
-                <input placeholder="{{courseStructure!=null ? 'Find a course': 'Loading courses…'}}" ng-model="view.search" search-input />
-            </div><!-- /.search-field -->
-
-            <div class="search-dropdown">
-                <div class="cols"  ng-if="(courseHeaderCols.length || 0) == 0">
-
-                    <div class="col col-2of2 no-record">
-                        <div ng-if="(view.search.length || 0) == 0">
-                            No course(s) found
-                        </div>
-                        <div ng-if="view.search.length">
-                            No course(s) with title "<b>{{view.search}}</b>" found
-                        </div>
-                    </div>
-                </div>
-                <div class="cols" ng-if="courseHeaderCols.length">
-
-                    <div class="col col-1of2" ng-repeat="col in courseHeaderCols">
-                        <div class="search-section" ng-repeat="courseHeader in col">
-                            <div class="section-head">
-                                <h3 class="section-title">
-                                    <i class="search-ico-rats"></i>
-
-                                    {{courseHeader.title}}
-                                </h3><!-- /.section-title -->
-                            </div><!-- /.section-head -->
-
-                            <div class="section-body">
-                                <h5 ng-repeat-start="courseCat in courseHeader.categories">{{courseCat.title}}</h5>
-
-                                <ul ng-repeat-end>
-                                    <li ng-repeat="course in courseCat.courses">
-                                        <div>
-                                            <a href="" ng-click="loadCourse(course)">
-                                                {{course.title}}
-                                                <div class="courses-item-content">
-                                                    <div ng-if="course.description">
-                                                        <h6>CEU(s) Available:</h6>
-                                                        <p class="courses-item-meta">{{course.description}}</p><!-- /.courses-item-meta -->
-                                                    </div>
-                                                    <div ng-if="course.prereq_courses && course.prereq_courses.length > 0">
-                                                        <h6>Pre-requisite Courses:</h6>
-                                                        <p ng-repeat="pre in course.prereq_courses" class="courses-item-meta">{{pre}}</p><!-- /.courses-item-meta -->
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div><!-- /.section-body -->
-                        </div><!-- /.search-section -->
-                    </div><!-- /.col col-1of2 -->
-
-                </div><!-- /.cols -->
-            </div><!-- /.search-dropdown -->
-        </div><!-- /.search -->
-    </div><!-- /.intro -->
+        <h3 class="intro-title">{{firstLogin ? 'Welcome':'Welcome back'}}, <strong ng-bind="User.firstName"></strong>!</h3>
+        <search-section></search-section>
+    </div>
 
     <div class="cols">
 
         <div class="col col-1of2" id="intro">
-
             <e-introduction ng-if="(openCourses.length || 0)==0"></e-introduction>
 
             <div class="section-courses" ng-if="openCourses.length">
                 <div class="section-head">
                     <h3 class="section-title title-underlined">
                         <i class="ico ico-open-courses"></i>
-
                         <span>Open Courses</span>
-
                         <small class="bull">&bull;</small>
-
                         <small class="count" ng-bind="openCourses.length"></small>
-                    </h3><!-- /.section-title -->
-                </div><!-- /.section-head -->
+                    </h3>
+                </div>
 
                 <div class="section-body">
                     <ul class="courses-items">
                         <li class="courses-item" ng-repeat="course in openCourses">
-                            <a href="#" class="courses-item-image">
-
-                            </a><!-- /.courses-item-image -->
+                            <div class="courses-item-image">
+                                <div class="course-item-badge" ng-if="course.ceu_eligible">
+                                    <span>CEU</span>
+                                </div>
+                            </div>
 
                             <div class="courses-item-content">
                                 <h4 class="courses-item-title">
                                     <a href="#" ng-bind="course.title"></a>
                                 </h4>
 
-                                <p class="courses-item-meta">Last Activity: <span am-time-ago="course.last_activity"></span></p><!-- /.courses-item-meta -->
+                                <p class="courses-item-meta">Last Activity: <span am-time-ago="course.last_activity"></span></p>
 
                                 <ul class="courses-item-bars">
                                     <li class="courses-item-bar courses-item-bar-purple">
@@ -102,23 +44,47 @@
                                         <span class="courses-item-bar-fill">
                                             <span style="width: {{course.course_progress * 100}}%"></span>
                                         </span>
-                                    </li><!-- /.courses-item-bar courses-item-bar-purple -->
+                                    </li>
 
-                                    <li class="courses-item-bar courses-item-bar-blue">
+                                    <li class="courses-item-bar"
+                                        ng-class="{'courses-item-bar-blue': getTestProgress(course) >= 0.7,
+                                        'courses-item-bar-red': getTestProgress(course) < 0.7}">
                                         <span class="courses-item-bar-label">Tests</span>
 
                                         <span class="courses-item-bar-fill">
                                             <span style="width: {{course.test_progress * 100}}%"></span>
                                         </span>
-                                    </li><!-- /.courses-item-bar courses-item-bar-blue -->
-                                </ul><!-- /.courses-item-bars -->
-                            </div><!-- /.courses-item-content -->
+                                    </li>
+                                </ul>
+                            </div>
 
-                            <a ui-sref="course({id: course.course_id})" class="courses-item-action-resume">
-                                <span>Resume Course</span>
-                            </a><!-- /.courses-item-action-resume -->
-                        </li><!-- /.courses-item -->
+                            <div class="course-item-progress"
+                                 ng-class="{'course-item-progress-blue':course.test_progress >= 0.7, 'course-item-progress-red':course.test_progress < 0.7 }"
+                                 ng-if="getTestProgress(course) != null">
+                                <div ng-class="{'ico-reset': course.test_progress < 0.7, 'ico-check': course.test_progress >= 0.7 }">&nbsp;</div>
+                                <span>{{(course.test_progress * 100) | mathFloor}}%</span>
+                            </div>
 
+                            <a ng-if="getTestProgress(course) != null" ui-sref="course({id: course.course_id})" class="courses-item-action-resume test"
+                               ng-class="getTestProgress(course) < 0.7 ? 'less' : 'great'">
+                                <span ng-if="getTestProgress(course) < 0.7">
+                                    <span class="course-test-text">
+                                        {{course.test_progress * 100 | mathFloor}}% - Retake Test?
+                                    </span>
+                                    <span class="course-test-subtext" ng-if="course.ceu_eligible">
+                                        You may retake this course to meet requirements for CEU credit
+                                    </span>
+                                </span>
+
+                                <span class="course-test-text" ng-if="getTestProgress(course) >= 0.7">
+                                    Passed! Retake Course?
+                                </span>
+                            </a>
+
+                            <a ng-if="getTestProgress(course) == null" ui-sref="course({id: course.course_id})" class="courses-item-action-resume non-test">
+                                <span class="course-test-text">Resume Course</span>
+                            </a>
+                        </li>
                     </ul><!-- /.courses-items -->
                 </div><!-- /.section-body -->
             </div><!-- /.section-courses -->
@@ -137,8 +103,8 @@
                         <small class="bull">&bull;</small>
 
                         <small class="count" ng-bind="newCourses.length"></small>
-                    </h3><!-- /.section-title -->
-                </div><!-- /.section-head -->
+                    </h3>
+                </div>
 
                 <div class="section-body">
                     <ul class="courses-items">
@@ -151,9 +117,11 @@
                             No new course(s)
                         </li>
                         <li class="courses-item" ng-repeat="course in newCourses">
-                            <a href="#" class="courses-item-image">
-
-                            </a><!-- /.courses-item-image -->
+                            <div class="courses-item-image">
+                                <div class="course-item-badge" ng-if="course.ceu_eligible">
+                                    <span>CEU</span>
+                                </div>
+                            </div>
 
                             <div class="courses-item-content">
                                 <h4 class="courses-item-title">
@@ -161,22 +129,21 @@
                                 </h4>
                                 <div ng-if="course.description">
                                     <h5>CEU(s) Available:</h5>
-                                    <p class="courses-item-meta">{{course.description}}</p><!-- /.courses-item-meta -->
+                                    <p class="courses-item-meta">{{course.description}}</p>
                                 </div>
                                 <div ng-if="course.prereq_courses && course.prereq_courses.length > 0">
                                     <h5>Pre-requisite Courses:</h5>
-                                    <p ng-repeat="pre in course.prereq_courses" class="courses-item-meta">{{pre}}</p><!-- /.courses-item-meta -->
+                                    <p ng-repeat="pre in course.prereq_courses" class="courses-item-meta">{{pre}}</p>
                                 </div>
-                            </div><!-- /.courses-item-content -->
+                            </div>
 
                             <a  href="" ng-click="loadCourse(course)" class="courses-item-action-start">
                                 <span>Start Course</span>
-                            </a><!-- /.courses-item-action-start -->
-                        </li><!-- /.courses-item -->
-
-                    </ul><!-- /.courses-items -->
-                </div><!-- /.section-body -->
-            </div><!-- /.section-courses -->
-        </div><!-- /.col col-1of2 -->
-    </div><!-- /.cols -->
-</div><!-- /.container -->
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

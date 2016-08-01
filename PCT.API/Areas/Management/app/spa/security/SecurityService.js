@@ -167,9 +167,12 @@
             var fetchUser = function() {
                 return Api.get("api/account")
                     .success(function(account) {
+                        User.ID = account.ID;
                         User.loggedIn = true;
                         User.firstName = account.first_name;
                         User.fullName = account.first_name + " " + account.last_name;
+
+                        Fs.invokeAll(onLoginListeners);
                     })
                     .onError(function(error, status) {
                         if (status == 401) {
@@ -189,6 +192,9 @@
                     }
                 });
             }
+
+            var onLoginListeners = [];
+            var onLogoutListeners = [];
 
             return {
                 login: function(username, password, remember, firstLogin) {
@@ -223,6 +229,22 @@
                     User.firstName = null;
                     User.fullName = null;
                     $state.go(Security.loginState());
+
+                    Fs.invokeAll(onLogoutListeners);
+                },
+                onLogin: function (onLoginListener, onLogoutListener) {
+                    onLoginListeners.push(onLoginListener);
+
+                    if(User.loggedIn) {
+                        onLoginListener();
+                    }
+
+                    if(onLogoutListener) {
+                        onLogoutListeners.push(onLogoutListener);
+                        if(!User.loggedIn) {
+                            onLogoutListener();
+                        }
+                    }
                 }
             };
         }])

@@ -1,0 +1,7 @@
+.test-ws {
+  content: "xs";
+  @media (min-width: 1025px) {
+    content: "lg";
+  }
+}
+

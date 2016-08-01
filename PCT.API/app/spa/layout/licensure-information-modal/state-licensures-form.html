@@ -1,0 +1,49 @@
+<form novalidate name="form">
+    <div class="form-body">
+        <div class="form-controls" ng-repeat="stateLicensure in stateLicensures" state-licensure-row>
+            <div class="form-cols-outer">
+                <div class="form-cols">
+                    <div class="form-col form-col-1of2">
+                        <select class="field" ng-options="state.code as state.name for state in states" ng-model="stateLicensure.state" required>
+                            <option style="color:#707070" value="">State</option>
+                        </select>
+                    </div>
+
+                    <div class="form-col form-col-1of2">
+                        <select class="field" ng-options="cat.id as (cat.name + ' ' + cat.number) for cat in filteredCertification(stateLicensure.state)"
+                                ng-model="stateLicensure.category" required>
+                            <option style="color:#707070" value="">Certification Category</option>
+                        </select>
+                    </div>
+
+                    <div class="form-col form-col-1of2">
+                        <input type="text" class="field" placeholder="License #" ng-model="stateLicensure.license_num" required ng-maxlength="200">
+                    </div>
+
+                    <div class="form-col form-col-1of2">
+                        <input type="text" class="field" placeholder="Confirm License #" ng-model="stateLicensure.confirmNum" equals="stateLicensure.license_num" >
+                    </div>
+                </div>
+            </div>
+
+            <a href="" ng-if="stateLicensures.length == 1" class="btn-licensure btn-add" ng-click="stateLicensures.push({})" tabindex="2"></a>
+            <a href="" ng-if="stateLicensures.length > 1" class="btn-licensure btn-remove" ng-click="stateLicensures.splice($index, 1)" tabindex="2"></a>
+
+            <div ng-if="stateLicensures.length > 1" class="form-controls-actions">
+                <a href="" class="btn-add" ng-click="stateLicensures.push({})" tabindex="2"></a>
+                <a href="" class="btn-remove" ng-click="stateLicensures.splice($index, 1)" tabindex="2"></a>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <button ng-disabled="form.$invalid || stateLicensuresForm.loading"
+                ng-click="update()"
+                class="btn btn-xs-block">
+            Continue
+        </button>
+        <div class="skip-button">
+            <a ng-click="skipStep()">Skip this step</a>
+        </div>
+    </div>
+</form>

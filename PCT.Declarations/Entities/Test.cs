@@ -12,7 +12,7 @@ namespace PCT.Declarations.Entities
     public class Test : Questioned<TestQuestionProgress>
     {
         private static readonly decimal _passingPercentage =
-            ConfigurationManager.AppSettings["PassingPercentage"].ToDecimal(.8M);
+            ConfigurationManager.AppSettings["PassingPercentage"].ToDecimal(.7M);
 
         public Test()
         {

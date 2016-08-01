@@ -30,7 +30,7 @@
         .directive("contentSideNav", ["LayoutService", function(LayoutService) {
             return {
                 restrict: "E",
-                templateUrl: "Areas/Management/app/spa/layout/ContentSideNav.html",
+                templateUrl: "Areas/Management/app/spa/layout/ContentSideNav.html?v=" + htmlVer,
                 link: function($scope, elem, attrs) {
                     $scope.links = [
                         {
@@ -86,7 +86,7 @@
         .directive("layoutHeader", ["LayoutService", "SecurityService", "User", "$parse", function(LayoutService, SecurityService, User, $parse) {
             return {
                 restrict: "A",
-                templateUrl: "Areas/Management/app/spa/layout/LayoutHeader.html",
+                templateUrl: "Areas/Management/app/spa/layout/LayoutHeader.html?v=" + htmlVer,
                 link: function($scope, elem, attrs) {
                     // chs means Content Header Search. This helps prevent shadowing in child scopes
                     $scope.chs = {

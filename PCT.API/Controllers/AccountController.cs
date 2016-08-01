@@ -382,23 +382,7 @@ namespace PCT.Api.Controllers
         [Route("courses")]
         public course_overview[] OpenCourses()
         {
-            var courseProgress = _courseService.Value.OpenCourses(CurrentUserID);
-
-            return courseProgress.Select(cp =>
-            {
-                var co = (course_overview) cp.Course;
-                co.course_progress = Math.Max(.1M, cp.Sections.Count(s => s.Passed)/(decimal) cp.TotalSections);
-                co.test_progress =
-                    cp.TestProgress != null
-                        ? cp.TestProgress.CompletedQuestions.Count(q => q.CorrectOnAttempt != null)/
-                          (decimal) cp.TestProgress.TotalQuestions
-                        : 0;
-                co.last_activity = cp.LastActivityUtc;
-
-                return co;
-            }).ToArray().OrderByDescending(c => c.last_activity)
-                //TODO: Remove this hack - multiple results being returned for same course
-                .GroupBy(g => g.course_id).Select(g => g.First()).ToArray();
+            return _courseService.Value.OpenCourses(CurrentUserID);
         }
 
         [HttpGet]
@@ -406,7 +390,7 @@ namespace PCT.Api.Controllers
         public course_progress GetCourseProgress(Guid courseID)
         {
             return _courseService.Value.GetCourseProgress(CurrentUserID, courseID)
-                ?? new course_progress {course_id = courseID, complete = false};
+                   ?? new course_progress {course_id = courseID, complete = false, need_verification = true};
         }
 
         [HttpGet]
@@ -428,7 +412,7 @@ namespace PCT.Api.Controllers
                 tries_left = test.MaxTries,
                 max_tries = test.MaxTries
             };
-        }
+         }
 
         [HttpGet]
         [Route("certificates")]
@@ -486,6 +470,22 @@ namespace PCT.Api.Controllers
             account.StateLicensures.Clear();
             licensures.ForEach(l => account.StateLicensures.Add(l));
             _entityRepository.Save(account);
+        }
+
+
+        /// <summary>
+        /// Get all certification categories
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("certification_category")]
+        public certification_category[] GetCertificationCategory()
+        {
+            return _entityRepository.Queryable<CertificationCategory>()
+                .OrderBy(m => m.StateAbbr).ThenBy(m => m.Name)
+                .ToList()
+                .Select(m => (certification_category)m)
+                .ToArray();
         }
 
         #endregion

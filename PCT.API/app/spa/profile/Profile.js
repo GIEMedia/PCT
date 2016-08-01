@@ -9,7 +9,7 @@
             $stateProvider
                 .state('profile', {
                     url: '/profile',
-                    templateUrl: "/app/spa/profile/Profile.html",
+                    templateUrl: "/app/spa/profile/Profile.html?v=" + htmlVer,
                     controller: "profile.Ctrl"
                 })
             ;
@@ -29,7 +29,7 @@
             return {
                 restrict: "E",
                 scope: true,
-                templateUrl: "/app/spa/profile/AccountForm.html",
+                templateUrl: "/app/spa/profile/AccountForm.html?v=" + htmlVer,
                 link: function($scope, elem, attrs) {
                     $scope.accountForm = {
                         loading: false
@@ -57,7 +57,7 @@
             return {
                 restrict: "E",
                 scope: true,
-                templateUrl: "/app/spa/profile/PasswordForm.html",
+                templateUrl: "/app/spa/profile/PasswordForm.html?v=" + htmlVer,
                 link: function($scope, elem, attrs) {
                     function newForm() {
                         return {
@@ -114,8 +114,19 @@
             return {
                 restrict: "E",
                 scope: true,
-                templateUrl: "/app/spa/profile/StateLicensuresForm.html",
-                link: function($scope, elem, attrs) {
+                templateUrl: "/app/spa/profile/StateLicensuresForm.html?v=" + htmlVer,
+                controller: ["$scope", "CourseService", function($scope, CourseService) {
+
+                    CourseService.getCertificationCategories().then(function (resp) {
+                        $scope.certificationCategories = resp.data;
+                    });
+                    
+                    $scope.filteredCertification = function (stateCode) {
+                        return Cols.filter($scope.certificationCategories, function (categori) {
+                            return categori.state == stateCode;
+                        });
+                    };
+
                     $scope.stateLicensuresForm = {
                         loading: true
                     };
@@ -129,8 +140,6 @@
                         $scope.stateLicensuresMaster = angular.copy($scope.stateLicensures);
                         $scope.stateLicensuresForm.loading = false;
                     });
-                    $scope.certificateCategories = CertificateService.getCertificateCategories();
-
 
                     $scope.update = function() {
                         $scope.stateLicensuresForm.loading = true;
@@ -139,9 +148,22 @@
                             $scope.stateLicensuresMaster = angular.copy($scope.stateLicensures);
                         });
                     };
-                }
+                }]
             };
         }])
+
+        .directive("stateLicensureRow", function() {
+            return {
+                restrict: "A",
+                controller: ["$scope", function($scope) {
+                    $scope.$watch("stateLicensure.state", function(newVal, oldVal) {
+                        if(newVal != oldVal) {
+                            $scope.stateLicensure.category = null;
+                        }
+                    });
+                }]
+            };
+        })
 
         /**
          * For the Managers form in Profile page
@@ -150,7 +172,7 @@
             return {
                 restrict: "E",
                 scope: true,
-                templateUrl: "/app/spa/profile/ManagersForm.html",
+                templateUrl: "/app/spa/profile/ManagersForm.html?v=" + htmlVer,
                 link: function($scope, elem, attrs) {
                     $scope.managersForm = {
                         loading: true

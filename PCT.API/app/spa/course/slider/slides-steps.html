@@ -1,0 +1,5 @@
+<ul>
+    <li ng-repeat="section in sections">
+        <a href ng-click="onChangeSection({$value: section})" tooltipster="section.title" ng-class="{current: section == currentSection, answered: isComplete(section)}">{{$index + 1}}</a>
+    </li>
+</ul>

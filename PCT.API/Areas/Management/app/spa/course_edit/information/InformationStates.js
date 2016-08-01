@@ -7,7 +7,7 @@
         .directive("stateAdder", function() {
             return {
                 restrict: "A",
-                templateUrl: "Areas/Management/app/spa/course_edit/information/StateAdder.html",
+                templateUrl: "Areas/Management/app/spa/course_edit/information/StateAdder.html?v=" + htmlVer,
                 link: function($scope, elem, attrs) {
                     $scope.stateAdder = {
                         model: {}
@@ -18,13 +18,24 @@
                         $scope.stateAdder.model = {};
                         $scope.addStateForm.$setPristine(true);
                     };
+
+                    $scope.filteredCode = function (stateCode) {
+                        return Cols.filter($scope.certificationCategories, function (categori) {
+                            return categori.state == stateCode;
+                        })
+                    };
+
+                    $scope.$watch("stateAdder.model.state", function(value) {
+                        $scope.stateAdder.model.category_id = null;
+                    });
+
                 }
             };
         })
-        .directive("courseInformationStates", ["StateService", function(StateService) {
+        .directive("courseInformationStates", ["StateService","CourseService", function(StateService, CourseService) {
             return {
                 restrict: "A",
-                templateUrl: "Areas/Management/app/spa/course_edit/information/InformationStates.html",
+                templateUrl: "Areas/Management/app/spa/course_edit/information/InformationStates.html?v=" + htmlVer,
                 link: function($scope, elem, attrs) {
                     $scope.states = StateService.getStates();
 
@@ -45,8 +56,17 @@
                         $scope.filteredStates = Cols.filter($scope.states, function(s) {
                             return !ids[s.code];
                         });
+
+
                         //console.log($scope.filteredStates.length);
                     });
+
+                    CourseService.getCertificationCategories().then(function (resp) {
+                       $scope.certificationCategories = resp.data;
+                    });
+
+
+
 
                     $scope.stateByCode = StateService.stateByCode;
 
@@ -60,5 +80,17 @@
                 }
             };
         }])
+
+
+        .filter('filterCategoryCode', function () {
+            return function (id, CategoriesCode) {
+                if (!CategoriesCode) return null;
+                var certification = Cols.find(CategoriesCode, function (c) {
+                    return c.id == id;
+                });
+
+                return (certification.name ? certification.name : '') + ' ' + (certification.number ? certification.number : '');
+            }
+        })
     ;
 })();

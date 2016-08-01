@@ -9,7 +9,7 @@
             $stateProvider
                 .state('courseEdit.test', {
                     url: '/test?focusQuestion',
-                    templateUrl: "Areas/Management/app/spa/course_edit/test/Test.html",
+                    templateUrl: "Areas/Management/app/spa/course_edit/test/Test.html?v=" + htmlVer,
                     controller: "courseEdit.test.Ctrl"
                 })
             ;

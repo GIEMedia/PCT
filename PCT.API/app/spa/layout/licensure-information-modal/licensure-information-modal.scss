@@ -1,0 +1,161 @@
+.modal-open {
+  overflow: hidden;
+}
+.licensure-information-modal .modal {
+  .title {
+      .section-title-modal {
+        i {
+          color: #2cb142;
+          font-size: 23px;
+          padding-right: 6px;
+        }
+
+        span {
+          border-bottom: 3px solid #ededed;
+          display: inline-block;
+          vertical-align: top;
+          padding-bottom: 4px;
+          font-size: 19px;
+        }
+      }
+    }
+
+  form {
+    margin: 0;
+
+    .form-actions {
+      text-align: center;
+      margin: 30px 0 16px;
+
+      .btn {
+        display: inline-block;
+        width: auto;
+      }
+
+      .skip-button {
+        margin: 15px 0;
+      }
+    }
+  }
+
+  .content {
+    padding: 0;
+  }
+
+  .controls {
+    text-align: center;
+
+    .form-controls {
+      &:not(:first-child) {
+        margin-top: 30px;
+      }
+
+      .btn-add, .btn-remove {
+        width: 29px;
+        height: 29px;
+        background-size: 33px;
+        background-position: center -1px;
+
+        &:hover {
+          background-position: center -34px;
+        }
+      }
+
+      .form-cols-outer {
+
+        input, select {
+          border-radius: 6px;
+        }
+
+        select {
+          background: url("./images/select-arrows.png") no-repeat 99% 8px #F9F9F9;
+          background-size: 5px;
+          -webkit-appearance: none;
+          -moz-appearance: none;
+        }
+      }
+
+      .form-controls-actions {
+        display: none;
+
+      }
+
+      &:last-child {
+        .form-controls-actions {
+          display: block;
+          float: none;
+
+          .btn-remove {
+            margin: 0 4px;
+            display: inline-block;
+          }
+        }
+
+        .btn-licensure {
+          &.btn-remove{
+            display: none;
+          }
+        }
+      }
+    }
+
+    a {
+      color: #404040;
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 20px;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  @media (min-width: 1025px) {
+    form {
+      margin: 0 37px;
+    }
+
+    .content {
+      padding: 0 0 0 35px;
+    }
+
+    .controls {
+      .form-controls {
+        .btn-licensure {
+          float: left;
+          margin: 30px;
+        }
+
+        .btn-add, .btn-remove {
+          width: 50px;
+          height: 50px;
+          background-size: 52px;
+
+          &:hover {
+            background-position: center -53px;
+          }
+        }
+
+        .form-cols-outer {
+          width: 80%;
+          float: left;
+
+          select {
+            background-position: 98% 17px;
+          }
+        }
+
+        &:last-child {
+          .form-controls-actions {
+            float: left;
+            padding-left: 22px;
+
+            .btn-remove {
+              margin: 8px !important;
+              display: block !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

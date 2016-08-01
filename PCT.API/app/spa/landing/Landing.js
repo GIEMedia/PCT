@@ -11,7 +11,7 @@
             $stateProvider
                 .state('landing', {
                     url: '/landing',
-                    templateUrl: "/app/spa/landing/Landing.html",
+                    templateUrl: "/app/spa/landing/Landing.html?v=" + htmlVer,
                     controller: "landing.Ctrl"
                 })
             ;

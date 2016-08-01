@@ -9,7 +9,7 @@
             $stateProvider
                 .state('courseEdit.publish', {
                     url: '/publish',
-                    templateUrl: "Areas/Management/app/spa/course_edit/publish/Publish.html",
+                    templateUrl: "Areas/Management/app/spa/course_edit/publish/Publish.html?v=" + htmlVer,
                     controller: "courseEdit.publish.Ctrl"
                 })
             ;

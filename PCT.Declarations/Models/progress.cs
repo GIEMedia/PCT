@@ -51,6 +51,7 @@ namespace PCT.Declarations.Models
         public course_progress()
         {
             sections = new section_progress[0];
+            need_verification = true;
         }
 
         public Guid course_id { get; set; }
@@ -58,5 +59,7 @@ namespace PCT.Declarations.Models
         public bool complete { get; set; }
 
         public section_progress[] sections { get; set; }
+
+        public bool need_verification { get; set; }
     }
 }

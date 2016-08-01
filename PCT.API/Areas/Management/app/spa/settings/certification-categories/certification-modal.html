@@ -1,0 +1,19 @@
+<form novalidate name="popupText">
+    <div class="popup popup-new-category">
+        <div class="popup-inner">
+            <div class="popup-head">
+                <h2 class="popup-title">{{certification.id ? 'Update Certification' : 'Add Certification'}}</h2><!-- /.popup-title -->
+            </div>
+            <div class="popup-body clearfix popup-single-input">
+                <input type="text" class="field" placeholder="Category Type" required ng-model="certification.name" maxlength="200" />
+                <input type="text" class="field" placeholder="Category Name" required ng-model="certification.number" maxlength="200" />
+                <span name="state" id="state" class="select" pct-model="certification.state" required pct-options="state.code as state.name for state in States"></span>
+            </div>
+            <div class="popup-actions">
+                <a href="" ng-click="close()" class="btn btn-grey">Cancel</a>
+
+                <button ng-click="save()" ng-disabled="popupText.$invalid" class="btn btn-green">Save</button>
+            </div>
+        </div>
+    </div>
+</form>

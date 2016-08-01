@@ -9,6 +9,8 @@
 
         'pct.management.layout',
         'pct.management.theme',
+        'pct.management.template-opener',
+        'pct.management.modal',
 
         'pct.management.login',
         'pct.management.courses',
@@ -83,14 +85,14 @@
         /**
          * This config show Fancybox alerts whenver receiving API error 500
          */
-        .run(["Api", "Fancybox", function(Api, Fancybox) {
+        .run(["Api", "modalAlert", function(Api, modalAlert) {
             var showingError = false;
             Api.onError(function(data, status) {
                 if (status == 500) {
                     // This is to avoid multiple errors to launch many alert boxes
                     if (!showingError) {
                         showingError = true;
-                        Fancybox.alert("Internal server error", "An error occurred attempting to process your request. We apologize for the inconvenience. Please try again.").then(function() {
+                        modalAlert.open("Internal server error", "An error occurred attempting to process your request. We apologize for the inconvenience. Please try again.").result.then(function() {
                             showingError = false;
                         });
                     }

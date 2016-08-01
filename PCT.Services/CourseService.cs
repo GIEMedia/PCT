@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
 using Prototype1.Foundation;
 using Prototype1.Foundation.Data.NHibernate;
 using Prototype1.Foundation.Logging;
@@ -11,8 +8,6 @@ using PCT.Declarations;
 using PCT.Declarations.Entities;
 using PCT.Declarations.Interfaces;
 using PCT.Declarations.Models;
-using Remotion.Linq.Utilities;
-using WebGrease.Css.Extensions;
 
 namespace PCT.Services
 {
@@ -29,19 +24,48 @@ namespace PCT.Services
             _exceptionLogger = exceptionLogger;
         }
 
-        public IEnumerable<CourseProgress> OpenCourses(Guid accountID)
+        public course_overview[] OpenCourses(Guid accountID)
         {
-            return
+            var courseProgress =
                 _entityRepository.GetByID<Account>(accountID).CourseProgress
+                    .GroupBy(c => c.Course).Select(g => g.OrderByDescending(c => c.Attempt).FirstOrDefault())
                     .Where(c => c.Course.Status == CourseStatus.Active &&
                                 (c.Sections.Count(s => s.Passed) != c.TotalSections ||
                                  // havent completed all of the questions
-                                 
-                                 c.TestProgress == null || // havent started the test
-                                 (c.TestProgress.CompletedQuestions.Count(q=>q.CorrectOnAttempt != null) != c.TestProgress.TotalQuestions &&
 
-                                  // havent completed test
-                                  c.TestProgress.TriesLeft > 0))); // havent failed test
+                                 c.TestProgress == null || // havent started the test
+                                 (
+                                 //c.TestProgress.CompletedQuestions.Count(q => q.CorrectOnAttempt != null) !=
+                                 // c.TestProgress.TotalQuestions &&
+
+                                  // hasn't passed test
+                                  c.Certificate == null &&
+
+                                  // havent failed test
+                                  c.TestProgress.TriesLeft > 0)));
+
+            return courseProgress.Select(cp =>
+            {
+                var co = (course_overview) cp.Course;
+                co.course_progress = Math.Max(.1M, cp.Sections.Count(s => s.Passed)/(decimal) cp.TotalSections);
+                co.test_progress =
+                    cp.TestProgress != null
+                        ? cp.TestProgress.CompletedQuestions.Count(q => q.CorrectOnAttempt != null)/
+                          (decimal) cp.TestProgress.TotalQuestions
+                        : 0;
+                co.last_activity = cp.LastActivityUtc;
+                var states = cp.Course.StateCEUs.Select(s => s.StateAbbr).ToArray();
+                co.ceu_eligible = cp.Course.StateCEUs.Any() &&
+                                  (from a in _entityRepository.Queryable<Account>()
+                                      where a.ID == accountID
+                                      from s in a.StateLicensures
+                                      where states.Contains(s.StateAbbr)
+                                      select s).Any();
+
+                return co;
+            }).ToArray().OrderByDescending(c => c.last_activity)
+                //TODO: Remove this hack - multiple results being returned for same course
+                .GroupBy(g => g.course_id).Select(g => g.First()).ToArray();
         }
 
         public IEnumerable<Course> NewCourses(int count = 5, Guid? accountID = null)
@@ -68,18 +92,20 @@ namespace PCT.Services
             var course = _entityRepository.GetByID<Course>(courseID);
 
             if (course == null)
-                throw new ArgumentOutOfRangeException("courseID", "Course not found.");
+                throw new ArgumentOutOfRangeException(nameof(courseID), "Course not found.");
 
             if (status.HasValue && course.Status != status)
-                throw new ArgumentOutOfRangeException("courseID", "Course status not " + status + ".");
+                throw new ArgumentOutOfRangeException(nameof(courseID), "Course status not " + status + ".");
 
             if (!accountID.HasValue)
                 return course;
 
             var courseProgress = (from a in _entityRepository.Queryable<Account>()
-                                  where a.ID == accountID
-                                  from c in a.CourseProgress
-                                  select c).ToList();
+                where a.ID == accountID
+                from c in a.CourseProgress
+                select c).ToList()
+                .GroupBy(c => c.Course)
+                .Select(g => g.OrderByDescending(x => x.Attempt).FirstOrDefault()).ToList();
 
             if (onlyPassed && !courseProgress.Any(c => c.Course.ID == courseID && c.Sections.All(s => s.Passed)))
                 return null;
@@ -111,20 +137,25 @@ namespace PCT.Services
             if (course == null)
                 return new course_progress();
 
-            var completedSections = (from a in _entityRepository.Queryable<Account>()
-                                     where a.ID == accountID
-                                     from c in a.CourseProgress
-                                     where c.Course.ID == course.ID
-                                     from s in c.Sections
-                                     from q in s.CompletedQuestions
-                                     group q by s
-                                         into g
-                                         select g).ToDictionary(g => g.Key.SectionID, g => g.ToList());
+            var courseProgress = (from a in _entityRepository.Queryable<Account>()
+                where a.ID == accountID
+                from c in a.CourseProgress
+                where c.Course.ID == course.ID
+                orderby c.Attempt descending 
+                select c).FirstOrDefault();
+
+            if (courseProgress == null) return null;
+
+            var completedSections = (from s in courseProgress.Sections
+                from q in s.CompletedQuestions
+                group q by s into g
+                select g).ToDictionary(g => g.Key.SectionID, g => g.ToList());
 
             return new course_progress
             {
                 course_id = course.ID,
                 complete = completedSections.Keys.Count == course.Sections.Count,
+                need_verification = courseProgress.VerificationInitials.IsNullOrEmpty(),
                 sections =
                     course.Sections.Where(s => completedSections.ContainsKey(s.ID)).Select(s =>
                     {
@@ -185,6 +216,7 @@ namespace PCT.Services
                 where a.ID == accountID
                 from c in a.CourseProgress
                 where c.Course.ID == courseID
+                orderby c.Attempt descending
                 select c).FirstOrDefault();
 
             if (courseProgress == null || courseProgress.Sections.Any(s => !s.Passed) ||
@@ -220,12 +252,22 @@ namespace PCT.Services
                 where a.ID == accountID
                 from c in a.CourseProgress
                 where c.Course.ID == course.ID
+                orderby c.Attempt descending
                 select c).FirstOrDefault();
+
+            var attempt = 1;
+
+            if (courseProgress?.TestProgress != null &&
+                !courseProgress.TestProgress.Passed && courseProgress.TestProgress.TriesLeft == 0)
+            {
+                attempt = courseProgress.Attempt + 1;
+                courseProgress = null;
+            }
 
             if (courseProgress == null)
             {
                 var account = _entityRepository.GetByID<Account>(accountID);
-                courseProgress = new CourseProgress {Course = course, TotalSections = course.Sections.Count};
+                courseProgress = new CourseProgress {Course = course, TotalSections = course.Sections.Count, Attempt = attempt };
                 account.CourseProgress.Add(courseProgress);
                 _entityRepository.Save(account);
             }
@@ -300,23 +342,23 @@ namespace PCT.Services
             out string correctResponseHeading, out string correctResponseText)
         {
             if (!selectedOptionIDs.Any())
-                throw new ArgumentOutOfRangeException("selectedOptionIDs", "No options selected.");
+                throw new ArgumentOutOfRangeException(nameof(selectedOptionIDs), "No options selected.");
 
             var course = GetCourse(courseID);
 
             if (course == null)
-                throw new ArgumentOutOfRangeException("courseID", "Course not found.");
+                throw new ArgumentOutOfRangeException(nameof(courseID), "Course not found.");
 
             if (course.Status != CourseStatus.Active)
-                throw new ArgumentOutOfRangeException("courseID", "Course not active.");
+                throw new ArgumentOutOfRangeException(nameof(courseID), "Course not active.");
 
             var question = (from s in course.Sections
                 from q in s.Questions
                 where q.ID == questionID
                 select new {Question = q, Section = s}).FirstOrDefault();
 
-            if (question == null || question.Question == null)
-                throw new ArgumentOutOfRangeException("questionID",
+            if (question?.Question == null)
+                throw new ArgumentOutOfRangeException(nameof(questionID),
                     "Question not found in course (" + course.DisplayTitle + ")");
 
             return IsCorrectAnswer(accountID, course, question.Question, question.Section, selectedOptionIDs,
@@ -328,13 +370,13 @@ namespace PCT.Services
             var course = GetCourse(courseID);
 
             if (course == null)
-                throw new ArgumentOutOfRangeException("courseID", "Course not found.");
+                throw new ArgumentOutOfRangeException(nameof(courseID), "Course not found.");
 
             if (course.Status != CourseStatus.Active)
-                throw new ArgumentOutOfRangeException("courseID", "Course not active.");
+                throw new ArgumentOutOfRangeException(nameof(courseID), "Course not active.");
 
             if (course.Test == null)
-                throw new ArgumentOutOfRangeException("courseID", "Course does not have a test.");
+                throw new ArgumentOutOfRangeException(nameof(courseID), "Course does not have a test.");
 
             var courseProgress = GetCourseProgress(accountID, course);
             var testProgress = (TestProgress) (course.Test.GetProgress(courseProgress) ??
@@ -342,6 +384,8 @@ namespace PCT.Services
 
             if (testProgress.TriesLeft == 0)
                 return null;
+
+            var firstAttempt = testProgress.TriesLeft == TestProgress.MaxTries;
 
             var results = new List<answer_result>();
             foreach (var answer in answers)
@@ -369,7 +413,12 @@ namespace PCT.Services
             testProgress = (TestProgress) (course.Test.GetProgress(courseProgress) ??
                                            course.Test.CreateAndAddProgress(courseProgress));
 
-            if (testProgress.CompletedQuestions.Count(r => r.CorrectOnAttempt != null) / (decimal)course.Test.Questions.Count < course.Test.PassingPercentage)
+            var percentage = testProgress.CompletedQuestions.Count(r => r.CorrectOnAttempt != null)/
+                             (decimal) course.Test.Questions.Count;
+
+            //if (firstAttempt) courseProgress.FirstAttemptGrade = percentage;
+
+            if (percentage < course.Test.PassingPercentage)
             {
                 testProgress.TriesLeft = Math.Max(0, testProgress.TriesLeft - 1);
                 _entityRepository.Save(testProgress);
@@ -390,6 +439,82 @@ namespace PCT.Services
                 return false;
             _entityRepository.Delete(course);
             return true;
+        }
+
+        public void Verify(Guid accountID, Guid courseID, string initials)
+        {
+            var course = GetCourse(courseID);
+
+            if (course == null)
+                throw new ArgumentOutOfRangeException(nameof(courseID), "Course not found.");
+
+            if (course.Status != CourseStatus.Active)
+                throw new ArgumentOutOfRangeException(nameof(courseID), "Course not active.");
+
+            var courseProgress = GetCourseProgress(accountID, course);
+
+            courseProgress.VerificationInitials = initials;
+            courseProgress.VerificationDate =
+                courseProgress.LastActivityUtc = DateTime.UtcNow;
+
+            _entityRepository.Save(courseProgress);
+        }
+
+        public int IncrementActivity(Guid accountID, Guid courseID, int elapsedSeconds)
+        {
+            var course = GetCourse(courseID);
+
+            if (course == null)
+                throw new ArgumentOutOfRangeException(nameof(courseID), "Course not found.");
+
+            if (course.Status != CourseStatus.Active)
+                throw new ArgumentOutOfRangeException(nameof(courseID), "Course not active.");
+
+            var courseProgress = GetCourseProgress(accountID, course);
+
+            courseProgress.ActiveTime += elapsedSeconds;
+            courseProgress.LastActivityUtc = DateTime.UtcNow;
+
+            // Changed to use SQL instead of NHibernate b/c it was saving stale data. Only the two fields here should change when this call is made.
+
+            NHibernateSessionManager.Instance.GetSession()
+                .CreateSQLQuery(
+                    "UPDATE [Progress] SET ActiveTime=:activeTime, LastActivityUtc=:lastActivityUtc WHERE ProgressID=:progressID AND ActiveTime<:activeTime")
+                .SetInt32("activeTime", courseProgress.ActiveTime)
+                .SetDateTime("lastActivityUtc", courseProgress.LastActivityUtc)
+                .SetGuid("progressID", courseProgress.ID)
+                .ExecuteUpdate();
+
+            //_entityRepository.Save(courseProgress);
+
+            return courseProgress.ActiveTime;
+        }
+
+        public void ResetCourseSoItCanBeRataken(Guid accountID, Guid courseID)
+        {
+            var test = GetTest(courseID);
+
+            var courseProgress = (from a in _entityRepository.Queryable<Account>()
+                where a.ID == accountID
+                from c in a.CourseProgress
+                where c.Course.ID == courseID
+                orderby c.Attempt descending
+                select c).FirstOrDefault();
+
+            if (courseProgress == null)
+                throw new ArgumentOutOfRangeException(nameof(courseID), "Course progress not found.");
+
+            if (courseProgress.TestProgress != null)
+                courseProgress.TestProgress.TriesLeft = 0;
+            else
+                courseProgress.TestProgress = new TestProgress
+                {
+                    TestID = test.ID,
+                    TotalQuestions = test.Questions.Count,
+                    TriesLeft = 0
+                };
+
+            _entityRepository.Save(courseProgress);
         }
     }
 }

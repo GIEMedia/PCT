@@ -7,7 +7,7 @@
         .directive("pctQuestions", function() {
             return {
                 restrict: "E",
-                templateUrl: "Areas/Management/app/spa/course_edit/questions/Questions.html",
+                templateUrl: "Areas/Management/app/spa/course_edit/questions/Questions.html?v=" + htmlVer,
                 scope: {
                     questions: "=",
                     focus: "=",
@@ -74,7 +74,7 @@
             };
         })
     
-        .directive("questionRow", ["Fancybox", "$parse", "QuestionService", function(Fancybox, $parse, QuestionService) {
+        .directive("questionRow", ["modal", "$parse", "QuestionService", function(modal, $parse, QuestionService) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -142,10 +142,11 @@
                                 $scope.question.question_type = 2;
                             }
                         };
-                        Fancybox.open(scope, {
-                            templateUrl: "Areas/Management/app/spa/course_edit/questions/popup-edit-answers.html",
+                        modal.open({
+                            templateUrl: "Areas/Management/app/spa/course_edit/questions/popup-edit-answers.html?v=" + htmlVer,
                             width: (questionType==1 || questionType==3) ? 647 : 720,
-                            controller: "courseEdit.questions.AnswersModalCtrl"
+                            controller: "courseEdit.questions.AnswersModalCtrl",
+                            scope: scope
                         });
                     };
                     
@@ -174,7 +175,7 @@
             };
         }])
         
-        .controller("courseEdit.questions.AnswersModalCtrl", ["$scope", "$q", "$modalInstance", "QuestionService", "Fancybox", function($scope, $q, $modalInstance, QuestionService, Fancybox) {
+        .controller("courseEdit.questions.AnswersModalCtrl", ["$scope", "$q", "$modalInstance", "QuestionService", function($scope, $q, $modalInstance, QuestionService) {
             $scope.view = {
                 addVideo: {
                     url: null,

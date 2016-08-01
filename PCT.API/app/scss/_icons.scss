@@ -1,0 +1,54 @@
+
+/* ================================================================ *\
+	#Icon Colors
+\* ================================================================ */
+.fa.fa-print { color: #42b3e0; }
+.fa.fa-download { color: #e97c00; }
+.fa.fa-expand { color: #5fd771; }
+
+label.correct {
+  color: limegreen;
+}
+
+.btn-login i.fa {
+  margin-left: 0;
+}
+
+
+
+.ico-profile {
+  width: 20px;
+  height: 22px;
+  background-size: cover;
+}
+.ico-new-courses {
+  background-image: url(/app/css/images/ico-new-courses-mobile.png);
+  width: 18px;
+  height: 24px;
+}
+.ico-open-courses {
+  background-image: url(/app/css/images/ico-open-courses-mobile.png);
+  width: 23px;
+  height: 22px;
+}
+
+@media (min-width: 1025px) {
+  // Desktop
+  .ico-profile {
+    background-image: url(/app/css/images/ico-profile.png);
+    width: 30px;
+    height: 33px;
+  }
+
+  .ico-new-courses {
+    background-image: url(/app/css/images/ico-new-courses.png);
+    width: 28px;
+    height: 37px;
+  }
+
+  .ico-open-courses {
+    background-image: url(/app/css/images/ico-open-courses.png);
+    width: 37px;
+    height: 35px;
+  }
+}

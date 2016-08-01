@@ -86,7 +86,7 @@ namespace PCT.Services
             {
                 if (headers == null)
                 {
-                    throw new ArgumentNullException("headers");
+                    throw new ArgumentNullException(nameof(headers));
                 }
 
                 return string.Format("{0}.{1}", Guid.NewGuid(),

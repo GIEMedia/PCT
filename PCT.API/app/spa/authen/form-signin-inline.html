@@ -1,0 +1,15 @@
+<form novalidate name="signin">
+    <label for="EmailAddress">Sign In</label>
+    <div ng-if="error" style="color: red">{{error}}</div>
+    <input type="email" class="field" placeholder="Email Address" name="EmailAddress" id="EmailAddress" ng-model="loginForm.email" required>
+    <input type="password" class="field" placeholder="Password" name="Password" ng-model="loginForm.password" required>
+    <button class="btn btn-green btn-login" ng-click="login()" button-loading="ui.loggingin" ng-disabled="ui.loggingin">
+        <i class="fa fa-lg fa-sign-in"></i>
+    </button>
+    <div class="login-footer">
+        <a ui-sref="forgotpassword">Forgot password?</a>
+    </div>
+    <div class="login-footer">
+        <input type="checkbox" id="remember" ng-model="loginForm.remember" /><label for="remember">Remember me</label>
+    </div>
+</form>

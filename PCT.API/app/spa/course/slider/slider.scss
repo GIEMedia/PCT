@@ -1,0 +1,79 @@
+
+.course-steps-slider {
+  position: absolute;
+  top: 110px;
+  bottom: 85px;
+  left: 50%;
+  margin-left: -11px;
+  width: 22px;
+  overflow: hidden;
+}
+
+course-steps-slides ul {
+  list-style: none outside none;
+  display: table;
+  height: 100%;
+
+
+  li {
+    display: table-row;
+  }
+
+  a {
+    line-height: 22px;
+    font-size: 10px;
+    display: block;
+    width: 22px;
+    height: 22px;
+    white-space: nowrap;
+    text-align: center;
+    overflow: hidden;
+    background: #edf3f5;
+    box-shadow: 0 0 0 1px #abb8be inset;
+    border-radius: 50%;
+    color: #707070;
+    font-weight: 700;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .answered {
+    text-indent: 150%;
+    box-shadow: none;
+    background: #209634 url(/app/css/images/ico-check-white.png) no-repeat center center;
+  }
+
+  .current {
+    text-indent: 150%;
+    box-shadow: none;
+    background: #a86eee url(/app/css/images/ico-current-question.png) no-repeat center center;
+  }
+}
+
+@media (max-width: 1024px) {
+    // Mobile
+
+  .course-steps-slider {
+    top: 12px;
+    left: 42px;
+    right: 42px;
+    bottom: auto;
+    width: auto;
+    height: auto;
+    margin: 0;
+  }
+  course-steps-slides ul {
+    display: table;
+    width: 100%;
+
+    li {
+      display: table-cell;
+      padding: 0;
+    }
+    a {
+      margin: 0 auto;
+    }
+  }
+
+}

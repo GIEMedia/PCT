@@ -19,5 +19,7 @@ namespace PCT.Declarations.Models
         public string[] prereq_courses { get; set; }
 
         public string image_url { get; set; }
+
+        public bool ceu_eligible { get; set; }
     }
 }

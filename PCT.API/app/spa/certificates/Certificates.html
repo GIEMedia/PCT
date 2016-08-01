@@ -8,8 +8,8 @@
                 <small class="bull" ng-if="viewConfig.showLink && (earnedCertificates.length || 0) > (viewConfig.limit || 0)">&bull;</small>
 
                 <small class="count" ng-if="viewConfig.showLink && (earnedCertificates.length || 0) > (viewConfig.limit || 0)"><a ui-sref="certificates">more</a></small>
-            </h3><!-- /.title-underlined -->
-        </div><!-- /.form-head -->
+            </h3>
+        </div>
         <div class="form-body">
             <div class="no-record" ng-if="(earnedCertificates.length || 0) == 0">
                 No certificate(s) available
@@ -18,33 +18,34 @@
                 <li class="courses-item" ng-repeat="cert in (earnedCertificates | orderBy:'-earned' | limitTo:(viewConfig.limit || 100))">
                     <a class="courses-item-image">
                         <span><img ng-src="{{cert.image_url}}" /></span>
-                    </a><!-- /.courses-item-image -->
+                    </a>
                     <div class="courses-item-content">
                         <h4 class="courses-item-title">
                             <a href="">{{cert.course_name}}</a>
                         </h4>
-                        <p class="courses-item-meta">Passed: {{cert.earned | date:'MM/dd/yy'}}</p><!-- /.courses-item-meta -->
+                        <p class="courses-item-meta">Passed: {{cert.earned | date:'MM/dd/yy'}}</p>
                         <ul class="courses-item-bars">
                             <li class="courses-item-bar courses-item-bar-purple">
                                 <span class="courses-item-bar-label">Activities</span>
                                 <span class="courses-item-bar-fill">
                                     <span style="width: 100%"></span>
                                 </span>
-                            </li><!-- /.courses-item-bar courses-item-bar-purple -->
+                            </li>
                             <li class="courses-item-bar courses-item-bar-blue">
                                 <span class="courses-item-bar-label">Tests</span>
                                 <span class="courses-item-bar-fill">
                                     <span style="width: 100%"></span>
                                 </span>
-                            </li><!-- /.courses-item-bar courses-item-bar-blue -->
-                        </ul><!-- /.courses-item-bars -->
-                    </div><!-- /.courses-item-content -->
+                            </li>
+                        </ul>
+                    </div>
                     <span class="courses-item-action-send">
                         <a href="{{cert.pdf_url}}" target="_blank"><i class="fa fa-download"></i>Download Certificate</a>
+                        <!--<a href="" ng-click="download_certificate(cert)" target="_blank"><i class="fa fa-download"></i>Download Certificate</a>-->
                         <a ui-sref="certificate({courseId: cert.course_id})"><i class="fa fa-envelope"></i>Email Manager</a>
-                    </span><!-- /.courses-item-action-send -->
-                </li><!-- /.courses-item -->
-            </ul><!-- /.courses-items -->
-        </div><!-- /.form-body -->
+                    </span>
+                </li>
+            </ul>
+        </div>
     </form>
-</div><!-- /.form-signup -->
+</div>

@@ -9,18 +9,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" />
     @Styles.Render("~/bundles/css/site.css")
     <link href="https://vjs.zencdn.net/4.11/video-js.css" rel="stylesheet" />
-    <script>var appHost='@MvcApplication.WebsiteHost';</script>
+    <script>var appHost = '@MvcApplication.WebsiteHost'; var htmlVer = "@MvcApplication.HtmlVersion"; var idleDurationSecs = @MvcApplication.IdleDurationSecs; </script>
     @Scripts.Render("~/bundles/js/lib.js")
     @Scripts.Render("~/bundles/js/site.js")
     <script src="https://vjs.zencdn.net/4.11/video.js"></script>
 </head>
 <body>
     <div class="wrapper">
-        <header class="header">
-            <a class="logo" href="" ng-click="$state.go(User.loggedIn ? 'dashboard' : 'landing')">PCT - Pest Control Technology</a>
-            <user-info></user-info>
-            <error-container></error-container>
-        </header>
+        <page-header></page-header>
 
         <!-- Content start -->
         <div ui-view></div>

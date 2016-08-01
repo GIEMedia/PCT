@@ -10,7 +10,7 @@
         .directive("signUp", ["AccountService", "StateService", "SecurityService", "$state", function(AccountService, StateService, SecurityService, $state) {
             return {
                 restrict: "E",
-                templateUrl: "/app/spa/landing/Signup.html",
+                templateUrl: "/app/spa/landing/Signup.html?v=" + htmlVer,
                 link: function($scope, elem, attrs) {
                     $scope.signup = {
                         loading: false

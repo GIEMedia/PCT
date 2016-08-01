@@ -10,7 +10,7 @@
             $stateProvider
                 .state('courseEdit.sections.list', {
                     url: '/list',
-                    templateUrl: "Areas/Management/app/spa/course_edit/sections/list/SectionsList.html",
+                    templateUrl: "Areas/Management/app/spa/course_edit/sections/list/SectionsList.html?v=" + htmlVer,
                     controller: "courseEdit.sections.list.Ctrl"
                 })
             ;
@@ -67,7 +67,7 @@
             };
         }])
 
-        .directive("sectionRow", ["SectionService", "Fancybox", function(SectionService, Fancybox) {
+        .directive("sectionRow", ["SectionService", "modalConfirm", function(SectionService, modalConfirm) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -101,7 +101,7 @@
 
                     $scope.deleting = false;
                     $scope.deleteSection = function() {
-                        Fancybox.confirm("Confirm deleting section", "Are you sure to delete this section?").then(function() {
+                        modalConfirm.open("Confirm deleting section", "Are you sure to delete this section?").result.then(function() {
                             $scope.deleting = true;
                             SectionService.delete($scope.course.id, $scope.section.id).success(function() {
                                 $scope.deleting = false;
@@ -113,14 +113,11 @@
                     };
 
                     $scope.deleteDocument = function() {
-                        Fancybox.confirm("Confirm removing section's document", "Are you sure to remove this section's document?").then(function() {
-                            SectionService.deleteDocument($scope.course.id, $scope.section.id)
-                                .success(function() {
-                                    $scope.section.document = null;
-                                })
-                            ;
+                        modalConfirm.open("Confirm removing section's document", "Are you sure to remove this section's document?").result.then(function() {
+                            SectionService.deleteDocument($scope.course.id, $scope.section.id).success(function() {
+                                $scope.section.document = null;
+                            });
                         });
-
                     }
                 }
             };

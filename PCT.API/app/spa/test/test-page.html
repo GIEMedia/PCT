@@ -1,0 +1,47 @@
+<div class="container is-scrollable">
+    <div class="test">
+
+        <div class="test-head">
+            <h2>{{test.title}}</h2>
+
+            <div class="test-progress">
+                <span class="test-progress-percent">{{ progress ? (showResult ? '100%' : testView.questionProgress) : "-" }}</span>
+
+						<span class="test-progress-label">
+							{{ progress ? "Test Completed" : "Loading Test..."}}
+						</span>
+
+                <div class="test-progress-bar">
+                    <div class="test-progress-bar-fill" style="width: {{ showResult ? '100%' : testView.questionProgress }}"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="test-body">
+
+            <!-- Showing test questions -->
+            <test-questions-container ng-if="!showResult"
+                                      questions="test.questions"
+                                      send-result="sendResult($answers)"
+                                      report-progress="testView.questionProgress"
+                                      progress="progress"
+                                      preview-mode="previewMode"
+                    ></test-questions-container>
+
+            <div ng-if="showResult">
+
+                <!-- Test result failed -->
+                <div class="cols" ng-if="!isPassed()">
+                    <test-failed></test-failed>
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+<div class="help-container" help-container="app/spa/test/help/test-help.html" help-func="disableHelp($value)" ng-if="helpEnabled">
+</div>

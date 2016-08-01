@@ -1,6 +1,8 @@
-
 var StringUtil = StringUtil || {};
 StringUtil.uppercaseFirstChar = function(str) {
+    return str.substring(0, 1).toUpperCase() + str.substring(1, str.length);
+};
+StringUtil.uppercaseOnlyFirstChar = function(str) {
     return str.substring(0, 1).toUpperCase() + str.substring(1, str.length).toLowerCase();
 };
 StringUtil.isBlank = function(val) {
@@ -10,10 +12,10 @@ StringUtil.isBlank = function(val) {
         return val == null;
     }
 };
-
 StringUtil.isEmpty = function(val) {
     return val==null || val == '';
 };
+
 StringUtil.isNotEmpty = function(val) {
     return !StringUtil.isEmpty(val);
 };
@@ -24,6 +26,18 @@ StringUtil.isNotBlank = function(val) {
 StringUtil.getLastWord = function(str) {
     return /\b\w+$/.exec(str)[0];
 };
+StringUtil.startsWith = function(target, str) {
+    if (str == null || str.length < target.length) {
+        return false;
+    }
+    return str.substring(0, target.length) == target;
+};
+StringUtil.endsWith = function(target, str) {
+    if (str == null || str.length < target.length) {
+        return false;
+    }
+    return str.substring(str.length - target.length) == target;
+};
 
 StringUtil.trim = function(val) {
     if (!val) {
@@ -32,6 +46,16 @@ StringUtil.trim = function(val) {
 
     return val.replace(/^\s+/, "").replace(/\s+$/, "");
 };
+
+StringUtil.replaceAll = (function() {
+    function escapeRegExp(string) {
+        return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+    }
+
+    return function(from, to, src) {
+        return src.replace(new RegExp(escapeRegExp(from), "g"), to);
+    }
+})();
 
 StringUtil.equalsIgnoreCase = function(s1, s2) {
     if (s1 == null) {
@@ -44,7 +68,18 @@ StringUtil.equalsIgnoreCase = function(s1, s2) {
     s1 = s1.toLowerCase();
     s2 = s2.toLowerCase();
     return s1 == s2;
-}
+};
+
+StringUtil.randomId = function(length) {
+    var possible1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    var possible2 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    var text = possible1.charAt(Math.floor(Math.random() * possible1.length));
+    for ( var i=0; i < length-1; i++ ) {
+        text += possible2.charAt(Math.floor(Math.random() * possible2.length));
+    }
+    return text;
+};
 
 
 var DateUtil = DateUtil || {};
@@ -106,6 +141,32 @@ DateUtil.parse = function(str, format) {
         var m = /(\d+)_(\d+)/.exec(str);
         return new Date(m[1], m[2] - 1);
     }
+    if (format=="dd.mm.yy") {
+        var m = /(\d+)\.(\d+)\.(\d+)/.exec(str);
+        return new Date(m[3], m[2] - 1, m[1]);
+    }
+    if (format=="mm/dd/yy") {
+        var m = /(\d+)\/(\d+)\/(\d+)/.exec(str);
+        return new Date(m[3], m[1] - 1, m[2]);
+    }
+    if (format=="MM d") {
+        var m = /(\w+) (\d+)/.exec(str);
+        var months = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+            "August",
+            "September",
+            "October",
+            "November",
+            "December"
+        ];
+        return new Date(new Date().getYear(), months.indexOf(m[1]), m[2]);
+    }
     throw "Unsupported format: " + format;
 };
 
@@ -145,6 +206,14 @@ DateUtil.weekBegin = function(date) {
     return new Date(date.getFullYear(), date.getMonth(), date.getDate() - dow, 0, 0, 0);
 };
 
+DateUtil.toDateObj = function(date) {
+    if (date == null) return null;
+    return {
+        year: date.getFullYear(),
+        month: date.getMonth() + 1,
+        day: date.getDate()
+    };
+};
 
 var TimingUtil = TimingUtil || {};
 
@@ -164,6 +233,28 @@ TimingUtil.syncDelay = function (f, delay) {
             }
         }, delay);
     };
+};
+TimingUtil.repeativeCallLock = function (f, delay) {
+    delay = delay || 1000;
+
+    var lockUntil = null;
+    return function() {
+        var now = new Date().getTime();
+        if (lockUntil != null && lockUntil > now) {
+            return;
+        }
+        lockUntil = now + delay;
+        f();
+    };
+};
+
+TimingUtil.aggressiveCheck = function(check, action) {
+    var interval = setInterval(function() {
+        if (check()) {
+            clearInterval(interval);
+            action();
+        }
+    }, 100);
 };
 
 var LangUtil = LangUtil || {};
@@ -219,6 +310,7 @@ ObjectUtil.equals = function (o1, o2) {
             continue;
         }
         if (!ObjectUtil.equals(o1[i], o2[i])) {
+            //console.log("Different: " + i);
             return false;
         }
     }
@@ -227,6 +319,7 @@ ObjectUtil.equals = function (o1, o2) {
             continue;
         }
         if (!ObjectUtil.equals(o1[i], o2[i])) {
+            //console.log("Different: " + i);
             return false;
         }
     }
@@ -234,10 +327,29 @@ ObjectUtil.equals = function (o1, o2) {
     return true;
 };
 
+ObjectUtil.size = function(o) {
+    var size = 0;
+    for (var k in o) {
+        size++;
+    }
+    return size;
+};
+
 ObjectUtil.copy = function(fromO, toO) {
     for (var name in fromO) {
         toO[name] = fromO[name];
     }
+    return toO;
+};
+
+
+ObjectUtil.isEmpty = function isEmpty(obj) {
+    for (var prop in obj) {
+        if (obj.hasOwnProperty(prop)) {
+            return false;
+        }
+    }
+    return true;
 };
 
 ObjectUtil.clone = function(obj) {
@@ -279,7 +391,49 @@ ObjectUtil.hasValue = function(o) {
         }
     }
     return false;
-}
+};
+ObjectUtil.hasValueRecursive = function(o) {
+    if (o == null) {
+        return false;
+    }
+    for (var i in o) {
+        if (o.hasOwnProperty(i)) {
+            var v = o[i];
+            if (v == null) {
+                continue;
+            } else if ( typeof v == "object") {
+                var vHasValue = ObjectUtil.hasValueRecursive(v);
+                if (vHasValue) {
+                    return true;
+                }
+            } else {
+                return true;
+            }
+        }
+    }
+    return false;
+};
+ObjectUtil.toStringLines = function(o) {
+    if (o == null) {
+        return "null";
+    }
+    return Cols.join(Cols.yield(o, function(i) { return JSON.stringify(i);}), "\n");
+};
+
+ObjectUtil.merge = function(o1, o2) {
+    var ret = {};
+
+    for (var i = 0; i < arguments.length; i++) {
+        var arg = arguments[i];
+        if (arg == null) {
+            continue;
+        }
+
+        ObjectUtil.copy(arg, ret);
+    }
+
+    return ret;
+};
 
 var Http = Http || {};
 Http.afterSharp = function() {
@@ -317,6 +471,11 @@ RegexUtil.replaceAll = function(str, exp, replace) {
         }
     }
 };
+RegexUtil.each = function(exp, string, withEachMatch) {
+    for (var match;(match = exp.exec(string)) !== null;) {
+        withEachMatch(match);
+    }
+};
 
 var Fs = Fs || {};
 Fs.p0 = function(p1, a) {
@@ -329,11 +488,27 @@ Fs.f0 = function(f1, a) {
         return f1(a);
     }
 };
+Fs.noop = function(ret) {
+    return function() {
+        return ret;
+    }
+};
 
 Fs.invokeAll = function(funcs, data1, data2) {
     for (var i in funcs) {
         funcs[i](data1, data2);
     }
+};
+Fs.invokeWithEach = function(list, func) {
+    for (var i in list) {
+        func(list[i]);
+    }
+};
+
+Fs.invokeAllF = function(col) {
+    return function() {
+        Cols.each(col, function(f) { f(); });
+    };
 };
 
 Fs.invokeChecks = function(funcs, data) {
@@ -366,6 +541,11 @@ Fs.sequel = function (fs) {
     };
 };
 
+Fs.tail0 = function(func, a, b) {
+    return function() {
+        return func(a, b);
+    };
+};
 Fs.tail1 = function(func, b, c) {
     return function(a) {
         return func(a, b, c);
@@ -386,6 +566,49 @@ Fs.invoke = function(func) {
 };
 
 var Cols = Cols || {};
+
+Cols.getUnique1 = function(col1, col2) {
+    return Cols.filter(col1, function(e) { return col2.indexOf(e) == -1});
+};
+
+Cols.keepBestFound = function(items, count, orderF) {
+    var handles = Cols.yield(items, function (item) {
+        var order = orderF(item);
+        return order == null ? null : {
+            order: order,
+            item: item
+        };
+    });
+    var sorted = _.sortBy(handles, function(h) { return h.order; });
+
+    return _.map(sorted.splice(0, count), "item");
+};
+
+Cols.keepOldRefs = function(newCol, oldCol, by) {
+    if (oldCol == null) {
+        return newCol;
+    }
+
+    for (var i = 0; i < newCol.length; i++) {
+        var newE = newCol[i];
+        var oldE = Cols.find(oldCol, function(oldE) {
+            return oldE[by] == newE[by];
+        });
+        if (oldE != null) {
+            ObjectUtil.clear(oldE);
+            ObjectUtil.copy(newE, oldE);
+            newCol[i] = oldE;
+        }
+    }
+    return newCol;
+};
+
+Cols.assureLength = function(length, col, createNew) {
+    for (; col.length < length;) {
+        col.push(createNew ? createNew() : null);
+    }
+    col.splice(length, col.length - length);
+};
 Cols.values = function(map) {
     var ret = [];
     for ( var k in map) {
@@ -395,13 +618,13 @@ Cols.values = function(map) {
 };
 
 Cols.length = function(obj) {
-	var count = 0;
-	for (var k in obj) {
-		if (obj.hasOwnProperty(k) && obj[k] != null) {
-			count++;
-		}
-	}
-	return count;
+    var count = 0;
+    for (var k in obj) {
+        if (obj.hasOwnProperty(k) && obj[k] != null) {
+            count++;
+        }
+    }
+    return count;
 };
 
 Cols.find = function(col, func) {
@@ -413,14 +636,38 @@ Cols.find = function(col, func) {
     }
     return null;
 };
+Cols.hasAny = function(col, func) {
+    return Cols.find(col, func);
+};
 
+Cols.findReverse = function(col, func) {
+    for (var i = col.length - 1; i > -1; i--) {
+        var e = col[i];
+
+        if (func(e)) {
+            return e;
+        }
+    }
+    return null;
+};
+
+Cols.findIndex = function(col, func, start){
+    for (var i = start || 0; i < col.length; i++) {
+        var e = col[i];
+
+        if(func(e)){
+            return i;
+        }
+    }
+    return -1;
+};
 
 Cols.yield = function(col, func) {
     var ret = Array.isArray(col) ? [] : {};
     for (var i in col) {
         var e = func(col[i]);
         if (e != null) {
-            ret[i] = e;
+            ret.push(e);
         }
     }
     return ret;
@@ -428,8 +675,9 @@ Cols.yield = function(col, func) {
 Cols.filter = function(col, func) {
     var ret = [];
     for (var i in col) {
-        if (func(col[i])) {
-            ret.push( col[i] );
+        var e = col[i];
+        if (func(e)) {
+            ret.push(e);
         }
     }
     return ret;
@@ -437,12 +685,21 @@ Cols.filter = function(col, func) {
 Cols.join = function(col, delimiter) {
     var ret = "";
     for (var i in col) {
+        var e = col[i];
+        if (e == null) continue;
+
         if (ret.length > 0) {
             ret += delimiter;
         }
-        ret += col[i];
+        ret += e;
+    }
+    if (StringUtil.isEmpty(ret)) {
+        return null;
     }
     return ret;
+};
+Cols.joinWrap = function(col, start, end) {
+    return start + Cols.join(col, end + start) + end;
 };
 Cols.merge = function(map1, map2) {
     for ( var k in map2) {
@@ -464,6 +721,16 @@ Cols.mapAddAll = function(map1, map2) {
         }
     }
     return map2;
+};
+
+Cols.toDictionary = function (list, keyFunc) {
+    if (!list) return null;
+    var map = {};
+    list.forEach(function (a) {
+        var key = keyFunc(a);
+        if (key) map[key] = a;
+    });
+    return map;
 };
 
 Cols.eachLine = function(/*final List<F>*/ steps, /*final P2<F,P1<N>>*/ digF, /*final List<N>*/ collecteds, /*final P1<List<N>>*/ resultF) {
@@ -488,17 +755,39 @@ Cols.each = function(col, p1) {
 };
 
 Cols.eachEntry = function(obj, p2) {
-	for (var key in obj) {
-		if (obj.hasOwnProperty(key)) {
-			p2(key, obj[key]);
-		}
-	}
+    for (var key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            p2(key, obj[key]);
+        }
+    }
+};
+
+Cols.split = function(col, max) {
+    var ret = [];
+
+    var buffer = [];
+    for (var i = 0; i < col.length; i++) {
+        var o = col[i];
+        buffer.push(o);
+        if ((i + 1) % max == 0) {
+            ret.push(buffer);
+            buffer = [];
+        }
+    }
+    if (buffer.length > 0) {
+        ret.push(buffer);
+    }
+
+    return ret;
 };
 
 /**
  * collect(ele, total)
  */
 Cols.collect = function(col, init, collect) {
+    if (col==null) {
+        return init;
+    }
     var total = init;
     for (var i in col) {
         total = collect(col[i], total);
@@ -542,6 +831,19 @@ Cols.indexOf = function(ele, col, colExtract) {
         }
     }
     return -1;
+};
+
+Cols.indexUnique = function(col, by) {
+    if (typeof by == "string") {
+        var byAttr = by;
+        by = function(ele) { return ele[byAttr];};
+    }
+
+    return Cols.collect(col, {}, function(ele, groups) {
+        var key = by(ele);
+        groups[key] = ele;
+        return groups;
+    });
 };
 
 Cols.copy = function(arr1) {
@@ -593,12 +895,35 @@ Cols.addAll = function (from, to) {
     }
 };
 
-Cols.addRemove = function(col) {
-    return function(item) {
-        col.push(item);
-        return function() {
-            col.splice(col.indexOf(item), 1);
+Cols.addAllSet = function (from, to) {
+    for (var i = 0; i < from.length; i++) {
+        var e = from[i];
+        if (to.indexOf(e) == -1) {
+            to.push(e);
         }
+    }
+};
+
+Cols.addAllSet_deepEquals = function (from, to) {
+    F1:
+        for (var i = 0; i < from.length; i++) {
+            var e = from[i];
+
+            for (var j = 0; j < to.length; j++) {
+                var te = to[j];
+                if (ObjectUtil.equals(e, te)) {
+                    continue F1;
+                }
+            }
+
+            to.push(e);
+        }
+};
+
+Cols.addRemove = function(item, col) {
+    col.push(item);
+    return function() {
+        col.splice(col.indexOf(item), 1);
     }
 };
 
@@ -615,18 +940,23 @@ Cols.toEnd = function(array) {
 Cols.remove = function(e, col) {
     var i = col.indexOf(e);
     if (i == -1) {
-        return;
+        return false;
     }
     col.splice(i, 1);
+    return true;
 };
 
 Cols.removeBy = function(col, f) {
+    var removed = [];
     for (var j = 0; j < col.length; j++) {
         var obj = col[j];
         if (f(obj)) {
             col.splice(j, 1);
+            j--;
+            removed.push(obj);
         }
     }
+    return removed;
 };
 Cols.removeAll = function(col, list) {
     for (var i in col) {
@@ -642,6 +972,11 @@ Cols.removeAll = function(col, list) {
 };
 
 Cols.sortBy = function(byF) {
+    if (typeof byF == "string") {
+        var byAttr = byF;
+        byF = function(ele) { return ele[byAttr];};
+    }
+
     var nullGoLast = true;
     return function(rd1, rd2) {
         var by1 = byF(rd1);
@@ -664,7 +999,7 @@ Cols.sortBy = function(byF) {
     };
 };
 
-Cols.index = function(col, by) {
+Cols.index = function(col, by, valueF) {
     if (typeof by == "string") {
         var byAttr = by;
         by = function(ele) { return ele[byAttr];};
@@ -677,10 +1012,32 @@ Cols.index = function(col, by) {
             list = [];
             groups[index] = list;
         }
-        list.push(ele);
+        list.push(valueF == null ? ele : valueF(ele));
         return groups;
     });
 };
+
+Cols.reverseIndex = function(index) {
+    var ret = {};
+
+    for (var key in index) {
+        var list = index[key];
+
+        for (var i = 0; i < list.length; i++) {
+            var value = list[i];
+
+            var newList = ret[value];
+            if (newList == null) {
+                newList = [];
+                ret[value] = newList;
+            }
+            newList.push(key);
+        }
+    }
+
+    return ret;
+};
+
 Cols.group = function(col, by) {
     return Cols.values(Cols.index(col, by));
 };
@@ -699,35 +1056,97 @@ Cols.arraysEqual = function (a, b) {
 };
 
 
+Cols.addLists = function(cols) {
+    var ret = [];
+    for (var i = 0; i < cols.length; i++) {
+        var col = cols[i];
+        Cols.addAll(col, ret);
+    }
+    return ret;
+}
+
 var Async = Async || {};
+
+Async.createLazyExec = function(delay) {
+    var timeout;
+    return function(task) {
+        if (timeout) {
+            clearTimeout(timeout);
+        }
+        timeout = setTimeout(task, delay);
+    }
+};
+
+/**
+ * Once scheduled, it's fixed, can not reschedule until it's done
+ * @param func
+ * @returns {Function}
+ */
+Async.schedule = function(func) {
+    var oldScheduleTime;
+    var timeout;
+
+    var invoke = function() {
+        func();
+        timeout = null;
+        oldScheduleTime = null;
+    };
+
+    return function(delay) {
+        var scheduledTime = new Date().getTime() + delay;
+
+        if (oldScheduleTime != null && Math.abs(oldScheduleTime - scheduledTime) < 100) {
+            // Scheduled at that time, no need to redo
+            return;
+        }
+
+        timeout = setTimeout(invoke, delay);
+
+        oldScheduleTime = scheduledTime;
+    };
+};
 
 
 /**
- * var oneRun = Async.oneRun();
- *
- * var run1 = oneRun();
- * var run2 = oneRun();
- * // Async post
- * alert(run1())
- * alert(run1())
- * alert(run2())
+ * After scheduled, can cancel or reschedule, only run once
+ * @param func
+ * @returns {Function}
  */
-Async.oneRun = function() {
-    var lastRunRef = [null];
-    return function() {
-        if (lastRunRef[0] != null) {
-            lastRunRef[0][0] = false;
-        }
-        var lastRun = [true];
-        lastRunRef[0] = lastRun;
+Async.scheduleFlex1 = function(func) {
+    var timeout;
+    var ran = false;
 
-        return function() {
-            var r = lastRun[0];
-            lastRun[0] = false;
-            return r;
+    var invoke = function () {
+        func();
+        ran = true;
+    };
+
+    var schedule = function(delay) {
+        if (ran) { return; }
+
+        if (timeout) {
+            clearTimeout(timeout);
         }
-    }
+
+        if (!delay) {
+            invoke();
+        } else {
+            timeout = setTimeout(invoke, delay);
+        }
+
+    };
+
+    schedule.cancel = function() {
+        if (timeout) {
+            clearTimeout(timeout);
+            timeout = null;
+        }
+    };
+
+    return schedule;
 };
+
+
 
 Async.ladyFirst = function() {
     var afterLadyDone = [];
@@ -875,4 +1294,120 @@ var EmailUtil = EmailUtil || {};
 EmailUtil.validEmail = function (email) {
     var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
+};
+
+var RandomUtil = RandomUtil || {};
+RandomUtil.choose = function(list) {
+    return list[Math.floor(Math.random() * list.length)];
+};
+
+var MathUtil = MathUtil || {};
+MathUtil.incMap = function(key, map) {
+    var value = map[key];
+    if (value == null) {
+        map[key] = 1;
+    } else {
+        map[key]++;
+    }
+};
+
+MathUtil.min = function(col, by) {
+    var min = null;
+    var minVal = null;
+    for (var i = 0; i < col.length; i++) {
+        var e = col[i];
+        var val = by(e);
+
+        if (min == null || minVal > val) {
+            min = e;
+            minVal = val;
+        }
+    }
+    return min;
+};
+
+MathUtil.max = function(col, by, by2) {
+    var max = null;
+    var maxVal = null;
+    for (var i = 0; i < col.length; i++) {
+        var e = col[i];
+        var val = by(e);
+
+        if (max == null || maxVal < val) {
+            max = e;
+            maxVal = val;
+        } else if (max != null && maxVal == val) {
+            var r21 = by2(e);
+            var r22 = by2(max);
+            if (r21 > r22) {
+                max = e;
+                maxVal = val;
+            }
+        }
+    }
+    return max;
+};
+
+
+
+var Urls = {};
+Urls.build = function(url, params) {
+    for (var k in params) {
+        var param = params[k];
+        if (param == null) {
+            continue;
+        }
+        url += (url.indexOf("?") > -1 ? "&" : "?") + (k + "=" + encodeURIComponent(param));
+    }
+    return url;
+};
+
+var Watchers = {};
+Watchers.watcher = function(onChange) {
+    var oldValue;
+    return function(currentValue) {
+        if (currentValue != oldValue) {
+            onChange(currentValue);
+            oldValue = currentValue;
+        }
+    }
+};
+Watchers.mapWatcher = function(onChange) {
+    var oldMap = {};
+    return function(newMap) {
+        for (var k in newMap) {
+            var oldVal = oldMap[k];
+            var newVal = newMap[k];
+            if (oldVal != newVal) {
+                onChange(k, newVal, oldVal);
+                oldMap[k] = newVal;
+            }
+        }
+    }
+};
+
+var Attrs = {};
+
+Attrs.getAttrs = function(el) {
+    var attrs = [];
+    for (var i = 0; i < el.attributes.length; i++){
+        var att = el.attributes[i];
+        attrs.push({
+            name: att.nodeName,
+            value: att.nodeValue
+        });
+    }
+    return attrs;
+};
+
+Attrs.setAttrs = function(el, attrs) {
+    for (var i = 0; i < attrs.length; i++){
+        var att = attrs[i];
+        el.setAttribute(att.name, att.value);
+    }
+};
+
+var TransDate = {};
+TransDate.toObject = function(date) {
+    return { year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDay() };
 };

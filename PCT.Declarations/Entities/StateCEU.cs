@@ -9,7 +9,11 @@ namespace PCT.Declarations.Entities
     {
         public virtual string StateAbbr { get; set; }
 
-        public virtual string CategoryCode { get; set; }
+        public virtual CertificationCategory Category { get; set; }
+
+        public virtual string ActivityID { get; set; }
+
+        public virtual string ActivityType { get; set; }
 
         public virtual decimal Hours { get; set; }
 
@@ -22,7 +26,9 @@ namespace PCT.Declarations.Entities
             {
                 id = stateCEU.ID,
                 state = stateCEU.StateAbbr,
-                category_code = stateCEU.CategoryCode,
+                activity_id = stateCEU.ActivityID,
+                activity_type = stateCEU.ActivityType,
+                category_id = stateCEU.Category?.ID,
                 hours = stateCEU.Hours
             };
         }

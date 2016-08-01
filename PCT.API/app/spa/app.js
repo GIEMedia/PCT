@@ -3,40 +3,44 @@
 (function () {
     /* App Module */
     angular.module("pct.elearning", [
-            'pct.markup',
+            "pct.markup",
 
-            'pct.elearning.theme',
-            'pct.elearning.authen',
-            'pct.elearning.course',
-            'pct.elearning.test',
-            'pct.elearning.certificate',
+            "pct.elearning.theme",
+            "pct.elearning.authen",
+            "pct.elearning.course",
+            "pct.elearning.test",
+            "pct.elearning.certificate",
+            "pct.elearning.certification",
 
-            'pct.elearning.api.Account',
-            'pct.Security',
+            "pct.elearning.api.Account",
+            "pct.Security",
 
-            'pct.elearning.api.Certificate',
-            'pct.elearning.api.ForgotpasswordService',
-            'pct.elearning.api.Course',
-            'pct.elearning.api.Test',
-            'pct.elearning.api.State',
-            'pct.elearning.api.StateLicensure',
-            'pct.elearning.api.Manager',
+            "pct.elearning.api.Certificate",
+            "pct.elearning.api.ForgotpasswordService",
+            "pct.elearning.api.Course",
+            "pct.elearning.api.Test",
+            "pct.elearning.api.State",
+            "pct.elearning.api.StateLicensure",
+            "pct.elearning.api.Manager",
 
-            'pct.elearning.local.Preference',
+            "pct.elearning.local.Preference",
 
-            'pct.elearning.landing',
-            'pct.elearning.signup',
-            'pct.elearning.userInfo',
-            'pct.elearning.dashboard',
-            'pct.elearning.forgotpassword',
-            'pct.elearning.profile',
-            'pct.elearning.certificates',
+            "pct.elearning.landing",
+            "pct.elearning.signup",
+            "pct.elearning.form-login",
+            "pct.elearning.dashboard",
+            "pct.elearning.forgotpassword",
+            "pct.elearning.profile",
+            "pct.elearning.certificates",
 
-            'pct.elearning.layout',
+            "pct.elearning.layout",
 
-            'ui.router',
-            'ngResource',
-            'angularMoment'
+            "pct.common.modal",
+            "pct.common.window-size",
+
+            "ui.router",
+            "ngResource",
+            "angularMoment"
     ])
 
         .config(["ApiProvider", function (ApiProvider) {

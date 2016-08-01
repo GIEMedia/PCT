@@ -1,0 +1,29 @@
+.popup {
+
+  .popup-body {
+    .popup-single-input {
+      padding: 20px 15px 10px;
+    }
+    .popup-single-input .field {
+      padding: 4px 8px;
+      background-color: #f2f4f5;
+      border: solid 1px #afafaf;
+      margin-bottom: 10px;
+    }
+
+    .selectboxit-container span {
+      height: 27px;
+      line-height: 26px;
+      display: block;
+      padding: 0 2px;
+    }
+
+    .selectboxit-container .selectboxit-options {
+      position: absolute;
+      max-height: 240px;
+
+    }
+
+  }
+
+}

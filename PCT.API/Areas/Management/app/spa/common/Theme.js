@@ -52,17 +52,14 @@
         })
 
         .directive("pctOptions", ["$parse", function($parse) {
-            var parse = function(exp) {
-                var getter;
-                if (exp.indexOf(".") == -1) {
-                    getter = function (o) {return o;};
-                } else {
-                    var cut = exp.replace(/.+\./,"");
-                    getter = function (o) {return o[cut];};
-                }
-
-                return getter;
-            };
+            function parse(exp, varName) {
+                var model = $parse(exp);
+                return function(obj) {
+                    var temp = {};
+                    temp[varName] = obj;
+                    return model(temp);
+                };
+            }
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -98,8 +95,9 @@
                     var list = null;
                     var match = /^(.+?) as (.+?) for (.+?) in (.+?)$/.exec(attrs.pctOptions);
 
-                    var valueM = parse(match[1]);
-                    var textM = parse(match[2]);
+                    var valueM = parse(match[1], match[3]);
+                    var textM = parse(match[2], match[3]);
+
                     var listExp = match[4];
 
                     var updatingView = false;
@@ -115,8 +113,6 @@
                             }
                             index = index < 0 ? 0 : index;
 
-                            console.log("Index: " + index + ", currentFocus: " + control.currentFocus + ", selectIndex: " + selectIndex);
-
                             if (neverSelected || selectIndex != control.currentFocus) { // Force change when neverSelected because it maybe the defaultText (==0)
                                 updatingView = true;
 
@@ -129,7 +125,7 @@
                         }
                     };
 
-                    $scope.$watch(listExp, function(listVal) {
+                    $scope.$watchCollection(listExp, function(listVal) {
                         //console.log("Changed " + listVal + " list=" + list);
                         if (listVal == list) {
                             return;

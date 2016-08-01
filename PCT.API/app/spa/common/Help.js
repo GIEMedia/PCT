@@ -41,7 +41,15 @@
                             elem.remove();
                         });
                         elem.find('#helpClose button.no').click(function () {
-                            $scope.$apply(attrs.helpDisable);
+                            $scope.$applyAsync(function () {
+                                $scope.$eval(attrs.helpFunc, {$value: false} );
+                            });
+                        });
+
+                        elem.find('#helpClose button.yes').click(function () {
+                            $scope.$applyAsync(function () {
+                                $scope.$eval(attrs.helpFunc, {$value: true} );
+                            });
                         });
                     });
 

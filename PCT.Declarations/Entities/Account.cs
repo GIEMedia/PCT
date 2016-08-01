@@ -121,14 +121,15 @@ namespace PCT.Declarations.Entities
                 company_name = account.CompanyName,
                 licensures = account.StateLicensures.Select(l => (state_licensure) l).ToArray(),
                 managers = account.Managers.Select(m => (manager) m).ToArray(),
-                courses = account.CourseProgress.Select(m => (m_user_course_stat) m).ToArray()
+                courses =
+                    account.CourseProgress.GroupBy(g => g.Course)
+                        .Select(g => g.OrderByDescending(c => c.Attempt).FirstOrDefault())
+                        .Select(m => (m_user_course_stat) m)
+                        .ToArray()
             };
         }
 
         [Transient]
-        public virtual IEntityBackedModel Model
-        {
-            get { return (account)this; }
-        }
+        public virtual IEntityBackedModel Model => (account)this;
     }
 }

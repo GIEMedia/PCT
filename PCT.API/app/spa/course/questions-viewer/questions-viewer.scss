@@ -1,0 +1,28 @@
+
+.course-questions-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 52px;
+  width: 400px;
+  border-right: 2px solid #d7e2e6;
+  overflow: auto;
+}
+
+
+.course-maximized .course-questions-container {
+  display: none;
+}
+
+@media (max-width: 1024px) {
+    // Mobile
+  .course-questions-container {
+    position: static;
+    width: auto;
+    border: 0;
+  }
+
+  .course-maximized .course-questions-container {
+    display: block;
+  }
+}

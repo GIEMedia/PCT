@@ -4,7 +4,7 @@
 
     angular.module('pct.elearning.api.Course', [
     ])
-        .factory("CourseService", ["$timeout", "Api", function($timeout, Api) {
+        .factory("CourseService", ["$timeout", "Api", "$q", function($timeout, Api, $q) {
             return {
                 check : function(questionId, courseId, answer) {
                     return Api.put("api/course/answer/" + courseId, {
@@ -18,16 +18,22 @@
                 getPreview : function(id, token) {
                     return Api.get("api/course/" + id + "/preview" + (token ? "?token=" + token : ""));
                 },
-                getProgress : function(id, callback) {
-                    return Api.get("api/account/progress/course/" + id).success(function(resp) {
-                        var progress = {};
-                        for (var i = 0; i < resp.sections.length; i++) {
-                            var sec = resp.sections[i];
+                getProgress : function(id) {
+                    return Api.get("api/account/progress/course/" + id).then(function(resp) {
+                        var defer = $q.defer();
+                        var progressCourse = {
+                            progress: {},
+                            config: resp.data
+                        };
+                        for (var i = 0; i < resp.data.sections.length; i++) {
+                            var sec = resp.data.sections[i];
                             if (sec.correctly_answered_questions != null) {
-                                progress[sec.section_id] = sec.correctly_answered_questions.length;
+                                progressCourse.progress[sec.section_id] = sec.correctly_answered_questions.length;
                             }
                         }
-                        callback(progress);
+
+                        defer.resolve(progressCourse);
+                        return defer.promise;
                     });
                 },
                 getNewCourses : function() {
@@ -38,6 +44,18 @@
                 },
                 getCourseStructure : function() {
                     return Api.get("api/course/list");
+                },
+                verifyStatement: function (courseId, initials) {
+                    return Api.put("api/course/verify/" + courseId, JSON.stringify(initials));
+                },
+                getCertificationCategories: function () {
+                    return Api.get("api/account/certification_category");
+                },
+                incrementCourseActivity: function (courseId, elapsedSeconds) {
+                    return Api.put("api/course/activity/" + courseId, elapsedSeconds);
+                },
+                retakeCourse: function (courseId) {
+                    return Api.post("api/course/retake/" + courseId);
                 }
             };
         }])

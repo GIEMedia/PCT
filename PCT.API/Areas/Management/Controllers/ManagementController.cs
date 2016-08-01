@@ -266,7 +266,82 @@ namespace PCT.Api.Areas.Management.Controllers
             var manufacturer = _entityRepository.GetByID<Manufacturer>(manufacturer_id);
             if (manufacturer == null)
                 throw new NullReferenceException("Specified manufacturer not found.");
+
+            var coursesToUpdate =
+                _entityRepository.Queryable<Course>()
+                    .Where(s => s.Manufacturer != null && s.Manufacturer.ID == manufacturer_id)
+                    .ToList();
+            foreach (var course in coursesToUpdate)
+            {
+                course.Manufacturer = null;
+                _entityRepository.Save(course);
+            }
+
             _entityRepository.Delete(manufacturer);
+        }
+
+        /// <summary>
+        /// Get all certification categories
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Route("certification_category")]
+        public certification_category[] GetCertificationCategory()
+        {
+            return _entityRepository.Queryable<CertificationCategory>()
+                .OrderBy(m => m.StateAbbr).ThenBy(m => m.Name)
+                .ToList()
+                .Select(m => (certification_category) m)
+                .ToArray();
+        }
+
+        /// <summary>
+        /// Upsert certification category
+        /// </summary>
+        /// <param name="category">Certification category to upsert</param>
+        /// <returns></returns>
+        [HttpPut]
+        [Route("certification_category")]
+        public certification_category UpsertCertificationCategory(certification_category category)
+        {
+            CertificationCategory cat;
+            if (!category.id.IsNullOrEmpty())
+            {
+                cat = _entityRepository.GetByID<CertificationCategory>(category.id);
+                if (cat == null)
+                    throw new NullReferenceException("Specified certification category not found.");
+            }
+            else
+                cat = new CertificationCategory();
+
+            cat.SyncFromModel(category);
+
+            _entityRepository.Save(cat);
+
+            return cat;
+        }
+
+        /// <summary>
+        /// Delete certification category
+        /// </summary>
+        /// <param name="id"></param>
+        [HttpDelete]
+        [Route("certification_category/{id}")]
+        public void DeleteCertificationCategory(Guid id)
+        {
+            var category = _entityRepository.GetByID<CertificationCategory>(id);
+            if (category == null)
+                throw new NullReferenceException("Specified certification category not found.");
+
+            var statesToUpdate =
+                _entityRepository.Queryable<StateCEU>().Where(s => s.Category != null && s.Category.ID == id).ToList();
+            foreach (var state in statesToUpdate)
+            {
+                state.Category = null;
+                _entityRepository.Save(state);
+            }
+
+            _entityRepository.Delete(category);
         }
     }
 }

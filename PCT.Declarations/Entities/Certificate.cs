@@ -31,7 +31,7 @@ namespace PCT.Declarations.Entities
 
         public static string GetImageUrl(Guid certificateID)
         {
-            return string.Concat(BaseUrl, "/Content/Certificates/", certificateID, ".jpg");
+            return string.Concat(BaseUrl, "/Content/Certificates/", certificateID, "_user.jpg");
         }
 
         public static string GetPdfUrl(Guid certificateID)

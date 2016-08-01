@@ -19,7 +19,7 @@
                         Fs.invokeAll(closeListeners);
                         closeListeners = [];
                     };
-
+                    
                     var close = function () {
                         $.fancybox.close();
                     };
@@ -68,7 +68,7 @@
                         defer.resolve(text);
                     };
                     open(modalScope, {
-                        templateUrl: "Areas/Management/app/spa/common/popup-text.html",
+                        templateUrl: "Areas/Management/app/spa/common/popup-text.html?v=" + htmlVer,
                         controller: "pct.fancybox.PromptTextCtrl"
                     })
                         .onClose(function() {
@@ -84,7 +84,7 @@
                     modalScope.text = text;
                     modalScope.action = defer.resolve;
                     open(modalScope, {
-                        templateUrl: "Areas/Management/app/spa/common/popup-alert.html",
+                        templateUrl: "Areas/Management/app/spa/common/popup-alert.html?v=" + htmlVer,
                         controller: "pct.fancybox.AlertCtrl",
                         width: 550
                     })
@@ -103,9 +103,24 @@
                     modalScope.no = no || "Cancel";
                     modalScope.action = defer.resolve;
                     open(modalScope, {
-                        templateUrl: "Areas/Management/app/spa/common/popup-confirm.html",
+                        templateUrl: "Areas/Management/app/spa/common/popup-confirm.html?v=" + htmlVer,
                         controller: "pct.fancybox.ConfirmCtrl",
                         width: 550
+                    })
+                        .onClose(function() {
+                            modalScope.$destroy();
+                        });
+                    return defer.promise;
+                },
+                openFormTemplate: function (data, options) {
+                    var defer = $q.defer();
+
+                    var modalScope = $rootScope.$new(true);
+                    if (data != null) modalScope.data = ObjectUtil.clone(data);
+                    modalScope.action = defer.resolve;
+                    open(modalScope, {
+                        templateUrl: options.templateUrl,
+                        controller: options.controller
                     })
                         .onClose(function() {
                             modalScope.$destroy();

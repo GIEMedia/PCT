@@ -9,7 +9,7 @@
             $stateProvider
                 .state('courseEdit.reviewInvite', {
                     url: '/reviewInvite',
-                    templateUrl: "Areas/Management/app/spa/course_edit/review_invite/ReviewInvite.html",
+                    templateUrl: "Areas/Management/app/spa/course_edit/review_invite/ReviewInvite.html?v=" + htmlVer,
                     controller: "courseEdit.reviewInvite.Ctrl"
                 })
             ;
@@ -60,7 +60,7 @@
                     course: "=",
                     valid: "="
                 },
-                templateUrl: "Areas/Management/app/spa/course_edit/review_invite/CourseValidation.html",
+                templateUrl: "Areas/Management/app/spa/course_edit/review_invite/CourseValidation.html?v=" + htmlVer,
                 link: function($scope, elem, attrs) {
 
                     $scope.$watch("course", function(course) {

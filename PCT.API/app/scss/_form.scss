@@ -1,0 +1,292 @@
+
+/* ================================================================ *\
+	#Form
+\* ================================================================ */
+
+.user-forms > div:not(.form-signin) + div { padding-top: 0; }
+
+.form-signin { display: none; }
+.form-signup,
+.form-password,
+.form-licensure-managers,
+.form-certificates { padding: 65px 6% 35px 6%; }
+#dashboard-page .form-certificates { padding: 60px 12% 0 3%; }
+.user-forms .form-body { position: relative; padding: 36px 0 0; }
+.user-forms .form-body.split-form:before { position: absolute; top: 70px; bottom: 36px; left: 50%; margin-left: -1px; width: 2px; background: #ededed; content: ''; }
+
+.user-forms .form-section-head { padding-bottom: 16px; }
+.user-forms .form-row { padding-bottom: 20px; }
+.user-forms .form-section { padding-right: 9px; }
+.user-forms .form-col ~ .form-col .form-section { padding: 0 0 0 9px; }
+.user-forms i.fa { color: #1daa33; font-size: 24px; margin-right: 7px; }
+
+.user-forms .form-controls + .form-controls { margin-top: 20px; }
+
+
+/* ================================================================ *\
+	#Forms
+\* ================================================================ */
+.field {
+  height: 36px;
+  padding: 7px;
+
+  width: 100%;
+  box-sizing: border-box;
+  border: 2px solid #bbb;
+  color: #606060;
+}
+
+.field:focus {
+  border-color: #878787;
+  color: #404040;
+}
+
+.field.has-error {
+  border-color: red;
+}
+
+.text-danger {
+  color: red;
+}
+
+.text-success {
+  color: green;
+}
+
+@-moz-keyframes border-pulsate {
+  0% {
+    border-bottom-color: #bbbbbb;
+  }
+  50% {
+    border-bottom-color: #d64d4d;
+  }
+  100% {
+    border-bottom-color: #bbbbbb;
+  }
+}
+
+@-webkit-keyframes border-pulsate {
+  0% {
+    border-bottom-color: #bbbbbb;
+  }
+  50% {
+    border-bottom-color: #d64d4d;
+  }
+  100% {
+    border-bottom-color: #bbbbbb;
+  }
+}
+
+@keyframes border-pulsate {
+  0% {
+    border-bottom-color: #bbbbbb;
+  }
+  50% {
+    border-bottom-color: #d64d4d;
+  }
+  100% {
+    border-bottom-color: #bbbbbb;
+  }
+}
+
+form.ng-dirty .ng-invalid {
+  border-bottom-color: #d64d4d;
+  -webkit-animation: border-pulsate 2s infinite;
+  -moz-animation: border-pulsate 2s infinite;
+  -ms-animation: border-pulsate 2s infinite;
+  -o-animation: border-pulsate 2s infinite;
+  animation: border-pulsate 2s infinite;
+}
+
+.form-label {
+  padding-bottom: 7px;
+  font-size: 11px;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: block;
+}
+
+a.form-label {
+  color: #404040 !important;
+}
+
+.form-cols {
+  margin: 0;
+}
+
+.form-col {
+  padding: 0 0 8px;
+  width: auto;
+  float: none;
+  box-sizing: border-box;
+}
+
+.form-controls-actions {
+  float: right;
+}
+
+.form-controls-actions ~ .form-cols-outer {
+  padding-right: 70px;
+}
+
+.form-actions {
+  text-align: right;
+  font-size: 0;
+
+  .state-licensure-form {
+    width: calc(100% - 155px);
+
+    [type='checkbox'] {
+      display: none;
+    }
+
+    [type="checkbox"]:not(:checked) + label,
+    [type="checkbox"]:checked + label {
+      position: relative;
+      padding-left: 30px;
+      cursor: pointer;
+      top: 12px;
+      text-align: left;
+      color: #404040;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 18px;
+    }
+
+    [type="checkbox"]:not(:checked) + label:before,
+    [type="checkbox"]:checked + label:before {
+      content: '';
+      position: absolute;
+      width: 17px;
+      height: 17px;
+      border: 2px solid #bbb;
+      background: #fff;
+      left: 0;
+    }
+
+    [type="checkbox"]:checked + label:after {
+      content: '✔';
+      position: absolute;
+      top: 3px;
+      left: 4px;
+      font-size: 18px;
+      line-height: 0.8;
+      color: #50cf6e ;
+    }
+  }
+}
+
+.form-actions label {
+  font-size: 11px;
+  float: left;
+}
+
+.form-actions label + label {
+  clear: both;
+  margin-top: 5px;
+}
+
+.form-actions label input {
+  position: relative;
+  top: 3px;
+}
+
+.form-actions label a {
+  color: #404040;
+}
+
+@media (min-width: 1025px) {
+  // Desktop
+
+  .form-cols {
+    margin: 0 -8px;
+  }
+
+  .form-col {
+    float: left;
+    padding: 0 8px 8px;
+  }
+
+  .form-col-1of2 {
+    width: 50%;
+  }
+
+  .form-col-1of3 {
+    width: 33.33%;
+  }
+
+  .form-col-full {
+    width: 100%;
+  }
+
+  .form-label {
+
+    font-size: 13px;
+    padding-bottom: 15px;
+  }
+
+  .field {
+    padding: 13px;
+    height: 54px;
+  }
+}
+
+@media (max-width: 1024px) {
+    // Mobile
+
+  /* ================================================================ *\
+      #Signup
+  \* ================================================================ */
+
+  .form-password,
+  .form-signin,
+  .form-licensure-managers {
+    display: block;
+    padding: 22px 25px;
+  }
+  .form-signup {
+    padding: 0 25px 22px 25px;
+  }
+  .profile .form-signup {
+    padding: 22px 25px;
+  }
+  .user-forms .form-body {
+    padding-top: 18px;
+  }
+  .user-forms .form-body:before {
+    display: none;
+  }
+  .user-forms .form-section,
+  .user-forms .form-col ~ .form-col .form-section {
+    padding: 0;
+  }
+  .user-forms .text-right {
+    text-align: left;
+  }
+  .user-forms .form-row {
+    padding-bottom: 10px;
+  }
+  .user-forms .form-section-body .form-col ~ .form-col {
+    padding-top: 10px;
+  }
+
+  .form-actions .state-licensure-form{
+    width: calc(100% - 123px);
+
+    label {
+      top: 4px !important;
+      line-height: 16px !important;
+    }
+  }
+}
+
+
+/* ================================================================ *\
+	#Small Desktops
+\* ================================================================ */
+@media (max-width: 1280px) {
+  .form-signup {
+    padding-right: 4%;
+    padding-left: 2%;
+  }
+}

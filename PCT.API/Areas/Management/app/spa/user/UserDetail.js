@@ -9,7 +9,7 @@
             $stateProvider
                 .state('user.detail', {
                     url: '/:userId',
-                    templateUrl: "Areas/Management/app/spa/user/UserDetail.html",
+                    templateUrl: "Areas/Management/app/spa/user/UserDetail.html?v=" + htmlVer,
                     data: {
                         name: "User Information"
                     },

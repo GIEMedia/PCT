@@ -19,8 +19,7 @@ namespace PCT.Api
                 "~/app/css/magnific-popup.css",
                 "~/app/css/jquery.fs.selecter.css",
                 "~/app/css/tooltipster.css",
-                "~/app/css/style.css",
-                "~/app/css/responsive.css"
+                "~/app/css/style.css"
                 );
             bundles.Add(cssFrontEnd);
 
@@ -56,6 +55,7 @@ namespace PCT.Api
                 "~/app/js/jquery.panzoom.min.js",
                 "~/app/js/moment.min.js",
                 "~/app/js/angular-moment.min.js",
+                // Inject front-end start
                 "~/app/spa/api/AccountService.js",
                 "~/app/spa/api/CertificateData.js",
                 "~/app/spa/api/CertificateService.js",
@@ -67,27 +67,40 @@ namespace PCT.Api
                 "~/app/spa/api/TestService.js",
                 "~/app/spa/app.js",
                 "~/app/spa/authen/authen.js",
-                "~/app/spa/authen/UserInfo.js",
+                "~/app/spa/authen/form-login.js",
                 "~/app/spa/certificates/Certificates.js",
-                "~/app/spa/common/Markup.js",
+                "~/app/spa/certification/certification.js",
+                "~/app/spa/certification/print-service.js",
                 "~/app/spa/common/Help.js",
+                "~/app/spa/common/Markup.js",
+                "~/app/spa/common/modal/modal.js",
+                "~/app/spa/common/template-opener.js",
+                "~/app/spa/common/timer-service/idle-detector.js",
+                "~/app/spa/common/timer-service/timer-service.js",
+                "~/app/spa/common/window-size.js",
                 "~/app/spa/course/Course.js",
-                "~/app/spa/course/CourseControls.js",
-                "~/app/spa/course/CourseQuestion.js",
-                "~/app/spa/course/CourseQuestionsContainer.js",
-                "~/app/spa/course/CourseSectionSlider.js",
+                "~/app/spa/course/document-viewer/CourseControls.js",
+                "~/app/spa/course/document-viewer/document-viewer.js",
+                "~/app/spa/course/questions-viewer/question.js",
+                "~/app/spa/course/questions-viewer/questions-viewer.js",
+                "~/app/spa/course/slider/slider.js",
+                "~/app/spa/course/verification-modal/verification-modal.js",
                 "~/app/spa/dashboard/Dashboard.js",
                 "~/app/spa/forgotpassword/Forgotpassword.js",
                 "~/app/spa/landing/Landing.js",
                 "~/app/spa/landing/Signup.js",
+                "~/app/spa/layout/ErrorContainer.js",
+                "~/app/spa/layout/Layout.js",
+                "~/app/spa/layout/header-timer.js",
+                "~/app/spa/layout/licensure-information-modal/licensure-information-modal.js",
+                "~/app/spa/layout/page-header.js",
                 "~/app/spa/local/PreferenceService.js",
                 "~/app/spa/profile/Profile.js",
-                "~/app/spa/test/certificate/Certificate.js",
                 "~/app/spa/test/Test.js",
-                "~/app/spa/test/TestQuestionsContainer.js",
-                "~/app/spa/theme.js",
-                "~/app/spa/layout/ErrorContainer.js",
-                "~/app/spa/layout/Layout.js"
+                "~/app/spa/test/certificate/Certificate.js",
+                "~/app/spa/test/test-question-container/test-questions-container.js",
+                "~/app/spa/theme.js"
+                // Inject front-end end
                 );
             bundles.Add(jsFrontEnd);
 
@@ -101,8 +114,10 @@ namespace PCT.Api
                 "~/app/js/jquery-textrange.js",
                 "~/Areas/Management/app/js/angular-file-upload/angular-file-upload-shim.min.js",
                 "~/Areas/Management/app/js/angular-file-upload/angular-file-upload.min.js",
+                // Inject back-end start
                 "~/Areas/Management/app/spa/api/CategoryService.js",
                 "~/Areas/Management/app/spa/api/CourseService.js",
+                "~/Areas/Management/app/spa/api/ManufacturerService.js",
                 "~/Areas/Management/app/spa/api/QuestionService.js",
                 "~/Areas/Management/app/spa/api/ReportService.js",
                 "~/Areas/Management/app/spa/api/SectionService.js",
@@ -113,7 +128,8 @@ namespace PCT.Api
                 "~/Areas/Management/app/spa/common/Markup.js",
                 "~/Areas/Management/app/spa/common/Sorter.js",
                 "~/Areas/Management/app/spa/common/Theme.js",
-                "~/Areas/Management/app/spa/courses/Courses.js",
+                "~/Areas/Management/app/spa/common/modal/modal.js",
+                "~/Areas/Management/app/spa/common/template-opener.js",
                 "~/Areas/Management/app/spa/course_edit/CourseEdit.js",
                 "~/Areas/Management/app/spa/course_edit/information/Information.js",
                 "~/Areas/Management/app/spa/course_edit/information/InformationCategories.js",
@@ -121,22 +137,25 @@ namespace PCT.Api
                 "~/Areas/Management/app/spa/course_edit/publish/Publish.js",
                 "~/Areas/Management/app/spa/course_edit/questions/Questions.js",
                 "~/Areas/Management/app/spa/course_edit/review_invite/ReviewInvite.js",
+                "~/Areas/Management/app/spa/course_edit/sections/Sections.js",
                 "~/Areas/Management/app/spa/course_edit/sections/detail/SectionsDetail.js",
                 "~/Areas/Management/app/spa/course_edit/sections/list/SectionsList.js",
-                "~/Areas/Management/app/spa/course_edit/sections/Sections.js",
                 "~/Areas/Management/app/spa/course_edit/test/Test.js",
+                "~/Areas/Management/app/spa/courses/Courses.js",
                 "~/Areas/Management/app/spa/layout/Layout.js",
                 "~/Areas/Management/app/spa/login/Login.js",
                 "~/Areas/Management/app/spa/report/Report.js",
                 "~/Areas/Management/app/spa/report/ReportDetail.js",
                 "~/Areas/Management/app/spa/report/ReportList.js",
-                "~/Areas/Management/app/spa/settings/Settings.js",
-                "~/Areas/Management/app/spa/settings/Manufaturers.js",
+                "~/Areas/Management/app/spa/security/SecurityService.js",
                 "~/Areas/Management/app/spa/settings/Categories.js",
+                "~/Areas/Management/app/spa/settings/Manufaturers.js",
+                "~/Areas/Management/app/spa/settings/Settings.js",
+                "~/Areas/Management/app/spa/settings/certification-categories/certification-categories.js",
                 "~/Areas/Management/app/spa/user/User.js",
                 "~/Areas/Management/app/spa/user/UserDetail.js",
-                "~/Areas/Management/app/spa/user/UserList.js",
-                "~/Areas/Management/app/spa/api/ManufacturerService.js"
+                "~/Areas/Management/app/spa/user/UserList.js"
+                // Inject back-end end
                 );
             bundles.Add(jsManagement);
         }

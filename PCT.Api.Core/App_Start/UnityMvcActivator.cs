@@ -1,10 +1,9 @@
 using System.Linq;
 using System.Web.Mvc;
-using PCT.Api.Core.App_Start;
 using Microsoft.Practices.Unity.Mvc;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(UnityWebActivator), "Start")]
-[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(UnityWebActivator), "Shutdown")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(PCT.Api.Core.App_Start.UnityWebActivator), "Start")]
+[assembly: WebActivatorEx.ApplicationShutdownMethod(typeof(PCT.Api.Core.App_Start.UnityWebActivator), "Shutdown")]
 
 namespace PCT.Api.Core.App_Start
 {

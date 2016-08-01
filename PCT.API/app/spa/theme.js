@@ -177,6 +177,12 @@
             };
         })
 
+        .filter('mathFloor', function () {
+            return function (num) {
+                return Math.floor(num);
+            }
+        })
+
         .directive("buttonLoading", function() {
             return {
                 restrict: "A",

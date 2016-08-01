@@ -1,0 +1,32 @@
+/* ================================================================ *\
+	#Features
+\* ================================================================ */
+
+.section-features { padding: 65px 5% 65px 11%; }
+
+.features { list-style: none outside none; padding-top: 35px; }
+.feature { display: table; width: 100%; border: 2px solid #ededed; border-radius: 5px; padding: 30px 0; }
+.feature ~ .feature { margin-top: 25px; }
+
+[class^="feature-ico"] { display: inline-block; background-repeat: no-repeat; background-position: 0 0; vertical-align: middle; }
+.feature-ico-book { background-image: url(/app/css/images/ico-book.png); width: 53px; height: 49px; }
+.feature-ico-hat { background-image: url(/app/css/images/ico-hat.png); width: 73px; height: 49px; }
+.feature-ico-write { background-image: url(/app/css/images/ico-write.png); width: 57px; height: 45px; }
+
+.feature-aside,
+.feature-entry { display: table-cell; vertical-align: middle; }
+.feature-aside { width: 22%; text-align: center; }
+.feature-entry { font-size: 13px; line-height: 1.2; padding-right: 6%; }
+
+@media (max-width: 1024px) {
+    // Mobile
+
+  /* ================================================================ *\
+      #Features
+  \* ================================================================ */
+
+  .section-features {
+    display: none;
+  }
+
+}

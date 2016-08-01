@@ -10,7 +10,7 @@
             $stateProvider
                 .state('login', {
                     url: '/login',
-                    templateUrl: "Areas/Management/app/spa/login/Login.html",
+                    templateUrl: "Areas/Management/app/spa/login/Login.html?v=" + htmlVer,
                     data: {
                         name: "Login"
                     },
@@ -19,7 +19,7 @@
             ;
         }])
 
-        .controller("login.Ctrl", ["$scope", "$state", "User", "SecurityService", "Fancybox", function ($scope, $state, User, SecurityService, Fancybox) {
+        .controller("login.Ctrl", ["$scope", "$state", "User", "SecurityService", "modalAlert", function ($scope, $state, User, SecurityService, modalAlert) {
             $scope.login = {
             };
 
@@ -35,11 +35,11 @@
                 $scope.pristine = false;
 
                 if (StringUtil.isBlank($scope.login.email)) {
-                    Fancybox.alert("Email is required", "Please input your email to login");
+                    modalAlert.open("Email is required", "Please input your email to login");
                     return;
                 }
                 if (StringUtil.isBlank($scope.login.password)) {
-                    Fancybox.alert("Password is required", "Please input your password to login");
+                    modalAlert.open("Password is required", "Please input your password to login");
                     return;
                 }
 
@@ -50,7 +50,7 @@
                     },
                     function(reason) {
                         $scope.view.submitting = false;
-                        Fancybox.alert(reason, reason);
+                        modalAlert.open(reason, reason);
                         $scope.login.password = null;
                     }
                 );

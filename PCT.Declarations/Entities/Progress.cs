@@ -24,6 +24,7 @@ namespace PCT.Declarations.Entities
         public CourseProgress()
         {
             this.Sections = new List<SectionProgress>();
+            this.Attempt = 1;
         }
 
         [Ownership(Ownership.None)]
@@ -61,6 +62,16 @@ namespace PCT.Declarations.Entities
                     certificate.Course = Course;
             }
         }
+
+        public virtual string VerificationInitials { get; set; }
+
+        public virtual DateTime? VerificationDate { get; set; }
+
+        public virtual int ActiveTime { get; set; }
+
+        public virtual int Attempt { get; set; }
+
+        //public virtual decimal? FirstAttemptGrade { get; set; }
 
         public static implicit operator m_user_course_stat(CourseProgress courseProgress)
         {

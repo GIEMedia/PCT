@@ -11,7 +11,7 @@
             $stateProvider
                 .state('certificate', {
                     url: '/certificate/:courseId',
-                    templateUrl: "/app/spa/test/certificate/Certificate.html",
+                    templateUrl: "/app/spa/test/certificate/Certificate.html?v=" + htmlVer,
                     controller: "certificate.Ctrl",
                     resolve: {
                         certificate: ["CertificateService", "$stateParams", function(CertificateService, $stateParams) {
@@ -22,7 +22,7 @@
             ;
         }])
 
-        .controller("certificate.Ctrl", ["$scope", "$state", "$stateParams", "ManagerService", "certificate", function ($scope, $state, $stateParams, ManagerService, certificate) {
+        .controller("certificate.Ctrl", ["$scope", "$state", "$stateParams", "ManagerService", "certificate", "PrintService", function ($scope, $state, $stateParams, ManagerService, certificate, PrintService) {
             $scope.certificate = certificate.data;
             $scope.sent = false;
             $scope.sending = false;
@@ -55,10 +55,25 @@
                 return false;
             };
 
+            //$scope.download = function() {
+            //    var popupWin = window.open('about:blank', 'fax_printing', 'width=861,height=792');
+            //
+            //    PrintService.print(popupWin, {
+            //        templateUrl: "app/spa/certification/certification.html?v=" + htmlVer,
+            //        controller: "certification.ctrl",
+            //        resolve: {
+            //            course: function() { return certificate.data; }
+            //        },
+            //        parentScope: $scope
+            //    });
+            //    return false;
+            //};
+
             $scope.download = function() {
                 window.open($scope.certificate.pdf_url, "_blank");
                 return false;
             };
+
         }])
 
     ;

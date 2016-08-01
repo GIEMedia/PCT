@@ -1,0 +1,129 @@
+@mixin translate($x, $y) {
+  -webkit-transform: translate($x, $y);
+  -ms-transform: translate($x, $y);
+  -o-transform: translate($x, $y);
+  transform: translate($x, $y);
+}
+
+@mixin clearfix() {
+  &:after {
+    content: " ";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin transition($transition...) {
+  -webkit-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+.modal-overlay {
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.6);
+
+  .modal {
+    box-sizing: border-box;
+    background: none;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+
+    .close {
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      width: 36px;
+      height: 36px;
+      cursor: pointer;
+      z-index: 8040;
+      background-image: url('/Areas/Management/app/css/fancybox_sprite.png');
+    }
+
+    &.modal-alert {
+      position: absolute;
+      width: 320px;
+      top: 50%;
+      left: 50%;
+      @include translate(-50%, -50%);
+
+      @media (min-width: 400px) {
+        width: 400px;
+      }
+    }
+
+    .modal-header {
+      padding: 15px;
+      @include clearfix;
+
+      h4 {
+        font-size: 18px;
+      }
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .modal-title {
+      margin: 0;
+      line-height: 1.33;
+    }
+
+    .modal-body {
+      position: relative;
+      padding: 15px;
+    }
+
+    .modal-footer {
+      padding: 15px;
+      text-align: right;
+      @include clearfix;
+
+      .btn + .btn {
+        margin-left: 5px;
+        margin-bottom: 0;
+      }
+      .btn-group .btn + .btn {
+        margin-left: -1px;
+      }
+      .btn-block + .btn-block {
+        margin-left: 0;
+      }
+    }
+  }
+
+  @media (min-width: 769px) {
+    .modal {
+      //max-width: 350px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      @include translate(-50%, -50%);
+      width: 100%;
+      box-sizing: border-box;
+    }
+  }
+}
+
+.fade {
+  opacity: 0;
+  @include transition(opacity .15s linear);
+  &.in {
+    opacity: 1;
+  }
+}
+
+.modal-open {
+  overflow: hidden;
+
+  .layout {
+    -webkit-filter: blur(10px);
+    filter: blur(10px);
+  }
+}

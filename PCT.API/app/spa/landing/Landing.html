@@ -1,14 +1,14 @@
 <div class="container is-scrollable new-user">
     <div class="intro">
-        <h3 class="intro-title">Welcome to <strong>Pest Control Technology</strong> Online Training</h3><!-- /.intro-title -->
-    </div><!-- /.intro -->
+        <h3 class="intro-title">Welcome to <strong>Pest Control Technology</strong> Online Training</h3>
+    </div>
     <div class="cols">
         <div class="col col-1of2">
 
             <e-introduction></e-introduction>
 
 
-        </div><!-- /.col col-1of2 -->
+        </div>
 
         <div class="col col-1of2 user-forms">
 
@@ -18,9 +18,9 @@
                         <h3 class="title-underlined">
                             <i class="fa fa-sign-in"></i>
                             <span>Sign In</span>
-                        </h3><!-- /.title-underlined -->
+                        </h3>
                         <div ng-if="error" style="color: red">{{error}}</div>
-                    </div><!-- /.form-head -->
+                    </div>
                     <div class="form-body">
                         <div class="form-cols">
                             <div class="form-col">
@@ -29,27 +29,27 @@
                                         <div class="form-row">
                                             <div class="form-controls">
                                                 <input type="text" class="field" placeholder="Email Address" ng-model="loginForm.email" required>
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
+                                            </div>
+                                        </div>
                                         <div class="form-row">
                                             <div class="form-controls">
                                                 <input type="password" class="field" placeholder="Password" ng-model="loginForm.password" required>
-                                            </div><!-- /.form-controls -->
-                                        </div><!-- /.form-row -->
-                                    </div><!-- /.form-section-body -->
-                                </div><!-- /.form-section -->
-                            </div><!-- /.form-col form-col-1of2 -->
-                        </div><!-- /.form-cols -->
-                    </div><!-- /.form-body -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="form-actions">
                         <label><input type="checkbox" ng-model="loginForm.remember" /> Remember me</label>
                         <label><a ui-sref="forgotpassword">Forgot your password?</a></label>
                         <button class="btn" ng-click="login()">Sign In</button>
-                    </div><!-- /.form-actions -->
+                    </div>
                 </form>
             </div>
 
             <sign-up/>
-        </div><!-- /.col col-1of2 -->
-    </div><!-- /.cols -->
+        </div>
+    </div>
 </div>

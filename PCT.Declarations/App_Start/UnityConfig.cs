@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Practices.Unity;
+using Microsoft.Practices.Unity.Configuration;
 
 namespace PCT.Declarations.App_Start
 {

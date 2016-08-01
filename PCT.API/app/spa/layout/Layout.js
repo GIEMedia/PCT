@@ -3,7 +3,10 @@
 (function () {
 
     angular.module('pct.elearning.layout', [
-        'pct.elearning.errorContainter'
+        'pct.elearning.errorContainter',
+        "pct.elearning.layout.page-header",
+        "pct.elearning.layout.header-timer",
+        "pct.elearning.layout.licensure-modal"
     ])
 
         .factory("LayoutService", function() {

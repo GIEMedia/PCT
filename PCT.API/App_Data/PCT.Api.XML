@@ -4,6 +4,31 @@
         <name>PCT.Api</name>
     </assembly>
     <members>
+        <member name="T:PCT.Api.App_Start.UnityConfig">
+            <summary>
+            Specifies the Unity configuration for the main container.
+            </summary>
+        </member>
+        <member name="M:PCT.Api.App_Start.UnityConfig.GetConfiguredContainer">
+            <summary>
+            Gets the configured Unity container.
+            </summary>
+        </member>
+        <member name="M:PCT.Api.App_Start.UnityConfig.RegisterTypes(Microsoft.Practices.Unity.IUnityContainer)">
+            <summary>Registers the type mappings with the Unity container.</summary>
+            <param name="container">The unity container to configure.</param>
+            <remarks>There is no need to register concrete types such as controllers or API controllers (unless you want to 
+            change the defaults), as Unity allows resolving a concrete type even if it was not previously registered.</remarks>
+        </member>
+        <member name="T:PCT.Api.App_Start.UnityWebActivator">
+            <summary>Provides the bootstrapping for integrating Unity with ASP.NET MVC.</summary>
+        </member>
+        <member name="M:PCT.Api.App_Start.UnityWebActivator.Start">
+            <summary>Integrates Unity when the application starts.</summary>
+        </member>
+        <member name="M:PCT.Api.App_Start.UnityWebActivator.Shutdown">
+            <summary>Disposes the Unity container when the application is shut down.</summary>
+        </member>
         <member name="M:PCT.Api.Areas.Help.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>
             Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
@@ -182,6 +207,21 @@
             Initializes a new instance of the <see cref="T:PCT.Api.Areas.Help.HelpSampleGenerator"/> class.
             </summary>
         </member>
+        <member name="P:PCT.Api.Areas.Help.HelpSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:PCT.Api.Areas.Help.HelpSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:PCT.Api.Areas.Help.HelpSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
         <member name="M:PCT.Api.Areas.Help.HelpSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
             <summary>
             Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
@@ -245,21 +285,6 @@
             <param name="type">The type.</param>
             <param name="mediaType">Type of the media.</param>
             <returns></returns>
-        </member>
-        <member name="P:PCT.Api.Areas.Help.HelpSampleGenerator.ActualHttpMessageTypes">
-            <summary>
-            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
-            </summary>
-        </member>
-        <member name="P:PCT.Api.Areas.Help.HelpSampleGenerator.ActionSamples">
-            <summary>
-            Gets the objects that are used directly as samples for certain actions.
-            </summary>
-        </member>
-        <member name="P:PCT.Api.Areas.Help.HelpSampleGenerator.SampleObjects">
-            <summary>
-            Gets the objects that are serialized as samples by the supported formatters.
-            </summary>
         </member>
         <member name="T:PCT.Api.Areas.Help.HelpSampleKey">
             <summary>
@@ -384,6 +409,77 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.GetCourses(System.Boolean)">
+            <summary>
+            Get list of courses
+            </summary>
+            <param name="activeOnly">Indicates if all or only active courses should be returned</param>
+            <returns></returns>
+        </member>
+        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.DeleteCourse(System.Guid)">
+            <summary>
+            Delete course
+            </summary>
+            <param name="courseID">ID of course</param>
+        </member>
+        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.GetCourse(System.Guid)">
+            <summary>
+            Get specific course
+            </summary>
+            <param name="courseID">ID of course</param>
+            <returns></returns>
+        </member>
+        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.GetCategories(System.Boolean)">
+            <summary>
+            Get available categories
+            </summary>
+            <param name="courseCount">Indicates if course counts should be added the resulting category list.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.UpsertCategory(System.String,System.Nullable{System.Guid},System.Nullable{System.Guid})">
+            <summary>
+            Add category or sub-category
+            </summary>
+            <param name="categoryID">ID of category to upsert</param>
+            <param name="parentCategoryID">ID of parent category (if sub-category)</param>
+            <param name="title">Title of category to add</param>
+            <returns></returns>
+        </member>
+        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.DeleteCategory(System.Guid,System.Nullable{System.Guid})">
+            <summary>
+            Delete a category or sub category. The category must not be in use.
+            </summary>
+            <param name="categoryID">ID of category to delete</param>
+            <param name="parentCategoryID">ID of parent category (if sub-category).</param>
+        </member>
+        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.UpsertCourse(PCT.Declarations.Models.Management.m_course)">
+            <summary>
+            Upsert course
+            </summary>
+            <param name="course">Course to be upserted. Status cannot be updated using this call. If new, leave ID blank. If existing, properties will be merged into existing entity.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.Validate(System.Guid)">
+            <summary>
+            Validate course, sections, and test
+            </summary>
+            <param name="courseID"></param>
+            <returns></returns>
+        </member>
+        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.ValidateAndUpdateStatus(System.Guid,PCT.Declarations.CourseStatus)">
+            <summary>
+            Update the status of a course.
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="courseStatus">Status to change course to. If setting it to Active, validation will run. If any errors found, the save will not happen. If only warnings found, save will happen but warnings will still return.</param>
+            <returns></returns>
+        </member>
+        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.SendCourseToReviewer(System.Guid,PCT.Declarations.Models.Management.m_course_reviewer)">
+            <summary>
+            Send course to reviewer
+            </summary>
+            <param name="reviewer">Details about who will be reviewing this course</param>
+        </member>
         <member name="M:PCT.Api.Areas.Management.Controllers.ManagementController.GetResults(System.Guid)">
             <summary>
             Get results of a course's test
@@ -447,6 +543,25 @@
             Delete manufacturer
             </summary>
             <param name="manufacturer_id"></param>
+        </member>
+        <member name="M:PCT.Api.Areas.Management.Controllers.ManagementController.GetCertificationCategory">
+            <summary>
+            Get all certification categories
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:PCT.Api.Areas.Management.Controllers.ManagementController.UpsertCertificationCategory(PCT.Declarations.Models.certification_category)">
+            <summary>
+            Upsert certification category
+            </summary>
+            <param name="category">Certification category to upsert</param>
+            <returns></returns>
+        </member>
+        <member name="M:PCT.Api.Areas.Management.Controllers.ManagementController.DeleteCertificationCategory(System.Guid)">
+            <summary>
+            Delete certification category
+            </summary>
+            <param name="id"></param>
         </member>
         <member name="M:PCT.Api.Areas.Management.Controllers.ManageQuestionController.GetQuestions(System.Guid,System.Nullable{System.Guid})">
             <summary>
@@ -538,77 +653,6 @@
             <param name="sectionID">ID of section</param>
             <param name="cascade">Indicates if other sections that share this same document should also be updated (optional: default = false).</param>
         </member>
-        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.GetCourses(System.Boolean)">
-            <summary>
-            Get list of courses
-            </summary>
-            <param name="activeOnly">Indicates if all or only active courses should be returned</param>
-            <returns></returns>
-        </member>
-        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.DeleteCourse(System.Guid)">
-            <summary>
-            Delete course
-            </summary>
-            <param name="courseID">ID of course</param>
-        </member>
-        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.GetCourse(System.Guid)">
-            <summary>
-            Get specific course
-            </summary>
-            <param name="courseID">ID of course</param>
-            <returns></returns>
-        </member>
-        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.GetCategories(System.Boolean)">
-            <summary>
-            Get available categories
-            </summary>
-            <param name="courseCount">Indicates if course counts should be added the resulting category list.</param>
-            <returns></returns>
-        </member>
-        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.UpsertCategory(System.String,System.Nullable{System.Guid},System.Nullable{System.Guid})">
-            <summary>
-            Add category or sub-category
-            </summary>
-            <param name="categoryID">ID of category to upsert</param>
-            <param name="parentCategoryID">ID of parent category (if sub-category)</param>
-            <param name="title">Title of category to add</param>
-            <returns></returns>
-        </member>
-        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.DeleteCategory(System.Guid,System.Nullable{System.Guid})">
-            <summary>
-            Delete a category or sub category. The category must not be in use.
-            </summary>
-            <param name="categoryID">ID of category to delete</param>
-            <param name="parentCategoryID">ID of parent category (if sub-category).</param>
-        </member>
-        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.UpsertCourse(PCT.Declarations.Models.Management.m_course)">
-            <summary>
-            Upsert course
-            </summary>
-            <param name="course">Course to be upserted. Status cannot be updated using this call. If new, leave ID blank. If existing, properties will be merged into existing entity.</param>
-            <returns></returns>
-        </member>
-        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.Validate(System.Guid)">
-            <summary>
-            Validate course, sections, and test
-            </summary>
-            <param name="courseID"></param>
-            <returns></returns>
-        </member>
-        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.ValidateAndUpdateStatus(System.Guid,PCT.Declarations.CourseStatus)">
-            <summary>
-            Update the status of a course.
-            </summary>
-            <param name="courseID">ID of course</param>
-            <param name="courseStatus">Status to change course to. If setting it to Active, validation will run. If any errors found, the save will not happen. If only warnings found, save will happen but warnings will still return.</param>
-            <returns></returns>
-        </member>
-        <member name="M:PCT.Api.Areas.Management.Controllers.ManageCourseController.SendCourseToReviewer(System.Guid,PCT.Declarations.Models.Management.m_course_reviewer)">
-            <summary>
-            Send course to reviewer
-            </summary>
-            <param name="reviewer">Details about who will be reviewing this course</param>
-        </member>
         <member name="T:PCT.Api.Controllers.AccountController">
             <summary>
             Manage user account information
@@ -676,31 +720,33 @@
             <param name="providerKey">External login provider key</param>
             <returns>HTTP Response</returns>
         </member>
+        <member name="M:PCT.Api.Controllers.AccountController.GetCertificationCategory">
+            <summary>
+            Get all certification categories
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:PCT.Api.Controllers.CourseController.GetCourse(System.Guid)">
             <summary>
             Get specific course
             </summary>
             <param name="courseID">ID of course</param>
-            <returns></returns>
         </member>
         <member name="M:PCT.Api.Controllers.CourseController.GetCoursePreview(System.Guid)">
             <summary>
             Get specific course in preview mode
             </summary>
             <param name="courseID">ID of course</param>
-            <returns></returns>
         </member>
         <member name="M:PCT.Api.Controllers.CourseController.GetCourses">
             <summary>
             Get all categorized courses
             </summary>
-            <returns></returns>
         </member>
         <member name="M:PCT.Api.Controllers.CourseController.NewCourses">
             <summary>
             Get new courses
             </summary>
-            <returns></returns>
         </member>
         <member name="M:PCT.Api.Controllers.CourseController.AnswerQuestion(System.Guid,PCT.Declarations.Models.answer)">
             <summary>
@@ -708,7 +754,26 @@
             </summary>
             <param name="courseID">ID of course</param>
             <param name="answer">Answer to a course question</param>
-            <returns></returns>
+        </member>
+        <member name="M:PCT.Api.Controllers.CourseController.VerifyCourse(System.Guid,System.String)">
+            <summary>
+            Sign verification statement
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="initials"></param>
+        </member>
+        <member name="M:PCT.Api.Controllers.CourseController.IncrementCourseActivity(System.Guid,System.Int32)">
+            <summary>
+            Incerement course activity
+            </summary>
+            <param name="courseID">ID of course</param>
+            <param name="elapsedSeconds">Seconds to be added to activity.</param>
+        </member>
+        <member name="M:PCT.Api.Controllers.CourseController.ResetCourseSoItCanBeRataken(System.Guid)">
+            <summary>
+            Reset Test Progress so Course Can Be Retaken
+            </summary>
+            <param name="courseID">ID of course</param>
         </member>
         <member name="M:PCT.Api.Controllers.TestController.GetTest(System.Guid)">
             <summary>

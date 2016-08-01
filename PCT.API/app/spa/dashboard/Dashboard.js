@@ -1,4 +1,3 @@
-"use strict";
 
 (function () {
 
@@ -11,13 +10,14 @@
             $stateProvider
                 .state('dashboard', {
                     url: '/dashboard?firstLogin',
-                    templateUrl: "/app/spa/dashboard/Dashboard.html",
+                    templateUrl: "/app/spa/dashboard/Dashboard.html?v=" + htmlVer,
                     controller: "dashboard.Ctrl"
                 })
             ;
         }])
 
-        .controller("dashboard.Ctrl", ["$scope", "$state", "$stateParams", "User", "CourseService", "DashboardHelper", function ($scope, $state, $stateParams, User, CourseService, DashboardHelper) {
+        .controller("dashboard.Ctrl", ["$scope", "$state", "$stateParams", "User", "CourseService", "DashboardHelper", function ($scope, $state, $stateParams, User,
+                                                                                                                                 CourseService, DashboardHelper) {
             $scope.User = User;
             $scope.firstLogin = $stateParams.firstLogin;
 
@@ -43,6 +43,14 @@
                 $scope.courseHeaderCols = DashboardHelper.toCols(DashboardHelper.filter($scope.courseStructure, search));
             });
 
+            $scope.getTestProgress = function (course) {
+              var openCourse = Cols.find($scope.openCourses, function (openCourse) {
+                  return openCourse.course_id == course.course_id;
+              });
+
+              return openCourse && openCourse.course_progress == 1 ? openCourse.test_progress : null;
+            };
+
             /**
              * This is invoked when user click on a new course (either in the New Courses list or in the search dropdown).
              * This will load the desired course, to check if the server will allow that course to be loaded when user proceed to the Course Page.
@@ -57,6 +65,7 @@
                     }
                 });
             };
+
         }])
 
         /**
@@ -188,6 +197,16 @@
                 }
             };
         })
+
+        .directive("searchSection", function() {
+            return {
+                restrict: "E",
+                templateUrl: "app/spa/dashboard/search-section.html?v=" + htmlVer,
+                controller: ["$scope", function($scope) {}]
+            };
+        })
     ;
 
 })();
+
+

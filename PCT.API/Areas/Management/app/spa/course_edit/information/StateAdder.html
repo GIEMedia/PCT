@@ -3,8 +3,18 @@
     </span>
 </div><!-- /.table-col -->
 
+<div class="table-col col-size-4">
+    <input type="text" placeholder="Activity ID" ng-model="stateAdder.model.activity_id" ng-readonly="course.status == 1" maxlength="15" required />
+</div><!-- /.table-col -->
+
+<div class="table-col col-size-4">
+    <input type="text" placeholder="Category Credit" ng-model="stateAdder.model.activity_type" ng-readonly="course.status == 1" maxlength="15" required />
+</div><!-- /.table-col -->
+
 <div class="table-col col-size-3">
-    <input type="text" placeholder="Code" ng-model="stateAdder.model.category_code" ng-pattern="/[a-zA-Z0-9]+/" ng-readonly="course.status == 1" maxlength="10" required />
+    <span name="field-add-category-code" id="field-add-category-code" class="select" pct-model="stateAdder.model.category_id" pct-disabled="course.status == 1" pct-options="code.id as (code.name + ' ' + code.number) for code in filteredCode(stateAdder.model.state)">
+    </span>
+    <!--<input type="text" placeholder="Code" ng-model="stateAdder.model.category_code" ng-pattern="/[a-zA-Z0-9]+/" ng-readonly="course.status == 1" maxlength="10" required />-->
 </div><!-- /.table-col -->
 
 <div class="table-col col-size-4">

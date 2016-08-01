@@ -1,0 +1,94 @@
+<div class="course-questions-container no-select is-scrollable">
+
+    <div class="course-progress">
+        <h3>{{course.title}}</h3>
+
+        <h5>#{{sectionNum()}} - {{section.title}}</h5>
+
+        <div class="course-progress-bar" ng-if="question">
+            <p>
+                <span class="alignright">Question
+                    <span class="current-count">{{questionIndex()+1}}</span> of
+                    <span class="total-count">{{section.questions.length}}</span>
+                </span> Section Progress
+            </p>
+
+            <div class="course-progress-bar-fill">
+                <div style="width: {{ (questionIndex()+1) / section.questions.length*100 }}%;"></div>
+            </div>
+
+            <div class="course-progress-green-bar">
+                <span>{{course.sections.length}} Sections</span>
+                <div class="course-progress-bar-fill">
+                    <div style="width: {{ progressPercent() }}%; background-color: #209634;"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="course-questions">
+
+        <course-question ng-if="question" question="question"
+                         on-answer-correct="progressQuestion()" check-answer="checkAnswer"
+                         control="view.questionControl"
+        ></course-question>
+
+        <!-- Completed section -->
+        <div class="course-question" ng-if="question == null && finishedThisSection() && !finishedAllSection()">
+            <div class="course-question-head">
+                <h4 class="course-question-title">You've completed this section.</h4>
+                <h4 class="course-question-title">Do you want to change to next section?</h4>
+            </div>
+
+            <div class="course-question-body">
+                <div class="form-actions">
+                    <input type="button" class="btn" value="Next Section" ng-click="onChangeSection({ $value: nextUnfinishedSection() })">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="course-question" ng-if="question == null && finishedAllSection()">
+            <div class="course-question-head">
+                <h4 class="course-question-title"><strong>Congratulations!</strong></h4>
+                <h4 class="course-question-title">You've completed all of the sections.</h4>
+                <h4 class="course-question-title">Are you ready to proceed to the test?</h4>
+            </div>
+
+            <div class="course-question-body">
+                <div class="form-actions">
+                    <input type="button" class="btn" value="Start Test" ng-click="gotoTest()">
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Answered correctly -->
+    <div class="course-question-answer correct" ng-if="view.questionControl.result().correct == true || previewMode" >
+        <h4 class="course-question-answer-title" markup="(previewMode ? question.answer : view.questionControl.result()).correct_response_heading"></h4>
+        <div class="course-question-answer-entry">
+            <p markup="(previewMode ? question.answer : view.questionControl.result()).correct_response_heading"></p>
+        </div>
+    </div>
+
+    <nav class="nav-questions" ng-if="view.questionControl.result().correct == true">
+        <a href="" ng-click="nextQuestion()" class="link-next">Next</a>
+    </nav>
+
+    <!-- Answered wrongly -->
+    <div class="course-question-answer retry" ng-if="view.questionControl.result().correct == false">
+        <h4 class="course-question-answer-title">Incorrect.</h4>
+        <div class="course-question-answer-entry">
+            <p>Please review the question, consult the label/document and try again</p>
+        </div>
+    </div>
+
+
+    <nav class="nav-questions" ng-if="previewMode">
+        <a href="" ng-click="prevQuestion()" class="link-prev" ng-if="questionIndex() > 0">Prev</a>
+        <a href="" ng-click="nextQuestion()" class="link-next" ng-if="questionIndex() < section.questions.length - 1">Next</a>
+    </nav>
+
+</div>

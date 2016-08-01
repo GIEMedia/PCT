@@ -1,0 +1,61 @@
+.login-container {
+  display: none;
+}
+
+.login-container form {
+  display: inline-block;
+  margin-left: 9px;
+}
+
+.login-container input[type=text], .login-container input[type=email], .login-container input[type=password] {
+  width: 168px;
+  height: 36px;
+  padding: 0 13px;
+}
+
+.login-container .btn {
+  min-width: 0;
+  padding: 0 13px;
+  border-radius: 0;
+  height: 36px;
+}
+
+.login-container .login-footer {
+  line-height: 1;
+  font-size: 13px;
+  margin: 3px 100px 0 30px;
+  float: right;
+}
+
+.login-container .login-footer + .login-footer {
+  margin-right: 32px;
+}
+
+.login-container .login-footer input {
+  width: 12px;
+}
+
+.login-container .login-footer label {
+  position: relative;
+  display: inline-block;
+  top: -2px;
+  margin-left: 5px;
+  color: #909090;
+}
+
+.login-container .login-footer a {
+  color: #909090;
+}
+
+@media (min-width: 1025px) {
+  // Desktop
+
+  .login-container {
+    display: block;
+    position: relative;
+    float: right;
+    margin: 9px 0 0 0;
+    width: 500px;
+  }
+
+}

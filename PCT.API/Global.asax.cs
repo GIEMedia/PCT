@@ -1,4 +1,8 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
+using System.IO;
+using System.Linq;
+using System.Web.Hosting;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -34,5 +38,28 @@ namespace PCT.Api
                 MigrationManager.MigrateToLatest(ConnectionString, "PCT.Migrations");
             }
         }
+
+        private static DateTime _htmlVersionLastUpdated = DateTime.MinValue;
+        private static int _htmlVersion;
+        private static readonly object _htmlLockObject = new object();
+        public static int HtmlVersion
+        {
+            get
+            {
+                if (_htmlVersionLastUpdated > DateTime.Now.AddMinutes(-5))
+                    return _htmlVersion;
+                lock (_htmlLockObject)
+                {
+                    _htmlVersion =
+                        new DirectoryInfo(HostingEnvironment.MapPath("~/")).GetFiles("*.htm*",
+                            SearchOption.AllDirectories).Max(f => f.LastWriteTime).GetHashCode();
+                    _htmlVersionLastUpdated = DateTime.Now;
+                }
+                return _htmlVersion;
+            }
+        }
+
+        private static readonly int _idleDurationSecs = ConfigurationManager.AppSettings["IdleDurationSecs"].ToInt(60*5);
+        public static int IdleDurationSecs => _idleDurationSecs;
     }
 }

@@ -41,6 +41,8 @@ namespace PCT.Data
                 c.References(x => x.Course).LazyLoad().Cascade.None();
             });
 
+            mapper.Add().TableFor<CertificationCategory>();
+
             mapper.Add().TableFor<Course>(c =>
             {
                 c.Map(x => x.DateCreatedUtc).CustomType<UtcDateTimeType>();
@@ -90,6 +92,7 @@ namespace PCT.Data
                         x.References(y => y.Certificate).Not.LazyLoad().Cascade.All();
                         x.References(y => y.Course).Column("ItemID").LazyLoad().Cascade.None();
                         x.Map(y => y.TotalSections).Column("Total");
+                        x.Map(y=>y.VerificationDate).CustomType<UtcDateTimeType>();
                     });
                 p.AddSubclass()
                     .OfType<SectionProgress>(x =>
@@ -148,7 +151,7 @@ namespace PCT.Data
                 s.AddSubclass().OfType<Test>();
             });
 
-            mapper.Add().TableFor<StateCEU>();
+            mapper.Add().TableFor<StateCEU>(s => s.References(x => x.Category).Not.LazyLoad().Cascade.None());
 
             mapper.Add().TableFor<StateLicensure>();
         }

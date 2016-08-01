@@ -18,7 +18,6 @@
                     return enabled == null || enabled == "true";
                 },
                 setTestHelpEnabled: function(enabled) {
-                    console.log(enabled);
                     return localStorage.setItem("test.help.enabled", enabled);
                 }
             };

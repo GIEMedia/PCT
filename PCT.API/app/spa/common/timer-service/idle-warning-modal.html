@@ -1,0 +1,9 @@
+<div>
+    <div class="title">Your session is about to expire!</div>
+    <div class="content"> You will be logged out in <b interval-1-second>{{countDown()}}</b> seconds. Do you want to stay signed in?</div>
+
+    <div class="controls">
+        <button class="btn btn-xs-block" ng-click="continueCourse()">Yes, keep me signed in {{stateName}}</button>
+        <a href ng-click="logout()">No, sign me out</a>
+    </div>
+</div>

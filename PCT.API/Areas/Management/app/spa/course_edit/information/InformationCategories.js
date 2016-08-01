@@ -5,7 +5,7 @@
     angular.module('pct.management.courseEdit.information.categories', [
         'pct.fancybox'
     ])
-        .directive("courseInformationCategories", ["$q", "CategoryService", "Fancybox", function($q, CategoryService, Fancybox) {
+        .directive("courseInformationCategories", ["$q", "CategoryService", "Fancybox", "modalPrompt", function($q, CategoryService, Fancybox, modalPrompt) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -58,7 +58,7 @@
 
                     function addCategoryModal() {
                         var defer = $q.defer();
-                        Fancybox.promptText("Add New Category", "Category name").then(function(newName) {
+                        modalPrompt.open("Add New Category", "Category name").result.then(function(newName) {
                             CategoryService.addCategory(newName).success(function(cat) {
                                 defer.resolve(cat);
                             });
@@ -67,8 +67,7 @@
                     }
                     function addSubCategoryModal(parentId) {
                         var defer = $q.defer();
-                        Fancybox.promptText("Add New Sub Category", "Sub category name").then(function (newName) {
-
+                        modalPrompt.open("Add New Sub Category", "Sub category name").result.then(function(newName) {
                             CategoryService.addSubCategory(parentId, newName).success(function(subCat) {
                                 defer.resolve(subCat);
                             });

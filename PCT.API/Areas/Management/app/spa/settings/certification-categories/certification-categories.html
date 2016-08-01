@@ -1,0 +1,76 @@
+<div class="custom-table-secondary table-manufacturers" expanding-table>
+    <div class="table-row-head">
+        <div class="table-col col-size-1">&nbsp;</div><!-- /.table-col -->
+        <div class="table-col col-size-6">
+            <h3>Certification Categories</h3>
+        </div><!-- /.table-col -->
+        <div class="table-col col-size-5">
+            <h3>Courses</h3>
+        </div><!-- /.table-col -->
+    </div><!-- /.table-row-head -->
+
+    <div class="table-row table-row-1">
+        <div class="table-col col-size-1">
+            <a href="" class="icon icon-chevron-down"></a>
+        </div><!-- /.table-col -->
+        <div class="table-col col-size-6">
+            <h4 ng-bind="listCertifications == null ? 'Loading...' : listCertifications.length + ' Certification'"></h4>
+        </div><!-- /.table-col -->
+        <div class="table-col col-size-5">
+            <h3>&nbsp;</h3>
+        </div><!-- /.table-col -->
+    </div><!-- /.table-row -->
+    <div class="table-expand">
+        <div class="table-row">
+            <div class="table-col col-size-1">
+                <a href="" class="icon icon-chevron-up"></a>
+            </div><!-- /.table-col -->
+            <div class="table-col col-size-6">
+            </div><!-- /.table-col -->
+            <div class="table-col col-size-5">
+                <button class="btn btn-grey" pct-tooltip="Add Certification" ng-click="addCertification()">+ ADD</button>
+            </div><!-- /.table-col -->
+        </div><!-- /.table-row -->
+    </div><!-- /.table-row-expand -->
+
+    <div class="table-expand">
+
+        <div class="table-row">
+            <div class="table-col col-size-4">
+                State
+            </div><!-- /.table-col -->
+            <div class="table-col col-size-4">
+                Category Type
+            </div><!-- /.table-col -->
+            <div class="table-col col-size-3">
+                Category Name
+            </div><!-- /.table-col -->
+            <div class="table-col col-size-2">
+                &nbsp;
+            </div><!-- /.table-col -->
+        </div>
+
+
+        <div class="table-row" ng-repeat="certification in listCertifications">
+            <div class="table-col col-size-4">
+                {{certification.state}}
+            </div><!-- /.table-col -->
+            <div class="table-col col-size-4">
+                {{certification.name}}
+            </div><!-- /.table-col -->
+            <div class="table-col col-size-3">
+                {{certification.number}}
+            </div><!-- /.table-col -->
+            <div class="table-col col-size-2">
+                <div class="icons">
+                    <a ng-click="updateCertification(certification)" class="fa fa-pencil" ng-click="updateCertification(certification)" pct-tooltip="Edit"></a>
+                    <a ng-click="removeCertification(certification)" button-loading="removing:small">
+                        <i class="fa fa-trash-o" pct-tooltip="Delete"></i>
+                    </a>
+                </div>
+            </div><!-- /.table-col -->
+        </div>
+
+
+    </div><!-- /.table-row-expand -->
+</div><!-- /.custom-table-secondary -->

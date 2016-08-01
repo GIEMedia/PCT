@@ -8,7 +8,7 @@
             return {
                 restrict: "E",
                 scope: true,
-                templateUrl: "Areas/Management/app/spa/settings/Manufaturers.html",
+                templateUrl: "Areas/Management/app/spa/settings/Manufaturers.html?v=" + htmlVer,
                 link: function($scope, elem, attrs) {
                     $scope.adding = {
                         name: null,
@@ -49,7 +49,7 @@
             };
         }])
 
-        .directive("settingsManufacturerRow", ["ManufacturerService", "Fancybox", function(ManufacturerService, Fancybox) {
+        .directive("settingsManufacturerRow", ["ManufacturerService", "modalConfirm", function(ManufacturerService, modalConfirm) {
             return {
                 restrict: "A",
                 link: function($scope, elem, attrs) {
@@ -68,12 +68,11 @@
                     };
 
                     $scope.remove = function(man) {
-                        Fancybox.confirm("Confirm removing manufacturer","Remove manufacturer \"" + man.name + "\"?").then(function() {
+                        modalConfirm.open("Confirm removing manufacturer","Remove manufacturer \"" + man.name + "\"?").result.then(function() {
                             $scope.removingMan = true;
                             ManufacturerService.remove(man.manufacturer_id).success(function() {
                                 Cols.remove(man, $scope.list);
                             });
-
                         });
                     };
 

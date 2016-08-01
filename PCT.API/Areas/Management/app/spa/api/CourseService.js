@@ -46,6 +46,15 @@
                 },
                 review: function(courseId, reviewer) {
                     return Api.put("api/manage/course/review/" + courseId, reviewer);
+                },
+                getCertificationCategories: function () {
+                    return Api.get("api/manage/certification_category");
+                },
+                deleteCertificationCategory: function (id) {
+                    return Api.delete("api/manage/certification_category/" + id);
+                },
+                upsertCertificationCategory: function (certification) {
+                    return Api.put("api/manage/certification_category", certification);
                 }
             };
         }])

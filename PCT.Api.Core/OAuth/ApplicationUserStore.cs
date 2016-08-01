@@ -132,7 +132,7 @@ namespace PCT.Api.Core.OAuth
             account.HashedPassword = user.HashedPassword.IfNullOrEmpty(account.HashedPassword);
             account.PasswordResetToken = user.PasswordResetToken.IfNullOrEmpty(account.PasswordResetToken);
             account.PasswordResetTokenExpirationDate = user.PasswordResetTokenExpirationDate.IfNull(account.PasswordResetTokenExpirationDate);
-            account.Status = user.Status.GetValueOrDefault(account.Status);
+            account.Status = user.Status;
             account.AdminAccess = user.AdminAccess.GetValueOrDefault(account.AdminAccess);
 
             _entityRepository.Save(account);

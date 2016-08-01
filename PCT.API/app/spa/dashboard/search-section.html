@@ -1,0 +1,69 @@
+<div class="search">
+    <div class="search-field" allow-search="courseStructure!=null">
+        <input placeholder="{{courseStructure!=null ? 'Find a course': 'Loading courses…'}}" ng-model="view.search" search-input />
+    </div>
+
+    <div class="search-dropdown">
+        <div class="cols" ng-if="(courseHeaderCols.length || 0) == 0">
+
+            <div class="col col-2of2 no-record">
+                <div ng-if="(view.search.length || 0) == 0">
+                    No course(s) found
+                </div>
+                <div ng-if="view.search.length">
+                    No course(s) with title "<b>{{view.search}}</b>" found
+                </div>
+            </div>
+        </div>
+        <div class="cols" ng-if="courseHeaderCols.length">
+
+            <div class="col col-1of2" ng-repeat="col in courseHeaderCols">
+                <div class="search-section" ng-repeat="courseHeader in col">
+                    <div class="section-head">
+                        <h3 class="section-title">
+                            <i class="search-ico-rats"></i>
+
+                            {{courseHeader.title}}
+                        </h3>
+                    </div>
+
+                    <div class="section-body">
+                        <h5 ng-repeat-start="courseCat in courseHeader.categories">{{courseCat.title}}</h5>
+
+                        <ul ng-repeat-end>
+                            <li ng-repeat="course in courseCat.courses">
+                                <div>
+                                    <a href="" ng-click="loadCourse(course)">
+                                        <div class="course-item-badge" ng-if="course.ceu_eligible">
+                                            <span>CEU</span>
+                                        </div>
+                                        <div class="course-item-progress"
+                                             ng-class="{'course-item-progress-blue':getTestProgress(course) >= 0.7, 'course-item-progress-red':getTestProgress(course) < 0.7 }"
+                                             ng-if="getTestProgress(course) != null">
+                                            <div ng-class="{'ico-reset': getTestProgress(course) < 0.7, 'ico-check': getTestProgress(course) >= 0.7 }">&nbsp;</div>
+                                            <span>{{(getTestProgress(course) * 100) | mathFloor}}%</span>
+                                        </div>
+
+                                        {{course.title}}
+
+                                        <div class="courses-item-content">
+                                            <div ng-if="course.description">
+                                                <h6>CEU(s) Available:</h6>
+                                                <p class="courses-item-meta">{{course.description}}</p>
+                                            </div>
+                                            <div ng-if="course.prereq_courses && course.prereq_courses.length > 0">
+                                                <h6>Pre-requisite Courses:</h6>
+                                                <p ng-repeat="pre in course.prereq_courses" class="courses-item-meta">{{pre}}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

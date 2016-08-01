@@ -12,7 +12,7 @@ namespace PCT.Declarations.Interfaces
         /// </summary>
         /// <param name="accountID">ID of account</param>
         /// <returns>List of course progresses that have already been started but not yet finished.</returns>
-        IEnumerable<CourseProgress> OpenCourses(Guid accountID);
+        course_overview[] OpenCourses(Guid accountID);
 
         /// <summary>
         /// Gets newest coureses. Optionally specify account id to remove already started/taken courses.
@@ -90,5 +90,11 @@ namespace PCT.Declarations.Interfaces
         IEnumerable<answer_result> AnswerTestQuestion(Guid accountID, Guid courseID, answer[] answers);
 
         bool DeleteCourse(Guid courseID);
+
+        void Verify(Guid accountID, Guid courseID, string initials);
+
+        int IncrementActivity(Guid accountID, Guid courseID, int elapsedSeconds);
+
+        void ResetCourseSoItCanBeRataken(Guid accountID, Guid courseID);
     }
 }

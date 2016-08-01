@@ -37,7 +37,6 @@ namespace PCT.Api.Controllers
         /// Get specific course
         /// </summary>
         /// <param name="courseID">ID of course</param>
-        /// <returns></returns>
         [HttpGet]
         [Route("{courseID}")]
         [Authorize]
@@ -56,7 +55,6 @@ namespace PCT.Api.Controllers
         /// Get specific course in preview mode
         /// </summary>
         /// <param name="courseID">ID of course</param>
-        /// <returns></returns>
         [HttpGet]
         [Route("{courseID}/preview")]
         [AdminOrTokenAuthorize]
@@ -70,7 +68,6 @@ namespace PCT.Api.Controllers
         /// <summary>
         /// Get all categorized courses
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         [Route("list")]
         [Authorize]
@@ -82,6 +79,8 @@ namespace PCT.Api.Controllers
             var passedCourses =
                 _certificateService.Value.GetCertificates(CurrentUserID).Select(c => c.Course.ID).ToArray();
 
+            var openCourses = _courseService.OpenCourses(CurrentUserID);
+
             return categories.Select(mainCategory => new main_category
             {
                 title = mainCategory.Title,
@@ -91,7 +90,21 @@ namespace PCT.Api.Controllers
                     courses =
                         courses.Where(c => c.Category.ID == s.ID)
                             .Where(c => !passedCourses.Contains(c.ID))
-                            .Select(c => (course_overview) c)
+                            .Select(c =>
+                            {
+                                var openCourse = openCourses.FirstOrDefault(o => o.course_id == c.ID);
+                                if (openCourse != null) return openCourse;
+
+                                var course = (course_overview) c;
+                                var states = c.StateCEUs.Select(x => x.StateAbbr).Distinct().ToArray();
+                                course.ceu_eligible = c.StateCEUs.Any() &&
+                                                      (from a in _entityRepository.Queryable<Account>()
+                                                          where a.ID == CurrentUserID
+                                                          from l in a.StateLicensures
+                                                          where states.Contains(l.StateAbbr)
+                                                          select l).Any();
+                                return course;
+                            })
                             .OrderBy(c => c.title)
                             .ToArray()
                 }).Where(c => c.courses.Any()).ToArray()
@@ -101,14 +114,24 @@ namespace PCT.Api.Controllers
         /// <summary>
         /// Get new courses
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         [Route("new")]
         [Authorize]
         public course_overview[] NewCourses()
         {
-            return (from c in _courseService.NewCourses(accountID: CurrentUserID)
-                select (course_overview) c).ToArray();
+            return _courseService.NewCourses(accountID: CurrentUserID)
+                .Select(c =>
+                {
+                    var course = (course_overview) c;
+                    var states = c.StateCEUs.Select(s => s.StateAbbr).Distinct().ToArray();
+                    course.ceu_eligible = states.Any() &&
+                                          (from a in _entityRepository.Queryable<Account>()
+                                              where a.ID == CurrentUserID
+                                              from l in a.StateLicensures
+                                              where states.Contains(l.StateAbbr)
+                                              select l).Any();
+                    return course;
+                }).ToArray();
         }
 
         /// <summary>
@@ -116,7 +139,6 @@ namespace PCT.Api.Controllers
         /// </summary>
         /// <param name="courseID">ID of course</param>
         /// <param name="answer">Answer to a course question</param>
-        /// <returns></returns>
         [HttpPut]
         [Route("answer/{courseID}")]
         [Authorize]
@@ -126,6 +148,44 @@ namespace PCT.Api.Controllers
             var correct = _courseService.AnswerCourseQuestion(CurrentUserID, courseID, answer.question_id,
                 answer.selected_option_ids, out correctResponseHeading, out correctResponseText);
             return new answer_result(answer.question_id, correct, correctResponseHeading, correctResponseText);
+        }
+
+        /// <summary>
+        /// Sign verification statement
+        /// </summary>
+        /// <param name="courseID">ID of course</param>
+        /// <param name="initials"></param>
+        [HttpPut]
+        [Route("verify/{courseID}")]
+        [Authorize]
+        public void VerifyCourse(Guid courseID, [FromBody] string initials)
+        {
+            _courseService.Verify(CurrentUserID, courseID, initials);
+        }
+
+        /// <summary>
+        /// Incerement course activity
+        /// </summary>
+        /// <param name="courseID">ID of course</param>
+        /// <param name="elapsedSeconds">Seconds to be added to activity.</param>
+        [HttpPut]
+        [Route("activity/{courseID}")]
+        [Authorize]
+        public int IncrementCourseActivity(Guid courseID, [FromBody] int elapsedSeconds)
+        {
+            return _courseService.IncrementActivity(CurrentUserID, courseID, elapsedSeconds);
+        }
+
+        /// <summary>
+        /// Reset Test Progress so Course Can Be Retaken
+        /// </summary>
+        /// <param name="courseID">ID of course</param>
+        [HttpPost]
+        [Route("retake/{courseID}")]
+        [Authorize]
+        public void ResetCourseSoItCanBeRataken(Guid courseID)
+        {
+            _courseService.ResetCourseSoItCanBeRataken(CurrentUserID, courseID);
         }
     }
 }

@@ -1,0 +1,154 @@
+/* ================================================================ *\
+	#Buttons
+\* ================================================================ */
+
+.btn {
+  font-size: 11px;
+  padding: 9px 10px;
+  min-width: 100px;
+  -webkit-appearance: none;
+
+  display: inline-block;
+  border: 0;
+  cursor: pointer;
+  background: $color-blue;
+  border-radius: 3px;
+  color: #fff;
+}
+
+.btn:hover {
+  //background: #009ed9;
+  background: darken($color-blue, 5%);
+}
+
+.btn:active {
+  //background: #0192c8;
+  background: darken($color-blue, 10%);
+}
+
+.btn[disabled] {
+  //background: #88DDFC;
+  background: lighten($color-blue, 30%);
+  cursor: not-allowed;
+}
+button[disabled], button[disabled]:hover {
+  //background: #88DDFC;
+  background: lighten($color-blue, 30%);
+  cursor: not-allowed;
+}
+
+.btn-lightgray {
+  background: #9eafb5;
+}
+
+.btn-lightgray:hover {
+  background: #a8b7bd;
+}
+
+.btn-lightgray:active {
+  background: #8e9da3;
+}
+
+.btn-green {
+  background: #2cb142;
+  &:hover {
+    background: #42b955;
+  }
+  &:active {
+    background: #289f3b;
+  }
+}
+.btn.btn-green[disabled] {
+  background: #78EB8B;
+}
+
+.btn-add,
+.btn-remove {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  vertical-align: top;
+  border: 2px solid #00c7d3;
+}
+
+.btn-add {
+  background: url(/app/css/images/ico-plus.png) no-repeat center 0;
+}
+
+.btn-add.thin {
+  background: url(/app/css/images/ico-plus-thin.png) no-repeat center -2px;
+}
+
+.btn-remove {
+  background: url(/app/css/images/ico-minus.png) no-repeat center 0;
+}
+
+.btn-remove.thin {
+  background: url(/app/css/images/ico-minus-thin.png) no-repeat center -2px;
+}
+
+.btn-add:hover,
+.btn-add:active,
+.btn-remove:hover,
+.btn-remove:active {
+  background-position: center -53px;
+}
+
+.btn-add.thin:hover,
+.btn-add.thin:active,
+.btn-remove.thin:hover,
+.btn-remove.thin:active {
+  background-position: center -29px;
+}
+
+.btn-add:hover,
+.btn-remove:hover {
+  background-color: #00c7d3;
+}
+
+.btn-add:active,
+.btn-remove:active {
+  background-color: #02bbc6;
+}
+
+.btn-add + .btn-remove {
+  display: block;
+  margin-top: 8px;
+}
+
+.btn ~ .btn {
+  margin-left: 20px;
+}
+
+.btn-add.thin,
+.btn-remove.thin {
+  height: 21px;
+}
+
+.btn-add.thin + .btn-remove.thin {
+  margin-top: 2px;
+}
+
+.btn i.fa {
+  margin-left: 5px;
+}
+
+.btn-xs-block {
+  display: block;
+  width: 100%;
+}
+
+@media (min-width: 1025px) {
+  // Desktop
+  .btn {
+    font-size: 13px;
+    padding: 13px 20px;
+    min-width: 140px;
+  }
+
+  .btn-xs-block {
+    display: inline-block;
+    width: auto;
+  }
+
+}
