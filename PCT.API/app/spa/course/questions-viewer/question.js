@@ -12,6 +12,7 @@
                 restrict: "E",
                 templateUrl: "app/spa/course/questions-viewer/question.html?v=" + htmlVer,
                 scope: {
+                    previewMode: "=",
                     question: "=",
                     checkAnswer: "=",
                     onAnswerCorrect: "&",
@@ -73,7 +74,8 @@
                     "answer": "=",
                     "retry": "=",
                     "disabled": "=",
-                    "highlightCorrect": "&"
+                    "highlightCorrect": "&",
+                    "previewMode": "="
                 },
                 templateUrl: "/app/spa/course/questions-viewer/eOptions.html?v=" + htmlVer,
                 link: function($scope, elem, attrs) {
@@ -111,7 +113,22 @@
                     };
 
                     $scope.$watch("question", function(value) {
-                        $scope.view.answer = [];
+                        if ($scope.previewMode) {
+                            var tmpAnswer = [];
+                            for (var x = 0; x < $scope.question.options.length; x++)
+                                tmpAnswer[x] = $scope.highlightCorrect({ "$option": $scope.question.options[x] });
+
+                            if ($scope.question.multi_select) {
+                                $scope.view.answer = tmpAnswer;
+                            } else {
+                                for (var x = 0; x < tmpAnswer.length; x++)
+                                    if (tmpAnswer[x]) {
+                                        $scope.view.answer[0] = $scope.question.options[x].option_id;
+                                        break;
+                                    }
+                            }
+                        } else
+                            $scope.view.answer = [];
                     });
                     $scope.$watch(extractAnswer, function(value) {
                         $scope.answer = JSON.parse(value);
@@ -138,7 +155,7 @@
                             $scope.$watch(on, function() {
                                 $scope.reset();
                             });
-                        })
+                        });
                     }
                     $scope.magnifyClass = attrs.magnifyClass;
 

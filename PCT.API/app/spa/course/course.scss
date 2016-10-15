@@ -292,7 +292,7 @@
 
 .correct .course-question-option.previous-answer input:checked + label,
 .correct .course-question-option.previous-answer label:hover {
-  color: #1daa33;
+  color: #1daa33 !important;
 }
 
 .course-question-option input:checked + label:after {
@@ -311,7 +311,7 @@
 }
 
 .correct .course-question-option.previous-answer input:checked + label:after {
-  background-image: url(/app/css/images/ico-check-green.png);
+  background-image: url(/app/css/images/ico-check-green.png) !important;
 }
 
 .course-question-options-pictures {
@@ -398,8 +398,8 @@
 }
 
 .correct .course-question-option.course-question-option-header {
-  background-color: #1daa33;
-  color: #fff;
+  background-color: #1daa33 !important;
+  color: #fff !important;
 }
 
 .course-question-answer {
@@ -411,7 +411,7 @@
 }
 
 .correct .course-question-answer-title {
-  color: #209634;;
+  color: #209634 !important;
 }
 
 .retry .course-question-answer-title {
