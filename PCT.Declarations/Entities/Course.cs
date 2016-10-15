@@ -111,8 +111,11 @@ namespace PCT.Declarations.Entities
                 image_url = course.Manufacturer != null ? course.Manufacturer.ImageUrl : "",
                 description = course.StateCEUs.Any()
                     ? course.StateCEUs.GroupBy(x => x.Hours, x => x.StateAbbr)
-                          .Select(x => string.Format("{1:#.0} hrs: {0}", x.OrderBy(y=>y).Aggregate((i, j) => i + ", " + j), x.Key))
-                          .Aggregate((i, j) => i + " | " + j)
+                        .Select(
+                            x =>
+                                string.Format("{1:#.0} hrs: {0}",
+                                    x.OrderBy(y => y).Distinct().Aggregate((i, j) => i + ", " + j), x.Key))
+                        .Aggregate((i, j) => i + " | " + j)
                     : "",
                 prereq_courses = course.PrerequisiteCourses.Select(c => c.DisplayTitle).ToArray()
             };

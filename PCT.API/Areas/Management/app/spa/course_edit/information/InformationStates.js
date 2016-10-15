@@ -53,9 +53,10 @@
 
                         //console.log($scope.states);
                         //console.log(ids);
-                        $scope.filteredStates = Cols.filter($scope.states, function(s) {
-                            return !ids[s.code];
-                        });
+                        //$scope.filteredStates = Cols.filter($scope.states, function(s) {
+                        //    return !ids[s.code];
+                        //});
+                        $scope.filteredStates = $scope.states;
 
 
                         //console.log($scope.filteredStates.length);

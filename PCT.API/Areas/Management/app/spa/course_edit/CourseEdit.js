@@ -108,7 +108,7 @@
 
             $scope.setCel = function(cel) {
                 ObjectUtil.clear($scope.cel);
-                console.log(cel);
+                //console.log(cel);
                 ObjectUtil.copy(cel, $scope.cel);
             };
 

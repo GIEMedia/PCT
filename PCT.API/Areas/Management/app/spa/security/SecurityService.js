@@ -110,7 +110,7 @@
                         //console.log("Unhandled api error:\n    Url: " + config.url + "\n    Response status: " + status);
                         //console.log(data);
 
-                        console.log("An error occured");
+                        //console.log("An error occured");
                     });
 
                     return httpPromise;
