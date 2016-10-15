@@ -28,7 +28,7 @@
 
 .btn[disabled] {
   //background: #88DDFC;
-  background: lighten($color-blue, 30%);
+  background: #d8d8d8;
   cursor: not-allowed;
 }
 button[disabled], button[disabled]:hover {

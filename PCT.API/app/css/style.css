@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /* ================================================================ *	#Base
 \* ================================================================ */
 article,
@@ -649,7 +649,7 @@ h6 {
   background: #045c7d; }
 
 .btn[disabled] {
-  background: #53ccfa;
+  background: #d8d8d8;
   cursor: not-allowed; }
 
 button[disabled], button[disabled]:hover {
@@ -996,7 +996,7 @@ a.form-label {
   color: #5fd771; }
 
 label.correct {
-  color: limegreen; }
+  color: limegreen !important; }
 
 .btn-login i.fa {
   margin-left: 0; }
@@ -1445,7 +1445,7 @@ label.correct {
 
 .correct .course-question-option.previous-answer input:checked + label,
 .correct .course-question-option.previous-answer label:hover {
-  color: #1daa33; }
+  color: #1daa33 !important; }
 
 .course-question-option input:checked + label:after {
   position: absolute;
@@ -1461,7 +1461,7 @@ label.correct {
   background-image: url(/app/css/images/ico-check-gray.png); }
 
 .correct .course-question-option.previous-answer input:checked + label:after {
-  background-image: url(/app/css/images/ico-check-green.png); }
+  background-image: url(/app/css/images/ico-check-green.png) !important; }
 
 .course-question-options-pictures {
   border: 1px solid #d7e2e6;
@@ -1535,8 +1535,8 @@ label.correct {
   color: #fff; }
 
 .correct .course-question-option.course-question-option-header {
-  background-color: #1daa33;
-  color: #fff; }
+  background-color: #1daa33 !important;
+  color: #fff !important; }
 
 .course-question-answer {
   padding: 31px 35px; }
@@ -1545,7 +1545,7 @@ label.correct {
   padding-bottom: 16px; }
 
 .correct .course-question-answer-title {
-  color: #209634; }
+  color: #209634 !important; }
 
 .retry .course-question-answer-title {
   color: #e97d00; }
@@ -2968,7 +2968,7 @@ header-timer {
   .licensure-information-modal .modal .controls .form-controls .form-cols-outer input, .licensure-information-modal .modal .controls .form-controls .form-cols-outer select {
     border-radius: 6px; }
   .licensure-information-modal .modal .controls .form-controls .form-cols-outer select {
-    background: url("./images/select-arrows.png") no-repeat 99% 8px #F9F9F9;
+    background: url("../scss/images/select-arrows.png") no-repeat 99% 8px #F9F9F9;
     background-size: 5px;
     -webkit-appearance: none;
     -moz-appearance: none; }
@@ -3168,3 +3168,4 @@ header-timer {
     padding-top: 29px; }
   .test-certificate-form .form-actions {
     padding: 20px 0; } }
+

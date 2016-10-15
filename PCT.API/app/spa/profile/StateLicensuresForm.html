@@ -22,7 +22,7 @@
 
             <div class="form-controls" ng-repeat="stateLicensure in stateLicensures" state-licensure-row>
                 <div class="form-controls-actions">
-                    <a href="" class="btn-add" ng-click="stateLicensures.push({})" tabindex="2"></a>
+                    <a href="" class="btn-add" ng-click="stateLicensures.push({})" tabindex="2" ng-show="stateLicensures.length - 1 == $index"></a>
                     <a href="" class="btn-remove" ng-click="stateLicensures.splice($index, 1)" tabindex="2"></a>
                 </div>
 
